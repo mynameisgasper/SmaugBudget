@@ -10,6 +10,7 @@ Lastni projekt pri predmetu **Spletno programiranje** v študijskem letu **2020/
 ## Budget Tracker
 
 > Spletna stran za sledenje, analitiko in kategoriziranje osebnega ali skupinskega proračuna
+- **Landing page in Registracija**
 
 - **Dashboard**
     - Začetna stran po vpisu
@@ -27,8 +28,12 @@ Lastni projekt pri predmetu **Spletno programiranje** v študijskem letu **2020/
         - trenutni budget za to kategorijo.
     - Tortni diagrami in drugi analitični prikazi
     - Microbudgeting
-        - Dodajanje podkategorij posameznim kategorijam (npr. kurjava, TV, ...)
-    - Kalkulator povrnitve investicij
+        - Dodajanje podkategorij posameznim kategorijam (npr. kurjava pri položnicah, TV pri zabavi, ...)
+    - Kalkulator povrnitve investicij (npr. kdaj se ti povrne nakup nove centralne peči, oken ipd.)
+    - Cilji 
+        - Dodaš cilje ki jih želiš dosečti (varčevanje ali nakup zadeve)
+        - Možnost obkljukanja avtomatske prilagoditve budgeta ali pa ročno vnašanje denarja ko ga želiš in kolikor ga želiš
+    
 - **Zgodovina**
     - Pregled porabe za tedne, mesece, leto
         - za vsako kuverto posebej
@@ -40,12 +45,13 @@ Lastni projekt pri predmetu **Spletno programiranje** v študijskem letu **2020/
     - dodajanje prijateljev, partnerjev
         - skupinski sistem za budget
             - npr. za sostanovalce, skupna potovanja, ...
+            - za partnerje ali sostanovalce -> lahko deliš le določene budget kategorije (druge ostanejo skrite) ali pa vse
         - skupinsko deljenje stroškov
             - deljenje računov med prijatelji.
     - email authentication z aktivacijo računa
     - child lock (*je sploh smislno?*)
 - **Pretvorba valut**
-    - avtomatična pretvorba valute v privzeto.
+    - avtomatična pretvorba valute v privzeto (prav pride npr. pri odhodu na počitnice - vneseš lokalno valuto).
 - **Izvoz tedenskega, mesečnega, letnega poročila v PDF**
 - **Dark mode**
 
