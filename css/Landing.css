@@ -10,6 +10,7 @@
 
 .navbar-light{
    /* color: black; */
+    color: lightblue
     text-decoration: none;
 }
 
@@ -37,4 +38,9 @@
 
 .active {
     font-weight: bold;
+}
+
+body {
+    background-image: url("../imgs/back.png");
+
 }
