@@ -1,3 +1,4 @@
+
 .row {
     margin-top: 5vh;
 }
@@ -5,7 +6,6 @@
 .container {
     margin-top: 5vh;
 
-    align-items: center;
 }
 
 .col-xl-1 {
@@ -28,8 +28,8 @@
     margin: 0 auto;
 }
 
-.goal-col {
-    
+.card-body{
+
 }
 
 .goal-col .progress-bar{
@@ -41,13 +41,19 @@
     color:white
 }
 
-.goal-col p {
+.goal-p {
+    font-family: 'Open Sans Bold';
     position: relative;
     padding: 0;
     margin: 0 auto;
     float: none;
     display: inline;
 }
+
+.goal-col a {
+    font-family: 'Open Sans Bold';
+}
+
 
 .progress-bar{
     overflow: visible;
@@ -58,10 +64,10 @@
     position: absolute;
     margin: 0 auto;
     float: none;
-    top: 1vh;
+    top: 3.5vh;
     background:#003166;
     border: 1px #003166;
-    border-radius: .5vw; 
+    border-radius: 10%; 
     padding-left: 1vw;
     padding-right: 1vw;
     z-index: 1000;
@@ -76,6 +82,6 @@
 
 
 
-.collapse  {
-    
+.modal-body input{
+    margin-bottom:5%;
 }
