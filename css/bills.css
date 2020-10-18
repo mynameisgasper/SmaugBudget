@@ -1,0 +1,105 @@
+/* 
+    Namesto font-weight: bold
+    uporabi font-family: 'Open Sans Bold'
+*/
+
+/* Navbar related CSS */
+
+nav .button {
+    font-size: 16px;
+    font-family:'Open Sans';
+    text-align: center;
+    user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+
+}
+
+
+
+.navbar-light {
+    text-decoration: none;
+}
+
+.nav-link:hover {
+    font-family: 'Open Sans Bold'
+}
+
+.nav-item {
+    padding: 1vh;
+    
+}
+
+/*
+
+.nav-item a {
+    transition: border-width 0.5s ease;
+}
+
+.nav-item a:hover{
+    border: solid ;
+    border-color: #ff7700;
+    border-width: 0 0 .2em;
+   
+}
+
+ */
+
+header {
+    height: 200px;
+}
+
+.navbar-brand {
+    font-family: 'Open Sans';
+}
+
+.navbar-brand img {
+    margin-top:-3%;
+    padding:0;
+}
+
+.active {
+    font-family: 'Open Sans Bold';
+}
+
+.fas {
+    user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+    cursor: pointer;
+    font-family: 'Open Sans';
+}
+
+.date {
+    text-align: center;
+
+}
+
+td {
+    text-align: left;
+}
+
+.cena{
+    text-align: center;
+}
+
+.x:hover {
+    color: red;
+}
+
+.p:hover{
+    color: green
+}
+
+.zadnji {
+   text-align: right;
+}
+
+.g {
+    float: right;
+}
+
