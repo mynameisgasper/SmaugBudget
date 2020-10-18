@@ -28,9 +28,7 @@
     margin: 0 auto;
 }
 
-.card-body{
 
-}
 
 .goal-col .progress-bar{
     height: 1vh;
@@ -39,6 +37,10 @@
     border-radius: .5vw;
     display: inline-block;
     color:white
+}
+
+.goal-col p {
+    display: inline-block;
 }
 
 .goal-p {
@@ -57,6 +59,10 @@
 
 .progress-bar{
     overflow: visible;
+}
+
+.progress-tooltip p {
+    margin: 0;
 }
 
 .progress-bar .progress-tooltip{
