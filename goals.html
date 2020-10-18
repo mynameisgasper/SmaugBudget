@@ -45,7 +45,7 @@
               <a class="nav-link" href="#">GOALS<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">BILLS</a>
+              <a class="nav-link" href="bills.html">BILLS</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">HISTORY</a>
@@ -77,6 +77,17 @@
 
             <div class="row">
               <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 goal-col">
+                <div class="alert alert-success" role="alert">
+                  Congrats, you have reached your goal to save for an <strong>iPhone 12 Pro</strong> :)
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </div>
+              </div>
+            </div>
+          
+
+            <div class="row">
+              <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 goal-col">
                 <button type="button" class="btn btn-primary" style="float:right;" data-toggle="modal" href="#modalForm" role="button" aria-expanded="false" aria-controls="about">
                   Add goal
                 </button>
@@ -95,12 +106,31 @@
                       </button>
                     </div>
                     <div class="modal-body">
-                      Name your goal: 
-                      <input type="text" class="form-control" placeholder="e.g. new car" style="display: inline-block;">
-                      Specify amount needed:
-                      <input type="number" class="form-control" placeholder="eg. 15000€">
-                      Add Description
-                      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                      <label for="inputGoal">What's your goal?</label>
+                      <input type="text" class="form-control" id="inputGoal" placeholder="e.g. new car" >
+                      
+                      <label for="inputCategory">Choose a Category</label>
+                      <select id="inputCategory" class="form-control">
+                        <option selected>Choose...</option>
+                        <option>Furniture</option>
+                        <option>Electronics</option>
+                        <option>Trip</option>
+                        <option>Party</option>
+                        <option>Wedding</option>
+                        <option>Car</option>
+                        <option>Other</option>
+                      </select>
+
+                      </br>
+
+                      <label for="inputAmount">How much do you want to save?</label>
+                      <input type="number" class="form-control" id="inputAmount" placeholder="eg. 15000€">
+                      
+                      <label for="inputDate">Planned date</label>
+                      <input class="form-control" type="date" value="2020-01-01" id="inputDate">
+
+                      <label for="inputDescription">Description</label>
+                      <textarea class="form-control" id="inputDescription" rows="3"></textarea>
 
 
                     </div>
@@ -139,7 +169,7 @@
 
             <div class="row ">
                 <!---  Row 1 Col 1 --->
-                <div class="col-sm-12 col-md-12 col-lg-2 col-xl-2 goal-col">
+                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-2 goal-col">
                    <a style="text-decoration: none; color:black" data-toggle="collapse" href="#about" role="button" aria-expanded="false" aria-controls="about">
                         iPhone 12 Pro
                       </a>
@@ -175,15 +205,17 @@
                 </div>
 
                 <!---  Row 1 Col 3 --->
-                <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 goal-col">
+                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-4 goal-col">
                     <p class="goal-p">0€ <p style="color: gray; font-family:'Open Sans'; margin-left:2%">needed of 1,500€ (<b>0€</b> per month)</p>
+                    <i class="fas fa-edit"></i>
                 </div>
+                
             </div>
 
 
             <div class="row ">
                 <!---  Row 2 Col 1 --->
-                <div class="col-sm-12 col-md-12 col-lg-2 col-xl-2 goal-col">
+                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-2 goal-col">
                     <p class="goal-p">New Car</p>
                 </div>
 
@@ -202,17 +234,33 @@
                     </div>
                 </div>
 
-                <!---  Row 2 Col 3 --->
-                <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 goal-col">
-                    <p class="goal-p">9,000€ <p style="color: gray; font-family:'Open Sans';  margin-left:2%">needed of 20,000€ (<b>150€</b> per month)</p>
+                <div class="collapse" id="about-2">
+                  <div class="card card-body">
+                      <p style="text-align: justify;">
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+
+                      </p>
+                  </div>
                 </div>
+
+                <!---  Row 2 Col 3 --->
+                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-4 goal-col">
+                    <p class="goal-p">9,000€ <p style="color: gray; font-family:'Open Sans';  margin-left:2%">needed of 20,000€ (<b>150€</b> per month)</p>
+                    <i class="fas fa-edit"></i>
+                </div>
+
+                
             </div>
 
 
             <div class="row">
 
                 <!---Row 3 Col 1 --->
-                <div class="col-sm-12 col-md-12 col-lg-2 col-xl-2 goal-col">
+                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-2 goal-col">
                     <p class="goal-p">London Trip</p>
                 </div>
                 
@@ -231,9 +279,22 @@
                     </div>
                 </div>
 
+                <div class="collapse" id="about-3">
+                  <div class="card card-body">
+                      <p style="text-align: justify;">
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                      </p>
+                  </div>
+                </div>
+
                 <!---Row 3 Col 3 --->
-                <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 goal-col">
+                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-4 goal-col">
                     <p class="goal-p">250€ <p style="color: gray; font-family:'Open Sans'; margin-left:2% ">needed of 2,500€ (<b>50€</b> per month)</p>
+                    <i class="fas fa-edit"></i>
                 </div>
             </div>
         </div>

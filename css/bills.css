@@ -47,8 +47,13 @@ nav .button {
 
  */
 
-header {
-    height: 200px;
+.navbar {
+    position: relative;
+    
+}
+
+.container {
+    margin-top: 5vw;
 }
 
 .navbar-brand {
@@ -122,7 +127,7 @@ td {
 }
 
 .add {
-    float: right;
+      float: right;
       background-color:blue;
       display:inline-block;
       color:#ffffff;

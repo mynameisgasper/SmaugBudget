@@ -17,11 +17,11 @@ nav .button {
 
 }
 
+
+
 .navbar {
     position: relative;
 }
-
-
 
 .navbar-light {
     text-decoration: none;
@@ -61,3 +61,42 @@ nav .button {
 }
 
 
+
+
+/* Progress bar related */
+
+.progress-bar{
+    height: 1vh;
+    position: relative;
+    border: solid #007bff;
+    border-radius: .5vw;
+    display: inline-block;
+    color:white
+}
+
+.progress-bar{
+    overflow: visible;
+}
+
+.progress-tooltip p {
+    margin: 0;
+}
+
+.progress-bar .progress-tooltip{
+    display: none;
+    position: absolute;
+    margin: 0 auto;
+    float: none;
+    top: 3.5vh;
+    background:#003166;
+    border: 1px #003166;
+    border-radius: 10%; 
+    padding-left: 1vw;
+    padding-right: 1vw;
+    z-index: 1000;
+}
+
+.progress-bar:hover .progress-tooltip{
+    display: block;
+
+}
