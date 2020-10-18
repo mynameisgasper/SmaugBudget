@@ -92,16 +92,24 @@ td {
 }
 
 .p:hover{
-    color: green
+    color: green;
 }
+
+.bi-plus-square-fill:hover{
+    color: blue;
+    
+}
+.g:hover ~ .bi-plus-square-fill {color: blue;}
 
 .zadnji {
    text-align: right;
+   cursor:pointer
 }
 
-.g {
+.g{
     float: right;
 }
+
 
 .ena{
     padding-bottom: 20px;
@@ -115,7 +123,7 @@ td {
 
 .add {
     float: right;
-      background-color:#006eff;
+      background-color:blue;
       display:inline-block;
       color:#ffffff;
       padding:6px 24px;
