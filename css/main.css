@@ -35,9 +35,7 @@ nav .button {
 
 .nav-item a {
     transition: border-width 0.5s ease;
-      
 }
-
 
 .nav-item a:hover{
     border: solid ;
@@ -68,4 +66,7 @@ nav .button {
     -webkit-user-select: none;
     -o-user-select: none;
     cursor: pointer;
+    font-family: 'Open Sans';
 }
+
+
