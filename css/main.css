@@ -17,6 +17,10 @@ nav .button {
 
 }
 
+.navbar {
+    position: relative;
+}
+
 
 
 .navbar-light {
@@ -32,20 +36,6 @@ nav .button {
     
 }
 
-/*
-
-.nav-item a {
-    transition: border-width 0.5s ease;
-}
-
-.nav-item a:hover{
-    border: solid ;
-    border-color: #ff7700;
-    border-width: 0 0 .2em;
-   
-}
-
- */
 
 .navbar-brand {
     font-family: 'Open Sans';

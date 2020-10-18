@@ -1,0 +1,81 @@
+.row {
+    margin-top: 5vh;
+}
+
+.container {
+    margin-top: 5vh;
+
+    align-items: center;
+}
+
+.col-xl-1 {
+    float:none;
+    margin: 0 auto;
+}
+
+.col-lg-2  {
+    float:none;
+    margin: 0 auto;
+}
+
+.col-md-2 {
+    float:none;
+    margin: 0 auto;
+}
+
+.col-sm-2 {
+    float:none;
+    margin: 0 auto;
+}
+
+.goal-col {
+    
+}
+
+.goal-col .progress-bar{
+    height: 1vh;
+    position: relative;
+    border: solid #007bff;
+    border-radius: .5vw;
+    display: inline-block;
+    color:white
+}
+
+.goal-col p {
+    position: relative;
+    padding: 0;
+    margin: 0 auto;
+    float: none;
+    display: inline;
+}
+
+.progress-bar{
+    overflow: visible;
+}
+
+.progress-bar .progress-tooltip{
+    display: none;
+    position: absolute;
+    margin: 0 auto;
+    float: none;
+    top: 1vh;
+    background:#003166;
+    border: 1px #003166;
+    border-radius: .5vw; 
+    padding-left: 1vw;
+    padding-right: 1vw;
+    z-index: 1000;
+}
+
+
+
+.progress-bar:hover .progress-tooltip{
+    display: block;
+
+}
+
+
+
+.collapse  {
+    
+}
