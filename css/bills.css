@@ -103,3 +103,20 @@ td {
     float: right;
 }
 
+.ena{
+    padding-bottom: 20px;
+}
+
+
+.add:active {
+	position:relative;
+	top:2px;
+}
+
+.add {
+    float: right;
+      background-color:#006eff;
+      display:inline-block;
+      color:#ffffff;
+      padding:6px 24px;
+  }
