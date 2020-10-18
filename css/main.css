@@ -1,33 +1,55 @@
-.button {
+/* 
+    Namesto font-weight: bold
+    uporabi font-family: 'Open Sans Bold'
+*/
 
+/* Navbar related CSS */
+
+nav .button {
     font-size: 16px;
     font-family:'Open Sans';
- 
-    
     text-align: center;
+    user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
 
 }
 
-.navbar-light{
-   /* color: black; */
+
+.navbar-light {
     text-decoration: none;
 }
 
-.navbar-light a{
-    color: inherit;
-}
-
-.nav-item:hover {
-    font-weight: bold;
+.nav-link:hover {
+    font-family: 'Open Sans Bold'
 }
 
 .nav-item {
     padding: 1vh;
-
+    
 }
 
+/*
+
+.nav-item a {
+    transition: border-width 0.5s ease;
+      
+}
+
+
+.nav-item a:hover{
+    border: solid ;
+    border-color: #ff7700;
+    border-width: 0 0 .2em;
+   
+}
+
+ */
+
 .navbar-brand {
-    font-family:'Open Sans';
+    font-family: 'Open Sans';
 }
 
 .navbar-brand img {
@@ -36,5 +58,14 @@
 }
 
 .active {
-    font-weight: bold;
+    font-family: 'Open Sans Bold';
+}
+
+.fas {
+    user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+    cursor: pointer;
 }
