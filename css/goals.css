@@ -2,6 +2,10 @@
 
 .row {
     margin: 0;
+}
+
+.container .row {
+    
     margin-top: 4vh;
 
 }

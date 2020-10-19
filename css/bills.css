@@ -46,6 +46,11 @@ nav .button {
 
  */
 
+
+ .row {
+     margin: 0;
+ }
+
 .container {
     margin-top: 3vw;
 }

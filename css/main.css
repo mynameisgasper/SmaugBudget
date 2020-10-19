@@ -84,7 +84,6 @@ nav .button {
     
 }
 
-
 .bottom-row-footer {
     padding-top:5vh;
     padding-bottom:7.5vh;
@@ -113,7 +112,9 @@ nav .button {
     color:gray;
 }
 
-
+.footer-row{
+    padding-top: 6vh;
+}
 
 
 /* Progress bar related */
