@@ -73,231 +73,230 @@
       <!----- End Navigation Bar ----->
 
       <!----- Start Main Containers ----->
-        <div class="container">
-
-            <div class="row">
-              <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 goal-col">
-                <div class="alert alert-success" role="alert">
-                  Congrats, you have reached your goal to save for an <strong>iPhone 12 Pro</strong> 
-                  <i class="far fa-laugh-beam"></i>
-                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </div>
+      <div class="container">
+          <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 goal-col">
+              <div class="alert alert-success" role="alert">
+                Congrats, you have reached your goal to save for an <strong>iPhone 12 Pro</strong> 
+                <i class="far fa-laugh-beam"></i>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
               </div>
             </div>
-          
+          </div>
+        
 
-            <div class="row">
-              <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 goal-col">
-                <button type="button" class="btn btn-primary" style="float:right;" data-toggle="modal" href="#modalForm" role="button" aria-expanded="false" aria-controls="about">
-                  Add goal
-                </button>
-              </div>
-
-
-              <!---- Modal Form ---->
-
-              <div class="modal fade " id="modalForm" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="modalCenterTitle">Add Goal</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                      <label for="inputGoal">What's your goal?</label>
-                      <input type="text" class="form-control" id="inputGoal" placeholder="e.g. new car" >
-                      
-                      <label for="inputCategory">Choose a Category</label>
-                      <select id="inputCategory" class="form-control">
-                        <option selected>Choose...</option>
-                        <option>Furniture</option>
-                        <option>Electronics</option>
-                        <option>Trip</option>
-                        <option>Party</option>
-                        <option>Wedding</option>
-                        <option>Car</option>
-                        <option>Other</option>
-                      </select>
-
-                      </br>
-
-                      <label for="inputAmount">How much do you want to save?</label>
-                      <input type="number" class="form-control" id="inputAmount" placeholder="eg. 15000€">
-                      
-                      <label for="inputDate">Planned date</label>
-                      <input class="form-control" type="date" value="2020-01-01" id="inputDate">
-
-                      <label for="inputDescription">Description</label>
-                      <textarea class="form-control" id="inputDescription" rows="3"></textarea>
+          <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 goal-col">
+              <button type="button" class="btn btn-primary" style="float:right;" data-toggle="modal" href="#modalForm" role="button" aria-expanded="false" aria-controls="about">
+                Add goal
+              </button>
+            </div>
 
 
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-primary">Add Goal</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <!---- Modal Form ---->
 
-              <!----  Legacy Form
-              <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 goal-col">
-                <div class="collapse" id="addGoal">
-                  <div class="card card-body">
-                    <div class="col-sm-12 col-md-12 col-lg-6 col-xl-8 ">
-                     Name your goal: <input type="text" class="form-control" placeholder="e.g. new car" style="display: inline-block;">
-
-                    </div>
-                    <div class="col-sm-12 col-md-12 col-lg-6 col-xl-4" style="padding-top: 1%;">
-                      Specify amount needed:
-                      <input type="number" class="form-control" placeholder="eg. 15000€">
-
-                    </div>
-
-                    <button type="button" class="btn btn-success" style=" margin: 0 auto; margin-top: 1%; background-color:#00cf1d; border-color: #00cf1d;" >
-                      Submit
+            <div class="modal fade " id="modalForm" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="modalCenterTitle">Add Goal</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
+                  <div class="modal-body">
+                    <label for="inputGoal">What's your goal?</label>
+                    <input type="text" class="form-control" id="inputGoal" placeholder="e.g. new car" >
+                    
+                    <label for="inputCategory">Choose a Category</label>
+                    <select id="inputCategory" class="form-control">
+                      <option selected>Choose...</option>
+                      <option>Furniture</option>
+                      <option>Electronics</option>
+                      <option>Trip</option>
+                      <option>Party</option>
+                      <option>Wedding</option>
+                      <option>Car</option>
+                      <option>Other</option>
+                    </select>
+
+                    </br>
+
+                    <label for="inputAmount">How much do you want to save?</label>
+                    <input type="number" class="form-control" id="inputAmount" placeholder="eg. 15000€">
+                    
+                    <label for="inputDate">Planned date</label>
+                    <input class="form-control" type="date" value="2020-01-01" id="inputDate">
+
+                    <label for="inputDescription">Description</label>
+                    <textarea class="form-control" id="inputDescription" rows="3"></textarea>
+
+
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Add Goal</button>
+                  </div>
                 </div>
               </div>
-            ---->
-              
             </div>
 
+            <!----  Legacy Form
+            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 goal-col">
+              <div class="collapse" id="addGoal">
+                <div class="card card-body">
+                  <div class="col-sm-12 col-md-12 col-lg-6 col-xl-8 ">
+                    Name your goal: <input type="text" class="form-control" placeholder="e.g. new car" style="display: inline-block;">
 
-            <div class="row ">
-                <!---  Row 1 Col 1 --->
-                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-2 goal-col">
-                   <a style="text-decoration: none; color:black" data-toggle="collapse" href="#about" role="button" aria-expanded="false" aria-controls="about">
-                        iPhone 12 Pro
-                      </a>
-                    
+                  </div>
+                  <div class="col-sm-12 col-md-12 col-lg-6 col-xl-4" style="padding-top: 1%;">
+                    Specify amount needed:
+                    <input type="number" class="form-control" placeholder="eg. 15000€">
+
+                  </div>
+
+                  <button type="button" class="btn btn-success" style=" margin: 0 auto; margin-top: 1%; background-color:#00cf1d; border-color: #00cf1d;" >
+                    Submit
+                  </button>
                 </div>
+              </div>
+            </div>
+          ---->
+            
+          </div>
 
-                <!---  Row 1 Col 2 --->
-                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 goal-col">
+
+          <div class="row ">
+              <!---  Row 1 Col 1 --->
+              <div class="col-sm-12 col-md-12 col-lg-12 col-xl-2 goal-col">
+                  <a style="text-decoration: none; color:black" data-toggle="collapse" href="#about" role="button" aria-expanded="false" aria-controls="about">
+                      iPhone 12 Pro
+                    </a>
                   
-                <!---  Progress Bar --->
-                    <div class="progress-bar" role="progressbar"style="width:100%; height:auto; background-color:#00cf1d; border-color: #00cf1d" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
-                        100%
-                        <!--- Hover Tooltip --->
-                        <span class="progress-tooltip">
-                            <p>100% </p> 
-                        </br>
-                            <p style="color: lightgrey; font-family: 'Open Sans';">0€</p>
-                        </span>
-                    </div>
+              </div>
 
-                    <div class="collapse" id="about">
-                      <div class="card card-body">
-                          <p style="text-align: justify;">
-                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-
-                          </p>
-                      </div>
-                    </div>
-                </div>
-
-                <!---  Row 1 Col 3 --->
-                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-4 goal-col">
-                    <p class="goal-p">0€ <p style="color: gray; font-family:'Open Sans'; margin-left:2%">needed of 1,500€ (<b>0€</b> per month)</p>
-                    <i class="fas fa-edit"></i>
-                </div>
+              <!---  Row 1 Col 2 --->
+              <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 goal-col">
                 
-            </div>
-
-
-            <div class="row ">
-                <!---  Row 2 Col 1 --->
-                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-2 goal-col">
-                    <p class="goal-p">New Car</p>
-                </div>
-
-                <!---  Row 2 Col 2 --->
-                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 goal-col">
-
-                <!---  Progress Bar --->
-                    <div class="progress-bar" role="progressbar"style="width:55%; height:auto" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
-                        55%
-                        <!--- Hover Tooltip --->
-                        <span class="progress-tooltip">
-                            <p>55% </p> 
-                        </br>
-                            <p style="color: lightgrey; font-family: 'Open Sans';">11,000€</p>
-                        </span>
-                    </div>
-                </div>
-
-                <div class="collapse" id="about-2">
-                  <div class="card card-body">
-                      <p style="text-align: justify;">
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-
-                      </p>
+              <!---  Progress Bar --->
+                  <div class="progress-bar" role="progressbar"style="width:100%; height:auto; background-color:#00cf1d; border-color: #00cf1d" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
+                      100%
+                      <!--- Hover Tooltip --->
+                      <span class="progress-tooltip">
+                          <p>100% </p> 
+                      </br>
+                          <p style="color: lightgrey; font-family: 'Open Sans';">0€</p>
+                      </span>
                   </div>
-                </div>
 
-                <!---  Row 2 Col 3 --->
-                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-4 goal-col">
-                    <p class="goal-p">9,000€ <p style="color: gray; font-family:'Open Sans';  margin-left:2%">needed of 20,000€ (<b>150€</b> per month)</p>
-                    <i class="fas fa-edit"></i>
-                </div>
+                  <div class="collapse" id="about">
+                    <div class="card card-body">
+                        <p style="text-align: justify;">
+                          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+                          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+                          Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 
-                
-            </div>
-
-
-            <div class="row">
-
-                <!---Row 3 Col 1 --->
-                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-2 goal-col">
-                    <p class="goal-p">London Trip</p>
-                </div>
-                
-                <!---Row 3 Col 2 --->
-                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 goal-col">
-                    
-                    <!---  Progress Bar --->
-                    <div class="progress-bar" role="progressbar" style="width:90%; height:auto" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
-                        90%
-                        <!--- Hover Tooltip --->
-                        <span class="progress-tooltip">
-                            <p>90% </p> 
-                        </br>
-                            <p style="color: lightgrey; font-family: 'Open Sans';">2,225€</p>
-                        </span>
+                        </p>
                     </div>
-                </div>
-
-                <div class="collapse" id="about-3">
-                  <div class="card card-body">
-                      <p style="text-align: justify;">
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-                      </p>
                   </div>
-                </div>
+              </div>
 
-                <!---Row 3 Col 3 --->
-                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-4 goal-col">
-                    <p class="goal-p">250€ <p style="color: gray; font-family:'Open Sans'; margin-left:2% ">needed of 2,500€ (<b>50€</b> per month)</p>
-                    <i class="fas fa-edit"></i>
+              <!---  Row 1 Col 3 --->
+              <div class="col-sm-12 col-md-12 col-lg-6 col-xl-4 goal-col">
+                  <p class="goal-p">0€ <p style="color: gray; font-family:'Open Sans'; margin-left:2%">needed of 1,500€ (<b>0€</b> per month)</p>
+                  <i class="fas fa-edit"></i>
+              </div>
+              
+          </div>
+
+
+          <div class="row ">
+              <!---  Row 2 Col 1 --->
+              <div class="col-sm-12 col-md-12 col-lg-12 col-xl-2 goal-col">
+                  <p class="goal-p">New Car</p>
+              </div>
+
+              <!---  Row 2 Col 2 --->
+              <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 goal-col">
+
+              <!---  Progress Bar --->
+                  <div class="progress-bar" role="progressbar"style="width:55%; height:auto" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
+                      55%
+                      <!--- Hover Tooltip --->
+                      <span class="progress-tooltip">
+                          <p>55% </p> 
+                      </br>
+                          <p style="color: lightgrey; font-family: 'Open Sans';">11,000€</p>
+                      </span>
+                  </div>
+              </div>
+
+              <div class="collapse" id="about-2">
+                <div class="card card-body">
+                    <p style="text-align: justify;">
+                      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                      Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+                      Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+                      Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+
+                    </p>
                 </div>
-            </div>
+              </div>
+
+              <!---  Row 2 Col 3 --->
+              <div class="col-sm-12 col-md-12 col-lg-6 col-xl-4 goal-col">
+                  <p class="goal-p">9,000€ <p style="color: gray; font-family:'Open Sans';  margin-left:2%">needed of 20,000€ (<b>150€</b> per month)</p>
+                  <i class="fas fa-edit"></i>
+              </div>
+
+              
+          </div>
+
+
+          <div class="row">
+
+              <!---Row 3 Col 1 --->
+              <div class="col-sm-12 col-md-12 col-lg-12 col-xl-2 goal-col">
+                  <p class="goal-p">London Trip</p>
+              </div>
+              
+              <!---Row 3 Col 2 --->
+              <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 goal-col">
+                  
+                  <!---  Progress Bar --->
+                  <div class="progress-bar" role="progressbar" style="width:90%; height:auto" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
+                      90%
+                      <!--- Hover Tooltip --->
+                      <span class="progress-tooltip">
+                          <p>90% </p> 
+                      </br>
+                          <p style="color: lightgrey; font-family: 'Open Sans';">2,225€</p>
+                      </span>
+                  </div>
+              </div>
+
+              <div class="collapse" id="about-3">
+                <div class="card card-body">
+                    <p style="text-align: justify;">
+                      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                      Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+                      Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+                      Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                    </p>
+                </div>
+              </div>
+
+              <!---Row 3 Col 3 --->
+              <div class="col-sm-12 col-md-12 col-lg-6 col-xl-4 goal-col">
+                  <p class="goal-p">250€ <p style="color: gray; font-family:'Open Sans'; margin-left:2% ">needed of 2,500€ (<b>50€</b> per month)</p>
+                  <i class="fas fa-edit"></i>
+              </div>
+          </div>
         </div>
 
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

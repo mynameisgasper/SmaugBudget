@@ -1,8 +1,8 @@
 
 
-
 .row {
     margin-top: 4vh;
+  
 }
 
 
@@ -33,4 +33,13 @@
 .fa-edit {
     margin-top:1%;
     float:right;
+}
+
+.fa-edit:hover {
+    color:#007bff;
+}
+
+.card-body {
+    margin-top:5%;
+    margin-bottom: 5%; 
 }
