@@ -19,13 +19,10 @@ nav .button {
 
 
 .container {
-    margin-top: 4vh;
+    position:relative;
+    padding-top:10vh;
 }
 
-
-.navbar {
-    position: relative;
-}
 
 .navbar-light {
     text-decoration: none;
@@ -37,7 +34,6 @@ nav .button {
 
 .nav-item {
     padding: 1vh;
-    
 }
 
 
@@ -65,6 +61,17 @@ nav .button {
 }
 
 
+
+/* Footer related */
+
+.footer {
+    color:white;
+    width:100%;
+}
+
+.footer-col {
+    margin-top:1vh;
+}
 
 
 /* Progress bar related */
