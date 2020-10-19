@@ -60,6 +60,12 @@ nav .button {
     font-family: 'Open Sans';
 }
 
+@media only screen and (min-width: 900px) {
+    .notification{
+        white-space: nowrap;
+    }
+  }
+
 
 
 /* Footer related */
