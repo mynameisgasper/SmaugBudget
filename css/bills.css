@@ -46,11 +46,6 @@ nav .button {
 
  */
 
-.navbar {
-    position: relative;
-    
-}
-
 .container {
     margin-top: 3vw;
 }
@@ -134,5 +129,4 @@ tr.border_bottom td {
 .search {
     float:right;
 }
-
 
