@@ -6,6 +6,7 @@
 
     <!----- Stylesheets ----->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/fonts.css">
     <link rel="stylesheet" href="../css/bills.css">
 
@@ -76,8 +77,7 @@
 
     <main>
       <div class="container">
-        <div class="row">
-        <div class="container col-sm-12 col-lg-12 col-xl-12">
+          <div class="container col-sm-12 col-lg-12 col-xl-12">
             <div class="table-responsive">
                 <table class="table">
                     <thead>
@@ -86,9 +86,9 @@
                           Upcoming bills
                         </div>
                         <div class="container col-sm-6 col-lg-6 col-xl-6 headright">
-                          <button data-toggle="modal" href="#modalForm" role="button" aria-expanded="false" aria-controls="about" class="btn g">Add bill
-
+                          <button data-toggle="modal" href="#modalForm" role="button" aria-expanded="false" aria-controls="about" class="btn btn-primary">Add bill
                           <i class="fas fa-plus-square"></i>
+
                           </button>
                         </div>
                       </div>
@@ -101,29 +101,29 @@
                               </button>
                             </div>
                             <div class="modal-body">
-                                <div class="ena">
-                                    Category
+                                <div class="ena">                
+                                    <label for="Category">Category</label><br>
                                     <input type="text" id="Category" class="form-control" placeholder="e.g. Rent">
                                 </div>
                                 <div class="ena">
-                                    Payee
+                                    <label for="Payee">Payee</label><br>
                                     <input type="text" id="Payee" class="form-control" placeholder="e.g. Elektro Ljubljana d.d.">
                                 </div>
                                 <div class="ena">
-                                    Amount
+                                    <label for="Amount">Amount</label><br>
                                     <input type="number" id="Amount" class="form-control" placeholder="e.g. $150,30">
                                 </div>
-                                <div class="ena">
-                                    Date due
+                                <div class="ena">   
+                                    <label for="date">Date due</label><br>
                                     <input type="date" class="form-control">
                                 </div>
                                 <div class="ena">
-                                  How often?<br> 
-                                  <input type="radio" id="once" name="gender" value="yearly">
-                                  <label for="yearly">Once</label><br>
-                                  <input type="radio" id="monthly" name="gender" value="monthly">
+                                  <label for="once">How often?</label><br>
+                                  <input type="radio" id="once"  value="once">
+                                  <label for="once">Once</label><br>
+                                  <input type="radio" id="monthly"  value="monthly">
                                   <label for="monthly">Monthly</label><br>
-                                  <input type="radio" id="yearly" name="gender" value="yearly">
+                                  <input type="radio" id="yearly"  value="yearly">
                                   <label for="yearly">Yearly</label><br>
                                 </div>
                             </div>
@@ -148,11 +148,6 @@
                       </td>
                       <td class="zadnji">
                         <button type="button" class="btn p">
-                          <!---
-                          <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                              <path fill-rule="evenodd" d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
-                          </svg>
-                           --->
                           <i class="fas fa-pencil-alt"></i>
                          
 
@@ -173,11 +168,6 @@
                         </td>
                         <td class="zadnji">
                           <button type="button" class="btn p">
-                              <!---
-                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
-                            </svg>
-                            --->
                             <i class="fas fa-pencil-alt"></i>
                           </button>
                         </td>
@@ -193,10 +183,10 @@
           
                   </tbody>
                   <!-- /.Table body -->
-          
+
                 </table>           
-          </div>
         </div>
+      </div>
     </main>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
