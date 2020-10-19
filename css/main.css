@@ -124,13 +124,20 @@ nav .button {
 
 /* Progress bar related */
 
+.progress {
+    height: 3vh;
+    font:inherit;
+    text-align: center;
+    background-color: #a1ceff;
+    border-radius: .5vw;
+}
+
 .progress-bar{
-    height: 1vh;
     position: relative;
     border: solid #007bff;
     border-radius: .5vw;
     display: inline-block;
-    color:white
+    color:white;
 }
 
 .progress-bar{
@@ -199,10 +206,5 @@ nav .button {
     top:65%;
     opacity: 0.5;
     font-size: 2vh;
-  }
-
-  .notification {
-    width: 20vw !important;
-    height: 3vw !important;
   }
 
