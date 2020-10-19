@@ -93,27 +93,25 @@ td {
     font-family: 'Open Sans Bold';
 }
 
-.x:hover {
-    color: red;
-}
-
 .p:hover{
-    color: green;
+    color: blue;
 }
 
 .bi-plus-square-fill:hover{
     color: blue;
     
 }
-.g:hover ~ .bi-plus-square-fill {color: blue;}
 
 .zadnji {
    text-align: right;
    cursor:pointer
 }
 
-.g{
+.headright{
     float: right;
+}
+.headleft{
+    float: left;
 }
 
 
@@ -127,9 +125,3 @@ td {
 	top:2px;
 }
 
-.add {
-      background-color:blue;
-      display:inline-block;
-      color:#ffffff;
-      padding:6px 24px;
-  }
