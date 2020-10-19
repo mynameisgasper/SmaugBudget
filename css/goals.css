@@ -30,14 +30,12 @@
     margin-bottom:5%;
 }
 
-.fa-edit {
+.fa-pencil-alt {
     margin-top:1%;
     float:right;
 }
 
-.fa-edit:hover {
-    color:#007bff;
-}
+
 
 .card-body {
     margin-top:5%;

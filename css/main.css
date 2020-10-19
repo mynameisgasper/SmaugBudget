@@ -100,3 +100,11 @@ nav .button {
     display: block;
 
 }
+
+
+
+/* IKONE */
+
+.fa-pencil-alt:hover {
+    color:#007bff;
+}
