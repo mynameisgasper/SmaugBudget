@@ -77,13 +77,13 @@
 
     <main>
       <div class="container">
-          <div class="container col-sm-12 col-lg-12 col-xl-12">
-            <div class="table-responsive">
+          <div class="container col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <div class="">
                 <table class="table">
                     <thead class="headertop">
                       <tr>
-                        <td colspan="3" style="border:none;" class="headleft">
-                          Upcoming bills
+                        <td colspan="3" style="border:none;" class="headleft align-bottom h3">
+                          All bills
                         </td>
                         <td colspan="2" style="border:none;" class="headright">
                           <button data-toggle="modal" href="#modalForm" role="button" aria-expanded="false" aria-controls="about" class="btn btn-primary">Add bill
@@ -91,6 +91,8 @@
                           </button>
                         </td>
                       </tr>
+
+                      <!--Modal form 1-->
                       <div class="modal fade " id="modalForm" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                           <div class="modal-content">
@@ -110,11 +112,11 @@
                                 </div>
                                 <div class="ena">
                                     <label for="Amount">Amount</label><br>
-                                    <input type="number" id="Amount" class="form-control" placeholder="e.g. $150,30">
+                                    <input type="number" id="Amount" class="form-control" placeholder="e.g. $150.30">
                                 </div>
                                 <div class="ena">   
-                                    <label for="date">Date due</label><br>
-                                    <input type="date" class="form-control">
+                                    <label for="datum">Date due</label><br>
+                                    <input type="datum" class="form-control">
                                 </div>
                                 <div class="ena">
                                   <label for="once">How often?</label><br>
@@ -126,49 +128,90 @@
                                   <label for="yearly">Yearly</label><br>
                                 </div>
                             </div>
-                            <button type="button" class="btn btn-primary">Add bill</button>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-primary">Add Goal</button>
+                            </div>
                           </div>
                         </div>
                       </div>
+                      <!--Modal form2-->
+                      <!--- Modal Form Edit --->
 
+                    <div class="modal fade" id="editForm" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <div class="ena">                
+                                <label for="Category">Category</label><br>
+                                <input type="text" id="Category" class="form-control" placeholder="e.g. Rent">
+                            </div>
+                            <div class="ena">
+                                <label for="Payee">Payee</label><br>
+                                <input type="text" id="Payee" class="form-control" placeholder="e.g. Elektro Ljubljana d.d.">
+                            </div>
+                            <div class="ena">
+                                <label for="Amount">Amount</label><br>
+                                <input type="number" id="Amount" class="form-control" placeholder="e.g. $150.30">
+                            </div>
+                            <div class="ena">   
+                                <label for="datum">Date due</label><br>
+                                <input type="datum" class="form-control">
+                            </div>
+                            <div class="ena">
+                              <label for="once">How often?</label><br>
+                              <input type="radio" id="once"  value="once">
+                              <label for="once">Once</label><br>
+                              <input type="radio" id="monthly"  value="monthly">
+                              <label for="monthly">Monthly</label><br>
+                              <input type="radio" id="yearly"  value="yearly">
+                              <label for="yearly">Yearly</label><br>
+                            </div>
+                        </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-danger">Delete Bill</button>
+                            <button type="button" class="btn btn-primary">Save Changes</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                     </thead>
                   </div>
                     <tbody>
                     <!-- First row -->
                     <tr>
-                      <td class="date">
+                      <td class="date align-middle">
                         <p class="text-muted"><b>JAN</b></p>
                         <p class="text-muted">25</p>
                       </td>
-                      <td>Electricity</td>
-                      <td>Petrol d.d.</td>
-                      <td class="cena">
+                      <td class="align-middle">Electricity</td>
+                      <td class="align-middle">Petrol d.d.</td>
+                      <td class="cena align-middle">
                         $800
                       </td>
-                      <td class="zadnji">
-                        <button type="button" class="btn p">
-                          <i class="fas fa-pencil-alt"></i>
-                         
-
-                        </button>
+                      <td class="zadnji align-middle">
+                        <button type="button" class="btn p" data-toggle="modal" href="#editForm"><i class="fas fa-pencil-alt"></i></button>
                       </td>
                     </tr>
                     <!-- /.First row -->
                      <!-- First row -->
                      <tr>
-                        <td class="date">
+                        <td class="date align-middle">
                           <p class="text-muted"><b>JAN</b></p>
                           <p class="text-muted">28</p>
                         </td>
-                        <td>Phone</td>
-                        <td>A1 d.d..</td>
-                        <td class="font-weight-bold cena">
+                        <td class="align-middle">Phone</td>
+                        <td class="align-middle">A1 d.d..</td>
+                        <td class="cena align-middle">
                           <strong>$40</strong>
                         </td>
-                        <td class="zadnji">
-                          <button type="button" class="btn p">
-                            <i class="fas fa-pencil-alt"></i>
-                          </button>
+                        <td class="zadnji align-middle">
+                          <button type="button" class="btn p" data-toggle="modal" href="#editForm"><i class="fas fa-pencil-alt"></i></button>
                         </td>
                       </tr>
                       <!-- /.First row -->
@@ -180,6 +223,11 @@
                       </td>
                     </tr>
           
+                    
+
+
+
+
                   </tbody>
                   <!-- /.Table body -->
 
