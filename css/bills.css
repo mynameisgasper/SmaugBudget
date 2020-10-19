@@ -136,33 +136,3 @@ tr.border_bottom td {
 }
 
 
-
-
-.card-counter{
-    margin: 5px;
-    padding: 20px 10px;
-    color: #fff;
-    height: 100px;
-    border-radius: 5px;
-  }
-
-  .card-counter i{
-    font-size: 4vw;
-    opacity: 0.3
-  }
-
-  .card-counter .count-numbers{
-    position: absolute;
-    right: 35px;
-    top: 20px;
-    font-size: 32px;
-  }
-
-  .card-counter .count-name{
-    position: absolute;
-    right: 35px;
-    top: 65px;
-    opacity: 0.5;
-    font-size: 1vw;
-  }
-
