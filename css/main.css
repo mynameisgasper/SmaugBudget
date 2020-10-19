@@ -67,10 +67,22 @@ nav .button {
 .footer {
     color:white;
     width:100%;
+    padding-top:8vh;
+    padding-bottom:8vh;
+
+    height:100%;
 }
 
 .footer-col {
-    margin-top:1vh;
+    padding-bottom:1vh;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+
+.bottom-row-footer {
+    padding-top:5vh;
+    color:gray;
 }
 
 
@@ -152,3 +164,4 @@ nav .button {
     opacity: 0.5;
     font-size: 2vh;
   }
+
