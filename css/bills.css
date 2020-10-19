@@ -130,3 +130,7 @@ tr.border_bottom td {
     float:right;
 }
 
+.row {
+    margin: 0;
+}
+
