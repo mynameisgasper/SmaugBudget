@@ -1,0 +1,35 @@
+.date {
+    text-align: center;
+
+}
+
+td {
+    text-align: left;
+}
+
+.cena{
+    text-align: center;
+    font-family: 'Open Sans Bold';
+}
+
+.zadnji {
+    text-align: right;
+}
+
+.date {
+    width: 5vw;
+}
+
+tr.border_bottom td {
+    border-bottom: 1px solid #dee2e6;
+  }
+
+.search {
+    float:right;
+}
+.addbill{
+    float: right;
+}
+.headleft{
+    text-align: left;
+}
