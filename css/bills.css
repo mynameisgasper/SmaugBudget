@@ -101,18 +101,13 @@ td {
     
 }
 
-.zadnji {
-   text-align: right;
-   cursor:pointer
-}
 
 .headright{
-    float: right;
+    text-align: right;
 }
 .headleft{
-    float: left;
+    text-align: left;
 }
-
 
 .ena{
     padding-bottom: 20px;
@@ -122,5 +117,9 @@ td {
 .add:active {
 	position:relative;
 	top:2px;
+}
+
+.zadnji {
+    text-align: right;
 }
 
