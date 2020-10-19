@@ -49,7 +49,7 @@
                 <a class="nav-link" href="#">BILLS<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" href="#">HISTORY</a>
+                <a class="nav-link" href="history.html">HISTORY</a>
                 </li>
             </ul>
 
@@ -77,19 +77,21 @@
 
     <main>
       <div class="container">
-          <div class="container col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <div class="row">
+          <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+            <h3>All bills</h3>
+              
+          </div>
+          <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+            <!-- Search form -->
+            <input class="form-control search" type="text" placeholder="Search" aria-label="Search">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <div class="table-responsive">
                 <table class="table">
                     <thead class="headertop">
-                      <tr>
-                        <td colspan="3" style="border:none;" class="headleft align-bottom h3">
-                          All bills
-                        </td>
-                        <td colspan="2" style="border:none;">
-                          <!-- Search form -->
-                          <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-                        </td>
-                      </tr>
-
                       <!--Modal form 1-->
                       <div class="modal fade " id="modalForm" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -198,7 +200,7 @@
                     </tr>
                     <!-- /.First row -->
                      <!-- First row -->
-                     <tr>
+                     <tr class="border_bottom"> 
                         <td class="date align-middle">
                           <p class="text-muted"><b>JAN</b></p>
                           <p class="text-muted">28</p>
@@ -215,19 +217,17 @@
                       <!-- /.First row -->
                     
 
-                    <tr>
-                      <td colspan="6"class="headright">
-                        <button data-toggle="modal" href="#modalForm" role="button" aria-expanded="false" aria-controls="about" class="btn btn-primary">Add bill
-                        <i class="fas fa-plus-square"></i>
-                        </button>
-                      </td>
-                    </tr>
-                  </tbody>
                   <!-- /.Table body -->
-              </table>    
+              </table>   
+            </div> 
+            <button data-toggle="modal" href="#modalForm" role="button" aria-expanded="false" aria-controls="about" class="btn btn-primary addbill">Add bill
+              <i class="fas fa-plus-square"></i>
+              </button>
+          </div>
         </div>
       </div>
     </main>
+
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
