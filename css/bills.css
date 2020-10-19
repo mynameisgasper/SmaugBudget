@@ -53,7 +53,7 @@ nav .button {
 }
 
 .container {
-    margin-top: 5vw;
+    margin-top: 3vw;
 }
 
 .navbar-brand {
@@ -90,6 +90,7 @@ td {
 
 .cena{
     text-align: center;
+    font-family: 'Open Sans Bold ';
 }
 
 .x:hover {
