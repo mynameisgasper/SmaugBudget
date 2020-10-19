@@ -60,6 +60,16 @@ nav .button {
     font-family: 'Open Sans';
 }
 
+.center {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+}
+
+  
+.right {
+    float: right;
+}
 
 
 /* Footer related */

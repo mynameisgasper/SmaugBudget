@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/fonts.css">
+    <link rel="stylesheet" href="../css/pie.css">
 
 
     <!----- Tab Icon and Title ----->
@@ -19,87 +20,248 @@
     <body>
         <header>
             <!----- Navigation Bar ----->
-      <nav class="navbar navbar-expand-lg fixed-top navbar-dark navbar-left bg-dark">
+            <nav class="navbar navbar-expand-lg fixed-top navbar-dark navbar-left bg-dark">
         
-        <!----- Logo ----->
-        <a class="navbar-brand" href="#">
-          <img src="../imgs/dragon.svg" width="25vh" height="25vh">
-          <b>SMAUG</b>budget
-        </a>
+                <!----- Logo ----->
+                <a class="navbar-brand" href="#">
+                  <img src="../imgs/dragon.svg" width="25vh" height="25vh">
+                  <b>SMAUG</b>budget
+                </a>
 
-        <!----- Logo ----->
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+                <!----- Logo ----->
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-        <!----- Navbar Links ----->
-        <div class="button collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link" href="dashboard.html">DASHBOARD<span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">ENVELOPES</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="goals.html">GOALS</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="bills.html">BILLS</a>
-            </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="#">HISTORY</a>
-            </li>
-          </ul>
+                <!----- Navbar Links ----->
+                <div class="button collapse navbar-collapse" id="navbarNav">
+                  <ul class="navbar-nav">
+                    <li class="nav-item">
+                      <a class="nav-link" href="dashboard.html">DASHBOARD<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#">ENVELOPES</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="goals.html">GOALS</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="bills.html">BILLS</a>
+                    </li>
+                    <li class="nav-item active">
+                      <a class="nav-link" href="#">HISTORY</a>
+                    </li>
+                  </ul>
 
-          <!----- Navbar Profile Dropdown Menu  ----->
-          <ul class="navbar-nav ml-auto">
-            <li class ="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <span class="badge badge-danger ml-2">3</span>
-            <i class="far fa-bell"></i>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
-              <div class="alert notification" role="alert">
-                <b>BILLS:</b> 1 bill due this week!
-                <button type="button" class="close" data-dismiss="alert">
-                <span aria-hidden="true">&times;</span>
+                  <!----- Navbar Profile Dropdown Menu  ----->
+                  <ul class="navbar-nav ml-auto">
+                    <li class ="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="badge badge-danger ml-2">3</span>
+                    <i class="far fa-bell"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
+                      <div class="alert notification" role="alert">
+                        <b>BILLS:</b> 1 bill due this week!
+                        <button type="button" class="close" data-dismiss="alert">
+                        <span aria-hidden="true">&times;</span>
+                      </div>
+                      <div class="dropdown-divider"></div>
+                      <div class="alert notification" role="alert">
+                        <b>GOALS:</b> 1 goal completed!
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </div>
+                      <div class="dropdown-divider"></div>
+                      <div class="alert notification" role="alert">
+                        <b>ENVELOPES:</b> 1 envelope almost empty!
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </div>
+                  </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <b class="fas fa-user">   </b> User </a>
+                    <div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
+                        <a class="dropdown-item" href="#">My Account</a>
+                        <a class="dropdown-item" href="#">Settings</a>
+                        <a class="dropdown-item" href="#">Log out</a>
+                    </div>
+                    </li>
+                </ul>
+                </div>
+            </nav>
+
+            <main>
+              <div class="container">
+                  
+                  <div class="row" style="margin-bottom: 3%;">
+                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 goal-col">
+                        <button type="button" class="btn btn-secondary">Date</button>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 goal-col text-right">
+                        <button type="button" class="btn btn-secondary">Category</button>
+                    </div>
+                  </div>
+
+                  <div class="row mx-auto">
+                      <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 goal-col">
+                          <div class="pie center"></div>
+                      </div>
+                      <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 goal-col" >
+                          <div class="bar center"></div>
+                      </div>
+                  </div>
+
+                  <div class="container col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 mx-auto">
+                    <table class="table">
+                        <thead class="headertop">
+                          <tr>
+                            <td colspan="3" style="border:none;" class="headleft align-bottom h3">
+                              All expenses
+                            </td>
+                            <td colspan="2" style="border:none;">
+                              <!-- Search form -->
+                              <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+                            </td>
+                          </tr>
+    
+                          <!--Modal form 1-->
+                          <div class="modal fade " id="modalForm" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="ena">                
+                                        <label for="Category">Category</label><br>
+                                        <input type="text" id="Category" class="form-control" placeholder="e.g. Rent">
+                                    </div>
+                                    <div class="ena">
+                                        <label for="Payee">Payee</label><br>
+                                        <input type="text" id="Payee" class="form-control" placeholder="e.g. Elektro Ljubljana d.d.">
+                                    </div>
+                                    <div class="ena">
+                                        <label for="Amount">Amount</label><br>
+                                        <input type="number" id="Amount" class="form-control" placeholder="e.g. $150.30">
+                                    </div>
+                                    <div class="ena">   
+                                        <label for="datum">Date due</label><br>
+                                        <input type="datum" class="form-control">
+                                    </div>
+                                    <div class="ena">
+                                      <label for="once">How often?</label><br>
+                                      <input type="radio" id="once"  value="once">
+                                      <label for="once">Once</label><br>
+                                      <input type="radio" id="monthly"  value="monthly">
+                                      <label for="monthly">Monthly</label><br>
+                                      <input type="radio" id="yearly"  value="yearly">
+                                      <label for="yearly">Yearly</label><br>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-primary">Add Goal</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <!--Modal form2-->
+                          <!--- Modal Form Edit --->
+    
+                          <div class="modal fade" id="editForm" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                  <div class="ena">                
+                                      <label for="Category">Category</label><br>
+                                      <input type="text" id="Category" class="form-control" placeholder="e.g. Rent">
+                                  </div>
+                                  <div class="ena">
+                                      <label for="Payee">Payee</label><br>
+                                      <input type="text" id="Payee" class="form-control" placeholder="e.g. Elektro Ljubljana d.d.">
+                                  </div>
+                                  <div class="ena">
+                                      <label for="Amount">Amount</label><br>
+                                      <input type="number" id="Amount" class="form-control" placeholder="e.g. $150.30">
+                                  </div>
+                                  <div class="ena">   
+                                      <label for="datum">Date due</label><br>
+                                      <input type="datum" class="form-control">
+                                  </div>
+                                  <div class="ena">
+                                    <label for="once">How often?</label><br>
+                                    <input type="radio" id="once"  value="once">
+                                    <label for="once">Once</label><br>
+                                    <input type="radio" id="monthly"  value="monthly">
+                                    <label for="monthly">Monthly</label><br>
+                                    <input type="radio" id="yearly"  value="yearly">
+                                    <label for="yearly">Yearly</label><br>
+                                  </div>
+                              </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-danger">Delete Bill</button>
+                                  <button type="button" class="btn btn-primary">Save Changes</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </thead>
+                      </div>
+                        <tbody>
+                        <!-- First row -->
+                        <tr>
+                          <td class="date align-middle">
+                            <p class="text-muted"><b>JAN</b></p>
+                            <p class="text-muted">25</p>
+                          </td>
+                          <td class="align-middle">Electricity</td>
+                          <td class="align-middle">Petrol d.d.</td>
+                          <td class="cena align-middle">
+                            $800
+                          </td>
+                          <td class="zadnji align-middle">
+                            <button type="button" class="btn p" data-toggle="modal" href="#editForm"><i class="fas fa-pencil-alt"></i></button>
+                          </td>
+                        </tr>
+                        <!-- /.First row -->
+                          <!-- First row -->
+                          <tr>
+                            <td class="date align-middle">
+                              <p class="text-muted"><b>JAN</b></p>
+                              <p class="text-muted">28</p>
+                            </td>
+                            <td class="align-middle">Phone</td>
+                            <td class="align-middle">A1 d.d..</td>
+                            <td class="cena align-middle">
+                              <strong>$40</strong>
+                            </td>
+                            <td class="zadnji align-middle">
+                              <button type="button" class="btn p" data-toggle="modal" href="#editForm"><i class="fas fa-pencil-alt"></i></button>
+                            </td>
+                          </tr>
+                          <!-- /.First row -->
+                      </tbody>
+                      <!-- /.Table body -->
+                  </table>    
+                </div>
               </div>
-              <div class="dropdown-divider"></div>
-              <div class="alert notification" role="alert">
-                <b>GOALS:</b> 1 goal completed!
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </div>
-              <div class="dropdown-divider"></div>
-              <div class="alert notification" role="alert">
-                <b>ENVELOPES:</b> 1 envelope almost empty!
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </div>
-          </div>
-            </li>
-            <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <b class="fas fa-user">   </b> User </a>
-            <div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
-                <a class="dropdown-item" href="#">My Account</a>
-                <a class="dropdown-item" href="#">Settings</a>
-                <a class="dropdown-item" href="#">Log out</a>
-            </div>
-            </li>
-        </ul>
-        </div>
-    </nav>
+            </main>
 
-
-      <!----- End Navigation Bar ----->
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-    <script src="https://kit.fontawesome.com/759123a73e.js" crossorigin="anonymous"></script>
-          </header>
+            <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+            <script src="https://kit.fontawesome.com/759123a73e.js" crossorigin="anonymous"></script>
+        </header>
     </body>
 
 </html>
