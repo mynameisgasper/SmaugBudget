@@ -19,7 +19,8 @@
     padding: 0;
     margin: 0 auto;
     float: none;
-    display: inline;
+    display: block;
+
 }
 
 .goal-col a {
@@ -30,14 +31,19 @@
     margin-bottom:5%;
 }
 
-.fa-pencil-alt {
-    margin-top:1%;
+
+
+.edit-btn {
     float:right;
 }
-
-
 
 .card-body {
     margin-top:5%;
     margin-bottom: 5%; 
+}
+
+.p-date {
+    font-family: 'Open Sans Bold';
+    font-size:1.5vh;
+    color:gray;
 }
