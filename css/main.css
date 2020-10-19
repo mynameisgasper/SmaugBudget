@@ -95,7 +95,6 @@ nav .button {
 .footer-col a:hover {
     text-decoration: underline;
     color: gray;
-
 }
 
 .bottom-row-footer a{
@@ -114,6 +113,15 @@ nav .button {
 
 
 /* Progress bar related */
+
+
+.progress {
+    height: 3vh;
+    font:inherit;
+    text-align: center;
+    background-color: #a1ceff;
+    border-radius: .5vw;
+}
 
 .progress-bar{
     height: 1vh;
