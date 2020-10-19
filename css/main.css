@@ -60,6 +60,12 @@ nav .button {
     font-family: 'Open Sans';
 }
 
+.center {	
+    margin: auto;	
+    width: 50%;	
+    padding: 10px;	
+}
+
 @media only screen and (min-width: 900px) {
     .notification{
         white-space: nowrap;
