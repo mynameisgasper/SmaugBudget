@@ -65,25 +65,51 @@ nav .button {
 /* Footer related */
 
 .footer {
-    color:white;
+    color: white;
+    height: 35vh;
     width:100%;
-    padding-top:8vh;
-    padding-bottom:8vh;
-
-    height:100%;
+    margin-top: 15vh;
+    padding-top:7.5vh;
+    background: #343a40;
 }
 
 .footer-col {
     padding-bottom:1vh;
     text-align: center;
     text-transform: uppercase;
+    
 }
 
 
 .bottom-row-footer {
     padding-top:5vh;
+    padding-bottom:7.5vh;
+    background: #343a40;
     color:gray;
 }
+
+.footer-col a {
+    text-decoration: none;
+    color: white;
+}
+
+.footer-col a:hover {
+    text-decoration: underline;
+    color: gray;
+
+}
+
+.bottom-row-footer a{
+    text-decoration: none;
+    color:gray;
+}
+
+.bottom-row-footer a:hover{
+    text-decoration: underline;
+    color:gray;
+}
+
+
 
 
 /* Progress bar related */
