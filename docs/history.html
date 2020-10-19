@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/fonts.css">
     <link rel="stylesheet" href="../css/pie.css">
+    <link rel="stylesheet/scss" type="text/scss" href="../css/bar.scss" />
+
 
 
     <!----- Tab Icon and Title ----->
@@ -98,154 +100,165 @@
                     </div>
                   </div>
 
-                  <div class="row mx-auto">
+                  <div class="row">
                       <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 goal-col">
                           <div class="pie center"></div>
                       </div>
                       <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 goal-col" >
-                          <div class="bar center"></div>
+
+                          
                       </div>
                   </div>
 
-                  <div class="container col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 mx-auto">
-                    <table class="table">
-                        <thead class="headertop">
-                          <tr>
-                            <td colspan="3" style="border:none;" class="headleft align-bottom h3">
-                              All expenses
-                            </td>
-                            <td colspan="2" style="border:none;">
-                              <!-- Search form -->
-                              <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-                            </td>
-                          </tr>
-    
-                          <!--Modal form 1-->
-                          <div class="modal fade " id="modalForm" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                              <div class="modal-content">
-                                <div class="modal-header">
-                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                  </button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="ena">                
-                                        <label for="Category">Category</label><br>
-                                        <input type="text" id="Category" class="form-control" placeholder="e.g. Rent">
-                                    </div>
-                                    <div class="ena">
-                                        <label for="Payee">Payee</label><br>
-                                        <input type="text" id="Payee" class="form-control" placeholder="e.g. Elektro Ljubljana d.d.">
-                                    </div>
-                                    <div class="ena">
-                                        <label for="Amount">Amount</label><br>
-                                        <input type="number" id="Amount" class="form-control" placeholder="e.g. $150.30">
-                                    </div>
-                                    <div class="ena">   
-                                        <label for="datum">Date due</label><br>
-                                        <input type="datum" class="form-control">
-                                    </div>
-                                    <div class="ena">
-                                      <label for="once">How often?</label><br>
-                                      <input type="radio" id="once"  value="once">
-                                      <label for="once">Once</label><br>
-                                      <input type="radio" id="monthly"  value="monthly">
-                                      <label for="monthly">Monthly</label><br>
-                                      <input type="radio" id="yearly"  value="yearly">
-                                      <label for="yearly">Yearly</label><br>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                  <button type="button" class="btn btn-primary">Add Goal</button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <!--Modal form2-->
-                          <!--- Modal Form Edit --->
-    
-                          <div class="modal fade" id="editForm" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                              <div class="modal-content">
-                                <div class="modal-header">
-                                  
-                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                  </button>
-                                </div>
-                                <div class="modal-body">
-                                  <div class="ena">                
-                                      <label for="Category">Category</label><br>
-                                      <input type="text" id="Category" class="form-control" placeholder="e.g. Rent">
-                                  </div>
-                                  <div class="ena">
-                                      <label for="Payee">Payee</label><br>
-                                      <input type="text" id="Payee" class="form-control" placeholder="e.g. Elektro Ljubljana d.d.">
-                                  </div>
-                                  <div class="ena">
-                                      <label for="Amount">Amount</label><br>
-                                      <input type="number" id="Amount" class="form-control" placeholder="e.g. $150.30">
-                                  </div>
-                                  <div class="ena">   
-                                      <label for="datum">Date due</label><br>
-                                      <input type="datum" class="form-control">
-                                  </div>
-                                  <div class="ena">
-                                    <label for="once">How often?</label><br>
-                                    <input type="radio" id="once"  value="once">
-                                    <label for="once">Once</label><br>
-                                    <input type="radio" id="monthly"  value="monthly">
-                                    <label for="monthly">Monthly</label><br>
-                                    <input type="radio" id="yearly"  value="yearly">
-                                    <label for="yearly">Yearly</label><br>
-                                  </div>
-                              </div>
-                                <div class="modal-footer">
-                                  <button type="button" class="btn btn-danger">Delete Bill</button>
-                                  <button type="button" class="btn btn-primary">Save Changes</button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </thead>
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                        <h3>All expenses</h3>
+                          
                       </div>
-                        <tbody>
-                        <!-- First row -->
-                        <tr>
-                          <td class="date align-middle">
-                            <p class="text-muted"><b>JAN</b></p>
-                            <p class="text-muted">25</p>
-                          </td>
-                          <td class="align-middle">Electricity</td>
-                          <td class="align-middle">Petrol d.d.</td>
-                          <td class="cena align-middle">
-                            $800
-                          </td>
-                          <td class="zadnji align-middle">
-                            <button type="button" class="btn p" data-toggle="modal" href="#editForm"><i class="fas fa-pencil-alt"></i></button>
-                          </td>
-                        </tr>
-                        <!-- /.First row -->
-                          <!-- First row -->
-                          <tr>
-                            <td class="date align-middle">
-                              <p class="text-muted"><b>JAN</b></p>
-                              <p class="text-muted">28</p>
-                            </td>
-                            <td class="align-middle">Phone</td>
-                            <td class="align-middle">A1 d.d..</td>
-                            <td class="cena align-middle">
-                              <strong>$40</strong>
-                            </td>
-                            <td class="zadnji align-middle">
-                              <button type="button" class="btn p" data-toggle="modal" href="#editForm"><i class="fas fa-pencil-alt"></i></button>
-                            </td>
-                          </tr>
-                          <!-- /.First row -->
-                      </tbody>
-                      <!-- /.Table body -->
-                  </table>    
+                      <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                        <!-- Search form -->
+                        <input class="form-control search" type="text" placeholder="Search" aria-label="Search">
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class="headertop">
+                                  <!--Modal form 1-->
+                                  <div class="modal fade " id="modalForm" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                          </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="ena">                
+                                                <label for="Category">Category</label><br>
+                                                <input type="text" id="Category" class="form-control" placeholder="e.g. Rent">
+                                            </div>
+                                            <div class="ena">
+                                                <label for="Payee">Payee</label><br>
+                                                <input type="text" id="Payee" class="form-control" placeholder="e.g. Elektro Ljubljana d.d.">
+                                            </div>
+                                            <div class="ena">
+                                                <label for="Amount">Amount</label><br>
+                                                <input type="number" id="Amount" class="form-control" placeholder="e.g. $150.30">
+                                            </div>
+                                            <div class="ena">   
+                                                <label for="datum">Date due</label><br>
+                                                <input type="datum" class="form-control">
+                                            </div>
+                                            <div class="ena">
+                                              <label for="once">How often?</label><br>
+                                              <input type="radio" id="once"  name="rad" value="once">
+                                              <label for="once">Once</label><br>
+                                              <input type="radio" id="monthly" name="rad" value="monthly">
+                                              <label for="monthly">Monthly</label><br>
+                                              <input type="radio" id="yearly" name="rad" value="yearly">
+                                              <label for="yearly">Yearly</label><br>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                          <button type="button" class="btn btn-primary">Add Goal</button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <!--Modal form2-->
+                                  <!--- Modal Form Edit --->
+            
+                                  <div class="modal fade" id="editForm" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          
+                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                          </button>
+                                        </div>
+                                        <div class="modal-body">
+                                          <div class="ena">                
+                                              <label for="Category">Category</label><br>
+                                              <input type="text" id="Category" class="form-control" placeholder="e.g. Rent">
+                                          </div>
+                                          <div class="ena">
+                                              <label for="Payee">Payee</label><br>
+                                              <input type="text" id="Payee" class="form-control" placeholder="e.g. Elektro Ljubljana d.d.">
+                                          </div>
+                                          <div class="ena">
+                                              <label for="Amount">Amount</label><br>
+                                              <input type="number" id="Amount" class="form-control" placeholder="e.g. $150.30">
+                                          </div>
+                                          <div class="ena">   
+                                              <label for="datum">Date due</label><br>
+                                              <input type="datum" class="form-control">
+                                          </div>
+                                          <div class="ena">
+                                            <label for="once">How often?</label><br>
+                                            <input type="radio" id="once"  value="once">
+                                            <label for="once">Once</label><br>
+                                            <input type="radio" id="monthly"  value="monthly">
+                                            <label for="monthly">Monthly</label><br>
+                                            <input type="radio" id="yearly"  value="yearly">
+                                            <label for="yearly">Yearly</label><br>
+                                          </div>
+                                      </div>
+                                        <div class="modal-footer">
+                                          <button type="button" class="btn btn-danger">Delete expense</button>
+                                          <button type="button" class="btn btn-primary">Save Changes</button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </thead>
+                              </div>
+                                <tbody>
+                                <!-- First row -->
+                                <tr>
+                                  <td class="date align-middle">
+                                    <p class="text-muted"><b>JAN</b></p>
+                                    <p class="text-muted">25</p>
+                                  </td>
+                                  <td class="align-middle">Oil</td>
+                                  <td class="align-middle">Petrol d.d.</td>
+                                  <td class="cena align-middle">
+                                    $80
+                                  </td>
+                                  <td class="zadnji align-middle">
+                                    <button type="button" class="btn p" data-toggle="modal" href="#editForm"><i class="fas fa-pencil-alt"></i></button>
+                                  </td>
+                                </tr>
+                                <!-- /.First row -->
+                                 <!-- First row -->
+                                 <tr class="border_bottom"> 
+                                    <td class="date align-middle">
+                                      <p class="text-muted"><b>JAN</b></p>
+                                      <p class="text-muted">28</p>
+                                    </td>
+                                    <td class="align-middle">Phone</td>
+                                    <td class="align-middle">A1 d.d..</td>
+                                    <td class="cena align-middle">
+                                      <strong>$40</strong>
+                                    </td>
+                                    <td class="zadnji align-middle">
+                                      <button type="button" class="btn p" data-toggle="modal" href="#editForm"><i class="fas fa-pencil-alt"></i></button>
+                                    </td>
+                                  </tr>
+                                  <!-- /.First row -->
+                                
+            
+                              <!-- /.Table body -->
+                          </table>   
+                        </div> 
+                        <button data-toggle="modal" href="#modalForm" role="button" aria-expanded="false" aria-controls="about" class="btn btn-primary addbill">Add expense
+                          <i class="fas fa-plus-square"></i>
+                          </button></br>
+                      </div>
+                    </div>   
                 </div>
               </div>
             </main>
