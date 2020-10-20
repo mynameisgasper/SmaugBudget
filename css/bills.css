@@ -113,3 +113,7 @@ tr.border_bottom td {
 #welcome-alert-section .row {
     padding: 1.5vh;
 }
+
+.yellow-panel {
+    background: #ffbb33;
+}
