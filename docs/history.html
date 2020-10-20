@@ -1,25 +1,30 @@
 <!DOCTYPE html>
 <html lang="sl">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!----- Stylesheets ----->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../css/fonts.css">
-    <link rel="stylesheet" href="../css/pie.css">
-    <link rel="stylesheet" href="../css/history.css">
-    <link rel="stylesheet/scss" type="text/scss" href="../css/bar.scss" />
+        <!----- Stylesheets ----->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <link rel="stylesheet" href="../css/main.css">
+        <link rel="stylesheet" href="../css/fonts.css">
+        <link rel="stylesheet" href="../css/pie.css">
+        <link rel="stylesheet" href="../css/history.css">
 
+        <!----- Scripts ----->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+        <script src="https://kit.fontawesome.com/759123a73e.js" crossorigin="anonymous"></script>
+        <script src="../js/chart/Chart.bundle.js"></script>
+        <script src="../js/chart/Utils.js"></script>
+        <script src="../js/HistoryChart.js"></script>
 
-
-    <!----- Tab Icon and Title ----->
-    <link rel="icon" href="../imgs/dragon.svg">
-    <title>SMAUGBudget</title>
+        <!----- Tab Icon and Title ----->
+        <link rel="icon" href="../imgs/dragon.svg">
+        <title>SMAUGBudget</title>
     </head>
 
-    
     <body>
         <header>
             <!----- Navigation Bar ----->
@@ -43,7 +48,7 @@
                       <a class="nav-link" href="dashboard.html">DASHBOARD<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="#">ENVELOPES</a>
+                      <a class="nav-link" href="envelopes.html">ENVELOPES</a>
                     </li>
                     <li class="nav-item">
                       <a class="nav-link" href="goals.html">GOALS</a>
@@ -90,7 +95,7 @@
             </nav>
 
             <main>
-              <div class="container">
+              <div class="container" style="padding-bottom: 1%;">
                   
                   <div class="row" style="margin-bottom: 3%;">
                     <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 goal-col">
@@ -102,12 +107,11 @@
                   </div>
 
                   <div class="row">
-                      <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 goal-col">
-                          <div class="pie center"></div>
+                      <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 goal-col">   
+                          <canvas id="pie-canvas"></canvas>
                       </div>
                       <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 goal-col" >
-
-                          
+                          <canvas id="line-canvas"></canvas>
                       </div>
                   </div>
 
@@ -295,8 +299,6 @@
                                       <button type="button" class="btn p" data-toggle="modal" href="#editForm"><i class="fas fa-pencil-alt"></i></button>
                                     </td>
                                   </tr>
-                                
-            
                               <!-- /.Table body -->
                           </table>   
                         </div> 
@@ -308,12 +310,6 @@
                 </div>
               </div>
             </main>
-
-            <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-            <script src="https://kit.fontawesome.com/759123a73e.js" crossorigin="anonymous"></script>
         </header>
     </body>
-
 </html>
