@@ -29,7 +29,7 @@ nav .button {
 }
 
 .nav-link:hover {
-    font-family: 'Open Sans Bold'
+    text-shadow: 0 0 1px #fff, 0 0 1px #fff;
 }
 
 .nav-item {
@@ -47,7 +47,7 @@ nav .button {
 }
 
 .active {
-    font-family: 'Open Sans Bold';
+    text-shadow: 0 0 1px #fff, 0 0 1px #fff;
 }
 
 .fas {

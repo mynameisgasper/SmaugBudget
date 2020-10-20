@@ -3,49 +3,6 @@
     uporabi font-family: 'Open Sans Bold'
 */
 
-/* Navbar related CSS */
-
-nav .button {
-    font-size: 16px;
-    font-family:'Open Sans';
-    text-align: center;
-    user-select: none;
-    -moz-user-select: none;
-    -khtml-user-select: none;
-    -webkit-user-select: none;
-    -o-user-select: none;
-
-}
-
-
-.navbar-light {
-    text-decoration: none;
-}
-
-.nav-link:hover {
-    font-family: 'Open Sans Bold'
-}
-
-.nav-item {
-    padding: 1vh;
-    
-}
-
-/*
-
-.nav-item a {
-    transition: border-width 0.5s ease;
-}
-
-.nav-item a:hover{
-    border: solid ;
-    border-color: #ff7700;
-    border-width: 0 0 .2em;
-   
-}
-
- */
-
 
  .row {
      margin: 0;
