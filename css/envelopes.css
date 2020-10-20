@@ -1,0 +1,110 @@
+.row {
+    margin: 0;
+    margin-top:5vh;
+}
+
+.welcome-alert-section {
+    margin-top:15vh;
+}
+
+.card-counter i{
+    font-size: 6vh;
+    opacity: 0.3
+}
+
+.container .cards-section {
+    margin-top: 5vh;
+}
+
+.container {
+    padding: 0;
+}
+
+
+.progress-bar{
+    height: auto;
+}
+
+/* Envelope Category IDs */
+
+#gas {
+    width:69%;
+    background: #0096ff;
+    border-color: #0096ff;
+}
+
+#gas-back {
+    background: #9ebde3;
+}
+
+#groceries {
+    width:50%;
+    background: green;
+    border-color: green;
+}
+
+#groceries-back {
+    background: lightgreen
+}
+
+
+#utilites {
+    width:33%;
+    background: purple;
+    border-color: purple;
+}
+
+#utilites-back {
+    background: plum;
+
+}
+
+#entertainment {
+    width:90%;
+    background: red;
+    border-color:red;
+}
+
+#entertainment-back {
+    background: lightcoral;
+
+}
+
+
+/* End Envelope Category IDs */
+
+
+
+
+.main-section h3 {
+    font-family: 'Open Sans Bold';
+    font-size: 1.2em;
+}
+
+.main-section p {
+    float:left;
+}
+
+.main-section p .info{
+    color: gray; 
+    font-family:'Open Sans';
+    display: inline;
+}
+
+
+
+.main-section p .monetary-value {
+    font-family: 'Open Sans Bold';
+    display: inline;
+}
+
+
+
+.envelope-info button {
+    margin:0;
+    float:right;
+}
+
+.info span {
+    font-family: 'Open Sans Bold';
+}
