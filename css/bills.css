@@ -3,36 +3,12 @@
     uporabi font-family: 'Open Sans Bold'
 */
 
-
  .row {
      margin: 0;
  }
 
 .container {
     margin-top: 3vw;
-}
-
-.navbar-brand {
-    font-family: 'Open Sans';
-}
-
-.navbar-brand img {
-    margin-top:-3%;
-    padding:0;
-}
-
-.active {
-    font-family: 'Open Sans Bold';
-}
-
-.fas {
-    user-select: none;
-    -moz-user-select: none;
-    -khtml-user-select: none;
-    -webkit-user-select: none;
-    -o-user-select: none;
-    cursor: pointer;
-    font-family: 'Open Sans';
 }
 
 .date {

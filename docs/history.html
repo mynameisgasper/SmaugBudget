@@ -150,21 +150,12 @@
                                                 <input type="number" id="Amount" class="form-control" placeholder="e.g. $150.30">
                                             </div>
                                             <div class="ena">   
-                                                <label for="datum">Date due</label><br>
-                                                <input type="datum" class="form-control">
-                                            </div>
-                                            <div class="ena">
-                                              <label for="once">How often?</label><br>
-                                              <input type="radio" id="once"  name="rad" value="once">
-                                              <label for="once">Once</label><br>
-                                              <input type="radio" id="monthly" name="rad" value="monthly">
-                                              <label for="monthly">Monthly</label><br>
-                                              <input type="radio" id="yearly" name="rad" value="yearly">
-                                              <label for="yearly">Yearly</label><br>
+                                                <label for="datum">Date</label><br>
+                                                <input type="datum" class="form-control" value="2020-01-01">
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                          <button type="button" class="btn btn-primary">Add Goal</button>
+                                          <button type="button" class="btn btn-primary">Add Expense</button>
                                         </div>
                                       </div>
                                     </div>
@@ -195,17 +186,8 @@
                                               <input type="number" id="Amount" class="form-control" placeholder="e.g. $150.30">
                                           </div>
                                           <div class="ena">   
-                                              <label for="datum">Date due</label><br>
-                                              <input type="datum" class="form-control">
-                                          </div>
-                                          <div class="ena">
-                                            <label for="once">How often?</label><br>
-                                            <input type="radio" id="once"  value="once">
-                                            <label for="once">Once</label><br>
-                                            <input type="radio" id="monthly"  value="monthly">
-                                            <label for="monthly">Monthly</label><br>
-                                            <input type="radio" id="yearly"  value="yearly">
-                                            <label for="yearly">Yearly</label><br>
+                                              <label for="datum">Date</label><br>
+                                              <input type="date" class="form-control" value="2020-01-01">
                                           </div>
                                       </div>
                                         <div class="modal-footer">
@@ -221,27 +203,29 @@
                                 <!-- First row -->
                                 <tr>
                                   <td class="date align-middle">
-                                    <p class="text-muted"><b>JAN</b></p>
-                                    <p class="text-muted">25</p>
+                                    <div class="text-muted">2020</div>
+                                    <div class="text-muted font-weight-bold">MAR</div>
+                                    <div class="text-muted font-weight-bold">25</div>
                                   </td>
-                                  <td class="align-middle">Oil</td>
-                                  <td class="align-middle">Petrol d.d.</td>
+                                  <td class="align-middle">Gas</td>
+                                  <td class="align-middle">Petrol</td>
                                   <td class="cena align-middle">
-                                    $80
+                                    $50
                                   </td>
                                   <td class="zadnji align-middle">
                                     <button type="button" class="btn p" data-toggle="modal" href="#editForm"><i class="fas fa-pencil-alt"></i></button>
                                   </td>
                                 </tr>
                                 <!-- /.First row -->
-                                 <!-- First row -->
+                                 <!-- Second row -->
                                  <tr class="border_bottom"> 
                                     <td class="date align-middle">
-                                      <p class="text-muted"><b>JAN</b></p>
-                                      <p class="text-muted">28</p>
+                                      <div class="text-muted">2020</div>
+                                      <div class="text-muted font-weight-bold">MAR</div>
+                                      <div class="text-muted font-weight-bold">25</div>
                                     </td>
                                     <td class="align-middle">Phone</td>
-                                    <td class="align-middle">A1 d.d..</td>
+                                    <td class="align-middle">A1</td>
                                     <td class="cena align-middle">
                                       <strong>$40</strong>
                                     </td>
@@ -249,7 +233,68 @@
                                       <button type="button" class="btn p" data-toggle="modal" href="#editForm"><i class="fas fa-pencil-alt"></i></button>
                                     </td>
                                   </tr>
-                                  <!-- /.First row -->
+                                  <!-- /.Second row -->
+                                
+                                  <tr class="border_bottom"> 
+                                    <td class="date align-middle">
+                                      <div class="text-muted">2020</div>
+                                      <div class="text-muted font-weight-bold">MAR</div>
+                                      <div class="text-muted font-weight-bold">26</div>
+                                    </td>
+                                    <td class="align-middle">Groceries</td>
+                                    <td class="align-middle">Mercator</td>
+                                    <td class="cena align-middle">
+                                      <strong>$150</strong>
+                                    </td>
+                                    <td class="zadnji align-middle">
+                                      <button type="button" class="btn p" data-toggle="modal" href="#editForm"><i class="fas fa-pencil-alt"></i></button>
+                                    </td>
+                                  </tr>
+                                  <tr class="border_bottom"> 
+                                    <td class="date align-middle">
+                                      <div class="text-muted">2020</div>
+                                      <div class="text-muted font-weight-bold">MAR</div>
+                                      <div class="text-muted font-weight-bold">28</div>
+                                    </td>
+                                    <td class="align-middle">Entertainment</td>
+                                    <td class="align-middle">Kolosej</td>
+                                    <td class="cena align-middle">
+                                      <strong>$32</strong>
+                                    </td>
+                                    <td class="zadnji align-middle">
+                                      <button type="button" class="btn p" data-toggle="modal" href="#editForm"><i class="fas fa-pencil-alt"></i></button>
+                                    </td>
+                                  </tr>
+                                  <tr class="border_bottom"> 
+                                    <td class="date align-middle">
+                                      <div class="text-muted">2020</div>
+                                      <div class="text-muted font-weight-bold">MAR</div>
+                                      <div class="text-muted font-weight-bold">28</div>
+                                    </td>
+                                    <td class="align-middle">Eating out</td>
+                                    <td class="align-middle">Pop's Place</td>
+                                    <td class="cena align-middle">
+                                      <strong>$63</strong>
+                                    </td>
+                                    <td class="zadnji align-middle">
+                                      <button type="button" class="btn p" data-toggle="modal" href="#editForm"><i class="fas fa-pencil-alt"></i></button>
+                                    </td>
+                                  </tr>
+                                  <tr class="border_bottom"> 
+                                    <td class="date align-middle">
+                                      <div class="text-muted">2020</div>
+                                      <div class="text-muted font-weight-bold">APR</div>
+                                      <div class="text-muted font-weight-bold">1</div>
+                                    </td>
+                                    <td class="align-middle">Groceries</td>
+                                    <td class="align-middle">Mercator</td>
+                                    <td class="cena align-middle">
+                                      <strong>$120</strong>
+                                    </td>
+                                    <td class="zadnji align-middle">
+                                      <button type="button" class="btn p" data-toggle="modal" href="#editForm"><i class="fas fa-pencil-alt"></i></button>
+                                    </td>
+                                  </tr>
                                 
             
                               <!-- /.Table body -->
