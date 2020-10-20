@@ -16,31 +16,56 @@ body {
 
 .row {
     margin: 0;
-    margin-top:2vh;
-}
-
-.welcome-alert-section .row {
-    padding: 4vh;
-}
-
-.cards-section .row {
-    padding: 4vh;
 
 }
 
-.main-section .row {
+
+
+#welcome-alert-section {
+    margin-top: 2vh;
+}
+
+
+#welcome-alert-section .row {
+    padding: 1.5vh;
+}
+
+#cards-section .row {
+    padding: 1.5vh;
+
+}
+
+#main-section .row {
+    padding: 1.5vh;
+}
+
+
+#welcome-alert-section {
     padding: 4vh;
+
+}
+
+#cards-section {
+    padding: 4vh;
+    margin-top: 2vh;
+
+}
+
+#main-section {
+    padding: 4vh;
+    margin-top: 2vh;
+
 }
 
 @media only screen and (min-width: 900px) {
-    .welcome-alert-section {
+    #welcome-alert-section {
         margin-top:15vh;
     }
 
 }
 
 @media only screen and (max-width: 991px) {
-    .welcome-alert-section {
+    #welcome-alert-section {
         margin-top:10vh;
     }
     
@@ -53,7 +78,7 @@ body {
     opacity: 0.3
 }
 
-.container .cards-section {
+.container #cards-section {
     margin-top: 5vh;
     margin-bottom: 5vh;
 }
@@ -113,16 +138,16 @@ body {
 
 /* Main Section Envelopes CSS */
 
-.main-section h3 {
+#main-section h3 {
     font-family: 'Open Sans Bold';
     font-size: 1.2em;
 }
 
-.main-section p {
+#main-section p {
     float:left;
 }
 
-.main-section p .info{
+#main-section p .info{
     color: gray; 
     font-family:'Open Sans';
     display: inline;
@@ -130,7 +155,7 @@ body {
 
 
 
-.main-section p .monetary-value {
+#main-section p .monetary-value {
     font-family: 'Open Sans Bold';
     display: inline;
 }
