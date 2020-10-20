@@ -96,7 +96,6 @@ nav .button {
     color: white;
     height: 35vh;
     width:100%;
-    margin-top: 15vh;
     padding-top:7.5vh;
     background: #343a40;
 }
@@ -138,6 +137,21 @@ nav .button {
 .footer-row{
     padding-top: 6vh;
 }
+
+@media only screen and (min-width: 900px) {
+    .footer {
+        margin-top:9vh;
+    }
+
+}
+
+@media only screen and (max-width: 991px) {
+    .footer {
+        margin-top:4vh;
+    }
+    
+}
+
 
 
 /* Progress bar related */

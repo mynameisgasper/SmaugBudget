@@ -1,11 +1,52 @@
-.row {
-    margin: 0;
-    margin-top:5vh;
+body {
+    background:#ededed;
 }
 
-.welcome-alert-section {
-    margin-top:15vh;
+.container {
+    background: white;
 }
+
+.container {
+    -webkit-box-shadow: 0px 1px 15px 1px rgba(209,209,209,1);
+    -moz-box-shadow: 0px 1px 15px 1px rgba(209,209,209,1);
+    box-shadow: 0px 1px 15px 1px rgba(209,209,209,1);  
+    padding: 0;
+}
+
+
+.row {
+    margin: 0;
+    margin-top:2vh;
+}
+
+.welcome-alert-section .row {
+    padding: 4vh;
+}
+
+.cards-section .row {
+    padding: 4vh;
+
+}
+
+.main-section .row {
+    padding: 4vh;
+}
+
+@media only screen and (min-width: 900px) {
+    .welcome-alert-section {
+        margin-top:15vh;
+    }
+
+}
+
+@media only screen and (max-width: 991px) {
+    .welcome-alert-section {
+        margin-top:10vh;
+    }
+    
+}
+
+
 
 .card-counter i{
     font-size: 6vh;
@@ -14,12 +55,8 @@
 
 .container .cards-section {
     margin-top: 5vh;
+    margin-bottom: 5vh;
 }
-
-.container {
-    padding: 0;
-}
-
 
 .progress-bar{
     height: auto;
@@ -70,11 +107,11 @@
 
 }
 
-
 /* End Envelope Category IDs */
 
 
 
+/* Main Section Envelopes CSS */
 
 .main-section h3 {
     font-family: 'Open Sans Bold';
