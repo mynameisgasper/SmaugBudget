@@ -1,15 +1,67 @@
+body {
+    background:#ededed;
+}
 
+.container {
+    background: white;
+}
+
+.container {
+    -webkit-box-shadow: 0px 1px 15px 1px rgba(209,209,209,1);
+    -moz-box-shadow: 0px 1px 15px 1px rgba(209,209,209,1);
+    box-shadow: 0px 1px 15px 1px rgba(209,209,209,1);  
+    padding: 0;
+}
 
 .row {
     margin: 0;
 }
 
-.container .row {
-    
-    margin-top: 4vh;
+
+@media only screen and (min-width: 900px) {
+    #welcome-alert-section {
+        margin-top:15vh;
+    }
 
 }
 
+@media only screen and (max-width: 991px) {
+    #welcome-alert-section {
+        margin-top:10vh;
+    }
+    
+}
+
+#welcome-alert-section {
+    padding: 4vh;
+
+}
+
+#cards-section {
+    padding: 4vh;
+    margin-top: 2vh;
+
+}
+
+#goals-section {
+    padding: 4vh;
+    margin-top: 2vh;
+
+}
+
+
+#welcome-alert-section .row {
+    padding: 1.5vh;
+}
+
+#cards-section .row {
+    padding: 1.5vh;
+
+}
+
+#main-section .row {
+    padding: 1.5vh;
+}
 
 .goal-col p {
     display: inline-block;
@@ -37,14 +89,8 @@
 }
 
 
-
 .edit-btn {
     float:right;
-}
-
-.card-body {
-    margin-top:5%;
-    margin-bottom: 5%; 
 }
 
 .p-date {

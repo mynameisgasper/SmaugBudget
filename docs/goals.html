@@ -39,7 +39,7 @@
               <a class="nav-link" href="dashboard.html">DASHBOARD</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">ENVELOPES</a>
+              <a class="nav-link" href="envelopes.html">ENVELOPES</a>
             </li>
             <li class="nav-item active">
               <a class="nav-link" href="#">GOALS<span class="sr-only">(current)</span></a>
@@ -220,12 +220,13 @@
 
 
       <!----- Start Main Containers ----->
-      <div class="container">
+
+      <!----- WELCOME SECTION ----->
+
+      <div class="container" id="welcome-alert-section">
           <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
               <h2>Welcome to goals.</h2> <h5>Here you can add saving goals you want to achieve. Click Add Goal, fill in the form, submit and you're done! </h5>
-
-
             </div>
           </div>
 
@@ -239,7 +240,12 @@
               </div>
             </div>
           </div>
+      </div>
+    
 
+      <!----- CARDS SECTION ----->
+
+        <div class="container" id="cards-section">
           <div class="row">
             <div class="col-xl-3 col-lg-0"></div>
             <div class="col-xl-3 col-lg-6">
@@ -258,9 +264,12 @@
             </div>
             <div class="col-xl-3 col-lg-0"></div>
           </div>
+        </div>
 
-          
-        
+
+        <!----- GOALS SECTION ----->
+
+        <div class="container" id="goals-section">
 
           <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 goal-col">
@@ -378,19 +387,15 @@
 
 
           <div class="row">
-
               <!---Row 3 Col 1 --->
               <div class="col-sm-6 col-md-12 col-lg-12 col-xl-2 goal-col">
                   <p class="goal-p">London Trip</p>
                   <div class="w-100"></div>
-
                   <p class="p-date">MAR 01 2021</p>
-
               </div>
               
               <!---Row 3 Col 2 --->
               <div class="col-sm-12 col-md-12 col-lg-6 col-xl-5 goal-col">
-                  
                   <!---  Progress Bar --->
                   <div class="progress">
                     <div class="progress-bar" role="progressbar" style="width:90%; height:auto" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
@@ -422,10 +427,10 @@
                   <p class="goal-p">250€ <p style="color: gray; font-family:'Open Sans'; margin-left:2% ">needed of 2,500€ (<b>50€</b> per month)</p>
                   <button type="button" class="btn edit-btn" data-toggle="modal" href="#editForm"><i class="fas fa-pencil-alt"></i></button>
                   <button type="button" class="btn edit-btn" data-toggle="modal" href="#addMoneyForm"><i class="fas fa-plus"></i></button>
-
               </div>
           </div>
       </div>
+    </div>
 
 
       <!--- Footer start --->

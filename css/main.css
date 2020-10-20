@@ -1,9 +1,17 @@
 /* 
-    Namesto font-weight: bold
-    uporabi font-family: 'Open Sans Bold'
+ *  Namesto font-weight: bold
+ *  uporabi font-family: 'Open Sans Bold'
 */
 
 /* Navbar related CSS */
+
+
+nav {
+    -webkit-box-shadow: 0px 1px 15px 1px rgba(209,209,209,1);
+    -moz-box-shadow: 0px 1px 15px 1px rgba(209,209,209,1);
+    box-shadow: 0px 1px 15px 1px rgba(209,209,209,1);  
+}
+
 
 nav .button {
     font-size: 16px;
@@ -15,12 +23,6 @@ nav .button {
     -webkit-user-select: none;
     -o-user-select: none;
 
-}
-
-.card-counter {
-    -webkit-box-shadow: 0px 1px 15px 1px rgba(209,209,209,1);
-    -moz-box-shadow: 0px 1px 15px 1px rgba(209,209,209,1);
-    box-shadow: 0px 1px 15px 1px rgba(209,209,209,1);
 }
 
 .container {
@@ -102,16 +104,18 @@ nav .button {
     color: white;
     height: 35vh;
     width:100%;
-    margin-top: 15vh;
     padding-top:7.5vh;
     background: #343a40;
+    overflow-x: hidden;
+    -webkit-box-shadow: 0px 1px 15px 1px rgba(209,209,209,1);
+    -moz-box-shadow: 0px 1px 15px 1px rgba(209,209,209,1);
+    box-shadow: 0px 1px 15px 5px rgba(209,209,209,1);  
 }
 
 .footer-col {
     padding-bottom:1vh;
     text-align: center;
     text-transform: uppercase;
-    
 }
 
 .bottom-row-footer {
@@ -144,6 +148,21 @@ nav .button {
 .footer-row{
     padding-top: 6vh;
 }
+
+@media only screen and (min-width: 900px) {
+    .footer {
+        margin-top:9vh;
+    }
+
+}
+
+@media only screen and (max-width: 991px) {
+    .footer {
+        margin-top:4vh;
+    }
+    
+}
+
 
 
 /* Progress bar related */
@@ -233,5 +252,9 @@ nav .button {
     font-size: 2vh;
   }
 
-
+  .card-counter {
+    -webkit-box-shadow: 0px 1px 15px 1px rgba(209,209,209,1);
+    -moz-box-shadow: 0px 1px 15px 1px rgba(209,209,209,1);
+    box-shadow: 0px 1px 15px 1px rgba(209,209,209,1);
+}
 
