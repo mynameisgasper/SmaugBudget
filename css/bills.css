@@ -3,13 +3,13 @@
     uporabi font-family: 'Open Sans Bold'
 */
 
+body {
+    background:#ededed;
+}
+
  .row {
      margin: 0;
  }
-
-.container {
-    margin-top: 3vw;
-}
 
 .date {
     text-align: center;
@@ -72,3 +72,44 @@ tr.border_bottom td {
     margin: 0;
 }
 
+.container {
+    background: white;
+}
+
+.container {
+    -webkit-box-shadow: 0px 1px 15px 1px rgba(209,209,209,1);
+    -moz-box-shadow: 0px 1px 15px 1px rgba(209,209,209,1);
+    box-shadow: 0px 1px 15px 1px rgba(209,209,209,1);  
+    padding: 0;
+}
+
+#cards-section {
+    padding: 4vh;
+    margin-top: 2vh;
+}
+
+.container #cards-section {
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+}
+
+@media only screen and (min-width: 900px) {
+    #welcome-alert-section {
+        margin-top:15vh;
+    }
+}
+
+@media only screen and (max-width: 991px) {
+    #welcome-alert-section {
+        margin-top:10vh;
+    }
+}
+
+#welcome-alert-section {
+    margin-top: 15vh;
+    padding: 4vh;
+}
+
+#welcome-alert-section .row {
+    padding: 1.5vh;
+}
