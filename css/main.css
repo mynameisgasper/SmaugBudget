@@ -28,6 +28,10 @@ nav .button {
     text-decoration: none;
 }
 
+.nav-link{
+    transition: text-shadow .3s;
+}
+
 .nav-link:hover {
     text-shadow: 0 0 1px #fff, 0 0 1px #fff;
 }
