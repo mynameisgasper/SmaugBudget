@@ -70,8 +70,8 @@ var randomScalingFactor = function() {
     return Math.round(Math.random() * 100);
 };
 
-var pieConfig = {
-    type: 'pie',
+var doughnutConfig = {
+    type: 'doughnut',
     data: {
         datasets: [{
             data: [
@@ -104,8 +104,8 @@ var pieConfig = {
 };
 
 window.onload = function() {
-    var ctx = document.getElementById('pie-canvas').getContext('2d');
-    window.myPie = new Chart(ctx, pieConfig);
+    var ctx = document.getElementById('doughnut-canvas').getContext('2d');
+    window.myPie = new Chart(ctx, doughnutConfig);
 
     var ctx = document.getElementById('line-canvas').getContext('2d');
     window.myLine = new Chart(ctx, lineConfig);
