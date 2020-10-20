@@ -98,13 +98,13 @@ nav .button {
     width:100%;
     padding-top:7.5vh;
     background: #343a40;
+    overflow-x: hidden;
 }
 
 .footer-col {
     padding-bottom:1vh;
     text-align: center;
     text-transform: uppercase;
-    
 }
 
 .bottom-row-footer {
