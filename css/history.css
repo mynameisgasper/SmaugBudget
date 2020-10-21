@@ -64,6 +64,10 @@ canvas{
     margin-top: 2vh;
 }
 
+#cards-section .row {
+    padding: 1.5vh;
+}
+
 .container #cards-section {
     margin-top: 5vh;
     margin-bottom: 5vh;
@@ -80,12 +84,12 @@ canvas{
     #welcome-alert-section {
         margin-top:10vh;
     }
-    
 }
 
 #welcome-alert-section {
-    margin-top: 15vh;
-    padding: 4vh;
+    padding-left: 5vh;
+    padding-top: 4vh;
+    padding-bottom: 4vh;
 }
 
 #welcome-alert-section .row {
