@@ -1,3 +1,41 @@
 .row {
     padding: 5px;
 }
+
+.container {
+    background: white;
+}
+
+.container {
+    -webkit-box-shadow: 0px 1px 15px 1px rgba(209,209,209,1);
+    -moz-box-shadow: 0px 1px 15px 1px rgba(209,209,209,1);
+    box-shadow: 0px 1px 15px 1px rgba(209,209,209,1);  
+    padding: 0;
+}
+
+#cards-section {
+    padding: 4vh;
+    margin-top: 2vh;
+}
+
+#connectionsBody-container {
+    margin-top: 2vh;
+    
+    padding: 4vh;
+}
+
+#accountBody-container {
+    margin-top: 10vh;
+    padding: 4vh;
+}
+
+#appSettings-container {
+    margin-top: 2vh;
+    padding: 4vh;
+}
+
+.scrollable-menu {
+    height: auto;
+    max-height: 200px;
+    overflow-x: hidden;
+}
