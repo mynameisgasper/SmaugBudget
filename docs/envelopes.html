@@ -88,22 +88,65 @@
 
 
     <!---- Main Section ---->
+
+    <!--- Modal Form Add --->
+
+    <div class="modal fade" id="addEnvelopeForm" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="ena"><label for="inputGoal">Category</label></br>
+            <input type="text" class="form-control" id="inputGoal" value="Entertainment">
+          </div>
+
+            <div class="ena"><label for="inputAmount">Amount</label></br>
+            <input type="number" class="form-control" id="inputAmount" value="0.00"> 
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary">Add</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="addExpenseForm" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="ena"><label for="inputGoal">Category</label></br>
+            <input type="text" class="form-control" id="inputGoal" value="Entertainment">
+          </div>
+
+            <div class="ena"><label for="inputAmount">Amount</label></br>
+            <input type="number" class="form-control" id="inputAmount" value="0.00"> 
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary">Add</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!---- Welcome and Alert Section ---->
     <div class="container" id="welcome-alert-section">
       <div class="row">
         <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+          <button type="button" class="close not" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           <h2>Welcome to envelopes!</h2> <h5>This is the best way to track your monthly and weekly spanding per category. Start by clicking Add Envelope.</h5>
-        </div>
-      </div>
-        <div class="row">
-          <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-            <div class="alert alert-warning" role="alert">
-              <i class="fas fa-exclamation-triangle"></i> 
-              Careful! Your leisure and entertainment category is almost at the limit!
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </div>
-          </div>
         </div>
       </div>
     </div> 
@@ -112,25 +155,31 @@
 
     <div class="container" id="cards-section">
       <div class="row">
-        <div class="col-xl-3 col-lg-0"></div>
+           <div class="col-xl-3 col-lg-12 mx-auto">
+              <div class="card-counter bg-primary">
+                <i class="fas fa-envelope"></i>
+                <p class="count-numbers">5</p>
+                <p class="count-name">Envelopes total</p>
+              </div>
+            </div>
 
-        <div class="col-xl-3 col-lg-6">
-          <div class="card-counter bg-primary">
-            <i class="fas fa-envelope"></i>
-            <p class="count-numbers">5</p>
-            <p class="count-name">Envelopes total</p>
+            <div class="col-xl-3 col-lg-12 mx-auto">
+              <div class="card-counter bg-warning">
+                <i class="fas fa-exclamation-triangle"></i> 
+                <p class="count-numbers">1</p>
+                <p class="count-name">Envelopes almost empty</p>
+              </div>
+            </div>
+
+            <div class="col-xl-3 col-lg-12 mx-auto">
+              <div class="card-counter bg-danger">
+                <i class="fas fa-radiation"></i> 
+                <p class="count-numbers">0</p>
+                <p class="count-name">Envelopes empty</p>
+              </div>
+            </div>
           </div>
         </div>
-
-        <div class="col-xl-3 col-lg-6">
-          <div class="card-counter bg-danger">
-            <i class="fas fa-exclamation-triangle"></i> 
-            <p class="count-numbers">1</p>
-            <p class="count-name">Envelopes over limit</p>
-          </div>
-        </div>
-
-        <div class="col-xl-3 col-lg-0"></div>
       </div>
     </div>
 
@@ -139,11 +188,11 @@
       <div class="row">
         <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
 
-          <button type="button" class="btn btn-success" style="float:left;" data-toggle="modal" href="#addGoalForm" role="button" aria-expanded="false" aria-controls="about">
+          <button type="button" class="btn btn-success" style="float:left;" data-toggle="modal" href="#addExpenseForm" role="button" aria-expanded="false" aria-controls="about">
             Add Expense
             <i class="fas fa-plus-square"></i>
 
-          <button type="button" class="btn btn-primary" style="float:right;" data-toggle="modal" href="#addGoalForm" role="button" aria-expanded="false" aria-controls="about">
+          <button type="button" class="btn btn-primary" style="float:right;" data-toggle="modal" href="#addEnvelopeForm" role="button" aria-expanded="false" aria-controls="about">
             Add Envelope
             <i class="fas fa-plus-square"></i>
           </button>

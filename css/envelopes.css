@@ -13,6 +13,10 @@ body {
     padding: 0;
 }
 
+.center-row-9 {
+    margin: 0 12.5%
+}
+
 
 .row {
     margin: 0;
@@ -123,13 +127,16 @@ body {
 
 #entertainment {
     width:90%;
-    background: red;
-    border-color:red;
+    background: #ffbb33;
+    border-color:#ffbb33;
 }
 
 #entertainment-back {
-    background: lightcoral;
+    background: #fdce6f;
 
+}
+.ena{
+    padding-bottom: 20px;
 }
 
 /* End Envelope Category IDs */
