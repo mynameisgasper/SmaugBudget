@@ -101,6 +101,20 @@ body {
     
 }
 
+@media only screen and (min-width: 900px) {
+    .footer {
+        padding-top:12vh;
+    }
+
+}
+
+@media only screen and (max-width: 991px) {
+    .footer {
+        padding-top:6vh;
+    }
+    
+}
+
 
 
 .card-counter i{
