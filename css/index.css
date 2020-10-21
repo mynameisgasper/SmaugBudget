@@ -97,7 +97,8 @@ header {
 /*Modal sign in*/
 .modal-login {		
 	color: rgb(167, 35, 90) 84%;
-	width: 450px;
+	max-width: 450px;
+	width: 100%;
 }
 
 .modal-login.modal-dialog {
@@ -193,4 +194,3 @@ header {
 	position: absolute;
 	right: 30px;
 }
-
