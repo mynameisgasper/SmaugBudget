@@ -103,11 +103,45 @@
           <div class="modal-body">
             <div class="ena"><label for="inputGoal">Category</label></br>
             <input type="text" class="form-control" id="inputGoal" value="Entertainment">
-          </div>
+            </div>
 
             <div class="ena"><label for="inputAmount">Amount</label></br>
             <input type="number" class="form-control" id="inputAmount" value="0.00"> 
             </div>
+
+            <div class="ena">
+              <label for="colorpicker">Color Picker</label></br>
+              <input type="color" id="colorpicker" value="#0000ff">
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary">Add</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="editForm" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+
+            <div class="ena"><label for="inputAmount">Amount</label></br>
+            <input type="number" class="form-control" id="inputAmount" value="0.00"> 
+            </div>
+
+            <div class="ena">
+              <label for="colorpicker">Color Picker</label></br>
+              <input type="color" id="colorpicker" value="#0000ff">
+            </div>
+
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-primary">Add</button>
@@ -164,7 +198,7 @@
             </div>
 
             <div class="col-xl-3 col-lg-12 mx-auto">
-              <div class="card-counter bg-warning">
+              <div class="card-counter bg-warning warn">
                 <i class="fas fa-exclamation-triangle"></i> 
                 <p class="count-numbers">1</p>
                 <p class="count-name">Envelopes almost empty</p>
@@ -172,7 +206,7 @@
             </div>
 
             <div class="col-xl-3 col-lg-12 mx-auto">
-              <div class="card-counter bg-danger">
+              <div class="card-counter bg-danger dang">
                 <i class="fas fa-radiation"></i> 
                 <p class="count-numbers">0</p>
                 <p class="count-name">Envelopes empty</p>
@@ -185,6 +219,20 @@
 
 
     <div class="container" id="main-section">
+
+      <div class="row mx-auto">
+        <div class="col-5 col-sm-5 col-md-5 col-lg-5 col-xl-5 puscica-leva">
+          <i class="arrow left"></i>
+        </div>
+        <div class="col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2 mesec">
+          <h4>AUG</h4>
+        </div>
+        <div class="col-5 col-sm-5 col-md-5 col-lg-5 col-xl-5 puscica-desna">
+          <i class="arrow right"></i>
+        </div>
+
+      </div>
+
       <div class="row">
         <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
 
@@ -213,7 +261,7 @@
         
         <div class="col-sm-12 col-md-12 col-lg-5 col-xl-4 envelope-info">
           <p class="info">You have spent <span>172,5€</span> of <span>250€</span></p> 
-          <button type="button" class="btn edit-btn" data-toggle="modal" href="#editForm">
+          <button type="button" class="btn edit-btn" data-toggle="modal" href="#editForm" role="button">
             <i class="fas fa-pencil-alt"></i>
           </button>
         </div>
@@ -234,7 +282,7 @@
         
         <div class="col-sm-12 col-md-12 col-lg-5 col-xl-4 envelope-info">
           <p class="info">You have spent <span>175</span> of <span>350</span></p> 
-          <button type="button" class="btn edit-btn" data-toggle="modal" href="#editForm">
+          <button type="button" class="btn edit-btn" data-toggle="modal" href="#editForm" role="button" >
             <i class="fas fa-pencil-alt"></i>
           </button>
         </div>
@@ -254,7 +302,7 @@
         
         <div class="col-sm-12 col-md-12 col-lg-5 col-xl-4 envelope-info">
           <p class="info">You have spent <span>60€</span> of <span>180€</span></p> 
-          <button type="button" class="btn edit-btn" data-toggle="modal" href="#editForm">
+          <button type="button" class="btn edit-btn" data-toggle="modal" href="#editForm" role="button" >
             <i class="fas fa-pencil-alt"></i>
           </button>
         </div>
@@ -274,7 +322,7 @@
         
         <div class="col-sm-12 col-md-12 col-lg-5 col-xl-4 envelope-info">
           <p class="info">You have spent <span>108€</span> of <span>120€</span></p> 
-          <button type="button" class="btn edit-btn" data-toggle="modal" href="#editForm">
+          <button type="button" class="btn edit-btn" data-toggle="modal" href="#editForm"role="button" >
             <i class="fas fa-pencil-alt"></i>
           </button>
         </div>
