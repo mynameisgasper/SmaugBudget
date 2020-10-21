@@ -35,6 +35,8 @@ var lineConfig = {
     },
     options: {
         responsive: true,
+        maintainAspectRatio: true,
+        aspectRatio: ($(window).width() < 960 ? 1 : 2),
         title: {
             display: true,
             text: 'Expenses by month'
@@ -51,14 +53,15 @@ var lineConfig = {
             xAxes: [{
                 display: true,
                 scaleLabel: {
-                    display: true,
+                    display: false,
                     labelString: 'Month'
                 }
             }],
             yAxes: [{
+                stacked: true,
                 display: true,
                 scaleLabel: {
-                    display: true,
+                    display: false,
                     labelString: 'Value in $'
                 }
             }]
@@ -99,7 +102,9 @@ var doughnutConfig = {
         ]
     },
     options: {
-        responsive: true
+        responsive: true,
+        maintainAspectRatio: true,
+        aspectRatio: ($(window).width() < 960 ? 1 : 2),
     }
 };
 
