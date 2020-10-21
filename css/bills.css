@@ -117,3 +117,19 @@ tr.border_bottom td {
 .yellow-panel {
     background: #ffbb33;
 }
+
+.warner:hover .replies{
+    display: none; }
+
+ 
+.warner:hover .comments:before{
+    content: "JAN 25: Petrol $80";
+    position: absolute;
+    text-align: center;
+    left:10%;
+    right:10%;
+    top:10%;
+    bottom:10%;
+    opacity: 0.6;
+    font-size: 2.5vh;
+}
