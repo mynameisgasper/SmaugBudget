@@ -15,13 +15,65 @@
         <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
         <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
         <script src="https://kit.fontawesome.com/759123a73e.js" crossorigin="anonymous"></script>
         <script src="../js/chart/Chart.min.js"></script>
         <script src="../js/chart/Utils.js"></script>
         <script src="../js/HistoryChart.js"></script>
+
+        <script>
+        //https://www.daterangepicker.com/
+        $(function() {
+            $('input[name="daterange"]').daterangepicker({
+                showDropdowns: true,
+                minYear: 2019,
+                maxYear: 2020,
+                autoApply: true,
+                opens: 'left',
+                locale: {
+                  format: "DD/MM/YYYY",
+                  separator: " - ",
+                  applyLabel: "Apply",
+                  cancelLabel: "Cancel",
+                  fromLabel: "From",
+                  toLabel: "To",
+                  customRangeLabel: "Custom",
+                  weekLabel: "W",
+                  daysOfWeek: [
+                      "Su",
+                      "Mo",
+                      "Tu",
+                      "We",
+                      "Th",
+                      "Fr",
+                      "Sa"
+                  ],
+                  monthNames: [
+                      "January",
+                      "February",
+                      "March",
+                      "April",
+                      "May",
+                      "June",
+                      "July",
+                      "August",
+                      "September",
+                      "October",
+                      "November",
+                      "December"
+                  ],
+                  firstDay: 1,
+                  startDate: "10/15/2020",
+                  endDate: "10/21/2020",
+                  drops: "auto"
+                }
+    
+            }, function(start, end, label) {
+                console.log("A new date selection was made: " + start.format('DD/MM/YYYY') + ' to ' + end.format('DD/MM/YYYY'));
+            });
+        });
+        </script>
 
         <!----- Tab Icon and Title ----->
         <link rel="icon" href="../imgs/dragon.svg">
@@ -109,40 +161,50 @@
         <div class="container" id="cards-section"> 
             <div class="row" style="margin-bottom: 3%;">
                 <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                    <button type="button" class="btn btn-primary">Date</button>
-                    <button class="btn btn-primary dropdown-toggle mr-4" style="float:right;" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Category</button>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="checkbox1" checked>
-                                <label class="custom-control-label" for="checkbox1">Gas</label>
-                            </div>
-                        </a>
-                        <a class="dropdown-item" href="#">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="checkbox2" checked>
-                                <label class="custom-control-label" for="checkbox2">Phone</label>
-                            </div>
-                        </a>
-                        <a class="dropdown-item" href="#">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="checkbox3" checked>
-                                <label class="custom-control-label" for="checkbox3">Groceries</label>
-                            </div>
-                        </a>
-                        <a class="dropdown-item" href="#">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="checkbox3" checked>
-                                <label class="custom-control-label" for="checkbox3">Entertainment</label>
-                            </div>
-                        </a>
-                        <a class="dropdown-item" href="#">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="checkbox3" checked>
-                                <label class="custom-control-label" for="checkbox3">Eating out</label>
-                            </div>
-                        </a>
-                    </div>
+                    <!--button type="button" class="btn btn-primary">Date</button-->
+                    <div class="row">
+                        <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                            <input class="form-control" type="text" name="daterange" value="01/01/2020 - 31/12/2020" />
+                        </div>
+
+                        <div class="col-3 col-sm-3 col-md-5 col-lg-3 col-xl-3"></div>
+
+                        <div class="col-3 col-sm-3 col-md-3 col-lg-6 col-xl-6">
+                        <button class="btn btn-primary dropdown-toggle mr-4" style="float:right;" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Category</button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="checkbox1" checked>
+                                    <label class="custom-control-label" for="checkbox1">Gas</label>
+                                </div>
+                            </a>
+                            <a class="dropdown-item" href="#">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="checkbox2" checked>
+                                    <label class="custom-control-label" for="checkbox2">Phone</label>
+                                </div>
+                            </a>
+                            <a class="dropdown-item" href="#">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="checkbox3" checked>
+                                    <label class="custom-control-label" for="checkbox3">Groceries</label>
+                                </div>
+                            </a>
+                            <a class="dropdown-item" href="#">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="checkbox3" checked>
+                                    <label class="custom-control-label" for="checkbox3">Entertainment</label>
+                                </div>
+                            </a>
+                            <a class="dropdown-item" href="#">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="checkbox3" checked>
+                                    <label class="custom-control-label" for="checkbox3">Eating out</label>
+                                </div>
+                            </a>
+                        </div>
+                      </div>
+                  </div>
               </div>
           </div>
 
