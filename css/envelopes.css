@@ -209,11 +209,15 @@ body {
 
  
 .warner:hover .comments:before{
-     content: "Entertainment: 108 of 120 € spent!";
-    position: absolute;
-    left:10%;
-    right:10%;
-    top:10%;
+    content: "Entertainment: 108 of 120 € spent!";
+ /*   position: relative;
+    text-align: center;
+    font-size: 2.5vh;
+    display: table-cell; 
+    vertical-align: middle;*/
+}
+
+.warn-after {
     text-align: center;
     font-size: 2.5vh;
 }

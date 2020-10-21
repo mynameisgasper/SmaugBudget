@@ -123,12 +123,15 @@ tr.border_bottom td {
 
  
 .warner:hover .comments:before{
-    content: "JAN 25: Petrol $80";
-    position: absolute;
+    content: "January 25: Petrol $80";
+    /*position: relative;
     text-align: center;
-    left:10%;
-    right:10%;
-    top:10%;
-    bottom:10%;
+    font-size: 2.5vh;
+    display: table-cell; 
+    vertical-align: middle;*/
+}
+
+.warn-after {
+    text-align: center;
     font-size: 2.5vh;
 }
