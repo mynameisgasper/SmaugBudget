@@ -77,6 +77,28 @@ nav .button {
     padding: 10px;	
 }
 
+@keyframes slideInFromLeft {
+    0% {
+      width: 0%;
+    }
+    100% {
+      
+    }
+
+}
+
+.progress-bar {
+    animation: .75s ease-out 0s 1 slideInFromLeft;
+}
+
+.goals .progress-bar {
+    animation: .9s ease-out 0s 1 slideInFromLeft;
+}
+
+.container {
+    overflow: hidden;
+}
+
 /*@media only screen and (min-width: 900px) {
     .notification{
         white-space: nowrap;
