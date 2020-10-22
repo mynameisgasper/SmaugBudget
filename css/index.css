@@ -214,3 +214,16 @@ body {
 		text-align: center;
 	}
 }
+
+@media screen and (min-width: 1200px) {
+
+	.right{
+		padding-top: 8vw ;
+   		vertical-align: middle;
+	}
+
+	.jumbotron{
+		padding-top: 10vw;
+	}
+
+}
