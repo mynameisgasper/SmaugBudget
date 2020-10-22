@@ -71,6 +71,12 @@ nav .button {
     font-family: 'Open Sans';
 }
 
+.dropdown-info .dropdown-item{ width: 25vh; }
+
+.dropdown-info .fas { margin-right:10%; }
+
+.dropdown-info hr { margin: 1vh; }
+
 .center {	
     margin: auto;	
     width: 50%;	
