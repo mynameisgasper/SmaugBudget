@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/fonts.css">
     <link rel="stylesheet" href="../css/goals.css">
+    <script src="../js/DarkMode.js"></script>
 
     <!----- Tab Icon and Title ----->
     <link rel="icon" href="../imgs/dragon.svg">
@@ -40,8 +41,8 @@
             <li class="nav-item">
               <a class="nav-link" href="envelopes.html">ENVELOPES</a>
             </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="#">GOALS<span class="sr-only">(current)</span></a>
+            <li class="nav-item">
+              <a class="nav-link active" href="#">GOALS<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="bills.html">BILLS</a>
@@ -77,11 +78,13 @@
             <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <b class="fas fa-user">   </b> User </a>
-            <div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
-                <a class="dropdown-item" href="account.html">My Account</a>
-                <a class="dropdown-item" href="#">Settings</a>
-                <a class="dropdown-item" href="index.html">Log out</a>
-              </div>
+            <div class="dropdown-menu dropdown-menu-right dropdown-info" id="dropdown-user" aria-labelledby="navbarDropdownMenuLink-4">
+                <a class="dropdown-item" href="account.html"><i class="fas fa-cog"></i>Settings</a>
+                <a class="dropdown-item" href="#" onclick="toggleDarkMode()" id="appearance"><i class="fas fa-adjust"></i>Appearance: Light</a>
+                <hr>
+                <a class="dropdown-item" href="index.html"><i class="fas fa-sign-out-alt"></i>Log out</a>
+
+            </div>
             </li>
         </ul>
         </div>
@@ -436,7 +439,7 @@
       ---->
 
       <div class="footer">
-        <div class="row footer-row">
+        <div class="row">
           <!--- Spacing --->
           <div class="col-12 col-sm-12 col-md-12 col-lg-0 col-xl-3 footer-col">
           </div>
@@ -455,7 +458,7 @@
           </div>
 
           <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-1 footer-col">     
-            <a href="bills.html">bills</a>
+            <a href="bills.html">Bills</a>
           </div>
 
           <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-1 footer-col">
@@ -463,7 +466,7 @@
           </div>
 
           <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-1 footer-col">
-            <a href="#">Back to Top</a>
+            <a href="utility.html">Utilities</a>
           </div>
         
           <!--- Spacing --->
@@ -473,11 +476,11 @@
 
           <!--- Second Row --->
           <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-1 footer-col bottom-row-footer">
-            <a href="#">About</a>
+            <a href="#">Settings</a>
           </div>
           
           <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-1 footer-col bottom-row-footer">
-            <a href="#">Settings</a>
+            <a href="#">Back to top</a>
           </div>
          
     

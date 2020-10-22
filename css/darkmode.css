@@ -20,6 +20,10 @@ body a:hover {
 
 .collapse .card { background: #2b2b2b }
 
+.form-control{
+    background-color: lightgrey;
+}
+
 .close { color: white; }
 
 .progress { opacity: 0.8 }
