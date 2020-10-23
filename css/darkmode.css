@@ -13,6 +13,13 @@ body a:hover {
     color:white;
 }
 
+body input {
+    background: #2b2b2b !important;
+    background-color: #2b2b2b !important;
+    color: white !important;
+    border-color: #595959 !important;
+}
+
 .fas {
     color: white;
     opacity: 0.8;
@@ -136,4 +143,9 @@ nav {
 
 #doughnut-canvas {
     border-color: black;
+}
+
+.bootstrap-tagsinput {
+    background: #2b2b2b;
+    border-color: #595959;
 }

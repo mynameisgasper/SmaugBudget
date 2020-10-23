@@ -18,6 +18,14 @@ h5 {
     padding: 0;
 }
 
+.dropdown {
+  padding-left: 0px;
+}
+
+#appSettings-container {
+  overflow: visible !important;
+}
+
 #cards-section {
     padding: 4vh;
     margin-top: 2vh;
@@ -116,6 +124,8 @@ h5 {
 .label-info {
   padding: 2px;
   vertical-align: middle;
+  margin-bottom: 2px;
+  display: inline-block;
 }
 
 .dropright {
