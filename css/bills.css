@@ -87,6 +87,9 @@ tr.border_bottom td {
     padding: 4vh;
     margin-top: 2vh;
 }
+#cards-section .row {
+    padding: 1.5vh;
+}
 
 .container #cards-section {
     margin-top: 5vh;
