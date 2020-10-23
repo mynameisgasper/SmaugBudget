@@ -462,3 +462,25 @@ a.anchor {
 	  background-color: #666;
   }
   
+@keyframes slideFromUp {
+    0% {
+      transform: translateY(500%);
+    }
+    100% {
+      
+    }
+
+}
+
+
+
+
+#phone {
+    animation: .75s ease-out 0s 1 slideFromUp;
+	
+}
+
+#welcome-text {
+	animation: .65s ease-out 0s 1 slideFromUp;
+
+}
