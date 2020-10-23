@@ -1,7 +1,11 @@
-var darkMode = false;
+
+
+var darkMode = {
+    isSet: false
+};
 
 function toggleDarkMode() {
-    if (darkMode) {
+    if (darkMode.isSet) {
         //turn off darkmode
         removeDarkModeCss();
     }
@@ -20,12 +24,12 @@ function addDarkModeCss() {
     document.getElementsByTagName('head')[0].appendChild(link);
     
     document.getElementById('appearance').innerHTML = '<i class="fas fa-adjust"></i>Appearance: Dark';
-    darkMode = true;
+    darkMode.isSet = true;
 }
 
 function removeDarkModeCss() {
     document.getElementById("darkmode").remove();
 
     document.getElementById('appearance').innerHTML = '<i class="fas fa-adjust"></i>Appearance: Light';
-    darkMode = false;
+    darkMode.isSet = false;
 }

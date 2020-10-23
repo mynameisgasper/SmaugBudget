@@ -91,7 +91,8 @@ var doughnutConfig = {
                 window.chartColors.green,
                 window.chartColors.blue,
             ],
-            label: 'Expenses by category'
+            label: 'Expenses by category',
+            borderColor: "#ffffff"
         }],
         labels: [
             'Gas',
@@ -109,9 +110,21 @@ var doughnutConfig = {
 };
 
 window.onload = function() {
+    loadGraphs();
+}
+
+function loadGraphs() {
+    if (!darkMode.isSet) {
+        doughnutConfig.data.datasets[0].borderColor = "#ffffff"
+    }
+    else {
+        doughnutConfig.data.datasets[0].borderColor = "#2b2b2b"
+    }
+
     var ctx = document.getElementById('doughnut-canvas').getContext('2d');
     window.myPie = new Chart(ctx, doughnutConfig);
 
     var ctx = document.getElementById('line-canvas').getContext('2d');
     window.myLine = new Chart(ctx, lineConfig);
-};
+
+}

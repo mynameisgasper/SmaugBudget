@@ -20,8 +20,8 @@
         <script src="https://kit.fontawesome.com/759123a73e.js" crossorigin="anonymous"></script>
         <script src="../js/chart/Chart.min.js"></script>
         <script src="../js/chart/Utils.js"></script>
-        <script src="../js/HistoryChart.js"></script>
         <script src="../js/DarkMode.js"></script>
+        <script src="../js/HistoryChart.js"></script>
 
         <script>
         //https://www.daterangepicker.com/
@@ -144,7 +144,7 @@
                   <b class="fas fa-user">   </b> User </a>
               <div class="dropdown-menu dropdown-menu-right dropdown-info" id="dropdown-user" aria-labelledby="navbarDropdownMenuLink-4">
                   <a class="dropdown-item" href="account.html"><i class="fas fa-cog"></i>Settings</a>
-                  <a class="dropdown-item" href="#" onclick="toggleDarkMode()" id="appearance"><i class="fas fa-adjust"></i>Appearance: Light</a>
+                  <a class="dropdown-item" href="#" onclick="toggleDarkMode();loadGraphs();" id="appearance"><i class="fas fa-adjust"></i>Appearance: Light</a>
                   <hr>
                   <a class="dropdown-item" href="index.html"><i class="fas fa-sign-out-alt"></i>Log out</a>
   
