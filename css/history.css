@@ -90,6 +90,12 @@ canvas{
     }
 }
 
+@media only screen and (max-height: 768px) and (min-width:560px){
+    #welcome-alert-section{
+        margin-top: 20vh;
+    }
+}
+
 #welcome-alert-section {
     padding-left: 5vh;
     padding-right: 5vh;
