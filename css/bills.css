@@ -117,3 +117,26 @@ tr.border_bottom td {
 .yellow-panel {
     background: #ffbb33;
 }
+
+.warner:hover .replies{
+    display: none; }
+
+ 
+.warner:hover .comments:before{
+    content: "January 25: Petrol $80";
+    /*position: relative;
+    text-align: center;
+    font-size: 2.5vh;
+    display: table-cell; 
+    vertical-align: middle;*/
+}
+
+.warn-after {
+    text-align: center;
+    font-size: 2.5vh;
+}
+
+
+:root {
+    color-scheme: light dark; /* both supported */
+  }

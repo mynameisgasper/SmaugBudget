@@ -2,51 +2,46 @@
 
 Dokumentacija lastnega projekta pri predmetu **Spletno programiranje** v študijskem letu **2020/2021**.
 
-## Budget Tracker
+## SmaugBudget - Budget tracker
 
-> Spletna stran za sledenje, analitiko in kategoriziranje osebnega ali skupinskega proračuna
-- **Landing page in Registracija**
+> Prvi korak na poti do finančne uspešnosti je nadzor nad našimi izdatki. Veliko ljudem se zgodi da se konec meseca vprašajo kam je šel denar. Mogoče si celo niso privoščili nobenih večjih nakupov zato jim je situacija še bolj sumljiva, nato pa ugotovijo da so krivi majhni nakupi po nekaj deset evrov. Aplikacija SmaugBudget omogoča enostaven pregled nad vašimi financami ter finančnimi cilji. Omogoča kategorizacijo, nastavljanje ciljev, analitični pregled, PDF izpise in še marsikaj.
 
-- **Dashboard**
+- [**Landing page s prijavo in registracijo**](https://github.com/sp-2020-2021/LP-30/blob/master/docs/index.html)
+    - e-mail authentication
+
+- [**Dashboard**](https://github.com/sp-2020-2021/LP-30/blob/master/docs/dashboard.html)
     - Začetna stran po vpisu
-    - Osnovna analitika, zgodovina
-    - Povzetek dneva, tedna
-    - Opozorila na prekomerno zapravljanje, prekoračitve mesečnega limita
-- **Kategorijsko deljenje**
-    - Sistem za sledenju budgeta / porabe denarja glede na kategorijo,
-    - e.g. Gas, Bills, Groceries ...
-    - Obrazec za dodajanje novih transakcij
-        - dodajanje trgovin, restavracij, itd. za kasnejšo uporabo,
-        - avtomatski zapis osebe, ki je transakcijo opravila (če je skupni račun),
-    - Stran za sledenje vsem kategorijam
-        - zgodovina kategorije,
-        - trenutni budget za to kategorijo.
-    - Tortni diagrami in drugi analitični prikazi
-    - Microbudgeting
-        - Dodajanje podkategorij posameznim kategorijam (npr. kurjava pri položnicah, TV pri zabavi, ...)
-    - Kalkulator povrnitve investicij (npr. kdaj se ti povrne nakup nove centralne peči, oken ipd.)
-    - Cilji 
-        - Dodaš cilje ki jih želiš dosečti (varčevanje ali nakup zadeve)
-        - Možnost obkljukanja avtomatske prilagoditve budgeta ali pa ročno vnašanje denarja ko ga želiš in kolikor ga želiš
+    - Osnovni pregled, analitika, zgodovina
+   
+- [**Envelopes**](https://github.com/sp-2020-2021/LP-30/blob/master/docs/envelopes.html)
+    - Sistem sestavljanja mesečnega proračuna po kategorijah oziroma t.i. kuvertah.
+        - Možnost ustvarjanja, spreminjanja in brisanja kuvert ter nastavljanja količine denarja in vpis stroškov po mesecih.
+        - Možen premik po mesecih nazaj (za pregled) in naprej (za nastavitev proračuna za naslednji mesec)
+        - Search funkcija, ki omogoča prikaz samo določenih kategorij
+        - Microbudgeting: omogoča deljenje kategorij na podkategorije na enostaven način z znakom za dvopičje (primer: Entertainment:Netflix, Entertainment: Games)
+    - Hitri pregled na karticah in enostaven pregled v obliki progress barov.
     
-- **Zgodovina**
-    - Pregled porabe za tedne, mesece, leto
-        - za vsako kuverto posebej
-        - za vse skupaj.
-- **Možnost večih računov**
-    - Ločenje bančnih računov in gotovine
-    - Ločenje lastnega in družinskega budgeta
-- **Uporabniški sistem**
-    - dodajanje prijateljev, partnerjev
-        - skupinski sistem za budget
-            - npr. za sostanovalce, skupna potovanja, ...
-            - za partnerje ali sostanovalce -> lahko deliš le določene budget kategorije (druge ostanejo skrite) ali pa vse
-        - skupinsko deljenje stroškov
-            - deljenje računov med prijatelji.
-    - email authentication z aktivacijo računa
-    - child lock (*je sploh smislno?*)
-- **Pretvorba valut**
-    - avtomatična pretvorba valute v privzeto (prav pride npr. pri odhodu na počitnice - vneseš lokalno valuto).
-- **Izvoz tedenskega, mesečnega, letnega poročila v PDF**
-- **Dark mode**
-
+- [**Goals**](https://github.com/sp-2020-2021/LP-30/blob/master/docs/goals.html)
+    - Vpis, izbris in upravljanje s cilji, ki jih želiš dosečti v določenem časovnem obdobju.
+    - Možno avtomatsko dodajanje kuverte v proračun glede na cilj.
+    - Hitri pregled na karticah in enostaven pregled v obliki progress barov.
+    
+- [**Bills**](https://github.com/sp-2020-2021/LP-30/blob/master/docs/bills.html)
+    - Vpis, izbris in upravljanje s ponavljajočimi se računi. Računi se avtomatsko dodajajo v vsakomesečni proračun v kuvertah.
+    - Hitri pregled na karticah.
+    
+- [**History**](https://github.com/sp-2020-2021/LP-30/blob/master/docs/history.html)
+    - Pregled vseh transakcij v obliki tabele, grafa in tortnega diagrama
+        - Možna prikaz glede na časovno obdobje, kategorije in rezultate iskanja. Vse te tri nastavitve upravljajo z vsemi elementi hkrati.
+    - Izvoz poročila v PDF (glede na izbrano časovno obdobje, kategorije,..)
+        
+- [**Utilities**](https://github.com/sp-2020-2021/LP-30/blob/master/docs/utility.html)
+    - Pretvornik valut (API)
+    - Mikroaplikacija, ki omogoča pregled plačil v tvoji družbi in poskrbi za poravnane račune. (Plačila tudi avtomatsko doda med plačila)
+    
+- [**Settings**](https://github.com/sp-2020-2021/LP-30/blob/master/docs/account.html)
+    - Nastavitve uporabniškega profila
+    - Povezovanje z drugimi računi (partner, prijatelji). Sistem omogoča da deliš z njimi le določene kategorije oz. kuverte, ostale ostanejo skrite
+    
+- **Ostale funkcionalnosti**
+    - Dark mode: Nahaja se v dropdown meniju v navigation baru.

@@ -13,13 +13,43 @@ body {
     padding: 0;
 }
 
+.center-row-9 {
+    margin: 0 12.5%
+}
+
 
 .row {
     margin: 0;
 
 }
 
+.arrow {
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+  }
+  
+  .right {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+  }
+  
+  .left {
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+  }
+.puscica-leva{
+    text-align: right;
+}
 
+.mesec {
+    text-align: center;
+}
+
+.puscica-desna{
+    text-align: left;
+}
 
 #welcome-alert-section {
     margin-top: 2vh;
@@ -67,6 +97,20 @@ body {
 @media only screen and (max-width: 991px) {
     #welcome-alert-section {
         margin-top:10vh;
+    }
+    
+}
+
+@media only screen and (min-width: 900px) {
+    .footer {
+        padding-top:12vh;
+    }
+
+}
+
+@media only screen and (max-width: 991px) {
+    .footer {
+        padding-top:6vh;
     }
     
 }
@@ -123,13 +167,16 @@ body {
 
 #entertainment {
     width:90%;
-    background: red;
-    border-color:red;
+    background: #ffbb33;
+    border-color:#ffbb33;
 }
 
 #entertainment-back {
-    background: lightcoral;
+    background: #fdce6f;
 
+}
+.ena{
+    padding-bottom: 20px;
 }
 
 /* End Envelope Category IDs */
@@ -169,4 +216,22 @@ body {
 
 .info span {
     font-family: 'Open Sans Bold';
+}
+
+.warner:hover .replies{
+    display: none; }
+
+ 
+.warner:hover .comments:before{
+    content: "Entertainment: 108 of 120 € spent!";
+ /*   position: relative;
+    text-align: center;
+    font-size: 2.5vh;
+    display: table-cell; 
+    vertical-align: middle;*/
+}
+
+.warn-after {
+    text-align: center;
+    font-size: 2.5vh;
 }

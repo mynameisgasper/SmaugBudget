@@ -35,9 +35,12 @@ var lineConfig = {
     },
     options: {
         responsive: true,
+        maintainAspectRatio: true,
+        aspectRatio: 2,
         title: {
             display: true,
-            text: 'Expenses by month'
+            text: 'Expenses by month',
+            fontColor: '#666'
         },
         tooltips: {
             mode: 'index',
@@ -51,17 +54,40 @@ var lineConfig = {
             xAxes: [{
                 display: true,
                 scaleLabel: {
-                    display: true,
+                    display: false,
                     labelString: 'Month'
+
+                },
+                ticks: {
+                    beginAtZero: true,
+                    fontColor: '#666'
+                },
+                gridLines: {
+                    display: true,
+                    color: 'rgba(0, 0, 0, 0.1)'
                 }
             }],
             yAxes: [{
+                stacked: true,
                 display: true,
                 scaleLabel: {
                     display: true,
                     labelString: 'Value in $'
+                },
+                ticks: {
+                    beginAtZero: true,
+                    fontColor: '#666'
+                },
+                gridLines: {
+                    display: true ,
+                    color: 'rgba(0, 0, 0, 0.1)'
                 }
             }]
+        },
+        legend: {
+            labels: {
+                fontColor: '#666'
+            }
         }
     }
 };
@@ -88,7 +114,8 @@ var doughnutConfig = {
                 window.chartColors.green,
                 window.chartColors.blue,
             ],
-            label: 'Expenses by category'
+            label: 'Expenses by category',
+            borderColor: "#ffffff"
         }],
         labels: [
             'Gas',
@@ -99,14 +126,52 @@ var doughnutConfig = {
         ]
     },
     options: {
-        responsive: true
+        responsive: true,
+        maintainAspectRatio: true,
+        aspectRatio: ($(window).width() < 960 ? 1 : 2),
+        legend: {
+            labels: {
+                fontColor: '#666'
+            }
+        }
     }
 };
 
 window.onload = function() {
+    loadGraphs();
+}
+
+window.onresize = function() {
+    loadGraphs();
+}
+
+function loadGraphs() {
+    lineConfig.options.aspectRatio = ($(window).width() < 960 ? 1 : 2);
+
+    if (!darkMode.isSet) {
+        doughnutConfig.data.datasets[0].borderColor = "#ffffff";
+        doughnutConfig.options.legend.labels.fontColor ="#666";
+        lineConfig.options.legend.labels.fontColor ="#666";
+        lineConfig.options.title.fontColor ="#666";
+        lineConfig.options.scales.xAxes[0].ticks.fontColor ="#666";
+        lineConfig.options.scales.yAxes[0].ticks.fontColor ="#666";
+        lineConfig.options.scales.xAxes[0].gridLines.color ="rgba(0, 0, 0, 0.1)";
+        lineConfig.options.scales.yAxes[0].gridLines.color ="rgba(0, 0, 0, 0.1)";
+    }
+    else {
+        doughnutConfig.data.datasets[0].borderColor = "#2b2b2b";
+        doughnutConfig.options.legend.labels.fontColor ="#ffffff";
+        lineConfig.options.legend.labels.fontColor ="#ffffff";
+        lineConfig.options.title.fontColor ="#ffffff";
+        lineConfig.options.scales.xAxes[0].ticks.fontColor ="#ffffff";
+        lineConfig.options.scales.yAxes[0].ticks.fontColor ="#ffffff";
+        lineConfig.options.scales.xAxes[0].gridLines.color ="#999999";
+        lineConfig.options.scales.yAxes[0].gridLines.color ="#999999";
+    }
+
     var ctx = document.getElementById('doughnut-canvas').getContext('2d');
     window.myPie = new Chart(ctx, doughnutConfig);
 
     var ctx = document.getElementById('line-canvas').getContext('2d');
     window.myLine = new Chart(ctx, lineConfig);
-};
+}

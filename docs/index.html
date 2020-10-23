@@ -8,17 +8,27 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" href="../css/index.css">
     <link rel="stylesheet" href="../css/fonts.css">
+    <script src="../js/DarkMode.js"></script>
 
     <!----- Tab Icon and Title ----->
     <link rel="icon" href="../imgs/dragon.svg">
     <title>SMAUGbudget</title>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script>
+      $(document).ready(function(){
+          $('[data-toggle="popover"]').popover();   
+      });
+    </script>
+
   </head>
     
     <body>
       <header>
+        <div class="glava">
         <!----- Navigation Bar ----->
-        <nav class="navbar navbar-expand-lg fixed-top bg-light">
+        <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-light">
           
           <!----- Logo ----->
           <a class="navbar-brand" href="#">
@@ -39,13 +49,13 @@
                 <a class="nav-link" href="#">HOME<span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">FEATURES</a>
+                <a class="nav-link" href="#features">FEATURES</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">ABOUT US</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">SIGN IN</a>
+                <a class="nav-link" a href="" class="btn btn-default btn-rounded" data-toggle="modal" data-target="#signInForm">SIGN IN</a>
               </li>
             </ul>
 
@@ -53,38 +63,197 @@
           </div>
         </nav>
         <!----- End Navigation Bar ----->
+      </div>
       </header>
-
-      <main role= "main">
-        <div class="jumbotron">
-          <div class="row">
-            <div class="left col-sm-0 col-lg-6 col-xl-5">
-              <img class="img-responsive" src="../imgs/phone.png">
+      <!----- Sign in modal ----->
+      <div id="signInForm" class="modal fade">
+        <div class="modal-dialog modal-login">
+          <div class="modal-content">
+            <div class="modal-header">
+              <img src="../imgs/dragon.svg">				
+              <h4 class="modal-title">Member Login</h4>	
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
-            <div class="right col-sm-12 col-lg-6 col-xl-7">
-              <h1 class="display-7">Saving money made simple,<br> for you.</h1>
-              <p class="lead">Join now and experience your finances in a completely new way.</p>
-              <p class="lead">
-                <a class="btn btn-primary btn-lg" href="#" role="button">Sign up</a>
-              </p>
+            <div class="modal-body">
+              <form action="/examples/actions/confirmation.php" method="post">
+                <div class="form-group">
+                  <input type="email" class="form-control" name="username" placeholder="E-mail" required="required">	
+                </div>
+                <div class="form-group">
+                  <input type="password" class="form-control" name="password" placeholder="Password" required="required">	
+                </div>        
+                <div class="form-button">
+                  <a href="dashboard.html" class="btn btn-primary btn-lg btn-block login-btn" button type="submit">Login</a>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <a href="#" class="a1" data-toggle="modal" data-target="#forgottenPasswordForm" data-dismiss="modal">Forgot Password?</a>
+              <a href="#" class="a2" data-toggle="modal" data-target="#signUpForm" data-dismiss="modal">Not a member?</a>
             </div>
           </div>
         </div>
-          
-        <div class="container">
-          <div class="row">
-            <div class="left col-sm-4 col-lg-4 col-xl-4">
+      </div>
+      <!----- End sign in modal ----->
 
+      <!----- Sign up modal ----->
+      <div id="signUpForm" class="modal fade">
+        <div class="modal-dialog modal-login">
+          <div class="modal-content">
+            <div class="modal-header">
+              <img src="../imgs/dragon.svg">				
+              <h4 class="modal-title">New Member</h4>	
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
-            <div class="left col-sm-4 col-lg-4 col-xl-4">
-            
+            <div class="modal-body">
+              <form action="/examples/actions/confirmation.php" method="post">
+                <div class="form-group">
+                  <input type="text" class="form-control" name="username" placeholder="Name" required="required">	
+                </div>
+                <div class="form-group">
+                  <input type="password" class="form-control" name="password" placeholder="Surname" required="required">	
+                </div>
+                <div class="form-group">
+                  <input type="email" class="form-control" name="username" placeholder="E-mail" required="required">		
+                </div>
+                <div class="form-group">
+                  <input type="email" class="form-control" name="username" placeholder="Confirm E-mail" required="required">		
+                </div>
+                <div class="form-group">
+                  <input type="password" class="form-control" name="password" placeholder="Password" required="required">	
+                </div>    
+                <div class="form-group">
+                  <input type="password" class="form-control" name="password" placeholder="Confirm Password" required="required">	
+                </div>     
+                <div class="form-button">
+                  <a href="dashboard.html" class="btn btn-primary btn-lg btn-block login-btn" button type="submit">Create Account</a>
+                </div>
+              </form>
             </div>
-            <div class="left col-sm-4 col-lg-4 col-xl-4">
-            
+            <div class="modal-footer" style="padding: 10px;">
+              <a href="" style="font-family: 'Open Sans'; color: #999;" data-toggle="modal" data-target="#signInForm" data-dismiss="modal">Already a member?</a>
             </div>
-         </div>
+          </div>
         </div>
-      </main>
+      </div>   
+      <!----- End sign up modal ----->
+
+      <!----- Password reset modal ----->
+      <div id="forgottenPasswordForm" class="modal fade">
+        <div class="modal-dialog modal-login">
+          <div class="modal-content">
+            <div class="modal-header">
+              <img src="../imgs/dragon.svg">				
+              <h4 class="modal-title">Password Reset</h4>	
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+              <form action="/examples/actions/confirmation.php" method="post">
+                <div class="form-group">
+                  <input type="email" class="form-control" name="username" placeholder="Insert your E-mail" required="required">		
+                </div>
+                <div class="form-pop">
+                  <a tabindex="0" class="btn btn-primary btn-lg btn-block login-btn" role="button" data-toggle="popover" data-trigger="focus" data-content="We have sent a recovery e-mail to your address.">Reset Password</a>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer" style="padding: 10px;">
+              <a href="" style="font-family: 'Open Sans'; color: #999;" data-toggle="modal" data-target="#signInForm" data-dismiss="modal">Back?</a>
+            </div>
+          </div>
+        </div>
+      </div>  
+      <!----- End password reset modal ----->
+
+      <!----- Jumbotron ----->
+      <div class="jumbotron" style="padding-bottom: 20px;">
+        <div class="row" style="padding-bottom: 40px;">
+          <div class="left d-none d-md-block d-lg-block d-xl-block left col-md-6 col-lg-5 col-xl-5 ">
+            <img class="img-responsive max-height:300px" src="../imgs/phone.png">
+          </div>
+          <div class="right col-md-6 col-lg-7 col-xl-7">
+            <h1 class="display-7">Saving money made simple,<br> for you.</h1>
+            <p class="lead">Join now and experience your finances in a completely new way.</p>
+            <p class="lead">
+              <a class="btn btn-primary btn-lg" href="#" role="button" data-toggle="modal" data-target="#signUpForm">Sign up</a>
+            </p>
+          </div>
+        </div>
+
+         <!----- Features ----->
+        <div class="row row-cols-1 row-cols-md-3">
+          <div class="col mb-4">
+            <div class="card">
+              <img src="../imgs/filler.png" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col mb-4">
+            <div class="card">
+              <img src="../imgs/filler.png" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col mb-4">
+            <div class="card">
+              <img src="../imgs/filler.png" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.This content is a little bit longer.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!----- About us ----->
+        <div class="row" style="margin: 0px !important;">
+          <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6" style="padding: 0px !important;">
+            <h1 class="display-7">Features</h1>
+            <p class="lead">pridejo kle se kartice z featurje al neki</p>
+            <p class="lead">ne prevec gledat kk je kej alignan, se pridejo fixi</p>
+          </div>
+          <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6" style="padding: 0px !important;">
+            <img src="../imgs/office.jpg" class="img-fluid" alt="Responsive image">
+          </div>
+        </div>
+
+        <!----- Before footer ----->
+        <div class="row" style="margin: 0px !important; max-height: 100 px;">
+          <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+            <img class="img-responsive " style="max-width:100px" src="../imgs/dragon.svg">
+          </div>
+          <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6" style="padding: 0px !important;">
+              <h2>Stop waiting.<br>Start saving.</h2>
+          </div>
+        </div>
+      </div>
+
+      <!----- End jumbotron ----->
+    
+
+      <!--- Footer --->
+      <div class="footer bg-light">
+        <div class="row" style="padding-right: 0px !important; padding-left: 0px !important;">
+          <div class="col-6 col-sm-4 col-md-4 col-lg-4 col-xl-4 footer-col">
+            <a href="" data-toggle="modal" data-target="#signUpForm">Sign up</a>
+          </div>
+          <div class="col-6 col-sm-4 col-md-4 col-lg-4 col-xl-4 footer-col">
+            <a  href="" data-toggle="modal" data-target="#signInForm">Sign in</a>
+          </div>
+          <div class="col-12 col-sm-4 col-md-4 col-lg-4 col-xl-4 footer-col">
+            <a href="#">Back to Top</a>
+          </div>
+        </div>
+      </div>
+      <!--- End footer --->  
+
+           
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
