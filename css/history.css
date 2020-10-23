@@ -38,6 +38,10 @@ tr.border_bottom td {
     text-align: left;
 }
 
+.totaltext{
+    text-align: center;
+}
+
 .ena{
     padding-bottom: 20px;
 }
