@@ -20,7 +20,7 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script src="../js/chart/Chart.min.js"></script>
     <script src="../js/chart/Utils.js"></script>
-    <script src="../js/HistoryChart.js"></script>
+    <script src="../js/DashboardChart.js"></script>
 
     <!----- Tab Icon and Title ----->
     <link rel="icon" href="../imgs/dragon.svg">
@@ -102,16 +102,18 @@
     </nav>
     <!----- End Navigation Bar ----->
 
+    <!----- Welcome section ----->
     <div class="container" id="welcome-alert-section">
       <div class="row">
           <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
               <button type="button" class="close not" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
               <h2>Welcome to dashboard!</h2> 
-              <h5>napište neki tle k jst sm brez idej </h5>
+              <h5>A simple overview of your spending.</h5>
           </div>
       </div>
-    </div> 
+    </div>
 
+    <!----- Cards section ----->
     <div class="container" id="cards-section">
       <div class="row">
            <div class="col-xl-3 col-lg-4 mx-auto">
@@ -142,6 +144,67 @@
       </div>
     </div>
 
+    <!----- Overview section ----->
+    <div class="container" id="overview-section">
+      <h2 style="text-align: center; padding-bottom: 10px;">Last month overview</h2>
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 left-col" >
+          
+          <!----- Expense section----->
+          <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12" style="border-bottom:1px solid rgb(204, 204, 204); padding-bottom: 20px">
+              <table class="table table-borderless table-hover tabela">
+                <tbody>
+                  <tr>
+                    <th>Income</th>
+                    <td>1400€</td>
+                  </tr>
+                  <tr id="second-last-tr">
+                    <th>Expenses</th>
+                    <td>850€</td>
+                  </tr>
+                  <tr >
+                    <th>Balance</th>
+                    <td>550€</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+          <!----- Analytics section ----->
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12" >
+              <h4 style="text-align: center; padding-top: 35px; padding-bottom: 10px;">Analytics</h4>
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 analytics-col" style="padding-bottom: 20px;">
+              <table class="table table-borderless table-hover tabela">
+                <tbody class="analytics-table">
+                  <tr>
+                    <th>Most money spent on</th>
+                    <td>Rent</td>
+                  </tr>
+                  <tr>
+                    <th>Most times purchased</th>
+                    <td>Groceries</td>
+                  </tr>
+                  <tr >
+                    <th>Biggest change from last month</th>
+                    <td>Gas</td>
+                  </tr>
+                  <tr >
+                    <th>Least change from last month</th>
+                    <td>Phone</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <!----- Graph ----->
+        <div class="col-xl-6 col-lg-6" style="padding-top: 25px;">
+          <canvas id="doughnut-canvas"></canvas>
+        </div>
+      </div>
+    </div>
 
 
 
