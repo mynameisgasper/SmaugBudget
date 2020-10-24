@@ -5,9 +5,9 @@ Lastni projekt pri predmetu **Spletno programiranje** v študijskem letu **2020/
 
 ## 1. LP
 
-# Funkcionalnosti spletne strani:
+### Funkcionalnosti spletne strani:
 
-## SmaugBudget - Budget tracker	
+#### SmaugBudget - Budget tracker	
 
 > Prvi korak na poti do finančne uspešnosti je nadzor nad našimi izdatki. Veliko ljudem se zgodi da se konec meseca vprašajo kam je šel denar. Mogoče si celo niso privoščili nobenih večjih nakupov zato jim je situacija še bolj sumljiva, nato pa ugotovijo da so krivi majhni nakupi po nekaj deset evrov. Aplikacija SmaugBudget omogoča enostaven pregled nad vašimi financami ter finančnimi cilji. Omogoča kategorizacijo, nastavljanje ciljev, analitični pregled, PDF izpise in še marsikaj.	
 - [**Landing page s prijavo in registracijo**](https://github.com/sp-2020-2021/LP-30/blob/master/docs/index.html)	
@@ -49,7 +49,25 @@ Lastni projekt pri predmetu **Spletno programiranje** v študijskem letu **2020/
 
 - **Ostale funkcionalnosti**	
     - Dark mode: Nahaja se v dropdown meniju v navigation baru.
+    
+ 
+### Primerjava brsklalnikov:
 
+- **Chrome**
+    - Vse deluje tako kot implementirano saj je bil to naš primarni brsklalnik.
+
+- **Edge**
+    - Vse deluje povsem enako kot na Chrome-u, kar se ni čuditi, saj novi Edge sloni na Chromiumu, tako kot Chrome.
+    
+- **Firefox**
+    - Prva razlika opazna na index.html ob odpiranju obrazcev za vpis/registracijo -> body se premakne v levo.
+    - Drugačni gumbi v poljih kjer je potreben vnos številske vrednosti ter select polja.
+    - Naslovi pisav so precej tanjši
+    - Na strani Goals premaknjeni gumbi za dodajanje denarja.
+
+- **Opera**
+    - Na strani Envelopes tekst ob hoverju rumene kartice gleda izven polja
+    - Vse ostalo enako kar se ponovno ni za čuditi saj je tudi Opera bazira na Chromiumu.
 
 ## 2. LP
 
