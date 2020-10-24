@@ -8,7 +8,9 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" href="../css/index.css">
     <link rel="stylesheet" href="../css/fonts.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <script src="../js/DarkMode.js"></script>
+    
 
     <!----- Tab Icon and Title ----->
     <link rel="icon" href="../imgs/dragon.svg">
@@ -16,6 +18,8 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="../js/ScrollTrigger/ScrollTriger.min.js"></script>
+    
     <script>
       $(document).ready(function(){
           $('[data-toggle="popover"]').popover();   
@@ -188,7 +192,7 @@
       <div class="row feat123">  
         <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
           <div class="row">
-            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 title">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 title ">
               <h1>FEATURES</h1>
             </div>
           </div>
@@ -197,7 +201,7 @@
             <div class="col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12">
               <div class="row kartice">
                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
-                  <div class="card-l">
+                  <div class="card-l"  data-aos="fade-right" data-aos-duration="500">
                     <img src="../imgs/card1.png" class="card-img-top" alt="...">
                     <div class="card-body">
                       <h5 class="card-title">Envelopes</h5>
@@ -206,7 +210,7 @@
                   </div>
                 </div>
                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
-                  <div class="card">
+                  <div class="card" data-aos="fade-up" data-aos-delay="100" data-aos-duration="500">
                     <img src="../imgs/card2.png" class="card-img-top" alt="...">
                     <div class="card-body">
                       <h5 class="card-title">Bills</h5>
@@ -215,7 +219,7 @@
                   </div>
                 </div>
                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
-                  <div class="card-r">
+                  <div class="card-r" data-aos="fade-left" data-aos-duration="500">
                     <img src="../imgs/card3.png" class="card-img-top" alt="...">
                     <div class="card-body">
                       <h5 class="card-title">History</h5>
@@ -230,9 +234,9 @@
         </div>
       </div>
 
-      <div class="container about">
+      <div class="container about" data-aos="fade-right" data-aos-duration="500"   data-aos-anchor-placement="top-center">
         <div class="row">
-        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 title">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 title " >
           <h1 id="about123">ABOUT US</h1>
         </div>
         </div>
@@ -281,9 +285,14 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
       </div>
       <script>
-      $(window).on('beforeunload', function() {
-        $('body').hide();
-        $(window).scrollTop(0);
-      });</script>
+        $(window).on('beforeunload', function() {
+          $('body').hide();
+          $(window).scrollTop(0);
+        });
+      </script>
+      <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+      <script>
+        AOS.init();
+      </script>
   </body>
 </html>
