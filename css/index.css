@@ -114,8 +114,12 @@ body {
 	width: 100%;
 }
 
+::-webkit-scrollbar { 
+	width: 0px!important;
+  } 
+
 .modal-open{
-	padding-right: 0px !important;
+	padding-right: -17px !important;
 }
 .fade{
 	padding-right: 0px !important;
@@ -227,7 +231,7 @@ body {
 	right: calc(-50vw + 50%);
 	margin-left: auto;
 	margin-right: auto;
-}
+}/*
 html {
 	overflow: hidden;
 	height: 100%;
@@ -236,16 +240,16 @@ html {
 	overflow: auto;
 	height: 100%;
   }
+}
+
+.gostilna{
+	z-index: 90 !important;
+}*/
   
   /* unset bs3 setting */
   .modal-open {
    overflow: auto; 
   }
-
-.navbar-light .navbar-toggler {
-    color:white;
-    border-color: white;
-}
 
 .row{
 	margin-right: 0px;
@@ -491,7 +495,6 @@ a.anchor {
     }
 
 }
-
 
 
 
