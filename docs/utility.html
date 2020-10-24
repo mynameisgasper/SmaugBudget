@@ -100,6 +100,34 @@
       </div>
     </div>
 
+    <div class="container" id="friend-groups">
+      <div class="row" style="margin-bottom: 2vh;">
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+          <h2>Friend groups</h2> 
+        </div>
+      </div>
+      <div class="row">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Next to pay</th>
+              <th scope="col">Balance</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="clickable" data-toggle="modal" data-target="#showGroup">
+              <td>Fri group</td>
+              <td>Luka</td>
+              <td>
+                + 5,6
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
     <div class="container" id="converter">
       <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
@@ -230,6 +258,72 @@
         </div>
       </div>
     </div>
+
+    <!-- showGroup -->
+    <div class="modal fade" id="showGroup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Group details</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Paid</th>
+                    <th scope="col">balance</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Grega</td>
+                    <td><input type="text" id="price1" class="form-control" placeholder="Bill amount"></td>
+                    <td><input type="text" id="paid1" class="form-control" placeholder="Money paid"></td>
+                    <td>Me</td>
+                  </tr>
+                  <tr>
+                    <td>Luka</td>
+                    <td><input type="text" id="price2" class="form-control" placeholder="Bill amount"></td>
+                    <td><input type="text" id="paid2" class="form-control" placeholder="Money paid"></td>
+                    <td>+ 2</td>
+                  </tr>
+                  <tr>
+                    <td>Miha</td>
+                    <td><input type="text" id="price3" class="form-control" placeholder="Bill amount"></td>
+                    <td><input type="text" id="paid3" class="form-control" placeholder="Money paid"></td>
+                    <td>+ 2</td>
+                  </tr>
+                  <tr>
+                    <td>Gašper</td>
+                    <td><input type="text" id="price4" class="form-control" placeholder="Bill amount"></td>
+                    <td><input type="text" id="paid4" class="form-control" placeholder="Money paid"></td>
+                    <td>- 1,4</td>
+                  </tr>
+                  <tr>
+                    <td>Tim</td>
+                    <td><input type="text" id="price5" class="form-control" placeholder="Bill amount"></td>
+                    <td><input type="text" id="paid5" class="form-control" placeholder="Money paid"></td>
+                    <td>+ 3</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary">Save changes</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End showGroup -->
 
           <!--- Footer start --->
       <!----
