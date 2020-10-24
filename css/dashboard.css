@@ -1,0 +1,139 @@
+body {
+    background:#ededed;
+}
+
+.date {
+    text-align: center;
+
+}
+
+td {
+    text-align: left;
+}
+
+.cena{
+    text-align: center;
+    font-family: 'Open Sans Bold';
+}
+
+.zadnji {
+    text-align: right;
+}
+
+.date {
+    width: 5vw;
+}
+
+tr.border_bottom td {
+    border-bottom: 1px solid #dee2e6;
+  }
+
+.search {
+    float:right;
+}
+.addbill{
+    float: right;
+}
+.headleft{
+    text-align: left;
+}
+
+.totaltext{
+    text-align: center;
+}
+
+.ena{
+    padding-bottom: 20px;
+}
+
+canvas{
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+.container {
+    background: white;
+}
+
+.container {
+    -webkit-box-shadow: 0px 1px 15px 1px rgba(209,209,209,1);
+    -moz-box-shadow: 0px 1px 15px 1px rgba(209,209,209,1);
+    box-shadow: 0px 1px 15px 1px rgba(209,209,209,1);  
+    padding: 0;
+}
+
+#cards-section {
+    padding: 4vh;
+    margin-top: 2vh;
+}
+
+#cards-section .row {
+    padding: 1.5vh;
+}
+
+.container #cards-section {
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+}
+
+@media only screen and (min-width: 900px) {
+    #welcome-alert-section {
+        margin-top:15vh !important;
+    }
+
+}
+
+@media only screen and (max-width: 991px) {
+    #welcome-alert-section {
+        margin-top:10vh !important;
+    }
+}
+
+@media only screen and (max-height: 768px) and (min-width:560px){
+    #welcome-alert-section{
+        margin-top: 20vh;
+    }
+}
+
+#welcome-alert-section {
+    padding-left: 5vh;
+    padding-right: 5vh;
+    padding-top: 4vh;
+    padding-bottom: 4vh;
+}
+
+#welcome-alert-section .row {
+    padding: 1.5vh;
+}
+
+.warner:hover .replies{
+    display: none; }
+
+ 
+.warner:hover .comments:before{
+    content: "Entertainment: 108 of 120 € spent!";
+ /*   position: relative;
+    text-align: center;
+    font-size: 2.5vh;
+    display: table-cell; 
+    vertical-align: middle;*/
+}
+
+.warner2:hover .replies{
+    display: none; }
+
+ 
+.warner2:hover .comments2:before{
+    content: "January 25: Petrol $80";
+ /*   position: relative;
+    text-align: center;
+    font-size: 2.5vh;
+    display: table-cell; 
+    vertical-align: middle;*/
+}
+
+.warn-after{
+    text-align: center;
+    font-size: 2.5vh;
+}

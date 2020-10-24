@@ -8,13 +8,19 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/fonts.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
 
     <!----- Scripts ----->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/759123a73e.js" crossorigin="anonymous"></script>
     <script src="../js/DarkMode.js"></script>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script src="../js/chart/Chart.min.js"></script>
+    <script src="../js/chart/Utils.js"></script>
+    <script src="../js/HistoryChart.js"></script>
 
     <!----- Tab Icon and Title ----->
     <link rel="icon" href="../imgs/dragon.svg">
@@ -95,6 +101,60 @@
         </div>
     </nav>
     <!----- End Navigation Bar ----->
+
+    <div class="container" id="welcome-alert-section">
+      <div class="row">
+          <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+              <button type="button" class="close not" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h2>Welcome to dashboard!</h2> 
+              <h5>napište neki tle k jst sm brez idej </h5>
+          </div>
+      </div>
+    </div> 
+
+    <div class="container" id="cards-section">
+      <div class="row">
+
+            <div class="col-xl-3 col-lg-4 mx-auto warner">
+              <div class="card-counter bg-warning warn1">
+                <span class="replies">
+                <i class="fas fa-exclamation-triangle"></i> 
+                <p class="count-numbers">1</p>
+                <p class="count-name warn-name">Envelopes almost empty</p></span>
+                <p class="warn-after">
+                <span class="comments">
+                </span>
+                </p>
+              </div>
+            </div>
+
+            <div class="col-xl-3 col-lg-4 mx-auto dang">
+              <div class="card-counter bg-danger">
+                <i class="fas fa-radiation"></i> 
+                <p class="count-numbers">0</p>
+                <p class="count-name">Envelopes empty</p>
+              </div>
+            </div>
+
+            <div class="col-xl-3  col-lg-4 mx-auto warner2">
+              <div class="card-counter bg-warning">
+                <span class="replies">
+                <i class="fa fa-calendar-o"></i>
+                <p class="count-numbers">1</p>
+                <p class="count-name">Bills This Week</p></span>
+                <p class="warn-after">
+                <span class="comments2"></span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
           <!--- Footer start --->
       <!----
         Samo kopiraj, linki so že postavljeni. Če kj ni responsive HMU!
