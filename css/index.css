@@ -508,10 +508,6 @@ a.anchor {
 
 }
 
-
-.container {
-	scroll-snap-type: y mandatory;
-	scroll-snap-align: start;
-
-}
-
+html {
+	scroll-behavior: smooth;
+  }
