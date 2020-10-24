@@ -507,3 +507,7 @@ a.anchor {
 	animation: .65s ease-out 0s 1 slideFromUp;
 
 }
+
+html {
+	scroll-behavior: smooth;
+  }
