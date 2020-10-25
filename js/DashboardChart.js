@@ -34,7 +34,7 @@ var doughnutConfig = {
     options: {
         responsive: true,
         maintainAspectRatio: true,
-        aspectRatio: ($(window).width() < 960 ? 1 : 1),
+        aspectRatio: 1,
         legend: {
             labels: {
                 fontColor: '#666'
@@ -52,12 +52,10 @@ function loadGraphs() {
     if (!darkMode.isSet) {
         doughnutConfig.data.datasets[0].borderColor = "#ffffff";
         doughnutConfig.options.legend.labels.fontColor ="#666";
-
     }
     else {
         doughnutConfig.data.datasets[0].borderColor = "#2b2b2b";
         doughnutConfig.options.legend.labels.fontColor ="#ffffff";
-
     }
 
     var ctx = document.getElementById('doughnut-canvas').getContext('2d');
