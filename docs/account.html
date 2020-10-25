@@ -58,24 +58,6 @@
 
           <!----- Navbar Profile Dropdown Menu  ----->
           <ul class="navbar-nav ml-auto">
-            <li class ="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <span class="badge badge-danger ml-2">2</span>
-            <i class="far fa-bell"></i>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right dropdown-noti" aria-labelledby="navbarDropdownMenuLink-4">
-
-              <a class="dropdown-item" href="#">
-                  <button type="button" class="close not" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <p<></p><b>GOALS:</b> 1 goal completed!</p></p>
-              </a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">
-                <button type="button" class="close not" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <p><p><b>ENVELOPES:</b> 1 envelope almost empty!</p></p>
-              </a>
-            </div>
-            </li>
             <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <b class="fas fa-user">   </b> User </a>
@@ -99,16 +81,47 @@
         <div id="accountBody"  class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
           <h2>Account</h2>
           <div class="row">
-              <label id="usernameInputLbl" for="usernameInput" class="col-sm-3 col-md-3 col-lg-2 col-xl-2">Username:</label>
-              <input type="text" id="usernameInput" value="Grega"  class="form-control col-sm-6 col-md-7 col-lg-7 col-xl-7">
+            <div class="del-margin col-sm-12 col-md-9 col-lg-9 col-xl-9">
+              <div class="row">
+                  <label id="usernameInputLbl" for="usernameInput" class="col-sm-3 col-md-3 col-lg-2 col-xl-2">Username:</label>
+                  <input type="text" id="usernameInput" value="Grega"  class="form-control col-sm-9 col-md-9 col-lg-10 col-xl-10">
+              </div>
+              <div class="row">
+                <label id="nameInputLbl" for="nameInput" class="col-sm-3 col-md-3 col-lg-2 col-xl-2">First name:</label>
+                <input type="text" id="nameInput" placeholder="First name" class="form-control col-sm-3 col-md-3 col-lg-3 col-xl-3">
+            
+                <label id="lastnameInputLbl" for="lastnameInput" class="col-sm-3 col-md-3 col-lg-4 col-xl-4">Last name:</label>
+                <input type="text" id="lastnameInput" placeholder="Last name"  class="form-control col-sm-3 col-md-3 col-lg-3 col-xl-3">
+              </div>
+              <div class="row">
+                  <label id="passwordChangeLbl" for="passwordChange" class="col-sm-3 col-md-3 col-lg-2 col-xl-2">Password:</label>
+                  <button id ="passwordChange" type="button" class="btn btn-primary" data-toggle="modal" data-target="#changePassowrd">change password</button>
+              </div>
+              <div class="row">
+                  <label id="emailInputLbl" for="emailInput" class="col-sm-3 col-md-3 col-lg-2 col-xl-2">Email:</label>
+                  <input type="email" id="emailInput" value="Grega@gmail.com"  class="form-control col-sm-9 col-md-9 col-lg-10 col-xl-10">
+              </div>
+              <div class="row">
+                <label id="incomeInputLbl" for="incomeInput" class="col-sm-3 col-md-3 col-lg-2 col-xl-2">Income:</label>
+                <input type="text" id="incomeInput" value="1100" class="form-control col-sm-3 col-md-3 col-lg-3 col-xl-3">
+            
+                <label id="savingsInputLbl" for="savingsInput" class="col-sm-4 col-md-4 col-lg-4 col-xl-4">Savings target:</label>
+                <input type="text" id="savingsInput" value="200" class="form-control col-sm-2 col-md-2 col-lg-3 col-xl-3">
+              </div>
+            </div>
+            <div id="pfpImg" class="del-margin col-sm-12 col-md-3 col-lg-3 col-xl-3">
+              <a data-toggle="modal" data-target="#changePfp" aria-label="Change Profile Picture">
+                <div class="profile-pic" style="background-image: url('../imgs/Default_pfp.png')" >
+                  <span class="fas fa-camera"></span>
+                  <span>Change Image</span>
+                </div>
+              </a>
+            </div>
           </div>
           <div class="row">
-              <label id="passwordChangeLbl" for="passwordChange" class="col-sm-3 col-md-3 col-lg-2 col-xl-2">Password:</label>
-              <button id ="passwordChange" type="button" class="btn btn-primary" data-toggle="modal" data-target="#changePassowrd">change password</button>
-          </div>
-          <div class="row">
-              <label id="emailInputLbl" for="emailInput" class="col-sm-3 col-md-3 col-lg-2 col-xl-2">Email:</label>
-              <input type="email" id="emailInput" value="Grega@gmail.com"  class="form-control col-sm-6 col-md-7 col-lg-7 col-xl-7">
+            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+              <button type="button" class="btn btn-primary" style="float: right;">Save changes</button>
+            </div>
           </div>
         </div>
       </div>
@@ -145,7 +158,7 @@
                     </div>
                   </td>
                   <td>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editConnectionModal">
+                    <button type="button" class="btn" data-toggle="modal" data-target="#editConnectionModal">
                       <i class="fas fa-pencil-alt"></i>
                     </button>
                   </td>
@@ -569,6 +582,33 @@
         </div>
       </div>
       <!-- End editConnectionModal -->
+
+      <!-- changePfp -->
+      <div class="modal fade" id="changePfp" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Change profile picture</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="form-group">
+                  <label for="exampleFormControlFile1">Drag and drop or:</label>
+                  <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary">Save changes</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End changePfp -->
 
       <!--- Footer start --->
       <!----
