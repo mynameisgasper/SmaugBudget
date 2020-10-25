@@ -141,9 +141,6 @@ window.onload = function() {
     loadGraphs();
 }
 
-window.onresize = function() {
-    loadGraphs();
-}
 
 function loadGraphs() {
     lineConfig.options.aspectRatio = ($(window).width() < 960 ? 1 : 2);
