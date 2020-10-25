@@ -20,7 +20,7 @@ body input {
     border-color: #595959 !important;
 }
 
-.fas {
+.fas:not(.fa-camera) {
     color: white;
     opacity: 0.8;
 }
