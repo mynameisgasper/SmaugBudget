@@ -437,6 +437,15 @@ html {
 	padding-left: 0px;
 	padding-right: 0px;
 	border: 0px;
+	text-align: center;
+	display: block;
+}
+
+.card-body{
+	padding-top: 1.25rem;
+	padding-left: 0px;
+	padding-bottom: 0px;
+	padding-right: 0px;
 }
 
 a.anchor {
@@ -446,7 +455,8 @@ a.anchor {
 }
 
 .card-img-top{
-	max-height: 200px;
+	max-height: auto;
+	max-width: 300px
 }
 
 
