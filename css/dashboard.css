@@ -180,3 +180,6 @@ canvas{
 tr{
     line-height: 14px;
 }
+.card-counter i{
+font-size: 6vh
+}
