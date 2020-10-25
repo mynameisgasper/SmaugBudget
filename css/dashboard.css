@@ -92,6 +92,10 @@ canvas{
     .analytics-col{
         border-bottom:1px solid rgb(204, 204, 204);
     }
+
+    #doughnut-canvas{
+        max-width: 400px;
+    }
     
 }
 
@@ -182,4 +186,10 @@ tr{
 }
 .card-counter i{
 font-size: 6vh
+}
+
+#doughnut-canvas{
+    width: 100%; 
+    text-align:center;
+    margin: auto; 
 }
