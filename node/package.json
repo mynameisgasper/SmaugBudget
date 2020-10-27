@@ -1,0 +1,27 @@
+{
+  "name": "smaug-budget",
+  "version": "1.0.0",
+  "description": "SP group project",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sp-2020-2021/LP-30.git"
+  },
+  "keywords": [
+    "Budget",
+    "SP"
+  ],
+  "author": "Miha Bogataj, Grega Kranjec, Gašper Štepec, Luka Bratina, Tim Draksler",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sp-2020-2021/LP-30/issues"
+  },
+  "homepage": "https://github.com/sp-2020-2021/LP-30#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
