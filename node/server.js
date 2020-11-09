@@ -58,6 +58,12 @@ app.get('/account', function (req, res) {
   });
 });
 
+app.all('*', function (req, res) {
+  fs.readFile('../docs/404notfound.html', "utf8", function(err, data) {
+    sendFile(res, err, data);
+  });
+});
+
 app.listen(8080);
 
 function sendFile(res, err, data) {
