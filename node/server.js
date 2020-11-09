@@ -12,7 +12,7 @@ app.use('/fonts', express.static(path.join("../fonts", '../fonts')));
 
 app.get('/', function (req, res) {
   fs.readFile('../docs/index.html', "utf8", function(err, data) {
-    sendFile(res, err, data, 200);
+    sendFile(res, err, data);
   });
 });
 
@@ -69,8 +69,8 @@ app.listen(8080);
 function sendFile(res, err, data, status) {
   if (err) {
     console.log(err);
-    res.sendStatus(status);
+    res.sendStatus(404);
     return;
   }
-  res.send(data);
+  res.status(status).send(data);
 }
