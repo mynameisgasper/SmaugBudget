@@ -12,7 +12,7 @@ app.use('/fonts', express.static(path.join("../fonts", '../fonts')));
 
 app.get('/', function (req, res) {
   fs.readFile('../docs/index.html', "utf8", function(err, data) {
-    sendFile(res, err, data);
+    sendFile(res, err, data, 200);
   });
 });
 
