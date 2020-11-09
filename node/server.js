@@ -69,7 +69,9 @@ app.listen(8080);
 function sendFile(res, err, data, status) {
   if (err) {
     console.log(err);
-    res.sendStatus(404);
+    fs.readFile('../docs/404notfound.html', "utf8", function(err, data) {
+      sendFile(res, err, data, 404);
+    });
     return;
   }
   res.status(status).send(data);
