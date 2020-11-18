@@ -1,79 +1,62 @@
 //Dependencies
 var fs = require('fs');
 const path = require('path');
-var express = require('express')
+var express = require('express');
+
+//Business logic
+var index = require('../services/index.js');
+var dashboard = require('../services/dashboard.js');
+var envelopes = require('../services/envelopes.js');
+var goals = require('../services/goals.js');
+var bills = require('../services/bills.js');
+var history = require('../services/history.js');
+var utility = require('../services/utility.js');
+var account = require('../services/account.js');
+var notFound404 = require('../services/not_found.js');
 
 var app = express();
 
+//Import static files
 app.use('/imgs', express.static(path.join('../imgs', '../imgs')));
 app.use('/css', express.static(path.join("../css", '../css')));
 app.use('/js', express.static(path.join("../js", '../js')));
 app.use('/fonts', express.static(path.join("../fonts", '../fonts')));
 
 app.get('/', function (req, res) {
-  fs.readFile('../docs/index.html', "utf8", function(err, data) {
-    sendFile(res, err, data, 200);
-  });
+  index.get(req, res);
 });
 
 app.get('/dashboard', function (req, res) {
-  fs.readFile('../docs/dashboard.html', "utf8", function(err, data) {
-    sendFile(res, err, data, 200);
-  });
+  dashboard.get(req, res);
 });
 
 app.get('/envelopes', function (req, res) {
-  fs.readFile('../docs/envelopes.html', "utf8", function(err, data) {
-    sendFile(res, err, data, 200);
-  });
+  envelopes.get(req, res);
 });
 
 app.get('/goals', function (req, res) {
-  fs.readFile('../docs/goals.html', "utf8", function(err, data) {
-    sendFile(res, err, data, 200);
-  });
+  goals.get(req, res);
 });
 
 app.get('/bills', function (req, res) {
-  fs.readFile('../docs/bills.html', "utf8", function(err, data) {
-    sendFile(res, err, data, 200);
-  });
+  bills.get(req, res);
 });
 
 app.get('/history', function (req, res) {
-  fs.readFile('../docs/history.html', "utf8", function(err, data) {
-    sendFile(res, err, data, 200);
-  });
-});
+  history.get(req, res);
+});history
 
 app.get('/utility', function (req, res) {
-  fs.readFile('../docs/utility.html', "utf8", function(err, data) {
-    sendFile(res, err, data, 200);
-  });
+  utility.get(req, res);
 });
 
 app.get('/account', function (req, res) {
-  fs.readFile('../docs/account.html', "utf8", function(err, data) {
-    sendFile(res, err, data, 200);
-  });
+  account.get(req, res);
 });
 
 app.all('*', function (req, res) {
-  fs.readFile('../docs/404notfound.html', "utf8", function(err, data) {
-    sendFile(res, err, data, 404);
-  });
+  notFound404.get(req, res);
 });
-
-function sendFile(res, err, data, status) {
-  if (err) {
-    console.log(err);
-    fs.readFile('../docs/404notfound.html', "utf8", function(err, data) {
-      sendFile(res, err, data, 404);
-    });
-    return;
-  }
-  res.status(status).send(data);
-}
 
 module.exports = {
     startServer: function() {
