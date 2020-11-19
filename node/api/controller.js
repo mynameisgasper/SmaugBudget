@@ -1,5 +1,4 @@
 //Dependencies
-var fs = require('fs');
 const path = require('path');
 var express = require('express');
 
@@ -59,9 +58,9 @@ app.all('*', function (req, res) {
 });
 
 module.exports = {
-    startServer: function() {
+    startServer: function(port) {
         console.log("Starting server");
-        app.listen(8080);
+        app.listen(port);
         console.log("Server started");
     }
 }
