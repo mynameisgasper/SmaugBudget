@@ -1,6 +1,6 @@
 //Dependencies
 var fs = require('fs');
-var responder = require('../api/responder');
+var responder = require('../routes/responder');
 
 function respond(res) {
     fs.readFile('../docs/account.html', "utf8", function(err, data) {
