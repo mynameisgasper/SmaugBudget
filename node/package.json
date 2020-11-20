@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/sp-2020-2021/LP-30#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "express-handlebars": "^5.2.0"
   }
 }
