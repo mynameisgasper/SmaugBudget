@@ -64,7 +64,8 @@ app.get('/goals', (req, res) => {
 
 //Bills
 app.get('/bills', (req, res) => {
-    bills.get(req, res);
+    //bills.get(req, res);
+    res.render('bills');
 });
 
 //History
