@@ -1,26 +1,4 @@
-<!DOCTYPE html>
-<html lang="sl">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!----- Stylesheets ----->
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <link rel="stylesheet" href="../stylesheets/main.css">
-    <link rel="stylesheet" href="../stylesheets/envelopes.css">
-    <link rel="stylesheet" href="../stylesheets/fonts.css">
-    <!--script src="../js/envelopes.js"></script-->
-    <script src="../javascripts/DarkMode.js"></script>
-
-
-    <!----- Tab Icon and Title ----->
-    <link rel="icon" href="../images/dragon.svg">
-    <title>SMAUGbudget</title>
-</head>
-
-<body>
     <!----- Navigation Bar ----->
     <nav class="navbar navbar-expand-lg fixed-top navbar-dark navbar-left bg-dark">
 
@@ -37,41 +15,41 @@
 
         <!----- Navbar Links ----->
         <div class="button collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="dashboard">DASHBOARD</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">ENVELOPES<span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="goals">GOALS</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="bills">BILLS</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="history">HISTORY</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="utility">UTILITIES</a>
-                </li>
-            </ul>
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="dashboard">DASHBOARD</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="#">ENVELOPES<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="goals">GOALS</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="bills">BILLS</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="history">HISTORY</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="utility">UTILITIES</a>
+            </li>
+          </ul>
 
-            <!----- Navbar Profile Dropdown Menu  ----->
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <b class="fas fa-user">   </b> User </a>
-                    <div class="dropdown-menu dropdown-menu-right dropdown-info" id="dropdown-user" aria-labelledby="navbarDropdownMenuLink-4">
-                        <a class="dropdown-item" href="account"><i class="fas fa-cog"></i>Settings</a>
-                        <a class="dropdown-item" href="#" onclick="toggleDarkMode()" id="appearance"><i class="fas fa-adjust"></i>Appearance: Light</a>
-                        <hr>
-                        <a class="dropdown-item" href="/"><i class="fas fa-sign-out-alt"></i>Log out</a>
+          <!----- Navbar Profile Dropdown Menu  ----->
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <b class="fas fa-user">   </b> User </a>
+            <div class="dropdown-menu dropdown-menu-right dropdown-info" id="dropdown-user" aria-labelledby="navbarDropdownMenuLink-4">
+                <a class="dropdown-item" href="account"><i class="fas fa-cog"></i>Settings</a>
+                <a class="dropdown-item" href="#" onclick="toggleDarkMode()" id="appearance"><i class="fas fa-adjust"></i>Appearance: Light</a>
+                <hr>
+                <a class="dropdown-item" href="/"><i class="fas fa-sign-out-alt"></i>Log out</a>
 
-                    </div>
-                </li>
-            </ul>
+            </div>
+            </li>
+        </ul>
         </div>
     </nav>
     <!----- End Navigation Bar ----->
@@ -178,40 +156,11 @@
 
     <!---- Cards Section ---->
 
-    <div class="container" id="cards-section">
-        <div class="row">
-            <div class="col-xl-3 col-lg-4 col-md-4 col-sm-4 col-12 mx-auto" data-aos="flip-down" data-aos-duration="500" data-aos-anchor="top-top">
-                <div class="card-counter bg-primary">
-                    <i class="fas fa-envelope"></i>
-                    <p class="count-numbers">5</p>
-                    <p class="count-name">Envelopes Total</p>
-                </div>
-            </div>
-
-            <div class="col-xl-3 col-lg-4 col-md-4 col-sm-4 col-12 mx-auto warner" data-aos="flip-down" data-aos-duration="500" data-aos-anchor="top-top">
-                <div class="card-counter bg-warning warn1">
-                    <span class="replies">
-                <i class="fas fa-exclamation-triangle"></i> 
-                <p class="count-numbers">1</p>
-                <p class="count-name warn-name">Almost Empty</p></span>
-                    <p class="warn-after">
-                        <span class="comments">
-                </span>
-                    </p>
-                </div>
-            </div>
-
-            <div class="col-xl-3 col-lg-4 col-md-4 col-sm-4 col-12 mx-auto dang" data-aos="flip-down" data-aos-duration="500" data-aos-anchor="top-top">
-                <div class="card-counter bg-danger">
-                    <i class="fas fa-radiation"></i>
-                    <p class="count-numbers">0</p>
-                    <p class="count-name">Empty</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
+  <div class="container" id="cards-section">
+      <div class="row">
+          {{> card}}
+      </div>
+    </div>  
 
     <div class="container" id="main-section">
         <div class="row">
@@ -239,3 +188,10 @@
           </button>
             </div>
         </div>
+        {{>progress-envelopes}}
+
+        </div>
+        
+
+        
+

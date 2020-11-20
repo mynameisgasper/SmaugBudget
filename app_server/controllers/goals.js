@@ -4,7 +4,7 @@ var responder = require('../routes/responder');
 
 function respond(res) {
     res.render('goals', {
-        title: 'goals',
+        fileName: 'goals',
         welcomeMessage: 'Here you can add saving goals you want to achieve. Click Add Goal, fill in the form, submit and you`re done!',
         goal: [{
                 title: 'iPhone',
