@@ -10,6 +10,6 @@ function respond(res) {
 
 module.exports = {
     get: function(req, res) {
-        respond(res)
+        respond(res);
     }
 }
