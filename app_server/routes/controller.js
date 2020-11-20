@@ -20,11 +20,7 @@ var app = express();
 var jsonParser = bodyParser.json()
 
 //Import static files
-app.use('/images', express.static(path.join('../images', '../imgs')));
-app.use('/stylesheets', express.static(path.join("../stylesheets", '../css')));
-app.use('/javascripts', express.static(path.join("../javascripts", '../js')));
-app.use('/webfonts', express.static(path.join("../webfonts", '../fonts')));
-
+app.use(express.static('../public'))
 
 app.engine('hbs', exphbs({
     defaultLayout: 'layout',
