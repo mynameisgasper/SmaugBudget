@@ -21,6 +21,19 @@ function respond(res) {
                 targetLeft: 1500,
                 monthlyTarget: 1000,
             }
+        ],
+        card: [{
+                title: 'Goals Total',
+                color: 'bg-primary',
+                count: 3,
+                icon: 'fa-bullseye'
+            },
+            {
+                title: 'Goals Completed',
+                color: 'green-panel',
+                count: 1,
+                icon: 'fa-check-circle'
+            }
         ]
     });
 }
