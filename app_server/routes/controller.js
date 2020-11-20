@@ -57,11 +57,7 @@ app.get('/goals', (req, res) => {
 
 //Bills
 app.get('/bills', (req, res) => {
-<<<<<<< Updated upstream
     bills.get(req, res);
-=======
-    bills.get(req,res);
->>>>>>> Stashed changes
 });
 
 //History
