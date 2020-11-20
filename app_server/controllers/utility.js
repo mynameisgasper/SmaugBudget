@@ -3,9 +3,15 @@ var fs = require('fs');
 var responder = require('../routes/responder');
 
 function respond(res) {
-    fs.readFile('../docs/utility.html', "utf8", function(err, data) {
-        responder.send(res, err, data, 200);
-    });
+    res.render('utility', ({
+    fileName: 'Utility',
+        welcomeMessage: 'Welcome to utilities. Here you can find some useful gadgets.',
+        Friend: [{
+            Group: 'Fri group',
+            Next: 'Kranjec',
+            Balance: '+15,3'
+        }]
+    }));
 }
 
 module.exports = {

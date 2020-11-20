@@ -3,7 +3,7 @@ var fs = require('fs');
 
 function respond(res) {
     res.render('bills', ({
-        title: 'bills',
+        fileName: 'bills',
         welcomeMessage:'Here you can add recurring bills. Fill in the form, submit and it will be added to an envelope repeteadly!',
         Bill: [{
             Year:2020,
@@ -29,7 +29,20 @@ function respond(res) {
             Company: 'Mercator',
             Price: '200',
             Currency: '€'
-        }]
+        }],
+        card: [{
+            title: 'Bills Total',
+            color: 'bg-primary',
+            count: 2,
+            icon: 'fa-paperclip'
+        },
+        {
+            title: 'Bills This Week',
+            color: 'bg-warning',
+            count: 1,
+            icon: 'fa-calendar'
+        }
+    ]
     }));
 }
 
