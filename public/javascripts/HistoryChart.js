@@ -123,8 +123,10 @@ var doughnutConfig = {
 };
 
 function loadGraphs(categoryData) {
-    doughnutConfig.data.datasets[0].data = extractValues(categoryData);
-    doughnutConfig.data.labels = extractNames(categoryData);
+    if (categoryData != null) {
+        doughnutConfig.data.datasets[0].data = extractValues(categoryData);
+        doughnutConfig.data.labels = extractNames(categoryData);
+    }
 
     lineConfig.options.aspectRatio = ($(window).width() < 960 ? 1 : 2);
 

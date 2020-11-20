@@ -19,7 +19,7 @@ function addDarkModeCss() {
     var link = document.createElement('link');
     link.setAttribute('rel', 'stylesheet');
     link.setAttribute('type', 'text/css');
-    link.setAttribute('href', '../css/darkmode.css');
+    link.setAttribute('href', '../stylesheets/darkmode.css');
     link.setAttribute('id', 'darkmode')
     document.getElementsByTagName('head')[0].appendChild(link);
     
