@@ -3,7 +3,7 @@ var fs = require('fs');
 var responder = require('../routes/responder');
 
 var data = {
-    title: 'history',
+    fileName: 'history',
     graph: {
         used: true,
         name: 'HistoryChart'
@@ -11,6 +11,7 @@ var data = {
     dateRangePicker: {
         used: true
     },
+    totalExpenses: 335,
     expenses: [
         {
             id: 0,

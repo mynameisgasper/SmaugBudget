@@ -2,7 +2,6 @@
  * https://www.chartjs.org/docs/latest/
  */
 
-var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 var lineConfig = {
     type: 'line',
     data: {
@@ -100,13 +99,6 @@ var doughnutConfig = {
     type: 'doughnut',
     data: {
         datasets: [{
-            data: [
-                50,
-                40,
-                270,
-                32,
-                63,
-            ],
             backgroundColor: [
                 window.chartColors.red,
                 window.chartColors.orange,
@@ -117,13 +109,6 @@ var doughnutConfig = {
             label: 'Expenses by category',
             borderColor: "#ffffff"
         }],
-        labels: [
-            'Gas',
-            'Phone',
-            'Groceries',
-            'Entertainment',
-            'Eating out',
-        ]
     },
     options: {
         responsive: true,
@@ -137,12 +122,10 @@ var doughnutConfig = {
     }
 };
 
-window.onload = function() {
-    loadGraphs();
-}
+function loadGraphs(categoryData) {
+    doughnutConfig.data.datasets[0].data = extractValues(categoryData);
+    doughnutConfig.data.labels = extractNames(categoryData);
 
-
-function loadGraphs() {
     lineConfig.options.aspectRatio = ($(window).width() < 960 ? 1 : 2);
 
     if (!darkMode.isSet) {
@@ -171,4 +154,20 @@ function loadGraphs() {
 
     var ctx = document.getElementById('line-canvas').getContext('2d');
     window.myLine = new Chart(ctx, lineConfig);
+}
+
+function extractNames(data) {
+    const names = [];
+    for (let entry of data) {
+        names.push(entry.name);
+    }
+    return names;
+}
+
+function extractValues(data) {
+    const values = [];
+    for (let entry of data) {
+        values.push(entry.sum);
+    }
+    return values;
 }
