@@ -2,6 +2,30 @@ $(window).on('beforeunload', function() {
   $('body').hide();
   $(window).scrollTop(0);
 });
+
+function nameRegex(username) {
+  var regex = new RegExp("^([a-zA-Z])+$");
+  if(!username.value.match(regex)) {
+    username.borderColor = "red";
+    document.getElementById("alerts4").innerHTML ='<div class="alert alert-warning" role="alert">Name may only contain letters A-Z.</div>';
+  }
+  else {
+    username.borderColor = "#ced4da";
+    document.getElementById("alerts4").innerHTML = "";
+  }
+}
+function surnameRegex(username) {
+  var regex = new RegExp("^([a-zA-Z])+$");
+  if(!username.value.match(regex)) {
+    username.borderColor = "red";
+    document.getElementById("alerts5").innerHTML ='<div class="alert alert-warning" role="alert">Surname may only contain letters A-Z</div>';
+  }
+  else {
+    username.borderColor = "#ced4da";
+    document.getElementById("alerts5").innerHTML = "";
+  }
+}
+
 function passwordStrength(password1) {
 
   //var email1 = document.getElementById(email1up);
@@ -20,9 +44,9 @@ function passwordStrength(password1) {
   * - At least 6 characters long, max length anything
   * - Include at least 1 lowercase letter AND 1 capital letter
   *  OR
-  * - Include at least 1 lowercase letter AND 1 number 
+  * - Include at least 1 lowercase letter AND 1 numeric character
   *  OR
-  * - Include at least 1 uppercase letter AND 1 special character => !@#$%^&**/
+  * - Include at least 1 uppercase letter AND 1 numeric character*/
   if(password1.value.match(strongRegex)) {
     password1.borderColor = "green";
     document.getElementById("alerts").innerHTML = "";

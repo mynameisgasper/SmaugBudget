@@ -58,7 +58,7 @@
                   <input type="password" class="form-control" id="passwordin" placeholder="Password" required>	
                 </div>        
                 <div class="form-button">
-                  <a href="dashboard" class="btn btn-primary singbut btn-lg btn-block login-btn" button type="submit">Login</a>
+                  <button href="dashboard" class="btn btn-primary singbut btn-lg btn-block login-btn" button type="submit">Login</button>
                 </div>
               </form>
             </div>
@@ -83,10 +83,10 @@
             <div class="modal-body">
               <form name="signup" method="post" action="#signup">
                 <div class="form-group">
-                  <input type="text" class="form-control" id="nameup" placeholder="Name" required="required">	
+                  <input type="text" class="form-control" id="nameup" placeholder="Name" onfocusout="nameRegex(document.signup.nameup)" required="required">	
                 </div>
                 <div class="form-group">
-                  <input type="text" class="form-control" id="surnameup"  placeholder="Surname" required="required">	
+                  <input type="text" class="form-control" id="surnameup"  placeholder="Surname" onfocusout="surnameRegex(document.signup.surnameup)" required="required">	
                 </div>
                 <div class="form-group">
                   <input type="email" class="form-control" id="email1up" placeholder="E-mail" onfocusout="emailCheckSignUp()" required="required">		
@@ -103,6 +103,9 @@
                 <div id="alerts"></div>
                 <div id="alerts2"></div>
                 <div id="alerts3"></div>
+                <div id="alerts4"></div>
+                <div id="alerts5"></div>
+                
                 <div class="form-button">
                   <button href="dashboard"  class="btn btn-primary singbut btn-lg btn-block login-btn" button type="submit" onclick="validateSignUp()">Create Account</button>
                 </div>
