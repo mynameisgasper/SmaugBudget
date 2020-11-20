@@ -20,11 +20,10 @@ var app = express();
 var jsonParser = bodyParser.json()
 
 //Import static files
-app.use('/imgs', express.static(path.join('../imgs', '../imgs')));
-app.use('/css', express.static(path.join("../css", '../css')));
-app.use('/js', express.static(path.join("../js", '../js')));
-app.use('/fonts', express.static(path.join("../fonts", '../fonts')));
-
+app.use('/images', express.static(path.join('../images', '../imgs')));
+app.use('/stylesheets', express.static(path.join("../stylesheets", '../css')));
+app.use('/javascripts', express.static(path.join("../javascripts", '../js')));
+app.use('/webfonts', express.static(path.join("../webfonts", '../fonts')));
 
 
 app.engine('hbs', exphbs({
@@ -33,7 +32,6 @@ app.engine('hbs', exphbs({
 }));
 
 app.set('view engine', 'hbs');
-
 
 
 //Index
@@ -58,8 +56,21 @@ app.get('/envelopes', (req, res) => {
 
 //Goals
 app.get('/goals', (req, res) => {
-    //goals.get(req, res);
-    res.render('goals');
+    res.render('goals', {
+        goal: [{
+                title: 'iPhone',
+                progress: 100,
+                target: 1200,
+                targetLeft: 0
+            },
+            {
+                title: 'Ferrari F8 Tributo',
+                progress: 69,
+                target: 100000,
+                targetLeft: 100000
+            }
+        ]
+    });
 });
 
 //Bills
