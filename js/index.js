@@ -10,3 +10,12 @@ function validateSignUp() {
   var passReg = regpass.test(password1);
   alert("password: " + passReg);
 }
+
+function emailCheck() {
+  var email1 = document.getElementById("email1up");
+  var email2 = document.getElementById("email2up");
+  if (email1.value != email2.value) {
+    email1.style.borderColor = "red";
+    email2.style.borderColor = "red";
+  }
+}
