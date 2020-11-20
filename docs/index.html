@@ -10,7 +10,8 @@
     <link rel="stylesheet" href="../css/index.css">
     <link rel="stylesheet" href="../css/fonts.css">
     <script src="../js/DarkMode.js"></script>
-    
+    <script src="../js/handlebars-v4.7.6.js"></script>
+
 
     <!----- Tab Icon and Title ----->
     <link rel="icon" href="../imgs/dragon.svg">
@@ -111,27 +112,27 @@
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
             <div class="modal-body">
-              <form action="/examples/actions/confirmation.php" method="post">
+              <form name = "sign-up" method="post">
                 <div class="form-group">
-                  <input type="text" class="form-control" name="username" placeholder="Name" required="required">	
+                  <input type="text" class="form-control" id="nameup" placeholder="Name" required="required">	
                 </div>
                 <div class="form-group">
-                  <input type="password" class="form-control" name="password" placeholder="Surname" required="required">	
+                  <input type="password" class="form-control" id="surnameup" placeholder="Surname" required="required">	
                 </div>
                 <div class="form-group">
-                  <input type="email" class="form-control" name="username" placeholder="E-mail" required="required">		
+                  <input type="email" class="form-control" id="email1up" placeholder="E-mail" required="required">		
                 </div>
                 <div class="form-group">
-                  <input type="email" class="form-control" name="username" placeholder="Confirm E-mail" required="required">		
+                  <input type="email" class="form-control" id="email2up" placeholder="Confirm E-mail" required="required">		
                 </div>
                 <div class="form-group">
-                  <input type="password" class="form-control" name="password" placeholder="Password" required="required">	
+                  <input type="password" class="form-control" id="password1up" placeholder="Password" required="required">	
                 </div>    
                 <div class="form-group">
-                  <input type="password" class="form-control" name="password" placeholder="Confirm Password" required="required">	
+                  <input type="password" class="form-control" id="password2up" placeholder="Confirm Password" required="required">	
                 </div>     
                 <div class="form-button">
-                  <a href="dashboard" class="btn btn-primary singbut btn-lg btn-block login-btn" button type="submit">Create Account</a>
+                  <button href="dashboard"  class="btn btn-primary singbut btn-lg btn-block login-btn" button type="submit" onclick="validateSignUp()">Create Account</button>
                 </div>
               </form>
             </div>
