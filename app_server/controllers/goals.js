@@ -3,8 +3,25 @@ var fs = require('fs');
 var responder = require('../routes/responder');
 
 function respond(res) {
-    fs.readFile('../docs/goals.html', "utf8", function(err, data) {
-        responder.send(res, err, data, 200);
+    res.render('goals', {
+        title: 'goals',
+        welcomeMessage: 'Here you can add saving goals you want to achieve. Click Add Goal, fill in the form, submit and you`re done!',
+        goal: [{
+                title: 'iPhone',
+                progress: 100,
+                target: 1200,
+                targetLeft: 0,
+                monthlyTarget: 0,
+                color: '#00cf1d'
+            },
+            {
+                title: 'Ferrari F8 Tributo',
+                progress: 69,
+                target: 1500,
+                targetLeft: 1500,
+                monthlyTarget: 1000,
+            }
+        ]
     });
 }
 

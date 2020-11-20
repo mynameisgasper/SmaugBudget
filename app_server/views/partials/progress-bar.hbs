@@ -1,29 +1,31 @@
+{{#each goal}}
 <div class="row ">
     <!---  Row 1 Col 1 --->
     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-2 goal-col">
-        <p class="goal-p">{{goal.title}}</p>
+        <p class="goal-p">{{title}}</p>
     <div class="w-100"></div>
-    <p class="p-date">{{goal.date}}</p>
+    <p class="p-date">{{date}}</p>
     </div>
 
     <!---  Row 1 Col 2 --->
     <div class="col-sm-12 col-md-12 col-lg-6 col-xl-5 goal-col">
     <!---  Progress Bar --->
     <div class="progress">
-        <div class="progress-bar" role="progressbar" style="width:100%; height:auto; background-color:#00cf1d; border-color: #00cf1d" aria-valuenow="{{goal-progress}}" aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" data-placement="top">
-            {{goal.progress}}
+        <div class="progress-bar" role="progressbar" style="width:{{progress}}%; height:auto; background-color:{{color}}; border-color: {{color}}; aria-valuenow="{{progress}}"; aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" data-placement="top">
+            {{progress}}
         </div>
     </div>
     </div>
     <!---  Row 1 Col 3 --->
     <div class="col-sm-12 col-md-12 col-lg-6 col-xl-5 goal-col">
-    <p class="goal-p">{{goal.targetLeft}}
+    <p class="goal-p">{{targetLeft}}
         <p style="color: gray; font-family:'Open Sans'; margin-left:2%">
-            needed of {{goal.target}} 
-            (<b>{{goal.monthlyTarget}}</b> per month)
+            needed of {{target}} 
+            (<b>{{monthlyTarget}}</b> per month)
         </p>
     </p>
     <button type="button" class="btn edit-btn" data-toggle="modal" href="#editForm"><i class="fas fa-pencil-alt"></i></button>
     <button type="button" class="btn edit-btn" data-toggle="modal" href="#addMoneyForm"><i class="fas fa-plus"></i></button>
     </div>
 </div>
+{{/each}}

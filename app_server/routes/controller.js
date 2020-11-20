@@ -52,27 +52,12 @@ app.get('/envelopes', (req, res) => {
 
 //Goals
 app.get('/goals', (req, res) => {
-    res.render('goals', {
-        goal: [{
-                title: 'iPhone',
-                progress: 100,
-                target: 1200,
-                targetLeft: 0
-            },
-            {
-                title: 'Ferrari F8 Tributo',
-                progress: 69,
-                target: 100000,
-                targetLeft: 100000
-            }
-        ]
-    });
+    goals.get(req, res);
 });
 
 //Bills
 app.get('/bills', (req, res) => {
-    //bills.get(req, res);
-    res.render('bills');
+    bills.get(req, res);
 });
 
 //History

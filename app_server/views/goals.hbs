@@ -190,9 +190,24 @@
 
     <!----- Start Main Containers ----->
 
+    {{> welcome}}
 
     <!----- CARDS SECTION ----->
+      <div class="container" id="cards-section">
+        <div class="row">
+            <div class="col-xl-3 col-lg-2 col-md-0"></div>
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-md-6" data-aos="flip-down" data-aos-duration="500">
+                {{> card}}
 
+            </div>
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 warner" data-aos="flip-down" data-aos-duration="500">
+                {{> card}}
+
+            </div>
+            <div class="col-xl-3 col-lg-2 col-md-0"></div>
+        </div>
+     </div>  
+   
     <!----- GOALS SECTION ----->
 
     <div class="container" id="goals-section">
@@ -206,10 +221,9 @@
                 </button>
             </div>
         </div>
-      
-        {{#each goal}}
-        {{> progress-bar}}
-        {{/each}}
+        
+          {{>progress-bar}}
+
 
     </div>
 </div>
