@@ -7,7 +7,7 @@ function respond(res) {
         welcomeMessage:'Here you can add recurring bills. Fill in the form, submit and it will be added to an envelope repeteadly!',
         Bill: [{
             Year:2020,
-            Month:12,
+            Month:'Dec',
             Day:10,
             Category: 'Cat',
             Company: 'Meow d.o.o.',
@@ -15,7 +15,7 @@ function respond(res) {
             Currency: '€'
         },{
             Year:2020,
-            Month:12,
+            Month:'Dec',
             Day:09,
             Category: 'Gas',
             Company: 'Petrol d.d',
@@ -23,7 +23,7 @@ function respond(res) {
             Currency: '€'
         },{
             Year:2020,
-            Month:12,
+            Month:'Dec',
             Day:09,
             Category: 'Groceries',
             Company: 'Mercator',

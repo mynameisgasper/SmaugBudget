@@ -1,11 +1,15 @@
+
 //Dependencies
 var fs = require('fs');
 var responder = require('../routes/responder');
 
 function respond(res) {
-    fs.readFile('../docs/index.html', "utf8", function(err, data) {
-        responder.send(res, err, data, 200);
-    });
+    res.render('index', ({
+        fileName: 'index',
+        index: {
+            used: true
+        }
+    }));
 }
 
 module.exports = {

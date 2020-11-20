@@ -1,3 +1,7 @@
+$(window).on('beforeunload', function() {
+  $('body').hide();
+  $(window).scrollTop(0);
+});
 function validateSignUp() {
 
   //var email1 = document.getElementById(email1up);

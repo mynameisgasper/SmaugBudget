@@ -24,6 +24,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/759123a73e.js" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="../javascripts/layout.js"></script>
     <script src="../javascripts/{{fileName}}.js"></script>
     <script src="../javascripts/DarkMode.js"></script>
     
@@ -47,6 +48,21 @@
 <body>
     {{{body}}}
     
+    {{#if index.used}}
+     <div class="footer bg-light ">
+        <div class="row" style="padding-right: 0px !important; padding-left: 0px !important;">
+          <div class="col-6 col-sm-4 col-md-4 col-lg-4 col-xl-4 footer-col">
+            <a href="" class="gumb" data-toggle="modal" data-target="#signUpForm">Sign up</a>
+          </div>
+          <div class="col-6 col-sm-4 col-md-4 col-lg-4 col-xl-4 footer-col">
+            <a  href="" data-toggle="modal" data-target="#signInForm">Sign in</a>
+          </div>
+          <div class="col-12 col-sm-4 col-md-4 col-lg-4 col-xl-4 footer-col">
+            <a href="#top" >Back to Top</a>
+          </div>
+        </div>
+      </div>
+    {{else}}
     <div class="footer">
         <div class="row">
             <!--- Spacing --->
@@ -96,6 +112,7 @@
         </div>
 
     </div>
+    {{/if}}
 
     <!--- Footer end --->
 

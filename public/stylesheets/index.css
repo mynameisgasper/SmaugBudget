@@ -288,7 +288,7 @@ html {
 	border-radius: 30px !important;
 	text-shadow: 0 0 1px #fff, 0 0 1px #fff ;
 }
-.btn:focus{
+.btn{
 	box-shadow: none;
 }
 
@@ -306,6 +306,7 @@ html {
 	position: relative;
 	bottom: 0; 
 	margin-top: 0px !important;
+	box-shadow: none;
 }
 
 .footer-col {
