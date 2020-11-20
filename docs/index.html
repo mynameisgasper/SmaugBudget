@@ -81,12 +81,12 @@
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
             <div class="modal-body">
-              <form name="sign-in" action="/login" method="post">
+              <form name="sign-in" action="#login" method="post">
                 <div class="form-group">
-                  <input type="email" class="form-control" id="username" placeholder="E-mail" required>	
+                  <input type="email" class="form-control" id="emailin" placeholder="E-mail" required>	
                 </div>
                 <div class="form-group">
-                  <input type="password" class="form-control" id="password" placeholder="Password" required>	
+                  <input type="password" class="form-control" id="passwordin" placeholder="Password" required>	
                 </div>        
                 <div class="form-button">
                   <a href="dashboard" class="btn btn-primary singbut btn-lg btn-block login-btn" button type="submit">Login</a>
@@ -112,7 +112,7 @@
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
             <div class="modal-body">
-              <form name="sign-up" method="post" action="/signup">
+              <form name="signup" method="post" action="#signup">
                 <div class="form-group">
                   <input type="text" class="form-control" id="nameup" placeholder="Name" required="required">	
                 </div>
@@ -120,17 +120,20 @@
                   <input type="text" class="form-control" id="surnameup"  placeholder="Surname" required="required">	
                 </div>
                 <div class="form-group">
-                  <input type="email" class="form-control" id="email1up" placeholder="E-mail" required="required">		
+                  <input type="email" class="form-control" id="email1up" placeholder="E-mail" onfocusout="emailCheckSignUp()" required="required">		
                 </div>
                 <div class="form-group">
-                  <input type="email" class="form-control" id="email2up" placeholder="Confirm E-mail" onfocusout="emailCheck()" required="required">		
+                  <input type="email" class="form-control" id="email2up" placeholder="Confirm E-mail" onfocusout="emailCheckSignUp()" required="required">		
                 </div>
                 <div class="form-group">
-                  <input type="password" class="form-control" id="password1up" placeholder="Password" required="required">	
+                  <input type="password" class="form-control" id="password1up" name="password1up" placeholder="Password" onfocusout="passwordStrength(document.signup.password1up)" required="required">	
                 </div>    
                 <div class="form-group">
-                  <input type="password" class="form-control" id="password2up" placeholder="Confirm Password" required="required">	
-                </div>     
+                  <input type="password" class="form-control" id="password2up" placeholder="Confirm Password" onfocusout="passwordCheckSignUp()" required="required">	
+                </div>
+                <div id="alerts"></div>  
+                <div id="alerts2"></div> 
+                <div id="alerts3"></div>  
                 <div class="form-button">
                   <button href="dashboard"  class="btn btn-primary singbut btn-lg btn-block login-btn" button type="submit" onclick="validateSignUp()">Create Account</button>
                 </div>
@@ -154,7 +157,7 @@
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
             <div class="modal-body">
-              <form action="/password" method="post">
+              <form action="#password" method="post">
                 <div class="form-group">
                   <input type="email" class="form-control" id="username" placeholder="Insert your E-mail" required="required">		
                 </div>
