@@ -1,32 +1,17 @@
-<tr>
-    <td class="date align-middle">
-        <div class="text-muted">2020</div>
-        <div class="text-muted font-weight-bold">JAN</div>
-        <div class="text-muted font-weight-bold">25</div>
-    </td>
-    <td class="align-middle">Oil</td>
-    <td class="align-middle">Petrol d.d.</td>
-    <td class="cena align-middle">
-        $80
-    </td>
-    <td class="zadnji align-middle">
-        <button type="button" class="btn p" data-toggle="modal" href="#editForm"><i class="fas fa-pencil-alt"></i></button>
-    </td>
-</tr>
-<!-- /.First row -->
-<!-- First row -->
-<tr class="border_bottom">
-    <td class="date align-middle">
-        <div class="text-muted">2020</div>
-        <div class="text-muted font-weight-bold">JAN</div>
-        <div class="text-muted font-weight-bold">28</div>
-    </td>
-    <td class="align-middle">Phone</td>
-    <td class="align-middle">A1 d.d..</td>
-    <td class="cena align-middle">
-        <strong>$40</strong>
-    </td>
-    <td class="zadnji align-middle">
-        <button type="button" class="btn p" data-toggle="modal" href="#editForm"><i class="fas fa-pencil-alt"></i></button>
-    </td>
-</tr>
+{{#each Bill}}
+    <tr>
+        <td class="date align-middle">
+            <div class="text-muted">{{Year}}</div>
+            <div class="text-muted font-weight-bold">{{Month}}</div>
+            <div class="text-muted font-weight-bold">{{Day}}</div>
+        </td>
+        <td class="align-middle">{{Category}}</td>
+        <td class="align-middle">{{Company}}</td>
+        <td class="cena align-middle">
+            {{Price}}
+        </td>
+        <td class="zadnji align-middle">
+            <button type="button" class="btn p" data-toggle="modal" href="#editForm"><i class="fas fa-pencil-alt"></i></button>
+        </td>
+    </tr>
+{{/each}}
