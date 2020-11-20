@@ -8,6 +8,9 @@ function respond(res) {
         graph: {
             used: true,
             name: 'HistoryChart'
+        },
+        dateRangePicker: {
+            used: true
         }
     });
 }
