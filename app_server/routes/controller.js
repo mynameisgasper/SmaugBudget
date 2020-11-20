@@ -2,7 +2,7 @@
 const path = require('path');
 var express = require('express');
 var bodyParser = require('body-parser')
-var hbs = require('express-handlebars');
+var exphbs = require('express-handlebars');
 
 //Business logic
 var index = require('../controllers/index.js');
@@ -26,14 +26,14 @@ app.use('/js', express.static(path.join("../js", '../js')));
 app.use('/fonts', express.static(path.join("../fonts", '../fonts')));
 
 
-/*
-app.engine('hbs', hbs({
+
+app.engine('hbs', exphbs({
     defaultLayout: 'layout',
     extname: '.hbs'
 }));
 
 app.set('view engine', 'hbs');
-*/
+
 
 
 //Index
@@ -58,7 +58,8 @@ app.get('/envelopes', (req, res) => {
 
 //Goals
 app.get('/goals', (req, res) => {
-    goals.get(req, res);
+    //goals.get(req, res);
+    res.render('goals');
 });
 
 //Bills
