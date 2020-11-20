@@ -3,8 +3,12 @@ var fs = require('fs');
 var responder = require('../routes/responder');
 
 function respond(res) {
-    fs.readFile('../docs/history.html', "utf8", function(err, data) {
-        responder.send(res, err, data, 200);
+    res.render('history', {
+        title: 'history',
+        graph: {
+            used: true,
+            name: 'HistoryChart'
+        }
     });
 }
 
