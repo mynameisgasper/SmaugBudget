@@ -1,11 +1,10 @@
-//Dependencies
-var fs = require('fs');
-var responder = require('../routes/responder');
+var data = {
+    fileName: '404notfound',
+    notfound: true
+};
 
 function respond(res) {
-    fs.readFile('../docs/404notfound.html', "utf8", function(err, data) {
-        responder.send(res, err, data, 404);
-    });
+    res.render('404notfound', data);
 }
 
 module.exports = {
