@@ -1,5 +1,5 @@
 //Dependencies
-var fs = require('fs');
+var dictionary = require('./Dictionary');
 
 function respond(res) {
     res.render('bills', ({
@@ -9,7 +9,7 @@ function respond(res) {
         bill: [{
                 id: 0,
                 year: 2020,
-                month: 'Dec',
+                month: 'DEC',
                 day: 10,
                 category: 'Cat',
                 company: 'Meow d.o.o.',
@@ -19,7 +19,7 @@ function respond(res) {
             {
                 id: 1,
                 year: 2020,
-                month: 'Dec',
+                month: 'DEC',
                 day: 09,
                 category: 'Gas',
                 company: 'Petrol d.d',
@@ -29,7 +29,7 @@ function respond(res) {
             {
                 id: 2,
                 year: 2020,
-                month: 'Dec',
+                month: 'DEC',
                 day: 09,
                 category: 'Groceries',
                 company: 'Mercator',

@@ -44,7 +44,6 @@ function signup(body, res) {
     if (email && pass && body.nameup && body.surnameup) {
         res.redirect('/confirmation');
         smtp.send();
-        console.log("WHAT UP NIGGA");
     }
     else {
         notFound404.get(null, res);

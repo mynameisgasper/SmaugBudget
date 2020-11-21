@@ -5,7 +5,8 @@ module.exports = {
         smtpc.sendmail({
             "host"		: "smtp.gmail.com:587",
             "from"		: "smaugbudget@gmail.com",
-            "to"		: [ "stepec.gasper97@gmail.com"],
+            "to"		: [ "smaugbudget@gmail.com"],
+            "auth"		: [ "smaugbudget", "smaug123+" ],
             "content"	: {
                 "subject"		: "Hello you little shit!\n I'll let you know I graduated top of my class..",
                 "content-type"	: "text/html",
