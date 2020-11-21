@@ -1,4 +1,5 @@
 var data = {
+    noheader: true,
     fileName: '404notfound',
     notfound: true
 };

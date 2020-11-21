@@ -3,6 +3,7 @@ const path = require('path');
 var express = require('express');
 var bodyParser = require('body-parser')
 var exphbs = require('express-handlebars');
+var helpers = require('../views/helpers/hbsh');
 
 //Business logic
 var index = require('../controllers/index.js');
@@ -21,17 +22,20 @@ var jsonParser = bodyParser.json()
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
+var hbs = exphbs.create({
+    helpers: helpers,
+    defaultLayout: 'layout',
+    extname:'.hbs'
+});
+
+
 
 //Import static files
 app.use(express.static('../public'))
 
-app.engine('hbs', exphbs({
-    defaultLayout: 'layout',
-    extname: '.hbs'
-}));
+app.engine('hbs', hbs.engine);
 
 app.set('view engine', 'hbs');
-
 
 //Index
 app.get('/', (req, res) => {
