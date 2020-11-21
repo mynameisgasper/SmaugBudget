@@ -4,6 +4,7 @@ var responder = require('../routes/responder');
 
 function respond(res) {
     res.render('utility', ({
+    utility: true,
     fileName: 'Utility',
         welcomeMessage: 'Welcome to utilities. Here you can find some useful gadgets.',
         Friend: [{

@@ -3,6 +3,7 @@ var fs = require('fs');
 
 function respond(res) {
     res.render('bills', ({
+        bills: true,
         fileName: 'bills',
         welcomeMessage:'Here you can add recurring bills. Fill in the form, submit and it will be added to an envelope repeteadly!',
         Bill: [{
