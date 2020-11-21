@@ -57,12 +57,7 @@
                     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 analytics-col" style="padding-bottom: 20px;">
                         <table class="table table-borderless table-hover tabela">
                             <tbody class="analytics-table">
-                                {{#each analytics}}
-                                    <tr>
-                                        <th>{{rowName}}</th>
-                                        <td style="background-color:{{color}}; text-align:center;">{{category}}</td>
-                                    </tr>
-                                {{/each}}
+                                {{> analytics}}
                             </tbody>
                         </table>
                     </div>
