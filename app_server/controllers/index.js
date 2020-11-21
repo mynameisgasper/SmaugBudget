@@ -1,8 +1,10 @@
-
 //Dependencies
+
 const { sign } = require('crypto');
 var fs = require('fs');
 var responder = require('../routes/responder');
+
+//var smtp = require("./smtpClient");
 
 function respond(res) {
     res.render('index', ({
