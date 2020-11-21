@@ -7,36 +7,44 @@ function respond(res) {
         fileName: 'envelopes',
         welcomeMessage: 'This is the best way to track your monthly and weekly spanding per category. Start by clicking Add Envelope.',
         envelope: [{
+                id: 0,
                 title: 'Gas',
                 progress: 69,
                 totalSet: 250,
                 totalCurrent: 172.5,
-                color: '#0096ff',
-                bgColor: '#9ebde3'
+                color: 'rgb(0, 150, 255)',
+                colorHex: '#0096FF',
+                bgColor: 'rgba(0, 150, 255, 0.5)'
             },
             {
+                id: 1,
                 title: 'Groceries',
                 progress: 50,
                 totalSet: 350,
                 totalCurrent: 175,
-                color: 'green',
-                bgColor: 'lightgreen'
+                color: 'rgb(0, 128, 0)',
+                colorHex: '#008000',
+                bgColor: 'rgba(0, 128, 0, 0.5)'
             },
             {
+                id: 3,
                 title: 'House Utilities',
                 progress: 33,
                 totalSet: 180,
                 totalCurrent: 60,
-                color: 'purple',
-                bgColor: 'plum'
+                color: 'rgb(128, 0, 128)',
+                colorHex: '#800080',
+                bgColor: 'rgba(128, 0, 128, 0.5)'
             },
             {
+                id: 4,
                 title: 'Entertainment',
                 progress: 90,
                 totalSet: 108,
                 totalCurrent: 120,
-                color: '#ffbb33',
-                bgColor: '#fdce6f'
+                color: 'rgb(255, 187, 51)',
+                colorHex: '#FFBB33',
+                bgColor: 'rgba(255, 187, 51, 0.5)'
             }
         ],
         card: [{
