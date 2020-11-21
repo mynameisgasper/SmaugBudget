@@ -1,5 +1,5 @@
 /*
- * Entery point for SmaugBudget server 
+ * Entry point for SmaugBudget server 
  */
 
 const config = require('../app_server/config/server.json');
