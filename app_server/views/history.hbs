@@ -139,7 +139,16 @@
                 </div>
                 <div class="row">
                     <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                        <button type="button" class="btn btn-primary">Export to PDF <i class="far fa-file-pdf"></i></button>
+                        <form method="POST" action="/pdf" id="pdf">
+                            {{#each expenses}}
+                            <input type="hidden" name="date{{id}}" value="{{year}}-{{month}}-{{day}}"/>
+                            <input type="hidden" name="category{{id}}" value="{{category}}"/>
+                            <input type="hidden" name="receiver{{id}}" value="{{receiver}}"/>
+                            <input type="hidden" name="value{{id}}" value="{{value}}"/>
+                            <input type="hidden" name="currency{{id}}" value="{{currency}}"/>
+                            {{/each}}
+                            <a type="button" class="btn btn-primary" href="javascript:;" onclick="document.getElementById('pdf').submit()">Export to PDF <i class="far fa-file-pdf"></i></a>
+                        </form>
                     </div>
                     <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
                         <button data-toggle="modal" href="#modalForm" role="button" aria-expanded="false" aria-controls="about" class="btn btn-primary addbill">Add expense

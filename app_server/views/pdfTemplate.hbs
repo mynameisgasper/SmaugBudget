@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charest="utf-8" />
+        <title>Expenses</title>
+    </head>
+    <body>
+        <h1>Expenses</h1>
+        <table>
+            <tr>
+                <th>Date</th>
+                <th>Category</th>
+                <th>Receiver</th>
+                <th>Value</th>
+            </tr>
+            {{#each parsedBody}}
+            <tr>
+                <td>{{date}}</td>
+                <td>{{category}}</td>
+                <td>{{receiver}}</td>
+                <td>{{currency}}{{value}}</td>
+            </tr>
+            {{/each}}
+        </table>
+    </body>
+</html>
