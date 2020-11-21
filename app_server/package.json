@@ -26,7 +26,8 @@
         "cookie-session": "^1.4.0",
         "express": "^4.17.1",
         "express-handlebars": "^5.2.0",
-        "smtpc": "^0.1.2",
-        "hbs": "*"
+        "express-session": "^1.17.1",
+        "hbs": "*",
+        "smtpc": "^0.1.2"
     }
 }

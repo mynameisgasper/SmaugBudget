@@ -4,6 +4,7 @@ var express = require('express');
 var bodyParser = require('body-parser')
 var exphbs = require('express-handlebars');
 var helpers = require('../views/helpers/hbsh');
+var session = require('express-session')
 
 //Business logic
 var index = require('../controllers/index.js');
@@ -29,12 +30,21 @@ var hbs = exphbs.create({
 });
 
 
+//Cookies
+app.use(session(
+    {
+        secret: 'secret',
+        resave: false,
+        saveUninitialized: true
+    }
+));
+app.set('trust proxy', 1);
 
 //Import static files
 app.use(express.static('../public'))
 
+//Handlebars
 app.engine('hbs', hbs.engine);
-
 app.set('view engine', 'hbs');
 
 //Index
