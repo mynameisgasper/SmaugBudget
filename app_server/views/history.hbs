@@ -151,11 +151,55 @@
                         </form>
                     </div>
                     <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                        <button data-toggle="modal" href="#modalForm" role="button" aria-expanded="false" aria-controls="about" class="btn btn-primary addbill">Add expense
+                        <button data-toggle="modal" href="#modalAddExpense" role="button" aria-expanded="false" aria-controls="about" class="btn btn-primary addbill">Add expense
                       <i class="fas fa-plus-square"></i>
                       </button>
                     </div>
                 </div>
+
+                <div class="modal fade " id="modalAddExpense" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="ena"><label for="inputGoal">Category</label></br>
+                                                <select id="inputCategory" class="form-control">
+                                                    <option selected disabled>Select Category</option>
+                                                    {{#each categories}}
+                                                    <option id="category{{id}}">{{category}}</option>
+                                                    {{/each}}
+                                                </select>
+                                            </div>
+                                            <div class="checker">
+                                                <label for="Payee">Location</label><br>
+                                                <input type="text" id="PayeeModal" class="form-control" onfocusout="check(this)" placeholder="e.g. Mercator">
+                                            </div>
+                                            <div id="alerts"></div>
+                                            <div class="ena">
+                                                <label for="Amount">Amount</label><br>
+                                                <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">€</span>
+                                                    </div>
+                                                    <input type="number" class="form-control" onfocusout="amount(this)" id="amount" placeholder="e.g. 15">
+                                                </div>    
+                                                <div id="amm"></div>
+                                            </div>
+                                            <div class="ena">
+                                                <label for="date">Date</label><br>
+                                                <input type="date" class="form-control" value="2020-11-01">
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-primary">Add Expense</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
             </div>
         </div>
     </div>

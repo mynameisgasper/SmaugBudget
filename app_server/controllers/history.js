@@ -80,6 +80,16 @@ var data = {
             value: '120',
             currency: '$'
         }
+    ],
+    categories: [
+        { id: 1, category: "Furniture" },
+        { id: 2, category: "Electronics" },
+        { id: 3, category: "Trip" },
+        { id: 4, category: "Party" },
+        { id: 5, category: "Wedding" },
+        { id: 6, category: "Car" },
+        { id: 7, category: "Gas" },
+        { id: 8, category: "Other" },
     ]
 }
 
