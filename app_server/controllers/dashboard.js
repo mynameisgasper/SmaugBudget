@@ -60,14 +60,12 @@ function respond(res) {
             rowName: dictionary.getTranslation("analyticsRowName4"),
             color: 'rgb(247, 158, 55)',
             category: dictionary.getTranslation("analyticsCategory4")
-        }
-        ],
+        }],
         graph: {
             used: true,
             name: 'DashboardChart'
         },
-
-        //translations
+        
         alertSection: dictionary.getTranslation("alertSection"),
         overview:  dictionary.getTranslation("overview"),
         incomeRow: dictionary.getTranslation("incomeRow"),

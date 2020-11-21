@@ -8,6 +8,26 @@ function respond(res) {
         utility: true,
         fileName: 'Utility',
         welcomeMessage: 'Welcome to utilities. Here you can find some useful gadgets.',
+        groupMember: [{
+            name: 'Grega',
+            amount: '+5,00'
+        },
+        {
+            name: 'Luka',
+            amount: '-3,40'
+        },
+        {
+            name: 'Miha',
+            amount: '+2,47'
+        },
+        {
+            name: 'Gašper',
+            amount: '-1,20'
+        },
+        {
+            name: 'Tim',
+            amount: '+420,69'
+        }],
         //translations navbar
         DASHBOARD: dictionary.getTranslation("DASHBOARD"),
         ENVELOPES: dictionary.getTranslation("ENVELOPES"),
