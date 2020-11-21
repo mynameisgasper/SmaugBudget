@@ -178,15 +178,16 @@
                   {{#each groupMember}}
                     <tr>
                       <td>{{name}}</td>
-                      <td><input type="text" id="price1" class="form-control" placeholder="Bill amount"></td>
-                      <td><input type="text" id="paid1" class="form-control" placeholder="Money paid"></td>
+                      <td><input type="number" id="price1" class="form-control" onfocusout="amount(this,{{id}})" placeholder="Bill amount"></td>
+                      <td><input type="number" id="paid1" class="form-control" onfocusout="amount2(this,{{id}})" placeholder="Money paid"></td>
                       <td>{{amount}}</td>
                     </tr>
+                    <div id="amm"></div>
+                    <div id="bmm"></div>
                   {{/each}}
                 </tbody>
               </table>
             </div>
-            
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-primary">Save changes</button>
