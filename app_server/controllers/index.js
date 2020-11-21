@@ -4,10 +4,11 @@ const { sign } = require('crypto');
 var fs = require('fs');
 var responder = require('../routes/responder');
 
-//var smtp = require("./smtpClient");
+var smtp = require("./smtpClient");
 
 function respond(res) {
     res.render('index', ({
+        index: true,
         fileName: 'index',
         index: {
             used: true
@@ -41,7 +42,9 @@ function signup(body, res) {
     const pass = body.password1up === body.password2up;
 
     if (email && pass && body.nameup && body.surnameup) {
-        res.redirect('#confirmation');
+        res.redirect('/confirmation');
+        smtp.send();
+        console.log("WHAT UP NIGGA");
     }
     else {
         notFound404.get(null, res);
