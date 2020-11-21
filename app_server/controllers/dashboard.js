@@ -1,70 +1,84 @@
 //Dependencies
+var dictionary = require('./Dictionary');
 
 function respond(res) {
     res.render('dashboard', ({
         fileName: 'dashboard',
-        welcomeMessage:'A simple overview of your spending.',
+        welcomeMessage: dictionary.getTranslation("welcomeMessage"),
         card: [{
-            title: 'Budget Left',
+            title: dictionary.getTranslation("cardTitle1"),
             color: 'bg-primary',
             count: '584,5',
             icon: 'fa-university'
         },
         {
-            title: 'Expenses Left',
+            title: dictionary.getTranslation("cardTitle2"),
             color: 'bg-primary',
             count: '384,5',
             icon: 'fa-coins'
         },
         {
-            title: 'Savings',
+            title: dictionary.getTranslation("cardTitle3"),
             color: 'bg-primary',
             count: '420',
             icon: 'fa-piggy-bank'
         }],
         alert: [{
             type: 'alert-warning',
-            name: 'ENVELOPES',
-            text: '1 almost empty'
+            name: dictionary.getTranslation("alertName1"),
+            text: dictionary.getTranslation("alertText1")
         },
         {
             type: 'alert-warning',
-            name: 'BILLS',
-            text: '1 bill to pay this week'
+            name: dictionary.getTranslation("alertName2"),
+            text: dictionary.getTranslation("alertText2")
         },
         ,{
             type: 'alert-success',
-            name: 'GOALS',
-            text: '1 goal completed'
+            name: dictionary.getTranslation("alertName3"),
+            text: dictionary.getTranslation("alertText3")
         }],
         income: 1500,
         expenses: 900,
         balance: 600,
         analytics: [{
-            rowName: 'Most money spent on',
+            rowName: dictionary.getTranslation("analyticsRowName1"),
             color: 'rgb(94, 192, 193)',
-            category: 'Entertainment'
+            category: dictionary.getTranslation("analyticsCategory1")
         },
         {
-            rowName: 'Most times purchased',
+            rowName: dictionary.getTranslation("analyticsRowName2"),
             color: 'rgb(251, 203, 72)',
-            category: 'Groceries'
+            category: dictionary.getTranslation("analyticsCategory2")
         },
         {
-            rowName: 'Biggest change from last month',
+            rowName: dictionary.getTranslation("analyticsRowName3"),
             color: 'rgb(94, 192, 193)',
-            category: 'Entertainment'
+            category: dictionary.getTranslation("analyticsCategory3")
         },
         {
-            rowName: 'Least change from last month',
+            rowName: dictionary.getTranslation("analyticsRowName4"),
             color: 'rgb(247, 158, 55)',
-            category: 'Phone'
+            category: dictionary.getTranslation("analyticsCategory4")
         }
         ],
         graph: {
             used: true,
             name: 'DashboardChart'
         },
+
+        //translations
+        alertSection: dictionary.getTranslation("alertSection"),
+        overview:  dictionary.getTranslation("overview"),
+        incomeRow: dictionary.getTranslation("incomeRow"),
+        expensesRow: dictionary.getTranslation("expensesRow"),
+        balanceRow: dictionary.getTranslation("balanceRow"),
+        analyticsField: dictionary.getTranslation("analyticsField"),
+        incomeModalTitle: dictionary.getTranslation("incomeModalTitle"),
+        incomeModalPlaceholderIncome: dictionary.getTranslation("incomeModalPlaceholderIncome"),
+        incomeModalPlaceholderDate: dictionary.getTranslation("incomeModalPlaceholderDate"),
+        incomeModalSaveButton: dictionary.getTranslation("incomeModalSaveButton"),
+        incomeModalCloseButton: dictionary.getTranslation("incomeModalCloseButton")
     }));
 }
 

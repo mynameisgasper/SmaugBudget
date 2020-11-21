@@ -46,7 +46,49 @@ var slovenian = {
     "confirmPassword": "Ponovi geslo",
     "connectionName": "Ime povezave",
     "envelopes": "Kuverte",
-    "editConnection": "Uredi povezavo"
+    "editConnection": "Uredi povezavo",
+
+    //DASHBOARD
+    //welcome
+    "welcomeMessage": "Enostaven pregled vašega porabljanja.",
+
+    //cards
+    "cardTitle1": "Preostal proračun",
+    "cardTitle2": "Preostali stroški",
+    "cardTitle3": "Prihranki",
+
+    //alert
+    "alertSection": "Opozorila",
+    "alertName1": "KUVERTE",
+    "alertText1": "1 skoraj prazna",
+    "alertName2": "RAČUNI",
+    "alertText2": "1 račun z rokom v tem tednu",
+    "alertName3": "CILJI",
+    "alertText3": "1 cilj dosežen",
+
+    //overview
+    "overview": "Pregled preteklega meseca",
+    "incomeRow": "Prihodek",
+    "expensesRow": "Stroški",
+    "balanceRow": "Stanje",
+
+    //analytics
+    "analyticsField": "Analiza",
+    "analyticsRowName1": "Največ denarja zapravljeno",
+    "analyticsCategory1": "Zabava",
+    "analyticsRowName2": "Največkrat kupljeno",
+    "analyticsCategory2": "Živila",
+    "analyticsRowName3": "Največja sprememba od prejšnega meseca",
+    "analyticsCategory3": "Zabava",
+    "analyticsRowName4": "Najmanjša sprememba od prejšnega meseca",
+    "analyticsCategory4": "Telefon",
+    
+    //income modal
+    "incomeModalTitle": "Posodobite svoj prihodek",
+    "incomeModalPlaceholderIncome": "Vnesite svoj prihodek",
+    "incomeModalPlaceholderDate": "Dan v mesecu na katerega dobite plačo",
+    "incomeModalSaveButton": "Shrani spremembe",
+    "incomeModalCloseButton": "Zapri"
 }
 
 var english = {
@@ -93,8 +135,48 @@ var english = {
     "confirmPassword": "Confirm password",
     "connectionName": "Connection name",
     "envelopes": "Envelopes",
-    "editConnection": "Edit connection"
-}
+    "editConnection": "Edit connection",
+
+    //DASHBOARD
+    //welcome
+    "welcomeMessage": "A simple overview of your spending.",
+
+    //cards
+    "cardTitle1": "Budget Left",
+    "cardTitle2": "Expenses Left",
+    "cardTitle3": "Savings",
+
+    //alert
+    "alertSection": "Alert Section",
+    "alertName1": "ENVELOPES",
+    "alertText1": "1 almost empty",
+    "alertName2": "BILLS",
+    "alertText2": "1 bill to pay this week",
+    "alertName3": "GOALS",
+    "alertText3": "1 goal completed",
+    "overview": "Last month overview",
+    "incomeRow": "Income",
+    "expensesRow": "Expenses",
+    "balanceRow": "Balance",
+
+    //analytics
+    "analyticsField": "Analytics",
+    "analyticsRowName1": "Most money spent on",
+    "analyticsCategory1": "Entertainment",
+    "analyticsRowName2": "Most times purchased",
+    "analyticsCategory2": "Groceries",
+    "analyticsRowName3": "Biggest change from last month",
+    "analyticsCategory3": "Entertainment",
+    "analyticsRowName4": "Least change from last month",
+    "analyticsCategory4": "Phone",
+    
+    //income modal
+    "incomeModalTitle": "Update your Income",
+    "incomeModalPlaceholderIncome": "Enter your income",
+    "incomeModalPlaceholderDate": "Day in month you receive paycheck",
+    "incomeModalSaveButton": "Save changes",
+    "incomeModalCloseButton": "Close"
+}   
 
 module.exports = {
     getTranslation: (key) => {
