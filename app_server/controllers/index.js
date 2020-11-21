@@ -1,4 +1,5 @@
 //Dependencies
+var notFound404 = require('./not_found');
 
 const { sign } = require('crypto');
 var fs = require('fs');
@@ -28,6 +29,10 @@ function parseRequestBody(body, res) {
         }
         case 'forgotPassword': {
             forgotPassword(body, res);
+            break;
+        }
+        case 'logout': {
+            logout(body, res);
             break;
         }
         default: {
@@ -61,6 +66,10 @@ function signin(body, res) {
 
 function forgotPassword(body, res) {
     
+}
+
+function logout(body, res) {
+    res.redirect('/dashboard');
 }
 
 module.exports = {
