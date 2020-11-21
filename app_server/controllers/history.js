@@ -3,7 +3,9 @@ var fs = require('fs');
 var responder = require('../routes/responder');
 
 var data = {
+    history: true,
     fileName: 'history',
+    welcomeMessage: 'This is the best way to check your past spending by time and category.',
     graph: {
         used: true,
         name: 'HistoryChart'
