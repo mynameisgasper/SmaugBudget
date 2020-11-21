@@ -81,8 +81,9 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">€</span>
                         </div>
-                        <input type="number" class="form-control" id="inputAmount" value="0.00">
+                        <input type="number" class="form-control" onfocusout="amount(this)"id="inputAmount" value="0.00">
                     </div>
+                    <div id="amm"></div>
                 </div>
 
                 <div class="ena">
@@ -157,8 +158,9 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">€</span>
                         </div>
-                        <input type="number" class="form-control" id="inputAmount" value="0.00">
+                        <input type="number" class="form-control" onfocusout="amount2(this)" id="inputAmount" value="0.00">
                     </div>
+                    <div id="amm2"></div>
                 </div>
             </div>
             <div class="modal-footer">
