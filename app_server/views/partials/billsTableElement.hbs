@@ -1,17 +1,17 @@
-{{#each Bill}}
+{{#each bill}}
     <tr>
         <td class="date align-middle">
-            <div class="text-muted">{{Year}}</div>
-            <div class="text-muted font-weight-bold">{{Month}}</div>
-            <div class="text-muted font-weight-bold">{{Day}}</div>
+            <div class="text-muted">{{year}}</div>
+            <div class="text-muted font-weight-bold">{{month}}</div>
+            <div class="text-muted font-weight-bold">{{day}}</div>
         </td>
-        <td class="align-middle">{{Category}}</td>
-        <td class="align-middle">{{Company}}</td>
+        <td class="align-middle">{{category}}</td>
+        <td class="align-middle">{{company}}</td>
         <td class="cena align-middle">
-            {{Price}}{{Currency}}
+            {{price}}{{currency}}
         </td>
         <td class="zadnji align-middle">
-            <button type="button" class="btn p" data-toggle="modal" href="#editForm"><i class="fas fa-pencil-alt"></i></button>
+            <button type="button" class="btn p" data-toggle="modal" href="#editForm{{id}}"><i class="fas fa-pencil-alt"></i></button>
         </td>
     </tr>
 {{/each}}
