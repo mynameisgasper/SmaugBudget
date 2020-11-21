@@ -3,7 +3,7 @@ $(window).on('beforeunload', function() {
   $(window).scrollTop(0);
 });
 
-function disableButton(){
+function disableButton() {
   var button = document.getElementById("buttonup");
   var name = nameRegex();
   var surname = surnameRegex();
@@ -122,4 +122,8 @@ function emailCheckSignUp() {
     document.getElementById("alerts2").innerHTML = "";
     return 1;
   }
+}
+
+function submitForm() {
+  //disableButton();
 }

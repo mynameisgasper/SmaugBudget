@@ -81,24 +81,24 @@
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
             <div class="modal-body">
-              <form name="signup" method="post" action="#signup" onsubmit="return disableButton()">
+              <form name="signup" method="post" action="/" onsubmit="return disableButton()">
                 <div class="form-group">
-                  <input type="text" class="form-control" id="nameup" placeholder="Name" onfocusout="nameRegex()" required="required">	
+                  <input type="text" class="form-control" id="nameup" name="nameup" placeholder="Name" onfocusout="nameRegex()" required="required">	
                 </div>
                 <div class="form-group">
-                  <input type="text" class="form-control" id="surnameup"  placeholder="Surname" onfocusout="surnameRegex()" required="required">	
+                  <input type="text" class="form-control" id="surnameup" name="surnameup" placeholder="Surname" onfocusout="surnameRegex()" required="required">	
                 </div>
                 <div class="form-group">
-                  <input type="email" class="form-control" id="email1up" placeholder="E-mail" onfocusout="emailCheckSignUp()" required="required">		
+                  <input type="email" class="form-control" id="email1up" name="email1up" placeholder="E-mail" onfocusout="emailCheckSignUp()" required="required">		
                 </div>
                 <div class="form-group">
-                  <input type="email" class="form-control" id="email2up" placeholder="Confirm E-mail" onfocusout="emailCheckSignUp()" required="required">		
+                  <input type="email" class="form-control" id="email2up" name="email2up" placeholder="Confirm E-mail" onfocusout="emailCheckSignUp()" required="required">		
                 </div>
                 <div class="form-group">
                   <input type="password" class="form-control" id="password1up" name="password1up" placeholder="Password" onfocusout="passwordStrength()" required="required">	
                 </div>    
                 <div class="form-group">
-                  <input type="password" class="form-control" id="password2up" placeholder="Confirm Password" onfocusout="passwordCheckSignUp()" required="required">	
+                  <input type="password" class="form-control" id="password2up" name="password2up" placeholder="Confirm Password" onfocusout="passwordCheckSignUp()" required="required">	
                 </div>
                 <div id="alerts"></div>
                 <div id="alerts2"></div>
@@ -107,7 +107,7 @@
                 <div id="alerts5"></div>
                 
                 <div class="form-button">
-                  <button href="dashboard" id="buttonid" class="btn btn-primary singbut btn-lg btn-block login-btn" button type="submit" onclick="disableButton()">Create Account</button>
+                  <input href="dashboard" id="buttonid" class="btn btn-primary singbut btn-lg btn-block login-btn" type="submit" value="Create Account" onclick="disableButton()" />
                 </div>
               </form>
             </div>
