@@ -36,10 +36,9 @@ body {
     padding: 4vh;
 }
 
-#converter, #friend-groups {
+#converter, #cards-section {
     padding: 4vh;
     margin-top: 2vh;
-
 }
 
 #welcome-alert-section .row {
