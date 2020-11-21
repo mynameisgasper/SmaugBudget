@@ -14,22 +14,22 @@
     <div class="button collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link {{#if dashboard}}active{{/if}}" href="dashboard">DASHBOARD{{#if dashboard}}<span class="sr-only">(current)</span>{{/if}}</a>
+                <a class="nav-link {{#ifEquals fileName "dashboard"}}active{{/ifEquals}}" href="dashboard">DASHBOARD{{#ifEquals dashboard "dashboard"}}<span class="sr-only">(current)</span>{{/ifEquals}}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{#if envelopes}}active{{/if}}" href="envelopes">ENVELOPES{{#if envelopes}}<span class="sr-only">(current)</span>{{/if}}</a>
+                <a class="nav-link {{#ifEquals fileName "envelopes"}}active{{/ifEquals}}" href="envelopes">ENVELOPES{{#ifEquals fileName "envelopes"}}<span class="sr-only">(current)</span>{{/ifEquals}}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{#if goals}}active{{/if}}" href="goals">GOALS{{#if goals}}<span class="sr-only">(current)</span>{{/if}}</a>
+                <a class="nav-link {{#ifEquals fileName "goals"}}active{{/ifEquals}}" href="goals">GOALS{{#ifEquals fileName "goals"}}<span class="sr-only">(current)</span>{{/ifEquals}}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{#if bills}}active{{/if}}" href="bills">BILLS{{#if bills}}<span class="sr-only">(current)</span>{{/if}}</a>
+                <a class="nav-link {{#ifEquals fileName "bills"}}active{{/ifEquals}}" href="bills">BILLS{{#ifEquals fileName "bills"}}<span class="sr-only">(current)</span>{{/ifEquals}}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{#if history}}active{{/if}}" href="#">HISTORY{{#if history}}<span class="sr-only">(current)</span>{{/if}}</a>
+                <a class="nav-link {{#ifEquals fileName "history"}}active{{/ifEquals}}" href="#">HISTORY{{#ifEquals fileName "history"}}<span class="sr-only">(current)</span>{{/ifEquals}}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{#if utility}}active{{/if}}" href="utility">UTILITIES{{#if utility}}<span class="sr-only">(current)</span>{{/if}}</a>
+                <a class="nav-link {{#ifEquals fileName "utility"}}active{{/ifEquals}}" href="utility">UTILITIES{{#ifEquals fileName "utility"}}<span class="sr-only">(current)</span>{{/ifEquals}}</a>
             </li>
         </ul>
 
