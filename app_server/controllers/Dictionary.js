@@ -1,5 +1,5 @@
 var userInfo = {
-    language: "slovenian"
+    language: "english"
 }
 
 var slovenian = {
