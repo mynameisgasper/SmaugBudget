@@ -1,22 +1,14 @@
-//Dependencies
-var fs = require('fs');
-var responder = require('../routes/responder');
+var data = {
+    fileName: 'confirmation',
+    notfound: true
+};
 
-function respond(req, res) {
-    var confirmationCode = req.query.code;
-    if (confirmationCodeValid(confirmationCode)) {
-        fs.readFile('../docs/email_confirmation.html', "utf8", function(err, data) {
-            responder.send(res, err, data, 200);
-        });
-    }
-}
-
-function confirmationCodeValid(confirmationCode) {
-    return true;
+function respond(res) {
+    res.render('confirmation', data);
 }
 
 module.exports = {
     get: function(req, res) {
-        respond(req, res);
+        respond(res);
     }
 }

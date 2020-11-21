@@ -19,6 +19,9 @@ var notFound404 = require('../controllers/not_found.js');
 var app = express();
 var jsonParser = bodyParser.json()
 
+app.use(bodyParser.urlencoded({ extended: true }));
+
+
 //Import static files
 app.use(express.static('../public'))
 
@@ -36,8 +39,7 @@ app.get('/', (req, res) => {
 });
 
 app.post('/', jsonParser, (req, res) => {
-    console.log(req.body);
-    res.send(200);
+    index.post(req, res);
 });
 
 //Dashboard
@@ -87,7 +89,6 @@ app.all('*', (req, res) => {
 
 module.exports = {
     startServer: (port) => {
-        app.use(bodyParser.json());
         app.listen(port, () => console.log("Server started"));
     }
 }
