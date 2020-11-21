@@ -39,8 +39,7 @@ app.get('/', (req, res) => {
 });
 
 app.post('/', jsonParser, (req, res) => {
-    console.log(req.body);
-    res.send(200);
+    index.post(req, res);
 });
 
 //Dashboard
