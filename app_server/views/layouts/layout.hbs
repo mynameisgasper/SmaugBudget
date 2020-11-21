@@ -45,6 +45,11 @@
 
 
 <body>
+    <!--- Navigation Bar --->
+    {{#ifNot noheader}}
+    {{> navbar}}
+    {{/ifNot}}
+
     {{{body}}}
     
     {{#if notfound}}

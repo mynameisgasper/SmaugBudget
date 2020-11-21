@@ -1,13 +1,15 @@
 //Dependencies
+var notFound404 = require('./not_found');
 
 const { sign } = require('crypto');
 var fs = require('fs');
 var responder = require('../routes/responder');
 
-//var smtp = require("./smtpClient");
+var smtp = require("./smtpClient");
 
 function respond(res) {
     res.render('index', ({
+        index: true,
         fileName: 'index',
         index: {
             used: true
@@ -29,6 +31,10 @@ function parseRequestBody(body, res) {
             forgotPassword(body, res);
             break;
         }
+        case 'logout': {
+            logout(body, res);
+            break;
+        }
         default: {
             notFound404.get(null, res);
         }
@@ -41,7 +47,8 @@ function signup(body, res) {
     const pass = body.password1up === body.password2up;
 
     if (email && pass && body.nameup && body.surnameup) {
-        res.redirect('#confirmation');
+        res.redirect('/confirmation');
+        smtp.send();
     }
     else {
         notFound404.get(null, res);
@@ -59,6 +66,10 @@ function signin(body, res) {
 
 function forgotPassword(body, res) {
     
+}
+
+function logout(body, res) {
+    res.redirect('/dashboard');
 }
 
 module.exports = {

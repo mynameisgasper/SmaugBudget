@@ -138,11 +138,11 @@ body {
 }
 
 #groceries-back {
-    background: lightgreen
+    background: green;
+    opacity: 1;
 }
 
 #utilites {
-    width: 33%;
     background: purple;
     border-color: purple;
 }
@@ -152,7 +152,6 @@ body {
 }
 
 #entertainment {
-    width: 90%;
     background: #ffbb33;
     border-color: #ffbb33;
 }
