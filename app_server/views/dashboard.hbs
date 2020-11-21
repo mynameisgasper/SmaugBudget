@@ -82,8 +82,10 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <input type="number" id="Category" class="form-control" placeholder="{{incomeModalPlaceholderIncome}}"></br>
-                    <input type="number" id="Category" class="form-control" placeholder="{{incomeModalPlaceholderDate}}" min="1" max="31">
+                    <input type="number" id="Category" class="form-control" onfocusout="amount(this)" placeholder="{{incomeModalPlaceholderIncome}}">
+                    <div id="amm"></div></br>
+                    <input type="number" id="Category" class="form-control" onfocusout="date(this)" placeholder="{{incomeModalPlaceholderDate}}" min="1" max="31">
+                    <div id="dat"></div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary">{{incomeModalSaveButton}}</button>

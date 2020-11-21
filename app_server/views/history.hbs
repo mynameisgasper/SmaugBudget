@@ -110,15 +110,17 @@
                                             <div class="modal-body">
                                                 <div class="ena">
                                                     <label for="Category">Category</label><br>
-                                                    <input type="text" id="Category" class="form-control" placeholder="e.g. Rent" value="{{category}}">
+                                                    <input type="text" id="Category" class="form-control" placeholder="e.g. Rent" value="{{category}}"> 
                                                 </div>
                                                 <div class="ena">
                                                     <label for="Payee">Payee</label><br>
-                                                    <input type="text" id="Payee" class="form-control" placeholder="e.g. Elektro Ljubljana d.d." value="{{receiver}}">
+                                                    <input type="text" id="Payee" class="form-control" placeholder="e.g. Elektro Ljubljana d.d." onfocusout="nameAdd2(this,{{id}})" value="{{receiver}}">
+                                                    <div id="{{id}}txt"></div>
                                                 </div>
                                                 <div class="ena">
                                                     <label for="Amount">Amount</label><br>
-                                                    <input type="number" id="Amount" class="form-control" placeholder="e.g. $150.30" value="{{value}}">
+                                                    <input type="number" id="Amount" class="form-control" onfocusout="amount3(this,{{id}})" placeholder="e.g. $150.30" value="{{value}}">
+                                                    <div id="{{id}}amm"></div>
                                                 </div>
                                                 <div class="ena">
                                                     <label for="datum">Date</label><br>
@@ -177,8 +179,8 @@
                                             <div class="checker">
                                                 <label for="Payee">Location</label><br>
                                                 <input type="text" id="PayeeModal" class="form-control" onfocusout="check(this)" placeholder="e.g. Mercator">
+                                                <div id="alerts"></div>
                                             </div>
-                                            <div id="alerts"></div>
                                             <div class="ena">
                                                 <label for="Amount">Amount</label><br>
                                                 <div class="input-group mb-3">
@@ -186,8 +188,9 @@
                                                         <span class="input-group-text">€</span>
                                                     </div>
                                                     <input type="number" class="form-control" onfocusout="amount(this)" id="amount" placeholder="e.g. 15">
+                                                    <div id="amm"></div>
                                                 </div>    
-                                                <div id="amm"></div>
+                                                
                                             </div>
                                             <div class="ena">
                                                 <label for="date">Date</label><br>

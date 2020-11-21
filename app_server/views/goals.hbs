@@ -71,8 +71,8 @@
       </div>
       <div class="modal-body">
         <label for="inputGoal">What's your goal?</label>
-        <input type="text" class="form-control" id="inputGoal" placeholder="e.g. new car">
-
+        <input type="text" class="form-control" id="inputGoal" onfocusout="nameAdd(this)" placeholder="e.g. new car">
+        <div id="txt1"></div>
         <label for="inputCategory">Choose a Category</label>
         <select id="inputCategory" class="form-control">
           <option selected disabled>Select Category</option>
@@ -88,14 +88,12 @@
           <div class="input-group-prepend">
             <span class="input-group-text">€</span>
           </div>
-          <input type="number" class="form-control" id="inputAmount" placeholder="e.g. 1500">
+          <input type="number" class="form-control" onfocusout="amount(this)" id="inputAmount" placeholder="e.g. 1500">
+          <div id="amm"></div>
         </div>
 
         <label for="inputDate">Planned Date</label>
         <input class="form-control" type="date" value="2020-01-01" id="inputDate">
-
-        <label for="inputDescription">Description</label>
-        <textarea class="form-control" id="inputDescription" rows="3"></textarea>
 
 
       </div>
@@ -122,7 +120,8 @@
       </div>
       <div class="modal-body">
         <label for="inputGoal">What's your goal?</label>
-        <input type="text" class="form-control" id="inputGoal" value="{{title}}">
+        <input type="text" class="form-control" onfocusout="nameAdd2(this,{{id}})" id="inputGoal" value="{{title}}">
+        <div id="{{id}}txt"></div>
 
         <label for="inputCategory">Choose a Category</label>
         <select id="inputCategory" class="form-control">
@@ -138,7 +137,8 @@
           <div class="input-group-prepend">
             <span class="input-group-text">€</span>
           </div>
-          <input type="number" class="form-control" id="inputAmount" value="{{target}}">
+          <input type="number" class="form-control" onfocusout="amount3(this,{{id}})" id="inputAmount" value="{{target}}">
+          <div id="{{id}}amm"></div>
         </div>
         <label for="inputDate">Planned Date</label>
         <input class="form-control" type="date" value="{{year}}-{{month}}-{{day}}" id="inputDate">
@@ -168,7 +168,8 @@
           <div class="input-group-prepend">
             <span id="currency{{id}}" class="input-group-text currencyDisplay">€</span>
           </div>
-          <input type="number" class="form-control" id="inputAmount" value="0.00">
+          <input type="number" class="form-control" onfocusout="amount2(this,{{id}})" id="inputAmount" value="0.00">
+          <div id="amm{{id}}"></div>
         </div>
         <label for="inputAmount">Your Currency</label>
         <select id="currencySelect{{id}}" class="form-control currencySelector">
