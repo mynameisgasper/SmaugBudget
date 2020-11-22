@@ -47,6 +47,7 @@ var slovenian = {
     "connectionName": "Ime povezave",
     "envelopes": "Kuverte",
     "editConnection": "Uredi povezavo",
+    "dragAndDropOr": "Povleci in spusti, ali",
 
     //DASHBOARD
     //welcome
@@ -136,6 +137,7 @@ var english = {
     "connectionName": "Connection name",
     "envelopes": "Envelopes",
     "editConnection": "Edit connection",
+    "dragAndDropOr": "Drag and drop or",
 
     //DASHBOARD
     //welcome
