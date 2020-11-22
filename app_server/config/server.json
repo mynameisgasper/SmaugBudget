@@ -1,5 +1,15 @@
 {
     "socket": {
         "port": 8080
+    },
+    "email": {
+        "auth": {
+            "address": "smaugbudget@gmail.com",
+            "password": "smaug123+"   
+        },
+        "smtp": {
+            "host": "smtp.gmail.com",
+            "port": 465
+        }
     }
 }

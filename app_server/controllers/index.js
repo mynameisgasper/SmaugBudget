@@ -48,8 +48,8 @@ function signup(body, res, session) {
     const pass = body.password1up === body.password2up;
 
     if (email && pass && body.nameup && body.surnameup) {
+        smtp.send(body.email1up, "Confirmation code", "Welcome, here is our confirmation code: code");
         res.redirect('/confirmation');
-        smtp.send();
     }
     else {
         notFound404.get(null, res);

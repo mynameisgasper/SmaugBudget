@@ -1,22 +1,29 @@
-var smtpc = require("../node_modules/smtpc/lib/smtp");
+//Dependencies
+const nodemailer = require('nodemailer');
+const config = require('../config/server.json');
 
 module.exports = {
-    send: function() {
-        smtpc.sendmail({
-            "host"		: "smtp.gmail.com:587",
-            "from"		: "smaugbudget@gmail.com",
-            "to"		: [ "smaugbudget@gmail.com"],
-            "auth"		: [ "smaugbudget", "smaug123+" ],
-            "content"	: {
-                "subject"		: "Hello you little shit!\n I'll let you know I graduated top of my class..",
-                "content-type"	: "text/html",
-                "content"		: "Hello <strong>Jane</strong>!"
-            },
-            "success"	: function () {
-                console.log("Sent!");
-            },
-            "failure"	: function (err) {
-                console.log("Error(%d): %s", err.code, err.message);
+    send: function(to, subject, text) {
+        
+        let transport = nodemailer.createTransport({
+            host: config.email.smtp.host,
+            port: config.email.smtp.port,
+            auth: {
+               user: config.email.auth.address,
+               pass: config.email.auth.password
+            }
+        });
+
+        const message = {
+            from: config.email.auth.address,
+            to: to,
+            subject: subject,
+            text: text
+        };
+
+        transport.sendMail(message, function(err, info) {
+            if (err) {
+              console.log(err)
             }
         });
     }
