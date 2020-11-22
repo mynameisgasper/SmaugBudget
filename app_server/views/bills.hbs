@@ -100,18 +100,20 @@
                                                     {{/each}}
                                                 </select>
                                             </div>
-                                            <div class="ena">
+                                            <div class="checker">
                                                 <label for="Payee">Payee</label><br>
-                                                <input type="text" id="Payee" class="form-control" placeholder="e.g. Elektro Ljubljana d.d.">
+                                                <input type="text" id="PayeeModal" class="form-control" onfocusout="check(this)" placeholder="e.g. Elektro Ljubljana d.d.">
                                             </div>
+                                            <div id="alerts"></div>
                                             <div class="ena">
                                                 <label for="Amount">Amount</label><br>
                                                 <div class="input-group mb-3">
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text">€</span>
                                                     </div>
-                                                    <input type="number" class="form-control" id="inputAmount" placeholder="e.g. 15">
+                                                    <input type="number" class="form-control" onfocusout="amount(this)" id="amount" placeholder="e.g. 15">
                                                 </div>    
+                                                <div id="amm"></div>
                                             </div>
                                             <div class="ena">
                                                 <label for="date">Date due</label><br>
@@ -128,7 +130,7 @@
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-primary">Add Bills</button>
+                                            <button type="button" type="submit" class="btn btn-primary">Add Bills</button>
                                         </div>
                                     </div>
                                 </div>
@@ -157,28 +159,31 @@
                                             </div>
                                             <div class="ena">
                                                 <label for="Payee">Payee</label><br>
-                                                <input type="text" id="Payee" class="form-control" value={{company}}>
+                                                <input type="text" id="Payee" onfocusout="check2(this,{{id}})" class="form-control" value={{company}}>
+                                                <div id="alarm{{id}}"></div>
                                             </div>
+                                            
                                             <div class="ena">
                                                 <label for="Amount">Amount</label><br>
                                                 <div class="input-group mb-3">
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text">€</span>
                                                     </div>
-                                                    <input type="number" id="Amount" class="form-control" placeholder="e.g. 150.30">
+                                                    <input type="number" id="Amount" onfocusout="amount2(this,{{id}})" class="form-control" placeholder="e.g. 150.30">
                                                 </div>
+                                                <div id="amm{{id}}"></div>
                                             </div>
                                             <div class="ena">
                                                 <label for="date">Date due</label><br>
                                                 <input type="date" class="form-control" value="2020-01-01">
                                             </div>
                                             <div class="ena">
-                                                <label for="once">How often?</label><br>
-                                                <input type="radio" id="once" value="once">
+                                                <b>How often?</b><br>
+                                                <input type="radio" name="radio" id="once" value="once">
                                                 <label for="once">Once</label><br>
-                                                <input type="radio" id="monthly" value="monthly">
+                                                <input type="radio" name="radio" id="monthly" value="monthly">
                                                 <label for="monthly">Monthly</label><br>
-                                                <input type="radio" id="yearly" value="yearly">
+                                                <input type="radio" name="radio" id="yearly" value="yearly">
                                                 <label for="yearly">Yearly</label><br>
                                             </div>
                                         </div>

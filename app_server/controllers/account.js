@@ -2,6 +2,8 @@
 var fs = require('fs');
 var responder = require('../routes/responder');
 var dictionary = require('./Dictionary');
+var globalVar = require('../models/globalVar.json');
+var connections = require('../models/connections.json');
 
 
 function respond(res) {
@@ -48,7 +50,13 @@ function respond(res) {
         confirmPassword: dictionary.getTranslation("confirmPassword"),
         connectionName: dictionary.getTranslation("connectionName"),
         envelopes: dictionary.getTranslation("envelopes"),
-        editConnection: dictionary.getTranslation("editConnection")
+        editConnection: dictionary.getTranslation("editConnection"),
+        dragAndDropOr: dictionary.getTranslation("dragAndDropOr"),
+        
+        //data
+        data_username: "Grega",
+        data_email: "Grega@gmail.com",
+        data_connections: connections
     });
 }
 

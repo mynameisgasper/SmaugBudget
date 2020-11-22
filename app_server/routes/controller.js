@@ -17,6 +17,8 @@ var utility = require('../controllers/utility.js');
 var account = require('../controllers/account.js');
 var confirmation = require('../controllers/confirmation.js');
 var notFound404 = require('../controllers/not_found.js');
+var pdf = require('../controllers/pdf.js');
+const { pbkdf2 } = require('crypto');
 
 var app = express();
 var jsonParser = bodyParser.json()
@@ -94,6 +96,11 @@ app.get('/account', (req, res) => {
 //Email confirmation
 app.get('/confirmation', (req, res) => {
     confirmation.get(req, res);
+});
+
+//PDF generator
+app.post('/pdf', (req, res) => {
+    pdf.post(req, res);
 });
 
 //Path was not recognized, return 404

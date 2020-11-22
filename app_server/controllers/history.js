@@ -1,6 +1,7 @@
 //Dependencies
 var fs = require('fs');
 var responder = require('../routes/responder');
+var dictionary = require('./Dictionary');
 
 var data = {
     fileName: 'history',
@@ -80,7 +81,32 @@ var data = {
             value: '120',
             currency: '$'
         }
-    ]
+    ],
+    categories: [
+        { id: 1, category: "Furniture" },
+        { id: 2, category: "Electronics" },
+        { id: 3, category: "Trip" },
+        { id: 4, category: "Party" },
+        { id: 5, category: "Wedding" },
+        { id: 6, category: "Car" },
+        { id: 7, category: "Gas" },
+        { id: 8, category: "Other" },
+    ],
+
+    //translations main
+    logout: dictionary.getTranslation("logout"),
+    //translations navbar
+    DASHBOARD: dictionary.getTranslation("DASHBOARD"),
+    ENVELOPES: dictionary.getTranslation("ENVELOPES"),
+    GOALS: dictionary.getTranslation("GOALS"),
+    BILLS: dictionary.getTranslation("BILLS"),
+    HISTORY: dictionary.getTranslation("HISTORY"),
+    UTILITIES: dictionary.getTranslation("UTILITIES"),
+    user: dictionary.getTranslation("user"),
+    settings: dictionary.getTranslation("settings"),
+    appearance: dictionary.getTranslation("appearance"),
+    light: dictionary.getTranslation("light"),
+    dark: dictionary.getTranslation("dark")
 }
 
 function respond(res) {
