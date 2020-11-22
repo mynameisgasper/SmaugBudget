@@ -22,13 +22,17 @@
     },
     "homepage": "https://github.com/sp-2020-2021/LP-30#readme",
     "dependencies": {
+        "bcrypt": "^5.0.0",
         "body-parser": "^1.19.0",
+        "connect-flash": "^0.1.1",
+        "cookie-parser": "^1.4.5",
         "cookie-session": "^1.4.0",
         "express": "^4.17.1",
         "express-handlebars": "^5.2.0",
         "express-session": "^1.17.1",
         "hbs": "*",
         "pdf-creator-node": "^1.4.1",
+        "sequelize": "^6.3.5",
         "smtpc": "^0.1.2"
     }
 }

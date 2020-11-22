@@ -43,7 +43,7 @@
                 <a class="dropdown-item" href="#" onclick="toggleDarkMode();loadGraphs();" id="appearance"><i class="fas fa-adjust"></i>{{appearance}}: {{light}}</a>
                 <hr>
                 <form method="POST" action="/" id="logout">
-                <input type="hidden" id="formType" value="logout"/>
+                    <input type="hidden" id="formType" name="formType" value="logout"/>
                     <a class="dropdown-item" href="javascript:;" onclick="document.getElementById('logout').submit()"><i class="fas fa-sign-out-alt"></i>{{logout}}</a>
                 </form>
             </div>

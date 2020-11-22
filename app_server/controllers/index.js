@@ -1,30 +1,31 @@
 //Dependencies
 var notFound404 = require('./not_found');
-
 const { sign } = require('crypto');
-var fs = require('fs');
-var responder = require('../routes/responder');
-
 var smtp = require("./smtpClient");
 
-function respond(res) {
-    res.render('index', ({
-        index: true,
-        fileName: 'index',
-        index: {
-            used: true
-        }
-    }));
+function respond(res, session) {
+    if (session.user) {
+        res.redirect('/dashboard');
+    }
+    else {
+        res.render('index', ({
+            index: true,
+            fileName: 'index',
+            index: {
+                used: true
+            }
+        }));
+    }
 }
 
-function parseRequestBody(body, res) {
+function parseRequestBody(body, res, session) {
     switch(body.formType) {
         case 'signup': {
-            signup(body, res);
+            signup(body, res, session);
             break;
         }
         case 'signin': {
-            signin(body, res);
+            signin(body, res, session);
             break;
         }
         case 'forgotPassword': {
@@ -32,7 +33,7 @@ function parseRequestBody(body, res) {
             break;
         }
         case 'logout': {
-            logout(body, res);
+            logout(body, res, session);
             break;
         }
         default: {
@@ -41,7 +42,7 @@ function parseRequestBody(body, res) {
     }
 }
 
-function signup(body, res) {
+function signup(body, res, session) {
     //First we check consistency of all fields
     const email = body.email1up === body.email2up;
     const pass = body.password1up === body.password2up;
@@ -55,8 +56,13 @@ function signup(body, res) {
     }
 }
 
-function signin(body, res) {
+function signin(body, res, session) {
     if (body.emailin && body.passwordin) {
+        res.session = session;
+        res.session.user = {
+            email: body.emailin
+        };
+        console.log(res.session);
         res.redirect('/dashboard');
     }
     else {
@@ -68,15 +74,16 @@ function forgotPassword(body, res) {
     
 }
 
-function logout(body, res) {
-    res.redirect('/dashboard');
+function logout(body, res, session) {
+    res.clearCookie('user_sid');
+    res.redirect('/');
 }
 
 module.exports = {
     get: function(req, res) {
-        respond(res);
+        respond(res, req.session);
     },
     post: function(req, res) {
-        parseRequestBody(req.body, res);
+        parseRequestBody(req.body, res, req.session);
     }
 }
