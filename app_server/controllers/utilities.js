@@ -3,7 +3,7 @@ var dictionary = require('./Dictionary');
 
 var data = {
     utility: true,
-    fileName: 'Utility',
+    fileName: 'utilities',
     welcomeMessage: 'Welcome to utilities. Here you can find some useful gadgets.',
     groupMember: [{
         id: 1,
@@ -51,7 +51,7 @@ var data = {
 
 function respond(res, session) {
     if (session.user) {
-        res.render('utility', data);
+        res.render('utilities', data);
     }
     else {
         res.redirect('/');
