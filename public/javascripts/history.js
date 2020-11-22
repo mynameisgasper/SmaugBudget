@@ -112,6 +112,29 @@ function convertMonthsToName(month) {
     }
 }
 
+function disableButton() {
+    var amount1 = amount(document.getElementById("Amount"));
+    var name = check(document.getElementById("Payee"));
+    if (amount1 == 0 || name == 0) {
+      return false;
+    }
+    else {
+      return true;
+    }
+}
+
+function disableButton2(id) {
+    var amount1 = amount3(document.getElementById("Amount2"),id);
+    var name = check2(document.getElementById("Goal2"),id);
+  
+    if (amount1 == 0 || name == 0) {
+      return false;
+    }
+    else {
+      return true;
+    }
+  }
+
 function amount(field) {
   
     //var field = document.getElementById("PayeeModal");
