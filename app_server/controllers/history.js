@@ -1,6 +1,4 @@
 //Dependencies
-var fs = require('fs');
-var responder = require('../routes/responder');
 var dictionary = require('./Dictionary');
 
 var data = {
@@ -109,12 +107,17 @@ var data = {
     dark: dictionary.getTranslation("dark")
 }
 
-function respond(res) {
-    res.render('history', data);
+function respond(res, session) {
+    if (session.user) {
+        res.render('history', data);
+    }
+    else {
+        res.redirect('/');
+    }
 }
 
 module.exports = {
     get: function(req, res) {
-        respond(res);
+        respond(res, req.session);
     }
 }

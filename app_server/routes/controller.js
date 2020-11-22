@@ -4,6 +4,7 @@ var express = require('express');
 var bodyParser = require('body-parser')
 var exphbs = require('express-handlebars');
 var helpers = require('../views/helpers/hbsh');
+const session = require('express-session');
 
 //Business logic
 var index = require('../controllers/index.js');
@@ -31,16 +32,44 @@ var hbs = exphbs.create({
 });
 
 
+//Cookies
+app.use(session(
+    {
+        key: 'user_sid',
+        secret: 'secret',
+        resave: false,
+        saveUninitialized: false,
+        cookie: {
+            expires: 600000
+        }
+    }
+));
+app.set('trust proxy', 1);
+app.use((req, res, next) => {
+    if (req.cookies && req.session && req.cookies.user_sid && !req.session.user) {
+        res.clearCookie('user_sid');        
+    }
+    next();
+});
+
+// middleware function to check for logged-in users
+var sessionChecker = (req, res, next) => {
+    if (req.session && req.cookies && req.session.user && req.cookies.user_sid) {
+        res.redirect('/dashboard');
+    } else {
+        next();
+    }    
+};
 
 //Import static files
 app.use(express.static('../public'))
 
+//Handlebars
 app.engine('hbs', hbs.engine);
-
 app.set('view engine', 'hbs');
 
 //Index
-app.get('/', (req, res) => {
+app.get('/', sessionChecker, (req, res) => {
     index.get(req, res);
 });
 

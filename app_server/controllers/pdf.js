@@ -25,7 +25,7 @@ function generatePDF(req, res) {
     };
     
     pdf.create(document, options).then(path => {
-        respond(res, path);
+        respond(res, path, req.session);
     }).catch(error => {
         console.error(error)
     });
@@ -63,6 +63,11 @@ function mapToArray(map) {
 
 module.exports = {
     post: function(req, res) {
-        generatePDF(req, res)
+        if (req.session.user) {
+            generatePDF(req, res);
+        }
+        else {
+            res.redirect('/');
+        }
     }
 }
