@@ -26,32 +26,32 @@ function disableButton2() {
 function check(field) {
   
     //var field = document.getElementById("PayeeModal");
-    var regex = new RegExp("^[A-Za-z0-9]+$"); 
+    var regex = new RegExp("^[A-Za-z0-9]{1,20}$"); 
     //črkev male,velike,številke
     if(!field.value.match(regex)) {
       field.style.borderColor = "red";
-      document.getElementById("alerts").innerHTML ='<div class="tekst" style="color:red">Input may only contain letters A-Z and numbers.</div>';
+      $('.tt1').toast('show');
       return 0;
     }
     else {
       field.style.borderColor = "#ced4da";
-      document.getElementById("alerts").innerHTML = "";
+      $('.tt1').toast('hide');
       return 1;
     }
 }
 function check2(field, id) {
   
     //var field = document.getElementById("PayeeModal");
-    var regex = new RegExp("^[A-Za-z0-9]+$"); 
+    var regex = new RegExp("^[A-Za-z0-9]{1,20}$"); 
     //črkev male,velike,številke
     if(!field.value.match(regex)) {
       field.style.borderColor = "red";
-      document.getElementById("alarm" + id).innerHTML ='<div class="tekst" style="color:red">Input may only contain letters A-Z and numbers.</div>';
+      $('.tt3').toast('show');
       return 0;
     }
     else {
       field.style.borderColor = "#ced4da";
-      document.getElementById("alarm" + id).innerHTML = "";
+      $('.tt3').toast('hide');
       return 1;
     }
 }
@@ -65,12 +65,12 @@ function amount2(field, id) {
     console.log(regex.test(field.value));
     if(!field.value.match(regex)) {
       field.style.borderColor = "red";
-      document.getElementById("amm" + id).innerHTML ='<div class="tekst" style="color:red">Input may only contain decimal numbers separated by \'.\' with max 2 decimal places.</div>';
+      $('.tt4').toast('show');
       return 0;
     }
     else {
       field.style.borderColor = "#ced4da";
-      document.getElementById("amm" + id).innerHTML = "";
+      $('.tt4').toast('hide');
       return 1;
     }
 }
@@ -83,12 +83,12 @@ function amount(field) {
     console.log(regex.test(field.value));
     if(!field.value.match(regex)) {
       field.style.borderColor = "red";
-      document.getElementById("amm").innerHTML ='<div class="tekst" style="color:red">Input may only contain decimal numbers separated by \'.\' with max 2 decimal places.</div>';
+      $('.tt2').toast('show');
       return 0;
     }
     else {
       field.style.borderColor = "#ced4da";
-      document.getElementById("amm").innerHTML = "";
+      $('.tt2').toast('hide');
       return 1;
     }
 }

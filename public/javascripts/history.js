@@ -144,12 +144,12 @@ function amount(field) {
     console.log(regex.test(field.value));
     if(!field.value.match(regex)) {
       field.style.borderColor = "red";
-      document.getElementById("amm").innerHTML ='<div class="tekst" style="color:red">Input may only contain decimal numbers separated by \'.\' with max 2 decimal places.</div>';
+      $('.tt4').toast('show')
       return 0;
     }
     else {
       field.style.borderColor = "#ced4da";
-      document.getElementById("amm").innerHTML = "";
+      $('.tt4').toast('hide')
       return 1;
     }
 }
@@ -162,12 +162,12 @@ function nameAdd(field) {
     console.log(regex.test(field.value));
     if(!field.value.match(regex)) {
       field.style.borderColor = "red";
-      document.getElementById("txt1").innerHTML ='<div class="tekst" style="color:red">Input may only contain letters, numbers and some special characters. Length allowed: 1-20</div>';
+      $('.tt3').toast('show')
       return 0;
     }
     else {
       field.style.borderColor = "#ced4da";
-      document.getElementById("txt1").innerHTML = "";
+      $('.tt3').toast('hide')
       return 1;
     }
 }
@@ -180,32 +180,16 @@ function nameAdd2(field,id) {
     console.log(regex.test(field.value));
     if(!field.value.match(regex)) {
       field.style.borderColor = "red";
-      document.getElementById(id+"txt").innerHTML ='<div class="tekst" style="color:red">Input may only contain letters, numbers and some special characters. Length allowed: 1-20</div>';
+      $('.tt1').toast('show')
       return 0;
     }
     else {
       field.style.borderColor = "#ced4da";
-      document.getElementById(id+"txt").innerHTML = "";
+      $('.tt1').toast('hide')
       return 1;
     }
 }
 
-function check(field) {
-  
-    //var field = document.getElementById("PayeeModal");
-    var regex = new RegExp("^[A-Za-z0-9]+$"); 
-    //črkev male,velike,številke
-    if(!field.value.match(regex)) {
-      field.style.borderColor = "red";
-      document.getElementById("alerts").innerHTML ='<div class="tekst" style="color:red">Input may only contain letters A-Z and numbers.</div>';
-      return 0;
-    }
-    else {
-      field.style.borderColor = "#ced4da";
-      document.getElementById("alerts").innerHTML = "";
-      return 1;
-    }
-}
 
 function amount3(field, id) {
   
@@ -216,12 +200,12 @@ function amount3(field, id) {
     console.log(regex.test(field.value));
     if(!field.value.match(regex)) {
       field.style.borderColor = "red";
-      document.getElementById(id+"amm").innerHTML ='<div class="tekst" style="color:red">Input may only contain decimal numbers separated by \'.\' with max 2 decimal places.</div>';
+      $('.tt2').toast('show')
       return 0;
     }
     else {
       field.style.borderColor = "#ced4da";
-      document.getElementById(id+"amm").innerHTML = "";
+      $('.tt2').toast('hide')
       return 1;
     }
 }

@@ -2,6 +2,10 @@ body {
     background:#ededed;
 }
 
+.toast {
+    z-index: 999999;
+  }
+
 .date {
     text-align: center;
 

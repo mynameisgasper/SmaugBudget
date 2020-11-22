@@ -25,12 +25,12 @@ function nameRegex() {
   var regex = new RegExp("^([a-zA-Z])+$");
   if(!username.value.match(regex)) {
     username.style.borderColor = "red";
-    document.getElementById("alerts4").innerHTML ='<div class="alert alert-warning" role="alert">Name may only contain letters A-Z.</div>';
+    $('.tt1').toast('show');
     return 0;
   }
   else {
     username.style.borderColor = "#ced4da";
-    document.getElementById("alerts4").innerHTML = "";
+    $('.tt1').toast('hide');
     return 1;
   }
 }
@@ -39,12 +39,12 @@ function surnameRegex() {
   var regex = new RegExp("^([a-zA-Z])+$");
   if(!username.value.match(regex)) {
     username.style.borderColor = "red";
-    document.getElementById("alerts5").innerHTML ='<div class="alert alert-warning" role="alert">Surname may only contain letters A-Z</div>';
+    $('.tt2').toast('show')
     return 0;
   }
   else {
     username.style.borderColor = "#ced4da";
-    document.getElementById("alerts5").innerHTML = "";
+    $('.tt3').toast('hide')
     return 1;
   }
 }
@@ -54,13 +54,12 @@ function passwordCheckSignUp() {
   var pass2 = document.getElementById("password2up");
   if (pass1.value != pass2.value) {
     pass2.style.borderColor = "red";
-    var neki = document.getElementById("alerts3");
-    neki.innerHTML = ('<div class="alert alert-warning" role="alert">Passwords don\'t match!</div>');
+    $('.tt3').toast('show')
     return 0;
   }
   else {
     pass2.style.borderColor = "#ced4da";
-    document.getElementById("alerts3").innerHTML = "";
+    $('.tt3').toast('hide')
     return 1;
   }
 }
@@ -89,19 +88,19 @@ function passwordStrength() {
   var pass = document.getElementById("password1up");
   if(pass.value.match(strongRegex)) {
     pass.style.borderColor = "green";
-    document.getElementById("alerts").innerHTML = "";
+    $('.tt4').toast('hide')
     return 1;
   }
   else if(pass.value.match(mediumRegex)) {
     
     pass.style.borderColor = "orange";
-    document.getElementById("alerts").innerHTML = "";
+    $('.tt4').toast('hide')
     return 1;
   }
   else {
     pass.style.borderColor = "red";
-    document.getElementById("alerts").innerHTML = '<div class="alert alert-warning" role="alert">Strong passwords are at least 8 characters long, include at least 1 lowercase letter, 1 capital letter, 1 number and 1 special character => !@#$%^&**/</div>';
-    return 0;
+    $('.tt4').toast('show')
+     return 0;
   }
 }
 
@@ -111,13 +110,13 @@ function emailCheckSignUp() {
   if (email1.value != email2.value) {
     email1.style.borderColor = "red";
     email2.style.borderColor = "red";
-    document.getElementById("alerts2").innerHTML = '<div class="alert alert-warning" role="alert">E-mails don\'t match!</div>';
+    $('.tt5').toast('show')
     return 0;
   }
   else {
     email1.style.borderColor = "#ced4da";
     email2.style.borderColor = "#ced4da";
-    document.getElementById("alerts2").innerHTML = "";
+    $('.tt5').toast('hide')
     return 1;
   }
 }

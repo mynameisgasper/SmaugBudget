@@ -8,12 +8,12 @@ function check(field,id) {
     console.log(regex.test(field.value));
     if(!field.value.match(regex)) {
       field.style.borderColor = "red";
-      document.getElementById("amm").innerHTML ='<div class="tekst" style="color:red">Input may only contain decimal numbers separated by \'.\' with max 2 decimal places.</div>';
+      $('.tt1').toast('show')
       n = 0;
     }
     else {
       field.style.borderColor = "#ced4da";
-      document.getElementById("amm").innerHTML = "";
+      $('.tt1').toast('hide')
       n = 1;
     }
   }
@@ -26,18 +26,18 @@ function check(field,id) {
     console.log(regex.test(field.value));
     if(!field.value.match(regex)) {
       field.style.borderColor = "red";
-      document.getElementById("amm").innerHTML ='<div class="tekst" style="color:red">Input may only contain decimal numbers separated by \'.\' with max 2 decimal places.</div>';
+      $('.tt1').toast('show')
       n = 0;
     }
     else {
       field.style.borderColor = "#ced4da";
-      document.getElementById("amm").innerHTML = "";
+      $('.tt1').toast('hide')
       n = 1;
     }
   }
 }
 function disableButton(id) {
-  if (n == 0) {
+  if (n === 0) {
     return false;
   }
   else {

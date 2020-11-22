@@ -53,12 +53,12 @@ function amount(field) {
     //črkev male,velike,številke ne veljajo števila kot so .73, 
     if(!field.value.match(regex)) {
       field.style.borderColor = "red";
-      document.getElementById("amm").innerHTML ='<div class="tekst" style="color:red">Input may only contain decimal numbers separated by \'.\' with max 2 decimal places.</div>';
+      $('.tt1').toast('show')
       return 0;
     }
     else {
       field.style.borderColor = "#ced4da";
-      document.getElementById("amm").innerHTML = "";
+      $('.tt1').toast('hide')
       return 1;
     }
 }
@@ -71,12 +71,12 @@ function amount2(field) {
   //črkev male,velike,številke ne veljajo števila kot so .73, 
   if(!field.value.match(regex)) {
     field.style.borderColor = "red";
-    document.getElementById("amm2").innerHTML ='<div class="tekst" style="color:red">Input may only contain decimal numbers separated by \'.\' with max 2 decimal places.</div>';
+    $('.tt2').toast('show')
     return 0;
   }
   else {
     field.style.borderColor = "#ced4da";
-    document.getElementById("amm2").innerHTML = "";
+    $('.tt2').toast('hide')
     return 1;
   }
 }
@@ -87,12 +87,12 @@ function amount3(field,id) {
     //črkev male,velike,številke ne veljajo števila kot so .73, 
     if(!field.value.match(regex)) {
       field.style.borderColor = "red";
-      document.getElementById("vnos"+id).innerHTML ='<div class="tekst" style="color:red">Input may only contain decimal numbers separated by \'.\' with max 2 decimal places.</div>';
+      $('.tt3').toast('show')
       return 0;
     }
     else {
       field.style.borderColor = "#ced4da";
-      document.getElementById("vnos"+id).innerHTML = "";
+      $('.tt3').toast('hide')
       return 1;
     }
 }

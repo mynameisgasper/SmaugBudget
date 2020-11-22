@@ -19,12 +19,12 @@ function amount(field) {
     console.log(regex.test(field.value));
     if(!field.value.match(regex)) {
       field.style.borderColor = "red";
-      document.getElementById("amm").innerHTML ='<div class="tekst" style="color:red">Input may only contain decimal numbers separated by \'.\' with max 2 decimal places.</div>';
+      $('.tt1').toast('show');
       return 0;
     }
     else {
       field.style.borderColor = "#ced4da";
-      document.getElementById("amm").innerHTML = "";
+      $('.tt1').toast('hide');
       return 1;
     }
 }
@@ -33,12 +33,12 @@ function date(field) {
   
     if(field.value < 1 || field.value > 28) {
       field.style.borderColor = "red";
-      document.getElementById("dat").innerHTML ='<div class="tekst" style="color:red">Only numbers between 1 and 28 allowed.</div>';
+      $('.tt2').toast('show');
       return 0;
     }
     else {
       field.style.borderColor = "#ced4da";
-      document.getElementById("dat").innerHTML = "";
+      $('.tt2').toast('hide');
       return 1;
     }
 }

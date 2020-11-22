@@ -1,7 +1,32 @@
 <!---- Add Goal Form ---->
 
-<div class="modal fade" id="addGoalForm" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle"
-  aria-hidden="true">
+<div class="modal fade" id="addGoalForm" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
+  <div class="position-absolute w-100 p-4 d-flex flex-column align-items-end">
+      <div class="w-25">
+        <div class="toast ml-auto tt4" role="alert" data-delay="3000" data-autohide="false">
+              <div class="toast-header">
+                  <strong class="mr-auto text-primary">HINT</strong>
+                  <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                  </button>
+              </div>
+              <div class="toast-body">
+                 Input may only contain letters, numbers and some special characters (_@./#&+-). Length allowed: 1-20
+              </div>
+          </div>
+          <div class="toast ml-auto tt3" role="alert" data-delay="1000" data-autohide="false">
+              <div class="toast-header">
+                  <strong class="mr-auto text-primary">HINT</strong>
+                  <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                  </button>
+              </div>
+              <div class="toast-body">
+                  Input may only contain decimal numbers separated by . or , with max 2 decimal places.
+              </div>
+          </div> 
+      </div>
+  </div>
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -51,8 +76,33 @@
 <!--- Modal Form Edit --->
 
 {{#each goal}}
-<div class="modal fade" id="editForm{{id}}" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle"
-  aria-hidden="true">
+<div class="modal fade" id="editForm{{id}}" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
+  <div class="position-absolute w-100 p-4 d-flex flex-column align-items-end">
+      <div class="w-25">
+        <div class="toast ml-auto tt5" role="alert" data-delay="3000" data-autohide="false">
+              <div class="toast-header">
+                  <strong class="mr-auto text-primary">HINT</strong>
+                  <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                  </button>
+              </div>
+              <div class="toast-body">
+                 Input may only contain letters, numbers and some special characters (_@./#&+-). Length allowed: 1-20
+              </div>
+          </div>
+          <div class="toast ml-auto tt6" role="alert" data-delay="1000" data-autohide="false">
+              <div class="toast-header">
+                  <strong class="mr-auto text-primary">HINT</strong>
+                  <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                  </button>
+              </div>
+              <div class="toast-body">
+                  Input may only contain decimal numbers separated by . or , with max 2 decimal places.
+              </div>
+          </div> 
+      </div>
+  </div>
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -98,8 +148,22 @@
 </div>
 
 <!--- Modal Form Add Money --->
-<div class="modal fade" id="addMoneyForm{{id}}" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle"
-  aria-hidden="true">
+<div class="modal fade" id="addMoneyForm{{id}}" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
+  <div class="position-absolute w-100 p-4 d-flex flex-column align-items-end">
+      <div class="w-25">
+          <div class="toast ml-auto tt2" role="alert" data-delay="1000" data-autohide="false">
+              <div class="toast-header">
+                  <strong class="mr-auto text-primary">HINT</strong>
+                  <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                  </button>
+              </div>
+              <div class="toast-body">
+                  Input may only contain decimal numbers separated by . or , with max 2 decimal places.
+              </div>
+          </div>
+      </div>
+  </div>
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
