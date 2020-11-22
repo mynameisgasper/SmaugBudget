@@ -1,5 +1,6 @@
 //Dependencies
 var notFound404 = require('./not_found');
+var fs = require('fs');
 const { sign } = require('crypto');
 var smtp = require("./smtpClient");
 
@@ -48,8 +49,9 @@ function signup(body, res, session) {
     const pass = body.password1up === body.password2up;
 
     if (email && pass && body.nameup && body.surnameup) {
-        smtp.send(body.email1up, "Confirmation code", "Welcome, here is our confirmation code: code");
-        res.redirect('/confirmation');
+        var code = generateCode(64);
+        sendCode(body.email1up, body.nameup, body.surnameup, code);
+        res.redirect('/confirmation?' + code);
     }
     else {
         notFound404.get(null, res);
@@ -76,6 +78,29 @@ function forgotPassword(body, res) {
 function logout(body, res, session) {
     res.clearCookie('user_sid');
     res.redirect('/');
+}
+
+async function sendCode(email, firstName, lastName, url) {
+    fs.readFile('./views/confirmationEmail.hbs', 'UTF-8', function(err, data) {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            code = generateCode(64);
+            data = data.replace('{{FIRSTNAME}}', firstName).replace('{{LASTNAME}}', lastName).replace('{{CODE}}', code).replace('{{LINK}}', 'http://localhost:8080/confirmation?' + url + "&code=" + code);
+            smtp.send(email, "Confirmation code", data);    
+        }
+    });
+}
+
+function generateCode(length) {
+    var result           = '';
+    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = length;
+    for (var i = 0; i < length; i++) {
+       result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
 }
 
 module.exports = {

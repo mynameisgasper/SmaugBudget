@@ -18,7 +18,7 @@ module.exports = {
             from: config.email.auth.address,
             to: to,
             subject: subject,
-            text: text
+            html: text
         };
 
         transport.sendMail(message, function(err, info) {
