@@ -69,37 +69,39 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        <label for="inputGoal">What's your goal?</label>
-        <input type="text" class="form-control" id="inputGoal" onfocusout="nameAdd(this)" placeholder="e.g. new car">
-        <div id="txt1"></div>
-        <label for="inputCategory">Choose a Category</label>
-        <select id="inputCategory" class="form-control">
-          <option selected disabled>Select Category</option>
-          {{#each categories}}
-          <option id="category{{id}}">{{category}}</option>
-          {{/each}}
-        </select>
+      <form name="signup" method="post" action="/" onsubmit="return disableButton()">
+        <div class="modal-body">
+          <label for="inputGoal">What's your goal?</label>
+          <input type="text" class="form-control" id="Goal" onfocusout="nameAdd(this)" placeholder="e.g. new car">
+          <div id="txt1"></div>
+          <label for="inputCategory">Choose a Category</label>
+          <select id="inputCategory" class="form-control">
+            <option selected disabled>Select Category</option>
+            {{#each categories}}
+            <option id="category{{id}}">{{category}}</option>
+            {{/each}}
+          </select>
 
-        </br>
+          </br>
 
-        <label for="inputAmount">How much do you want to save?</label>
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text">€</span>
+          <label for="inputAmount">How much do you want to save?</label>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">€</span>
+            </div>
+            <input type="number" class="form-control" onfocusout="amount(this)" id="Amount" placeholder="e.g. 1500" step="any">
+            <div id="amm"></div>
           </div>
-          <input type="number" class="form-control" onfocusout="amount(this)" id="inputAmount" placeholder="e.g. 1500">
-          <div id="amm"></div>
+
+          <label for="inputDate">Planned Date</label>
+          <input class="form-control" type="date" value="2020-01-01" id="inputDate">
+
+
         </div>
-
-        <label for="inputDate">Planned Date</label>
-        <input class="form-control" type="date" value="2020-01-01" id="inputDate">
-
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Add Goal</button>
-      </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Add Goal</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>
@@ -118,36 +120,38 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        <label for="inputGoal">What's your goal?</label>
-        <input type="text" class="form-control" onfocusout="nameAdd2(this,{{id}})" id="inputGoal" value="{{title}}">
-        <div id="{{id}}txt"></div>
+      <form name="signup" method="post" action="/" onsubmit="return disableButton2({{id}})">
+        <div class="modal-body">
+          <label for="inputGoal">What's your goal?</label>
+          <input type="text" class="form-control" onfocusout="nameAdd2(this,{{id}})" id="Goal3" value="{{title}}">
+          <div id="{{id}}txt"></div>
 
-        <label for="inputCategory">Choose a Category</label>
-        <select id="inputCategory" class="form-control">
-          {{#each ../categories}}
-          <option id="category{{id}}">{{category}}</option>
-          {{/each}}
-        </select>
+          <label for="inputCategory">Choose a Category</label>
+          <select id="inputCategory" class="form-control">
+            {{#each ../categories}}
+            <option id="category{{id}}">{{category}}</option>
+            {{/each}}
+          </select>
 
-        </br>
+          </br>
 
-        <label for="inputAmount">How much do you want to save?</label>
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text">€</span>
+          <label for="inputAmount">How much do you want to save?</label>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">€</span>
+            </div>
+            <input type="number" class="form-control" onfocusout="amount3(this,{{id}})" id="Amount3" value="{{target}}" step="any">
+            <div id="{{id}}amm"></div>
           </div>
-          <input type="number" class="form-control" onfocusout="amount3(this,{{id}})" id="inputAmount" value="{{target}}">
-          <div id="{{id}}amm"></div>
-        </div>
-        <label for="inputDate">Planned Date</label>
-        <input class="form-control" type="date" value="{{year}}-{{month}}-{{day}}" id="inputDate">
+          <label for="inputDate">Planned Date</label>
+          <input class="form-control" type="date" value="{{year}}-{{month}}-{{day}}" id="inputDate">
 
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger">Delete Goal</button>
-        <button type="button" class="btn btn-primary">Save Changes</button>
-      </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger">Delete Goal</button>
+          <button type="submit" onclick="disableButton2({{id}})" class="btn btn-primary">Save Changes</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>
@@ -162,29 +166,31 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        <label for="inputAmount">How much money do you want to add?</label>
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span id="currency{{id}}" class="input-group-text currencyDisplay">€</span>
+      <form name="signup" method="post" action="/" onsubmit="return disableButton3({{id}})">
+        <div class="modal-body">
+          <label for="inputAmount">How much money do you want to add?</label>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span id="currency{{id}}" class="input-group-text currencyDisplay">€</span>
+            </div>
+            <input type="number" class="form-control" onfocusout="amount2(this,{{id}})" id="Amount2" value="0.00" step ="any">
+            <div id="amm{{id}}"></div>
           </div>
-          <input type="number" class="form-control" onfocusout="amount2(this,{{id}})" id="inputAmount" value="0.00">
-          <div id="amm{{id}}"></div>
+          <label for="inputAmount">Your Currency</label>
+          <select id="currencySelect{{id}}" class="form-control currencySelector">
+            <option selected="selected">€</option>
+            <option>$</option>
+            <option>£</option>
+            <option>¥</option>
+            <option>₹</option>
+            <option>₽</option>
+            <option>kn</option>
+          </select>
         </div>
-        <label for="inputAmount">Your Currency</label>
-        <select id="currencySelect{{id}}" class="form-control currencySelector">
-          <option selected="selected">€</option>
-          <option>$</option>
-          <option>£</option>
-          <option>¥</option>
-          <option>₹</option>
-          <option>₽</option>
-          <option>kn</option>
-        </select>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Add</button>
-      </div>
+        <div class="modal-footer">
+          <button type="submit" onclick="disableButton3()" class="btn btn-primary">Add</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>

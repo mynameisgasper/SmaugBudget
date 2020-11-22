@@ -13,6 +13,42 @@ $(document).ready(function() {
     }
 });
 
+function disableButton() {
+  var amount1 = amount(document.getElementById("Amount"));
+  var name = nameAdd(document.getElementById("Goal"));
+
+  if (amount1 == 0 || name == 0) {
+    return false;
+  }
+  else {
+    return true;
+  }
+}
+
+function disableButton2(id) {
+  var amount1 = amount3(document.getElementById("Amount3"),id);
+  var name = nameAdd2(document.getElementById("Goal3"),id);
+
+  if (amount1 == 0 || name == 0) {
+    return false;
+  }
+  else {
+    return true;
+  }
+}
+
+function disableButton3(id) {
+  var amount1 = amount2(document.getElementById("Amount2"),id);
+
+  if (amount1 == 0) {
+    return false;
+  }
+  else {
+    return true;
+  }
+}
+
+
 function amount(field) {
   
     //var field = document.getElementById("PayeeModal");

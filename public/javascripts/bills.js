@@ -1,3 +1,28 @@
+function disableButton() {
+  var amount1 = amount(document.getElementById("Amount"));
+  var check1 = check(document.getElementById("Payee"));
+  var category = document.getElementById("selectCategory");
+
+  if (amount1 == 0 || check1 == 0) {
+    return false;
+  }
+  else {
+    return true;
+  }
+}
+
+function disableButton2() {
+  var amount1 = amount(document.getElementById("Amount2"));
+  var check1 = check(document.getElementById("Payee2"));
+
+  if (amount1 == 0 || check1 == 0) {
+    return false;
+  }
+  else {
+    return true;
+  }
+}
+
 function check(field) {
   
     //var field = document.getElementById("PayeeModal");
