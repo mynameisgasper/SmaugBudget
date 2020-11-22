@@ -1,3 +1,6 @@
+//Dependencies
+var dictionary = require('./Dictionary');
+
 var data = {
     fileName: 'goals',
     welcomeMessage: 'Here you can add saving goals you want to achieve. Click Add Goal, fill in the form, submit and you`re done!',
@@ -49,6 +52,20 @@ var data = {
         { id: 6, category: "Car" },
         { id: 7, category: "Other" },
     ],
+    //translations main
+    logout: dictionary.getTranslation("logout"),
+    //translations navbar
+    DASHBOARD: dictionary.getTranslation("DASHBOARD"),
+    ENVELOPES: dictionary.getTranslation("ENVELOPES"),
+    GOALS: dictionary.getTranslation("GOALS"),
+    BILLS: dictionary.getTranslation("BILLS"),
+    HISTORY: dictionary.getTranslation("HISTORY"),
+    UTILITIES: dictionary.getTranslation("UTILITIES"),
+    user: dictionary.getTranslation("user"),
+    settings: dictionary.getTranslation("settings"),
+    appearance: dictionary.getTranslation("appearance"),
+    light: dictionary.getTranslation("light"),
+    dark: dictionary.getTranslation("dark")
 
 };
 

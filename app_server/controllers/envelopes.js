@@ -1,3 +1,6 @@
+//Dependencies
+var dictionary = require('./Dictionary');
+
 var data = {
     fileName: 'envelopes',
     welcomeMessage: 'This is the best way to track your monthly and weekly spanding per category. Start by clicking Add Envelope.',
@@ -60,7 +63,21 @@ var data = {
             count: 1,
             icon: 'fa-radiation'
         }
-    ]
+    ],
+    //translations main
+    logout: dictionary.getTranslation("logout"),
+    //translations navbar
+    DASHBOARD: dictionary.getTranslation("DASHBOARD"),
+    ENVELOPES: dictionary.getTranslation("ENVELOPES"),
+    GOALS: dictionary.getTranslation("GOALS"),
+    BILLS: dictionary.getTranslation("BILLS"),
+    HISTORY: dictionary.getTranslation("HISTORY"),
+    UTILITIES: dictionary.getTranslation("UTILITIES"),
+    user: dictionary.getTranslation("user"),
+    settings: dictionary.getTranslation("settings"),
+    appearance: dictionary.getTranslation("appearance"),
+    light: dictionary.getTranslation("light"),
+    dark: dictionary.getTranslation("dark")
 };
 
 function respond(res, session) {

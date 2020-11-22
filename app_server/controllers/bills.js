@@ -58,7 +58,21 @@ var data = {
         { id: 6, category: "Car" },
         { id: 7, category: "Gas" },
         { id: 8, category: "Other" },
-    ]
+    ],
+    //translations main
+    logout: dictionary.getTranslation("logout"),
+    //translations navbar
+    DASHBOARD: dictionary.getTranslation("DASHBOARD"),
+    ENVELOPES: dictionary.getTranslation("ENVELOPES"),
+    GOALS: dictionary.getTranslation("GOALS"),
+    BILLS: dictionary.getTranslation("BILLS"),
+    HISTORY: dictionary.getTranslation("HISTORY"),
+    UTILITIES: dictionary.getTranslation("UTILITIES"),
+    user: dictionary.getTranslation("user"),
+    settings: dictionary.getTranslation("settings"),
+    appearance: dictionary.getTranslation("appearance"),
+    light: dictionary.getTranslation("light"),
+    dark: dictionary.getTranslation("dark")
 };
 
 function respond(res, session) {
