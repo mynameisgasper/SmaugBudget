@@ -79,7 +79,6 @@ app.post('/', jsonParser, (req, res) => {
 
 //Dashboard
 app.get('/dashboard', (req, res) => {
-    console.log(req.session);
     dashboard.get(req, res);
 });
 
