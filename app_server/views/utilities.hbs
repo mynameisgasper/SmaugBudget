@@ -194,8 +194,8 @@
                     {{#each groupMember}}
                       <tr>
                         <td>{{name}}</td>
-                        <td><input type="number" id="price{{id}}" class="form-control" onfocusout="check(this,{{id}})" placeholder="Bill amount" step="any"></td>
-                        <td><input type="number" id="paid{{id}}" class="form-control" onfocusout="check(this,{{id}})" placeholder="Money paid"step="any"></td>
+                        <td><input type="number" id="price{{id}}" class="form-control" onfocusout="check(this,{{id}})" placeholder="Bill amount" step="any" required="required"></td>
+                        <td><input type="number" id="paid{{id}}" class="form-control" onfocusout="check(this,{{id}})" placeholder="Money paid"step="any" required="required""></td>
                         <td>{{amount}}</td>
                       </tr>
                       <div id="amm"></div>

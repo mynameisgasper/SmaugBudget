@@ -8,7 +8,7 @@
                 <!--button type="button" class="btn btn-primary">Date</button-->
                 <div class="row">
                     <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3">
-                        <input class="form-control shadow p-3 mb-5 rounded" id="daterangepicker" type="text" name="daterange" value="01/01/2020 - 31/12/2020" readonly/>
+                        <input class="form-control shadow p-3 mb-5 rounded" id="daterangepicker" type="text" name="daterange" placeholder="01/01/2020 - 31/12/2020" readonly/>
                     </div>
 
                     <div class="col-3 col-sm-3 col-md-5 col-lg-3 col-xl-3"></div>
@@ -137,21 +137,21 @@
                                                 <div class="modal-body">
                                                     <div class="ena">
                                                         <label for="Category">Category</label><br>
-                                                        <input type="text" id="Category" class="form-control" placeholder="e.g. Rent" value="{{category}}"> 
+                                                        <input type="text" id="Category" class="form-control" placeholder="e.g. Rent" placeholder="{{category}}" required="required"> 
                                                     </div>
                                                     <div class="ena">
                                                         <label for="Payee">Payee</label><br>
-                                                        <input type="text" id="Payee2" class="form-control" placeholder="e.g. Elektro Ljubljana d.d." onfocusout="nameAdd2(this,{{id}})" value="{{receiver}}">
+                                                        <input type="text" id="Payee2" class="form-control" placeholder="e.g. Elektro Ljubljana d.d." onfocusout="nameAdd2(this,{{id}})" placeholder="{{receiver}}"required="required">
                                                         <div id="{{id}}txt"></div>
                                                     </div>
                                                     <div class="ena">
                                                         <label for="Amount">Amount</label><br>
-                                                        <input type="number" id="Amount2" class="form-control" onfocusout="amount3(this,{{id}})" placeholder="e.g. $150.30" value="{{value}}" step="any">
+                                                        <input type="number" id="Amount2" class="form-control" onfocusout="amount3(this,{{id}})" placeholder="e.g. $150.30" placeholder="{{value}}" step="any"required="required">
                                                         <div id="{{id}}amm"></div>
                                                     </div>
                                                     <div class="ena">
                                                         <label for="datum">Date</label><br>
-                                                        <input type="date" class="form-control" value="{{year}}-{{month}}-{{day}}">
+                                                        <input type="date" class="form-control" placeholder="{{year}}-{{month}}-{{day}}"required="required">
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
@@ -171,11 +171,11 @@
                     <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
                         <form method="POST" action="/pdf" id="pdf">
                             {{#each expenses}}
-                            <input type="hidden" name="date{{id}}" value="{{year}}-{{month}}-{{day}}"/>
-                            <input type="hidden" name="category{{id}}" value="{{category}}"/>
-                            <input type="hidden" name="receiver{{id}}" value="{{receiver}}"/>
-                            <input type="hidden" name="value{{id}}" value="{{value}}"/>
-                            <input type="hidden" name="currency{{id}}" value="{{currency}}"/>
+                            <input type="hidden" name="date{{id}}" placeholder="{{year}}-{{month}}-{{day}}"/>
+                            <input type="hidden" name="category{{id}}" placeholder="{{category}}"/>
+                            <input type="hidden" name="receiver{{id}}" placeholder="{{receiver}}"/>
+                            <input type="hidden" name="placeholder{{id}}" placeholder="{{value}}"/>
+                            <input type="hidden" name="currency{{id}}" placeholder="{{currency}}"/>
                             {{/each}}
                             <a type="button" class="btn btn-primary" href="javascript:;" onclick="document.getElementById('pdf').submit()">Export to PDF <i class="far fa-file-pdf"></i></a>
                         </form>
@@ -224,7 +224,7 @@
                             <form name="signup" method="post" action="/" onsubmit="return disableButton()">
                                 <div class="modal-body">
                                     <div class="ena"><label for="inputGoal">Category</label></br>
-                                        <select id="inputCategory" class="form-control">
+                                        <select id="inputCategory" class="form-control" required="required">
                                             <option selected disabled>Select Category</option>
                                             {{#each categories}}
                                             <option id="category{{id}}">{{category}}</option>
@@ -233,7 +233,7 @@
                                     </div>
                                     <div class="checker">
                                         <label for="Payee">Location</label><br>
-                                        <input type="text" id="Payee" class="form-control" onfocusout="nameAdd(this)" placeholder="e.g. Mercator">
+                                        <input type="text" id="Payee" class="form-control" onfocusout="nameAdd(this)" placeholder="e.g. Mercator" required="required">
                                         <div id="alerts"></div>
                                     </div>
                                     <div class="ena">
@@ -242,14 +242,14 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">€</span>
                                             </div>
-                                            <input type="number" class="form-control" onfocusout="amount(this)" id="Amount" placeholder="e.g. 15" step="any">
+                                            <input type="number" class="form-control" onfocusout="amount(this)" id="Amount" placeholder="e.g. 15" step="any" required="required">
                                             <div id="amm"></div>
                                         </div>    
                                         
                                     </div>
                                     <div class="ena">
                                         <label for="date">Date</label><br>
-                                        <input type="date" class="form-control" value="2020-11-01">
+                                        <input type="date" class="form-control" placeholder="2020-11-01" required="required">
                                     </div>
                                 </div>
                                 <div class="modal-footer">

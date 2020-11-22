@@ -73,7 +73,7 @@
                                             </div>
                                             <div class="checker">
                                                 <label for="Payee">Payee</label><br>
-                                                <input type="text" id="Payee" class="form-control" onfocusout="check(this)" placeholder="e.g. Elektro Ljubljana d.d.">
+                                                <input type="text" id="Payee" class="form-control" onfocusout="check(this)" placeholder="e.g. Elektro Ljubljana d.d." required="required">
                                             </div>
                                             <div id="alerts"></div>
                                             <div class="ena">
@@ -82,13 +82,13 @@
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text">€</span>
                                                     </div>
-                                                    <input type="number" class="form-control" onfocusout="amount(this)" id="Amount" placeholder="e.g. 15" step="any"> 
+                                                    <input type="number" class="form-control" onfocusout="amount(this)" id="Amount" placeholder="e.g. 15" step="any" required="required"> 
                                                 </div>    
                                                 <div id="amm"></div>
                                             </div>
                                             <div class="ena">
                                                 <label for="date">Date due</label><br>
-                                                <input type="date" class="form-control" value="2020-11-01">
+                                                <input type="date" class="form-control" value="2020-11-01" required="required">
                                             </div>
                                             <div class="ena">
                                                 <label for="once">How often?</label><br>
@@ -158,7 +158,7 @@
                                                 </div>
                                                 <div class="ena">
                                                     <label for="Payee">Payee</label><br>
-                                                    <input type="text" id="Payee2" onfocusout="check2(this,{{id}})" class="form-control" value={{company}}>
+                                                    <input type="text" id="Payee2" onfocusout="check2(this,{{id}})" class="form-control" value={{company}} required="required">
                                                     <div id="alarm{{id}}"></div>
                                                 </div>
                                                 
@@ -168,21 +168,21 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text">€</span>
                                                         </div>
-                                                        <input type="number" id="Amount2" onfocusout="amount2(this,{{id}})" class="form-control" placeholder="e.g. 150.30" step="any">
+                                                        <input type="number" id="Amount2" onfocusout="amount2(this,{{id}})" class="form-control" placeholder="e.g. 150.30" step="any"required="required"> 
                                                     </div>
                                                     <div id="amm{{id}}"></div>
                                                 </div>
                                                 <div class="ena">
                                                     <label for="date">Date due</label><br>
-                                                    <input type="date" class="form-control" value="2020-01-01">
+                                                    <input type="date" class="form-control" value="2020-01-01" required="required">
                                                 </div>
                                                 <div class="ena">
                                                     <b>How often?</b><br>
-                                                    <input type="radio" name="radio" id="once" value="once">
+                                                    <input type="radio" name="radio" id="once" value="once"required="required">
                                                     <label for="once">Once</label><br>
-                                                    <input type="radio" name="radio" id="monthly" value="monthly">
+                                                    <input type="radio" name="radio" id="monthly" value="monthly"required="required">
                                                     <label for="monthly">Monthly</label><br>
-                                                    <input type="radio" name="radio" id="yearly" value="yearly">
+                                                    <input type="radio" name="radio" id="yearly" value="yearly"required="required">
                                                     <label for="yearly">Yearly</label><br>
                                                 </div>
                                             </div>
