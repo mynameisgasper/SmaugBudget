@@ -62,7 +62,6 @@ function signin(body, res, session) {
         res.session.user = {
             email: body.emailin
         };
-        console.log(res.session);
         res.redirect('/dashboard');
     }
     else {

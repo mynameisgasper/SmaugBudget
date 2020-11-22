@@ -40,7 +40,7 @@ app.use(session(
         resave: false,
         saveUninitialized: false,
         cookie: {
-            expires: 600000
+            expires: 21600000
         }
     }
 ));
@@ -79,6 +79,7 @@ app.post('/', jsonParser, (req, res) => {
 
 //Dashboard
 app.get('/dashboard', (req, res) => {
+    console.log(req.session);
     dashboard.get(req, res);
 });
 
