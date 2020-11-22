@@ -4,7 +4,8 @@ var dictionary = require('./Dictionary');
 var data = {
     utility: true,
     fileName: 'utilities',
-    welcomeMessage: 'Welcome to utilities. Here you can find some useful gadgets.',
+    message: dictionary.getTranslation("messageUtilities"),
+    welcomeMessage: dictionary.getTranslation("welcomeMessageUtilities"),
     groupMember: [{
         id: 1,
         name: 'Grega',

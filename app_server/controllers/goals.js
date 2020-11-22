@@ -3,7 +3,8 @@ var dictionary = require('./Dictionary');
 
 var data = {
     fileName: 'goals',
-    welcomeMessage: 'Here you can add saving goals you want to achieve. Click Add Goal, fill in the form, submit and you`re done!',
+    message: dictionary.getTranslation("messageGoals"),
+    welcomeMessage: dictionary.getTranslation("welcomeMessageGoals"),
     goal: [{
             id: 0,
             title: 'iPhone',

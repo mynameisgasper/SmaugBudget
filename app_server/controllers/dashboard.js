@@ -3,7 +3,8 @@ var dictionary = require('./Dictionary');
 
 var data = {
     fileName: 'dashboard',
-    welcomeMessage: dictionary.getTranslation("welcomeMessage"),
+    message:dictionary.getTranslation("messageDashboard"),
+    welcomeMessage: dictionary.getTranslation("welcomeMessageDashboard"),
     card: [{
         title: dictionary.getTranslation("cardTitle1"),
         color: 'bg-primary',

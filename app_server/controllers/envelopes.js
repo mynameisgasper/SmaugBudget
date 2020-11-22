@@ -3,7 +3,8 @@ var dictionary = require('./Dictionary');
 
 var data = {
     fileName: 'envelopes',
-    welcomeMessage: 'This is the best way to track your monthly and weekly spanding per category. Start by clicking Add Envelope.',
+    message: dictionary.getTranslation("messageEnvelopes"),
+    welcomeMessage: dictionary.getTranslation("welcomeMessageEnvelopes"),
     envelope: [{
             id: 0,
             title: 'Gas',

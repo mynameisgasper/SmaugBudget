@@ -3,7 +3,8 @@ var dictionary = require('./Dictionary');
 
 var data = {
     fileName: 'history',
-    welcomeMessage: 'This is the best way to check your past spending by time and category.',
+    message: dictionary.getTranslation("messageHistory"),
+    welcomeMessage: dictionary.getTranslation("welcomeMessageHistory"),
     graph: {
         used: true,
         name: 'HistoryChart'

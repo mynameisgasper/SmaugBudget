@@ -22,7 +22,7 @@ var slovenian = {
     "light": "Svetlo",
     "dark": "Temno",
 
-    //Account
+    //ACCOUNT
     "account_title": "Uporabniški račun",
     "username": "Uporabniško ime",
     "firstName": "Ime",
@@ -47,9 +47,11 @@ var slovenian = {
     "editConnection": "Uredi povezavo",
     "dragAndDropOr": "Povleci in spusti, ali",
 
+
     //DASHBOARD
     //welcome
-    "welcomeMessage": "Enostaven pregled vašega porabljanja.",
+    "messageDashboard": "Dobrodošli na pregledu!",
+    "welcomeMessageDashboard": "Enostaven pregled vašega porabljanja.",
 
     //cards
     "cardTitle1": "Preostal proračun",
@@ -87,7 +89,37 @@ var slovenian = {
     "incomeModalPlaceholderIncome": "Vnesite svoj prihodek",
     "incomeModalPlaceholderDate": "Dan v mesecu na katerega dobite plačo",
     "incomeModalSaveButton": "Shrani spremembe",
-    "incomeModalCloseButton": "Zapri"
+    "incomeModalCloseButton": "Zapri",
+
+
+    //ENVELOPES
+    //welcome
+    "messageEnvelopes": "Dobrodošli na kuvertah!",
+    "welcomeMessageEnvelopes": "To je najbolši način za sledenje mesečnega in tedenskega porabljanjanja po kategorijah. Začnite s klikom na 'Dodaj kuverto'.",
+
+
+    //GOALS
+    //welcome
+    "messageGoals": "Dobrodošli na ciljih!",
+    "welcomeMessageGoals": "Tukaj lahko dodate cilje ki jih želite doseči. Kliknite na 'Dodaj cilj', izpolnite obrazec in ga oddajte.",
+
+
+    //BILLS
+    //welcome
+    "messageBills": "Dobrodošli na računih!",
+    "welcomeMessageBills": "Tukaj lahko dodate ponavljajoče se račune. Izpolnite obrazec, ga oddajte in račun bo avtomatsko dodeljen kuverti.",
+
+
+    //HISTORY
+    //welcome
+    "messageHistory": "Doborodšli na zgodovini!",
+    "welcomeMessageHistory": "To je najbolši način za pregled vašega porabljanja po kategorijah in časovnih obdobjih.",
+
+
+    //UTILITIES
+    //welcome
+    "messageUtilities": "Doborodošli na orodjih!",
+    "welcomeMessageUtilities": "Tukaj lahko najdete nekaj uporabnih pripomočkov.",
 }
 
 var english = {
@@ -112,7 +144,7 @@ var english = {
     "light": "Light",
     "dark": "Dark",
 
-    //Account
+    //ACCOUNT
     "account_title": "Account",
     "username": "Username",
     "firstName": "First name",
@@ -137,9 +169,11 @@ var english = {
     "editConnection": "Edit connection",
     "dragAndDropOr": "Drag and drop or",
 
+
     //DASHBOARD
     //welcome
-    "welcomeMessage": "A simple overview of your spending.",
+    "messageDashboard": "Welcome to dashboard!",
+    "welcomeMessageDashboard": "A simple overview of your spending.",
 
     //cards
     "cardTitle1": "Budget Left",
@@ -175,7 +209,37 @@ var english = {
     "incomeModalPlaceholderIncome": "Enter your income",
     "incomeModalPlaceholderDate": "Day in month you receive paycheck",
     "incomeModalSaveButton": "Save changes",
-    "incomeModalCloseButton": "Close"
+    "incomeModalCloseButton": "Close",
+
+
+    //ENVELOPES
+    //welcome
+    "messageEnvelopes": "Welcome to Envelopes!",
+    "welcomeMessageEnvelopes": "This is the best way to track your monthly and weekly spending per category. Start by clicking 'Add Envelope'.",
+
+
+    //GOALS
+    //welcome
+    "messageGoals": "Welcome to Goals!",
+    "welcomeMessageGoals": "Here you can add saving goals you want to achieve. Click 'Add Goal', fill in the form, submit and you`re done!",
+
+
+    //BILLS
+    //welcome
+    "messageBills": "Welcome to bills!",
+    "welcomeMessageBills": "Here you can add recurring bills. Fill in the form, submit and it will be added to an envelope repeteadly!",
+
+
+    //HISTORY
+    //welcome
+    "messageHistory": "Welcome to bills!",
+    "welcomeMessageHistory": "This is the best way to check your past spending by time and category.",
+
+
+    //UTILITIES
+    //welcome
+    "messageUtilities": "Welcome to utilites!",
+    "welcomeMessageUtilities": "Here you can find some useful gadgets.",
 }   
 
 module.exports = {

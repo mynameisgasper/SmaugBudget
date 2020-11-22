@@ -4,7 +4,8 @@ var dictionary = require('./Dictionary');
 var data = {
     bills: true,
     fileName: 'bills',
-    welcomeMessage: 'Here you can add recurring bills. Fill in the form, submit and it will be added to an envelope repeteadly!',
+    message: dictionary.getTranslation("messageBills"),
+    welcomeMessage: dictionary.getTranslation("welcomeMessageBills"),
     bill: [{
             id: 0,
             year: 2020,
