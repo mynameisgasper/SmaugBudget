@@ -71,30 +71,32 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <div class="ena"><label for="inputGoal">Category</label></br>
-                    <input type="text" class="form-control" id="inputGoal" value="Entertainment">
-                </div>
-
-                <div class="ena"><label for="inputAmount">Amount</label></br>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">€</span>
-                        </div>
-                        <input type="number" class="form-control" onfocusout="amount(this)"id="inputAmount" value="0.00">
+            <form name="signup" method="post" action="/" onsubmit="return disableButton2()">
+                <div class="modal-body">
+                    <div class="ena"><label for="inputGoal">Category</label></br>
+                        <input type="text" class="form-control" id="inputGoal" value="Entertainment">
                     </div>
-                    <div id="amm"></div>
-                </div>
 
-                <div class="ena">
-                    <label for="colorpicker">Color Picker</label></br>
-                    <input type="color" id="colorpicker" value="#0000ff">
-                </div>
+                    <div class="ena"><label for="inputAmount">Amount</label></br>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">€</span>
+                            </div>
+                            <input type="number" class="form-control" onfocusout="amount(this)"id="Amount" value="0.00" step="any">
+                        </div>
+                        <div id="amm"></div>
+                    </div>
 
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Add</button>
-            </div>
+                    <div class="ena">
+                        <label for="colorpicker">Color Picker</label></br>
+                        <input type="color" id="colorpicker" value="#0000ff">
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Add</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -110,26 +112,28 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <div class="ena"><label for="inputAmount">Amount</label></br>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">€</span>
+            <form name="signup" method="post" action="/" onsubmit="return disableButton3({{id}})">
+                <div class="modal-body">
+                    <div class="ena"><label for="inputAmount">Amount</label></br>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">€</span>
+                            </div>
+                            <input type="number" class="form-control" onfocusout="amount3(this,{{id}})" id="Amount3" value="0.00" step="any">
                         </div>
-                        <input type="number" class="form-control" onfocusout="amount3(this,{{id}})" id="inputAmount" value="0.00">
+                        <div id="vnos{{id}}"></div>
                     </div>
-                    <div id="vnos{{id}}"></div>
-                </div>
 
-                <div class="ena">
-                    <label for="colorpicker">Color Picker</label></br>
-                    <input type="color" id="colorpicker" value="{{colorHex}}">
-                </div>
+                    <div class="ena">
+                        <label for="colorpicker">Color Picker</label></br>
+                        <input type="color" id="colorpicker" value="{{colorHex}}">
+                    </div>
 
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Add</button>
-            </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" onclick="disableButton3({{id}})" class="btn btn-primary">Add</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -145,28 +149,30 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <div class="ena"><label for="inputGoal">Category</label></br>
-                    <select id="inputCategory" class="form-control">
-                        {{#each envelope}}
-                        <option id="category{{id}}">{{title}}</option>
-                        {{/each}}
-                    </select>
-                </div>
-
-                <div class="ena"><label for="inputAmount">Amount</label></br>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">€</span>
-                        </div>
-                        <input type="number" class="form-control" onfocusout="amount2(this)" id="inputAmount" value="0.00">
+            <form name="signup" method="post" action="/" onsubmit="return disableButton()">
+                <div class="modal-body">
+                    <div class="ena"><label for="inputGoal">Category</label></br>
+                        <select id="inputCategory" class="form-control">
+                            {{#each envelope}}
+                            <option id="category{{id}}">{{title}}</option>
+                            {{/each}}
+                        </select>
                     </div>
-                    <div id="amm2"></div>
+
+                    <div class="ena"><label for="inputAmount">Amount</label></br>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">€</span>
+                            </div>
+                            <input type="number" class="form-control" onfocusout="amount2(this)" id="Amount2" value="0.00" step="any">
+                        </div>
+                        <div id="amm2"></div>
+                    </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Add</button>
-            </div>
+                <div class="modal-footer">
+                    <button type="submit"  onclick="disableButton()" class="btn btn-primary">Add</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

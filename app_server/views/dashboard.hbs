@@ -81,16 +81,18 @@
                     <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <input type="number" id="Category" class="form-control" onfocusout="amount(this)" placeholder="{{incomeModalPlaceholderIncome}}">
-                    <div id="amm"></div></br>
-                    <input type="number" id="Category" class="form-control" onfocusout="date(this)" placeholder="{{incomeModalPlaceholderDate}}" min="1" max="31">
-                    <div id="dat"></div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">{{incomeModalSaveButton}}</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{incomeModalCloseButton}}</button>
-                </div>
+                <form name="signup" method="post" action="/" onsubmit="return disableButton()">
+                    <div class="modal-body">
+                        <input type="number" id="Amount" class="form-control" onfocusout="amount(this)" placeholder="{{incomeModalPlaceholderIncome}}" step="any">
+                        <div id="amm"></div></br>
+                        <input type="number" id="Date" class="form-control" onfocusout="date(this)" placeholder="{{incomeModalPlaceholderDate}}">
+                        <div id="dat"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" onclick="disableButton()" class="btn btn-primary">{{incomeModalSaveButton}}</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{incomeModalCloseButton}}</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

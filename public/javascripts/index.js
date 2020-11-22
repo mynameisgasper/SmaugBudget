@@ -53,14 +53,12 @@ function passwordCheckSignUp() {
   var pass1 = document.getElementById("password1up");
   var pass2 = document.getElementById("password2up");
   if (pass1.value != pass2.value) {
-    pass1.style.borderColor = "red";
     pass2.style.borderColor = "red";
     var neki = document.getElementById("alerts3");
     neki.innerHTML = ('<div class="alert alert-warning" role="alert">Passwords don\'t match!</div>');
     return 0;
   }
   else {
-    pass1.style.borderColor = "#ced4da";
     pass2.style.borderColor = "#ced4da";
     document.getElementById("alerts3").innerHTML = "";
     return 1;

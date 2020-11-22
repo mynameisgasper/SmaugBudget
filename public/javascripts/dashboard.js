@@ -1,3 +1,15 @@
+function disableButton() {
+  var amount1 = amount(document.getElementById("Amount"));
+  var date1 = date(document.getElementById("Date"));
+
+  if (amount1 == 0|| date1 == 0) {
+    return false;
+  }
+  else {
+    return true;
+  }
+}
+
 function amount(field) {
   
     //var field = document.getElementById("PayeeModal");
