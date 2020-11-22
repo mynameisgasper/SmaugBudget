@@ -30,6 +30,8 @@ var data = {
         name: 'Tim',
         amount: '+420,69'
     }],
+    //translations main
+    logout: dictionary.getTranslation("logout"),
     //translations navbar
     DASHBOARD: dictionary.getTranslation("DASHBOARD"),
     ENVELOPES: dictionary.getTranslation("ENVELOPES"),
