@@ -1,17 +1,26 @@
-
+$( window ).on( "load", function() {
+    
+    if (localStorage.getItem('dark') === "false") {
+        removeDarkModeCss();
+    }
+    else {
+        addDarkModeCss();
+    }
+})
 
 var darkMode = {
     isSet: false
 };
 
+
 function toggleDarkMode() {
-    if (darkMode.isSet) {
+    if (localStorage.getItem('dark') === "false") {
         //turn off darkmode
-        removeDarkModeCss();
+        addDarkModeCss();
     }
     else {
         //turn on darkmode
-        addDarkModeCss();
+        removeDarkModeCss();
     }
 }
 
@@ -25,6 +34,8 @@ function addDarkModeCss() {
     
     document.getElementById('appearance').innerHTML = '<i class="fas fa-adjust"></i>Appearance: Dark';
     darkMode.isSet = true;
+    localStorage.setItem('dark',"true");
+    console.log("addDark " +localStorage.getItem('dark'));
 }
 
 function removeDarkModeCss() {
@@ -32,4 +43,6 @@ function removeDarkModeCss() {
 
     document.getElementById('appearance').innerHTML = '<i class="fas fa-adjust"></i>Appearance: Light';
     darkMode.isSet = false;
+    localStorage.setItem('dark',"false");
+    console.log("removeDark "+localStorage.getItem('dark'));
 }
