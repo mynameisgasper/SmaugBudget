@@ -1,7 +1,5 @@
 var globalVar = require('../models/globalVar.json');
 
-console.log(globalVar);
-
 var slovenian = {
     //main
     "logout": "Odjava",
