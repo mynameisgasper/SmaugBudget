@@ -1,0 +1,13 @@
+[
+    {
+        "data_id": 1,
+        "data_conName": "Partner",
+        "data_members": [
+            {
+                "data_memberId": 1,
+                "data_memberName": "Wife"
+            }
+        ],
+        "data_active": true
+    }
+]

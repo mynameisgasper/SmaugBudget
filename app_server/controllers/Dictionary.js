@@ -1,6 +1,6 @@
-var userInfo = {
-    language: "english"
-}
+var globalVar = require('../models/globalVar.json');
+
+console.log(globalVar);
 
 var slovenian = {
     //main
@@ -182,7 +182,7 @@ var english = {
 
 module.exports = {
     getTranslation: (key) => {
-        switch (userInfo.language) {
+        switch (globalVar.language) {
             case "slovenian":
                 if (slovenian[key]) {
                     return slovenian[key];
@@ -194,10 +194,10 @@ module.exports = {
                 } 
                 break;
             default:
-                console.log(userInfo.language + " language is not supported!");
+                console.log(globalVar.language + " language is not supported!");
                 return key;
         }
-        console.log("No " + userInfo.language + " translation for key: " + key);
+        console.log("No " + globalVar.language + " translation for key: " + key);
         return key;
     }
 }

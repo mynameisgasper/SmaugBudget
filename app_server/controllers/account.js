@@ -2,6 +2,8 @@
 var fs = require('fs');
 var responder = require('../routes/responder');
 var dictionary = require('./Dictionary');
+var globalVar = require('../models/globalVar.json');
+var connections = require('../models/connections.json');
 
 
 function respond(res) {
@@ -54,19 +56,7 @@ function respond(res) {
         //data
         data_username: "Grega",
         data_email: "Grega@gmail.com",
-        data_connections: [
-            {
-                data_id: 1,
-                data_conName: "Partner",
-                data_members: [
-                    {
-                        data_memberId: 1,
-                        data_memberName: "Wife"
-                    }
-                ],
-                data_active: true
-            }
-        ]
+        data_connections: connections
     });
 }
 
