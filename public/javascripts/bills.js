@@ -1,9 +1,9 @@
 function disableButton() {
   var amount1 = amount(document.getElementById("Amount"));
   var check1 = check(document.getElementById("Payee"));
-  
+  var date1 = dateCheckAddBill(document.getElementById("date-hintAdd"));
 
-  if (amount1 == 0 || check1 == 0) {
+  if (amount1 == 0 || check1 == 0 || date1 == 0) {
     return false;
   }
   else {
