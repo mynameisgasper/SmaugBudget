@@ -49,4 +49,7 @@ mongoose.connect(dbURI, {
     useUnifiedTopology: true,
     useFindAndModify: false
 });
-  
+
+require('./envelopes');
+require('./connections');
+require('./user');
