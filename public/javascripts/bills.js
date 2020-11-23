@@ -104,6 +104,7 @@ function dateCheckAddBill(field) {
       if (inputDate[1] >= mm) {
           if (inputDate[2] >= dd) {
               $('#date-hintAdd').toast('hide');
+              field.style.borderColor = "#ced4da";
               return 1;
           } else {
               $('#date-hintAdd').toast('show');
