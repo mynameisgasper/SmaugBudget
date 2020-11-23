@@ -1,6 +1,9 @@
 {
-    "socket": {
+    "server": {
         "port": 8080
+    },
+    "api": {
+        "port": 3000
     },
     "email": {
         "auth": {

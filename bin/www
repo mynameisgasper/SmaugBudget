@@ -2,7 +2,9 @@
  * Entry point for SmaugBudget server 
  */
 
+//Dependencies
 const config = require('../app_server/config/server.json');
+var server = require('../app');
 
-var server = require('../app_server/routes/controller.js');
-server.startServer(config.socket.port);
+//Express server
+server.startServer(config.server.port);
