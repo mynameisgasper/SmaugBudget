@@ -13,8 +13,7 @@ var data = {
         used: true
     },
     totalExpenses: 335,
-    expenses: [
-        {
+    expenses: [{
             id: 0,
             year: '2020',
             monthName: 'MAR',
@@ -111,8 +110,7 @@ var data = {
 function respond(res, session) {
     if (session.user) {
         res.render('history', data);
-    }
-    else {
+    } else {
         res.redirect('/');
     }
 }

@@ -135,9 +135,13 @@
                                             </div>
                                             <form name="signup" method="post" action="/" onsubmit="return disableButton2()">
                                                 <div class="modal-body">
-                                                    <div class="ena">
-                                                        <label for="Category">Category</label><br>
-                                                        <input type="text" id="Category" class="form-control" placeholder="e.g. Rent" placeholder="{{category}}" required="required"> 
+                                                    <div class="ena"><label for="inputGoal">Category</label></br>
+                                                        <select id="inputCategory" class="form-control">
+                                                            <option selected disabled>Select Category</option>
+                                                              {{#each ../categories}}
+                                                                <option id="selectCategory{{id}}">{{category}}</option>
+                                                              {{/each}}
+                                                        </select>
                                                     </div>
                                                     <div class="ena">
                                                         <label for="Payee">Payee</label><br>
@@ -146,8 +150,13 @@
                                                     </div>
                                                     <div class="ena">
                                                         <label for="Amount">Amount</label><br>
+                                                            <div class="input-group mb-3">
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text">€</span>
+                                                                </div>
                                                         <input type="number" id="Amount2" class="form-control" onfocusout="amount3(this,{{id}})" placeholder="e.g. $150.30" placeholder="{{value}}" step="any"required="required">
                                                         <div id="{{id}}amm"></div>
+                                                        </div>
                                                     </div>
                                                     <div class="ena">
                                                         <label for="datum">Date</label><br>
@@ -177,12 +186,10 @@
                             <input type="hidden" name="value{{id}}" value="{{value}}"/>
                             <input type="hidden" name="currency{{id}}" value="{{currency}}"/>
                             {{/each}}
-                            <a type="button" class="btn btn-primary" href="javascript:;" onclick="document.getElementById('pdf').submit()">Export to PDF <i class="far fa-file-pdf"></i></a>
                         </form>
                     </div>
                     <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                        <button data-toggle="modal" href="#modalAddExpense" role="button" aria-expanded="false" aria-controls="about" class="btn btn-primary addbill">Add expense
-                      <i class="fas fa-plus-square"></i>
+                       <a type="button" style="float: right;" class="btn btn-primary" href="javascript:;" onclick="document.getElementById('pdf').submit()">Export to PDF <i class="far fa-file-pdf"></i></a>
                       </button>
                     </div>
                 </div>
