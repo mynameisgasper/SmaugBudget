@@ -1,16 +1,16 @@
 body {
     background: #242424;
-    color:white;
+    color: white;
 }
 
 body a {
-    text-decoration: none; 
-    color:white;
+    text-decoration: none;
+    color: white;
 }
 
 body a:hover {
-    text-decoration: none; 
-    color:white;
+    text-decoration: none;
+    color: white;
 }
 
 body input {
@@ -25,34 +25,40 @@ body input {
     opacity: 0.8;
 }
 
-.collapse .card { background: #2b2b2b }
+.collapse .card {
+    background: #2b2b2b
+}
 
-.form-control{
+.form-control {
     background-color: lightgrey;
 }
 
-.close { color: white; }
-
-.progress { opacity: 0.8 }
-
-.btn-primary { opacity: 0.8; }
-
-.modal-content { 
-    background: #2b2b2b;
-    border-color: #595959
-
+.close {
+    color: white;
 }
 
-.modal input{
-    background: #2b2b2b;
-    color: white; 
-    border-color: #595959
-
+.progress {
+    opacity: 0.8
 }
 
-.modal select{
+.btn-primary {
+    opacity: 0.8;
+}
+
+.modal-content {
     background: #2b2b2b;
-    color: white; 
+    border-color: #595959
+}
+
+.modal input {
+    background: #2b2b2b;
+    color: white;
+    border-color: #595959
+}
+
+.modal select {
+    background: #2b2b2b;
+    color: white;
     border-color: #595959
 }
 
@@ -60,35 +66,37 @@ body input {
     background: #2b2b2b;
     color: white;
     border-color: #595959
- 
 }
 
-.modal input:focus{ 
-    background: #2b2b2b; 
+.modal input:focus {
+    background: #2b2b2b;
     color: white;
     border-color: #595959
 }
 
-.modal select:focus{ 
+.modal select:focus {
     background: #2b2b2b;
     color: white;
     border-color: #595959
- }
+}
 
-.modal textarea:focus{ 
+.modal textarea:focus {
     background: #2b2b2b;
     color: white;
     border-color: #595959
+}
 
- }
-
-.dropdown-menu { background: #2b2b2b; }
-
-.dropdown-item { color: white }    
-
-.dropdown-item:hover { 
+.dropdown-menu {
     background: #2b2b2b;
-    color: lightgray; 
+}
+
+.dropdown-item {
+    color: white
+}
+
+.dropdown-item:hover {
+    background: #2b2b2b;
+    color: lightgray;
 }
 
 .container {
@@ -99,8 +107,19 @@ body input {
     padding: 0;
 }
 
+#darkModeButton {
+    color: black;
+}
+
+#darkModeContainerFullWidth {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    background: #242424;
+}
+
 .card-counter {
-    opacity:0.8;
+    opacity: 0.8;
     -webkit-box-shadow: 0px 1px 15px 1px rgb(30, 30, 30);
     -moz-box-shadow: 0px 1px 15px 1px rgb(30, 30, 30);
     box-shadow: 0px 1px 15px 1px rgb(30, 30, 30);
@@ -136,9 +155,8 @@ nav {
     box-shadow: 0px 1px 15px 1px rgb(30, 30, 30);
 }
 
-
-.table{
-    color: lightgray; 
+.table {
+    color: lightgray;
 }
 
 #doughnut-canvas {
@@ -150,26 +168,26 @@ nav {
     border-color: #595959;
 }
 
-.tabela td{
+.tabela td {
     color: black;
 }
 
-.tabela th{
-    color:white;
-}
-
-.tabela-balance #border-th{
-    color: black;
-}
-
-.tabela-balance #border-td{
-    color: black;
-}
-
-.tabela-balance th{
+.tabela th {
     color: white;
 }
 
-.tabela-balance td{
+.tabela-balance #border-th {
+    color: black;
+}
+
+.tabela-balance #border-td {
+    color: black;
+}
+
+.tabela-balance th {
+    color: white;
+}
+
+.tabela-balance td {
     color: white;
 }
