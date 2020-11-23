@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const { envelopesSchema } = require('./envelopes');
 const { goalsSchema } = require('./goals')
+const { billsSchema } = require('./bills')
+
 
 const userSchema = new mongoose.Schema();
 const connectionsSchema = new mongoose.Schema();
@@ -13,7 +15,8 @@ userSchema.add({
     passwordSalt: {type: String, required: true},
     connections: [connectionsSchema],
     envelopes: [envelopesSchema],
-    goals: [goalsSchema]
+    goals: [goalsSchema],
+    bills: [billsSchema]
 });
 
 connectionsSchema.add({

@@ -21,16 +21,16 @@
 
             <ul class="navbar-nav ml-auto">
               <li class="nav-item">
-                <a class="nav-link" href="#top">HOME<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="#top">{{HOME}}<span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#feat123">FEATURES</a>
+                <a class="nav-link" href="#feat123">{{FEATURES}}</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#aboutUs">ABOUT US</a>
+                <a class="nav-link" href="#aboutUs">{{ABOUTUS}}</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" a href="" class="btn btn-default btn-rounded" data-toggle="modal" data-target="#signInForm">SIGN IN</a>
+                <a class="nav-link" a href="" class="btn btn-default btn-rounded" data-toggle="modal" data-target="#signInForm">{{SIGNIN}}</a>
               </li>
             </ul>
 
@@ -46,26 +46,26 @@
           <div class="modal-content">
             <div class="modal-header">
               <img src="../images/dragon.svg">				
-              <h4 class="modal-title">Member Login</h4>	
+              <h4 class="modal-title">{{memberSignIn}}</h4>	
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
             <div class="modal-body">
               <form name="sign-in" action="/" method="post">
                 <input type="hidden" id="formType" name="formType" value="signin">
                 <div class="form-group">
-                  <input type="email" class="form-control" id="emailin" name="emailin" placeholder="E-mail" required>	
+                  <input type="email" class="form-control" id="emailin" name="emailin" placeholder="{{email}}" required>	
                 </div>
                 <div class="form-group">
-                  <input type="password" class="form-control" id="passwordin" name="passwordin" placeholder="Password" required>	
+                  <input type="password" class="form-control" id="passwordin" name="passwordin" placeholder="{{password}}" required>	
                 </div>        
                 <div class="form-button">
-                  <input href="dashboard" class="btn btn-primary singbut btn-lg btn-block login-btn" type="submit" value="Login"/>
+                  <input href="dashboard" class="btn btn-primary singbut btn-lg btn-block login-btn" type="submit" value="{{loginButton}}"/>
                 </div>
               </form>
             </div>
             <div class="modal-footer">
-              <a href="#" class="a1" data-toggle="modal" data-target="#forgottenPasswordForm" data-dismiss="modal">Forgot Password?</a>
-              <a href="#" class="a2" data-toggle="modal" data-target="#signUpForm" data-dismiss="modal">Not a member?</a>
+              <a href="#" class="a1" data-toggle="modal" data-target="#forgottenPasswordForm" data-dismiss="modal">{{passwordForgot}}</a>
+              <a href="#" class="a2" data-toggle="modal" data-target="#signUpForm" data-dismiss="modal">{{notMember}}</a>
             </div>
           </div>
         </div>
@@ -78,57 +78,57 @@
             <div class="w-25">
                 <div class="toast ml-auto tt1" role="alert" data-delay="1000" data-autohide="false">
                     <div class="toast-header">
-                        <strong class="mr-auto text-primary">HINT</strong>
+                        <strong class="mr-auto text-primary">{{HINT}}</strong>
                         <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
                     <div class="toast-body">
-                        Name may only contain letters A-Z.
+                        {{nameHint}}
                     </div>
                 </div>
                 <div class="toast ml-auto tt2" role="alert" data-delay="1000" data-autohide="false">
                     <div class="toast-header">
-                        <strong class="mr-auto text-primary">HINT</strong>
+                        <strong class="mr-auto text-primary">{{HINT}}</strong>
                         <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
                     <div class="toast-body">
-                        Surame may only contain letters A-Z.
+                        {{surnameHint}}
                     </div>
                 </div>
                 <div class="toast ml-auto tt5" role="alert" data-delay="1000" data-autohide="false">
                     <div class="toast-header">
-                        <strong class="mr-auto text-primary">HINT</strong>
+                        <strong class="mr-auto text-primary">{{HINT}}</strong>
                         <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
                     <div class="toast-body">
-                        E-mails don't match!
+                        {{emailHint}}
                     </div>
                 </div>
                 <div class="toast ml-auto tt4" role="alert" data-delay="1000" data-autohide="false">
                     <div class="toast-header">
-                        <strong class="mr-auto text-primary">HINT</strong>
+                        <strong class="mr-auto text-primary">{{HINT}}</strong>
                         <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
                     <div class="toast-body">
-                        Strong passwords are at least 8 characters long, include at least 1 lowercase letter, 1 capital letter, 1 number and 1 special character => !@#$%^&/
+                        {{passwordHint}}
                     </div>
                 </div>
                 <div class="toast ml-auto tt3" role="alert" data-delay="3000" data-autohide="false">
                     <div class="toast-header">
-                        <strong class="mr-auto text-primary">HINT</strong>
+                        <strong class="mr-auto text-primary">{{HINT}}</strong>
                         <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
                     <div class="toast-body">
-                        Passwords don't match!
+                        {{passwordNoMatch}}
                     </div>
                 </div>                
             </div>
@@ -137,29 +137,29 @@
           <div class="modal-content">
             <div class="modal-header">
               <img src="../images/dragon.svg">				
-              <h4 class="modal-title">New Member</h4>	
+              <h4 class="modal-title">{{memberSignUp}}</h4>	
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
             <div class="modal-body">
               <form name="signup" method="post" action="/" onsubmit="return disableButton()">
                <input type="hidden" id="formType" name="formType" value="signup">
                 <div class="form-group">
-                  <input type="text" class="form-control" id="nameup" name="nameup" placeholder="Name" onfocusout="nameRegex()" required="required">	
+                  <input type="text" class="form-control" id="nameup" name="nameup" placeholder="{{name}}" onfocusout="nameRegex()" required="required">	
                 </div>
                 <div class="form-group">
-                  <input type="text" class="form-control" id="surnameup" name="surnameup" placeholder="Surname" onfocusout="surnameRegex()" required="required">	
+                  <input type="text" class="form-control" id="surnameup" name="surnameup" placeholder="{{surname}}" onfocusout="surnameRegex()" required="required">	
                 </div>
                 <div class="form-group">
-                  <input type="email" class="form-control" id="email1up" name="email1up" placeholder="E-mail" onfocusout="emailCheckSignUp()" required="required">		
+                  <input type="email" class="form-control" id="email1up" name="email1up" placeholder="{{email}}" onfocusout="emailCheckSignUp()" required="required">		
                 </div>
                 <div class="form-group">
-                  <input type="email" class="form-control" id="email2up" name="email2up" placeholder="Confirm E-mail" onfocusout="emailCheckSignUp()" required="required">		
+                  <input type="email" class="form-control" id="email2up" name="email2up" placeholder="{{confirmEmail}}" onfocusout="emailCheckSignUp()" required="required">		
                 </div>
                 <div class="form-group">
-                  <input type="password" class="form-control" id="password1up" name="password1up" placeholder="Password" onfocusout="passwordStrength()" required="required">	
+                  <input type="password" class="form-control" id="password1up" name="password1up" placeholder="{{password}}" onfocusout="passwordStrength()" required="required">	
                 </div>    
                 <div class="form-group">
-                  <input type="password" class="form-control" id="password2up" name="password2up" placeholder="Confirm Password" onfocusout="passwordCheckSignUp()" required="required">	
+                  <input type="password" class="form-control" id="password2up" name="password2up" placeholder="{{confirmPassword}}" onfocusout="passwordCheckSignUp()" required="required">	
                 </div>
                 <div id="alerts"></div>
                 <div id="alerts2"></div>
@@ -168,12 +168,12 @@
                 <div id="alerts5"></div>
                 
                 <div class="form-button">
-                  <input href="dashboard" id="buttonid" class="btn btn-primary singbut btn-lg btn-block login-btn" type="submit" value="Create Account" />
+                  <input href="dashboard" id="buttonid" class="btn btn-primary singbut btn-lg btn-block login-btn" type="submit" value="{{createAccount}}" />
                 </div>
               </form>
             </div>
             <div class="modal-footer" style="padding: 10px;">
-              <a href="" style="font-family: 'Open Sans'; color: #999;" data-toggle="modal" data-target="#signInForm" data-dismiss="modal">Already a member?</a>
+              <a href="" style="font-family: 'Open Sans'; color: #999;" data-toggle="modal" data-target="#signInForm" data-dismiss="modal">{{alreadyMember}}</a>
             </div>
           </div>
         </div>

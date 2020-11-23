@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { categorySchema } = require('./categories')
 
 const envelopesSchema = new mongoose.Schema();
 envelopesSchema.add({
@@ -11,7 +12,7 @@ envelopesSchema.add({
     color: { type: String, required: true },
     colorHex: { type: String, required: true },
     bgColor: { type: String, required: true },
-    //category: { type: categorySchema, required: true }
+    category: { type: categorySchema, required: true }
 });
 
 mongoose.model('Envelopes', envelopesSchema, 'Envelopes');
