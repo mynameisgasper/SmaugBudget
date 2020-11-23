@@ -91,7 +91,7 @@
                                     <div class="text-muted font-weight-bold" id="day{{id}}">{{day}}</div>
                                 </td>
                                 <td class="align-middle" id="category{{id}}">{{category}}</td>
-                                <td class="align-middle" id="receiver{{id}}">{{receiver}}</td>
+                                <td class="align-middle" id="receiver{{id}}">{{recipient}}</td>
                                 <td class="cena align-middle" id="value{{id}}">
                                     <span id="currency{{id}}">{{currency}}</span><span id="price{{id}}">{{value}}</span>
                                 </td>
@@ -144,8 +144,8 @@
                                                         </select>
                                                     </div>
                                                     <div class="ena">
-                                                        <label for="Payee">Payee</label><br>
-                                                        <input type="text" id="Payee2" class="form-control" placeholder="e.g. Elektro Ljubljana d.d." onfocusout="nameAdd2(this,{{id}})" placeholder="{{receiver}}"required="required">
+                                                        <label for="Payee">Recipient</label><br>
+                                                        <input type="text" id="Payee2" class="form-control" placeholder="e.g. Elektro Ljubljana d.d." onfocusout="nameAdd2(this,{{id}})" value="{{recipient}}"required="required">
                                                         <div id="{{id}}txt"></div>
                                                     </div>
                                                     <div class="ena">
@@ -154,13 +154,13 @@
                                                                 <div class="input-group-prepend">
                                                                     <span class="input-group-text">€</span>
                                                                 </div>
-                                                        <input type="number" id="Amount2" class="form-control" onfocusout="amount3(this,{{id}})" placeholder="e.g. $150.30" placeholder="{{value}}" step="any"required="required">
+                                                        <input type="number" id="Amount2" class="form-control" onfocusout="amount3(this,{{id}})" placeholder="e.g. $150.30" value="{{value}}" step="any"required="required">
                                                         <div id="{{id}}amm"></div>
                                                         </div>
                                                     </div>
                                                     <div class="ena">
                                                         <label for="datum">Date</label><br>
-                                                        <input type="date" class="form-control" placeholder="{{year}}-{{month}}-{{day}}"required="required">
+                                                        <input type="date" class="form-control" value="{{year}}-{{month}}-{{day}}"required="required">
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
@@ -182,7 +182,7 @@
                             {{#each expenses}}
                             <input type="hidden" name="date{{id}}" value="{{year}}-{{month}}-{{day}}"/>
                             <input type="hidden" name="category{{id}}" value="{{category}}"/>
-                            <input type="hidden" name="receiver{{id}}" value="{{receiver}}"/>
+                            <input type="hidden" name="recipient{{id}}" value="{{recipient}}"/>
                             <input type="hidden" name="value{{id}}" value="{{value}}"/>
                             <input type="hidden" name="currency{{id}}" value="{{currency}}"/>
                             {{/each}}
@@ -193,7 +193,8 @@
                       </button>
                     </div>
                 </div>
-
+                
+                {{#each expenses}}
                 <div class="modal fade " id="modalAddExpense" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
                     <div class="position-absolute w-100 p-4 d-flex flex-column align-items-end">
                         <div class="w-25">
@@ -221,51 +222,12 @@
                             </div> 
                         </div>
                     </div>
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <form name="signup" method="post" action="/" onsubmit="return disableButton()">
-                                <div class="modal-body">
-                                    <div class="ena"><label for="inputGoal">Category</label></br>
-                                        <select id="inputCategory" class="form-control" required="required">
-                                            <option selected disabled>Select Category</option>
-                                            {{#each categories}}
-                                            <option id="category{{id}}">{{category}}</option>
-                                            {{/each}}
-                                        </select>
-                                    </div>
-                                    <div class="checker">
-                                        <label for="Payee">Location</label><br>
-                                        <input type="text" id="Payee" class="form-control" onfocusout="nameAdd(this)" placeholder="e.g. Mercator" required="required">
-                                        <div id="alerts"></div>
-                                    </div>
-                                    <div class="ena">
-                                        <label for="Amount">Amount</label><br>
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">€</span>
-                                            </div>
-                                            <input type="number" class="form-control" onfocusout="amount(this)" id="Amount" placeholder="e.g. 15" step="any" required="required">
-                                            <div id="amm"></div>
-                                        </div>    
-                                        
-                                    </div>
-                                    <div class="ena">
-                                        <label for="date">Date</label><br>
-                                        <input type="date" class="form-control" placeholder="2020-11-01" required="required">
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="submit" onclick="disableButton()" class="btn btn-primary">Add Expense</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+                    
+                    
+                   
+                    
                 </div>
+                {{/each }}
             </div>
         </div>
     </div>
