@@ -2,8 +2,8 @@
     "server": {
         "port": 8080
     },
-    "api": {
-        "port": 3000
+    "database": {
+        "url": "mongodb://localhost/SmaugBudget"
     },
     "email": {
         "auth": {
