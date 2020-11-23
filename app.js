@@ -10,7 +10,7 @@ var app = express();
 var notFound404 = require('./app_server/controllers/not_found.js');
 
 //Routers
-var signupRouter = require('./app_server/routes/signedupRouter');
+var applicationRouter = require('./app_server/routes/applicationRouter');
 var apiRouter = require('./app_server/routes/apiRouter');
 
 //Handlebars
@@ -46,7 +46,7 @@ app.use((req, res, next) => {
 //Import static files
 app.use(express.static('./public'))
 
-app.use('/', signupRouter);
+app.use('/', applicationRouter);
 app.use('/api', apiRouter);
 
 //Path was not recognized, return 404
