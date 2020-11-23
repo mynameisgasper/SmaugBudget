@@ -158,7 +158,7 @@
                                                 </div>
                                                 <div class="ena">
                                                     <label for="Payee">Payee</label><br>
-                                                    <input type="text" id="Payee2" onfocusout="check2(this,{{id}})" class="form-control" value={{company}} required="required">
+                                                    <input type="text" id="Payee2" onfocusout="check2(this,{{id}})" class="form-control" value={{recipient}} required="required">
                                                     <div id="alarm{{id}}"></div>
                                                 </div>
                                                 
@@ -168,7 +168,7 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text">€</span>
                                                         </div>
-                                                        <input type="number" id="Amount2" onfocusout="amount2(this,{{id}})" class="form-control" placeholder="e.g. 150.30" step="any"required="required"> 
+                                                        <input type="number" id="Amount2" onfocusout="amount2(this,{{id}})" class="form-control" value="{{value}}" step="any"required="required"> 
                                                     </div>
                                                     <div id="amm{{id}}"></div>
                                                 </div>

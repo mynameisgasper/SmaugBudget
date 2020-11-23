@@ -114,7 +114,7 @@
       <form name="signup" method="post" action="/" onsubmit="return disableButton2({{id}})">
         <div class="modal-body">
           <label for="inputGoal">What's your goal?</label>
-          <input type="text" class="form-control" onfocusout="nameAdd2(this,{{id}})" id="Goal3" placeholder="{{title}}"required="required"> 
+          <input type="text" class="form-control" onfocusout="nameAdd2(this,{{id}})" id="Goal3" value="{{title}}"required="required"> 
           <div id="{{id}}txt"></div>
 
           <label for="inputCategory">Choose a Category</label>
@@ -131,15 +131,14 @@
             <div class="input-group-prepend">
               <span class="input-group-text">€</span>
             </div>
-            <input type="number" class="form-control" onfocusout="amount3(this,{{id}})" id="Amount3" placeholder="{{target}}" step="any"required="required"> 
+            <input type="number" class="form-control" onfocusout="amount3(this,{{id}})" id="Amount3" value="{{target}}" step="any"required="required"> 
             <div id="{{id}}amm"></div>
           </div>
-          <label for="inputDate">Planned Date</label>
           <input class="form-control" type="date" placeholder="{{year}}-{{month}}-{{day}}" id="inputDate" required="required">
 
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-danger">Delete Goal</button>
+          <button type="button" class="btn btn-danger" onClick="removeGoal({{id}});">Delete Goal</button>
           <button type="submit" onclick="disableButton2({{id}})" class="btn btn-primary">Save Changes</button>
         </div>
       </form>

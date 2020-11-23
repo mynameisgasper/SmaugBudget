@@ -1,5 +1,5 @@
 {{#each goal}}
-<div class="row ">
+<div class="row" id="goal{{id}}">
     <!---  Row 1 Col 1 --->
     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-2 goal-col">
         <p class="goal-p">{{title}}</p>
@@ -28,6 +28,4 @@
     <button type="button" class="btn edit-btn" data-toggle="modal" href="#addMoneyForm{{id}}"><i class="fas fa-plus"></i></button>
     </div>
 </div>
-
-
 {{/each}}

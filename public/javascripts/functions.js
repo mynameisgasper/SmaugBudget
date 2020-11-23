@@ -1,8 +1,7 @@
 var path = window.location.pathname;
 var page = path.split("/").pop();
 
-$( window ).on( "load", function() {
-
+$(window).on("load", function() {
     if (sessionStorage.getItem(page) === "false") {
         hideWelcome();
     }
