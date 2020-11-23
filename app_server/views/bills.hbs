@@ -52,6 +52,17 @@
                                                 Input may only contain decimal numbers separated by . or , with max 2 decimal places.
                                             </div>
                                         </div> 
+                                        <div class="toast ml-auto" id="date-hintAdd" role="alert" data-delay="1000" data-autohide="false">
+                                            <div class="toast-header">
+                                                <strong class="mr-auto text-primary">HINT</strong>
+                                                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                                                    <span aria-hidden="true">×</span>
+                                                </button>
+                                            </div>
+                                            <div class="toast-body">
+                                                Input a valid date (today or in the future).
+                                            </div>
+                                        </div>  
                                     </div>
                                 </div>
                                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -88,7 +99,7 @@
                                             </div>
                                             <div class="ena">
                                                 <label for="date">Date due</label><br>
-                                                <input type="date" class="form-control" value="2020-11-01" required="required">
+                                                <input class="form-control" type="date" placeholder="2020-01-01" id="inputDateAddBill" onfocusout="dateCheckAddBill(this);" required="required">
                                             </div>
                                             <div class="ena">
                                                 <label for="once">How often?</label><br>

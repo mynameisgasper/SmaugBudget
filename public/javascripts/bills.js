@@ -1,7 +1,7 @@
 function disableButton() {
   var amount1 = amount(document.getElementById("Amount"));
   var check1 = check(document.getElementById("Payee"));
-  var category = document.getElementById("selectCategory");
+  
 
   if (amount1 == 0 || check1 == 0) {
     return false;
@@ -91,4 +91,33 @@ function amount(field) {
       $('.tt2').toast('hide');
       return 1;
     }
+}
+
+function dateCheckAddBill(field) {
+  var today = new Date();
+  var dd = String(today.getDate()).padStart(2, '0');
+  var mm = String(today.getMonth() + 1).padStart(2, '0');
+  var yyyy = today.getFullYear();
+  var inputDate = field.value.split("-");
+
+  if (inputDate[0] >= yyyy) {
+      if (inputDate[1] >= mm) {
+          if (inputDate[2] >= dd) {
+              $('#date-hintAdd').toast('hide');
+              return 1;
+          } else {
+              $('#date-hintAdd').toast('show');
+              field.style.borderColor = "red";
+              return 0;
+          }
+      } else {
+          $('#date-hintAdd').toast('show');
+          field.style.borderColor = "red";
+          return 0;
+      }
+  } else {
+      $('#date-hintAdd').toast('show');
+      field.style.borderColor = "red";
+      return 0;
+  }
 }
