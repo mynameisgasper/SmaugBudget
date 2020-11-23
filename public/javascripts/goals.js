@@ -16,8 +16,9 @@ $(document).ready(function() {
 function disableButton() {
     var amount1 = amount(document.getElementById("Amount"));
     var name = nameAdd(document.getElementById("Goal"));
+    var date = dateCheck(document.getElementById("inputDate"));
 
-    if (amount1 == 0 || name == 0) {
+    if (amount1 == 0 || name == 0 || date == 0) {
         return false;
     } else {
         return true;
@@ -27,8 +28,9 @@ function disableButton() {
 function disableButton2(id) {
     var amount1 = amount3(document.getElementById("Amount3"), id);
     var name = nameAdd2(document.getElementById("Goal3"), id);
+    var date = dateCheck(document.getElementById("inputDateAddGoal"), id);
 
-    if (amount1 == 0 || name == 0) {
+    if (amount1 == 0 || name == 0 || date == 0) {
         return false;
     } else {
         return true;
@@ -131,6 +133,64 @@ function nameAdd2(field, id) {
         field.style.borderColor = "#ced4da";
         $('.tt5').toast('hide')
         return 1;
+    }
+}
+
+function dateCheck(field, id) {
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+    var inputDate = field.value.split("-");
+
+    if (inputDate[0] >= yyyy) {
+        if (inputDate[1] >= mm) {
+            if (inputDate[2] >= dd) {
+                $('#date-hint').toast('hide');
+                return 1;
+            } else {
+                $('#date-hint').toast('show');
+                field.style.borderColor = "red";
+                return 0;
+            }
+        } else {
+            $('#date-hint').toast('show');
+            field.style.borderColor = "red";
+            return 0;
+        }
+    } else {
+        $('#date-hint').toast('show');
+        field.style.borderColor = "red";
+        return 0;
+    }
+}
+
+function dateCheckAddGoal(field) {
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+    var inputDate = field.value.split("-");
+
+    if (inputDate[0] >= yyyy) {
+        if (inputDate[1] >= mm) {
+            if (inputDate[2] >= dd) {
+                $('#date-hintAdd').toast('hide');
+                return 1;
+            } else {
+                $('#date-hintAdd').toast('show');
+                field.style.borderColor = "red";
+                return 0;
+            }
+        } else {
+            $('#date-hintAdd').toast('show');
+            field.style.borderColor = "red";
+            return 0;
+        }
+    } else {
+        $('#date-hintAdd').toast('show');
+        field.style.borderColor = "red";
+        return 0;
     }
 }
 
