@@ -81,7 +81,7 @@ function logout(body, res, session) {
 }
 
 async function sendCode(email, firstName, lastName, url) {
-    fs.readFile('./views/confirmationEmail.hbs', 'UTF-8', function(err, data) {
+    fs.readFile('./app_server/views/confirmationEmail.hbs', 'UTF-8', function(err, data) {
         if (err) {
             console.log(err);
         }

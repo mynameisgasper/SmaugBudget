@@ -1,5 +1,5 @@
-app_server/package-lock.json
-app_server/node_modules/
+package-lock.json
+node_modules/
 generated/
 
 .vscode/launch.json

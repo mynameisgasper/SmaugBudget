@@ -62,9 +62,10 @@ var sessionChecker = (req, res, next) => {
 };
 
 //Import static files
-app.use(express.static('../public'))
+app.use(express.static('./public'))
 
 //Handlebars
+app.set('views', path.join('./app_server/views'));
 app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
 
