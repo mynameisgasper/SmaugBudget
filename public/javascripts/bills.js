@@ -14,8 +14,9 @@ function disableButton() {
 function disableButton2() {
   var amount1 = amount(document.getElementById("Amount2"));
   var check1 = check(document.getElementById("Payee2"));
+  var date1 = dateCheckAddBill(document.getElementById("date-hintEdit"));
 
-  if (amount1 == 0 || check1 == 0) {
+  if (amount1 == 0 || check1 == 0 || date1) {
     return false;
   }
   else {
@@ -118,6 +119,36 @@ function dateCheckAddBill(field) {
       }
   } else {
       $('#date-hintAdd').toast('show');
+      field.style.borderColor = "red";
+      return 0;
+  }
+}
+
+function dateCheckEditBill(field, id) {
+  var today = new Date();
+  var dd = String(today.getDate()).padStart(2, '0');
+  var mm = String(today.getMonth() + 1).padStart(2, '0');
+  var yyyy = today.getFullYear();
+  var inputDate = field.value.split("-");
+
+  if (inputDate[0] >= yyyy) {
+      if (inputDate[1] >= mm) {
+          if (inputDate[2] >= dd) {
+              $('#date-hintEdit').toast('hide');
+              field.style.borderColor = "#ced4da";
+              return 1;
+          } else {
+              $('#date-hintEdit').toast('show');
+              field.style.borderColor = "red";
+              return 0;
+          }
+      } else {
+          $('#date-hintEdit').toast('show');
+          field.style.borderColor = "red";
+          return 0;
+      }
+  } else {
+      $('#date-hintEdit').toast('show');
       field.style.borderColor = "red";
       return 0;
   }
