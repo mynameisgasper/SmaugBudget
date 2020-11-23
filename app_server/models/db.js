@@ -4,41 +4,41 @@ const mongoose = require('mongoose');
 const dbURI = config.database.url;
 
 mongoose.connection.on('connected', () => {
-    console.log(`Mongoose je povezan na ${dbURI}.`);
+    console.log(`Connected to MongoDB ${dbURI}.`);
 });
 
 mongoose.connection.on('error', napaka => {
-    console.log('Mongoose napaka pri povezavi: ', napaka);
+    console.log('Error with MongoDB connection: ', napaka);
 });
 
 mongoose.connection.on('disconnected', () => {
-    console.log('Mongoose ni povezan.');
+    console.log('MongoDB not connected.');
 });
 
 const closeConenction = (message, callBack) => {
     mongoose.connection.close(() => {
-        console.log(`Mongoose je zaprl povezavo preko '${message}'.`);
+        console.log(`MongoDB closed connection with '${message}'.`);
         callBack();
     });
 };
 
 // Ponovni zagon nodemon
 process.once('SIGUSR2', () => {
-    closeConenction('nodemon ponovni zagon', () => {
+    closeConenction('nodemon restart', () => {
         process.kill(process.pid, 'SIGUSR2');
     });
 });
 
 // Izhod iz aplikacije
 process.on('SIGINT', () => {
-    closeConenction('izhod iz aplikacije', () => {
+    closeConenction('Application exit', () => {
         process.exit(0);
     });
 });
 
 // Izhod iz aplikacije na Heroku
 process.on('SIGTERM', () => {
-    closeConenction('izhod iz aplikacije na Heroku', () => {
+    closeConenction('Application exit on Heroku', () => {
         process.exit(0);
     });
 });
