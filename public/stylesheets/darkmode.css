@@ -1,16 +1,16 @@
 body {
     background: #242424;
-    color: white;
+    color: lightgray;
 }
 
 body a {
     text-decoration: none;
-    color: white;
+    color: lightgray;
 }
 
 body a:hover {
     text-decoration: none;
-    color: white;
+    color: lightgray;
 }
 
 body input {
@@ -34,7 +34,7 @@ body input {
 }
 
 .close {
-    color: white;
+    color: lightgray;
 }
 
 .progress {
@@ -52,7 +52,7 @@ body input {
 
 .modal input {
     background: #2b2b2b;
-    color: white;
+    color: lightgray;
     border-color: #595959
 }
 
@@ -91,7 +91,7 @@ body input {
 }
 
 .dropdown-item {
-    color: white
+    color: lightgray
 }
 
 .dropdown-item:hover {
@@ -120,21 +120,21 @@ body input {
 
 .card-counter {
     opacity: 0.8;
-    -webkit-box-shadow: 0px 1px 15px 1px rgb(30, 30, 30);
-    -moz-box-shadow: 0px 1px 15px 1px rgb(30, 30, 30);
-    box-shadow: 0px 1px 15px 1px rgb(30, 30, 30);
+    -webkit-box-shadow: 0px 1px 15px 1px rgba(30, 30, 30, 0.5);
+    -moz-box-shadow: 0px 1px 15px 1px rgba(30, 30, 30, 0.5);
+    box-shadow: 0px 1px 15px 1px rgba(30, 30, 30, 0.5);
 }
 
 .btn-primary {
-    -webkit-box-shadow: 0px 1px 15px 1px rgb(30, 30, 30);
-    -moz-box-shadow: 0px 1px 15px 1px rgb(30, 30, 30);
-    box-shadow: 0px 1px 15px 1px rgb(30, 30, 30);
+    -webkit-box-shadow: 0px 1px 15px 1px rgba(30, 30, 30, 0.5);
+    -moz-box-shadow: 0px 1px 15px 1px rgba(30, 30, 30, 0.5);
+    box-shadow: 0px 1px 15px 1px rgba(30, 30, 30, 0.5);
 }
 
 .btn-success {
-    -webkit-box-shadow: 0px 1px 15px 1px rgb(30, 30, 30);
-    -moz-box-shadow: 0px 1px 15px 1px rgb(30, 30, 30);
-    box-shadow: 0px 1px 15px 1px rgb(30, 30, 30);
+    -webkit-box-shadow: 0px 1px 15px 1px rgba(30, 30, 30, 0.5);
+    -moz-box-shadow: 0px 1px 15px 1px rgba(30, 30, 30, 0.5);
+    box-shadow: 0px 1px 15px 1px rgba(30, 30, 30, 0.5);
 }
 
 nav {

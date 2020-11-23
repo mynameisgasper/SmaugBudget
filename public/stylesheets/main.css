@@ -277,27 +277,27 @@ nav .button {
 /* Shadows */
 
 .card-counter {
-    -webkit-box-shadow: 0px 1px 15px 1px rgba(222, 222, 222, 1);
-    -moz-box-shadow: 0px 1px 15px 1px rgba(222, 222, 222, 1);
-    box-shadow: 0px 1px 15px 1px rgba(222, 222, 222, 1);
+    -webkit-box-shadow: 0px 1px 15px 1px rgba(222, 222, 222, 0.75);
+    -moz-box-shadow: 0px 1px 15px 1px rgba(222, 222, 222, 0.75);
+    box-shadow: 0px 1px 15px 1px rgba(222, 222, 222, 0.75);
 }
 
 .progress {
-    -webkit-box-shadow: 0px 1px 15px 1px rgba(222, 222, 222, 1);
-    -moz-box-shadow: 0px 1px 15px 1px rgba(222, 222, 222, 1);
-    box-shadow: 0px 1px 15px 1px rgba(222, 222, 222, 1);
+    -webkit-box-shadow: 0px 1px 15px 1px rgba(222, 222, 222, 0.75);
+    -moz-box-shadow: 0px 1px 15px 1px rgba(222, 222, 222, 0.75);
+    box-shadow: 0px 1px 15px 1px rgba(222, 222, 222, 0.75);
 }
 
 .btn-primary {
-    -webkit-box-shadow: 0px 1px 15px 1px rgba(222, 222, 222, 1);
-    -moz-box-shadow: 0px 1px 15px 1px rgba(222, 222, 222, 1);
-    box-shadow: 0px 1px 15px 1px rgba(222, 222, 222, 1);
+    -webkit-box-shadow: 0px 1px 15px 1px rgba(222, 222, 222, 0.75);
+    -moz-box-shadow: 0px 1px 15px 1px rgba(222, 222, 222, 0.75);
+    box-shadow: 0px 1px 15px 1px rgba(222, 222, 222, 0.75);
 }
 
 .btn-success {
-    -webkit-box-shadow: 0px 1px 15px 1px rgba(222, 222, 222, 1);
-    -moz-box-shadow: 0px 1px 15px 1px rgba(222, 222, 222, 1);
-    box-shadow: 0px 1px 15px 1px rgba(222, 222, 222, 1);
+    -webkit-box-shadow: 0px 1px 15px 1px rgba(222, 222, 222, 0.75);
+    -moz-box-shadow: 0px 1px 15px 1px rgba(222, 222, 222, 0.75);
+    box-shadow: 0px 1px 15px 1px rgba(222, 222, 222, 0.75);
 }
 
 .footer {
