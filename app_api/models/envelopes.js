@@ -12,6 +12,7 @@ envelopesSchema.add({
     color: { type: String, required: true },
     colorHex: { type: String, required: true },
     bgColor: { type: String, required: true },
+    month: { type: String, required: true },
     category: { type: categorySchema, required: true }
 });
 

@@ -10,6 +10,9 @@ var app = express();
 //Business logic
 var notFound404 = require('./app_server/controllers/not_found.js');
 
+//Helpers
+require('./app_server/views/helpers/hbsh.js');
+
 //Routers
 var applicationRouter = require('./app_server/routes/applicationRouter');
 var apiRouter = require('./app_api/routers/apiRouter');
@@ -18,28 +21,26 @@ var apiRouter = require('./app_api/routers/apiRouter');
 var hbs = exphbs.create({
     helpers: helpers,
     defaultLayout: 'layout',
-    extname:'.hbs'
+    extname: '.hbs'
 });
 app.set('views', path.join('./app_server/views'));
 app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
 
 //Cookies
-app.use(session(
-    {
-        key: 'user_sid',
-        secret: 'secret',
-        resave: false,
-        saveUninitialized: false,
-        cookie: {
-            expires: 21600000
-        }
+app.use(session({
+    key: 'user_sid',
+    secret: 'secret',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        expires: 21600000
     }
-));
+}));
 app.set('trust proxy', 1);
 app.use((req, res, next) => {
     if (req.cookies && req.session && req.cookies.user_sid && !req.session.user) {
-        res.clearCookie('user_sid');        
+        res.clearCookie('user_sid');
     }
     next();
 });

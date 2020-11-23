@@ -5,6 +5,7 @@ var data = {
     fileName: 'envelopes',
     message: dictionary.getTranslation("messageEnvelopes"),
     welcomeMessage: dictionary.getTranslation("welcomeMessageEnvelopes"),
+    currentMonth: 'NOV',
     envelope: [{
             id: 0,
             title: 'Gas',
@@ -13,7 +14,8 @@ var data = {
             totalCurrent: 172.5,
             color: 'rgb(0, 150, 255)',
             colorHex: '#0096FF',
-            bgColor: 'rgba(0, 150, 255, 0.5)'
+            bgColor: 'rgba(0, 150, 255, 0.5)',
+            month: 'NOV',
         },
         {
             id: 1,
@@ -23,7 +25,8 @@ var data = {
             totalCurrent: 175,
             color: 'rgb(0, 128, 0)',
             colorHex: '#008000',
-            bgColor: 'rgba(0, 128, 0, 0.5)'
+            bgColor: 'rgba(0, 128, 0, 0.5)',
+            month: 'NOV',
         },
         {
             id: 3,
@@ -33,7 +36,8 @@ var data = {
             totalCurrent: 60,
             color: 'rgb(128, 0, 128)',
             colorHex: '#800080',
-            bgColor: 'rgba(128, 0, 128, 0.5)'
+            bgColor: 'rgba(128, 0, 128, 0.5)',
+            month: 'NOV',
         },
         {
             id: 4,
@@ -43,7 +47,8 @@ var data = {
             totalCurrent: 120,
             color: 'rgb(255, 187, 51)',
             colorHex: '#FFBB33',
-            bgColor: 'rgba(255, 187, 51, 0.5)'
+            bgColor: 'rgba(255, 187, 51, 0.5)',
+            month: 'NOV',
         }
     ],
     card: [{
@@ -71,9 +76,15 @@ var data = {
 
         }
     ],
-    //translations main
+
+    /* 
+     * Translations Main
+     */
     logout: dictionary.getTranslation("logout"),
-    //translations navbar
+
+    /* 
+     * Translations Navbar 
+     */
     DASHBOARD: dictionary.getTranslation("DASHBOARD"),
     ENVELOPES: dictionary.getTranslation("ENVELOPES"),
     GOALS: dictionary.getTranslation("GOALS"),
