@@ -120,6 +120,38 @@ var slovenian = {
     //welcome
     "messageUtilities": "Doborodošli na orodjih!",
     "welcomeMessageUtilities": "Tukaj lahko najdete nekaj uporabnih pripomočkov.",
+
+
+    //INDEX
+    //navbar
+    "HOME": "VRH",
+    "FEATURES": "FUNKCIONALNONSTI",
+    "ABOUTUS": "O NAS",
+    "SIGNIN": "VPIS",
+    
+    //sign in modal
+    "memberSignIn": "Prijava članov",
+    "email": "E-pošta",
+    "password": "Geslo",
+    "loginButton": "Prijava",
+    "passwordForgot": "Pozabljeno geslo?",
+    "notMember": "Niste član?",
+
+    //sign up modal
+    "HINT": "NASVET",
+    "nameHint": "Ime lahko vsebuje samo črke A-Z.",
+    "surnameHint": "Priimek lahko vsebuje samo črke A-Z.",
+    "emailHint": "E-poštna naslova se ne ujemata!",
+    "passwordHint": "Močna gesla so dolga vsaj 8 znakov, vsebujejo vsaj 1 malo črko, 1 veliko črko, 1 številko in 1 poseben znak => !@#$%^&/.",
+    "passwordNoMatch": "Gesli se ne ujemata!",
+    "memberSignUp": "Nov član",
+    "name": "Ime",
+    "surname": "Priimek",
+    "confirmEmail": "Potrdi E-pošto",
+    "confirmPassword": "Potrdi geslo",
+    "createAccount": "Ustvarite račun",
+    "alreadyMember": "Že član?"
+
 }
 
 var english = {
@@ -240,6 +272,37 @@ var english = {
     //welcome
     "messageUtilities": "Welcome to utilites!",
     "welcomeMessageUtilities": "Here you can find some useful gadgets.",
+
+
+    //INDEX
+    //navbar
+    "HOME": "HOME",
+    "FEATURES": "FEATURES",
+    "ABOUTUS": "ABOUT US",
+    "SIGNIN": "SIGN IN",
+
+    //login modal
+    "memberSignIn": "Member Login",
+    "email": "E-mail",
+    "password": "Password",
+    "loginButton": "Login",
+    "passwordForgot": "Forgot Password?",
+    "notMember": "Not a member?",
+
+    //sign up modal
+    "HINT": "NASVET",
+    "nameHint": "Name may only contain letters A-Z.",
+    "surnameHint": "Surname may only contain letters A-Z.",
+    "emailHint": "E-mails don't match!",
+    "passwordHint": "Strong passwords are at least 8 characters long, include at least 1 lowercase letter, 1 capital letter, 1 number and 1 special character => !@#$%^&/",
+    "passwordNoMatch": "Passwords don't match!",
+    "memberSignUp": "New Member",
+    "name": "Name",
+    "surname": "Surname",
+    "confirmEmail": "Confirm E-mail",
+    "confirmPassword": "Confirm Password",
+    "createAccount": "Create Account",
+    "alreadyMember": "Already a member?"
 }   
 
 module.exports = {

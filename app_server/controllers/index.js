@@ -3,19 +3,49 @@ var notFound404 = require('./not_found');
 var fs = require('fs');
 const { sign } = require('crypto');
 var smtp = require("./smtpClient");
+var dictionary = require('./Dictionary');
+
+var data = {
+    index: true,
+    fileName: 'index',
+    index: {
+        used: true
+    },
+    //navbar
+    HOME: dictionary.getTranslation("HOME"),
+    FEATURES: dictionary.getTranslation("FEATURES"),
+    ABOUTUS: dictionary.getTranslation("ABOUTUS"),
+    SIGNIN: dictionary.getTranslation("SIGNIN"),
+    //sign in modal
+    memberSignIn: dictionary.getTranslation("memberSignIn"),
+    email: dictionary.getTranslation("email"),
+    password: dictionary.getTranslation("password"),
+    loginButton: dictionary.getTranslation("loginButton"),
+    passwordForgot: dictionary.getTranslation("passwordForgot"),
+    notMember: dictionary.getTranslation("notMember"),
+    //sign up modal
+    HINT: dictionary.getTranslation("HINT"),
+    nameHint: dictionary.getTranslation("nameHint"),
+    surnameHint: dictionary.getTranslation("surnameHint"),
+    emailHint: dictionary.getTranslation("emailHint"),
+    passwordHint: dictionary.getTranslation("passwordHint"),
+    passwordNoMatch: dictionary.getTranslation("passwordNoMatch"),
+    memberSignUp: dictionary.getTranslation("memberSignUp"),
+    name: dictionary.getTranslation("name"),
+    surname: dictionary.getTranslation("surname"),
+    confirmEmail: dictionary.getTranslation("confirmEmail"),
+    confirmPassword: dictionary.getTranslation("confirmPassword"),
+    createAccount: dictionary.getTranslation("createAccount"),
+    alreadyMember: dictionary.getTranslation("alreadyMember"),
+
+}
 
 function respond(res, session) {
     if (session.user) {
         res.redirect('/dashboard');
     }
     else {
-        res.render('index', ({
-            index: true,
-            fileName: 'index',
-            index: {
-                used: true
-            }
-        }));
+        res.render('index', data);
     }
 }
 

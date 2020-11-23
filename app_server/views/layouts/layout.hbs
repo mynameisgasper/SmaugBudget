@@ -51,7 +51,10 @@
 <body>
     <!--- Navigation Bar --->
     {{#ifNot noheader}}
-    {{> navbar}}
+        {{#if index.used}}
+        {{else}}
+            {{> navbar}}
+        {{/if}}
     {{/ifNot}}
 
     {{{body}}}
