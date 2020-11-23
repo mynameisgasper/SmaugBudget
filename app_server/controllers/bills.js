@@ -12,8 +12,8 @@ var data = {
             month: 'DEC',
             day: 10,
             category: 'Cat',
-            company: 'Meow d.o.o.',
-            price: '80',
+            recipient: 'Meow d.o.o.',
+            value: '80',
             currency: '€'
         },
         {
@@ -22,8 +22,8 @@ var data = {
             month: 'DEC',
             day: 09,
             category: 'Gas',
-            company: 'Petrol d.d',
-            price: '500',
+            recipient: 'Petrol d.d',
+            value: '500',
             currency: '€'
         },
         {
@@ -32,8 +32,8 @@ var data = {
             month: 'DEC',
             day: 09,
             category: 'Groceries',
-            company: 'Mercator',
-            price: '200',
+            recipient: 'Mercator',
+            value: '200',
             currency: '€'
         }
     ],

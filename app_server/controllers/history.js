@@ -20,7 +20,7 @@ var data = {
             month: '03',
             day: '25',
             category: 'Gas',
-            receiver: 'Petrol',
+            recipient: 'Petrol',
             value: '50',
             currency: '$'
         },
@@ -31,7 +31,7 @@ var data = {
             month: '03',
             day: '25',
             category: 'Phone',
-            receiver: 'A1',
+            recipient: 'A1',
             value: '40',
             currency: '$'
         },
@@ -42,7 +42,7 @@ var data = {
             month: '03',
             day: '26',
             category: 'Groceries',
-            receiver: 'Mercator',
+            recipient: 'Mercator',
             value: '150',
             currency: '$'
         },
@@ -53,7 +53,7 @@ var data = {
             month: '03',
             day: '28',
             category: 'Entertainment',
-            receiver: 'Kolosej',
+            recipient: 'Kolosej',
             value: '32',
             currency: '$'
         },
@@ -64,7 +64,7 @@ var data = {
             month: '03',
             day: '28',
             category: 'Eating out',
-            receiver: 'Pop\'s Place',
+            recipient: 'Pop\'s Place',
             value: '63',
             currency: '$'
         },
@@ -75,7 +75,7 @@ var data = {
             month: '04',
             day: '1',
             category: 'Groceries',
-            receiver: 'Mercator',
+            recipient: 'Mercator',
             value: '120',
             currency: '$'
         }

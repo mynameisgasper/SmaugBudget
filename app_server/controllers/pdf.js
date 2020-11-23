@@ -23,7 +23,7 @@ function generatePDF(req, res) {
         },
         path: "../generated/output.pdf"
     };
-    
+
     pdf.create(document, options).then(path => {
         respond(res, path, req.session);
     }).catch(error => {
@@ -42,13 +42,13 @@ function parseBody(body) {
                 'id': id,
                 'date': body['date' + id],
                 'category': body['category' + id],
-                'receiver': body['receiver' + id],
+                'recipient': body['recipient' + id],
                 'value': body['value' + id],
                 'currency': body['currency' + id]
             });
         }
-      }
-      
+    }
+
 
     return parsedBody;
 }
@@ -65,8 +65,7 @@ module.exports = {
     post: function(req, res) {
         if (req.session.user) {
             generatePDF(req, res);
-        }
-        else {
+        } else {
             res.redirect('/');
         }
     }
