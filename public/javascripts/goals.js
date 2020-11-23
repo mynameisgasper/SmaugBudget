@@ -147,6 +147,7 @@ function dateCheck(field, id) {
         if (inputDate[1] >= mm) {
             if (inputDate[2] >= dd) {
                 $('#date-hint').toast('hide');
+                field.style.borderColor = "#ced4da";
                 return 1;
             } else {
                 $('#date-hint').toast('show');
@@ -176,6 +177,7 @@ function dateCheckAddGoal(field) {
         if (inputDate[1] >= mm) {
             if (inputDate[2] >= dd) {
                 $('#date-hintAdd').toast('hide');
+                field.style.borderColor = "#ced4da";
                 return 1;
             } else {
                 $('#date-hintAdd').toast('show');
