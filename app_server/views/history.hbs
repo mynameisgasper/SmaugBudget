@@ -169,13 +169,13 @@
                 </div>
                 <div class="row">
                     <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                        <form method="POST" action="/pdf" id="pdf">
+                        <form method="POST" action="/pdf" id="pdf" name="pdf">
                             {{#each expenses}}
-                            <input type="hidden" name="date{{id}}" placeholder="{{year}}-{{month}}-{{day}}"/>
-                            <input type="hidden" name="category{{id}}" placeholder="{{category}}"/>
-                            <input type="hidden" name="receiver{{id}}" placeholder="{{receiver}}"/>
-                            <input type="hidden" name="placeholder{{id}}" placeholder="{{value}}"/>
-                            <input type="hidden" name="currency{{id}}" placeholder="{{currency}}"/>
+                            <input type="hidden" name="date{{id}}" value="{{year}}-{{month}}-{{day}}"/>
+                            <input type="hidden" name="category{{id}}" value="{{category}}"/>
+                            <input type="hidden" name="receiver{{id}}" value="{{receiver}}"/>
+                            <input type="hidden" name="value{{id}}" value="{{value}}"/>
+                            <input type="hidden" name="currency{{id}}" value="{{currency}}"/>
                             {{/each}}
                             <a type="button" class="btn btn-primary" href="javascript:;" onclick="document.getElementById('pdf').submit()">Export to PDF <i class="far fa-file-pdf"></i></a>
                         </form>
