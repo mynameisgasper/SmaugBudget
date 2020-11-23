@@ -1,10 +1,13 @@
-
 {{#each card}}
-<div class="col-xl-3 col-lg-4 col-md-12 col-sm-12" data-aos="flip-down" data-aos-duration="500" style="margin: 0 auto">
+<div class="col-xl-3 col-lg-4 col-md-12 col-sm-12" id="card{{id}}" data-aos="flip-down" data-aos-duration="500" style="margin: 0 auto">
     <div class="card-counter  {{color}}">
+        <span id="replies{{id}}">
         <i class="fas {{icon}}"></i>
         <p class="count-numbers">{{count}}</p>
-        <p class="count-name">{{title}}</p>
+        <p class="count-name">{{title}}</p></span>
+        <p id="card{{id}}-after">
+            <span id="comments{{id}}">{{comment}}</span>
+        </p>
     </div>
 </div>
 {{/each}}

@@ -199,20 +199,41 @@ body {
     font-family: 'Open Sans Bold';
 }
 
-.warner:hover .replies {
+
+/*
+* CARDS
+*/
+
+#comments2 {
+    opacity: 0;
+}
+
+#comments3 {
+    opacity: 0;
+}
+
+#card2:hover #comments2 {
+    opacity: 1;
+}
+
+#card3:hover #comments3 {
+    opacity: 1;
+}
+
+#card2:hover #replies2 {
     display: none;
 }
 
-.warner:hover .comments:before {
-    content: "Entertainment: 108 of 120 € spent!";
-    /*   position: relative;
-    text-align: center;
-    font-size: 2.5vh;
-    display: table-cell; 
-    vertical-align: middle;*/
+#card3:hover #replies3 {
+    display: none;
 }
 
-.warn-after {
+#card2-after {
+    text-align: center;
+    font-size: 2.5vh;
+}
+
+#card3-after {
     text-align: center;
     font-size: 2.5vh;
 }

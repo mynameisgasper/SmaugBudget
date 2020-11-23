@@ -38,16 +38,19 @@ var data = {
         }
     ],
     card: [{
+            id: 1,
             title: 'Bills Total',
             color: 'bg-primary',
             count: 2,
             icon: 'fa-paperclip'
         },
         {
+            id: 2,
             title: 'Bills This Week',
             color: 'bg-warning',
             count: 1,
-            icon: 'fa-calendar'
+            icon: 'fa-calendar',
+            comment: "January 25: Petrol $80"
         }
     ],
     categories: [
@@ -79,8 +82,7 @@ var data = {
 function respond(res, session) {
     if (session.user) {
         res.render('bills', data);
-    }
-    else {
+    } else {
         res.redirect('/');
     }
 }

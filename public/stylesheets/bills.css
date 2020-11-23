@@ -4,52 +4,49 @@
 */
 
 body {
-    background:#ededed;
+    background: #ededed;
 }
 
- .row {
-     margin: 0;
- }
+.row {
+    margin: 0;
+}
 
 .date {
     text-align: center;
-
 }
 
 td {
     text-align: left;
 }
 
-.cena{
+.cena {
     text-align: center;
     font-family: 'Open Sans Bold';
 }
 
-.p:hover{
+.p:hover {
     color: blue;
 }
 
-.bi-plus-square-fill:hover{
+.bi-plus-square-fill:hover {
     color: blue;
-    
 }
 
-
-.addbill{
+.addbill {
     float: right;
 }
-.headleft{
+
+.headleft {
     text-align: left;
 }
 
-.ena{
+.ena {
     padding-bottom: 10px;
 }
 
-
 .add:active {
-	position:relative;
-	top:2px;
+    position: relative;
+    top: 2px;
 }
 
 .zadnji {
@@ -62,10 +59,10 @@ td {
 
 tr.border_bottom td {
     border-bottom: 1px solid #dee2e6;
-  }
+}
 
 .search {
-    float:right;
+    float: right;
 }
 
 .row {
@@ -77,9 +74,9 @@ tr.border_bottom td {
 }
 
 .container {
-    -webkit-box-shadow: 0px 1px 15px 1px rgba(209,209,209,1);
-    -moz-box-shadow: 0px 1px 15px 1px rgba(209,209,209,1);
-    box-shadow: 0px 1px 15px 1px rgba(209,209,209,1);  
+    -webkit-box-shadow: 0px 1px 15px 1px rgba(209, 209, 209, 1);
+    -moz-box-shadow: 0px 1px 15px 1px rgba(209, 209, 209, 1);
+    box-shadow: 0px 1px 15px 1px rgba(209, 209, 209, 1);
     padding: 0;
 }
 
@@ -87,6 +84,7 @@ tr.border_bottom td {
     padding: 4vh;
     margin-top: 2vh;
 }
+
 #cards-section .row {
     padding: 1.5vh;
 }
@@ -98,13 +96,13 @@ tr.border_bottom td {
 
 @media only screen and (min-width: 900px) {
     #welcome-alert-section {
-        margin-top:15vh;
+        margin-top: 15vh;
     }
 }
 
 @media only screen and (max-width: 991px) {
     #welcome-alert-section {
-        margin-top:10vh;
+        margin-top: 10vh;
     }
 }
 
@@ -121,25 +119,24 @@ tr.border_bottom td {
     background: #ffbb33;
 }
 
-.warner:hover .replies{
-    display: none; }
-
- 
-.warner:hover .comments:before{
-    content: "January 25: Petrol $80";
-    /*position: relative;
-    text-align: center;
-    font-size: 2.5vh;
-    display: table-cell; 
-    vertical-align: middle;*/
+#card2:hover #replies2 {
+    display: none;
 }
 
-.warn-after {
+#comments2 {
+    opacity: 0;
+}
+
+#card2:hover #comments2 {
+    opacity: 1;
+}
+
+#card2-after {
     text-align: center;
     font-size: 2.5vh;
 }
-
 
 :root {
-    color-scheme: light dark; /* both supported */
-  }
+    color-scheme: light dark;
+    /* both supported */
+}

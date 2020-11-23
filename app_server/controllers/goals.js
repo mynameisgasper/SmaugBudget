@@ -32,16 +32,19 @@ var data = {
         }
     ],
     card: [{
+            id: 1,
             title: 'Goals Total',
             color: 'bg-primary',
             count: 3,
             icon: 'fa-bullseye'
         },
         {
+            id: 2,
             title: 'Goals Completed',
             color: 'green-panel',
             count: 1,
-            icon: 'fa-check-circle'
+            icon: 'fa-check-circle',
+            comment: 'iPhone 12 Pro completed!'
         }
     ],
     categories: [
@@ -73,8 +76,7 @@ var data = {
 function respond(res, session) {
     if (session.user) {
         res.render('goals', data);
-    }
-    else {
+    } else {
         res.redirect('/');
     }
 }

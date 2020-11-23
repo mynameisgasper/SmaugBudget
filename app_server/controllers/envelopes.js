@@ -47,22 +47,28 @@ var data = {
         }
     ],
     card: [{
+            id: 1,
             title: 'Envelopes Total',
             color: 'bg-primary',
             count: 3,
             icon: 'fa-envelope'
         },
         {
+            id: 2,
             title: 'Almost Empty',
             color: 'bg-warning',
             count: 1,
-            icon: 'fa-exclamation-triangle'
+            icon: 'fa-exclamation-triangle',
+            comment: "Entertainment: 108 of 120 € spent!"
         },
         {
+            id: 3,
             title: 'Empty',
             color: 'bg-danger',
             count: 1,
-            icon: 'fa-radiation'
+            icon: 'fa-radiation',
+            comment: "No envelopes over the limit!"
+
         }
     ],
     //translations main
@@ -84,8 +90,7 @@ var data = {
 function respond(res, session) {
     if (session.user) {
         res.render('envelopes', data);
-    }
-    else {
+    } else {
         res.redirect('/');
     }
 }
