@@ -1,5 +1,5 @@
 //Dependencies
-require('./app_server/models/db');
+require('./app_api/models/db');
 const path = require('path');
 var express = require('express');
 var exphbs = require('express-handlebars');
@@ -12,7 +12,7 @@ var notFound404 = require('./app_server/controllers/not_found.js');
 
 //Routers
 var applicationRouter = require('./app_server/routes/applicationRouter');
-var apiRouter = require('./app_server/routes/apiRouter');
+var apiRouter = require('./app_api/routers/apiRouter');
 
 //Handlebars
 var hbs = exphbs.create({

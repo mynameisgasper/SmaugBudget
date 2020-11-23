@@ -1,4 +1,4 @@
-const config = require('../config/server.json');
+const config = require('../../app_server/config/server.json');
 const mongoose = require('mongoose');
 
 const dbURI = config.database.url;

@@ -1,7 +1,7 @@
 //Dependencies
 var dictionary = require('./Dictionary');
-var globalVar = require('../models/globalVar.json');
-var connections = require('../models/connections.json');
+var globalVar = require('../../app_api/models/globalVar.json');
+var connections = require('../../app_api/models/connections.json');
 
 var data = {
     fileName: "account",

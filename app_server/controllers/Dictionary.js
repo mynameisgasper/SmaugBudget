@@ -1,4 +1,4 @@
-var globalVar = require('../models/globalVar.json');
+var globalVar = require('../../app_api/models/globalVar.json');
 
 var slovenian = {
     //main
