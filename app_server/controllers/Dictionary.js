@@ -290,7 +290,7 @@ var english = {
     "notMember": "Not a member?",
 
     //sign up modal
-    "HINT": "NASVET",
+    "HINT": "HINT",
     "nameHint": "Name may only contain letters A-Z.",
     "surnameHint": "Surname may only contain letters A-Z.",
     "emailHint": "E-mails don't match!",
