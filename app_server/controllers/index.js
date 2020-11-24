@@ -99,17 +99,29 @@ function signup(body, res, session) {
 }
 
 function signin(body, res, session) {
-    console.log(body);
-    if (body.emailin && body.passwordin) {
-        res.session = session;
-        res.session.user = {
-            email: body.emailin
-        };
-        res.redirect('/dashboard');
+    const data = {
+        email: body.emailin,
+        password: body.passwordin,
     }
-    else {
-        notFound404.get(null, res);
-    }
+
+    var args = {
+        data: data,
+        headers: { "Content-Type": "application/x-www-form-urlencoded" }
+    };
+    
+
+    var client = new Client();
+    client.post("http://localhost:8080/api/login", args, function (data, response) {
+        if (response.statusCode == 200) {
+            res.session = session;
+            res.session.user = data;
+
+            res.redirect('/dashboard');
+        }
+        else {
+            res.redirect('#login');
+        }
+    });
 }
 
 function forgotPassword(body, res) {
