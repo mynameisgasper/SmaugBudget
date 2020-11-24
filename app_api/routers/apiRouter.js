@@ -41,9 +41,15 @@ router.post('/addExpense', (req, res) => {
     envelopes.addExpense(req, res);
 })
 
+<<<<<<< Updated upstream
 
 router.post('/editBill', (req, res) => {
     bills.editBill(req, res);
 });
+=======
+router.post('/editHistory', (req, res) => {
+    history.editHisory(req, res);
+})
+>>>>>>> Stashed changes
 
 module.exports = router;
