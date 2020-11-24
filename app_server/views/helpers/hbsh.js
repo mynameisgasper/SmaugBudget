@@ -5,7 +5,10 @@ module.exports = {
     ifEquals: function(arg1, arg2, options) {
         return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
     },
-    minus: function(arg1, arg2){
+    ifNotEquals: function(arg1, arg2, options) {
+        return (arg1 == arg2) ? options.inverse(this) : options.fn(this);
+    },
+    minus: function(arg1, arg2) {
         return arg1 - arg2;
     }
 }
