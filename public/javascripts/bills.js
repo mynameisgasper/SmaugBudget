@@ -101,8 +101,18 @@ function dateCheckAddBill(field) {
   var yyyy = today.getFullYear();
   var inputDate = field.value.split("-");
 
-  if (inputDate[0] >= yyyy) {
-      if (inputDate[1] >= mm) {
+  if (inputDate[0] > yyyy) {
+      $('#date-hintAdd').toast('hide');
+      field.style.borderColor = "#ced4da";
+      return 1;
+  } else if (inputDate[0] == yyyy) {
+      if (inputDate[1] > mm) {
+          $('#date-hintAdd').toast('hide');
+          field.style.borderColor = "#ced4da";
+          return 1;
+      } else if (inputDate[1] == mm) {
+          /* 
+          ? IF DAY IS >= NOW */
           if (inputDate[2] >= dd) {
               $('#date-hintAdd').toast('hide');
               field.style.borderColor = "#ced4da";
@@ -131,8 +141,18 @@ function dateCheckEditBill(field, id) {
   var yyyy = today.getFullYear();
   var inputDate = field.value.split("-");
 
-  if (inputDate[0] >= yyyy) {
-      if (inputDate[1] >= mm) {
+  if (inputDate[0] > yyyy) {
+      $('#date-hintEdit').toast('hide');
+      field.style.borderColor = "#ced4da";
+      return 1;
+  } else if (inputDate[0] == yyyy) {
+      if (inputDate[1] > mm) {
+          $('#date-hintEdit').toast('hide');
+          field.style.borderColor = "#ced4da";
+          return 1;
+      } else if (inputDate[1] == mm) {
+          /* 
+          ? IF DAY IS >= NOW */
           if (inputDate[2] >= dd) {
               $('#date-hintEdit').toast('hide');
               field.style.borderColor = "#ced4da";

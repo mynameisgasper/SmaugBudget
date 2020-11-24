@@ -9,13 +9,44 @@ function addBill(requestBody, res) {
         var date = requestBody.inputDateAddBill;
         var radio = requestBody.rad;
         
-        var regexPayee = new RegExp("^[A-Za-z0-9]{1,20}$"); 
-        var regexAmount = new RegExp("^[0-9]+(\.[0-9]{1,2})?$"); 
+        //validate date
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0');
+        var yyyy = today.getFullYear();
+        var inputDate = date.split("-");
+        var dateOk;
 
+        if (inputDate[0] > yyyy) {
+            dateOk = true;
+        } 
+        else if (inputDate[0] == yyyy) {
+            if (inputDate[1] > mm) {
+                dateOk = true;
+            } 
+            else if (inputDate[1] == mm) {
+                if (inputDate[2] >= dd) {
+                    dateOk = true;
+                } 
+                else {
+                    dateOk = false;
+                }
+            } 
+            else {
+                dateOk = false;
+            }
+        } 
+        else {
+            dateOk = false;
+        }
+
+        //validate payee and amount
+        var regexPayee = new RegExp("^[A-Za-z0-9]{1,20}$"); 
+        var regexAmount = new RegExp("^[0-9]+(\.[0-9]{1,2})?$");
         const payeeTest = regexPayee.test(requestBody.Payee);
         const amountTest  = regexAmount.test(requestBody.Amount);
         
-        if (payeeTest && amountTest) {
+        if (payeeTest && amountTest && dateOk) {
             let bill = new Bill({
                 recipient: recipient,
                 value: amount,
