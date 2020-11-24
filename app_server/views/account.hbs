@@ -27,7 +27,7 @@
         </div>
         <div id="pfpImg" class="del-margin col-sm-12 col-md-3 col-lg-3 col-xl-3">
           <a data-toggle="modal" data-target="#changePfp" aria-label="Change Profile Picture">
-            <div class="profile-pic" style="background-image: url('../images/Default_pfp.png')" >
+            <div id="profile-pic" class="profile-pic" style="background-image: url('../images/Default_pfp.png')" >
               <span class="fas fa-camera"></span>
               <span>{{changeImage}}</span>
             </div>
@@ -36,7 +36,7 @@
       </div>
       <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-          <button type="submit" onclick="updateUsetInfo()" class="btn btn-primary" style="float: right;">{{saveChanges}}</button>
+          <button type="submit" onclick="updateUserInfo()" class="btn btn-primary" style="float: right;">{{saveChanges}}</button>
         </div>
       </div>
     </form>
@@ -523,8 +523,8 @@
       <div class="modal-body">
         <form>
           <div class="form-group">
-            <label for="exampleFormControlFile1">{{dragAndDropOr}}:</label>
-            <input type="file" class="form-control-file" id="exampleFormControlFile1">
+            <label for="addPfp">{{dragAndDropOr}}:</label>
+            <input type="file" class="form-control-file" id="addPfp">
           </div>
         </form>
       </div>
