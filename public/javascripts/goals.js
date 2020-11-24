@@ -143,8 +143,18 @@ function dateCheck(field, id) {
     var yyyy = today.getFullYear();
     var inputDate = field.value.split("-");
 
-    if (inputDate[0] >= yyyy) {
-        if (inputDate[1] >= mm) {
+    if (inputDate[0] > yyyy) {
+        $('#date-hint').toast('hide');
+        field.style.borderColor = "#ced4da";
+        return 1;
+    } else if (inputDate[0] == yyyy) {
+        if (inputDate[1] > mm) {
+            $('#date-hint').toast('hide');
+            field.style.borderColor = "#ced4da";
+            return 1;
+        } else if (inputDate[1] == mm) {
+            /* 
+            ? IF DAY IS >= NOW */
             if (inputDate[2] >= dd) {
                 $('#date-hint').toast('hide');
                 field.style.borderColor = "#ced4da";
@@ -173,24 +183,34 @@ function dateCheckAddGoal(field) {
     var yyyy = today.getFullYear();
     var inputDate = field.value.split("-");
 
-    if (inputDate[0] >= yyyy) {
-        if (inputDate[1] >= mm) {
+    if (inputDate[0] > yyyy) {
+        $('#date-hint').toast('hide');
+        field.style.borderColor = "#ced4da";
+        return 1;
+    } else if (inputDate[0] == yyyy) {
+        if (inputDate[1] > mm) {
+            $('#date-hint').toast('hide');
+            field.style.borderColor = "#ced4da";
+            return 1;
+        } else if (inputDate[1] == mm) {
+            /* 
+            ? IF DAY IS >= NOW */
             if (inputDate[2] >= dd) {
-                $('#date-hintAdd').toast('hide');
+                $('#date-hint').toast('hide');
                 field.style.borderColor = "#ced4da";
                 return 1;
             } else {
-                $('#date-hintAdd').toast('show');
+                $('#date-hint').toast('show');
                 field.style.borderColor = "red";
                 return 0;
             }
         } else {
-            $('#date-hintAdd').toast('show');
+            $('#date-hint').toast('show');
             field.style.borderColor = "red";
             return 0;
         }
     } else {
-        $('#date-hintAdd').toast('show');
+        $('#date-hint').toast('show');
         field.style.borderColor = "red";
         return 0;
     }

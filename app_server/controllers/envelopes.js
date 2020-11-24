@@ -6,6 +6,7 @@ var data = {
     message: dictionary.getTranslation("messageEnvelopes"),
     welcomeMessage: dictionary.getTranslation("welcomeMessageEnvelopes"),
     currentMonth: 'NOV',
+    setMonth: 'NOV',
     envelope: [{
             id: 0,
             title: 'Gas',
@@ -26,7 +27,7 @@ var data = {
             color: 'rgb(0, 128, 0)',
             colorHex: '#008000',
             bgColor: 'rgba(0, 128, 0, 0.5)',
-            month: 'NOV',
+            month: 'OCT',
         },
         {
             id: 3,
