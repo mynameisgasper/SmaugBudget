@@ -10,7 +10,7 @@ const connectionsSchema = new mongoose.Schema();
 userSchema.add({
     firstname: {type: String, required: true},
     lastname: {type: String, required: true},
-    email: {type: String, required: true},
+    email: {type: String, required: true, unique: true},
     password: {type: String, required: true},
     passwordSalt: {type: String, required: true},
     connections: [connectionsSchema],
