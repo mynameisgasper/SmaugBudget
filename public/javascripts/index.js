@@ -3,6 +3,14 @@ $(window).on('beforeunload', function() {
     $(window).scrollTop(0);
 });
 
+$(document).ready(function() {
+
+    if(window.location.href.indexOf('#registration') != -1) {
+      $('#registration').modal('show');
+    }
+  
+  });
+
 function disableButton() {
     var button = document.getElementById("buttonup");
     var name = nameRegex();
