@@ -13,6 +13,8 @@ userSchema.add({
     email: {type: String, required: true, unique: true},
     password: {type: String, required: true},
     passwordSalt: {type: String, required: true},
+    paycheck: {type: Number, required: false},
+    paycheckDate: {type: Number, required: false},
     connections: [connectionsSchema],
     envelopes: [envelopesSchema],
     goals: [goalsSchema],

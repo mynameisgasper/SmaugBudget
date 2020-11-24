@@ -1,3 +1,11 @@
+$(document).ready(function() {
+
+  if(window.location.href.indexOf('#changeIncom') != -1) {
+    $('#changeIncome').modal('show');
+  }
+
+});
+
 function disableButton() {
   var amount1 = amount(document.getElementById("Amount"));
   var date1 = date(document.getElementById("Date"));
