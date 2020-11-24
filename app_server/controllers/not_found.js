@@ -5,7 +5,7 @@ var data = {
 };
 
 function respond(res) {
-    res.render('404notfound', data);
+    res.status(404).render('404notfound', data);
 }
 
 module.exports = {

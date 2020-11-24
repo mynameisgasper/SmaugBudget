@@ -44,15 +44,14 @@ module.exports = {
     send: function(to, subject, text) { 
         sendEmail(to, subject, text);
     },
-    sendCode: async function sendCode(email, firstName, lastName, url, callback) {
+    sendCode: async function sendCode(email, firstName, lastName, url, confirmationCode, callback) {
         fs.readFile('./app_server/views/confirmationEmail.hbs', 'UTF-8', function(err, data) {
             if (err) {
                 callback(err);
             }
             else {
-                code = gc(64);
-                data = data.replace('{{FIRSTNAME}}', firstName).replace('{{LASTNAME}}', lastName).replace('{{CODE}}', code).replace('{{LINK}}', 'http://localhost:8080/confirmation?' + url + "&code=" + code);
-                sendEmail(email, "Confirmation code", data, callback);    
+                data = data.replace('{{FIRSTNAME}}', firstName).replace('{{LASTNAME}}', lastName).replace('{{CODE}}', confirmationCode).replace('{{LINK}}', 'http://localhost:8080/confirmation/' + url + '/' + confirmationCode);
+                sendEmail(email, 'Confirmation code', data, callback);    
             }
         });
     },

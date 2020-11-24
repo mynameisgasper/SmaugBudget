@@ -27,8 +27,13 @@ router.post('/', jsonParser, (req, res) => {
 });
 
 //Email confirmation
-router.get('/confirmation', (req, res) => {
+router.get('/confirmation/:urlCode', (req, res) => {
     confirmation.get(req, res);
+});
+
+//Email confirmation
+router.get('/confirmation/:urlCode/:code', (req, res) => {
+    confirmation.confirm(req, res);
 });
 
 module.exports = router;

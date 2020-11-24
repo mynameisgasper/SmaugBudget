@@ -8,8 +8,15 @@ function respond(res) {
     res.render('confirmation', data);
 }
 
+function confirmEmail(req, res) {
+    res.render('confirmation', data);
+}
+
 module.exports = {
     get: function(req, res) {
         respond(res);
+    },
+    confirm: function (req, res) {
+        confirmEmail(req, res);
     }
 }

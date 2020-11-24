@@ -18,6 +18,10 @@ router.post('/login', (req, res) => {
     user.login(req, res);
 });
 
+router.post('/confirm/:urlCode/:code', (req, res) => {
+    user.confirm(req, res);
+});
+
 router.post('/dashboard/changeIncome', (req, res) => {
     user.changeIncome(req, res);
 });

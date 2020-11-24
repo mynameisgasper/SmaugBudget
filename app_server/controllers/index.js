@@ -90,7 +90,7 @@ function signup(body, res, session) {
     var client = new Client();
     client.post("http://localhost:8080/api/register", args, function (data, response) {
         if (response.statusCode == 200) {
-            res.redirect('/confirmation?' + data.urlCode);
+            res.redirect('/confirmation/' + data.urlCode);
         }
         else {
             res.redirect('#registration');

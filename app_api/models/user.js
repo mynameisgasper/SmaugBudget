@@ -15,6 +15,8 @@ userSchema.add({
     passwordSalt: {type: String, required: true},
     paycheck: {type: Number, required: false},
     paycheckDate: {type: Number, required: false},
+    confirmationUrl: {type: String},
+    confirmationCode: {type: String},
     connections: [connectionsSchema],
     envelopes: [envelopesSchema],
     goals: [goalsSchema],
