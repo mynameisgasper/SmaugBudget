@@ -33,4 +33,10 @@ router.post('/editEnvelope', (req, res) => {
     envelopes.editEnvelope(req, res);
 })
 
+router.post('/addExpense', (req, res) => {
+    envelopes.addExpense(req, res);
+})
+
+
+
 module.exports = router;

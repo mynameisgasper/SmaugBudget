@@ -1,6 +1,12 @@
 const mongoose = require('mongoose');
 const envelopes = mongoose.model('Envelopes');
 
+/*
+? Add Envelope Function
+! Adds an envelope into DB. 
+*/
+
+
 function addEnvelope(requestBody, res) {
     try {
         var colorHexPicker = requestBody.colorPicker
@@ -50,38 +56,123 @@ function addEnvelope(requestBody, res) {
     }
 }
 
+
+/*
+? EDIT Envelope Function
+! find the envelope and add an amount or/and change color 
+*/
+
 function editEnvelope(requestBody, res) {
     try {
-        var amountAdded = requestBody.inputAmount;
+        var newBudget = requestBody.inputAmount;
         var colorHexPicker = requestBody.colorPicker
         var colorRGB = hexToRGB(colorHexPicker);
         var colorBackground = hexToRGB(colorHexPicker, 0.5);
-
         var id_requested = requestBody.id;
 
-        var regex = new RegExp("^[0-9]+(\.[0-9]{1,2})?$");
-        const amountCorrect = regex.test(amountAdded);
+        var regex = new RegExp("^[0-9]+");
+        const amountCorrect = regex.test(newBudget);
+
+        var newProgress;
 
         if (amountCorrect) {
-            envelopes.findByIdAndUpdate(id_requested, {
-                    $inc: { spent: amountAdded },
-                    colorHex: colorHexPicker,
-                    color: colorRGB,
-                    bgColor: colorBackground
-                },
-                function(err, envelope) {
+            var promise = new Promise((res, err) => {
+                envelopes.findById(id_requested, function(err, envelope) {
                     if (err) {
                         console.log(err);
                     } else {
                         if (envelope) {
-                            envelope.save();
-                            res.status(200).json(envelope);
+                            Math.round(newProgress = (envelope.spent / newBudget) * 100);
+                            res();
                         } else {
                             res.sendStatus(404);
                         }
                     }
                 });
+            })
         }
+
+        promise.then(() => {
+            if (amountCorrect) {
+                envelopes.findByIdAndUpdate(id_requested, {
+                        budget: newBudget,
+                        progress: newProgress,
+                        colorHex: colorHexPicker,
+                        color: colorRGB,
+                        bgColor: colorBackground
+                    },
+                    function(err, envelope) {
+                        if (err) {
+                            console.log(err);
+                        } else {
+                            if (envelope) {
+                                envelope.save();
+                                res.status(200).json(envelope);
+                            } else {
+                                res.sendStatus(404);
+                            }
+                        }
+                    });
+            }
+        });
+    } catch (ex) {
+        console.log(ex);
+        res.sendStatus(500);
+    }
+}
+
+
+
+function addExpense(requestBody, res) {
+    try {
+        var amountAdded = requestBody.inputAmount;
+        var id_requested = requestBody.id;
+
+        var regex = new RegExp("^[0-9]+(\.[0-9]{1,2})?$");
+        const amountCorrect = regex.test(amountAdded);
+        var budgetVar;
+        var newSpent;
+        var newProgress;
+
+        if (amountCorrect) {
+            var promise = new Promise((res, err) => {
+                envelopes.findById(id_requested, function(err, envelope) {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        if (envelope) {
+                            budgetVar = envelope.budget;
+                            newSpent = parseInt(envelope.spent) + parseInt(amountAdded);
+                            Math.round(newProgress = (newSpent / budgetVar) * 100);
+                            res();
+                        } else {
+                            res.sendStatus(404);
+                        }
+                    }
+                });
+            })
+        }
+
+        promise.then(() => {
+            if (amountCorrect) {
+                envelopes.findByIdAndUpdate(id_requested, {
+                        spent: newSpent,
+                        progress: newProgress,
+                    },
+                    function(err, envelope) {
+                        if (err) {
+                            console.log(err);
+                        } else {
+                            if (envelope) {
+                                envelope.save();
+                                res.status(200).json(envelope);
+                            } else {
+                                res.sendStatus(404);
+                            }
+                        }
+                    });
+            }
+        });
     } catch (ex) {
         console.log(ex);
         res.sendStatus(500);
@@ -108,6 +199,9 @@ function hexToRGB(hex, alpha) {
 module.exports = {
     addEnvelope: function(req, res) {
         addEnvelope(req.body, res);
+    },
+    addExpense: function(req, res) {
+        addExpense(req.body, res);
     },
     editEnvelope: function(req, res) {
         editEnvelope(req.body, res);
