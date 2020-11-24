@@ -56,7 +56,8 @@
                   <input type="email" class="form-control" id="emailin" name="emailin" placeholder="{{email}}" required>	
                 </div>
                 <div class="form-group">
-                  <input type="password" class="form-control" id="passwordin" name="passwordin" placeholder="{{password}}" required>	
+                  <input type="password" class="form-control" id="passwordin" placeholder="{{password}}" required>
+                  <input type="hidden" name="passwordin" id="hashpassword" />
                 </div>        
                 <div class="form-button">
                   <input href="dashboard" class="btn btn-primary singbut btn-lg btn-block login-btn" onclick="passwordLoginSubmit(this);" type="submit" value="{{loginButton}}"/>
@@ -156,10 +157,12 @@
                   <input type="email" class="form-control" id="email2up" name="email2up" placeholder="{{confirmEmail}}" onfocusout="emailCheckSignUp()" required="required">		
                 </div>
                 <div class="form-group">
-                  <input type="password" class="form-control" id="password1up" name="password1up" placeholder="{{password}}"  onfocusout="passwordStrength()" required="required">	
+                  <input type="password" class="form-control" id="password1up" placeholder="{{password}}"  onfocusout="passwordStrength()" required="required">	
+                  <input type="hidden" name="password1up" id="hashpassword1" />
                 </div>    
                 <div class="form-group">
-                  <input type="password" class="form-control" id="password2up" name="password2up" placeholder="{{confirmPassword}}"  onfocusout="passwordCheckSignUp()" required="required">	
+                  <input type="password" class="form-control" id="password2up" placeholder="{{confirmPassword}}"  onfocusout="passwordCheckSignUp()" required="required">
+                  <input type="hidden" name="password2up" id="hashpassword2" />
                 </div>
                 <div id="alerts"></div>
                 <div id="alerts2"></div>
@@ -168,7 +171,7 @@
                 <div id="alerts5"></div>
                 
                 <div class="form-button">
-                  <input href="dashboard" id="buttonid" class="btn btn-primary singbut btn-lg btn-block login-btn" type="submit" onclick="passwordRegisterSubmit(this);"   value="{{createAccount}}" />
+                  <input href="dashboard" id="buttonid" class="btn btn-primary singbut btn-lg btn-block login-btn" type="submit" onclick="passwordRegisterSubmit(this);" value="{{createAccount}}" />
                 </div>
               </form>
             </div>

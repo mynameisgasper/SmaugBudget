@@ -124,14 +124,15 @@ function passwordLoginSubmit(obj) {
     var password = document.getElementById('passwordin');
     var hashOne = new jsSHA("SHA-512", "TEXT", { numRounds: 1 });
     hashOne.update(password.value);
-    var hash = hashOne.getHash("HEX");
-    password.value = hash;
+
+    document.getElementById('hashpassword').value = hashOne.getHash("HEX");
 }
 
 function passwordRegisterSubmit(obj) {
     var password = document.getElementById('password1up');
     var hashOne = new jsSHA("SHA-512", "TEXT", { numRounds: 1 });
     hashOne.update(password.value);
-    var hash = hashOne.getHash("HEX");
-    password.value = hash;
+
+    document.getElementById('hashpassword1').value = hashOne.getHash("HEX");
+    document.getElementById('hashpassword2').value = hashOne.getHash("HEX");
 }

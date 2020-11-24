@@ -88,11 +88,7 @@ function signup(body, res, session) {
     
 
     var client = new Client();
-    // direct way
     client.post("http://localhost:8080/api/register", args, function (data, response) {
-        // parsed response body as js object
-        console.log(data);
-        // raw response
         if (response.statusCode == 200) {
             res.redirect('/confirmation?' + data.urlCode);
         }
@@ -103,6 +99,7 @@ function signup(body, res, session) {
 }
 
 function signin(body, res, session) {
+    console.log(body);
     if (body.emailin && body.passwordin) {
         res.session = session;
         res.session.user = {
