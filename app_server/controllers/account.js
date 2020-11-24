@@ -64,14 +64,14 @@ function respond(res, session) {
     }
 }
 
-function post(res, session) {
+function post(reqBody, session) {
     
 }
 
 module.exports = {
     get: function(req, res) {
         if (req.method == 'POST') {
-            
+            post(req.reqBody, req.session);
             respond(res, req.session);
         } else {
             respond(res, req.session);

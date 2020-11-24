@@ -7,8 +7,20 @@ $(document).ready(function() {
         }
     }
 
+    //pfp
     $("#addPfp").change(function(){
         readURL(this);
+    });
+
+    //darkmode
+    if (localStorage.getItem('dark') === "false") {
+        $("#darkmodeEnable")[0].checked = false;
+    }
+    else {
+        $("#darkmodeEnable")[0].checked = true;
+    }
+    $("#darkmodeEnable").on("change", function () {
+        toggleDarkMode();
     });
 });
 
