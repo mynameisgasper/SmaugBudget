@@ -79,9 +79,7 @@ function login(requestBody, res) {
                 res.sendStatus(500);
             } else {
                 if (user) {
-                    if (user.password === password) {
-                        delete user.password;
-                        delete user.passwordSalt;
+                    if (user.password === password && user.confirmationUrl == null && user.confirmationCode == null) {
                         res.status(200).json(user);
                     } else {
                         res.sendStatus(401);
