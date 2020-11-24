@@ -36,11 +36,26 @@ function check(field,id) {
     }
   }
 }
+
 function disableButton(id) {
   if (n === 0) {
     return false;
   }
   else {
     return true;
+  }
+}
+
+function currencyConverter() {
+  var currency1 = document.getElementById("curr1");
+  var currency2 = document.getElementById("curr2");
+  var amount = document.getElementById("Amount");
+  var amount2 = document.getElementById("Amount2");
+
+  if (currency1.value === currency2.value) {
+    amount2.innerHTML = "1";
+  }
+  else {
+    //to do https://api.exchangeratesapi.io/latest?base=valuta
   }
 }
