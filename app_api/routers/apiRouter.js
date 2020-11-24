@@ -1,4 +1,5 @@
 var user = require('../controllers/userController');
+var bills = require('../controllers/billsController');
 
 var express = require('express');
 var router = express.Router();
@@ -19,4 +20,9 @@ router.post('/login', (req, res) => {
 router.post('/dashboard#modal', (req, res) => {
     user.changeIncome(req,res);
 });
+
+router.post('/addBill', (req, res) => {
+    bills.addBill(req, res);
+});
+
 module.exports = router;

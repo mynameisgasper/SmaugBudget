@@ -78,13 +78,13 @@
                                                 <select id="inputCategory" class="form-control">
                                                     <option selected disabled>Select Category</option>
                                                     {{#each categories}}
-                                                    <option id="category{{id}}">{{category}}</option>
+                                                    <option id="category{{id}}" name="category">{{category}}</option>
                                                     {{/each}}
                                                 </select>
                                             </div>
                                             <div class="checker">
                                                 <label for="Payee">Payee</label><br>
-                                                <input type="text" id="Payee" class="form-control" onfocusout="check(this)" placeholder="e.g. Elektro Ljubljana d.d." required="required">
+                                                <input type="text" id="Payee" name="Payee" class="form-control" onfocusout="check(this)" placeholder="e.g. Elektro Ljubljana d.d." required="required">
                                             </div>
                                             <div id="alerts"></div>
                                             <div class="ena">
@@ -93,13 +93,13 @@
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text">€</span>
                                                     </div>
-                                                    <input type="number" class="form-control" onfocusout="amount(this)" id="Amount" placeholder="e.g. 15" step="any" required="required"> 
+                                                    <input type="number" class="form-control" onfocusout="amount(this)" id="Amount" name="Amount" placeholder="e.g. 15" step="any" required="required"> 
                                                 </div>    
                                                 <div id="amm"></div>
                                             </div>
                                             <div class="ena">
                                                 <label for="date">Date due</label><br>
-                                                <input class="form-control" type="date" placeholder="2020-01-01" id="inputDateAddBill" onfocusout="dateCheckAddBill(this);" required="required">
+                                                <input class="form-control" type="date" placeholder="2020-01-01" id="inputDateAddBill" name="inputDateAddBill" onfocusout="dateCheckAddBill(this);" required="required">
                                             </div>
                                             <div class="ena">
                                                 <label for="once">How often?</label><br>
