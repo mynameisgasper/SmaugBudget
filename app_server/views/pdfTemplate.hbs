@@ -5,20 +5,20 @@
         <title>Expenses</title>
     </head>
     <body>
-        <h1>Expenses</h1>
-        <table>
-            <tr>
-                <th>Date</th>
-                <th>Category</th>
-                <th>Recipient</th>
-                <th>Value</th>
+        <h1 style="font-family: 'Calibri'; text-align: center ">Expenses</h1>
+        <table style="font-family: 'Calibri';  text-align: left">
+            <tr >
+                <th style="padding-left: 30px;">Date</th>
+                <th style="padding-left: 110px;">Category</th>
+                <th style="padding-left: 110px;">Recipient</th>
+                <th style="padding-left: 110px;">Value</th>
             </tr>
             {{#each parsedBody}}
-            <tr>
-                <td>{{date}}</td>
-                <td>{{category}}</td>
-                <td>{{recipient}}</td>
-                <td>{{currency}}{{value}}</td>
+            <tr style="text-align: left">
+                <td style="padding-left: 30px; ">{{date}}</td>
+                <td style="padding-left: 110px;">{{category}}</td>
+                <td style="padding-left: 110px;">{{recipient}}</td>
+                <td style="padding-left: 110px;">{{currency}}{{value}}</td>
             </tr>
             {{/each}}
         </table>

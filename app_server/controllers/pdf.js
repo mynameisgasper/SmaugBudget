@@ -14,6 +14,7 @@ function generatePDF(req, res) {
         format: "A4",
         orientation: "portrait",
         border: "10mm"
+
     };
 
     var document = {
