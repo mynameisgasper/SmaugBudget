@@ -11,10 +11,10 @@
         <div class="row h-50">
             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 align-self-start">
                 <p class="lead">
-                    <form name="Verification" method="POST" action="/">
+                    <form name="Verification" id="VerificationForm" method="GET" action="{{url}}/">
                         <input type="text" class="form-control" id="Verification" name="Verification" placeholder="Enter verification code" required="required">	
                         <div class="spodnji">
-                        <button class="btn btn-primary btn-lg gumbek" id="darkModeButton" type="submit">Submit</a>
+                        <button class="btn btn-primary btn-lg gumbek" id="darkModeButton" type="submit" onclick="buildAction()">Submit</a>
                         </div>
                     </form>
                 </p>
