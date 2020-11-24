@@ -258,19 +258,19 @@ var english = {
 
     //BILLS
     //welcome
-    "messageBills": "Welcome to bills!",
+    "messageBills": "Welcome to Bills!",
     "welcomeMessageBills": "Here you can add recurring bills. Fill in the form, submit and it will be added to an envelope repeteadly!",
 
 
     //HISTORY
     //welcome
-    "messageHistory": "Welcome to bills!",
+    "messageHistory": "Welcome to History!",
     "welcomeMessageHistory": "This is the best way to check your past spending by time and category.",
 
 
     //UTILITIES
     //welcome
-    "messageUtilities": "Welcome to utilites!",
+    "messageUtilities": "Welcome to Utilites!",
     "welcomeMessageUtilities": "Here you can find some useful gadgets.",
 
 

@@ -94,34 +94,20 @@ function login(requestBody, res) {
 
 function changeIncome(requestBody, res) {
     var day = requestBody.Date;
+    var paycheck = requestBody.Amount;
 
     var regex = new RegExp("^[0-9]+(\.[0-9]{1,2})?$");
     var income = regex.test(requestBody.Amount);
 
     if (income && day > 1 && day < 28) {
         let user = ({
-            paycheck: income,
+            paycheck: paycheck,
             paycheckDate: day
         });
         res.status(200).json(user);
     } else {
         res.sendStatus(400);
     }
-    User.findOne({ 'email': email }, function(err, user) {
-        if (err) {
-            console.log(err);
-        } else {
-            if (user) {
-                if (user.password == password) {
-                    res.status(200).json(user);
-                } else {
-                    res.sendStatus(401);
-                }
-            } else {
-                res.sendStatus(404);
-            }
-        }
-    });
 }
 
 module.exports = {

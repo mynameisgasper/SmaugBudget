@@ -18,7 +18,7 @@ router.post('/login', (req, res) => {
     user.login(req, res);
 });
 
-router.post('/dashboard#modal', (req, res) => {
+router.post('/dashboard/changeIncome', (req, res) => {
     user.changeIncome(req, res);
 });
 
