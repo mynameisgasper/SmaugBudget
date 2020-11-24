@@ -39,7 +39,9 @@ function addDarkModeCss() {
 }
 
 function removeDarkModeCss() {
-    document.getElementById("darkmode").remove();
+    if (document.getElementById("darkmode")) {
+        document.getElementById("darkmode").remove();
+    }
 
     document.getElementById('appearance').innerHTML = '<i class="fas fa-adjust"></i>Appearance: Light';
     darkMode.isSet = false;
