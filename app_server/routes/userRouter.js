@@ -45,6 +45,9 @@ router.get('/utility', (req, res) => {
 router.get('/account', (req, res) => {
     account.get(req, res);
 });
+router.post('/account', (req, res) => {
+    account.get(req, res);
+});
 
 //PDF generator
 router.post('/pdf', (req, res) => {

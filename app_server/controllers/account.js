@@ -64,8 +64,17 @@ function respond(res, session) {
     }
 }
 
+function post(res, session) {
+    
+}
+
 module.exports = {
     get: function(req, res) {
-        respond(res, req.session);
+        if (req.method == 'POST') {
+            
+            respond(res, req.session);
+        } else {
+            respond(res, req.session);
+        }
     }
 }
