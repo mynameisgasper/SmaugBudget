@@ -7,11 +7,14 @@ function register(requestBody, res) {
         var email2 = requestBody.email2up;
         var pass1 = requestBody.password1up;
         var pass2 = requestBody.password2up;
-    
-        var firstName = requestBody.nameup;
-        var lastName = requestBody.surnameup;
-    
-        if (firstName && lastName && email1 === email2 && pass1 == pass2) {
+
+        var regex = new RegExp("^([a-zA-Z])+$");
+        var regex2 = new RegExp("^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})");
+        const firstName = regex.test(requestBody.nameup);
+        const lastName = regex.test(requestBody.surnameup);
+        const password = regex2.test(requestBody.password1up);  
+        //dodate treba še če je bil mail poslan a.k.a. mail obstaja!!!
+        if (firstName && lastName && email1 === email2 && pass1 == pass2 && password) {
             let user = new User({
                 firstname: firstName,
                 lastname: lastName,
@@ -26,6 +29,7 @@ function register(requestBody, res) {
             res.sendStatus(400);
         }
     } catch (ex) {
+        console.log(ex);
         res.sendStatus(500);
     }
 }
