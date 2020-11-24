@@ -9,7 +9,7 @@ var data = {
     setMonth: 'NOV',
     envelope: [{
             id: 0,
-            title: 'Gas',
+            category: 'Gas',
             progress: 69,
             totalSet: 250,
             totalCurrent: 172.5,
@@ -20,7 +20,7 @@ var data = {
         },
         {
             id: 1,
-            title: 'Groceries',
+            category: 'Groceries',
             progress: 50,
             totalSet: 350,
             totalCurrent: 175,
@@ -31,7 +31,7 @@ var data = {
         },
         {
             id: 3,
-            title: 'House Utilities',
+            category: 'House Utilities',
             progress: 33,
             totalSet: 180,
             totalCurrent: 60,
@@ -42,7 +42,7 @@ var data = {
         },
         {
             id: 4,
-            title: 'Entertainment',
+            category: 'Entertainment',
             progress: 90,
             totalSet: 108,
             totalCurrent: 120,

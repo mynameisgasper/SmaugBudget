@@ -73,7 +73,7 @@ var data = {
             year: '2020',
             monthName: 'APR',
             month: '04',
-            day: '1',
+            day: '01',
             category: 'Groceries',
             recipient: 'Mercator',
             value: '120',

@@ -45,8 +45,7 @@ function register(requestBody, res) {
             user.save(function callback(err) {
                 if (err) {
                     res.sendStatus(400);
-                }
-                else {
+                } else {
                     var response = {
                         user: user,
                         urlCode: urlCode
@@ -55,8 +54,7 @@ function register(requestBody, res) {
                     res.status(200).json(response);
                 }
             });
-        }
-        else {
+        } else {
             console.log(requestBody);
             res.sendStatus(400);
         }
@@ -66,27 +64,25 @@ function register(requestBody, res) {
     }
 }
 
+
 function login(requestBody, res) {
     try {
         var email = requestBody.email;
         var password = requestBody.password;
 
-        User.findOne({'email': email}, function(err, user) {
+        User.findOne({ 'email': email }, function(err, user) {
             if (err) {
                 res.sendStatus(500);
-            }
-            else {
+            } else {
                 if (user) {
                     if (user.password === password) {
                         delete user.password;
                         delete user.passwordSalt;
                         res.status(200).json(user);
-                    }
-                    else {
+                    } else {
                         res.sendStatus(401);
                     }
-                }
-                else {
+                } else {
                     res.sendStatus(404);
                 }
             }
@@ -99,19 +95,33 @@ function login(requestBody, res) {
 function changeIncome(requestBody, res) {
     var day = requestBody.Date;
 
-    var regex = new RegExp("^[0-9]+(\.[0-9]{1,2})?$"); 
+    var regex = new RegExp("^[0-9]+(\.[0-9]{1,2})?$");
     var income = regex.test(requestBody.Amount);
 
-    if(income && day > 1 && day < 28 ) {
+    if (income && day > 1 && day < 28) {
         let user = ({
             paycheck: income,
             paycheckDate: day
         });
         res.status(200).json(user);
-    }
-    else {
+    } else {
         res.sendStatus(400);
     }
+    User.findOne({ 'email': email }, function(err, user) {
+        if (err) {
+            console.log(err);
+        } else {
+            if (user) {
+                if (user.password == password) {
+                    res.status(200).json(user);
+                } else {
+                    res.sendStatus(401);
+                }
+            } else {
+                res.sendStatus(404);
+            }
+        }
+    });
 }
 
 module.exports = {

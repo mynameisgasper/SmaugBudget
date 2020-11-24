@@ -3,10 +3,7 @@ const { categorySchema } = require('./categories')
 
 const envelopesSchema = new mongoose.Schema();
 envelopesSchema.add({
-    id: { type: Number, required: true },
-    title: { type: String, required: true },
     progress: { type: Number, required: true },
-    category: { type: String, required: true },
     budget: { type: Number, required: true },
     spent: { type: Number, required: true },
     color: { type: String, required: true },
