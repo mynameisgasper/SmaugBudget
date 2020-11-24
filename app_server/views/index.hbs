@@ -50,7 +50,7 @@
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
             <div class="modal-body">
-              <form name="sign-in" action="/" method="post">
+              <form name="sign-in" action="/"  method="post">
                 <input type="hidden" id="formType" name="formType" value="signin">
                 <div class="form-group">
                   <input type="email" class="form-control" id="emailin" name="emailin" placeholder="{{email}}" required>	
@@ -59,7 +59,7 @@
                   <input type="password" class="form-control" id="passwordin" name="passwordin" placeholder="{{password}}" required>	
                 </div>        
                 <div class="form-button">
-                  <input href="dashboard" class="btn btn-primary singbut btn-lg btn-block login-btn" type="submit" value="{{loginButton}}"/>
+                  <input href="dashboard" class="btn btn-primary singbut btn-lg btn-block login-btn" onclick="passwordLoginSubmit(this);" type="submit" value="{{loginButton}}"/>
                 </div>
               </form>
             </div>
@@ -141,7 +141,7 @@
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
             <div class="modal-body">
-              <form name="signup" method="post" action="/" onsubmit="return disableButton()">
+              <form name="signup" method="post" action="/" onsubmit="return disableButton();">
                <input type="hidden" id="formType" name="formType" value="signup">
                 <div class="form-group">
                   <input type="text" class="form-control" id="nameup" name="nameup" placeholder="{{name}}" onfocusout="nameRegex()" required="required">	
@@ -156,10 +156,10 @@
                   <input type="email" class="form-control" id="email2up" name="email2up" placeholder="{{confirmEmail}}" onfocusout="emailCheckSignUp()" required="required">		
                 </div>
                 <div class="form-group">
-                  <input type="password" class="form-control" id="password1up" name="password1up" placeholder="{{password}}" onfocusout="passwordStrength()" required="required">	
+                  <input type="password" class="form-control" id="password1up" name="password1up" placeholder="{{password}}"  onfocusout="passwordStrength()" required="required">	
                 </div>    
                 <div class="form-group">
-                  <input type="password" class="form-control" id="password2up" name="password2up" placeholder="{{confirmPassword}}" onfocusout="passwordCheckSignUp()" required="required">	
+                  <input type="password" class="form-control" id="password2up" name="password2up" placeholder="{{confirmPassword}}"  onfocusout="passwordCheckSignUp()" required="required">	
                 </div>
                 <div id="alerts"></div>
                 <div id="alerts2"></div>
@@ -168,7 +168,7 @@
                 <div id="alerts5"></div>
                 
                 <div class="form-button">
-                  <input href="dashboard" id="buttonid" class="btn btn-primary singbut btn-lg btn-block login-btn" type="submit" value="{{createAccount}}" />
+                  <input href="dashboard" id="buttonid" class="btn btn-primary singbut btn-lg btn-block login-btn" type="submit" onclick="passwordRegisterSubmit(this);"   value="{{createAccount}}" />
                 </div>
               </form>
             </div>
