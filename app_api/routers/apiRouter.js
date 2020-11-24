@@ -42,5 +42,8 @@ router.post('/addExpense', (req, res) => {
 })
 
 
+router.post('/editBill', (req, res) => {
+    bills.editBill(req, res);
+});
 
 module.exports = router;

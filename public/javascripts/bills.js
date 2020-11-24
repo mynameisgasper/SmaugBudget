@@ -142,33 +142,33 @@ function dateCheckEditBill(field, id) {
   var inputDate = field.value.split("-");
 
   if (inputDate[0] > yyyy) {
-      $('#date-hintEdit').toast('hide');
+      $('#date-hintEdit'+ id).toast('hide');
       field.style.borderColor = "#ced4da";
       return 1;
   } else if (inputDate[0] == yyyy) {
       if (inputDate[1] > mm) {
-          $('#date-hintEdit').toast('hide');
+          $('#date-hintEdit'+ id).toast('hide');
           field.style.borderColor = "#ced4da";
           return 1;
       } else if (inputDate[1] == mm) {
           /* 
           ? IF DAY IS >= NOW */
           if (inputDate[2] >= dd) {
-              $('#date-hintEdit').toast('hide');
+              $('#date-hintEdit'+ id).toast('hide');
               field.style.borderColor = "#ced4da";
               return 1;
           } else {
-              $('#date-hintEdit').toast('show');
+              $('#date-hintEdit'+ id).toast('show');
               field.style.borderColor = "red";
               return 0;
           }
       } else {
-          $('#date-hintEdit').toast('show');
+          $('#date-hintEdit'+ id).toast('show');
           field.style.borderColor = "red";
           return 0;
       }
   } else {
-      $('#date-hintEdit').toast('show');
+      $('#date-hintEdit'+ id).toast('show');
       field.style.borderColor = "red";
       return 0;
   }

@@ -11,7 +11,7 @@ billsSchema.add({
     repeating: {type: String, required: true}
 });
 
-mongoose.model('bills', billsSchema, 'bills');
+mongoose.model('Bills', billsSchema, 'Bills');
 
 module.exports = {
     billsSchema: billsSchema

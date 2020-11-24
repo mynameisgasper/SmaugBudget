@@ -147,7 +147,7 @@
                                                 Input may only contain decimal numbers separated by . or , with max 2 decimal places.
                                             </div>
                                         </div>
-                                        <div class="toast ml-auto" id="date-hintEdit" role="alert" data-delay="1000" data-autohide="false">
+                                        <div class="toast ml-auto" id="date-hintEdit{{id}}" role="alert" data-delay="1000" data-autohide="false">
                                             <div class="toast-header">
                                                 <strong class="mr-auto text-primary">HINT</strong>
                                                 <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
@@ -169,10 +169,11 @@
                                             </button>
                                         </div>
                                         <form name="signup" method="post" action="/" onsubmit="return disableButton2()">
+                                            <input type="hidden" value="{{_id}}" name="id">
                                             <div class="modal-body">
                                                 <div class="ena">
                                                     <label for="Category">Category</label><br>
-                                                    <select id="inputCategory" class="form-control">
+                                                    <select id="inputCategory" name="inputCategory" class="form-control">
                                                         <option selected>{{category}}</option>
                                                         {{#each ../categories}}
                                                             {{#ifNotEquals ../category category}}
@@ -183,7 +184,7 @@
                                                 </div>
                                                 <div class="ena">
                                                     <label for="Payee">Payee</label><br>
-                                                    <input type="text" id="Payee2" onfocusout="check2(this,{{id}})" class="form-control" value={{recipient}} required="required">
+                                                    <input type="text" id="Payee2" name="Payee2" onfocusout="check2(this,{{id}})" class="form-control" value={{recipient}} required="required">
                                                     <div id="alarm{{id}}"></div>
                                                 </div>
                                                 
@@ -193,13 +194,13 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text">€</span>
                                                         </div>
-                                                        <input type="number" id="Amount2" onfocusout="amount2(this,{{id}})" class="form-control" value="{{value}}" step="any"required="required"> 
+                                                        <input type="number" id="Amount2" name="Amount2" onfocusout="amount2(this,{{id}})" class="form-control" value="{{value}}" step="any"required="required"> 
                                                     </div>
                                                     <div id="amm{{id}}"></div>
                                                 </div>
                                                 <div class="ena">
                                                     <label for="date">Date due</label><br>
-                                                     <input class="form-control" type="date" placeholder="{{year}}-{{month}}-{{day}}" id="inputDate" onfocusout="dateCheckEditBill(this, {{id}});" required="required">
+                                                     <input class="form-control" type="date" placeholder="{{year}}-{{month}}-{{day}}" id="inputDate" name="inputDate" onfocusout="dateCheckEditBill(this, {{id}});" required="required">
                                                 </div>
                                                 <div class="ena">
                                                     <b>How often?</b><br>
