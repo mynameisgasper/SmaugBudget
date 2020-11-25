@@ -56,7 +56,6 @@ function currencyConverter() {
     amount2.innerHTML = "1";
   }
   else {
-		
 			$.get('/api/converter', {curr1:currency1, curr2:currency2, amm1:amount}, function (data, textStatus, jqXHR) {
 				console.log(data);
 			});
