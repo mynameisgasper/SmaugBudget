@@ -26,10 +26,11 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form name="signup" method="post" action="/" onsubmit="return disableButton2()">
+            <form name="addEnvelope" method="post" action="/envelopes" onsubmit="return disableButton2()">
+                <input type="hidden" value="addEnvelope" name="formType">
                 <div class="modal-body">
                     <div class="ena"><label for="categoryAddEnvelope">Category</label></br>
-                        <input type="text" class="form-control" id="categoryAddEnvelope" placeholder="Entertainment">
+                        <input type="text" class="form-control" id="categoryAddEnvelope" name="categoryAddEnvelope" placeholder="Entertainment">
                     </div>
 
                     <div class="ena"><label for="inputAmount">Amount</label></br>
@@ -37,14 +38,14 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">€</span>
                             </div>
-                            <input type="number" class="form-control" onfocusout="amount(this)"id="inputAmount" placeholder="0.00" step="any">
+                            <input type="number" class="form-control" name="inputAmount" onfocusout="amount(this)"id="inputAmount" placeholder="0.00" step="any">
                         </div>
                         <div id="amm"></div>
                     </div>
 
                     <div class="ena">
                         <label for="colorPicker">Color Picker</label></br>
-                        <input type="color" id="colorPicker" value="#0000ff">
+                        <input type="color" id="colorPicker" name="colorPicker" value="#0000ff">
                     </div>
 
                 </div>
@@ -138,7 +139,7 @@
             <form name="signup" method="post" action="/" onsubmit="return disableButton()">
                 <div class="modal-body">
                     <div class="ena"><label for="inputGoal">Category</label></br>
-                        <select id="inputCategory" class="form-control">
+                        <select id="inputCategory" name="inputCategory" class="form-control">
                             {{#each envelope}}
                             <option id="category{{id}}">{{category}}</option>
                             {{/each}}

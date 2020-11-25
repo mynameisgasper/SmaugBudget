@@ -40,7 +40,7 @@ router.get('/getPfp', (req, res) => {
 router.post('/addBill', (req, res) => {
     bills.addBill(req, res);
 });
-router.post('/envelopes', (req, res) => {
+router.post('/addEnvelope', (req, res) => {
     envelopes.addEnvelope(req, res);
 })
 
@@ -50,6 +50,10 @@ router.post('/editEnvelope', (req, res) => {
 
 router.post('/addExpense', (req, res) => {
     envelopes.addExpense(req, res);
+})
+
+router.post('/deleteEnvelope', (req, res) => {
+    envelopes.deleteEnvelope(req, res);
 })
 
 router.post('/editHistory', (req, res) => {

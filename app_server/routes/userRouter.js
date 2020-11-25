@@ -21,6 +21,10 @@ router.get('/envelopes', (req, res) => {
     envelopes.get(req, res);
 });
 
+router.post('/envelopes', (req, res) => {
+    envelopes.post(req, res);
+});
+
 //Goals
 router.get('/goals', (req, res) => {
     goals.get(req, res);

@@ -1,19 +1,23 @@
 const mongoose = require('mongoose');
 const envelopes = mongoose.model('Envelopes');
+const categories = mongoose.model('Categories');
+const users = mongoose.model('User');
 
 /*
 ? Add Envelope Function
 ! Adds an envelope into DB. 
 */
 
-
 function addEnvelope(requestBody, res) {
     try {
-        var colorHexPicker = requestBody.colorPicker
+        console.log(requestBody);
+
+        var colorHexPicker = requestBody.colorPicker;
         var categoryName = requestBody.categoryAddEnvelope;
         var amount = requestBody.inputAmount;
         var colorRGB = hexToRGB(colorHexPicker);
         var colorBackground = hexToRGB(colorHexPicker, 0.5);
+        var user_id = requestBody.id;
 
         var d = new Date();
         var month = new Array();
@@ -34,22 +38,62 @@ function addEnvelope(requestBody, res) {
         var regex = new RegExp("^[0-9]+(\.[0-9]{1,2})?$");
         const amountCorrect = regex.test(requestBody.inputAmount)
 
-        if (true) {
-            let envelope = new envelopes({
-                progress: 0,
-                budget: amount,
-                spent: 0,
-                colorHex: colorHexPicker,
-                color: colorRGB,
-                bgColor: colorBackground,
-                month: currentMonth,
-                category: { name: categoryName }
+        if (amountCorrect) {
+            //? Try to find the category, create it if it doesn't exist.
+            categories.findOne({ name: categoryName }, function(err, category) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    if (category == null) {
+                        let category = new categories({
+                            name: categoryName,
+                        })
+                        category.save();
+                    } else {
+                        console.log("This category already exists.")
+                    }
+                }
             })
-            envelope.save();
-            res.status(200).json(envelope);
+
+            //? Try to find current user
+            users.findById(user_id, function(error, user) {
+                if (error) {
+                    console.log(error);
+                } else {
+                    console.log(user);
+                    //? Try to find envelope, if it doesn't exit for this month, create it
+                    //! else return error code 304
+                    envelopes.findOne({ month: currentMonth, 'category.name': categoryName, user: user }, function(err, envelope) {
+                        if (err) {
+                            console.log(err);
+                        } else {
+                            if (envelope == null) {
+                                let envelope = new envelopes({
+                                    progress: 0,
+                                    budget: amount,
+                                    spent: 0,
+                                    colorHex: colorHexPicker,
+                                    color: colorRGB,
+                                    bgColor: colorBackground,
+                                    month: currentMonth,
+                                    category: { name: categoryName },
+                                    user: user
+                                })
+                                console.log(user.envelopes);
+                                envelope.save();
+                                res.status(200).json(envelope);
+                            } else {
+                                console.log("This envelope already exists.");
+                                res.sendStatus(304);
+                            }
+                        }
+                    });
+                }
+            });
         } else {
             res.sendStatus(400);
         }
+
     } catch (ex) {
         console.log(ex);
         res.sendStatus(500);
@@ -62,8 +106,9 @@ function addEnvelope(requestBody, res) {
 ! find the envelope and add an amount or/and change color 
 */
 
-function editEnvelope(requestBody, res) {
+function editEnvelope(requestBody, res_parent) {
     try {
+
         var newBudget = requestBody.inputAmount;
         var colorHexPicker = requestBody.colorPicker
         var colorRGB = hexToRGB(colorHexPicker);
@@ -74,7 +119,6 @@ function editEnvelope(requestBody, res) {
         const amountCorrect = regex.test(newBudget);
 
         var newProgress;
-
         if (amountCorrect) {
             var promise = new Promise((res, err) => {
                 envelopes.findById(id_requested, function(err, envelope) {
@@ -85,7 +129,7 @@ function editEnvelope(requestBody, res) {
                             Math.round(newProgress = (envelope.spent / newBudget) * 100);
                             res();
                         } else {
-                            res.sendStatus(404);
+                            res_parent.sendStatus(404);
                         }
                     }
                 });
@@ -107,9 +151,9 @@ function editEnvelope(requestBody, res) {
                         } else {
                             if (envelope) {
                                 envelope.save();
-                                res.status(200).json(envelope);
+                                res_parent.status(200).json(envelope);
                             } else {
-                                res.sendStatus(404);
+                                res_parent.sendStatus(404);
                             }
                         }
                     });
@@ -121,9 +165,36 @@ function editEnvelope(requestBody, res) {
     }
 }
 
+/*
+? Delete Envelope by ID
+*/
+
+function deleteEnvelope(requestBody, res) {
+    try {
+        var id_requested = requestBody.id;
+        envelopes.deleteOne({ _id: id_requested }, function(err) {
+            if (err) return console.log(err);
+            else {
+                res.sendStatus(204);
+            }
+        });
 
 
-function addExpense(requestBody, res) {
+    } catch (ex) {
+        console.log(ex);
+        res.sendStatus(500);
+    }
+
+}
+
+
+
+/*
+? Add Expense Function
+! find the envelope and add an amount or/and change color 
+*/
+
+function addExpense(requestBody, res_parent) {
     try {
         var amountAdded = requestBody.inputAmount;
         var id_requested = requestBody.id;
@@ -146,7 +217,7 @@ function addExpense(requestBody, res) {
                             Math.round(newProgress = (newSpent / budgetVar) * 100);
                             res();
                         } else {
-                            res.sendStatus(404);
+                            res_parent.sendStatus(404);
                         }
                     }
                 });
@@ -165,9 +236,9 @@ function addExpense(requestBody, res) {
                         } else {
                             if (envelope) {
                                 envelope.save();
-                                res.status(200).json(envelope);
+                                res_parent.status(200).json(envelope);
                             } else {
-                                res.sendStatus(404);
+                                res_parent.sendStatus(404);
                             }
                         }
                     });
@@ -205,5 +276,8 @@ module.exports = {
     },
     editEnvelope: function(req, res) {
         editEnvelope(req.body, res);
+    },
+    deleteEnvelope: function(req, res) {
+        deleteEnvelope(req.body, res);
     }
 }
