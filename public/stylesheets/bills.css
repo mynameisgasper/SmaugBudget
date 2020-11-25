@@ -140,3 +140,9 @@ tr.border_bottom td {
     color-scheme: light dark;
     /* both supported */
 }
+
+#pfpNavBar {
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+}
