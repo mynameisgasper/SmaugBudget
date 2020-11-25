@@ -40,6 +40,7 @@ router.get('/getPfp', (req, res) => {
 router.post('/addBill', (req, res) => {
     bills.addBill(req, res);
 });
+
 router.post('/addEnvelope', (req, res) => {
     envelopes.addEnvelope(req, res);
 })
