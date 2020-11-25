@@ -149,41 +149,48 @@ const storage = multer.diskStorage({
 const uploadImg = multer({storage: storage}).single('image');
 
 function postImg (req, res) {
-    User.findOne({ 'email': req.session.user.email }, function(err, user) {
-        if (err) {
-            console.log(err);
-        } else {
-            if (user) {
-                fs.unlink(user.profilePic, (err) => {
-                    if (err) {
-                        console.log('File: ' + user.profilePic + " does not exist!");
-                    } else {
-                        console.log('File: ' + user.profilePic + " was deleted");
-                    }
-                });
-                user.profilePic = req.file.path;
-                user.save();
-                res.status(200).json(user.profilePic);
+    try {
+        User.findOne({ 'email': req.session.user.email }, function(err, user) {
+            if (err) {
+                console.log(err);
             } else {
-                res.sendStatus(404);
+                if (user) {
+                    fs.unlink(user.profilePic, (err) => {
+                        if (err) {
+                            console.log('File: ' + user.profilePic + " does not exist!");
+                        } else {
+                            console.log('File: ' + user.profilePic + " was deleted");
+                        }
+                    });
+                    user.profilePic = req.file.path;
+                    user.save();
+                    res.status(200).json(user.profilePic);
+                } else {
+                    res.sendStatus(404);
+                }
             }
-        }
-    });
+        });
+    } catch (ex) {
+        res.sendStatus(500);
+    }
 }
 
 function getPfp (req, res) {
-    
-    User.findOne({ 'email': req.session.user.email }, function(err, user) {
-        if (err) {
-            console.log(err);
-        } else {
-            if (user) {
-                res.status(200).sendFile(path.resolve(user.profilePic));
+    try {
+        User.findOne({ 'email': req.session.user.email }, function(err, user) {
+            if (err) {
+                console.log(err);
             } else {
-                res.sendStatus(404);
+                if (user) {
+                    res.status(200).sendFile(path.resolve(user.profilePic));
+                } else {
+                    res.sendStatus(404);
+                }
             }
-        }
-    });
+        });
+    } catch (ex) {
+        res.sendStatus(500);
+    }
 }
 
 module.exports = {
