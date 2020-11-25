@@ -14,7 +14,7 @@ function hexToRgb(hex) {
 
 function disableButton() {
     var amount1 = amount2(document.getElementById("Amount2"));
-    var name1 = nameAdd(document.getElementById("ime"));
+    var name1 = nameAdd(document.getElementById("inputCategory"));
 
     if (amount1 == 0 || name1 == 0) {
         return false;

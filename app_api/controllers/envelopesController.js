@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
-const envelopes = mongoose.model('Envelopes');
+const Envelopes = mongoose.model('Envelopes');
 const categories = mongoose.model('Categories');
-const users = mongoose.model('User');
+const User = mongoose.model('User');
 
 /*
 ? Add Envelope Function
@@ -54,18 +54,18 @@ function addEnvelope(requestBody, res) {
             })
 
             //? Try to find current user
-            users.findById(user_id, function(error, user) {
+            User.findById(user_id, function(error, user) {
                 if (error) {
                     console.log(error);
                 } else {
                     //? Try to find envelope, if it doesn't exit for this month, create it
                     //! else return error code 304
-                    envelopes.findOne({ month: currentMonth, 'category.name': categoryName, user: user }, function(err, envelope) {
+                    Envelopes.findOne({ month: currentMonth, 'category.name': categoryName, user: user }, function(err, envelope) {
                         if (err) {
                             console.log(err);
                         } else {
                             if (envelope == null) {
-                                let envelope = new envelopes({
+                                let envelope = new Envelopes({
                                     progress: 0,
                                     budget: amount,
                                     spent: 0,
@@ -125,7 +125,7 @@ function editEnvelope(requestBody, res_parent) {
         var newProgress;
         if (amountCorrect) {
             var promise = new Promise((res, err) => {
-                envelopes.findById(id_requested, function(err, envelope) {
+                Envelopes.findById(id_requested, function(err, envelope) {
                     if (err) {
                         console.log(err);
                     } else {
@@ -142,7 +142,7 @@ function editEnvelope(requestBody, res_parent) {
 
         promise.then(() => {
             if (amountCorrect) {
-                envelopes.findByIdAndUpdate(id_requested, {
+                Envelopes.findByIdAndUpdate(id_requested, {
                         budget: newBudget,
                         progress: newProgress,
                         colorHex: colorHexPicker,
@@ -176,7 +176,7 @@ function editEnvelope(requestBody, res_parent) {
 function deleteEnvelope(requestBody, res) {
     try {
         var id_requested = requestBody.id;
-        envelopes.deleteOne({ _id: id_requested }, function(err) {
+        Envelopes.deleteOne({ _id: id_requested }, function(err) {
             if (err) return console.log(err);
             else {
                 res.sendStatus(204);
@@ -198,54 +198,33 @@ function deleteEnvelope(requestBody, res) {
 ! find the envelope and add an amount or/and change color 
 */
 
-function addExpense(requestBody, res_parent) {
+function addExpense(requestBody, res) {
     try {
         var amountAdded = requestBody.inputAmount;
-        var id_requested = requestBody.id;
-
-        var regex = new RegExp("^[0-9]+(\.[0-9]{1,2})?$");
-        const amountCorrect = regex.test(amountAdded);
-        var budgetVar;
-        var newSpent;
-        var newProgress;
-
-        if (amountCorrect) {
-            var promise = new Promise((res, err) => {
-                envelopes.findById(id_requested, function(err, envelope) {
-                    if (err) {
-                        console.log(err);
-                    } else {
-                        if (envelope) {
-                            budgetVar = envelope.budget;
-                            newSpent = parseInt(envelope.spent) + parseInt(amountAdded);
-                            Math.round(newProgress = (newSpent / budgetVar) * 100);
-                            res();
-                        } else {
-                            res_parent.sendStatus(404);
-                        }
-                    }
-                });
-            })
-        }
-
-        promise.then(() => {
-            if (amountCorrect) {
-                envelopes.findByIdAndUpdate(id_requested, {
-                        spent: newSpent,
-                        progress: newProgress,
-                    },
-                    function(err, envelope) {
-                        if (err) {
-                            console.log(err);
-                        } else {
-                            if (envelope) {
-                                envelope.save();
-                                res_parent.status(200).json(envelope);
-                            } else {
-                                res_parent.sendStatus(404);
+        var category = requestBody.category;
+        var user_id = requestBody.user;
+        
+        User.findById(user_id, function(error, user) {
+            if (error) {
+                res.sendStatus(500);
+            } else {
+                for (const element of user.envelopes) {
+                    if (element.category.name === category) {
+                        Envelopes.findById(element._id, function(err, envelope) {
+                            if (err) {
+                                res.sendStatus(404);
                             }
-                        }
-                    });
+                            else {
+                                envelope.spent += parseInt(amountAdded);
+                                envelope.progress = parseFloat(parseFloat(envelope.spent) / parseFloat(envelope.budget));
+                                envelope.save();
+                                res.status(200).json(user);
+                            }
+                        });
+                        return;
+                    }
+                }
+                res.sendStatus(404);
             }
         });
     } catch (ex) {

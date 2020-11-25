@@ -67,17 +67,14 @@ function respond(res, session) {
 
 function parseRequestBody(body, res, session) {
     switch (body.formType) {
-        case 'addExpense':
-            {
-                addExpense(body, res, session);
-                break;
-            }
-        case 'addEnvelope':
-            {
-                addEnvelope(body, res, session);
-                break;
-            }
-
+        case 'addExpense':{
+            addExpense(body, res, session);
+            break;
+        }
+        case 'addEnvelope':{
+            addEnvelope(body, res, session);
+            break;
+        }
     }
 }
 
@@ -112,7 +109,8 @@ function addEnvelope(body, res, session) {
 function addExpense(body, res, session) {
     const data = {
         inputAmount: body.inputAmount,
-        id: body.id,
+        category: body.inputCategory,
+        user: session.user._id
     }
 
     var args = {
@@ -121,12 +119,17 @@ function addExpense(body, res, session) {
     };
 
     var client = new Client();
-    client.post("http://localhost:8080/api/addExpense"), args,
-        function(data, response) {
+    client.post("http://localhost:8080/api/addExpense", args, function(data, response) {
             if (response.statusCode == 200) {
-                console.log("Done!");
+                res.session = session;
+                res.session.user = data;
+                res.redirect('/envelopes');
+            }
+            else {
+                res.redirect('/envelopes#error'); 
             }
         }
+    );
 }
 
 module.exports = {

@@ -147,12 +147,13 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form name="signup" method="post" action="/" onsubmit="return disableButton()">
+            <form name="addExpense" method="post" action="/envelopes" onsubmit="return disableButton()">
+                <input type="hidden" name="formType" value="addExpense" />
                 <div class="modal-body">
                     <div class="ena"><label for="inputGoal">Category</label></br>
                         <select id="inputCategory" name="inputCategory" class="form-control">
                             {{#each envelope}}
-                            <option id="category{{id}}">{{category}}</option>
+                            <option id="category{{id}}">{{category.name}}</option>
                             {{/each}}
                         </select>
                     </div>
@@ -162,7 +163,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">€</span>
                             </div>
-                            <input type="number" class="form-control" onfocusout="amount2(this)" id="Amount2" placeholder="0.00" step="any">
+                            <input type="number" class="form-control" onfocusout="amount2(this)" id="Amount2" name="inputAmount" placeholder="0.00" step="any">
                         </div>
                         <div id="amm2"></div>
                     </div>
