@@ -103,6 +103,7 @@ var data = {
 
 function respond(res, session) {
     if (session.user) {
+        data.session = JSON.stringify(session.user);
         res.render('envelopes', data);
     } else {
         res.redirect('/');
