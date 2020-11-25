@@ -41,8 +41,8 @@ function register(requestBody, res) {
             var confirmationCode = smtp.generateCode(64);
 
             let user = new User({
-                firstname: firstName,
-                lastname: lastName,
+                firstname: requestBody.nameup,
+                lastname: requestBody.surnameup,
                 email: email1,
                 password: pass1,
                 passwordSalt: "tempSalt",
