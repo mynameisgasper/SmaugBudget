@@ -47,7 +47,8 @@ function register(requestBody, res) {
                 password: pass1,
                 passwordSalt: "tempSalt",
                 confirmationUrl: urlCode,
-                confirmationCode: confirmationCode
+                confirmationCode: confirmationCode,
+                isPremium: false
             });
 
             user.save(function callback(err) {
