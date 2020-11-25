@@ -3,6 +3,7 @@ const Bill = mongoose.model('Bills');
 
 function addBill(requestBody, res) {
     try {
+        console.log("a");
         var category = requestBody.inputCategory;
         var recipient = requestBody.Payee;
         var amount = requestBody.Amount;

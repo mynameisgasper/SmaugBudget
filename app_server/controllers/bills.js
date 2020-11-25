@@ -1,5 +1,6 @@
 //Dependencies
 var dictionary = require('./Dictionary');
+var Client = require('node-rest-client').Client;
 
 var data = {
     bills: true,
@@ -87,8 +88,78 @@ function respond(res, session) {
     }
 }
 
+function parseRequestBody(body, res, session) {
+    switch (body.formType) {
+        case 'addBill':
+            {
+                addBill(body, res, session);
+                break;
+            }
+
+
+    }
+}
+
+
+function addBill(body, res, session) {
+    const data = {
+        inputCategory: body.inputCategory,
+        Payee: body.Payee,
+        Amount: body.Amount,
+        inputDateAddBill: body.inputDateAddBill,
+        rad: body.rad,
+        id: session.user._id
+    }
+
+    var args = {
+        data: data,
+        headers: { "Content-Type": "application/x-www-form-urlencoded" }
+    };
+
+    var client = new Client();
+    client.post("http://localhost:8080/api/addBill", args,
+        function(data, response) {
+            if (response.statusCode == 200) {
+                res.redirect('/bills');
+            } else {
+                res.redirect('/bills#error');
+            }
+        }
+    );
+}
+
+function editBill(body, res, session) {
+    const data = {
+        inputCategory: body.inputCategory,
+        Payee: body.Payee,
+        Amount: body.Amount,
+        inputDateAddBill: body.inputDateAddBill,
+        rad: body.rad,
+        id: session.user._id
+    }
+
+    var args = {
+        data: data,
+        headers: { "Content-Type": "application/x-www-form-urlencoded" }
+    };
+
+    var client = new Client();
+    client.post("http://localhost:8080/api/addBill", args,
+        function(data, response) {
+            if (response.statusCode == 200) {
+                res.redirect('/bills');
+            } else {
+                res.redirect('/bills#error');
+            }
+        }
+    );
+}
+
 module.exports = {
     get: function(req, res) {
         respond(res, req.session);
+    },
+    post: function(req, res) {
+        parseRequestBody(req.body, res, req.session);
     }
 }

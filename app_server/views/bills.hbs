@@ -72,10 +72,11 @@
                                             <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
-                                        <form name="signup" method="post" action="/" onsubmit="return disableButton()">
+                                        <form name="signup" method="post" onsubmit="return disableButton()">
+                                        <input type="hidden" name="formType" value="addBill">
                                         <div class="modal-body">
                                             <div class="ena"><label for="inputGoal">Category</label></br>
-                                                <select id="inputCategory" class="form-control">
+                                                <select id="inputCategory" name="inputCategory" class="form-control">
                                                     <option selected disabled>Select Category</option>
                                                     {{#each categories}}
                                                     <option id="category{{id}}" name="category">{{category}}</option>
