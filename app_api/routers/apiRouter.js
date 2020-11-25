@@ -64,4 +64,12 @@ router.get('/converter', (req, res) => {
     converter.converter(req, res);
 })
 
+router.put('/editBill', (req, res) => {
+    bills.editBill(req, res);
+})
+
+router.delete('/deleteBill', (req, res) => {
+    bills.deleteBill(req, res);
+})
+
 module.exports = router;
