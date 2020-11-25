@@ -119,19 +119,26 @@ function confirm(req, res) {
     }
 }
 
-function changeIncome(requestBody, res) {
-    var day = requestBody.Date;
-    var paycheck = requestBody.Amount;
+function changeIncome(requestBody, res, session) {
+    var day = requestBody.date;
+    var paycheck = requestBody.amount;
 
     var regex = new RegExp("^[0-9]+(\.[0-9]{1,2})?$");
-    var income = regex.test(requestBody.Amount);
+    var income = regex.test(paycheck);
 
-    if (income && day > 1 && day < 28) {
-        let user = ({
-            paycheck: paycheck,
-            paycheckDate: day
+    console.log(day + " " + paycheck + " " + income);
+    if (income && day > 0 && day < 29) {
+        User.findOne({ 'email': session.user.email}, function name(err, user) {
+            if (err || user == null) {
+                res.sendStatus(404);
+            }
+            else {
+                user.paycheck = paycheck,
+                user.paycheckDate = day
+                user.save();
+                res.sendStatus(200);
+            }
         });
-        res.status(200).json(user);
     } else {
         res.sendStatus(400);
     }
@@ -209,7 +216,7 @@ module.exports = {
         confirm(req, res);
     },
     changeIncome: function(req, res) {
-        changeIncome(req.body, res);
+        changeIncome(req.body, res, req.session);
     },
     postImg,
     uploadImg,

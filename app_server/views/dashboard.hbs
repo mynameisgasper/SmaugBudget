@@ -107,11 +107,11 @@
                     <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form name="signup" method="post" action="/" onsubmit="return disableButton()">
+                <form name="changeIncome"  onsubmit="return disableButton()">
                     <div class="modal-body">
-                        <input type="number" id="Amount" class="form-control" onfocusout="amount(this)" placeholder="{{incomeModalPlaceholderIncome}}" step="any" required="required">
+                        <input type="number" id="amount" name="amount" class="form-control" onfocusout="amount1(this)" placeholder="{{incomeModalPlaceholderIncome}}" step="any" required="required">
                         <div id="amm"></div></br>
-                        <input type="number" id="Date" class="form-control" onfocusout="date(this)" placeholder="{{incomeModalPlaceholderDate}}" required="required">
+                        <input type="number" id="date" name="date" class="form-control" onfocusout="date1(this)" placeholder="{{incomeModalPlaceholderDate}}" required="required">
                         <div id="dat"></div>
                     </div>
                     <div class="modal-footer">

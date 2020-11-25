@@ -7,10 +7,28 @@ $(document).ready(function() {
 });
 
 function disableButton() {
-  var amount1 = amount(document.getElementById("Amount"));
-  var date1 = date(document.getElementById("Date"));
+  amount = document.getElementById("amount");
+  date = document.getElementById("date");
+  amount1(amount);
+  date1(date);
 
-  if (amount1 == 0|| date1 == 0) {
+  console.log(date.value +" "+amount.value);
+  $.ajax({
+    url: "/api/changeIncome",
+    type: "post",
+    data: { 
+      date: date.value, 
+      amount: amount.value
+    },
+    success: function(response) {
+
+    },
+    error: function(xhr) {
+      
+    }
+  });
+
+  if (amount == 0|| date == 0) {
     return false;
   }
   else {
@@ -18,7 +36,7 @@ function disableButton() {
   }
 }
 
-function amount(field) {
+function amount1(field) {
   
     //var field = document.getElementById("PayeeModal");
     var regex = new RegExp("^[0-9]+(\.[0-9]{1,2})?$"); 
@@ -37,7 +55,7 @@ function amount(field) {
     }
 }
 
-function date(field) {
+function date1(field) {
   
     if(field.value < 1 || field.value > 28) {
       field.style.borderColor = "red";

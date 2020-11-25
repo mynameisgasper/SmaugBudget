@@ -27,7 +27,7 @@ router.all('/confirm/:urlCode/:code', (req, res) => {
     user.confirm(req, res);
 });
 
-router.post('/dashboard/changeIncome', (req, res) => {
+router.post('/changeIncome', (req, res) => {
     user.changeIncome(req, res);
 });
 
