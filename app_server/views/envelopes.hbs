@@ -5,6 +5,17 @@
 <div class="modal fade" id="addEnvelopeForm" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
     <div class="position-absolute w-100 p-4 d-flex flex-column align-items-end">
         <div class="w-25">
+            <div class="toast ml-auto tt5" role="alert" data-delay="3000" data-autohide="false">
+              <div class="toast-header">
+                  <strong class="mr-auto text-primary">HINT</strong>
+                  <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                  </button>
+              </div>
+              <div class="toast-body">
+                 Input may only contain letters, numbers and some special characters (_@./#&+-). Length allowed: 1-20
+              </div>
+            </div>
             <div class="toast ml-auto tt1" role="alert" data-delay="1000" data-autohide="false">
                 <div class="toast-header">
                     <strong class="mr-auto text-primary">HINT</strong>
@@ -30,7 +41,7 @@
                 <input type="hidden" value="addEnvelope" name="formType">
                 <div class="modal-body">
                     <div class="ena"><label for="categoryAddEnvelope">Category</label></br>
-                        <input type="text" class="form-control" id="categoryAddEnvelope" name="categoryAddEnvelope" placeholder="Entertainment">
+                        <input type="text" class="form-control" id="ime" onfocusout="nameAdd(this)" name="categoryAddEnvelope" placeholder="Entertainment">
                     </div>
 
                     <div class="ena"><label for="inputAmount">Amount</label></br>

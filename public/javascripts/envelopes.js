@@ -14,8 +14,9 @@ function hexToRgb(hex) {
 
 function disableButton() {
     var amount1 = amount2(document.getElementById("Amount2"));
+    var name1 = nameAdd(document.getElementById("ime"));
 
-    if (amount1 == 0) {
+    if (amount1 == 0 || name1 == 0) {
         return false;
     } else {
         return true;
@@ -88,6 +89,23 @@ function amount3(field, id) {
     } else {
         field.style.borderColor = "#ced4da";
         $('.tt3').toast('hide')
+        return 1;
+    }
+}
+
+function nameAdd(field) {
+
+    //var field = document.getElementById("PayeeModal");
+    var regex = new RegExp("^[ A-Za-z0-9_@./#&+-]{1,20}$");
+    //uppercase, lowercase, številke, posebni znaki, dolžina od 1-20
+    console.log(regex.test(field.value));
+    if (!field.value.match(regex)) {
+        field.style.borderColor = "red";
+        $('.tt5').toast('show')
+        return 0;
+    } else {
+        field.style.borderColor = "#ced4da";
+        $('.tt5').toast('hide')
         return 1;
     }
 }
