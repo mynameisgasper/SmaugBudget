@@ -10,8 +10,6 @@ const users = mongoose.model('User');
 
 function addEnvelope(requestBody, res) {
     try {
-        console.log(requestBody);
-
         var colorHexPicker = requestBody.colorPicker;
         var categoryName = requestBody.categoryAddEnvelope;
         var amount = requestBody.inputAmount;
@@ -77,11 +75,18 @@ function addEnvelope(requestBody, res) {
                                     bgColor: colorBackground,
                                     month: currentMonth,
                                     category: { name: categoryName },
-                                    user: user
                                 })
-                                console.log(user.envelopes);
-                                envelope.save();
-                                res.status(200).json(envelope);
+                                envelope.save(function callback(err) {
+                                    if (err) {
+                                        console.log(err);
+                                        res.sendStatus(500);
+                                    }
+                                    else {
+                                        user.envelopes.push(envelope);
+                                        user.save();
+                                        res.status(200).json(envelope);        
+                                    }
+                                });
                             } else {
                                 console.log("This envelope already exists.");
                                 res.sendStatus(304);

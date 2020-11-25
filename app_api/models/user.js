@@ -40,7 +40,6 @@ envelopesSchema.add({
     bgColor: { type: String, required: true },
     month: { type: String, required: true },
     category: { type: categorySchema, required: true },
-    user: { type: userSchema, required: true }
 });
 
 mongoose.model('Connections', connectionsSchema, 'Connections');

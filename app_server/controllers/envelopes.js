@@ -127,7 +127,6 @@ function parseRequestBody(body, res, session) {
 
 
 function addEnvelope(body, res, session) {
-    console.log(session);
     const data = {
         colorPicker: body.colorPicker,
         categoryAddEnvelope: body.categoryAddEnvelope,
@@ -140,19 +139,16 @@ function addEnvelope(body, res, session) {
         headers: { "Content-Type": "application/x-www-form-urlencoded" }
     };
 
-    console.log(args);
-
     var client = new Client();
-    client.post("http://localhost:8080/api/addEnvelope"), args,
+    client.post("http://localhost:8080/api/addEnvelope", args,
         function(data, response) {
             if (response.statusCode == 200) {
-                console.log(data);
+                res.redirect('/envelopes');
             } else {
-                console.log("Something went wrong.");
+                res.redirect('/envelopes#error');
             }
         }
-
-
+    );
 }
 
 function addExpense(body, res, session) {
@@ -161,14 +157,14 @@ function addExpense(body, res, session) {
         id: body.id,
     }
 
-    console.log(data);
+    //console.log(data);
 
     var args = {
         data: data,
         headers: { "Content-Type": "application/x-www-form-urlencoded" }
     };
 
-    console.log(args);
+    //console.log(args);
     var client = new Client();
     client.post("http://localhost:8080/api/addExpense"), args,
         function(data, response) {
