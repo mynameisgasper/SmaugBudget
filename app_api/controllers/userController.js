@@ -1,6 +1,9 @@
 const smtp = require("../../app_api/controllers/smtpClient");
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
+const multer = require('multer');
+const user = require("../models/user");
+const fs = require('fs');
 
 function register(requestBody, res) {
     try {
@@ -133,6 +136,40 @@ function changeIncome(requestBody, res) {
     }
 }
 
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, './uploads');
+      },
+    filename: function (req, file, cb) {
+        cb(null, Date.now() + '-' + file.originalname);
+    }
+});
+
+const uploadImg = multer({storage: storage}).single('image');
+
+function postImg (req, res) {
+    User.findOne({ 'email': req.body.email }, function(err, user) {
+        if (err) {
+            console.log(err);
+        } else {
+            if (user) {
+                fs.unlink(user.profilePic, (err) => {
+                    if (err) {
+                        console.log('File: ' + user.profilePic + " does not exist!");
+                    } else {
+                        console.log('File: ' + user.profilePic + " was deleted");
+                    }
+                });
+                user.profilePic = req.file.path;
+                user.save();
+                res.status(200).json(user.profilePic);
+            } else {
+                res.sendStatus(404);
+            }
+        }
+    });
+}
+
 module.exports = {
     register: function(req, res) {
         register(req.body, res);
@@ -145,5 +182,7 @@ module.exports = {
     },
     changeIncome: function(req, res) {
         changeIncome(req.body, res);
-    }
+    },
+    postImg,
+    uploadImg
 }

@@ -17,6 +17,7 @@ userSchema.add({
     paycheckDate: {type: Number, required: false},
     confirmationUrl: {type: String},
     confirmationCode: {type: String},
+    profilePic: {type: String},
     connections: [connectionsSchema],
     envelopes: [envelopesSchema],
     goals: [goalsSchema],

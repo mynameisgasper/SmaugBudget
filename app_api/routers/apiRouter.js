@@ -1,6 +1,6 @@
 var user = require('../controllers/userController');
 var bills = require('../controllers/billsController');
-var envelopes = require('../controllers/envelopesController')
+var envelopes = require('../controllers/envelopesController');
 
 var express = require('express');
 var router = express.Router();
@@ -25,6 +25,8 @@ router.all('/confirm/:urlCode/:code', (req, res) => {
 router.post('/dashboard/changeIncome', (req, res) => {
     user.changeIncome(req, res);
 });
+
+router.post('/uploadPfp', user.uploadImg , user.postImg);
 
 router.post('/addBill', (req, res) => {
     bills.addBill(req, res);
