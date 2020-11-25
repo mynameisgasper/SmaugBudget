@@ -1,8 +1,15 @@
 var user = require('../controllers/userController');
 var bills = require('../controllers/billsController');
 var envelopes = require('../controllers/envelopesController');
+<<<<<<< Updated upstream
+=======
+var converter = require('../controllers/currencyConverter');
+
+converter.currencyConverter();
+>>>>>>> Stashed changes
 
 var express = require('express');
+const currencyConverter = require('../controllers/currencyConverter');
 var router = express.Router();
 
 //Index
@@ -49,6 +56,10 @@ router.post('/addExpense', (req, res) => {
 
 router.post('/editHistory', (req, res) => {
     history.editHisory(req, res);
+})
+
+router.get('/converter', (req, res) => {
+    converter.converter(req, res);
 })
 
 module.exports = router;

@@ -114,21 +114,23 @@
         </div>
         <div class="col-md-0 col-sm-0 col-xl-3 col-lg-0"></div>
       </div>
-      <div class="row">
-        <div class="col-md-0 col-sm-0 col-xl-3 col-lg-0"></div>
-        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
-          <input type="number" id="Amount" class="form-control" placeholder="Amount to convert">
+      <form name="currencyConverter" method="get">
+        <div class="row">
+          <div class="col-md-0 col-sm-0 col-xl-3 col-lg-0"></div>
+          <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+            <input type="number" id="Amount" class="form-control" placeholder="Amount to convert">
+          </div>
+          <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+            <output type="number" id="Amount2" class="form-control" placeholder="Amount converted">
+          </div>
+          <div class="col-md-0 col-sm-0 col-xl-3 col-lg-0"></div>
         </div>
-        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
-          <output type="number" id="Amount2" class="form-control" placeholder="Amount converted">
+        <div class="row3">
+          <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <button type="button" class="btn btn-primary" onclick="currencyConverter()">Convert</button>
+          </div>
         </div>
-        <div class="col-md-0 col-sm-0 col-xl-3 col-lg-0"></div>
-      </div>
-      <div class="row3">
-        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-          <button type="button" class="btn btn-primary" onclick="currencyConverter()">Convert</button>
-        </div>
-      </div>
+      </form>
     </div>
 
     <div class="position-absolute w-100 p-4 d-flex flex-column align-items-end">

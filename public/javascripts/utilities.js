@@ -56,6 +56,9 @@ function currencyConverter() {
     amount2.innerHTML = "1";
   }
   else {
-    //to do https://api.exchangeratesapi.io/latest?base=valuta
+		
+			$.get('/api/converter', {curr1:currency1, curr2:currency2, amm1:amount}, function (data, textStatus, jqXHR) {
+				console.log(data);
+			});
   }
 }
