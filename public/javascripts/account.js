@@ -13,6 +13,22 @@ $(document).ready(function() {
     });
     //$("#pfpNavBar")[0].setAttribute("src", $("#profile-pic")[0].style.backgroundImage.substring(5, $("#profile-pic")[0].style.backgroundImage.length - 2))
 
+    $('#submitPfp').click(function(e){
+        var form = document.getElementById('userPfp'); // give the form an ID
+        var xhr  = new XMLHttpRequest();              // create XMLHttpRequest
+        var data = new FormData(form);                // create formData object
+    
+    
+        xhr.onload = function() {
+            console.log(this.responseText); // whatever the server returns
+        }
+    
+        xhr.open("post", form.action);      // open connection
+        xhr.send(data);                     // send data
+    });
+
+    
+
     //darkmode
     if (localStorage.getItem('dark') === "false") {
         $("#darkmodeEnable")[0].checked = false;

@@ -4,6 +4,7 @@ const User = mongoose.model('User');
 const multer = require('multer');
 const user = require("../models/user");
 const fs = require('fs');
+const path = require("path");
 
 function register(requestBody, res) {
     try {
@@ -148,7 +149,7 @@ const storage = multer.diskStorage({
 const uploadImg = multer({storage: storage}).single('image');
 
 function postImg (req, res) {
-    User.findOne({ 'email': req.body.email }, function(err, user) {
+    User.findOne({ 'email': req.session.user.email }, function(err, user) {
         if (err) {
             console.log(err);
         } else {
@@ -170,6 +171,22 @@ function postImg (req, res) {
     });
 }
 
+function getPfp (req, res) {
+    
+    User.findOne({ 'email': req.session.user.email }, function(err, user) {
+        if (err) {
+            console.log(err);
+        } else {
+            if (user) {
+                console.log(path.resolve(user.profilePic));
+                res.status(200).sendFile(path.resolve(user.profilePic));
+            } else {
+                res.sendStatus(404);
+            }
+        }
+    });
+}
+
 module.exports = {
     register: function(req, res) {
         register(req.body, res);
@@ -184,5 +201,8 @@ module.exports = {
         changeIncome(req.body, res);
     },
     postImg,
-    uploadImg
+    uploadImg,
+    getPfp: function(req, res) {
+        getPfp(req, res);
+    }
 }

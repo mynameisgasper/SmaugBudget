@@ -28,6 +28,10 @@ router.post('/dashboard/changeIncome', (req, res) => {
 
 router.post('/uploadPfp', user.uploadImg , user.postImg);
 
+router.get('/getPfp', (req, res) => {
+    user.getPfp(req, res);
+});
+
 router.post('/addBill', (req, res) => {
     bills.addBill(req, res);
 });
