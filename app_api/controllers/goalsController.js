@@ -51,11 +51,9 @@ function checkDate(date){
     } 
     else if (y == yyyy) {
         if (m > mm) {
-            console.log("b");
             dateOk = true;
         } 
         else if (m == mm) {
-            console.log("c");
             if (d >= dd) {
                 dateOk = true;
             } 

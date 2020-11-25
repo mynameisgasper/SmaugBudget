@@ -9,49 +9,12 @@ function addBill(requestBody, res) {
         var date = requestBody.inputDateAddBill;
         var radio = requestBody.rad;
         
-        //validate date
-        var today = new Date();
-        var dd = String(today.getDate()).padStart(2, '0');
-        var mm = String(today.getMonth() + 1).padStart(2, '0');
-        var yyyy = today.getFullYear();
-        var inputDate = date.split("-");
-        var y = parseInt(inputDate[0], 10)
-        var m = parseInt(inputDate[1], 10)
-        var d = parseInt(inputDate[2], 10)
-        var dateOk;
-
-        if (y > yyyy) {
-            dateOk = true;
-        } 
-        else if (y == yyyy) {
-            if (m > mm) {
-                console.log("b");
-                dateOk = true;
-            } 
-            else if (m == mm) {
-                console.log("c");
-                if (d >= dd) {
-                    dateOk = true;
-                } 
-                else {
-                    dateOk = false;
-                }
-            } 
-            else {
-                dateOk = false;
-            }
-        } 
-        else {
-            dateOk = false;
-        }
-
-        //validate payee and amount
-        var regexPayee = new RegExp("^[A-Za-z0-9]{1,20}$"); 
-        var regexAmount = new RegExp("^[0-9]+(\.[0-9]{1,2})?$");
-        const payeeTest = regexPayee.test(requestBody.Payee);
-        const amountTest  = regexAmount.test(requestBody.Amount);
+        //validate date, recipient and amount
+        var dateOk = checkDate(date);
+        const recipientTest = checkRecipient(recipient);
+        const amountTest  = checkAmount(amount);
         
-        if (payeeTest && amountTest && dateOk) {
+        if (recipientTest && amountTest && dateOk) {
             let bill = new Bill({
                 recipient: recipient,
                 value: amount,
@@ -83,48 +46,12 @@ function editBill(requestBody, res) {
 
         var id_requested = "5fbd5a3947fa6f3da0a16b28"; //primer iz moje baze
 
-        var today = new Date();
-        var dd = String(today.getDate()).padStart(2, '0');
-        var mm = String(today.getMonth() + 1).padStart(2, '0');
-        var yyyy = today.getFullYear();
-        var inputDate = newDate.split("-");
-        var y = parseInt(inputDate[0], 10)
-        var m = parseInt(inputDate[1], 10)
-        var d = parseInt(inputDate[2], 10)
-        var dateOk;
+        //validate date, recipient and amount
+        var dateOk = checkDate(date);
+        const recipientTest = checkRecipient(recipient);
+        const amountTest  = checkAmount(amount);
 
-        if (y > yyyy) {
-            dateOk = true;
-        } 
-        else if (y == yyyy) {
-            if (m > mm) {
-                console.log("b");
-                dateOk = true;
-            } 
-            else if (m == mm) {
-                console.log("c");
-                if (d >= dd) {
-                    dateOk = true;
-                } 
-                else {
-                    dateOk = false;
-                }
-            } 
-            else {
-                dateOk = false;
-            }
-        } 
-        else {
-            dateOk = false;
-        }
-
-        //validate payee and amount
-        var regexPayee = new RegExp("^[A-Za-z0-9]{1,20}$"); 
-        var regexAmount = new RegExp("^[0-9]+(\.[0-9]{1,2})?$");
-        const payeeTest = regexPayee.test(newRecipient);
-        const amountTest  = regexAmount.test(newAmount);
-
-        if (payeeTest && amountTest && dateOk) {
+        if (recipientTest && amountTest && dateOk) {
             Bill.findByIdAndUpdate(id_requested, {
                     category: {name: newCategory},
                     recipient: newRecipient,
@@ -182,6 +109,57 @@ function deleteBill(requestBody, res) {
         console.log(ex);
         res.sendStatus(500);
     }
+}
+
+function checkDate(date){
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+    var inputDate = date.split("-");
+    var y = parseInt(inputDate[0], 10)
+    var m = parseInt(inputDate[1], 10)
+    var d = parseInt(inputDate[2], 10)
+    var dateOk;
+
+    if (y > yyyy) {
+        dateOk = true;
+    } 
+    else if (y == yyyy) {
+        if (m > mm) {
+            dateOk = true;
+        } 
+        else if (m == mm) {
+            if (d >= dd) {
+                dateOk = true;
+            } 
+            else {
+                dateOk = false;
+            }
+        } 
+        else {
+            dateOk = false;
+        }
+    } 
+    else {
+        dateOk = false;
+    }
+
+    return dateOk;
+}
+
+function checkRecipient(recipient){
+    var regexRecipient = new RegExp("^[A-Za-z0-9]{1,20}$"); 
+    const recipientTest = regexRecipient.test(recipient);
+
+    return recipientTest;
+}
+
+function checkAmount(amount){
+    var regexAmount = new RegExp("^[0-9]+(\.[0-9]{1,2})?$");
+    const amountTest  = regexAmount.test(amount);
+
+    return amountTest;
 }
 
 module.exports = {
