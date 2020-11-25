@@ -126,7 +126,6 @@ function changeIncome(requestBody, res, session) {
     var regex = new RegExp("^[0-9]+(\.[0-9]{1,2})?$");
     var income = regex.test(paycheck);
 
-    console.log(day + " " + paycheck + " " + income);
     if (income && day > 0 && day < 29) {
         User.findOne({ 'email': session.user.email}, function name(err, user) {
             if (err || user == null) {

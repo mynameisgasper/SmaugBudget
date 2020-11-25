@@ -12,7 +12,6 @@ function disableButton() {
   amount1(amount);
   date1(date);
 
-  console.log(date.value +" "+amount.value);
   $.ajax({
     url: "/api/changeIncome",
     type: "post",
