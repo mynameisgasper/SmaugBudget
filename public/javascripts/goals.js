@@ -219,3 +219,13 @@ function dateCheckAddGoal(field) {
 function removeGoal(id) {
     document.getElementById('goal' + id).style.display = 'none';
 }
+
+$(window).on("load", function() {
+    hideWelcome();
+})
+
+function hideWelcome() {
+document.getElementById('welcome-alert-section').style.display = 'none';
+document.querySelectorAll('#cards-section')[0].style.marginTop = 15 + 'vh';
+sessionStorage.setItem(page, "false");
+}
