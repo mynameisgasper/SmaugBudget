@@ -35,6 +35,51 @@ function addGoal(requestBody, res) {
     }
 }
 
+function editGoal(requestBody, res) {
+    try {
+        var newTitle = requestBody.goal;
+        var newTarget = requestBody.amount;
+        //var monthlyTarget = requestBody.monthlyTarget;
+        var newDate = requestBody.inputDateAddGoal;
+        var newCategory = requestBody.inputCategory;
+
+        var id_requested = "5fbebcc5dd5dbb3c14eb20f6";  //v moji bazi
+
+        //validate date, title and target
+        dateOk = checkDate(newDate);
+        const titleTest = checkTitle(newTitle);
+        const targetTest  = checkTarget(newTarget);
+        
+        if (titleTest && targetTest && dateOk) {
+            Goal.findByIdAndUpdate(id_requested, {
+                title: newTitle,
+                target: newTarget,
+                date: newDate,
+                category: {name: newCategory}
+            }, function (err, goal) { 
+            if (err) {
+                console.log(err);
+            } else {
+                if (goal) {
+                    goal.save();
+                    res.status(200).json(goal);
+                } else {
+                    res.sendStatus(404);
+                }
+            } 
+        });
+        }
+        else {
+            res.sendStatus(400);
+        }
+    } catch (ex) {
+        console.log(ex);
+        res.sendStatus(500);
+    }
+}
+
+
+
 function checkDate(date){
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
@@ -89,5 +134,8 @@ function checkTarget(target){
 module.exports = {
     addGoal: function(req, res) {
         addGoal(req.body, res);
+    },
+    editGoal: function(req, res) {
+        editGoal(req.body, res);
     }
 }

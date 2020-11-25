@@ -82,4 +82,8 @@ router.post('/addGoal', (req, res) => {
     goals.addGoal(req, res);
 })
 
+router.put('/editGoal', (req, res) => {
+    goals.editGoal(req, res);
+})
+
 module.exports = router;
