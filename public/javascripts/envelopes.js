@@ -100,8 +100,4 @@ $(window).on("load", function() {
     if (sessionStorage.getItem(page) === 'false') {
         hideWelcome();
     }
-
-    //Load envelopes
-    var dataField = document.getElementById('data').innerHTML;
-    console.log(this.sessionStorage);
 });
