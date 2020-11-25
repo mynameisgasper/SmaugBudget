@@ -1,12 +1,10 @@
 var user = require('../controllers/userController');
 var bills = require('../controllers/billsController');
 var envelopes = require('../controllers/envelopesController');
-<<<<<<< Updated upstream
-=======
+
 var converter = require('../controllers/currencyConverter');
 
 converter.currencyConverter();
->>>>>>> Stashed changes
 
 var express = require('express');
 const currencyConverter = require('../controllers/currencyConverter');
