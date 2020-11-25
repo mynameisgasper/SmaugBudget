@@ -182,7 +182,12 @@ function getPfp (req, res) {
                 console.log(err);
             } else {
                 if (user) {
-                    res.status(200).sendFile(path.resolve(user.profilePic));
+                    if (user.profilePic == null) {
+                        res.sendStatus(404);
+                    }
+                    else {
+                        res.status(200).sendFile(path.resolve(user.profilePic));
+                    }
                 } else {
                     res.sendStatus(404);
                 }
