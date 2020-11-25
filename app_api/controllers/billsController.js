@@ -125,7 +125,6 @@ function editBill(requestBody, res) {
         const amountTest  = regexAmount.test(newAmount);
 
         if (payeeTest && amountTest && dateOk) {
-            console.log("prišpel");
             Bill.findByIdAndUpdate(id_requested, {
                     category: {name: newCategory},
                     recipient: newRecipient,
@@ -155,11 +154,44 @@ function editBill(requestBody, res) {
     }
 }
 
+function deleteBill(requestBody, res) {
+    try {
+        //var id_requested = requestBody.id; tko bo ko bo implemetniran API
+        var id_requested = "5fbe9f0dd77de6160416f435"; //primer iz moje baze
+
+        if(id_requested != undefined){
+            Bill.findByIdAndDelete( id_requested, function(err, bills) { 
+                if (err) {
+                    console.log(err);
+                } 
+                else {
+                    if (bills) {
+                        res.status(204).json(bills);
+                    } 
+                    else {
+                        res.sendStatus(404);
+                    }
+                }
+            });
+        }
+        else{
+            res.sendStatus(400);
+        }
+    } 
+    catch (ex) {
+        console.log(ex);
+        res.sendStatus(500);
+    }
+}
+
 module.exports = {
     addBill: function(req, res) {
         addBill(req.body, res);
     },
     editBill: function(req, res) {
         editBill(req.body, res);
+    },
+    deleteBill: function(req, res){
+        deleteBill(req.body, res);
     }
 }

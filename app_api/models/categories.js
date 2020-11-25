@@ -4,7 +4,7 @@ categorySchema.add({
     name: { type: String, required: true }
 });
 
-mongoose.model('category', categorySchema, 'category');
+mongoose.model('Categories', categorySchema, 'Categories');
 
 module.exports = {
     categorySchema: categorySchema

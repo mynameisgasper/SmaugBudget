@@ -1,5 +1,7 @@
 //Dependencies
 var dictionary = require('./Dictionary');
+var notFound404 = require('./not_found');
+var Client = require('node-rest-client').Client;
 
 var data = {
     fileName: 'envelopes',
@@ -107,8 +109,76 @@ function respond(res, session) {
     }
 }
 
+function parseRequestBody(body, res, session) {
+    switch (body.formType) {
+        case 'addExpense':
+            {
+                addExpense(body, res, session);
+                break;
+            }
+        case 'addEnvelope':
+            {
+                addEnvelope(body, res, session);
+                break;
+            }
+
+    }
+}
+
+
+function addEnvelope(body, res, session) {
+    const data = {
+        colorPicker: body.colorPicker,
+        categoryAddEnvelope: body.categoryAddEnvelope,
+        inputAmount: body.inputAmount,
+        id: session.user._id
+    }
+
+    var args = {
+        data: data,
+        headers: { "Content-Type": "application/x-www-form-urlencoded" }
+    };
+
+    var client = new Client();
+    client.post("http://localhost:8080/api/addEnvelope", args,
+        function(data, response) {
+            if (response.statusCode == 200) {
+                res.redirect('/envelopes');
+            } else {
+                res.redirect('/envelopes#error');
+            }
+        }
+    );
+}
+
+function addExpense(body, res, session) {
+    const data = {
+        inputAmount: body.inputAmount,
+        id: body.id,
+    }
+
+    //console.log(data);
+
+    var args = {
+        data: data,
+        headers: { "Content-Type": "application/x-www-form-urlencoded" }
+    };
+
+    //console.log(args);
+    var client = new Client();
+    client.post("http://localhost:8080/api/addExpense"), args,
+        function(data, response) {
+            if (response.statusCode == 200) {
+                console.log("Done!");
+            }
+        }
+}
+
 module.exports = {
     get: function(req, res) {
         respond(res, req.session);
+    },
+    post: function(req, res) {
+        parseRequestBody(req.body, res, req.session);
     }
 }

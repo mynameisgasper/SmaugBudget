@@ -40,7 +40,7 @@ router.get('/getPfp', (req, res) => {
 router.post('/addBill', (req, res) => {
     bills.addBill(req, res);
 });
-router.post('/envelopes', (req, res) => {
+router.post('/addEnvelope', (req, res) => {
     envelopes.addEnvelope(req, res);
 })
 
@@ -52,12 +52,24 @@ router.post('/addExpense', (req, res) => {
     envelopes.addExpense(req, res);
 })
 
+router.post('/deleteEnvelope', (req, res) => {
+    envelopes.deleteEnvelope(req, res);
+})
+
 router.post('/editHistory', (req, res) => {
     history.editHisory(req, res);
 })
 
 router.get('/converter', (req, res) => {
     converter.converter(req, res);
+})
+
+router.put('/editBill', (req, res) => {
+    bills.editBill(req, res);
+})
+
+router.delete('/deleteBill', (req, res) => {
+    bills.deleteBill(req, res);
 })
 
 module.exports = router;

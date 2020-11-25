@@ -41,33 +41,37 @@ var data = {
 function respond(res, session) {
     if (session.user) {
         res.redirect('/dashboard');
-    }
-    else {
+    } else {
         res.render('index', data);
     }
 }
 
 function parseRequestBody(body, res, session) {
-    switch(body.formType) {
-        case 'signup': {
-            signup(body, res, session);
-            break;
-        }
-        case 'signin': {
-            signin(body, res, session);
-            break;
-        }
-        case 'forgotPassword': {
-            forgotPassword(body, res);
-            break;
-        }
-        case 'logout': {
-            logout(body, res, session);
-            break;
-        }
-        default: {
-            notFound404.get(null, res);
-        }
+    switch (body.formType) {
+        case 'signup':
+            {
+                signup(body, res, session);
+                break;
+            }
+        case 'signin':
+            {
+                signin(body, res, session);
+                break;
+            }
+        case 'forgotPassword':
+            {
+                forgotPassword(body, res);
+                break;
+            }
+        case 'logout':
+            {
+                logout(body, res, session);
+                break;
+            }
+        default:
+            {
+                notFound404.get(null, res);
+            }
     }
 }
 
@@ -85,14 +89,13 @@ function signup(body, res, session) {
         data: data,
         headers: { "Content-Type": "application/x-www-form-urlencoded" }
     };
-    
+
 
     var client = new Client();
-    client.post("http://localhost:8080/api/register", args, function (data, response) {
+    client.post("http://localhost:8080/api/register", args, function(data, response) {
         if (response.statusCode == 200) {
             res.redirect('/confirmation/' + data.urlCode);
-        }
-        else {
+        } else {
             res.redirect('#registration');
         }
     });
@@ -108,24 +111,23 @@ function signin(body, res, session) {
         data: data,
         headers: { "Content-Type": "application/x-www-form-urlencoded" }
     };
-    
+
 
     var client = new Client();
-    client.post("http://localhost:8080/api/login", args, function (data, response) {
+    client.post("http://localhost:8080/api/login", args, function(data, response) {
         if (response.statusCode == 200) {
             res.session = session;
             res.session.user = data;
 
             res.redirect('/dashboard');
-        }
-        else {
+        } else {
             res.redirect('#login');
         }
     });
 }
 
 function forgotPassword(body, res) {
-    
+
 }
 
 function logout(body, res, session) {
