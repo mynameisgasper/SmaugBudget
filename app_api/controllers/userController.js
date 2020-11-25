@@ -178,7 +178,6 @@ function getPfp (req, res) {
             console.log(err);
         } else {
             if (user) {
-                console.log(path.resolve(user.profilePic));
                 res.status(200).sendFile(path.resolve(user.profilePic));
             } else {
                 res.sendStatus(404);
