@@ -183,7 +183,7 @@ function getPfp (req, res) {
             } else {
                 if (user) {
                     if (user.profilePic == null) {
-                        res.sendStatus(404).sendFile(path.resolve(public/images/Default_pfp.png));
+                        res.status(404).sendFile(path.resolve("public/images/Default_pfp.png"));
                     }
                     else {
                         res.status(200).sendFile(path.resolve(user.profilePic));
