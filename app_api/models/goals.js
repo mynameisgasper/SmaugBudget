@@ -3,7 +3,6 @@ const goalsSchema = new mongoose.Schema();
 const { categorySchema } = require('./categories')
 
 goalsSchema.add({
-    id: { type: Number, required: true },
     title: { type: String, required: true },
     target: { type: Number, required: true },
     targetLeft: { type: Number, required: true },

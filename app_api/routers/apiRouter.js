@@ -1,6 +1,7 @@
 var user = require('../controllers/userController');
 var bills = require('../controllers/billsController');
 var envelopes = require('../controllers/envelopesController');
+var goals = require('../controllers/goalsController');
 
 var converter = require('../controllers/currencyConverter');
 
@@ -71,6 +72,10 @@ router.put('/editBill', (req, res) => {
 
 router.delete('/deleteBill', (req, res) => {
     bills.deleteBill(req, res);
+})
+
+router.post('/addGoal', (req, res) => {
+    goals.addGoal(req, res);
 })
 
 module.exports = router;
