@@ -84,6 +84,8 @@ function login(requestBody, res) {
             } else {
                 if (user) {
                     if (user.password === password && user.confirmationUrl == null && user.confirmationCode == null) {
+                        user.password = null;
+                        user.passowrdSalt = null;
                         res.status(200).json(user);
                     } else {
                         res.sendStatus(401);
