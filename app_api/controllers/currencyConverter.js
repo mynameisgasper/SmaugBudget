@@ -53,6 +53,9 @@ function currencyConverter() {
 }
 
 function converter(req, res) {
+    
+
+    currencyConverter();
 
     var curr1 = req.query.curr1;
     var curr2 = req.query.curr2;
@@ -64,14 +67,12 @@ function converter(req, res) {
     c2 - konverzija iz baze v drugo valuto*/
 
     Currency.findOne({'currency': curr1}, function(err, currency1) {
-        console.log("CURR1: " + currency1);
         if (err) {
             res.sendStatus(500);
         }
         else {
             if(currency1) {
                 Currency.findOne({'currency': curr2}, function(err, currency2) {
-                    console.log("CURR2: " + currency2);
                     if (err) {
                         res.sendStatus(500);
                     }
@@ -96,8 +97,6 @@ function converter(req, res) {
             }
         }
     });
-
-    console.log(curr1 + " " + curr2 + " " + amm1);
 }
 
 module.exports = {
