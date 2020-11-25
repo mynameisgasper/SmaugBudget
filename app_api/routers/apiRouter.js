@@ -23,6 +23,10 @@ router.post('/login', (req, res) => {
     user.login(req, res);
 });
 
+router.post('/getUser/', (req, res) => {
+    user.retrieveUser(req, res);
+})
+
 router.all('/confirm/:urlCode/:code', (req, res) => {
     user.confirm(req, res);
 });

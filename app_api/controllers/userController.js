@@ -101,6 +101,26 @@ function login(requestBody, res) {
     }
 }
 
+function retrieveUser(requestBody, res) {
+    try {
+        var id = requestBody.id;
+
+        User.findOne({ '_id': id }, function(err, user) {
+            if (err) {
+                res.sendStatus(500);
+            } else {
+                if (user) {
+                     res.status(200).json(user);
+                } else {
+                    res.sendStatus(404);
+                }
+            }
+        });
+    } catch (ex) {
+        res.sendStatus(500);
+    }
+}
+
 function confirm(req, res) {
     try {
         var url = req.params.urlCode;
@@ -214,11 +234,14 @@ module.exports = {
     login: function(req, res) {
         login(req.body, res);
     },
+    retrieveUser: function(req, res) {
+        retrieveUser(req.body, res, req.session);
+    },
     confirm: function(req, res) {
         confirm(req, res);
     },
     changeIncome: function(req, res) {
-        changeIncome(req.body, res, req.session);
+        changeIncome(req.body, res);
     },
     postImg,
     uploadImg,
