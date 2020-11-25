@@ -47,7 +47,8 @@ function register(requestBody, res) {
                 password: pass1,
                 passwordSalt: "tempSalt",
                 confirmationUrl: urlCode,
-                confirmationCode: confirmationCode
+                confirmationCode: confirmationCode,
+                isPremium: false
             });
 
             user.save(function callback(err) {
@@ -85,11 +86,31 @@ function login(requestBody, res) {
                 if (user) {
                     if (user.password === password && user.confirmationUrl == null && user.confirmationCode == null) {
                         user.password = null;
-                        user.passowrdSalt = null;
+                        user.passwordSalt = null;
                         res.status(200).json(user);
                     } else {
                         res.sendStatus(401);
                     }
+                } else {
+                    res.sendStatus(404);
+                }
+            }
+        });
+    } catch (ex) {
+        res.sendStatus(500);
+    }
+}
+
+function retrieveUser(requestBody, res) {
+    try {
+        var id = requestBody.id;
+
+        User.findOne({ '_id': id }, function(err, user) {
+            if (err) {
+                res.sendStatus(500);
+            } else {
+                if (user) {
+                     res.status(200).json(user);
                 } else {
                     res.sendStatus(404);
                 }
@@ -213,11 +234,14 @@ module.exports = {
     login: function(req, res) {
         login(req.body, res);
     },
+    retrieveUser: function(req, res) {
+        retrieveUser(req.body, res, req.session);
+    },
     confirm: function(req, res) {
         confirm(req, res);
     },
     changeIncome: function(req, res) {
-        changeIncome(req.body, res, req.session);
+        changeIncome(req.body, res);
     },
     postImg,
     uploadImg,

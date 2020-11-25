@@ -16,7 +16,13 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
     {{/if}}
 
-
+    {{#if session}}
+    <script type="text/javascript">
+    function getSession() {
+        return JSON.parse("{{session}}".replaceAll('&quot;', '"'));
+    }    
+    </script>
+    {{/if}}
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
