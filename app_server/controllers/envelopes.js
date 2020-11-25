@@ -9,51 +9,6 @@ var data = {
     welcomeMessage: dictionary.getTranslation("welcomeMessageEnvelopes"),
     currentMonth: 'NOV',
     setMonth: 'NOV',
-    envelope: [{
-            id: 0,
-            category: 'Gas',
-            progress: 69,
-            totalSet: 250,
-            totalCurrent: 172.5,
-            color: 'rgb(0, 150, 255)',
-            colorHex: '#0096FF',
-            bgColor: 'rgba(0, 150, 255, 0.5)',
-            month: 'NOV',
-        },
-        {
-            id: 1,
-            category: 'Groceries',
-            progress: 50,
-            totalSet: 350,
-            totalCurrent: 175,
-            color: 'rgb(0, 128, 0)',
-            colorHex: '#008000',
-            bgColor: 'rgba(0, 128, 0, 0.5)',
-            month: 'OCT',
-        },
-        {
-            id: 3,
-            category: 'House Utilities',
-            progress: 33,
-            totalSet: 180,
-            totalCurrent: 60,
-            color: 'rgb(128, 0, 128)',
-            colorHex: '#800080',
-            bgColor: 'rgba(128, 0, 128, 0.5)',
-            month: 'NOV',
-        },
-        {
-            id: 4,
-            category: 'Entertainment',
-            progress: 90,
-            totalSet: 108,
-            totalCurrent: 120,
-            color: 'rgb(255, 187, 51)',
-            colorHex: '#FFBB33',
-            bgColor: 'rgba(255, 187, 51, 0.5)',
-            month: 'NOV',
-        }
-    ],
     card: [{
             id: 1,
             title: 'Envelopes Total',
@@ -103,7 +58,7 @@ var data = {
 
 function respond(res, session) {
     if (session.user) {
-        data.session = JSON.stringify(session.user);
+        data.envelope = session.user.envelopes;
         res.render('envelopes', data);
     } else {
         res.redirect('/');
@@ -144,6 +99,8 @@ function addEnvelope(body, res, session) {
     client.post("http://localhost:8080/api/addEnvelope", args,
         function(data, response) {
             if (response.statusCode == 200) {
+                res.session = session;
+                res.session.user = data;
                 res.redirect('/envelopes');
             } else {
                 res.redirect('/envelopes#error');

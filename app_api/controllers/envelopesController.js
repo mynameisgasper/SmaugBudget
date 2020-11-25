@@ -83,7 +83,7 @@ function addEnvelope(requestBody, res) {
                                     else {
                                         user.envelopes.push(envelope);
                                         user.save();
-                                        res.status(200).json(envelope);        
+                                        res.status(200).json(user);        
                                     }
                                 });
                             } else {

@@ -1,3 +1,4 @@
+var Client = require('node-rest-client').Client;
 var express = require('express');
 var router = express.Router();
 
@@ -10,6 +11,12 @@ var history = require('../controllers/history.js');
 var utility = require('../controllers/utilities.js');
 var account = require('../controllers/account.js');
 var pdf = require('../controllers/pdf.js');
+
+//Common router
+router.all('*', (req, res, next) => {
+    refreshSession(req)
+    next();
+})
 
 //Dashboard
 router.get('/dashboard', (req, res) => {
@@ -61,5 +68,27 @@ router.post('/account', (req, res) => {
 router.post('/pdf', (req, res) => {
     pdf.post(req, res);
 });
+
+function refreshSession(req) {
+    if (req.session.user) {
+        const data = {
+            id: req.session.user._id,
+        }
+    
+        var args = {
+            data: data,
+            headers: { "Content-Type": "application/x-www-form-urlencoded" }
+        };
+    
+    
+        var client = new Client();
+        client.post("http://localhost:8080/api/getUser", args, function(data, response) {
+            if (response.statusCode == 200) {
+                req.session.user = data;
+            } else {
+            }
+        });
+    }
+}
 
 module.exports = router;

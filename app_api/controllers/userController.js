@@ -110,7 +110,9 @@ function retrieveUser(requestBody, res) {
                 res.sendStatus(500);
             } else {
                 if (user) {
-                     res.status(200).json(user);
+                    user.password = null;
+                    user.passwordSalt = null;
+                    res.status(200).json(user);
                 } else {
                     res.sendStatus(404);
                 }
