@@ -125,3 +125,9 @@ canvas{
     transition-timing-function: ease-in-out, ease-in-out, ease-in-out, ease-in-out;
     transition-delay: 0s, 0s, 0s, 0s; 
 }
+
+#pfpNavBar {
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+}
