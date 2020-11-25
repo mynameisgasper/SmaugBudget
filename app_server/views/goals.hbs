@@ -138,11 +138,11 @@
       <form name="signup" method="post" action="/" onsubmit="return disableButton2({{id}})">
         <div class="modal-body">
           <label for="inputGoal">What's your goal?</label>
-          <input type="text" class="form-control" onfocusout="nameAdd2(this,{{id}})" id="Goal3" value="{{title}}"required="required"> 
+          <input type="text" class="form-control" onfocusout="nameAdd2(this,{{id}})" id="Goal3" name="goal3" value="{{title}}"required="required"> 
           <div id="{{id}}txt"></div>
 
           <label for="inputCategory">Choose a Category</label>
-          <select id="inputCategory" class="form-control" required="required">
+          <select id="inputCategory" name="inputCategory" class="form-control" required="required">
             <option selected>{{category}}</option>
             {{#each ../categories}}
               {{#ifNotEquals ../category category}}
@@ -158,11 +158,11 @@
             <div class="input-group-prepend">
               <span class="input-group-text">€</span>
             </div>
-            <input type="number" class="form-control" onfocusout="amount3(this,{{id}})" id="Amount3" value="{{target}}" step="any"required="required"> 
+            <input type="number" class="form-control" onfocusout="amount3(this,{{id}})" id="amount3" name="Amount3" value="{{target}}" step="any"required="required"> 
             <div id="{{id}}amm"></div>
           </div>
           <label for="inputDate">Planned Date</label>
-          <input class="form-control" type="date" placeholder="{{year}}-{{month}}-{{day}}" id="inputDate" onfocusout="dateCheck(this, {{id}});" required="required">
+          <input class="form-control" type="date" placeholder="{{year}}-{{month}}-{{day}}" id="inputDate" name="inputDate" onfocusout="dateCheck(this, {{id}});" required="required">
 
         </div>
         <div class="modal-footer">

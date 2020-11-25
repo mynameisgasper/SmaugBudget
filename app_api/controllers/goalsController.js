@@ -37,10 +37,10 @@ function addGoal(requestBody, res) {
 
 function editGoal(requestBody, res) {
     try {
-        var newTitle = requestBody.goal;
-        var newTarget = requestBody.amount;
+        var newTitle = requestBody.goal3;
+        var newTarget = requestBody.amount3;
         //var monthlyTarget = requestBody.monthlyTarget;
-        var newDate = requestBody.inputDateAddGoal;
+        var newDate = requestBody.inputDate;
         var newCategory = requestBody.inputCategory;
 
         var id_requested = "5fbebcc5dd5dbb3c14eb20f6";  //v moji bazi
@@ -78,7 +78,68 @@ function editGoal(requestBody, res) {
     }
 }
 
+function addToGoal(requestBody, res) {
+    try {
+        var addedAmount = requestBody.amount2;
 
+        var id_requested = "5fbebcc5dd5dbb3c14eb20f6";  //v moji bazi
+
+        //validate added amount
+        const targetTest = checkTarget(addedAmount);
+        
+        if (targetTest) {
+            Goal.findById(id_requested, function (err, goal) { 
+                if (err){ 
+                    console.log(err); 
+                } 
+                else { 
+                    if (goal) {
+                        goal.targetLeft -= addedAmount
+                        goal.save();
+                        res.status(200).json(goal);
+                    } else {
+                        res.sendStatus(404);
+                    }
+                     
+                } 
+            });
+        }
+        else {
+            res.sendStatus(400);
+        }
+    } catch (ex) {
+        console.log(ex);
+        res.sendStatus(500);
+    }
+}
+
+function deleteGoal(requestBody, res) {
+    try {
+        var id_requested = "5fbec13be03d4a2d402da505"; //primer iz moje baze
+        if(id_requested != undefined){
+            Goal.findByIdAndDelete( id_requested, function(err, goal) { 
+                if (err) {
+                    console.log(err);
+                } 
+                else {
+                    if (goal) {
+                        res.status(204).json(goal);
+                    } 
+                    else {
+                        res.sendStatus(404);
+                    }
+                }
+            });
+        }
+        else{
+            res.sendStatus(400);
+        }
+    } 
+    catch (ex) {
+        console.log(ex);
+        res.sendStatus(500);
+    }
+}
 
 function checkDate(date){
     var today = new Date();
@@ -137,5 +198,11 @@ module.exports = {
     },
     editGoal: function(req, res) {
         editGoal(req.body, res);
+    },
+    addToGoal: function(req, res) {
+        addToGoal(req.body, res);
+    },
+    deleteGoal: function(req, res) {
+        deleteGoal(req.body, res);
     }
 }

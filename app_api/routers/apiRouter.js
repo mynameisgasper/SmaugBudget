@@ -86,4 +86,12 @@ router.put('/editGoal', (req, res) => {
     goals.editGoal(req, res);
 })
 
+router.put('/addToGoal', (req, res) => {
+    goals.addToGoal(req, res);
+})
+
+router.delete('/deleteGoal', (req, res) => {
+    goals.deleteGoal(req, res);
+})
+
 module.exports = router;
