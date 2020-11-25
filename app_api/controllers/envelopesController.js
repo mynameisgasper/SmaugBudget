@@ -58,7 +58,6 @@ function addEnvelope(requestBody, res) {
                 if (error) {
                     console.log(error);
                 } else {
-                    console.log(user);
                     //? Try to find envelope, if it doesn't exit for this month, create it
                     //! else return error code 304
                     envelopes.findOne({ month: currentMonth, 'category.name': categoryName, user: user }, function(err, envelope) {

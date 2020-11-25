@@ -16,6 +16,8 @@ userSchema.add({
     paycheckDate: { type: Number, required: false },
     confirmationUrl: { type: String },
     confirmationCode: { type: String },
+    balance: { type: Number, required: false },
+    isPremium: { type: Boolean, required: true },
     connections: [connectionsSchema],
     envelopes: [envelopesSchema],
     goals: [goalsSchema],

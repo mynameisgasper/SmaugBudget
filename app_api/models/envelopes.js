@@ -10,7 +10,7 @@ envelopesSchema.add({
     colorHex: { type: String, required: true },
     bgColor: { type: String, required: true },
     month: { type: String, required: true },
-    category: { type: categorySchema, required: true },
+    category: { type: categorySchema, required: true }
 });
 
 mongoose.model('Envelopes', envelopesSchema, 'Envelopes');

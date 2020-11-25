@@ -157,14 +157,11 @@ function addExpense(body, res, session) {
         id: body.id,
     }
 
-    //console.log(data);
-
     var args = {
         data: data,
         headers: { "Content-Type": "application/x-www-form-urlencoded" }
     };
 
-    //console.log(args);
     var client = new Client();
     client.post("http://localhost:8080/api/addExpense"), args,
         function(data, response) {
