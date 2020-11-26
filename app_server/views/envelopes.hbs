@@ -50,6 +50,7 @@
             </div>
             <form name="addEnvelope" method="post" action="/envelopes" onsubmit="return disableButton2()">
                 <input type="hidden" value="addEnvelope" name="formType">
+                <input type="hidden" value="{{setMonthNumber}}" name="setMonth">
                 <div class="modal-body">
                     <div class="ena"><label for="categoryAddEnvelope">Category</label></br>
                         <input type="text" class="form-control" id="ime" onfocusout="nameAdd(this)" name="categoryAddEnvelope" placeholder="Entertainment">
@@ -221,19 +222,28 @@
 <div class="container" id="cards-section">
     <div class="row">
         {{> card}}
+        <div id="envelopeSectionTag"></div>
     </div>
+    
 </div>
 
 <div class="container" id="main-section">
     <div class="row">
         <div class="col-3 col-sm-4 col-md-4 col-lg-5 col-xl-5 puscica-leva">
-            <i class="arrow left"></i>
+            <form action="/envelopes" method="GET">
+            <input type="hidden" name="monthMinus" value="{{setMonthNumber}}"/> 
+            <button class="arrowButton" type="submit"><i class="arrow left"></i></button>
+            </form>
         </div>
         <div class="col-6 col-sm-4 col-md-4 col-lg-2 col-xl-2 mesec">
-            <h4>{{currentMonth}}</h4>
+            <h4>{{setMonth}}</h4>
         </div>
         <div class="col-3 col-sm-4 col-md-4 col-lg-5 col-xl-5 puscica-desna">
-            <i class="arrow right"></i>
+            <form action="/envelopes" method="GET">
+            <input type="hidden" name="monthPlus" value="{{setMonthNumber}}"/> 
+            <button class="arrowButton" type="submit"><i  class="arrow right"></i></button>
+            </form>
+            
         </div>
     </div>
 

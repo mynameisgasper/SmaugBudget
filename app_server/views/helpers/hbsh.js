@@ -10,5 +10,8 @@ module.exports = {
     },
     minus: function(arg1, arg2) {
         return (isNaN(arg1 - arg2) ? 0 : arg1 - arg2);
+    },
+    plus: function(arg1, arg2) {
+        return (isNaN(arg1 + arg2) ? 0 : arg1 + arg2);
     }
 }

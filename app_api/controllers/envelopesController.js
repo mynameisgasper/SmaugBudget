@@ -17,8 +17,8 @@ function addEnvelope(requestBody, res) {
         var colorRGB = hexToRGB(colorHexPicker);
         var colorBackground = hexToRGB(colorHexPicker, 0.5);
         var user_id = requestBody.id;
+        var curMonth = requestBody.month;
 
-        var d = new Date();
         var month = new Array();
         month[0] = "JAN";
         month[1] = "FEB";
@@ -32,7 +32,7 @@ function addEnvelope(requestBody, res) {
         month[9] = "OCT";
         month[10] = "NOV";
         month[11] = "DEC";
-        var currentMonth = month[d.getMonth()];
+        var currentMonth = month[curMonth];
 
         var regex = new RegExp("^[0-9]+(\.[0-9]{1,2})?$");
         const amountCorrect = regex.test(requestBody.inputAmount)

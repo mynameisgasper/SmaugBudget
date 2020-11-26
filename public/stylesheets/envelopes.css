@@ -247,3 +247,10 @@ body {
 .hover-red:hover {
     color: red;
 }
+
+.arrowButton {
+    border: none;
+    text-decoration: none;
+    color: black;
+    background: none;
+}

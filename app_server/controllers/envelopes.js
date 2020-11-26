@@ -7,8 +7,6 @@ var data = {
     fileName: 'envelopes',
     message: dictionary.getTranslation("messageEnvelopes"),
     welcomeMessage: dictionary.getTranslation("welcomeMessageEnvelopes"),
-    currentMonth: 'NOV',
-    setMonth: 'NOV',
     card: [{
             id: 1,
             title: 'Envelopes Total',
@@ -56,8 +54,24 @@ var data = {
     dark: dictionary.getTranslation("dark")
 };
 
-function respond(res, session) {
+function respond(res, session, req) {
     if (session.user) {
+        var d = new Date();
+        if (req.query.monthMinus == null && req.query.monthPlus == null) {
+            data.setMonthNumber = d.getMonth();
+
+        } else if (req.query.monthMinus != null) {
+            data.setMonthNumber = req.query.monthMinus - 1;
+            if (data.setMonthNumber < 0)
+                data.setMonthNumber = data.setMonthNumber + 12;
+
+        } else if (req.query.monthPlus != null) {
+            data.setMonthNumber = parseInt(req.query.monthPlus) + 1;
+            if (data.setMonthNumber > 11)
+                data.setMonthNumber = data.setMonthNumber - 12;
+        }
+        data.setMonth = getCurrentMonth(data.setMonthNumber);
+        data.currentMonth = getCurrentMonth(d.getMonth());
         data.envelope = session.user.envelopes;
         res.render('envelopes', data);
     } else {
@@ -96,6 +110,7 @@ function addEnvelope(body, res, session) {
         colorPicker: body.colorPicker,
         categoryAddEnvelope: body.categoryAddEnvelope,
         inputAmount: body.inputAmount,
+        month: body.setMonth,
         id: session.user._id
     }
 
@@ -104,13 +119,19 @@ function addEnvelope(body, res, session) {
         headers: { "Content-Type": "application/x-www-form-urlencoded" }
     };
 
+    var referer = res.req.headers.referer;
+    if (referer.indexOf("?") != -1)
+        var redirectLocation = referer.substring(referer.indexOf("?"));
+    else
+        var redirectLocation = '';
+
     var client = new Client();
     client.post("http://localhost:8080/api/addEnvelope", args,
         function(data, response) {
             if (response.statusCode == 200) {
                 res.session = session;
                 res.session.user = data;
-                res.redirect('/envelopes');
+                res.redirect('/envelopes' + redirectLocation);
             } else {
                 res.redirect('/envelopes#error');
             }
@@ -132,12 +153,18 @@ function addExpense(body, res, session) {
         headers: { "Content-Type": "application/x-www-form-urlencoded" }
     };
 
+    var referer = res.req.headers.referer;
+    if (referer.indexOf("?") != -1)
+        var redirectLocation = referer.substring(referer.indexOf("?"));
+    else
+        var redirectLocation = '';
+
     var client = new Client();
     client.post("http://localhost:8080/api/addExpense", args, function(data, response) {
         if (response.statusCode == 200) {
             res.session = session;
             res.session.user = data;
-            res.redirect('/envelopes');
+            res.redirect('/envelopes' + redirectLocation);
         } else {
             res.redirect('/envelopes#error');
         }
@@ -155,12 +182,18 @@ function deleteEnvelope(body, res, session) {
         headers: { "Content-Type": "application/x-www-form-urlencoded" }
     };
 
+    var referer = res.req.headers.referer;
+    if (referer.indexOf("?") != -1)
+        var redirectLocation = referer.substring(referer.indexOf("?"));
+    else
+        var redirectLocation = '';
+
     var client = new Client();
     client.post("http://localhost:8080/api/deleteEnvelope", args, function(data, response) {
         if (response.statusCode == 200) {
             res.session = session;
             res.session.user = data;
-            res.redirect('/envelopes');
+            res.redirect('/envelopes' + redirectLocation);
         } else {
             res.redirect('/envelopes#error');
         }
@@ -181,21 +214,46 @@ function editEnvelope(body, res, session) {
         headers: { "Content-Type": "application/x-www-form-urlencoded" }
     };
 
+    var referer = res.req.headers.referer;
+    if (referer.indexOf("?") != -1)
+        var redirectLocation = referer.substring(referer.indexOf("?"));
+    else
+        var redirectLocation = '';
+
     var client = new Client();
     client.post("http://localhost:8080/api/editEnvelope", args, function(data, response) {
         if (response.statusCode == 200) {
             res.session = session;
             res.session.user = data;
-            res.redirect('/envelopes');
+            res.redirect('/envelopes' + redirectLocation);
         } else {
             res.redirect('/envelopes#error');
         }
     });
 }
 
+function getCurrentMonth(month) {
+    var monthArray = new Array();
+    monthArray[0] = "JAN";
+    monthArray[1] = "FEB";
+    monthArray[2] = "MAR";
+    monthArray[3] = "APR";
+    monthArray[4] = "MAY";
+    monthArray[5] = "JUN";
+    monthArray[6] = "JUL";
+    monthArray[7] = "AUG";
+    monthArray[8] = "SEP";
+    monthArray[9] = "OCT";
+    monthArray[10] = 'NOV';
+    monthArray[11] = 'DEC';
+
+    return monthArray[month];
+
+}
+
 module.exports = {
     get: function(req, res) {
-        respond(res, req.session);
+        respond(res, req.session, req);
     },
     post: function(req, res) {
         parseRequestBody(req.body, res, req.session);
