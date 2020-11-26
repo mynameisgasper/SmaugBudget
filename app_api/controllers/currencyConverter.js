@@ -53,10 +53,6 @@ function currencyConverter() {
 }
 
 function converter(req, res) {
-    
-
-    currencyConverter();
-
     var curr1 = req.query.curr1;
     var curr2 = req.query.curr2;
     var amm1 = req.query.amm1;
@@ -92,7 +88,7 @@ function converter(req, res) {
                     }
                 });
             }
-            else{
+            else {
                 res.sendStatus(404);
             }
         }
