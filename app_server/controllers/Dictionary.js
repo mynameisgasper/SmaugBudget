@@ -46,6 +46,7 @@ var slovenian = {
     "envelopes": "Kuverte",
     "editConnection": "Uredi povezavo",
     "dragAndDropOr": "Povleci in spusti, ali",
+    "selLanguage": "Slovenski",
 
 
     //DASHBOARD
@@ -200,6 +201,7 @@ var english = {
     "envelopes": "Envelopes",
     "editConnection": "Edit connection",
     "dragAndDropOr": "Drag and drop or",
+    "selLanguage": "English", 
 
 
     //DASHBOARD

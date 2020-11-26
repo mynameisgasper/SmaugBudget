@@ -48,6 +48,7 @@ var data = {
     envelopes: dictionary.getTranslation("envelopes"),
     editConnection: dictionary.getTranslation("editConnection"),
     dragAndDropOr: dictionary.getTranslation("dragAndDropOr"),
+    selLanguage: dictionary.getTranslation("selLanguage"),
     
     //data
     data_username: "Grega",
