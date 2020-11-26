@@ -128,6 +128,7 @@ function editEnvelope(requestBody, res) {
                 } else {
                     for (var i = 0; i < user.envelopes.length; i++) {
                         if (user.envelopes[i]._id == envelope_id) {
+                            user.envelopes[i].progress = Math.round((parseFloat(parseFloat(user.envelopes[i].spent) / parseFloat(newBudget))) * 100);
                             user.envelopes[i].budget = newBudget;
                             user.envelopes[i].colorHex = colorHexPicker;
                             user.envelopes[i].color = colorRGB;
@@ -139,6 +140,7 @@ function editEnvelope(requestBody, res) {
 
                     Envelopes.findById(envelope_id, function(err, envelope) {
                         envelope.budget = newBudget;
+                        envelope.progress = Math.round((parseFloat(parseFloat(envelope.spent) / parseFloat(newBudget))) * 100);
                         envelope.colorHex = colorHexPicker;
                         envelope.color = colorRGB;
                         envelope.bgColor = colorBackground;
@@ -212,7 +214,30 @@ function addExpense(requestBody, res) {
         var regex = new RegExp("^[0-9]+(\.[0-9]{1,2})?$");
         const amountCorrect = regex.test(requestBody.inputAmount)
 
-        if (amountCorrect) {
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0');
+        var yyyy = today.getFullYear();
+        var inputDate = date.split("-");
+        var dateBool = false;
+
+        if (inputDate[0] < yyyy) {
+            dateBool = true;
+        } else if (inputDate[0] == yyyy) {
+            if (inputDate[1] < mm) {
+                dateBool = true;
+            } else if (inputDate[1] == mm) {
+                if (inputDate[2] <= dd) dateBool = true;
+                else dateBool = false;
+            } else {
+                dateBool = false;
+            }
+        } else {
+            dateBool = false;
+        }
+
+
+        if (amountCorrect && dateBool) {
             User.findById(user_id, function(error, user) {
                 if (error) {
                     res.sendStatus(500);
@@ -226,8 +251,6 @@ function addExpense(requestBody, res) {
                                 if (error) {
                                     console.log(error);
                                 } else {
-                                    console.log(user.envelopes[i]);
-                                    console.log(i);
                                     envelope.spent = user.envelopes[i - 1].spent;
                                     envelope.progress = user.envelopes[i - 1].progress;
                                     envelope.save();
@@ -252,13 +275,8 @@ function addExpense(requestBody, res) {
                                             return;
                                         }
                                     });
-
                                 }
-
                             });
-
-
-
                         }
                     }
                 }
