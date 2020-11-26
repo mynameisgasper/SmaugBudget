@@ -123,12 +123,6 @@ function translateMonth(month) {
     }
 }
 
-function getFullMonthName(month) {
-    switch(month) {
-
-    }
-}
-
 function generateBills(bills) {
     var billsArray = []
     for (var bill of bills) {
