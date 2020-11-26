@@ -1,4 +1,5 @@
 //Dependencies
+const c = require('config');
 var dictionary = require('./Dictionary');
 var Client = require('node-rest-client').Client;
 
@@ -145,22 +146,44 @@ function generateGoals(goals){
         var date = goal.date.split("-");
         var progress = goal.saved / goal.target;
         var targetLeft = goal.target - goal.saved;
-
+        var monthlyTarget = calculateMonthlyTarget(goal.date, targetLeft);
+        
         goalsArray.push({
             id: goal._id,
             title: goal.title,
             progress: progress,
             target: goal.target,
             targetLeft: targetLeft,
-            monthlyTarget: 0,
+            monthlyTarget: monthlyTarget,
             category: goal.category,
-            color: '#00cf1d',
             year: date[0],
             month: date[1],
             day: date[2],
         });
     }
     return goalsArray;
+}
+
+function calculateMonthlyTarget(date, targetLeft){
+    var today = new Date();
+
+    var goalDate = date.split("-");
+    var y = parseInt(goalDate[0], 10)
+    var m = parseInt(goalDate[1], 10)
+    var d = parseInt(goalDate[2], 10)
+    const endDate = new Date(y, m - 1, d);
+
+    const diffTime = Math.abs(today - endDate);
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+    console.log("days: " + diffDays);
+
+
+    if(diffDays < 1)
+        return targetLeft;
+    else
+        return Math.ceil(targetLeft / diffDays);
+    
 }
 
 module.exports = {
