@@ -5,24 +5,6 @@ var data = {
     fileName: 'dashboard',
     message:dictionary.getTranslation("messageDashboard"),
     welcomeMessage: dictionary.getTranslation("welcomeMessageDashboard"),
-    card: [{
-        title: dictionary.getTranslation("cardTitle1"),
-        color: 'bg-primary',
-        count: '584,5',
-        icon: 'fa-university'
-    },
-    {
-        title: dictionary.getTranslation("cardTitle2"),
-        color: 'bg-primary',
-        count: '384,5',
-        icon: 'fa-coins'
-    },
-    {
-        title: dictionary.getTranslation("cardTitle3"),
-        color: 'bg-primary',
-        count: '420',
-        icon: 'fa-piggy-bank'
-    }],
     alert: [{
         type: 'alert-warning',
         name: dictionary.getTranslation("alertName1"),
@@ -96,11 +78,56 @@ var data = {
 
 function respond(res, session) {
     if (session.user) {
+        data.card = generateCards(session.user);
         res.render('dashboard', data);
     }
     else {
         res.redirect('/');
     }
+}
+
+function generateCards(user) {
+    return [{
+        title: dictionary.getTranslation("cardTitle1"),
+        color: 'bg-primary',
+        count: '584,5',
+        icon: 'fa-university'
+    },
+    {
+        title: dictionary.getTranslation("cardTitle2"),
+        color: 'bg-primary',
+        count: getBillsTotal(getBillsUntilPaycheck(user.bills, user.paycheckDate)),
+        icon: 'fa-coins'
+    },
+    {
+        title: dictionary.getTranslation("cardTitle3"),
+        color: 'bg-primary',
+        count: '420',
+        icon: 'fa-piggy-bank'
+    }];
+}
+
+function getBillsUntilPaycheck(bills, paycheckDate) {
+    var billsUntilPaycheck = [];
+
+    const today = new Date().getDate();
+    for (var bill of bills) {
+        const billDay = new Date(bill.date).getDate()
+        if (billDay > today || billDay <= paycheckDate) {
+            billsUntilPaycheck.push(bill);
+        }
+    }
+
+    return billsUntilPaycheck;
+}
+
+function getBillsTotal(bills) {
+    var sum = 0;
+    for (var bill of bills) {
+        sum += bill.value;
+    }
+
+    return sum;
 }
 
 module.exports = {
