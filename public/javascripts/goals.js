@@ -5,7 +5,6 @@
 $(document).ready(function() {
     var selector = document.getElementsByClassName("currencySelector");
     var currency = document.getElementsByClassName("currencyDisplay");
-    console.log(currency);
     for (var i = 0; i < selector.length; i++) {
         $("#" + selector[i].id).on("change", function(event) {
             $("#currency" + event.currentTarget.id.substring(14))[0].innerHTML = event.currentTarget.selectedOptions[0].innerHTML;
@@ -48,13 +47,12 @@ function disableButton3(id) {
 }
 
 
-function amount(field) {
+function amount5(field) {
 
     //var field = document.getElementById("PayeeModal");
     var regex = new RegExp("^[0-9]+(\.[0-9]{1,2})?$");
     //decimalna števila z največj 2ma decimalnima mestoma ločilo je pika!
     //črkev male,velike,številke ne veljajo števila kot so .73, 
-    console.log(regex.test(field.value));
     if (!field.value.match(regex)) {
         field.style.borderColor = "red";
         $('.tt3').toast('show')
@@ -72,7 +70,6 @@ function amount2(field, id) {
     var regex = new RegExp("^[0-9]+(\.[0-9]{1,2})?$");
     //decimalna števila z največj 2ma decimalnima mestoma ločilo je pika, prva mora biti številka!
     //črkev male,velike,številke
-    console.log(regex.test(field.value));
     if (!field.value.match(regex)) {
         field.style.borderColor = "red";
         $('.tt2').toast('show')
@@ -90,7 +87,6 @@ function amount3(field, id) {
     var regex = new RegExp("^[0-9]+(\.[0-9]{1,2})?$");
     //decimalna števila z največj 2ma decimalnima mestoma ločilo je pika, prva mora biti številka!
     //črkev male,velike,številke
-    console.log(regex.test(field.value));
     if (!field.value.match(regex)) {
         field.style.borderColor = "red";
         $('.tt6').toast('show')
@@ -107,7 +103,6 @@ function nameAdd(field) {
     //var field = document.getElementById("PayeeModal");
     var regex = new RegExp("^[ A-Za-z0-9_@./#&+-]{1,20}$");
     //uppercase, lowercase, številke, posebni znaki, dolžina od 1-20
-    console.log(regex.test(field.value));
     if (!field.value.match(regex)) {
         field.style.borderColor = "red";
         $('.tt4').toast('show')
@@ -124,7 +119,6 @@ function nameAdd2(field, id) {
     //var field = document.getElementById("PayeeModal");
     var regex = new RegExp("^[ A-Za-z0-9_@./#&+-]{1,20}$");
     //uppercase, lowercase, številke, posebni znaki, dolžina od 1-20
-    console.log(regex.test(field.value));
     if (!field.value.match(regex)) {
         field.style.borderColor = "red";
         $('.tt5').toast('show')
@@ -144,33 +138,33 @@ function dateCheck(field, id) {
     var inputDate = field.value.split("-");
 
     if (inputDate[0] > yyyy) {
-        $('#date-hint').toast('hide');
+        $('.tt7').toast('hide');
         field.style.borderColor = "#ced4da";
         return 1;
     } else if (inputDate[0] == yyyy) {
         if (inputDate[1] > mm) {
-            $('#date-hint').toast('hide');
+            $('.tt7').toast('hide');
             field.style.borderColor = "#ced4da";
             return 1;
         } else if (inputDate[1] == mm) {
             /* 
             ? IF DAY IS >= NOW */
             if (inputDate[2] >= dd) {
-                $('#date-hint').toast('hide');
+                $('.tt7').toast('hide');
                 field.style.borderColor = "#ced4da";
                 return 1;
             } else {
-                $('#date-hint').toast('show');
+                $('.tt7').toast('show');
                 field.style.borderColor = "red";
                 return 0;
             }
         } else {
-            $('#date-hint').toast('show');
+            $('.tt7').toast('show');
             field.style.borderColor = "red";
             return 0;
         }
     } else {
-        $('#date-hint').toast('show');
+        $('.tt7').toast('show');
         field.style.borderColor = "red";
         return 0;
     }
