@@ -123,6 +123,12 @@ function translateMonth(month) {
     }
 }
 
+function getFullMonthName(month) {
+    switch(month) {
+
+    }
+}
+
 function generateBills(bills) {
     var billsArray = []
     for (var bill of bills) {
@@ -146,6 +152,7 @@ function generateBills(bills) {
 }
 
 function generateCards(bills) {
+    const nearBills = getBillsInTheNext7Days(bills);
     return [
         {
             id: 1,
@@ -158,11 +165,37 @@ function generateCards(bills) {
             id: 2,
             title: 'Bills This Week',
             color: 'bg-warning',
-            count: 1,
+            count: nearBills.length,
             icon: 'fa-calendar',
-            comment: "January 25: Petrol $80"   
+            comment: generateComment(nearBills)   
         }
     ];
+}
+
+function getBillsInTheNext7Days(bills) {
+    const currentTime = new Date();
+    var billsArray = [];
+
+    for (var bill of bills) {
+        const billDate = new Date(Date.parse(bill.date)).getTime();
+        const diff = (billDate - currentTime.getTime()) / 86400000;
+        
+        if (diff < 7) {
+            billsArray.push(bill);
+        }
+    }
+    return billsArray;
+}
+
+function generateComment(bills) {
+    var comment = '';
+    for (var bill of bills) {
+        const billDate = new Date(Date.parse(bill.date));
+        const dtfUK = new Intl.DateTimeFormat('UK', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        comment += bill.recipient + " - " + dtfUK.format(billDate);
+    }
+
+    return comment;
 }
 
 module.exports = {
