@@ -57,6 +57,7 @@ nav .button {
 
 .toast-body{
     color:#212529;
+    opacity: 1 !important;
 }
 
 .active {
@@ -110,6 +111,15 @@ nav .button {
     overflow: hidden;
 }
 
+.toast {
+    display: none;
+    opacity: 1 !important;
+}
+
+.toastek {
+    z-index: 999999 !important;
+
+}
 
 /*@media only screen and (min-width: 900px) {
     .notification{

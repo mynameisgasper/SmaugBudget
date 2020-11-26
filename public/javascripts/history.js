@@ -138,7 +138,7 @@ function nameAdd2(field,id) {
     }
     else {
       field.style.borderColor = "#ced4da";
-      $('.tt1').toast('hide')
+      $('.tt1').toast('none')
       return 1;
     }
 }
@@ -157,7 +157,7 @@ function amount3(field, id) {
     }
     else {
       field.style.borderColor = "#ced4da";
-      $('.tt2').toast('hide')
+      $('.tt2').toast('none')
       return 1;
     }
 }
@@ -170,19 +170,19 @@ function dateCheck2(field,id) {
     var inputDate = field.value.split("-");
 
     if (inputDate[0] < yyyy) { 
-        $('.tt7').toast('hide');
+        $('.tt7').toast('none');
         field.style.borderColor = "#ced4da";
         return 1;
     } else if (inputDate[0] == yyyy) {
         if (inputDate[1] < mm) { 
-            $('.tt7').toast('hide');
+            $('.tt7').toast('none');
             field.style.borderColor = "#ced4da";
             return 1;
         } else if (inputDate[1] == mm) {
             /* 
             ? IF DAY IS >= NOW */
             if (inputDate[2] <= dd) { 
-                $('.tt7').toast('hide');
+                $('.tt7').toast('none');
                 field.style.borderColor = "#ced4da";
                 return 1;
             } else {

@@ -31,7 +31,7 @@ function disableButton() {
         
       }
     });
-    $('#changeIncome').modal('hide');
+    $('#changeIncome').modal('none');
     return true;
   }
 
@@ -51,7 +51,7 @@ function amount1(field) {
     }
     else {
       field.style.borderColor = "#ced4da";
-      $('.tt1').toast('hide');
+      $('.tt1').toast('none');
       return 1;
     }
 }
@@ -65,7 +65,7 @@ function date1(field) {
     }
     else {
       field.style.borderColor = "#ced4da";
-      $('.tt2').toast('hide');
+      $('.tt2').toast('none');
       return 1;
     }
 }
