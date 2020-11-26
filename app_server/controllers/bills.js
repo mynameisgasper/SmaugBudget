@@ -7,53 +7,6 @@ var data = {
     fileName: 'bills',
     message: dictionary.getTranslation("messageBills"),
     welcomeMessage: dictionary.getTranslation("welcomeMessageBills"),
-    bill: [{
-            id: 0,
-            year: 2020,
-            month: 'DEC',
-            day: 10,
-            category: 'Cat',
-            recipient: 'Meow d.o.o.',
-            value: '80',
-            currency: '€'
-        },
-        {
-            id: 1,
-            year: 2020,
-            month: 'DEC',
-            day: 09,
-            category: 'Gas',
-            recipient: 'Petrol d.d',
-            value: '500',
-            currency: '€'
-        },
-        {
-            id: 2,
-            year: 2020,
-            month: 'DEC',
-            day: 09,
-            category: 'Groceries',
-            recipient: 'Mercator',
-            value: '200',
-            currency: '€'
-        }
-    ],
-    card: [{
-            id: 1,
-            title: 'Bills Total',
-            color: 'bg-primary',
-            count: 2,
-            icon: 'fa-paperclip'
-        },
-        {
-            id: 2,
-            title: 'Bills This Week',
-            color: 'bg-warning',
-            count: 1,
-            icon: 'fa-calendar',
-            comment: "January 25: Petrol $80"
-        }
-    ],
     //translations main
     logout: dictionary.getTranslation("logout"),
     //translations navbar
@@ -74,6 +27,7 @@ function respond(res, session) {
     if (session.user) {
         data.categories = session.user.categories;
         data.card = generateCards(session.user.bills);
+        data.bill = generateBills(session.user.bills);
         res.render('bills', data);
     } else {
         res.redirect('/');
@@ -144,6 +98,43 @@ function editBill(body, res, session) {
             }
         }
     );
+}
+
+function translateMonth(month) {
+    switch(month) {
+        case '01': return "JAN";
+        case '02': return "FEB";
+        case '03': return "MAR";
+        case '04': return "APR";
+        case '05': return "MAY";
+        case '06': return "JUN";
+        case '07': return "JUL";
+        case '08': return "AUG";
+        case '09': return "SEP";
+        case '10': return "OCT";
+        case '11': return "NOV";
+        case '12': return "DEC";
+    }
+}
+
+function generateBills(bills) {
+    var billsArray = []
+    for (var bill of bills) {
+        var date = bill.date.split('T')[0].split('-');
+
+        billsArray.push({
+            id: bill._id,
+            year: date[0],
+            month: translateMonth(date[1]),
+            day: date[2],
+            category: bill.category.name,
+            recipient: bill.recipient,
+            value: bill.value,
+            currency: bill.currency
+        });
+    }
+    
+    return billsArray;
 }
 
 function generateCards(bills) {

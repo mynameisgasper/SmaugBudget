@@ -1,11 +1,12 @@
 const mongoose = require('mongoose');
 const Bill = mongoose.model('Bills');
 const User = mongoose.model('User');
+const Categories = mongoose.model('Categories');
 
 function addBill(requestBody, res) {
     try {
         var userId = requestBody.id;
-        var category = requestBody.inputCategory;
+        var categoryId = requestBody.inputCategory;
         var recipient = requestBody.Payee;
         var amount = requestBody.Amount;
         var date = requestBody.inputDateAddBill;
@@ -23,19 +24,29 @@ function addBill(requestBody, res) {
                     res.sendStatus(500);
                 }
                 else {
-                    let bill = new Bill({
-                        recipient: recipient,
-                        value: amount,
-                        category: {name: category},
-                        date: date,
-                        currency: "euro",
-                        repeating: radio, 
+                    Categories.findById(categoryId, function(err, category) {
+                        if (err) {
+                            console.log(err);
+                            res.sendStatus(500);
+                        }
+                        else {
+                            console.log(category);
+                            let bill = new Bill({
+                                recipient: recipient,
+                                value: amount,
+                                category: category,
+                                date: date,
+                                currency: "€",
+                                repeating: radio, 
+                            });
+                            bill.save();
+                            user.bills.push(bill);
+                            user.save();
+                
+                            res.status(200).json(user);
+                        }
+                        
                     });
-                    bill.save();
-                    user.bills.push(bill);
-                    user.save();
-        
-                    res.status(200).json(user);
                 }
             });
         }
