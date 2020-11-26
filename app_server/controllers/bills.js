@@ -92,6 +92,8 @@ function editBill(body, res, session) {
     client.post("http://localhost:8080/api/addBill", args,
         function(data, response) {
             if (response.statusCode == 200) {
+                res.session = session;
+                res.session.user = data;
                 res.redirect('/bills');
             } else {
                 res.redirect('/bills#error');
@@ -125,12 +127,14 @@ function generateBills(bills) {
         billsArray.push({
             id: bill._id,
             year: date[0],
-            month: translateMonth(date[1]),
+            month: date[1],
+            monthName: translateMonth(date[1]),
             day: date[2],
             category: bill.category.name,
             recipient: bill.recipient,
             value: bill.value,
-            currency: bill.currency
+            currency: bill.currency,
+            repeat: bill.repeating
         });
     }
     
