@@ -58,6 +58,7 @@ var data = {
 
 function respond(res, session) {
     if (session.user) {
+        data.envelope = session.user.envelopes;
         res.render('envelopes', data);
     } else {
         res.redirect('/');
