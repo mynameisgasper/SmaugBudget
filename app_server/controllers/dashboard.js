@@ -91,6 +91,7 @@ function generateCards(user) {
     var expensesSincePaycheck = getExpensesSincePaycheck(user.expense, user.paycheckDate);
 
     var totalCost = getTotalCost(getExpensesAndBills(expensesSincePaycheck, billsUntilPaycheck));
+    var totalBills = getTotalCost(billsUntilPaycheck);
     var budgetLeft = user.paycheck - totalCost;
     return [{
         title: dictionary.getTranslation("cardTitle1"),
@@ -101,13 +102,13 @@ function generateCards(user) {
     {
         title: dictionary.getTranslation("cardTitle2"),
         color: 'bg-primary',
-        count: getTotalCost(billsUntilPaycheck),
+        count: totalBills,
         icon: 'fa-coins'
     },
     {
         title: dictionary.getTranslation("cardTitle3"),
         color: 'bg-primary',
-        count: '420',
+        count: budgetLeft - totalBills,
         icon: 'fa-piggy-bank'
     }];
 }
