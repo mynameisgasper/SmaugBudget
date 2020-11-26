@@ -54,16 +54,6 @@ var data = {
             comment: "January 25: Petrol $80"
         }
     ],
-    categories: [
-        { id: 1, category: "Furniture" },
-        { id: 2, category: "Electronics" },
-        { id: 3, category: "Trip" },
-        { id: 4, category: "Party" },
-        { id: 5, category: "Wedding" },
-        { id: 6, category: "Car" },
-        { id: 7, category: "Gas" },
-        { id: 8, category: "Other" },
-    ],
     //translations main
     logout: dictionary.getTranslation("logout"),
     //translations navbar
@@ -82,6 +72,7 @@ var data = {
 
 function respond(res, session) {
     if (session.user) {
+        data.categories = session.user.categories;
         res.render('bills', data);
     } else {
         res.redirect('/');
@@ -90,13 +81,10 @@ function respond(res, session) {
 
 function parseRequestBody(body, res, session) {
     switch (body.formType) {
-        case 'addBill':
-            {
-                addBill(body, res, session);
-                break;
-            }
-
-
+        case 'addBill':{
+            addBill(body, res, session);
+            break;
+        }
     }
 }
 

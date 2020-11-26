@@ -79,7 +79,7 @@
                                                 <select id="inputCategory" name="inputCategory" class="form-control" required>
                                                     <option value="" selected disabled>Select Category</option>
                                                     {{#each categories}}
-                                                    <option id="category{{id}}" value="{{category}}" name="category">{{category}}</option>
+                                                    <option id="{{_id}}" value="{{_id}}" name="category">{{name}}</option>
                                                     {{/each}}
                                                 </select>
                                             </div>
@@ -170,15 +170,15 @@
                                             </button>
                                         </div>
                                         <form name="signup" method="post" action="/" onsubmit="return disableButton2()">
-                                            <input type="hidden" value="{{_id}}" name="id">
+                                            <input type="hidden" value="editBill" name="id">
                                             <div class="modal-body">
                                                 <div class="ena">
                                                     <label for="Category">Category</label><br>
                                                     <select id="inputCategory" name="inputCategory" class="form-control">
                                                         <option selected>{{category}}</option>
-                                                        {{#each ../categories}}
-                                                            {{#ifNotEquals ../category category}}
-                                                                <option id="category{{id}}">{{category}}</option>
+                                                        {{#each categories}}
+                                                            {{#ifNotEquals category category}}
+                                                                <option id="{{_id}}">{{name}}</option>
                                                             {{/ifNotEquals}}
                                                         {{/each}}
                                                     </select>
