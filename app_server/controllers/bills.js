@@ -191,7 +191,7 @@ function generateComment(bills) {
     var comment = '';
     for (var bill of bills) {
         const billDate = new Date(Date.parse(bill.date));
-        const dtfUK = new Intl.DateTimeFormat('UK', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        const dtfUK = new Intl.DateTimeFormat('UK', { year: 'numeric', month: '2-digit', day: '2-digit' });
         comment += bill.recipient + " - " + dtfUK.format(billDate);
     }
 
