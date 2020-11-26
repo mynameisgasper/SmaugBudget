@@ -1,11 +1,12 @@
 //Dependencies
 var dictionary = require('./Dictionary');
+var Client = require('node-rest-client').Client;
 
 var data = {
     fileName: 'goals',
     message: dictionary.getTranslation("messageGoals"),
     welcomeMessage: dictionary.getTranslation("welcomeMessageGoals"),
-    goal: [{
+    /*goal: [{
             id: 0,
             title: 'iPhone',
             progress: 100,
@@ -30,7 +31,7 @@ var data = {
             month: '03',
             day: '25',
         }
-    ],
+    ],*/
     card: [{
             id: 1,
             title: 'Goals Total',
@@ -130,10 +131,36 @@ function addGoal(body, res, session) {
 
 function respond(res, session) {
     if (session.user) {
+        data.goal = generateGoals(session.user.goals);
         res.render('goals', data);
     } else {
         res.redirect('/');
     }
+}
+
+function generateGoals(goals){
+    var goalsArray = [];
+
+    for (var goal of goals) {
+        var date = goal.date.split("-");
+        var progress = goal.saved / goal.target;
+        var targetLeft = goal.target - goal.saved;
+
+        goalsArray.push({
+            id: goal._id,
+            title: goal.title,
+            progress: progress,
+            target: goal.target,
+            targetLeft: targetLeft,
+            monthlyTarget: 0,
+            category: goal.category,
+            color: '#00cf1d',
+            year: date[0],
+            month: date[1],
+            day: date[2],
+        });
+    }
+    return goalsArray;
 }
 
 module.exports = {

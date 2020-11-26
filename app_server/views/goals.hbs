@@ -46,7 +46,8 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form name="signup" method="post" action="/" onsubmit="return disableButton()">
+      <form name="signup" method="post" action="/goals" onsubmit="return disableButton()">
+      <input type="hidden" name="formType" value="addGoal">
         <div class="modal-body">
           <label for="inputGoal">What's your goal?</label>
           <input type="text" class="form-control" id="Goal" name="goal" onfocusout="nameAdd(this)" placeholder="e.g. new car" required="required">
@@ -179,7 +180,6 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
