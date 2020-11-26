@@ -78,8 +78,8 @@ var data = {
 function respond(res, session) {
     if (session.user) {
         data.card = generateCards(session.user);
-        data.incomeLastMonth = (session.user.incomeLastMonth ? session.user.incomeLastMonth : 0);
-        data.expensesLastMonth = (session.user.incomeLastMonth ? session.user.incomeLastMonth : 0);
+        data.incomeLastMonth = (session.user.paycheckLastMonth ? session.user.paycheckLastMonth : 0);
+        data.expensesLastMonth = 0;
         res.render('dashboard', data);
     }
     else {
@@ -121,10 +121,15 @@ function getExpensesAndBills(expenses, bills) {
 function getExpensesSincePaycheck(expenses, paycheckDate) {
     var expensesSincePaycheck = [];
 
-    const today = new Date().getDate();
+    const today = new Date();
+    const todayMonth = today.getMonth();
+    today.setMonth(today.getMonth() - 1);
+    const previousMonth = today.getMonth();
     for (var expense of expenses) {
-        const expenseDay = new Date(expense.date).getDate()
-        if (expenseDay <= today && expenseDay > paycheckDate) {
+        const expenseDate = new Date(expense.date);
+        const expenseDay = expenseDate.getDate();
+        const expenseMonth = expenseDate.getMonth();
+        if ((expenseMonth == todayMonth && expenseDay <= paycheckDate) || (expenseMonth == previousMonth && expenseDay > paycheckDate)) {
             expensesSincePaycheck.push(expense);
         }
     }
@@ -135,10 +140,15 @@ function getExpensesSincePaycheck(expenses, paycheckDate) {
 function getBillsUntilPaycheck(bills, paycheckDate) {
     var billsUntilPaycheck = [];
 
-    const today = new Date().getDate();
+    const today = new Date();
+    const todayMonth = today.getMonth();
+    today.setMonth(today.getMonth() + 1);
+    const nextMonth = today.getMonth();
     for (var bill of bills) {
-        const billDay = new Date(bill.date).getDate()
-        if (billDay > today || billDay <= paycheckDate) {
+        const billDate = new Date(bill.date);
+        const billDay = billDate.getDate();
+        const billMonth = billDate.getMonth();
+        if ((billMonth == todayMonth && billDay > paycheckDate) || (billMonth == nextMonth && billDay <= paycheckDate)) {
             billsUntilPaycheck.push(bill);
         }
     }
