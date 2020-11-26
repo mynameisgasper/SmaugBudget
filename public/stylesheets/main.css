@@ -55,6 +55,10 @@ nav .button {
     padding: 0;
 }
 
+.toast-body{
+    color:#212529;
+}
+
 .active {
     text-shadow: 0 0 1px #fff, 0 0 1px #fff;
 }
