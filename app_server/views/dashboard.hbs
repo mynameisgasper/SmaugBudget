@@ -83,7 +83,7 @@
                         </button>
                     </div>
                     <div class="toast-body">
-                        Input may only contain decimal numbers separated by . or , with max 2 decimal places.
+                        Input may only contain decimal numbers separated by . with max 2 decimal places.
                     </div>
                 </div>
                 <div class="toast ml-auto tt2" role="alert" data-delay="3000" data-autohide="false">
@@ -99,7 +99,7 @@
                 </div>
             </div>
         </div>
-        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-dialog modal-dialog-centered" id="modal1" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">{{incomeModalTitle}}</h5>
@@ -109,7 +109,7 @@
                 </div>
                 <form name="changeIncome"  onsubmit="return disableButton()">
                     <div class="modal-body">
-                        <input type="number" id="amount" name="amount" class="form-control" onfocusout="amount1(this)" placeholder="{{incomeModalPlaceholderIncome}}" step="any" required="required">
+                        <input type="number" id="amount" name="amount" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" class="form-control" onfocusout="amount1(this)" placeholder="{{incomeModalPlaceholderIncome}}" step="any" required="required">
                         <div id="amm"></div></br>
                         <input type="number" id="date" name="date" class="form-control" onfocusout="date1(this)" placeholder="{{incomeModalPlaceholderDate}}" required="required">
                         <div id="dat"></div>

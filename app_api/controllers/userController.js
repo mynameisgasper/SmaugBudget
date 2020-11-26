@@ -243,7 +243,7 @@ module.exports = {
         confirm(req, res);
     },
     changeIncome: function(req, res) {
-        changeIncome(req.body, res);
+        changeIncome(req.body, res, req.session);
     },
     postImg,
     uploadImg,

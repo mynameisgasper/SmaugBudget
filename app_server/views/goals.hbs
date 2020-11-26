@@ -22,7 +22,7 @@
                   </button>
               </div>
               <div class="toast-body">
-                  Input may only contain decimal numbers separated by . or , with max 2 decimal places.
+                  Input may only contain decimal numbers separated by . with max 2 decimal places.
               </div>
           </div>
           <div class="toast ml-auto tt7" id="mjav" role="alert" data-delay="1000" data-autohide="false">
@@ -66,7 +66,7 @@
             <div class="input-group-prepend">
               <span class="input-group-text">€</span>
             </div>
-            <input type="number" class="form-control" onfocusout="amount5(this)" id="Amount" name="amount" placeholder="e.g. 1500" step="any" required="required">
+            <input type="number" class="form-control" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" onfocusout="amount5(this)" id="Amount" name="amount" placeholder="e.g. 1500" step="any" required="required">
             <div id="amm"></div>
           </div>
 
@@ -109,7 +109,7 @@
                   </button>
               </div>
               <div class="toast-body">
-                  Input may only contain decimal numbers separated by . or , with max 2 decimal places.
+                  Input may only contain decimal numbers separated by . with max 2 decimal places.
               </div>
           </div> 
           <div class="toast ml-auto tt7" id="date-hint" role="alert" data-delay="1000" data-autohide="false">
@@ -156,7 +156,7 @@
             <div class="input-group-prepend">
               <span class="input-group-text">€</span>
             </div>
-            <input type="number" class="form-control" onfocusout="amount3(this,{{id}})" id="amount3" name="Amount3" value="{{target}}" step="any"required="required"> 
+            <input type="number" class="form-control" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" onfocusout="amount3(this,{{id}})" id="amount3" name="Amount3" value="{{target}}" step="any"required="required"> 
             <div id="{{id}}amm"></div>
           </div>
           <label for="inputDate">Planned Date</label>
@@ -184,7 +184,7 @@
                   </button>
               </div>
               <div class="toast-body">
-                  Input may only contain decimal numbers separated by . or , with max 2 decimal places.
+                  Input may only contain decimal numbers separated by . with max 2 decimal places.
               </div>
           </div>
       </div>
@@ -203,7 +203,7 @@
             <div class="input-group-prepend">
               <span id="currency{{id}}" class="input-group-text currencyDisplay">€</span>
             </div>
-            <input type="number" class="form-control" onfocusout="amount2(this,{{id}})" id="Amount2" placeholder="0.00" step ="any" required="required">
+            <input type="number" class="form-control" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" onfocusout="amount2(this,{{id}})" id="Amount2" placeholder="0.00" step ="any" required="required">
             <div id="amm{{id}}"></div>
           </div>
           <label for="inputAmount">Your Currency</label>

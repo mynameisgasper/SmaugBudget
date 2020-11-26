@@ -20,7 +20,11 @@ function sendEmail(to, subject, text) {
         auth: {
            user: config.email.auth.address,
            pass: config.email.auth.password
+        },
+        tls: {
+            rejectUnauthorized: false
         }
+
     });
 
     const message = {
@@ -32,10 +36,10 @@ function sendEmail(to, subject, text) {
 
     transport.sendMail(message, function(err, info) {
         if (err) {
-          callback(err);
+          console.log(err);
         }
         else {
-            callback(info);
+            console.log(info);
         }
     });
 }
@@ -47,7 +51,7 @@ module.exports = {
     sendCode: async function sendCode(email, firstName, lastName, url, confirmationCode, callback) {
         fs.readFile('./app_server/views/confirmationEmail.hbs', 'UTF-8', function(err, data) {
             if (err) {
-                callback(err);
+                console.log(err);
             }
             else {
                 data = data.replace('{{FIRSTNAME}}', firstName).replace('{{LASTNAME}}', lastName).replace('{{CODE}}', confirmationCode).replace('{{LINK}}', 'http://localhost:8080/confirmation/' + url + '/' + confirmationCode);
