@@ -22,26 +22,6 @@ var data = {
     }],
     incomeLastMonth: 1500,
     expensesLastMonth: 900,
-    analytics: [{
-        rowName: dictionary.getTranslation("analyticsRowName1"),
-        color: 'rgb(94, 192, 193)',
-        category: dictionary.getTranslation("analyticsCategory1")
-    },
-    {
-        rowName: dictionary.getTranslation("analyticsRowName2"),
-        color: 'rgb(251, 203, 72)',
-        category: dictionary.getTranslation("analyticsCategory2")
-    },
-    {
-        rowName: dictionary.getTranslation("analyticsRowName3"),
-        color: 'rgb(94, 192, 193)',
-        category: dictionary.getTranslation("analyticsCategory3")
-    },
-    {
-        rowName: dictionary.getTranslation("analyticsRowName4"),
-        color: 'rgb(247, 158, 55)',
-        category: dictionary.getTranslation("analyticsCategory4")
-    }],
     graph: {
         used: true,
         name: 'DashboardChart'
@@ -78,6 +58,7 @@ var data = {
 function respond(res, session) {
     if (session.user) {
         data.card = generateCards(session.user);
+        data.analytics = generateAnalyitcs(session.user);
         data.incomeLastMonth = (session.user.paycheckLastMonth ? session.user.paycheckLastMonth : 0);
         data.expensesLastMonth = getTotalCost(getLastMonthExpenses(session.user.expense, session.user.paycheckDate));
         res.render('dashboard', data);
@@ -112,6 +93,43 @@ function generateCards(user) {
         count: (isNaN(budgetLeft - totalBills) ? 0 : budgetLeft - totalBills),
         icon: 'fa-piggy-bank'
     }];
+}
+
+function generateAnalyitcs(user) {
+    var lastMonthExpenses = getLastMonthExpenses(user.expense, user.paycheckDate);
+    var analyzeExpenses = getExpenseAnalysis(lastMonthExpenses);
+    var mostMoneySpentOn = getMostMoneySpentOn(analyzeExpenses);
+    var mostTimesPurchased = getMostTimesPurchased(analyzeExpenses);
+    
+    return [{
+        rowName: dictionary.getTranslation("analyticsRowName1"),
+        color: 'rgb(94, 192, 193)',
+        category: mostMoneySpentOn
+    },
+    {
+        rowName: dictionary.getTranslation("analyticsRowName2"),
+        color: 'rgb(251, 203, 72)',
+        category: mostTimesPurchased
+    }]
+}
+
+function getExpenseAnalysis(expenses) {
+    var categories = new Map();
+
+    for (var expense of expenses) {
+        if (categories.get(expense.category.name)) {
+            categories.get(expense.category.name).sum += parseInt(expense.value);
+            categories.get(expense.category.name).count += 1;
+        }
+        else {
+            categories.set(expense.category.name, {});
+            categories.get(expense.category.name).name = expense.category.name
+            categories.get(expense.category.name).sum = parseInt(expense.value);
+            categories.get(expense.category.name).count = 1;    
+        }
+    }
+
+    return categories;
 }
 
 function getExpensesAndBills(expenses, bills) {
@@ -176,6 +194,27 @@ function getLastMonthExpenses(expenses, paycheckDate) {
     }
 
     return lastMonthExpenses;
+}
+
+function getMostMoneySpentOn(expenseAnalitics) {
+    var selectedAnalitic = null;
+    for (var analitic of expenseAnalitics) {
+        if (selectedAnalitic == null || analitic.sum > selectedAnalitic.sum) {
+            console.log(analitic);
+            selectedAnalitic = analitic;
+        }
+    }
+    return selectedAnalitic[0];
+}
+
+function getMostTimesPurchased(expenseAnalitics) {
+    var selectedAnalitic = null;
+    for (var analitic of expenseAnalitics) {
+        if (selectedAnalitic == null || analitic.count > selectedAnalitic.count) {
+            selectedAnalitic = analitic;
+        }
+    }
+    return selectedAnalitic[0];
 }
 
 function getTotalCost(bills) {
