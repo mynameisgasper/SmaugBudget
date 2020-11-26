@@ -221,7 +221,6 @@ function getMostTimesPurchased(expenseAnalitics) {
     if (selectedAnalitic) {
         return selectedAnalitic[0];
     }
-    else {
 }
 
 function getTotalCost(bills) {
