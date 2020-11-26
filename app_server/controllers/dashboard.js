@@ -204,8 +204,13 @@ function getMostMoneySpentOn(expenseAnalitics) {
             selectedAnalitic = analitic;
         }
     }
-    return selectedAnalitic[0];
-}
+    
+    if (selectedAnalitic) {
+        return selectedAnalitic[0];
+    }
+    else {
+        return selectedAnalitic[0];
+    }}
 
 function getMostTimesPurchased(expenseAnalitics) {
     var selectedAnalitic = null;
