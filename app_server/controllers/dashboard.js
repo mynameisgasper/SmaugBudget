@@ -79,7 +79,7 @@ function respond(res, session) {
     if (session.user) {
         data.card = generateCards(session.user);
         data.incomeLastMonth = (session.user.paycheckLastMonth ? session.user.paycheckLastMonth : 0);
-        data.expensesLastMonth = 0;
+        data.expensesLastMonth = getTotalCost(getLastMonthExpenses(session.user.expense, session.user.paycheckDate));
         res.render('dashboard', data);
     }
     else {
@@ -154,6 +154,28 @@ function getBillsUntilPaycheck(bills, paycheckDate) {
     }
 
     return billsUntilPaycheck;
+}
+
+function getLastMonthExpenses(expenses, paycheckDate) {
+    var lastMonthExpenses = [];
+
+    const today = new Date();
+    today.setMonth(today.getMonth() - 1);
+    const previousMonth = today.getMonth();
+    today.setMonth(today.getMonth() - 2);
+    const prepreviousMonth = today.getMonth();
+    for (var expense of expenses) {
+        const expenseDate = new Date(expense.date);
+        const expenseDay = expenseDate.getDate();
+        const expenseMonth = expenseDate.getMonth();
+
+        if ((expenseMonth == previousMonth && expenseDay <= paycheckDate) || (expenseMonth == prepreviousMonth && expenseDay > paycheckDate)) {
+            lastMonthExpenses.push(expense);
+        }
+
+    }
+
+    return lastMonthExpenses;
 }
 
 function getTotalCost(bills) {
