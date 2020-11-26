@@ -9,6 +9,6 @@ module.exports = {
         return (arg1 == arg2) ? options.inverse(this) : options.fn(this);
     },
     minus: function(arg1, arg2) {
-        return arg1 - arg2;
+        return (isNaN(arg1 - arg2) ? 0 : arg1 - arg2);
     }
 }

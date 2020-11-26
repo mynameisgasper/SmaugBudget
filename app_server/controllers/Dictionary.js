@@ -1,4 +1,4 @@
-var globalVar = require('../../app_api/models/globalVar.json');
+var language = "English";
 
 var slovenian = {
     //main
@@ -46,6 +46,7 @@ var slovenian = {
     "envelopes": "Kuverte",
     "editConnection": "Uredi povezavo",
     "dragAndDropOr": "Povleci in spusti, ali",
+    "selLanguage": "Slovenski",
 
 
     //DASHBOARD
@@ -200,6 +201,7 @@ var english = {
     "envelopes": "Envelopes",
     "editConnection": "Edit connection",
     "dragAndDropOr": "Drag and drop or",
+    "selLanguage": "English", 
 
 
     //DASHBOARD
@@ -307,13 +309,13 @@ var english = {
 
 module.exports = {
     getTranslation: (key) => {
-        switch (globalVar.language) {
-            case "slovenian":
+        switch (language) {
+            case "Slovenski":
                 if (slovenian[key]) {
                     return slovenian[key];
                 } 
                 break;
-            case "english":
+            case "English":
                 if (english[key]) {
                     return english[key];
                 } 
@@ -324,5 +326,8 @@ module.exports = {
         }
         console.log("No " + globalVar.language + " translation for key: " + key);
         return key;
+    },
+    setLanguage: (lang) => {
+        language = lang;
     }
 }

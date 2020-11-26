@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { use } = require('../routers/apiRouter');
 const Goal = mongoose.model('Goals');
 const User = mongoose.model('User');
 const Categories = mongoose.model('Categories');
@@ -7,11 +8,11 @@ const Categories = mongoose.model('Categories');
 function addGoal(requestBody, res) {
     try {
         var title = requestBody.title;
-        var saved = requestBody.target;
+        var target = requestBody.target;
         //var monthlyTarget = requestBody.monthlyTarget;
         var date = requestBody.date;
         var categoryName = requestBody.category;
-        var user_id = requestBody.id;
+        var userId = requestBody.id;
 
         //validate date, title and target
         dateOk = checkDate(date);
@@ -19,9 +20,10 @@ function addGoal(requestBody, res) {
         const targetTest = checkTarget(target);
 
         if (titleTest && targetTest && dateOk) {
-            User.findById(user_id, function(error, user) {
+            User.findById(userId, function(error, user) {
                 if (error) {
                     console.log(error);
+                    res.sendStatus(500);
                 } else {
                     for (var i = 0; i < user.goals.length; i++) {
                         if (user.goals[i].title == title) {
@@ -50,12 +52,12 @@ function addGoal(requestBody, res) {
                     let goal = new Goal({
                         title: title,
                         target: target,
-                        saved: saved,
+                        saved: 0,
                         monthlyTarget: 0,
                         date: date,
                         category: { name: category }
                     });
-
+                
                     goal.save(function callback(err) {
                         if (err) {
                             console.log(err);

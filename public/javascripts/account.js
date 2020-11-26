@@ -52,7 +52,7 @@ $(document).ready(function() {
 
 function changeLanguage(language) {
     $("#languageChange")[0].innerText = language;
-    localStorage.setItem("language", language);
+    
     location.reload();
 }
 

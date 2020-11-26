@@ -37,6 +37,10 @@ router.get('/goals', (req, res) => {
     goals.get(req, res);
 });
 
+router.post('/goals', (req, res) => {
+    goals.post(req, res);
+});
+
 //Bills
 router.get('/bills', (req, res) => {
     bills.get(req, res);

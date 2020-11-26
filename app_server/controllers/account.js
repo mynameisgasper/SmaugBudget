@@ -48,6 +48,7 @@ var data = {
     envelopes: dictionary.getTranslation("envelopes"),
     editConnection: dictionary.getTranslation("editConnection"),
     dragAndDropOr: dictionary.getTranslation("dragAndDropOr"),
+    selLanguage: dictionary.getTranslation("selLanguage"),
     
     //data
     data_username: "Grega",
@@ -63,6 +64,9 @@ var data = {
 
 function respond(res, session) {
     if (session.user) {
+        if (session.user.language) {
+            dictionary.setLanguage(session.user.language);
+        }
         res.render('account', data);
     }
     else {

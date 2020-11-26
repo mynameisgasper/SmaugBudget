@@ -1,3 +1,4 @@
+const { get } = require('config');
 const mongoose = require('mongoose');
 const Envelopes = mongoose.model('Envelopes');
 const Categories = mongoose.model('Categories');
@@ -203,7 +204,7 @@ function deleteEnvelope(requestBody, res) {
 function addExpense(requestBody, res) {
     try {
         var amountAdded = requestBody.inputAmount;
-        var category = requestBody.category;
+        var categoryName = requestBody.category;
         var recipient = requestBody.recipient;
         var date = requestBody.date;
         var user_id = requestBody.user;
@@ -236,16 +237,19 @@ function addExpense(requestBody, res) {
             dateBool = false;
         }
 
-
         if (amountCorrect && dateBool) {
             User.findById(user_id, function(error, user) {
                 if (error) {
                     res.sendStatus(500);
                 } else {
+                    var envelopeExists = false;
                     for (var i = 0; i < user.envelopes.length; i++) {
-                        if (user.envelopes[i].category.name === category) {
+                        if (user.envelopes[i].category.name === categoryName && inputDate[1] == getMonthNumber(user.envelopes[i].month)) {
+                            envelopeExists = true;
                             user.envelopes[i].spent += parseInt(amountAdded);
                             user.envelopes[i].progress = Math.round((parseFloat(parseFloat(user.envelopes[i].spent) / parseFloat(user.envelopes[i].budget))) * 100);
+
+                            console.log(user.envelopes[i]);
 
                             Envelopes.findById(user.envelopes[i]._id, function(error, envelope) {
                                 if (error) {
@@ -279,12 +283,40 @@ function addExpense(requestBody, res) {
                             });
                         }
                     }
+
+                    if (!envelopeExists) {
+                        Categories.findOne({ name: categoryName }, function(error, category) {
+                            if (error) {
+                                console.log(error);
+                            } else {
+                                console.log(category);
+                                let expense = new Expense({
+                                    date: date,
+                                    category: category,
+                                    recipient: recipient,
+                                    value: amountAdded,
+                                    currency: currency
+                                });
+                                console.log(expense);
+
+                                expense.save(function callback(err) {
+                                    if (err) {
+                                        console.log(err);
+                                        res.sendStatus(500);
+                                        return;
+                                    } else {
+                                        user.expense.push(expense);
+                                        user.save();
+                                        res.status(200).json(user);
+                                        return;
+                                    }
+                                });
+                            }
+                        });
+                    }
                 }
             });
-        } else {
-            res.sendStatus(400);
         }
-
 
     } catch (ex) {
         console.log(ex);
@@ -306,6 +338,29 @@ function hexToRGB(hex, alpha) {
     } else {
         return "rgb(" + r + ", " + g + ", " + b + ")";
     }
+}
+
+function getMonthNumber(month) {
+    var monthArray = new Array();
+    monthArray[1] = "JAN";
+    monthArray[2] = "FEB";
+    monthArray[3] = "MAR";
+    monthArray[4] = "APR";
+    monthArray[5] = "MAY";
+    monthArray[6] = "JUN";
+    monthArray[7] = "JUL";
+    monthArray[8] = "AUG";
+    monthArray[9] = "SEP";
+    monthArray[10] = "OCT";
+    monthArray[11] = "NOV";
+    monthArray[12] = "DEC";
+    for (var i = 1; i <= monthArray.length; i++) {
+        if (monthArray[i] === month) {
+            return i;
+        }
+    }
+    return -1;
+
 }
 
 module.exports = {
