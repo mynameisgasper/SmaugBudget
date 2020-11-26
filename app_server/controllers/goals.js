@@ -73,6 +73,61 @@ var data = {
 
 };
 
+function parseRequestBody(body, res, session) {
+    switch (body.formType) {
+        case 'addGoal':
+            {
+                addGoal(body, res, session);
+                break;
+            }
+        case 'addMoney':
+            {
+                addMoney(body, res, session);
+                break;
+            }
+        case 'editGoal':
+            {
+                editGoal(body, res, session);
+                break;
+            }
+        case 'deleteGoal':
+            {
+                deleteGoal(body, res, session);
+                break;
+            }
+    }
+}
+
+
+function addGoal(body, res, session) {
+    const data = {
+        title: body.goal,
+        target: body.amount,
+        date: body.inputDateAddGoal,
+        category: body.inputCategory,
+        id: session.user._id
+    }
+
+    var args = {
+        data: data,
+        headers: { "Content-Type": "application/x-www-form-urlencoded" }
+    };
+
+    var client = new Client();
+    client.post("http://localhost:8080/api/addGoal", args,
+        function(data, response) {
+            if (response.statusCode == 200) {
+                res.session = session;
+                res.session.user = data;
+                res.redirect('/goals');
+            } else {
+                res.redirect('/goals#error');
+            }
+        }
+    );
+}
+
+
 function respond(res, session) {
     if (session.user) {
         res.render('goals', data);
@@ -84,5 +139,9 @@ function respond(res, session) {
 module.exports = {
     get: function(req, res) {
         respond(res, req.session);
+    },
+    post: function(req, res) {
+        parseRequestBody(req.body, res, req.session);
     }
+
 }

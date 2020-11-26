@@ -5,7 +5,7 @@ const { categorySchema } = require('./categories')
 goalsSchema.add({
     title: { type: String, required: true },
     target: { type: Number, required: true },
-    targetLeft: { type: Number, required: true },
+    saved: { type: Number, required: true },
     monthlyTarget: { type: Number, required: true },
     date: { type: Date, required: true },
     category: { type: categorySchema, required: true },

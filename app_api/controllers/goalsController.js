@@ -1,13 +1,16 @@
 const mongoose = require('mongoose');
 const Goal = mongoose.model('Goals');
+const User = mongoose.model('User');
+const Categories = mongoose.model('Categories');
+
 
 function addGoal(requestBody, res) {
     try {
-        var title = requestBody.goal;
-        var target = requestBody.amount;
+        var title = requestBody.title;
+        var saved = requestBody.target;
         //var monthlyTarget = requestBody.monthlyTarget;
-        var date = requestBody.inputDateAddGoal;
-        var category = requestBody.inputCategory;
+        var date = requestBody.date;
+        var categoryName = requestBody.category;
         var user_id = requestBody.id;
 
         //validate date, title and target
@@ -16,16 +19,56 @@ function addGoal(requestBody, res) {
         const targetTest = checkTarget(target);
 
         if (titleTest && targetTest && dateOk) {
-            let goal = new Goal({
-                title: title,
-                target: target,
-                targetLeft: target,
-                monthlyTarget: 0,
-                date: date,
-                category: { name: category }
+            User.findById(user_id, function(error, user) {
+                if (error) {
+                    console.log(error);
+                } else {
+                    for (var i = 0; i < user.goals.length; i++) {
+                        if (user.goals[i].title == title) {
+                            res.sendStatus(304);
+                            return;
+                        }
+                    }
+
+                    //? Try to find the category, create it if it doesn't exist.
+                    var category = null;
+                    for (var i = 0; i < user.categories.length; i++) {
+                        if (user.categories[i].name === categoryName) {
+                            category = user.categories[i];
+                            break;
+                        }
+                    }
+
+                    if (category == null) {
+                        let cat = new Categories({
+                            name: categoryName,
+                        })
+                        cat.save();
+                        category = cat;
+                    }
+
+                    let goal = new Goal({
+                        title: title,
+                        target: target,
+                        saved: saved,
+                        monthlyTarget: 0,
+                        date: date,
+                        category: { name: category }
+                    });
+
+                    goal.save(function callback(err) {
+                        if (err) {
+                            console.log(err);
+                            res.sendStatus(500);
+                        } else {
+                            user.categories.push(category);
+                            user.goals.push(goal);
+                            user.save();
+                            res.status(200).json(user);
+                        }
+                    });
+                }
             });
-            goal.save();
-            res.status(200).json(goal);
         } else {
             res.sendStatus(400);
         }

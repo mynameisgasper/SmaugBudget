@@ -83,6 +83,57 @@
   </div>
 </div>
 
+<!--- Add Money Form --->
+<div class="modal fade" id="addMoneyForm" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
+    <div class="position-absolute w-100 p-4 d-flex flex-column align-items-end">
+        <div class="w-25 toastek">
+            <div class="toast ml-auto tt2" role="alert" data-delay="1000" data-autohide="false">
+                <div class="toast-header">
+                    <strong class="mr-auto text-primary">HINT</strong>
+                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="toast-body">
+                    Input may only contain decimal numbers separated by . with max 2 decimal places.
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form name="addExpense" method="post" action="/goals" onsubmit="return disableButton()">
+                <input type="hidden" name="formType" value="addMoney" />
+                <div class="modal-body">
+                    <div class="ena"><label for="inputGoal">Goal</label></br>
+                        <select id="inputCategory" name="inputCategory" class="form-control">
+                            {{#each goal}}
+                            <option id="category{{_id}}">{{title}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                    <div class="ena"><label for="inputAmount">Amount</label></br>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">€</span>
+                            </div>
+                            <input type="number" class="form-control" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" onfocusout="amount2(this)" id="Amount2" name="inputAmount" placeholder="0.00" step="any">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit"  onclick="disableButton()" class="btn btn-primary">Add</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 
 <!--- Modal Form Edit --->
 
@@ -227,6 +278,7 @@
 {{/each}}
 
 
+
 <!----- WELCOME SECTION ----->
 
 {{> welcome}}
@@ -242,12 +294,17 @@
 
 <div class="container" id="goals-section">
   <div class="row" style="padding-bottom:3vh;">
-    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 goal-col">
+    <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+      <button type="button" class="btn btn-success" style="float:left;" data-toggle="modal" href="#addMoneyForm" role="button" aria-expanded="false" aria-controls="about">
+           Add Money 
+          <i class="fas fa-plus-square"></i>
+      </button>
+    </div>
+    <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
       <button type="button" class="btn btn-primary" style="float:right;" data-toggle="modal" href="#addGoalForm"
         role="button" aria-expanded="false" aria-controls="about">
         Add Goal
         <i class="fas fa-plus-square"></i>
-
       </button>
     </div>
   </div>
