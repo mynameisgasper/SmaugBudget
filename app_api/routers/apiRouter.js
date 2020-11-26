@@ -87,8 +87,8 @@ router.put('/editGoal', (req, res) => {
     goals.editGoal(req, res);
 })
 
-router.put('/addToGoal', (req, res) => {
-    goals.addToGoal(req, res);
+router.post('/addToGoalWithCategory', (req, res) => {
+    goals.addToGoalWithCategory(req, res);
 })
 
 router.delete('/deleteGoal', (req, res) => {

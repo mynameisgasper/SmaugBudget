@@ -9,7 +9,6 @@ function addGoal(requestBody, res) {
     try {
         var title = requestBody.title;
         var target = requestBody.target;
-        //var monthlyTarget = requestBody.monthlyTarget;
         var date = requestBody.date;
         var categoryName = requestBody.category;
         var userId = requestBody.id;
@@ -122,7 +121,53 @@ function editGoal(requestBody, res) {
     }
 }
 
-function addToGoal(requestBody, res) {
+function addToGoalWithCategory(requestBody, res) {
+    try {
+        var title = requestBody.title;
+        var amount = requestBody.amount;
+        var userId = requestBody.id;
+
+        //validate added amount
+        const targetTest = checkTarget(amount);
+
+        if (targetTest) {
+            User.findById(userId, function(error, user) {
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(500);
+                } else {
+                    //? find the correct goal
+                    var goalId = null;
+                    for (var i = 0; i < user.goals.length; i++) {
+                        if (user.goals[i].title === title) {
+                            goalId = user.goals[i]._id;
+                            console.log(user.goals[i].saved)
+                            
+                            user.goals[i].saved += amount;
+                            user.save();
+                            console.log(user.goals[i].saved)
+                            //amount = user.goals[i].saved;
+                            break;
+                        }
+                    }
+                    //console.log(goalId);
+                    //Goal.findByIdAndUpdate(goalId, {saved: 15512}, function(err, goal) {
+                       
+                    //});
+                    
+                    res.status(200).json(user);
+                }
+            });
+        } else {
+            res.sendStatus(400);
+        }
+    } catch (ex) {
+        console.log(ex);
+        res.sendStatus(500);
+    }
+}
+
+function addToGoalWithoutCategory(requestBody, res) {
     try {
         var addedAmount = requestBody.amount2;
 
@@ -143,7 +188,6 @@ function addToGoal(requestBody, res) {
                     } else {
                         res.sendStatus(404);
                     }
-
                 }
             });
         } else {
@@ -154,6 +198,7 @@ function addToGoal(requestBody, res) {
         res.sendStatus(500);
     }
 }
+
 
 function deleteGoal(requestBody, res) {
     try {
@@ -232,8 +277,8 @@ module.exports = {
     editGoal: function(req, res) {
         editGoal(req.body, res);
     },
-    addToGoal: function(req, res) {
-        addToGoal(req.body, res);
+    addToGoalWithCategory: function(req, res) {
+        addToGoalWithCategory(req.body, res);
     },
     deleteGoal: function(req, res) {
         deleteGoal(req.body, res);

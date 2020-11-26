@@ -82,9 +82,9 @@ function parseRequestBody(body, res, session) {
                 addGoal(body, res, session);
                 break;
             }
-        case 'addMoney':
+        case 'addToGoalWithCategory':
             {
-                addMoney(body, res, session);
+                addToGoalWithCategory(body, res, session);
                 break;
             }
         case 'editGoal':
@@ -100,6 +100,37 @@ function parseRequestBody(body, res, session) {
     }
 }
 
+
+function addToGoalWithCategory(body, res, session) {
+    const data = {
+        title: body.inputCategory,
+        amount: body.inputAmount,
+        id: session.user._id
+    }
+
+    var args = {
+        data: data,
+        headers: { "Content-Type": "application/x-www-form-urlencoded" }
+    };
+
+    console.log(data);
+
+    var client = new Client();
+    client.post("http://localhost:8080/api/addToGoalWithCategory", args,
+        function(data, response) {
+            if (response.statusCode == 200) {
+                console.log("a");
+                res.session = session;
+                res.session.user = data;
+                res.redirect('/goals');
+            } else {
+                console.log(response.statusCode);
+                res.redirect('/goals#error');
+                
+            }
+        }
+    );
+}
 
 function addGoal(body, res, session) {
     const data = {
@@ -193,5 +224,4 @@ module.exports = {
     post: function(req, res) {
         parseRequestBody(req.body, res, req.session);
     }
-
 }

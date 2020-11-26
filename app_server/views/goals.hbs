@@ -109,7 +109,7 @@
                 </button>
             </div>
             <form name="addExpense" method="post" action="/goals" onsubmit="return disableButton()">
-                <input type="hidden" name="formType" value="addMoney" />
+                <input type="hidden" name="formType" value="addToGoalWithCategory">
                 <div class="modal-body">
                     <div class="ena"><label for="inputGoal">Goal</label></br>
                         <select id="inputCategory" name="inputCategory" class="form-control">
@@ -257,16 +257,6 @@
             <input type="number" class="form-control" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" onfocusout="amount2(this,{{id}})" id="Amount2" placeholder="0.00" step ="any" required="required">
             <div id="amm{{id}}"></div>
           </div>
-          <label for="inputAmount">Your Currency</label>
-          <select id="currencySelect{{id}}" class="form-control currencySelector" required="required">
-            <option selected="selected">€</option>
-            <option>$</option>
-            <option>£</option>
-            <option>¥</option>
-            <option>₹</option>
-            <option>₽</option>
-            <option>kn</option>
-          </select>
         </div>
         <div class="modal-footer">
           <button type="submit" onclick="disableButton3()" class="btn btn-primary">Add</button>
