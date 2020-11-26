@@ -52,7 +52,13 @@ var data = {
     //data
     data_username: "Grega",
     data_email: "Grega@gmail.com",
-    data_connections: connections
+    data_connections: connections,
+
+    //validation
+    HINT: dictionary.getTranslation("HINT"),
+    nameHint: dictionary.getTranslation("nameHint"),
+    surnameHint: dictionary.getTranslation("surnameHint"),
+    emailHint: dictionary.getTranslation("emailHint")
 }
 
 function respond(res, session) {
