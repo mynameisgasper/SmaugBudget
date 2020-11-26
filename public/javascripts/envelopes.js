@@ -44,7 +44,7 @@ function disableButton3(id) {
 }
 
 function amount(field) {
-        //var field = document.getElementById("PayeeModal");
+    //var field = document.getElementById("PayeeModal");
     var regex = new RegExp("^[0-9]+(\.[0-9]{1,2})?$");
     //decimalna števila z največj 2ma decimalnima mestoma ločilo je pika!
     //črkev male,velike,številke ne veljajo števila kot so .73, 
@@ -60,7 +60,7 @@ function amount(field) {
 }
 
 function amount2(field) {
-        //var field = document.getElementById("PayeeModal");
+    //var field = document.getElementById("PayeeModal");
     var regex = new RegExp("^[0-9]+(\.[0-9]{1,2})?$");
     //decimalna števila z največj 2ma decimalnima mestoma ločilo je pika!
     //črkev male,velike,številke ne veljajo števila kot so .73, 

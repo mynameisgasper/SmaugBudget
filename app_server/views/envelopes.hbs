@@ -70,7 +70,7 @@
 
 
 {{#each envelope}}
-<div class="modal fade" id="editForm{{id}}" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="editForm{{_id}}" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
     <div class="position-absolute w-100 p-4 d-flex flex-column align-items-end">
         <div class="w-25 toastek">
             <div class="toast ml-auto tt3" role="alert" data-delay="1000" data-autohide="false">
@@ -89,12 +89,13 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">  
-                <h5 class="modal-title">{{category}}</h5>
+                <h5 class="modal-title">{{category.name}}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form name="signup" method="post" action="/" onsubmit="return disableButton3({{id}})">
+            <!--- ADD FORM --->
+            <form name="addEnvelope" method="post" action="/envelopes" onsubmit="return disableButton3({{id}})">
                 <div class="modal-body">
                     <div class="ena"><label for="inputAmount">Amount</label></br>
                         <div class="input-group mb-3">
@@ -102,22 +103,21 @@
                                 <span class="input-group-text">€</span>
                             </div>
                             <input type="hidden" value="{{_id}}" name="id">
-                            <input type="number" class="form-control" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" onfocusout="amount3(this,{{id}})" id="inputAmount" placeholder="0.00" step="any">
+                            <input type="hidden" name="formType" value="editEnvelope" />
+                            <input type="number" name="inputAmount" class="form-control" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" onfocusout="amount3(this,{{id}})" id="inputAmount" placeholder="0.00" step="any">
                         </div>
-                        <div id="vnos{{id}}"></div>
+                        <div id="vnos{{_id}}"></div>
                     </div>
-
                     <div class="ena">
                         <label for="colorpicker">Color Picker</label></br>
-                        <input type="color" id="colorpicker" value="{{colorHex}}">
+                        <input type="color" id="colorpicker" name="colorPicker" value="{{colorHex}}">
                     </div>
-
                 </div>
                 <div class="modal-footer">
-                    <button type="button" onclick="deleteEnvelope({{id}});" class="btn btn-danger">Delete</button>
                     <button type="submit" onclick="disableButton3({{id}})" class="btn btn-primary">Add</button>
                 </div>
             </form>
+            <!--- DELETE FORM --->
         </div>
     </div>
 </div>
@@ -153,11 +153,15 @@
                     <div class="ena"><label for="inputGoal">Category</label></br>
                         <select id="inputCategory" name="inputCategory" class="form-control">
                             {{#each envelope}}
-                            <option id="category{{id}}">{{category.name}}</option>
+                            <option id="category{{_id}}">{{category.name}}</option>
                             {{/each}}
                         </select>
                     </div>
-
+                    <div class="ena">
+                        <label for="Payee">Recipient</label><br>
+                        <input type="text" id="Payee2{{id}}" name="recipient" class="form-control" placeholder="e.g. Elektro Ljubljana d.d." onfocusout="nameAdd2(this,{{id}})" value="{{recipient}}"required="required">
+                        <div id="{{id}}txt"></div>
+                    </div>
                     <div class="ena"><label for="inputAmount">Amount</label></br>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
@@ -165,7 +169,10 @@
                             </div>
                             <input type="number" class="form-control" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" onfocusout="amount2(this)" id="Amount2" name="inputAmount" placeholder="0.00" step="any">
                         </div>
-                        <div id="amm2"></div>
+                    </div>
+                    <div class="ena">
+                        <label for="datum">Date</label><br>
+                        <input type="date" id="inputDate{{_id}}" name="date" onfocusout="dateCheck2(this,{{id}})"class="form-control" value="{{year}}-{{month}}-{{day}}"required="required">
                     </div>
                 </div>
                 <div class="modal-footer">

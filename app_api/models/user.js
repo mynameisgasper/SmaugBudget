@@ -2,7 +2,8 @@ const mongoose = require('mongoose');
 const { goalsSchema } = require('./goals');
 const { billsSchema } = require('./bills');
 const { envelopesSchema } = require('./envelopes');
-const { categorySchema } = require('./categories')
+const { categorySchema } = require('./categories');
+const { expenseSchema } = require('./expense');
 
 const userSchema = new mongoose.Schema();
 const connectionsSchema = new mongoose.Schema();
@@ -23,7 +24,8 @@ userSchema.add({
     envelopes: [envelopesSchema],
     goals: [goalsSchema],
     bills: [billsSchema],
-    categories: [categorySchema]
+    categories: [categorySchema],
+    expense: [expenseSchema]
 });
 
 connectionsSchema.add({

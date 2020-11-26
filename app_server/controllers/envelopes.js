@@ -68,14 +68,26 @@ function respond(res, session) {
 
 function parseRequestBody(body, res, session) {
     switch (body.formType) {
-        case 'addExpense': {
-            addExpense(body, res, session);
-            break;
-        }
-        case 'addEnvelope':{
-            addEnvelope(body, res, session);
-            break;
-        }
+        case 'addExpense':
+            {
+                addExpense(body, res, session);
+                break;
+            }
+        case 'addEnvelope':
+            {
+                addEnvelope(body, res, session);
+                break;
+            }
+        case 'deleteEnvelope':
+            {
+                deleteEnvelope(body, res, session);
+                break;
+            }
+        case 'editEnvelope':
+            {
+                editEnvelope(body, res, session);
+                break;
+            }
     }
 }
 
@@ -111,6 +123,8 @@ function addExpense(body, res, session) {
     const data = {
         inputAmount: body.inputAmount,
         category: body.inputCategory,
+        recipient: body.recipient,
+        date: body.date,
         user: session.user._id
     }
 
@@ -121,6 +135,55 @@ function addExpense(body, res, session) {
 
     var client = new Client();
     client.post("http://localhost:8080/api/addExpense", args, function(data, response) {
+        if (response.statusCode == 200) {
+            res.session = session;
+            res.session.user = data;
+            res.redirect('/envelopes');
+        } else {
+            res.redirect('/envelopes#error');
+        }
+    });
+}
+
+function deleteEnvelope(body, res, session) {
+    const data = {
+        user: session.user._id,
+        envelope_id: body.id
+    }
+
+    var args = {
+        data: data,
+        headers: { "Content-Type": "application/x-www-form-urlencoded" }
+    };
+
+    var client = new Client();
+    client.post("http://localhost:8080/api/deleteEnvelope", args, function(data, response) {
+        if (response.statusCode == 200) {
+            res.session = session;
+            res.session.user = data;
+            res.redirect('/envelopes');
+        } else {
+            res.redirect('/envelopes#error');
+        }
+    });
+
+}
+
+function editEnvelope(body, res, session) {
+    const data = {
+        inputAmount: body.inputAmount,
+        colorPicker: body.colorPicker,
+        id: body.id,
+        user: session.user._id
+    }
+
+    var args = {
+        data: data,
+        headers: { "Content-Type": "application/x-www-form-urlencoded" }
+    };
+
+    var client = new Client();
+    client.post("http://localhost:8080/api/editEnvelope", args, function(data, response) {
         if (response.statusCode == 200) {
             res.session = session;
             res.session.user = data;

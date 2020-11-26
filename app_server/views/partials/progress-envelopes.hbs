@@ -1,7 +1,7 @@
 <div id="data">
     {{#each envelope}}
         {{#ifEquals month ../setMonth}}
-            <div class="row" id="envelope{{id}}">
+            <div class="row" id="envelope{{_id}}">
                 <div class="col-sm-12 col-md-12 col-lg-2 col-xl-2">
                     <h3>{{category.name}}</h3>
                 </div>
@@ -16,11 +16,21 @@
 
                 <div class="col-sm-12 col-md-12 col-lg-5 col-xl-4 envelope-info">
                     <p class="info">You have spent <span>{{spent}}€</span> of <span>{{budget}}€</span></p>
-                    <button type="button" class="btn edit-btn" data-toggle="modal" href="#editForm{{id}}" role="button">
+                    <form name="deleteForm{{_id}}" method="post" action="/envelopes">
+                        <input type="hidden" value="deleteEnvelope" name="formType">
+                        <input type="hidden" value="{{_id}}" name="id">
+                        <button type="submit" class="btn edit-btn" data-toggle="modal">
+                            <i class="fas fa-minus-square hover-red"></i>
+                        </button>
+                    </form>
+                    
+                    <button type="button" class="btn edit-btn" data-toggle="modal" href="#editForm{{_id}}" role="button">
                         <i class="fas fa-pencil-alt"></i>
                     </button>
                 </div>
             </div>
+
+            
         {{/ifEquals}}
     {{/each}}
 </div>

@@ -8,12 +8,13 @@ function addGoal(requestBody, res) {
         //var monthlyTarget = requestBody.monthlyTarget;
         var date = requestBody.inputDateAddGoal;
         var category = requestBody.inputCategory;
+        var user_id = requestBody.id;
 
         //validate date, title and target
         dateOk = checkDate(date);
         const titleTest = checkTitle(title);
-        const targetTest  = checkTarget(target);
-        
+        const targetTest = checkTarget(target);
+
         if (titleTest && targetTest && dateOk) {
             let goal = new Goal({
                 title: title,
@@ -21,12 +22,11 @@ function addGoal(requestBody, res) {
                 targetLeft: target,
                 monthlyTarget: 0,
                 date: date,
-                category: {name: category}
+                category: { name: category }
             });
             goal.save();
             res.status(200).json(goal);
-        }
-        else {
+        } else {
             res.sendStatus(400);
         }
     } catch (ex) {
@@ -43,33 +43,32 @@ function editGoal(requestBody, res) {
         var newDate = requestBody.inputDate;
         var newCategory = requestBody.inputCategory;
 
-        var id_requested = "5fbebcc5dd5dbb3c14eb20f6";  //v moji bazi
+        var id_requested = "5fbebcc5dd5dbb3c14eb20f6"; //v moji bazi
 
         //validate date, title and target
         dateOk = checkDate(newDate);
         const titleTest = checkTitle(newTitle);
-        const targetTest  = checkTarget(newTarget);
-        
+        const targetTest = checkTarget(newTarget);
+
         if (titleTest && targetTest && dateOk) {
             Goal.findByIdAndUpdate(id_requested, {
                 title: newTitle,
                 target: newTarget,
                 date: newDate,
-                category: {name: newCategory}
-            }, function (err, goal) { 
-            if (err) {
-                console.log(err);
-            } else {
-                if (goal) {
-                    goal.save();
-                    res.status(200).json(goal);
+                category: { name: newCategory }
+            }, function(err, goal) {
+                if (err) {
+                    console.log(err);
                 } else {
-                    res.sendStatus(404);
+                    if (goal) {
+                        goal.save();
+                        res.status(200).json(goal);
+                    } else {
+                        res.sendStatus(404);
+                    }
                 }
-            } 
-        });
-        }
-        else {
+            });
+        } else {
             res.sendStatus(400);
         }
     } catch (ex) {
@@ -82,17 +81,16 @@ function addToGoal(requestBody, res) {
     try {
         var addedAmount = requestBody.amount2;
 
-        var id_requested = "5fbebcc5dd5dbb3c14eb20f6";  //v moji bazi
+        var id_requested = "5fbebcc5dd5dbb3c14eb20f6"; //v moji bazi
 
         //validate added amount
         const targetTest = checkTarget(addedAmount);
-        
+
         if (targetTest) {
-            Goal.findById(id_requested, function (err, goal) { 
-                if (err){ 
-                    console.log(err); 
-                } 
-                else { 
+            Goal.findById(id_requested, function(err, goal) {
+                if (err) {
+                    console.log(err);
+                } else {
                     if (goal) {
                         goal.targetLeft -= addedAmount
                         goal.save();
@@ -100,11 +98,10 @@ function addToGoal(requestBody, res) {
                     } else {
                         res.sendStatus(404);
                     }
-                     
-                } 
+
+                }
             });
-        }
-        else {
+        } else {
             res.sendStatus(400);
         }
     } catch (ex) {
@@ -116,32 +113,28 @@ function addToGoal(requestBody, res) {
 function deleteGoal(requestBody, res) {
     try {
         var id_requested = "5fbec13be03d4a2d402da505"; //primer iz moje baze
-        if(id_requested != undefined){
-            Goal.findByIdAndDelete( id_requested, function(err, goal) { 
+        if (id_requested != undefined) {
+            Goal.findByIdAndDelete(id_requested, function(err, goal) {
                 if (err) {
                     console.log(err);
-                } 
-                else {
+                } else {
                     if (goal) {
                         res.status(204).json(goal);
-                    } 
-                    else {
+                    } else {
                         res.sendStatus(404);
                     }
                 }
             });
-        }
-        else{
+        } else {
             res.sendStatus(400);
         }
-    } 
-    catch (ex) {
+    } catch (ex) {
         console.log(ex);
         res.sendStatus(500);
     }
 }
 
-function checkDate(date){
+function checkDate(date) {
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
     var mm = String(today.getMonth() + 1).padStart(2, '0');
@@ -154,40 +147,35 @@ function checkDate(date){
 
     if (y > yyyy) {
         dateOk = true;
-    } 
-    else if (y == yyyy) {
+    } else if (y == yyyy) {
         if (m > mm) {
             dateOk = true;
-        } 
-        else if (m == mm) {
+        } else if (m == mm) {
             if (d >= dd) {
                 dateOk = true;
-            } 
-            else {
+            } else {
                 dateOk = false;
             }
-        } 
-        else {
+        } else {
             dateOk = false;
         }
-    } 
-    else {
+    } else {
         dateOk = false;
     }
 
     return dateOk;
 }
 
-function checkTitle(title){
-    var regexTitle = new RegExp("^[A-Za-z0-9]{1,20}$"); 
+function checkTitle(title) {
+    var regexTitle = new RegExp("^[A-Za-z0-9]{1,20}$");
     const titleTest = regexTitle.test(title);
 
     return titleTest;
 }
 
-function checkTarget(target){
+function checkTarget(target) {
     var regexTarget = new RegExp("^[0-9]+(\.[0-9]{1,2})?$");
-    const targetTest  = regexTarget.test(target);
+    const targetTest = regexTarget.test(target);
 
     return targetTest;
 }

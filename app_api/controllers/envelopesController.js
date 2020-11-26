@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
 const Envelopes = mongoose.model('Envelopes');
 const Categories = mongoose.model('Categories');
+const Expense = mongoose.model('Expense');
 const User = mongoose.model('User');
 
 /*
 ? Add Envelope Function
 ! Adds an envelope into DB. 
 */
-
 function addEnvelope(requestBody, res) {
     try {
         var colorHexPicker = requestBody.colorPicker;
@@ -43,7 +43,8 @@ function addEnvelope(requestBody, res) {
                     console.log(error);
                 } else {
                     for (var i = 0; i < user.envelopes.length; i++) {
-                        if (user.envelopes[i].category.name === categoryName) {
+
+                        if (user.envelopes[i].category.name.toUpperCase() === categoryName.toUpperCase()) {
                             if (user.envelopes[i].month === currentMonth) {
                                 res.sendStatus(304);
                                 return;
@@ -64,7 +65,7 @@ function addEnvelope(requestBody, res) {
                         let cat = new Categories({
                             name: categoryName,
                         })
-                        cat.save();                        
+                        cat.save();
                         category = cat;
                     }
 
@@ -102,65 +103,53 @@ function addEnvelope(requestBody, res) {
     }
 }
 
-
 /*
 ? EDIT Envelope Function
 ! find the envelope and add an amount or/and change color 
 */
 
-function editEnvelope(requestBody, res_parent) {
+function editEnvelope(requestBody, res) {
     try {
-
         var newBudget = requestBody.inputAmount;
         var colorHexPicker = requestBody.colorPicker
         var colorRGB = hexToRGB(colorHexPicker);
         var colorBackground = hexToRGB(colorHexPicker, 0.5);
-        var id_requested = requestBody.id;
+        var envelope_id = requestBody.id;
+        var user_id = requestBody.user;
 
         var regex = new RegExp("^[0-9]+");
         const amountCorrect = regex.test(newBudget);
 
-        var newProgress;
         if (amountCorrect) {
-            var promise = new Promise((res, err) => {
-                Envelopes.findById(id_requested, function(err, envelope) {
-                    if (err) {
-                        console.log(err);
-                    } else {
-                        if (envelope) {
-                            Math.round(newProgress = (envelope.spent / newBudget) * 100);
-                            res();
-                        } else {
-                            res_parent.sendStatus(404);
+            User.findById(user_id, function(error, user) {
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(500);
+                } else {
+                    for (var i = 0; i < user.envelopes.length; i++) {
+                        if (user.envelopes[i]._id == envelope_id) {
+                            user.envelopes[i].budget = newBudget;
+                            user.envelopes[i].colorHex = colorHexPicker;
+                            user.envelopes[i].color = colorRGB;
+                            user.envelopes[i].bgColor = colorBackground;
+                            user.save();
+                            break;
                         }
                     }
-                });
-            })
+
+                    Envelopes.findById(envelope_id, function(err, envelope) {
+                        envelope.budget = newBudget;
+                        envelope.colorHex = colorHexPicker;
+                        envelope.color = colorRGB;
+                        envelope.bgColor = colorBackground;
+                    });
+                    res.status(200).json(user);
+                }
+            });
+        } else {
+            res.sendStatus(400);
         }
 
-        promise.then(() => {
-            if (amountCorrect) {
-                Envelopes.findByIdAndUpdate(id_requested, {
-                        budget: newBudget,
-                        progress: newProgress,
-                        colorHex: colorHexPicker,
-                        color: colorRGB,
-                        bgColor: colorBackground
-                    },
-                    function(err, envelope) {
-                        if (err) {
-                            console.log(err);
-                        } else {
-                            if (envelope) {
-                                envelope.save();
-                                res_parent.status(200).json(envelope);
-                            } else {
-                                res_parent.sendStatus(404);
-                            }
-                        }
-                    });
-            }
-        });
     } catch (ex) {
         console.log(ex);
         res.sendStatus(500);
@@ -170,17 +159,33 @@ function editEnvelope(requestBody, res_parent) {
 /*
 ? Delete Envelope by ID
 */
-
 function deleteEnvelope(requestBody, res) {
     try {
-        var id_requested = requestBody.id;
-        Envelopes.deleteOne({ _id: id_requested }, function(err) {
-            if (err) return console.log(err);
-            else {
-                res.sendStatus(204);
-            }
+        var envelope_id = requestBody.envelope_id;
+        var user_id = requestBody.user;
+
+        Envelopes.findByIdAndDelete(envelope_id, function(err, docs) {
+            if (err) {
+                console.log(err);
+            } else {}
         });
 
+        User.findById(user_id, function(err, user) {
+            if (err) {
+                console.log(err);
+            } else {
+                for (var i = 0; i < user.envelopes.length; i++) {
+                    if (user.envelopes[i]._id == envelope_id) {
+                        user.envelopes.pull(envelope_id);
+                        user.save();
+                        res.status(200).json(user);
+                        return;
+                    }
+                }
+                res.status(304);
+                return;
+            }
+        });
 
     } catch (ex) {
         console.log(ex);
@@ -189,42 +194,80 @@ function deleteEnvelope(requestBody, res) {
 
 }
 
-
-
 /*
 ? Add Expense Function
 ! find the envelope and add an amount or/and change color 
 */
-
 function addExpense(requestBody, res) {
     try {
         var amountAdded = requestBody.inputAmount;
         var category = requestBody.category;
+        var recipient = requestBody.recipient;
+        var date = requestBody.date;
         var user_id = requestBody.user;
+        //TODO Implement Currency
+        var currency = '€';
 
-        User.findById(user_id, function(error, user) {
-            if (error) {
-                res.sendStatus(500);
-            } else {
-                for (var i = 0; i < user.envelopes.length; i++) {
-                    if (user.envelopes[i].category.name === category) {
-                        user.envelopes[i].spent += parseInt(amountAdded);
-                        user.envelopes[i].progress = Math.round((parseFloat(parseFloat(user.envelopes[i].spent) / parseFloat(user.envelopes[i].budget))) * 100);
-                        user.save();
 
-                        Envelopes.findById(user.envelopes[i]._id, function(error, envelope) {
-                            envelope.spent = user.envelopes[i].spent;
-                            envelope.progress = user.envelopes[i].progress;
-                            envelope.save();
-                        });
+        var regex = new RegExp("^[0-9]+(\.[0-9]{1,2})?$");
+        const amountCorrect = regex.test(requestBody.inputAmount)
 
-                        res.status(200).json(user);
-                        return;
+        if (amountCorrect) {
+            User.findById(user_id, function(error, user) {
+                if (error) {
+                    res.sendStatus(500);
+                } else {
+                    for (var i = 0; i < user.envelopes.length; i++) {
+                        if (user.envelopes[i].category.name === category) {
+                            user.envelopes[i].spent += parseInt(amountAdded);
+                            user.envelopes[i].progress = Math.round((parseFloat(parseFloat(user.envelopes[i].spent) / parseFloat(user.envelopes[i].budget))) * 100);
+
+                            Envelopes.findById(user.envelopes[i]._id, function(error, envelope) {
+                                if (error) {
+                                    console.log(error);
+                                } else {
+                                    console.log(user.envelopes[i]);
+                                    console.log(i);
+                                    envelope.spent = user.envelopes[i - 1].spent;
+                                    envelope.progress = user.envelopes[i - 1].progress;
+                                    envelope.save();
+
+                                    let expense = new Expense({
+                                        date: date,
+                                        category: envelope.category,
+                                        recipient: recipient,
+                                        value: amountAdded,
+                                        currency: currency
+                                    });
+
+                                    expense.save(function callback(err) {
+                                        if (err) {
+                                            console.log(err);
+                                            res.sendStatus(500);
+                                            return;
+                                        } else {
+                                            user.expense.push(expense);
+                                            user.save();
+                                            res.status(200).json(user);
+                                            return;
+                                        }
+                                    });
+
+                                }
+
+                            });
+
+
+
+                        }
                     }
                 }
-                res.sendStatus(404);
-            }
-        });
+            });
+        } else {
+            res.sendStatus(400);
+        }
+
+
     } catch (ex) {
         console.log(ex);
         res.sendStatus(500);
@@ -235,7 +278,6 @@ function addExpense(requestBody, res) {
 ? Converts HEX color code to rgb if alpha is empty
 ! Converts HEX color code to rgba if alpha is present
 */
-
 function hexToRGB(hex, alpha) {
     var r = parseInt(hex.slice(1, 3), 16),
         g = parseInt(hex.slice(3, 5), 16),
