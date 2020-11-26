@@ -208,19 +208,19 @@ function addExpense(requestBody, res) {
             if (error) {
                 res.sendStatus(500);
             } else {
-                for (const element of user.envelopes) {
-                    if (element.category.name === category) {
-                        Envelopes.findById(element._id, function(err, envelope) {
-                            if (err) {
-                                res.sendStatus(404);
-                            }
-                            else {
-                                envelope.spent += parseInt(amountAdded);
-                                envelope.progress = parseFloat(parseFloat(envelope.spent) / parseFloat(envelope.budget));
-                                envelope.save();
-                                res.status(200).json(user);
-                            }
+                for (var i = 0; i < user.envelopes.length; i++) {
+                    if (user.envelopes[i].category.name === category) {
+                        user.envelopes[i].spent += parseInt(amountAdded);
+                        user.envelopes[i].progress = (parseFloat(parseFloat(user.envelopes[i].spent) / parseFloat(user.envelopes[i].budget))) * 100;
+                        user.save();
+
+                        Envelopes.findById(user.envelopes[i]._id, function(error, envelope) {
+                            envelope.spent = user.envelopes[i].spent;
+                            envelope.progress = user.envelopes[i].progress;
+                            envelope.save();
                         });
+
+                        res.status(200).json(user);
                         return;
                     }
                 }
