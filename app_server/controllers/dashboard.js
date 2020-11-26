@@ -100,7 +100,7 @@ function generateAnalyitcs(user) {
     var analyzeExpenses = getExpenseAnalysis(lastMonthExpenses);
     var mostMoneySpentOn = getMostMoneySpentOn(analyzeExpenses);
     var mostTimesPurchased = getMostTimesPurchased(analyzeExpenses);
-    
+
     return [{
         rowName: dictionary.getTranslation("analyticsRowName1"),
         color: 'rgb(94, 192, 193)',
@@ -214,7 +214,13 @@ function getMostTimesPurchased(expenseAnalitics) {
             selectedAnalitic = analitic;
         }
     }
-    return selectedAnalitic[0];
+
+    if (selectedAnalitic) {
+        return selectedAnalitic[0];
+    }
+    else {
+        return selectedAnalitic[0];
+    }
 }
 
 function getTotalCost(bills) {
