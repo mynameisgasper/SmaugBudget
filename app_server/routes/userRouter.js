@@ -51,7 +51,7 @@ router.get('/history', (req, res) => {
     history.get(req, res);
 });
 router.post('/history', (req, res) => {
-    history.get(req, res);
+    history.post(req, res);
 });
 
 //Utilities

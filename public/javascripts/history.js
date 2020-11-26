@@ -1,3 +1,5 @@
+const { localsAsTemplateData } = require("hbs");
+
 window.onload = function() {
     const parsedTable = parseTable(getRows());
     loadGraphs(groupByCategories(parsedTable));

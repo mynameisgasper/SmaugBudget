@@ -2,6 +2,7 @@ var user = require('../controllers/userController');
 var bills = require('../controllers/billsController');
 var envelopes = require('../controllers/envelopesController');
 var goals = require('../controllers/goalsController');
+var history = require('../controllers/expenseController');
 
 var converter = require('../controllers/currencyConverter');
 
@@ -62,8 +63,8 @@ router.post('/deleteEnvelope', (req, res) => {
     envelopes.deleteEnvelope(req, res);
 })
 
-router.post('/editHistory', (req, res) => {
-    history.editHisory(req, res);
+router.post('/editExpense', (req, res) => {
+    history.editExpense(req, res);
 })
 
 router.get('/converter', (req, res) => {

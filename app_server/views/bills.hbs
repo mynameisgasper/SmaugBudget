@@ -177,10 +177,8 @@
                                                     <label for="Category">Category</label><br>
                                                     <select id="inputCategory" name="inputCategory" class="form-control">
                                                         <option selected>{{category}}</option>
-                                                        {{#each categories}}
-                                                            {{#ifNotEquals category category}}
+                                                        {{#each ../categories}}
                                                                 <option id="{{_id}}">{{name}}</option>
-                                                            {{/ifNotEquals}}
                                                         {{/each}}
                                                     </select>
                                                 </div>
