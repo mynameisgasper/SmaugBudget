@@ -39,7 +39,7 @@ function sendEmail(to, subject, text) {
           console.log(err);
         }
         else {
-            console.log(info);
+            console.log("Email sent!");
         }
     });
 }

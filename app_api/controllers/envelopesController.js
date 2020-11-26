@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Envelopes = mongoose.model('Envelopes');
-const categories = mongoose.model('Categories');
+const Categories = mongoose.model('Categories');
 const User = mongoose.model('User');
 
 /*
@@ -37,22 +37,6 @@ function addEnvelope(requestBody, res) {
         const amountCorrect = regex.test(requestBody.inputAmount)
 
         if (amountCorrect) {
-            //? Try to find the category, create it if it doesn't exist.
-            categories.findOne({ name: categoryName }, function(err, category) {
-                if (err) {
-                    console.log(err);
-                } else {
-                    if (category == null) {
-                        let category = new categories({
-                            name: categoryName,
-                        })
-                        category.save();
-                    } else {
-                        console.log("This category already exists.")
-                    }
-                }
-            })
-
             //? Try to find current user
             User.findById(user_id, function(error, user) {
                 if (error) {
@@ -67,6 +51,23 @@ function addEnvelope(requestBody, res) {
                         }
                     }
 
+                    //? Try to find the category, create it if it doesn't exist.
+                    var category = null;
+                    for (var i = 0; i < user.categories.length; i++) {
+                        if (user.categories[i].name === categoryName) {
+                            category = user.categories[i];
+                            break;
+                        }
+                    }
+
+                    if (category == null) {
+                        let cat = new Categories({
+                            name: categoryName,
+                        })
+                        cat.save();                        
+                        category = cat;
+                    }
+
                     let envelope = new Envelopes({
                         progress: 0,
                         budget: amount,
@@ -75,20 +76,20 @@ function addEnvelope(requestBody, res) {
                         color: colorRGB,
                         bgColor: colorBackground,
                         month: currentMonth,
-                        category: { name: categoryName },
+                        category: category,
                     })
                     envelope.save(function callback(err) {
                         if (err) {
                             console.log(err);
                             res.sendStatus(500);
                         } else {
+                            user.categories.push(category);
                             user.envelopes.push(envelope);
                             user.save();
                             res.status(200).json(user);
                         }
 
                     });
-                    return;
                 }
             });
         } else {

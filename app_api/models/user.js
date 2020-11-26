@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
-const { goalsSchema } = require('./goals')
-const { billsSchema } = require('./bills')
-const { envelopesSchema } = require('./envelopes')
+const { goalsSchema } = require('./goals');
+const { billsSchema } = require('./bills');
+const { envelopesSchema } = require('./envelopes');
+const { categorySchema } = require('./categories')
 
 const userSchema = new mongoose.Schema();
 const connectionsSchema = new mongoose.Schema();
@@ -21,7 +22,8 @@ userSchema.add({
     connections: [connectionsSchema],
     envelopes: [envelopesSchema],
     goals: [goalsSchema],
-    bills: [billsSchema]
+    bills: [billsSchema],
+    categories: [categorySchema]
 });
 
 connectionsSchema.add({
