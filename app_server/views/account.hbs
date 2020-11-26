@@ -1,7 +1,6 @@
 <!-- Account body -->
-<div class="container" id="accountBody-container">  
-  <div class="position-absolute w-100 p-4 d-flex flex-column align-items-end">
-    <div class="w-25">
+<div class="position-absolute w-100 p-4 d-flex flex-column align-items-end">
+    <div class="w-25 toast-front">
         <div class="toast ml-auto tt1" role="alert" data-delay="1000" data-autohide="false">
             <div class="toast-header">
                 <strong class="mr-auto text-primary">{{HINT}}</strong>
@@ -26,6 +25,8 @@
         </div>        
     </div>
 </div>
+<div class="container" id="accountBody-container">  
+  
   <div id="accountBody"  class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
     <h2>{{title}}</h2>
     <form name="userInfo" method="post" action="/account" onsubmit="return updateUsetInfo()">
@@ -131,8 +132,8 @@
             English
           </button>
           <div class="dropdown-menu" aria-labelledby="languageChange">
-            <a class="dropdown-item" >English</a>
-            <a class="dropdown-item" >Slovenian</a>
+            <a class="dropdown-item" onclick="changeLanguage('English')">English</a>
+            <a class="dropdown-item" onclick="changeLanguage('Slovenski')">Slovenski</a>
           </div>
         </div>
     </div>
@@ -546,12 +547,12 @@
         <form name="userPfp" id="userPfp" method="post" action="/api/uploadPfp">
           <div class="form-group">
             <label for="addPfp">{{dragAndDropOr}}:</label>
-            <input type="file" name="image" class="form-control-file" id="addPfp">
+            <input type="file" name="image" class="form-control-file" id="addPfp" accept="image/*">
           </div>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" id="submitPfp" class="btn btn-primary">{{saveChanges}}</button>
+        <button type="button" id="submitPfp" class="btn btn-primary" disabled>{{saveChanges}}</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">{{close}}</button>
       </div>
     </div>

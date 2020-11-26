@@ -20,6 +20,7 @@ userSchema.add({
     confirmationCode: { type: String },
     balance: { type: Number, required: false },
     isPremium: { type: Boolean, required: true },
+    profilePic: { type: String, required: false },
     connections: [connectionsSchema],
     envelopes: [envelopesSchema],
     goals: [goalsSchema],

@@ -186,16 +186,18 @@ function postImg (req, res) {
                 console.log(err);
             } else {
                 if (user) {
-                    fs.unlink(user.profilePic, (err) => {
-                        if (err) {
-                            console.log('File: ' + user.profilePic + " does not exist!");
-                        } else {
-                            console.log('File: ' + user.profilePic + " was deleted");
-                        }
-                    });
+                    if (user.profilePic) {
+                        fs.unlink(user.profilePic, (err) => {
+                            if (err) {
+                                console.log('File: ' + user.profilePic + " does not exist!");
+                            } else {
+                                console.log('File: ' + user.profilePic + " was deleted");
+                            }
+                        });
+                    }
                     user.profilePic = req.file.path;
                     user.save();
-                    res.status(200).json(user.profilePic);
+                    res.status(200).json(req.file.path);
                 } else {
                     res.sendStatus(404);
                 }

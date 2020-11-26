@@ -9,7 +9,12 @@ $(document).ready(function() {
 
     //pfp
     $("#addPfp").change(function(){
-        readURL(this);
+        var file = readURL(this);
+        if (file) {
+            $('#submitPfp')[0].removeAttribute("disabled"); 
+        } else {
+            $('#submitPfp')[0].setAttribute("disabled", "disabled"); 
+        }
     });
     //$("#pfpNavBar")[0].setAttribute("src", $("#profile-pic")[0].style.backgroundImage.substring(5, $("#profile-pic")[0].style.backgroundImage.length - 2))
 
@@ -21,6 +26,9 @@ $(document).ready(function() {
     
         xhr.onload = function() {
             console.log(this.responseText); // whatever the server returns
+            $("#changePfp").modal('hide');
+            $('body').removeClass('modal-open');
+            $('.modal-backdrop').remove();
         }
     
         xhr.open("post", form.action);      // open connection
@@ -39,7 +47,14 @@ $(document).ready(function() {
     $("#darkmodeEnable").on("change", function () {
         toggleDarkMode();
     });
+
 });
+
+function changeLanguage(language) {
+    $("#languageChange")[0].innerText = language;
+    localStorage.setItem("language", language);
+    location.reload();
+}
 
 function updateUserInfo() {
     var forms = document.forms["userInfo"];
@@ -57,6 +72,10 @@ function readURL(input) {
             $("#pfpNavBar")[0].setAttribute("src", e.target.result);
         }
         reader.readAsDataURL(input.files[0]);
+
+        return true;
+    } else {
+        return false;
     }
 }
 
