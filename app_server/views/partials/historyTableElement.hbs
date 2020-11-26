@@ -71,7 +71,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">€</span>
                                     </div>
-                            <input type="number" id="Amount2" class="form-control" onfocusout="amount3(this,{{id}})" placeholder="e.g. $150.30" value="{{value}}" step="any"required="required">
+                            <input type="number" id="Amount2" class="form-control"  onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" onfocusout="amount3(this,{{id}})" placeholder="e.g. $150.30" value="{{value}}" step="any"required="required">
                             <div id="{{id}}amm"></div>
                             </div>
                         </div>
