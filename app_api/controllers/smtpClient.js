@@ -20,7 +20,11 @@ function sendEmail(to, subject, text) {
         auth: {
            user: config.email.auth.address,
            pass: config.email.auth.password
+        },
+        tls: {
+            rejectUnauthorized: false
         }
+
     });
 
     const message = {
