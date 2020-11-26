@@ -113,11 +113,12 @@ function convertMonthsToName(month) {
 }
 
 function disableButton2(id) {
-    var amount1 = amount3(document.getElementById("Amount2"),id);
-    var name = check2(document.getElementById("Goal2"),id);
+    console.log(id);
+    var amount1 = amount3(document.getElementById("Amount3"+id),id);
+    var name = nameAdd2(document.getElementById("Payee2"+id),id);
     var date = dateCheck2(document.getElementById("inputDate"),id);
   
-    if (amount1 == 0 || name == 0) {
+    if (amount1 == 0 || name == 0 || date == 0) {
       return false;
     }
     else {
@@ -126,7 +127,7 @@ function disableButton2(id) {
   }
 
 
-function nameAdd2(field,id) {
+function nameAdd2(field) {
   
     //var field = document.getElementById("PayeeModal");
     var regex = new RegExp("^[ A-Za-z0-9_@./#&+-]{1,20}$"); 
@@ -138,13 +139,13 @@ function nameAdd2(field,id) {
     }
     else {
       field.style.borderColor = "#ced4da";
-      $('.tt1').toast('none')
+      $('.tt1').toast('hide')
       return 1;
     }
 }
 
 
-function amount3(field, id) {
+function amount3(field) {
   
     //var field = document.getElementById("PayeeModal");
     var regex = new RegExp("^[0-9]+(\.[0-9]{1,2})?$"); 
@@ -157,12 +158,12 @@ function amount3(field, id) {
     }
     else {
       field.style.borderColor = "#ced4da";
-      $('.tt2').toast('none')
+      $('.tt2').toast('hide')
       return 1;
     }
 }
 
-function dateCheck2(field,id) {
+function dateCheck2(field) {
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
     var mm = String(today.getMonth() + 1).padStart(2, '0');
@@ -170,19 +171,19 @@ function dateCheck2(field,id) {
     var inputDate = field.value.split("-");
 
     if (inputDate[0] < yyyy) { 
-        $('.tt7').toast('none');
+        $('.tt7').toast('hide');
         field.style.borderColor = "#ced4da";
         return 1;
     } else if (inputDate[0] == yyyy) {
         if (inputDate[1] < mm) { 
-            $('.tt7').toast('none');
+            $('.tt7').toast('hide');
             field.style.borderColor = "#ced4da";
             return 1;
         } else if (inputDate[1] == mm) {
             /* 
             ? IF DAY IS >= NOW */
             if (inputDate[2] <= dd) { 
-                $('.tt7').toast('none');
+                $('.tt7').toast('hide');
                 field.style.borderColor = "#ced4da";
                 return 1;
             } else {

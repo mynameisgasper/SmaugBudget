@@ -137,7 +137,7 @@
 <div class="modal fade" id="addExpenseForm" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
     <div class="position-absolute w-100 p-4 d-flex flex-column align-items-end">
         <div class="w-25 toastek">
-            <div class="toast ml-auto tt2" role="alert" data-delay="1000" data-autohide="false">
+            <div class="toast ml-auto tt2" role="alert" data-delay="3000" data-autohide="false">
                 <div class="toast-header">
                     <strong class="mr-auto text-primary">HINT</strong>
                     <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
@@ -145,7 +145,29 @@
                     </button>
                 </div>
                 <div class="toast-body">
-                    Input may only contain decimal numbers separated by . with max 2 decimal places.
+                    Input may only contain letters, numbers and some special characters (_@./#&+-). Length allowed: 1-20
+                </div>
+            </div>
+            <div class="toast ml-auto tt3" role="alert" data-delay="1000" data-autohide="false">
+                <div class="toast-header">
+                    <strong class="mr-auto text-primary">HINT</strong>
+                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="toast-body">
+                    Input may only contain decimal numbers separated by . or , with max 2 decimal places.
+                </div>
+            </div> 
+            <div class="toast ml-auto tt4" id="date-hint" role="alert" data-delay="3000" data-autohide="false">
+                <div class="toast-header">
+                    <strong class="mr-auto text-primary">HINT</strong>
+                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="toast-body">
+                    Expense can't be in the future.
                 </div>
             </div>
         </div>
@@ -170,7 +192,7 @@
                     </div>
                     <div class="ena">
                         <label for="Payee">Recipient</label><br>
-                        <input type="text" id="Payee2{{id}}" name="recipient" class="form-control" placeholder="e.g. Elektro Ljubljana d.d." onfocusout="nameAdd2(this,{{id}})" value="{{recipient}}"required="required">
+                        <input type="text" id="Payee25" name="recipient" class="form-control" placeholder="e.g. Elektro Ljubljana d.d." onfocusout="nameAdd2(this)" value="{{recipient}}"required="required">
                         <div id="{{id}}txt"></div>
                     </div>
                     <div class="ena"><label for="inputAmount">Amount</label></br>
@@ -178,12 +200,12 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">€</span>
                             </div>
-                            <input type="number" class="form-control" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" onfocusout="amount2(this)" id="Amount2" name="inputAmount" placeholder="0.00" step="any">
+                            <input type="number" class="form-control" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" onfocusout="amount5(this)" id="Amount2{{id}}" name="inputAmount" placeholder="0.00" step="any">
                         </div>
                     </div>
                     <div class="ena">
                         <label for="datum">Date</label><br>
-                        <input type="date" id="inputDate{{_id}}" name="date" onfocusout="dateCheck2(this,{{id}})"class="form-control" value="{{year}}-{{month}}-{{day}}"required="required">
+                        <input type="date" id="inputDate15" name="date" onfocusout="dateCheck2(this)"class="form-control" value="{{year}}-{{month}}-{{day}}"required="required">
                     </div>
                 </div>
                 <div class="modal-footer">

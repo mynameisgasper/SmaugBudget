@@ -1,12 +1,12 @@
-{{#each expenses}}
+{{#each expense}}
     <tr>
     <td class="date align-middle" id="date{{id}}">
         <div class="text-muted" id="year{{id}}">{{year}}</div>
         <div class="text-muted font-weight-bold" id="month{{id}}">{{monthName}}</div>
         <div class="text-muted font-weight-bold" id="day{{id}}">{{day}}</div>
     </td>
-    <td class="align-middle" id="category{{id}}">{{category}}</td>
-    <td class="align-middle" id="receiver{{id}}">{{recipient}}</td>
+    <td class="align-middle" id="category{{id}}">{{category.name}}</td>
+    <td class="align-middle" id="receiver{{id}}">{{recipient}}{{id}}</td>
     <td class="cena align-middle" id="value{{id}}">
         <span id="currency{{id}}">{{currency}}</span><span id="price{{id}}">{{value}}</span>
     </td>
@@ -59,21 +59,21 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form name="signup" method="post" action="/" onsubmit="return disableButton2()">
+                <form name="signup" method="post" action="/" onsubmit="return disableButton2('{{id}}')">
                     <div class="modal-body">
                         <div class="ena"><label for="inputGoal">Category</label></br>
                             <select id="inputCategory" class="form-control">
-                                <option selected>{{category}}</option>
+                                <option selected>{{category.name}}</option>
                                 {{#each ../categories}}
                                     {{#ifNotEquals ../category category}}
-                                        <option id="categoryName{{id}}">{{category}}</option>
+                                        <option id="categoryName{{id}}">{{category.name}}</option>
                                     {{/ifNotEquals}}
                                 {{/each}}
                             </select>
                         </div>
                         <div class="ena">
                             <label for="Payee">Recipient</label><br>
-                            <input type="text" id="Payee2{{id}}" class="form-control" placeholder="e.g. Elektro Ljubljana d.d." onfocusout="nameAdd2(this,{{id}})" value="{{recipient}}"required="required">
+                            <input type="text" id="Payee2{{id}}" class="form-control" placeholder="e.g. Elektro Ljubljana d.d." onfocusout="nameAdd2(this)" value="{{recipient}}"required="required">
                             <div id="{{id}}txt"></div>
                         </div>
                         <div class="ena">
@@ -82,18 +82,18 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">€</span>
                                     </div>
-                            <input type="number" id="Amount2{{id}}" class="form-control"  onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" onfocusout="amount3(this,{{id}})" placeholder="e.g. $150.30" value="{{value}}" step="any"required="required">
+                            <input type="number" id="Amount3{{id}}" class="form-control"  onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" onfocusout="amount3(this)" placeholder="e.g. $150.30" value="{{value}}" step="any"required="required">
                             <div id="{{id}}amm"></div>
                             </div>
                         </div>
                         <div class="ena">
                             <label for="datum">Date</label><br>
-                            <input type="date" id="inputDate{{id}}" onfocusout="dateCheck2(this,{{id}})"class="form-control" value="{{year}}-{{month}}-{{day}}"required="required">
+                            <input type="date" id="inputDate{{id}}" onfocusout="dateCheck2(this)"class="form-control" value="{{year}}-{{month}}-{{day}}"required="required">
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger">Delete expense</button>
-                        <button type="submit" onclick="disableButton2()" class="btn btn-primary">Save Changes</button>
+                        <button type="submit" onclick="disableButton2('{{id}}')" class="btn btn-primary">Save Changes</button>
                     </div>
                 </form>
             </div>
