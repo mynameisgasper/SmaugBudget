@@ -48,6 +48,8 @@ $(document).ready(function() {
         toggleDarkMode();
     });
 
+    //language
+    $("#languageChange")[0].innerText = localStorage.getItem("language");
 });
 
 function changeLanguage(language) {

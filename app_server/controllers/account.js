@@ -63,6 +63,9 @@ var data = {
 
 function respond(res, session) {
     if (session.user) {
+        if (session.user.language) {
+            dictionary.setLanguage(session.user.language);
+        }
         res.render('account', data);
     }
     else {
