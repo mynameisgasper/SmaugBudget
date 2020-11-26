@@ -13,83 +13,6 @@ var data = {
         used: true
     },
     totalExpenses: 335,
-    expenses: [{
-            id: 0,
-            year: '2020',
-            monthName: 'MAR',
-            month: '03',
-            day: '25',
-            category: 'Gas',
-            recipient: 'Petrol',
-            value: '50',
-            currency: '$'
-        },
-        {
-            id: 1,
-            year: '2020',
-            monthName: 'MAR',
-            month: '03',
-            day: '25',
-            category: 'Phone',
-            recipient: 'A1',
-            value: '40',
-            currency: '$'
-        },
-        {
-            id: 2,
-            year: '2020',
-            monthName: 'MAR',
-            month: '03',
-            day: '26',
-            category: 'Groceries',
-            recipient: 'Mercator',
-            value: '150',
-            currency: '$'
-        },
-        {
-            id: 3,
-            year: '2020',
-            monthName: 'MAR',
-            month: '03',
-            day: '28',
-            category: 'Entertainment',
-            recipient: 'Kolosej',
-            value: '32',
-            currency: '$'
-        },
-        {
-            id: 4,
-            year: '2020',
-            monthName: 'MAR',
-            month: '03',
-            day: '28',
-            category: 'Eating out',
-            recipient: 'Pop\'s Place',
-            value: '63',
-            currency: '$'
-        },
-        {
-            id: 5,
-            year: '2020',
-            monthName: 'APR',
-            month: '04',
-            day: '01',
-            category: 'Groceries',
-            recipient: 'Mercator',
-            value: '120',
-            currency: '$'
-        }
-    ],
-    categories: [
-        { id: 1, category: "Furniture" },
-        { id: 2, category: "Electronics" },
-        { id: 3, category: "Trip" },
-        { id: 4, category: "Party" },
-        { id: 5, category: "Wedding" },
-        { id: 6, category: "Car" },
-        { id: 7, category: "Gas" },
-        { id: 8, category: "Other" },
-    ],
 
     //translations main
     logout: dictionary.getTranslation("logout"),
@@ -109,10 +32,49 @@ var data = {
 
 function respond(res, session) {
     if (session.user) {
+        data.expense = generateExpenses(session.user.expense);
         res.render('history', data);
     } else {
         res.redirect('/');
     }
+}
+
+function translateMonth(month) {
+    switch(month) {
+        case '01': return "JAN";
+        case '02': return "FEB";
+        case '03': return "MAR";
+        case '04': return "APR";
+        case '05': return "MAY";
+        case '06': return "JUN";
+        case '07': return "JUL";
+        case '08': return "AUG";
+        case '09': return "SEP";
+        case '10': return "OCT";
+        case '11': return "NOV";
+        case '12': return "DEC";
+    }
+}
+
+function generateExpenses(expense) {
+    var expensesArray = []
+    for (var exp of expense) {
+        var date = exp.date.split('T')[0].split('-');
+
+        expensesArray.push({
+            id: exp._id,
+            year: date[0],
+            month: date[1],
+            monthName: translateMonth(date[1]),
+            day: date[2],
+            category: exp.category.name,
+            recipient: exp.recipient,
+            value: exp.value,
+            currency: exp.currency,
+        });
+    }
+    
+    return expensesArray;
 }
 
 module.exports = {

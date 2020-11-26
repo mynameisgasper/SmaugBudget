@@ -50,6 +50,9 @@ router.post('/bills', (req, res) => {
 router.get('/history', (req, res) => {
     history.get(req, res);
 });
+router.post('/history', (req, res) => {
+    history.get(req, res);
+});
 
 //Utilities
 router.get('/utility', (req, res) => {
