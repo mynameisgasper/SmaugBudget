@@ -30,7 +30,7 @@ function check(field) {
     var regex = new RegExp("^[A-Za-z0-9]{1,20}$"); 
     //črkev male,velike,številke
     if(!field.value.match(regex)) {
-      field.style.borderColor = "red";
+      field.style.setProperty("border-color", "red", "important");
       $('.tt1').toast('show');
       return 0;
     }
@@ -46,7 +46,7 @@ function check2(field, id) {
     var regex = new RegExp("^[A-Za-z0-9]{1,20}$"); 
     //črkev male,velike,številke
     if(!field.value.match(regex)) {
-      field.style.borderColor = "red";
+      field.style.setProperty("border-color", "red", "important");
       $('.tt3').toast('show');
       return 0;
     }
@@ -63,9 +63,8 @@ function amount2(field, id) {
     var regex = new RegExp("^[0-9]+(\.[0-9]{1,2})?$"); 
     //decimalna števila z največj 2ma decimalnima mestoma ločilo je pika, prva mora biti številka!
     //črkev male,velike,številke
-    console.log(regex.test(field.value));
     if(!field.value.match(regex)) {
-      field.style.borderColor = "red";
+      field.style.setProperty("border-color", "red", "important");
       $('.tt4').toast('show');
       return 0;
     }
@@ -81,9 +80,8 @@ function amount(field) {
     var regex = new RegExp("^[0-9]+(\.[0-9]{1,2})?$"); 
     //decimalna števila z največj 2ma decimalnima mestoma ločilo je pika!
     //črkev male,velike,številke ne veljajo števila kot so .73, 
-    console.log(regex.test(field.value));
     if(!field.value.match(regex)) {
-      field.style.borderColor = "red";
+      field.style.setProperty("border-color", "red", "important");
       $('.tt2').toast('show');
       return 0;
     }
@@ -119,17 +117,17 @@ function dateCheckAddBill(field) {
               return 1;
           } else {
               $('#date-hintAdd').toast('show');
-              field.style.borderColor = "red";
+              field.style.setProperty("border-color", "red", "important");
               return 0;
           }
       } else {
           $('#date-hintAdd').toast('show');
-          field.style.borderColor = "red";
+          field.style.setProperty("border-color", "red", "important");
           return 0;
       }
   } else {
       $('#date-hintAdd').toast('show');
-      field.style.borderColor = "red";
+      field.style.setProperty("border-color", "red", "important");
       return 0;
   }
 }
@@ -159,17 +157,17 @@ function dateCheckEditBill(field, id) {
               return 1;
           } else {
               $('#date-hintEdit'+ id).toast('show');
-              field.style.borderColor = "red";
+              field.style.setProperty("border-color", "red", "important");
               return 0;
           }
       } else {
           $('#date-hintEdit'+ id).toast('show');
-          field.style.borderColor = "red";
+          field.style.setProperty("border-color", "red", "important");
           return 0;
       }
   } else {
       $('#date-hintEdit'+ id).toast('show');
-      field.style.borderColor = "red";
+      field.style.setProperty("border-color", "red", "important");
       return 0;
   }
 }

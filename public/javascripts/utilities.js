@@ -5,9 +5,8 @@ function check(field,id) {
     var regex = new RegExp("^[0-9]+(\.[0-9]{1,2})?$"); 
     //decimalna števila z največj 2ma decimalnima mestoma ločilo je pika, prva mora biti številka!
     //črkev male,velike,številke
-    console.log(regex.test(field.value));
     if(!field.value.match(regex)) {
-      field.style.borderColor = "red";
+      field.style.setProperty("border-color", "red", "important");
       $('.tt1').toast('show')
       n = 0;
     }
@@ -23,9 +22,8 @@ function check(field,id) {
     var regex = new RegExp("^[0-9]+(\.[0-9]{1,2})?$"); 
     //decimalna števila z največj 2ma decimalnima mestoma ločilo je pika, prva mora biti številka!
     //črkev male,velike,številke
-    console.log(regex.test(field.value));
     if(!field.value.match(regex)) {
-      field.style.borderColor = "red";
+      field.style.setProperty("border-color", "red", "important");
       $('.tt1').toast('show')
       n = 0;
     }

@@ -44,13 +44,12 @@ function disableButton3(id) {
 }
 
 function amount(field) {
-    console.log(field.value)
         //var field = document.getElementById("PayeeModal");
     var regex = new RegExp("^[0-9]+(\.[0-9]{1,2})?$");
     //decimalna števila z največj 2ma decimalnima mestoma ločilo je pika!
     //črkev male,velike,številke ne veljajo števila kot so .73, 
     if (!field.value.match(regex)) {
-        field.style.borderColor = "red";
+        field.style.setProperty("border-color", "red", "important");
         $('.tt1').toast('show')
         return 0;
     } else {
@@ -61,13 +60,12 @@ function amount(field) {
 }
 
 function amount2(field) {
-    console.log(field.value)
         //var field = document.getElementById("PayeeModal");
     var regex = new RegExp("^[0-9]+(\.[0-9]{1,2})?$");
     //decimalna števila z največj 2ma decimalnima mestoma ločilo je pika!
     //črkev male,velike,številke ne veljajo števila kot so .73, 
     if (!field.value.match(regex)) {
-        field.style.borderColor = "red";
+        field.style.setProperty("border-color", "red", "important");
         $('.tt2').toast('show')
         return 0;
     } else {
@@ -83,7 +81,7 @@ function amount3(field, id) {
     //decimalna števila z največj 2ma decimalnima mestoma ločilo je pika!
     //črkev male,velike,številke ne veljajo števila kot so .73, 
     if (!field.value.match(regex)) {
-        field.style.borderColor = "red";
+        field.style.setProperty("border-color", "red", "important");
         $('.tt3').toast('show')
         return 0;
     } else {
@@ -98,9 +96,8 @@ function nameAdd(field) {
     //var field = document.getElementById("PayeeModal");
     var regex = new RegExp("^[ A-Za-z0-9_@./#&+-]{1,20}$");
     //uppercase, lowercase, številke, posebni znaki, dolžina od 1-20
-    console.log(regex.test(field.value));
     if (!field.value.match(regex)) {
-        field.style.borderColor = "red";
+        field.style.setProperty("border-color", "red", "important");
         $('.tt5').toast('show')
         return 0;
     } else {

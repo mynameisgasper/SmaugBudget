@@ -54,7 +54,7 @@ function amount5(field) {
     //decimalna števila z največj 2ma decimalnima mestoma ločilo je pika!
     //črkev male,velike,številke ne veljajo števila kot so .73, 
     if (!field.value.match(regex)) {
-        field.style.borderColor = "red";
+        field.style.setProperty("border-color", "red", "important");
         $('.tt3').toast('show')
         return 0;
     } else {
@@ -71,7 +71,7 @@ function amount2(field, id) {
     //decimalna števila z največj 2ma decimalnima mestoma ločilo je pika, prva mora biti številka!
     //črkev male,velike,številke
     if (!field.value.match(regex)) {
-        field.style.borderColor = "red";
+        field.style.setProperty("border-color", "red", "important");
         $('.tt2').toast('show')
         return 0;
     } else {
@@ -88,7 +88,7 @@ function amount3(field, id) {
     //decimalna števila z največj 2ma decimalnima mestoma ločilo je pika, prva mora biti številka!
     //črkev male,velike,številke
     if (!field.value.match(regex)) {
-        field.style.borderColor = "red";
+        field.style.setProperty("border-color", "red", "important");
         $('.tt6').toast('show')
         return 0;
     } else {
@@ -104,7 +104,7 @@ function nameAdd(field) {
     var regex = new RegExp("^[ A-Za-z0-9_@./#&+-]{1,20}$");
     //uppercase, lowercase, številke, posebni znaki, dolžina od 1-20
     if (!field.value.match(regex)) {
-        field.style.borderColor = "red";
+        field.style.setProperty("border-color", "red", "important");
         $('.tt4').toast('show')
         return 0;
     } else {
@@ -120,7 +120,7 @@ function nameAdd2(field, id) {
     var regex = new RegExp("^[ A-Za-z0-9_@./#&+-]{1,20}$");
     //uppercase, lowercase, številke, posebni znaki, dolžina od 1-20
     if (!field.value.match(regex)) {
-        field.style.borderColor = "red";
+        field.style.setProperty("border-color", "red", "important");
         $('.tt5').toast('show')
         return 0;
     } else {
@@ -155,17 +155,17 @@ function dateCheck(field, id) {
                 return 1;
             } else {
                 $('.tt7').toast('show');
-                field.style.borderColor = "red";
+                field.style.setProperty("border-color", "red", "important");
                 return 0;
             }
         } else {
             $('.tt7').toast('show');
-            field.style.borderColor = "red";
+            field.style.setProperty("border-color", "red", "important");
             return 0;
         }
     } else {
         $('.tt7').toast('show');
-        field.style.borderColor = "red";
+        field.style.setProperty("border-color", "red", "important");
         return 0;
     }
 }
@@ -195,17 +195,17 @@ function dateCheckAddGoal(field) {
                 return 1;
             } else {
                 $('#date-hint').toast('show');
-                field.style.borderColor = "red";
+                field.style.setProperty("border-color", "red", "important");
                 return 0;
             }
         } else {
             $('#date-hint').toast('show');
-            field.style.borderColor = "red";
+            field.style.setProperty("border-color", "red", "important");
             return 0;
         }
     } else {
         $('#date-hint').toast('show');
-        field.style.borderColor = "red";
+        field.style.setProperty("border-color", "red", "important");
         return 0;
     }
 }

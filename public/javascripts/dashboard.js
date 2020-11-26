@@ -43,9 +43,9 @@ function amount1(field) {
     var regex = new RegExp("^[0-9]+(\.[0-9]{1,2})?$"); 
     //decimalna števila z največj 2ma decimalnima mestoma ločilo je pika!
     //črkev male,velike,številke ne veljajo števila kot so .73, 
-    console.log(regex.test(field.value));
     if(!field.value.match(regex)) {
-      field.style.borderColor = "red";
+      field.removeAttribute('borderColor');
+      field.style.setProperty("border-color", "red", "important");
       $('.tt1').toast('show');
       return 0;
     }
@@ -59,7 +59,7 @@ function amount1(field) {
 function date1(field) {
   
     if(field.value < 1 || field.value > 28) {
-      field.style.borderColor = "red";
+      field.style.setProperty("border-color", "red", "important");
       $('.tt2').toast('show');
       return 0;
     }
