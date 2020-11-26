@@ -98,7 +98,7 @@ function generateCards(user) {
     return [{
         title: dictionary.getTranslation("cardTitle1"),
         color: 'bg-primary',
-        count: budgetLeft,
+        count: (isNaN(budgetLeft) ? 0 : budgetLeft),
         icon: 'fa-university'
     },
     {
@@ -110,7 +110,7 @@ function generateCards(user) {
     {
         title: dictionary.getTranslation("cardTitle3"),
         color: 'bg-primary',
-        count: budgetLeft - totalBills,
+        count: (isNaN(budgetLeft - totalBills) ? 0 : budgetLeft - totalBills),
         icon: 'fa-piggy-bank'
     }];
 }
