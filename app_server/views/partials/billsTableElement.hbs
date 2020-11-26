@@ -12,6 +12,13 @@
         </td>
         <td class="zadnji align-middle">
             <button type="button" class="btn p" data-toggle="modal" href="#editForm{{id}}"><i class="fas fa-pencil-alt"></i></button>
+            <form name="deleteForm{{_id}}" method="post" action="/">
+                <input type="hidden" value="deleteEnvelope" name="formType">
+                <input type="hidden" value="{{_id}}" name="id">
+                <button type="submit" class="btn edit-btn" data-toggle="modal">
+                <i class="fas fa-minus-square hover-red"></i>
+                </button>
+            </form>
         </td>
     </tr>
 {{/each}}
