@@ -20,6 +20,7 @@
         {{> alert}}
     </div>
 
+    {{#if incomeLastMonth}}
     <!----- Overview section ----->
     <div class="container" id="overview-section">
         <h2 style="text-align: left; padding-bottom: 10px;">{{overview}}</h2>
@@ -33,12 +34,12 @@
                             <tbody>
                                 <tr id="income-tr">
                                     <th>{{incomeRow}}</th>
-                                    <td>{{income}}€</td>
+                                    <td>{{incomeLastMonth}}€</td>
                                     <td style="padding: 0px; text-align: right;"><button type="button" class="btn p" data-toggle="modal" href="#changeIncome"><i class="fas fa-pencil-alt"></i></button></td>
                                 </tr>
                                 <tr id="expenses-tr">
                                     <th>{{expensesRow}}</th>
-                                    <td>{{expenses}}€</td>
+                                    <td>{{expensesLastMonth}}€</td>
                                     <td></td>
                                 </tr>
                                 <tr>
@@ -69,6 +70,7 @@
             </div>
         </div>
     </div>
+    {{/if}}
 
 
     <!----- Chane income modal ----->

@@ -20,8 +20,8 @@ var data = {
         name: dictionary.getTranslation("alertName3"),
         text: dictionary.getTranslation("alertText3")
     }],
-    income: 1500,
-    expenses: 900,
+    incomeLastMonth: 1500,
+    expensesLastMonth: 900,
     balance: 600,
     analytics: [{
         rowName: dictionary.getTranslation("analyticsRowName1"),
@@ -79,6 +79,8 @@ var data = {
 function respond(res, session) {
     if (session.user) {
         data.card = generateCards(session.user);
+        data.incomeLastMonth = session.user.incomeLastMonth;
+        data.expensesLastMonth = (session.user.incomeLastMonth ? session.user.incomeLastMonth : 0);
         res.render('dashboard', data);
     }
     else {
