@@ -12,27 +12,29 @@ function disableButton() {
   amount1(amount);
   date1(date);
 
-  $.ajax({
-    url: "/api/changeIncome",
-    type: "post",
-    data: { 
-      date: date.value, 
-      amount: amount.value
-    },
-    success: function(response) {
-
-    },
-    error: function(xhr) {
-      
-    }
-  });
 
   if (amount == 0|| date == 0) {
     return false;
   }
   else {
+    $.ajax({
+      url: "/api/changeIncome",
+      type: "post",
+      data: { 
+        date: date.value, 
+        amount: amount.value
+      },
+      success: function(response) {
+  
+      },
+      error: function(xhr) {
+        
+      }
+    });
+    $('#changeIncome').modal('hide');
     return true;
   }
+
 }
 
 function amount1(field) {
