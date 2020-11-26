@@ -27,7 +27,7 @@ function disableButton2() {
 function check(field) {
   
     //var field = document.getElementById("PayeeModal");
-    var regex = new RegExp("^[A-Za-z0-9]{1,20}$"); 
+    var regex = new RegExp("^[ A-Za-z0-9_@./#&+-]{1,20}$"); 
     //črkev male,velike,številke
     if(!field.value.match(regex)) {
       field.style.setProperty("border-color", "red", "important");
@@ -43,7 +43,7 @@ function check(field) {
 function check2(field, id) {
   
     //var field = document.getElementById("PayeeModal");
-    var regex = new RegExp("^[A-Za-z0-9]{1,20}$"); 
+    var regex = new RegExp("^[ A-Za-z0-9_@./#&+-]{1,20}$"); 
     //črkev male,velike,številke
     if(!field.value.match(regex)) {
       field.style.setProperty("border-color", "red", "important");
