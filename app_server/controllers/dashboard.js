@@ -87,16 +87,21 @@ function respond(res, session) {
 }
 
 function generateCards(user) {
+    var billsUntilPaycheck = getBillsUntilPaycheck(user.bills, user.paycheckDate);
+    var expensesSincePaycheck = getExpensesSincePaycheck(user.expense, user.paycheckDate);
+
+    var totalCost = getTotalCost(getExpensesAndBills(expensesSincePaycheck, billsUntilPaycheck));
+    var budgetLeft = user.paycheck - totalCost;
     return [{
         title: dictionary.getTranslation("cardTitle1"),
         color: 'bg-primary',
-        count: '584,5',
+        count: budgetLeft,
         icon: 'fa-university'
     },
     {
         title: dictionary.getTranslation("cardTitle2"),
         color: 'bg-primary',
-        count: getBillsTotal(getBillsUntilPaycheck(user.bills, user.paycheckDate)),
+        count: getTotalCost(billsUntilPaycheck),
         icon: 'fa-coins'
     },
     {
@@ -105,6 +110,24 @@ function generateCards(user) {
         count: '420',
         icon: 'fa-piggy-bank'
     }];
+}
+
+function getExpensesAndBills(expenses, bills) {
+    return expenses.concat(bills);
+}
+
+function getExpensesSincePaycheck(expenses, paycheckDate) {
+    var expensesSincePaycheck = [];
+
+    const today = new Date().getDate();
+    for (var expense of expenses) {
+        const expenseDay = new Date(expense.date).getDate()
+        if (expenseDay <= today && expenseDay > paycheckDate) {
+            expensesSincePaycheck.push(expense);
+        }
+    }
+
+    return expensesSincePaycheck;
 }
 
 function getBillsUntilPaycheck(bills, paycheckDate) {
@@ -121,7 +144,7 @@ function getBillsUntilPaycheck(bills, paycheckDate) {
     return billsUntilPaycheck;
 }
 
-function getBillsTotal(bills) {
+function getTotalCost(bills) {
     var sum = 0;
     for (var bill of bills) {
         sum += bill.value;
