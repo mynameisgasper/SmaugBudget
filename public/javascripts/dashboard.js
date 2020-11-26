@@ -31,7 +31,7 @@ function disableButton() {
         
       }
     });
-    $('#changeIncome').modal('none');
+    $('#changeIncome').modal('hide');
     return true;
   }
 
