@@ -76,10 +76,10 @@
                                         <input type="hidden" name="formType" value="addBill">
                                         <div class="modal-body">
                                             <div class="ena"><label for="inputGoal">Category</label></br>
-                                                <select id="inputCategory" name="inputCategory" class="form-control">
-                                                    <option selected disabled>Select Category</option>
+                                                <select id="inputCategory" name="inputCategory" class="form-control" required>
+                                                    <option value="" selected disabled>Select Category</option>
                                                     {{#each categories}}
-                                                    <option id="category{{id}}" name="category">{{category}}</option>
+                                                    <option id="category{{id}}" value="{{category}}" name="category">{{category}}</option>
                                                     {{/each}}
                                                 </select>
                                             </div>
@@ -104,7 +104,7 @@
                                             </div>
                                             <div class="ena">
                                                 <label for="once">How often?</label><br>
-                                                <input type="radio" id="once" name="rad" value="once">
+                                                <input type="radio" id="once" name="rad" value="once" required>
                                                 <label for="once">Once</label><br>
                                                 <input type="radio" id="monthly" name="rad" value="monthly">
                                                 <label for="monthly">Monthly</label><br>
@@ -205,11 +205,11 @@
                                                 </div>
                                                 <div class="ena">
                                                     <b>How often?</b><br>
-                                                    <input type="radio" name="radio" id="once" value="once"required="required">
+                                                    <input type="radio" name="radio" id="once" value="once" required>
                                                     <label for="once">Once</label><br>
-                                                    <input type="radio" name="radio" id="monthly" value="monthly"required="required">
+                                                    <input type="radio" name="radio" id="monthly" value="monthly">
                                                     <label for="monthly">Monthly</label><br>
-                                                    <input type="radio" name="radio" id="yearly" value="yearly"required="required">
+                                                    <input type="radio" name="radio" id="yearly" value="yearly">
                                                     <label for="yearly">Yearly</label><br>
                                                 </div>
                                             </div>
