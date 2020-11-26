@@ -169,8 +169,9 @@
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
-                                        <form name="signup" method="post" action="/" onsubmit="return disableButton2()">
-                                            <input type="hidden" value="editBill" name="id">
+                                        <form name="editBill" method="post" action="/bills" onsubmit="return disableButton2()">
+                                            <input type="hidden" value="editBill" name="formType"/>
+                                            <input type="hidden" value="{{id}}" name="billId"/>
                                             <div class="modal-body">
                                                 <div class="ena">
                                                     <label for="Category">Category</label><br>

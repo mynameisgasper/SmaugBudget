@@ -36,8 +36,12 @@ function respond(res, session) {
 
 function parseRequestBody(body, res, session) {
     switch (body.formType) {
-        case 'addBill':{
+        case 'addBill': {
             addBill(body, res, session);
+            break;
+        }
+        case 'editBill': {
+            editBill(body, res, session);
             break;
         }
     }
@@ -75,11 +79,12 @@ function addBill(body, res, session) {
 
 function editBill(body, res, session) {
     const data = {
+        billId: body.billId,
         inputCategory: body.inputCategory,
-        Payee: body.Payee,
-        Amount: body.Amount,
-        inputDateAddBill: body.inputDateAddBill,
-        rad: body.rad,
+        payee: body.Payee2,
+        amount: body.Amount2,
+        date: body.inputDate,
+        repeat: body.radio,
         id: session.user._id
     }
 
@@ -89,8 +94,7 @@ function editBill(body, res, session) {
     };
 
     var client = new Client();
-    client.post("http://localhost:8080/api/addBill", args,
-        function(data, response) {
+    client.put("http://localhost:8080/api/editBill", args, function(data, response) {
             if (response.statusCode == 200) {
                 res.session = session;
                 res.session.user = data;

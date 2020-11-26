@@ -44,8 +44,7 @@ function addBill(requestBody, res) {
                             user.save();
                 
                             res.status(200).json(user);
-                        }
-                        
+                        }  
                     });
                 }
             });
@@ -61,14 +60,13 @@ function addBill(requestBody, res) {
 
 function editBill(requestBody, res) {
     try {
-        var newCategory = requestBody.inputCategory;
-        var newRecipient = requestBody.Payee2;
-        var newAmount = requestBody.Amount2;
-        var newDate = requestBody.inputDate;
-        var newRadio = requestBody.radio;
-        //var id_requested = requestBody.id; tko bo ko bo implemetniran API
-
-        var id_requested = "5fbd5a3947fa6f3da0a16b28"; //primer iz moje baze
+        var billId = requestBody.billId;
+        var inputCategory = requestBody.inputCategory;
+        var recipient = requestBody.payee;
+        var amount = requestBody.amount;
+        var date = requestBody.date;
+        var repeat = requestBody.repeat;
+        var userId = requestBody.id;
 
         //validate date, recipient and amount
         var dateOk = checkDate(date);
@@ -76,23 +74,39 @@ function editBill(requestBody, res) {
         const amountTest  = checkAmount(amount);
 
         if (recipientTest && amountTest && dateOk) {
-            Bill.findByIdAndUpdate(id_requested, {
-                    category: {name: newCategory},
-                    recipient: newRecipient,
-                    value: newAmount,
-                    date: newDate,
-                    repeating: newRadio
-                }, function (err, bill) { 
+            User.findById(userId, function(err, user) {
                 if (err) {
                     console.log(err);
-                } else {
-                    if (bill) {
-                        bill.save();
-                        res.status(200).json(bill);
-                    } else {
-                        res.sendStatus(404);
+                    res.sendStatus(500);
+                }
+                else {
+                    var category = null;
+                    for (var i = 0; i < user.bills.length; i++) {
+                        if (user.bills[i]._id == billId) {
+                            user.bills[i].recipient = recipient;
+                            user.bills[i].value = amount;
+                            user.bills[i].repeating = repeat;
+
+                            for (var j = 0; j < user.categories.length; j++) {
+                                if (user.categories[j].name == inputCategory) {
+                                    category = user.categories[j];
+                                    user.bills[i].category = user.categories[j];
+                                    break;
+                                }
+                            }
+                            user.save();
+                            break;
+                        }
                     }
-                } 
+
+                    Bill.findById(billId, function(err, bill) {
+                        bill.recipient = recipient;
+                        bill.value = amount;
+                        bill.repeating = repeat;
+                        if (category != null) bill.category = category;
+                    });
+                    res.status(200).json(user);
+                }
             });
         }
         else {
