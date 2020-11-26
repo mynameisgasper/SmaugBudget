@@ -51,7 +51,7 @@ function amount1(field) {
     }
     else {
       field.style.borderColor = "#ced4da";
-      $('.tt1').toast('none');
+      $('.tt1').toast('hide');
       return 1;
     }
 }
@@ -65,7 +65,7 @@ function date1(field) {
     }
     else {
       field.style.borderColor = "#ced4da";
-      $('.tt2').toast('none');
+      $('.tt2').toast('hide');
       return 1;
     }
 }
