@@ -73,6 +73,7 @@ var data = {
 function respond(res, session) {
     if (session.user) {
         data.categories = session.user.categories;
+        data.card = generateCards(session.user.bills);
         res.render('bills', data);
     } else {
         res.redirect('/');
@@ -108,6 +109,8 @@ function addBill(body, res, session) {
     client.post("http://localhost:8080/api/addBill", args,
         function(data, response) {
             if (response.statusCode == 200) {
+                res.session = session;
+                res.session.user = data;
                 res.redirect('/bills');
             } else {
                 res.redirect('/bills#error');
@@ -141,6 +144,26 @@ function editBill(body, res, session) {
             }
         }
     );
+}
+
+function generateCards(bills) {
+    return [
+        {
+            id: 1,
+            title: 'Bills Total',
+            color: 'bg-primary',
+            count: bills.length,
+            icon: 'fa-paperclip'
+        },
+        {
+            id: 2,
+            title: 'Bills This Week',
+            color: 'bg-warning',
+            count: 1,
+            icon: 'fa-calendar',
+            comment: "January 25: Petrol $80"   
+        }
+    ];
 }
 
 module.exports = {

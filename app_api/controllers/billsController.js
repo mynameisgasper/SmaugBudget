@@ -1,8 +1,10 @@
 const mongoose = require('mongoose');
 const Bill = mongoose.model('Bills');
+const User = mongoose.model('User');
 
 function addBill(requestBody, res) {
     try {
+        var userId = requestBody.id;
         var category = requestBody.inputCategory;
         var recipient = requestBody.Payee;
         var amount = requestBody.Amount;
@@ -15,16 +17,27 @@ function addBill(requestBody, res) {
         const amountTest  = checkAmount(amount);
         
         if (recipientTest && amountTest && dateOk) {
-            let bill = new Bill({
-                recipient: recipient,
-                value: amount,
-                category: {name: category},
-                date: date,
-                currency: "euro",
-                repeating: radio, 
+            User.findById(userId, function(err, user) {
+                if (err) {
+                    console.log(err);
+                    res.sendStatus(500);
+                }
+                else {
+                    let bill = new Bill({
+                        recipient: recipient,
+                        value: amount,
+                        category: {name: category},
+                        date: date,
+                        currency: "euro",
+                        repeating: radio, 
+                    });
+                    bill.save();
+                    user.bills.push(bill);
+                    user.save();
+        
+                    res.status(200).json(user);
+                }
             });
-            bill.save();
-            res.status(200).json(bill);
         }
         else {
             res.sendStatus(400);
@@ -149,7 +162,7 @@ function checkDate(date){
 }
 
 function checkRecipient(recipient){
-    var regexRecipient = new RegExp("^[A-Za-z0-9]{1,20}$"); 
+    var regexRecipient = new RegExp("^[ A-Za-z0-9_@./#&+-]{1,20}$"); 
     const recipientTest = regexRecipient.test(recipient);
 
     return recipientTest;
