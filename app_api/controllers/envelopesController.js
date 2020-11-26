@@ -58,40 +58,37 @@ function addEnvelope(requestBody, res) {
                 if (error) {
                     console.log(error);
                 } else {
-                    //? Try to find envelope, if it doesn't exit for this month, create it
-                    //! else return error code 304
-                    Envelopes.findOne({ month: currentMonth, 'category.name': categoryName, user: user }, function(err, envelope) {
-                        if (err) {
-                            console.log(err);
-                        } else {
-                            if (envelope == null) {
-                                let envelope = new Envelopes({
-                                    progress: 0,
-                                    budget: amount,
-                                    spent: 0,
-                                    colorHex: colorHexPicker,
-                                    color: colorRGB,
-                                    bgColor: colorBackground,
-                                    month: currentMonth,
-                                    category: { name: categoryName },
-                                })
-                                envelope.save(function callback(err) {
-                                    if (err) {
-                                        console.log(err);
-                                        res.sendStatus(500);
-                                    }
-                                    else {
-                                        user.envelopes.push(envelope);
-                                        user.save();
-                                        res.status(200).json(user);        
-                                    }
-                                });
-                            } else {
-                                console.log("This envelope already exists.");
+                    for (var i = 0; i < user.envelopes.length; i++) {
+                        if (user.envelopes[i].category.name === categoryName) {
+                            if (user.envelopes[i].month === currentMonth) {
                                 res.sendStatus(304);
+                                return;
                             }
                         }
+                    }
+
+                    let envelope = new Envelopes({
+                        progress: 0,
+                        budget: amount,
+                        spent: 0,
+                        colorHex: colorHexPicker,
+                        color: colorRGB,
+                        bgColor: colorBackground,
+                        month: currentMonth,
+                        category: { name: categoryName },
+                    })
+                    envelope.save(function callback(err) {
+                        if (err) {
+                            console.log(err);
+                            res.sendStatus(500);
+                        } else {
+                            user.envelopes.push(envelope);
+                            user.save();
+                            res.status(200).json(user);
+                        }
+
                     });
+                    return;
                 }
             });
         } else {
@@ -203,7 +200,7 @@ function addExpense(requestBody, res) {
         var amountAdded = requestBody.inputAmount;
         var category = requestBody.category;
         var user_id = requestBody.user;
-        
+
         User.findById(user_id, function(error, user) {
             if (error) {
                 res.sendStatus(500);
@@ -211,7 +208,7 @@ function addExpense(requestBody, res) {
                 for (var i = 0; i < user.envelopes.length; i++) {
                     if (user.envelopes[i].category.name === category) {
                         user.envelopes[i].spent += parseInt(amountAdded);
-                        user.envelopes[i].progress = (parseFloat(parseFloat(user.envelopes[i].spent) / parseFloat(user.envelopes[i].budget))) * 100;
+                        user.envelopes[i].progress = Math.round((parseFloat(parseFloat(user.envelopes[i].spent) / parseFloat(user.envelopes[i].budget))) * 100);
                         user.save();
 
                         Envelopes.findById(user.envelopes[i]._id, function(error, envelope) {
