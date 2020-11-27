@@ -301,6 +301,36 @@ function requestResetPassword(requestBody, res) {
     }
 }
 
+function resetPassword(requestBody, res) {
+    try {
+        var code = requestBody.code;
+        var password = requestBody.password;
+        if (password) {
+            User.findOne({ resetPasswordCode: code }, function(err, user) {
+                if (err) {
+                    res.sendStatus(500);
+                }
+                else {
+                    if (user) {
+                        user.password = password;
+                        user.resetPasswordCode = null;
+                        user.save();
+                        res.sendStatus(200);
+                    }
+                    else {
+                        res.sendStatus(404);
+                    }
+                }
+            });
+        }
+        else {
+            res.sendStatus(400);
+        }
+    } catch (ex) {
+        res.sendStatus(500);
+    }
+}
+
 module.exports = {
     register: function(req, res) {
         register(req.body, res);
@@ -312,7 +342,7 @@ module.exports = {
         requestResetPassword(req.body, res);
     },
     resetPassword: function(req, res) {
-
+        resetPassword(req.body, res);
     },
     retrieveUser: function(req, res) {
         retrieveUser(req.body, res, req.session);
