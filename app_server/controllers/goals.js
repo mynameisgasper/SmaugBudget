@@ -168,6 +168,35 @@ function addGoal(body, res, session) {
     );
 }
 
+function editGoal(body, res, session) {
+    const data = {
+        title: body.goal3,
+        target: body.Amount3,
+        date: body.inputDate,
+        category: body.inputCategory,
+        user_id: session.user._id,
+        goal_id: body.id
+    }
+
+    var args = {
+        data: data,
+        headers: { "Content-Type": "application/x-www-form-urlencoded" }
+    };
+
+    var client = new Client();
+    client.post("http://localhost:8080/api/editGoal", args,
+        function(data, response) {
+            if (response.statusCode == 200) {
+                res.session = session;
+                res.session.user = data;
+                res.redirect('/goals');
+            } else {
+                res.redirect('/goals#error');
+            }
+        }
+    );
+}
+
 function deleteGoal(body, res, session) {
     const data = {
         user_id: session.user._id,
@@ -179,18 +208,14 @@ function deleteGoal(body, res, session) {
         headers: { "Content-Type": "application/x-www-form-urlencoded" }
     };
 
-    console.log(data);
-
     var client = new Client();
     client.post("http://localhost:8080/api/deleteGoal", args,
         function(data, response) {
             if (response.statusCode == 200) {
-                console.log("tukaj ");
                 res.session = session;
                 res.session.user = data;
                 res.redirect('/goals');
             } else {
-                console.log(response.statusCode);
                 res.redirect('/goals#error');
             }
         }
@@ -206,7 +231,6 @@ function respond(res, session) {
             data = {...data, ...translationKeys};
         }
         data.goal = generateGoals(session.user.goals);
-        //console.log(data.goal)
         res.render('goals', data);
     } else {
         res.redirect('/');
@@ -215,6 +239,7 @@ function respond(res, session) {
 
 function generateGoals(goals){
     var goalsArray = [];
+    //console.log(goals);
 
     for (var goal of goals) {
         var date = goal.date.split("-");

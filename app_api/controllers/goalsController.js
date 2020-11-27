@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const goals = require('../models/goals');
 const { use } = require('../routers/apiRouter');
 const Goal = mongoose.model('Goals');
 const User = mongoose.model('User');
@@ -81,13 +82,12 @@ function addGoal(requestBody, res) {
 
 function editGoal(requestBody, res) {
     try {
-        var newTitle = requestBody.goal3;
-        var newTarget = requestBody.amount3;
-        //var monthlyTarget = requestBody.monthlyTarget;
-        var newDate = requestBody.inputDate;
-        var newCategory = requestBody.inputCategory;
-
-        var id_requested = "5fbebcc5dd5dbb3c14eb20f6"; //v moji bazi
+        var newTitle = requestBody.title;
+        var newTarget = requestBody.target;
+        var newDate = requestBody.date;
+        var newCategory = requestBody.category;
+        var user_id = requestBody.user_id;
+        var goal_id = requestBody.goal_id;
 
         //validate date, title and target
         dateOk = checkDate(newDate);
@@ -95,24 +95,40 @@ function editGoal(requestBody, res) {
         const targetTest = checkTarget(newTarget);
 
         if (titleTest && targetTest && dateOk) {
-            Goal.findByIdAndUpdate(id_requested, {
-                title: newTitle,
-                target: newTarget,
-                date: newDate,
-                category: { name: newCategory }
-            }, function(err, goal) {
-                if (err) {
-                    console.log(err);
+            User.findById(user_id, function(error, user) {
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(500);
                 } else {
-                    if (goal) {
-                        goal.save();
-                        res.status(200).json(goal);
-                    } else {
-                        res.sendStatus(404);
+                    for (var i = 0; i < user.goals.length; i++) {
+                        if (user.goals[i]._id == goal_id) {
+                            user.goals[i].title = newTitle;
+                            user.goals[i].target = newTarget;
+                            user.goals[i].date = newDate;
+                            user.goals[i].category.name = newCategory,
+                            user.save();
+
+                            break;
+                        }
                     }
+                    
+                    Goal.findByIdAndUpdate(goal_id, {
+                        title: newTitle,
+                        target: newTarget,
+                        date: newDate,
+                        category:  { name: newCategory }
+                    }, function(err, goal) {
+                        if (err) {
+                            console.log(err);
+                        } else {
+                            res.status(200).json(user);
+                        }
+                    });
+                    
                 }
             });
-        } else {
+        }
+         else {
             res.sendStatus(400);
         }
     } catch (ex) {
@@ -137,15 +153,25 @@ function addToGoalWithCategory(requestBody, res) {
                     res.sendStatus(500);
                 } else {
                     //? find the correct goal
+                    var goal_id = null;
                     for (var i = 0; i < user.goals.length; i++) {
                         if (user.goals[i].title === title) {
+                            goal_id = user.goals[i]._id;
                             amount = parseInt(amount) + user.goals[i].saved;
                             user.goals[i].saved = amount;
                             user.save();
                             break;
                         }
                     }
-                    res.status(200).json(user);
+                    Goal.findByIdAndUpdate(goal_id, {
+                        saved: amount
+                    }, function(err, goal) {
+                        if (err) {
+                            console.log(err);
+                        } else {
+                            res.status(200).json(user);
+                        }
+                    });
                 }
             });
         } else {
@@ -156,39 +182,6 @@ function addToGoalWithCategory(requestBody, res) {
         res.sendStatus(500);
     }
 }
-
-function addToGoalWithoutCategory(requestBody, res) {
-    try {
-        var addedAmount = requestBody.amount2;
-
-        var id_requested = "5fbebcc5dd5dbb3c14eb20f6"; //v moji bazi
-
-        //validate added amount
-        const targetTest = checkTarget(addedAmount);
-
-        if (targetTest) {
-            Goal.findById(id_requested, function(err, goal) {
-                if (err) {
-                    console.log(err);
-                } else {
-                    if (goal) {
-                        goal.targetLeft -= addedAmount
-                        goal.save();
-                        res.status(200).json(goal);
-                    } else {
-                        res.sendStatus(404);
-                    }
-                }
-            });
-        } else {
-            res.sendStatus(400);
-        }
-    } catch (ex) {
-        console.log(ex);
-        res.sendStatus(500);
-    }
-}
-
 
 function deleteGoal(requestBody, res) {
     try {
