@@ -22,7 +22,7 @@ userSchema.add({
     balance: { type: Number, required: false },
     isPremium: { type: Boolean, required: true, default: false },
     profilePic: { type: String, required: false },
-    language: { type: String, required: true, default: 'english'},
+    language: { type: String, required: true, default: 'English'},
     connections: [connectionsSchema],
     envelopes: [envelopesSchema],
     goals: [goalsSchema],
