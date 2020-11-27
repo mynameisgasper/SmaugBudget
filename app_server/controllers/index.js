@@ -42,17 +42,18 @@ var translationKeys = {
 }
 
 function translate (language) {
+    var translatedKeys = JSON.parse(JSON.stringify(translationKeys));
     Object.keys(translationKeys).forEach(function(key) {
-        translationKeys[key] = dictionary.getTranslation(translationKeys[key], language);
+        translatedKeys[key] = dictionary.getTranslation(translatedKeys[key], language);
     });
+    return translatedKeys;
 }
 
 function respond(res, session) {
     if (session.user) {
         res.redirect('/dashboard');
     } else {
-        translate("English");
-        data = {...data, ...translationKeys};
+        data = {...data, ...translate("English")};
         res.render('index', data);
     }
 }
