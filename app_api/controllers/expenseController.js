@@ -3,6 +3,33 @@ const Expense = mongoose.model('Expense');
 const User = mongoose.model('User');
 const Categories = mongoose.model('Categories');
 
+function getLastMonthExpenses(requestBody, res) {
+    try {
+        const userId = requestBody.userId;
+        User.findById(userId, function(err, user) {
+            if (err) {
+                console.log(err);
+                res.sendStatus(500);
+            }
+            else {
+                if (user) {
+
+                    var lastMonthExpenses = getLastMonthExpensesArray(user.expense, user.paycheckDate);
+                    var lastMonthAnalysis = getExpenseAnalysis(lastMonthExpenses);
+
+                    res.status(200).json(buildArrayFromMap(lastMonthAnalysis));
+                }
+                else {
+                    res.sendStatus(404);
+                }
+            }
+        });
+    } catch(ex) {
+        console.log(ex);
+        res.sendStatus(500);
+    }
+}
+
 function editExpense(requestBody, res) {
     try {
         var id = requestBody.expId;
@@ -107,9 +134,64 @@ function checkAmount(amount){
     return amountTest;
 }
 
+function getLastMonthExpensesArray(expenses, paycheckDate) {
+    var lastMonthExpenses = [];
+
+    const today = new Date();
+    today.setMonth(today.getMonth() - 1);
+    const previousMonth = today.getMonth();
+    today.setMonth(today.getMonth() - 2);
+    const prepreviousMonth = today.getMonth();
+    for (var expense of expenses) {
+        const expenseDate = new Date(expense.date);
+        const expenseDay = expenseDate.getDate();
+        const expenseMonth = expenseDate.getMonth();
+        if ((expenseMonth == previousMonth && expenseDay <= paycheckDate) || (expenseMonth == prepreviousMonth && expenseDay > paycheckDate)) {
+            lastMonthExpenses.push(expense);
+        }
+
+    }
+
+    return lastMonthExpenses;
+}
+
+function getExpenseAnalysis(expenses) {
+    var categories = new Map();
+
+    for (var expense of expenses) {
+        if (categories.get(expense.category.name)) {
+            categories.get(expense.category.name).sum += parseInt(expense.value);
+            categories.get(expense.category.name).count += 1;
+        }
+        else {
+            categories.set(expense.category.name, {});
+            categories.get(expense.category.name).name = expense.category.name
+            categories.get(expense.category.name).sum = parseInt(expense.value);
+            categories.get(expense.category.name).count = 1;    
+        }
+    }
+
+    return categories;
+}
+
+function buildArrayFromMap(expenses) {
+    var expenseArray = [];
+
+    let keys = Array.from(expenses.keys());
+    for (let key of keys) {
+        expenseArray.push(expenses.get(key));
+    }
+
+    return expenseArray;
+}
+
+
 
 module.exports = {
     editExpense: function(req, res) {
         editExpense(req.body, res);
+    },
+    getLastMonthExpenses: function(req, res) {
+        getLastMonthExpenses(req.body, res);
     }
 }
