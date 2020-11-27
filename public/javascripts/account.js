@@ -48,6 +48,8 @@ $(document).ready(function() {
         toggleDarkMode();
     });
 
+    $('select').selectpicker();
+
 });
 
 function changeLanguage(language) {

@@ -261,95 +261,12 @@
           <h5 style="padding-left: 5%;">{{envelopes}}</h5>
         </div>
         <div class="row">
-          <div class="bootstrap-tagsinput col-sm-12 col-md-12 col-lg-12 col-xl-12">
-            
-            <input type="text" placeholder="" disabled>
-          </div>
-          <input type="text" value="" data-role="tagsinput" style="display: none;">
-        </div>
-        <div class="row">
-          
-          <div class="btn-group dropright col-sm-5 col-md-5 col-lg-5 col-xl-5">
-            <button type="button" class="btn btn-secondary transportation">
-              Car
-            </button>
-            <button type="button" class="btn btn-secondary transportation dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="max-width: 40px;">
-              <span class="sr-only">Toggle Dropright</span>
-            </button>
-            <div class="dropdown-menu">
-              <a class="dropdown-item">Gas</a>
-              <a class="dropdown-item">Parking</a>
-              <a class="dropdown-item">Payment</a>
-              <a class="dropdown-item">Other</a>
-            </div>
-          </div>
-          <div class="bootstrap-tagsinput col-sm-7 col-md-7 col-lg-7 col-xl-7">
-            <input type="text" placeholder="">
-          </div>
-          <input type="text" value="" data-role="tagsinput" style="display: none;">
-        </div>
-        <div class="row">
-          <div class="btn-group dropright col-sm-5 col-md-5 col-lg-5 col-xl-5">
-            <button type="button" class="btn btn-secondary groceries">
-              Groceries
-            </button>
-            <button type="button" class="btn btn-secondary groceries dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="max-width: 40px;">
-              <span class="sr-only">Toggle Dropright</span>
-            </button>
-            <div class="dropdown-menu">
-              <a class="dropdown-item">Meat</a>
-              <a class="dropdown-item">Bread</a>
-              <a class="dropdown-item">Toiletries</a>
-              <a class="dropdown-item">Other</a>
-            </div>
-          </div>
-          <div class="bootstrap-tagsinput col-sm-7 col-md-7 col-lg-7 col-xl-7">
-            
-            <input type="text" placeholder="">
-          </div>
-          <input type="text" value="Fruit" data-role="tagsinput" style="display: none;">
-        </div>
-        <div class="row">
-          <div class="btn-group dropright col-sm-5 col-md-5 col-lg-5 col-xl-5">
-            <button type="button" class="btn btn-secondary house-utilities">
-              House utilities
-            </button>
-            <button type="button" class="btn btn-secondary house-utilities dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="max-width: 40px;">
-              <span class="sr-only">Toggle Dropright</span>
-            </button>
-            <div class="dropdown-menu">
-              <a class="dropdown-item">Electricity</a>
-              <a class="dropdown-item">Rent</a>
-              <a class="dropdown-item">Heating</a>
-              <a class="dropdown-item">other</a>
-            </div>
-          </div>
-          <div class="bootstrap-tagsinput col-sm-7 col-md-7 col-lg-7 col-xl-7">
-            <input type="text" placeholder="">
-          </div>
-          <input type="text" value="" data-role="tagsinput" style="display: none;">
-        </div>
-        <div class="row">
-          <div class="btn-group dropright col-sm-5 col-md-5 col-lg-5 col-xl-5">
-            <button type="button" class="btn btn-secondary entertainment">
-              Entertainment
-            </button>
-            <button type="button" class="btn btn-secondary entertainment dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="max-width: 40px;">
-              <span class="sr-only">Toggle Dropright</span>
-            </button>
-            <div class="dropdown-menu">
-              <a class="dropdown-item">Cable</a>
-              <a class="dropdown-item">Netflix</a>
-              <a class="dropdown-item">Spotify</a>
-              <a class="dropdown-item">Fri group</a>
-            </div>
-          </div>
-          <div class="bootstrap-tagsinput col-sm-7 col-md-7 col-lg-7 col-xl-7">
-            <input type="text" placeholder="">
-          </div>
-          <input type="text" value="" data-role="tagsinput" style="display: none;">
-        </div>
-        
+          <select class="selectpicker" multiple data-live-search="true">
+            <option>Mustard</option>
+            <option>Ketchup</option>
+            <option>Relish</option>
+          </select>
+        </div>  
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary">{{saveChanges}}</button>
