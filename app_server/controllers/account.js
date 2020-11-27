@@ -2,6 +2,7 @@
 var dictionary = require('./Dictionary');
 var globalVar = require('../../app_api/models/globalVar.json');
 var connections = require('../../app_api/models/connections.json');
+var Client = require('node-rest-client').Client;
 
 var data = {
     fileName: "account",
@@ -68,8 +69,8 @@ function respond(res, session) {
         if (session.user.language) {
             dictionary.setLanguage(session.user.language);
         }
-        data.data_firstName = session.user.firstName;
-        data.data_lasttName = session.user.lastName;
+        data.data_firstName = session.user.firstname;
+        data.data_lastName = session.user.lastname;
         data.data_email = session.user.email;
         res.render('account', data);
     }
@@ -78,17 +79,52 @@ function respond(res, session) {
     }
 }
 
-function post(reqBody, session) {
-    
+function parseRequestBody(reqBody, res, session) {
+    switch (reqBody.formType) {
+        case 'changeName': {
+            changeName(reqBody, res, session);
+            break;
+        }
+        
+    }
+}
+
+function changeName(body, res, session) {
+    const data = {
+        firstName: body.firstName,
+        lastName: body.lastName,
+        email: session.user.email
+    }
+
+    var args = {
+        data: data,
+        headers: { "Content-Type": "application/x-www-form-urlencoded" }
+    };
+    console.log("userController_pre");
+    var client = new Client();
+    console.log(session);
+    client.post("http://localhost:8080/api/updateUser", args,
+        function(data, response) {
+            if (response.statusCode == 200) {
+                res.session = session;
+                res.session.user = data;
+                res.redirect('/account');
+            } else {
+                res.redirect('/account#error');
+            }
+        }
+    );
 }
 
 module.exports = {
     get: function(req, res) {
         if (req.method == 'POST') {
-            post(req.reqBody, req.session);
             respond(res, req.session);
         } else {
             respond(res, req.session);
         }
+    },
+    post: function(req, res) {
+        parseRequestBody(req.body, res, req.session);
     }
 }

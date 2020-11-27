@@ -68,7 +68,7 @@ router.get('/account', (req, res) => {
     account.get(req, res);
 });
 router.post('/account', (req, res) => {
-    account.get(req, res);
+    account.post(req, res);
 });
 
 //PDF generator

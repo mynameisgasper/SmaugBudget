@@ -176,22 +176,24 @@ function updateUser(requestBody, res, session) {
         const firstName = requestBody.firstName ? regex.test(requestBody.firstName) : true;
         const lastName = requestBody.lastName ? regex.test(requestBody.lastName) : true;
         const password = requestBody.password ? regex2.test(requestBody.password) : true;
-
+        
         if (firstName && lastName && password) {
-            User.findOne({ 'email': req.session.user.email }, function(err, user) {
+            User.findOne({ 'email': requestBody.email }, function(err, user) {
                 if (err) {
                     console.log(err);
                 } else {
                     if (user) {
-                        user.firstName = requestBody.firstName ? requestBody.firstName : user.firstName;
-                        user.lastName = requestBody.lastName ? requestBody.lastName : user.lastName;
+                        console.log(requestBody.lastName);
+                        user.firstname = requestBody.firstName ? requestBody.firstName : user.firstname;
+                        user.lastname = requestBody.lastName ? requestBody.lastName : user.lastname;
                         user.email = requestBody.email ? requestBody.email : user.email;
                         user.password = requestBody.password ? requestBody.password : user.password;
                         user.language = requestBody.language ? requestBody.language : user.language;
                         user.defaultCurrency = requestBody.defaultCurrency ? requestBody.defaultCurrency : user.defaultCurrency;
-
+                        console.log(user.lastName);
+                        //console.log(user);
                         user.save();
-                        res.status(200).json("Saved");
+                        res.status(200).json(user);
                     } else {
                         res.sendStatus(404);
                     }
@@ -290,6 +292,7 @@ module.exports = {
         getPfp(req, res);
     },
     updateUser: function(req, res) {
+        console.log(req.session);
         updateUser(req.body, res, req.session);
     }
 }
