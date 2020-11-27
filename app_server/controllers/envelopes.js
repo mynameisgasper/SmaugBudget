@@ -29,8 +29,46 @@ var data = {
     dark: dictionary.getTranslation("dark")
 };
 
+var translationKeys = {
+    message: "messageEnvelopes",
+    welcomeMessage: "welcomeMessageEnvelopes",
+
+    /* 
+     * Translations Main
+     */
+    logout: "logout",
+
+    /* 
+     * Translations Navbar 
+     */
+    DASHBOARD: "DASHBOARD",
+    ENVELOPES: "ENVELOPES",
+    GOALS: "GOALS",
+    BILLS: "BILLS",
+    HISTORY: "HISTORY",
+    UTILITIES: "UTILITIES",
+    user: "user",
+    settings: "settings",
+    appearance: "appearance",
+    light: "light",
+    dark: "dark"
+}
+
+function translate (language) {
+    var translatedKeys = JSON.parse(JSON.stringify(translationKeys));
+    Object.keys(translationKeys).forEach(function(key) {
+        translatedKeys[key] = dictionary.getTranslation(translatedKeys[key], language);
+    });
+    return translatedKeys;
+}
+
 function respond(res, session, req) {
     if (session.user) {
+        if (session.user.language) {
+            data = {...data, ...translate(session.user.language)};
+        } else {
+            data = {...data, ...translationKeys};
+        }
         var d = new Date();
         if (req.query.monthMinus == null && req.query.monthPlus == null) {
             data.setMonthNumber = d.getMonth();
@@ -128,7 +166,7 @@ function getTotalEnvelopes(envelopes, month) {
 function getTotalAlmostEmptyEnvelopes(envelopes, month) {
     var counter = 0;
     for (var i = 0; i < envelopes.length; i++) {
-        if (envelopes[i].progress < 100 && envelopes[i].progress > 74 && envelopes[i].month === month) {
+        if (envelopes[i].progress < 100 && envelopes[i].progress > 85 && envelopes[i].month === month) {
             counter++;
         }
     }

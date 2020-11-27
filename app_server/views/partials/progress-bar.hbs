@@ -1,5 +1,5 @@
 {{#each goal}}
-<div class="row" id="goal{{id}}">
+<div class="row" id="goal{{_id}}">
     <!---  Row 1 Col 1 --->
     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-2 goal-col">
         <p class="goal-p">{{title}}</p>
@@ -19,15 +19,19 @@
     </div>
     <!---  Row 1 Col 3 --->
     <div class="col-sm-12 col-md-12 col-lg-6 col-xl-5 goal-col">
-    <p class="goal-p">{{targetLeft}}€
-        <p style="color: gray; font-family:'Open Sans'; margin-left:2%">
-            needed of {{target}}€ 
-            (<b>{{monthlyTarget}}€</b> per day)
+        <p class="goal-p">{{targetLeft}}€
+            <p style="color: gray; font-family:'Open Sans'; margin-left:2%">
+                needed of {{target}}€
+                (<b>{{monthlyTarget}}€</b> per day)
+            </p>
         </p>
-    </p>
-    <button type="button" class="btn edit-btn" data-toggle="modal" href="#deleteGoal{{id}}"><i class="fas fa-minus-square"></i></button>
-    <button type="button" class="btn edit-btn" data-toggle="modal" href="#addMoneyForm{{id}}"><i class="fas fa-plus"></i></button>
-
+        
+        <form name="deleteForm{{_id}}" method="post" action="/goals">
+            <input type="hidden" value="deleteGoal" name="formType">
+            <input type="hidden" value="{{_id}}" name="id">
+            <button type="submit" class="btn edit-btn" data-toggle="modal" ><i class="fas fa-minus-square"></i></button>
+         </form>
+        <button type="button" class="btn edit-btn" data-toggle="modal" href="#addMoneyForm{{_id}}"><i class="fas fa-plus"></i></button>
     </div>
 </div>
 {{/each}}

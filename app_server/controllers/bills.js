@@ -26,18 +26,21 @@ var translationKeys = {
     dark: "dark"
 }
 
-function translate (language) {
+function translate(language) {
+    var translatedKeys = JSON.parse(JSON.stringify(translationKeys));
     Object.keys(translationKeys).forEach(function(key) {
-        translationKeys[key] = dictionary.getTranslation(translationKeys[key], language);
+        translatedKeys[key] = dictionary.getTranslation(translatedKeys[key], language);
     });
+    return translatedKeys;
 }
 
 function respond(res, session) {
     if (session.user) {
         if (session.user.language) {
-            translate(session.user.language);
+            data = {...data, ...translate(session.user.language) };
+        } else {
+            data = {...data, ...translationKeys };
         }
-        data = {...data, ...translationKeys};
         data.categories = session.user.categories;
         data.card = generateCards(session.user.bills);
         data.bill = generateBills(session.user.bills);
@@ -49,14 +52,21 @@ function respond(res, session) {
 
 function parseRequestBody(body, res, session) {
     switch (body.formType) {
-        case 'addBill': {
-            addBill(body, res, session);
-            break;
-        }
-        case 'editBill': {
-            editBill(body, res, session);
-            break;
-        }
+        case 'addBill':
+            {
+                addBill(body, res, session);
+                break;
+            }
+        case 'editBill':
+            {
+                editBill(body, res, session);
+                break;
+            }
+        case 'deleteBill':
+            {
+                deleteBill(body, res, session);
+                break;
+            }
     }
 }
 
@@ -107,32 +117,68 @@ function editBill(body, res, session) {
     };
 
     var client = new Client();
-    client.put("http://localhost:8080/api/editBill", args, function(data, response) {
-            if (response.statusCode == 200) {
-                res.session = session;
-                res.session.user = data;
-                res.redirect('/bills');
-            } else {
-                res.redirect('/bills#error');
-            }
+    client.post("http://localhost:8080/api/editBill", args, function(data, response) {
+        if (response.statusCode == 200) {
+            res.session = session;
+            res.session.user = data;
+            res.redirect('/bills');
+        } else {
+            res.redirect('/bills#error');
         }
-    );
+    });
+}
+
+function deleteBill(body, res, session) {
+    const data = {
+        bill_id: body.id,
+        user_id: session.user._id
+    }
+
+    var args = {
+        data: data,
+        headers: { "Content-Type": "application/x-www-form-urlencoded" }
+    };
+
+
+    var client = new Client();
+    client.post("http://localhost:8080/api/deleteBill", args, function(data, response) {
+        if (response.statusCode == 200) {
+            res.session = session;
+            res.session.user = data;
+            res.redirect('/bills');
+        } else {
+            res.redirect('/bills#error');
+        }
+    });
+
 }
 
 function translateMonth(month) {
-    switch(month) {
-        case '01': return "JAN";
-        case '02': return "FEB";
-        case '03': return "MAR";
-        case '04': return "APR";
-        case '05': return "MAY";
-        case '06': return "JUN";
-        case '07': return "JUL";
-        case '08': return "AUG";
-        case '09': return "SEP";
-        case '10': return "OCT";
-        case '11': return "NOV";
-        case '12': return "DEC";
+    switch (month) {
+        case '01':
+            return "JAN";
+        case '02':
+            return "FEB";
+        case '03':
+            return "MAR";
+        case '04':
+            return "APR";
+        case '05':
+            return "MAY";
+        case '06':
+            return "JUN";
+        case '07':
+            return "JUL";
+        case '08':
+            return "AUG";
+        case '09':
+            return "SEP";
+        case '10':
+            return "OCT";
+        case '11':
+            return "NOV";
+        case '12':
+            return "DEC";
     }
 }
 
@@ -142,7 +188,7 @@ function generateBills(bills) {
         var date = bill.date.split('T')[0].split('-');
 
         billsArray.push({
-            id: bill._id,
+            _id: bill._id,
             year: date[0],
             month: date[1],
             monthName: translateMonth(date[1]),
@@ -154,14 +200,13 @@ function generateBills(bills) {
             repeat: bill.repeating
         });
     }
-    
+
     return billsArray;
 }
 
 function generateCards(bills) {
     const nearBills = getBillsInTheNext7Days(bills);
-    return [
-        {
+    return [{
             id: 1,
             title: 'Bills Total',
             color: 'bg-primary',
@@ -174,7 +219,7 @@ function generateCards(bills) {
             color: 'bg-warning',
             count: nearBills.length,
             icon: 'fa-calendar',
-            comment: generateComment(nearBills)   
+            comment: generateComment(nearBills)
         }
     ];
 }
@@ -186,7 +231,7 @@ function getBillsInTheNext7Days(bills) {
     for (var bill of bills) {
         const billDate = new Date(Date.parse(bill.date)).getTime();
         const diff = (billDate - currentTime.getTime()) / 86400000;
-        
+
         if (diff < 7) {
             billsArray.push(bill);
         }
@@ -194,13 +239,32 @@ function getBillsInTheNext7Days(bills) {
     return billsArray;
 }
 
+function findClosestBill(bills) {
+    var nearestBill = null;
+    const currentTime = new Date();
+
+    var minDiff = null
+    for (var bill of bills) {
+        const billDate = new Date(Date.parse(bill.date)).getTime();
+        const diff = (billDate - currentTime.getTime());
+
+        if (!minDiff || diff < minDiff) {
+            minDiff = diff;
+            nearestBill = bill;
+        }
+    }
+
+    return nearestBill
+}
+
 function generateComment(bills) {
     var comment = '';
-    for (var bill of bills) {
-        const billDate = new Date(Date.parse(bill.date));
-        const dtfUK = new Intl.DateTimeFormat('UK', { year: 'numeric', month: '2-digit', day: '2-digit' });
-        comment += bill.recipient + " - " + dtfUK.format(billDate);
-    }
+
+    var bill = findClosestBill(bills);
+    if (!bill) return comment;
+    const billDate = new Date(Date.parse(bill.date));
+    const dtfUK = new Intl.DateTimeFormat('UK', { month: '2-digit', day: '2-digit' });
+    comment = "Closest bill:\n" + bill.recipient + " - " + dtfUK.format(billDate);
 
     return comment;
 }

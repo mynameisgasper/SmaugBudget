@@ -56,7 +56,7 @@ function addGoal(requestBody, res) {
                         date: date,
                         category: { name: category }
                     });
-                
+
                     goal.save(function callback(err) {
                         if (err) {
                             console.log(err);
@@ -192,17 +192,30 @@ function addToGoalWithoutCategory(requestBody, res) {
 
 function deleteGoal(requestBody, res) {
     try {
-        var id_requested = "5fbec13be03d4a2d402da505"; //primer iz moje baze
-        if (id_requested != undefined) {
-            Goal.findByIdAndDelete(id_requested, function(err, goal) {
+        var goal_id = requestBody.goal_id;
+        var user_id = requestBody.user_id;
+
+        if (goal_id != undefined) {
+            Goal.findByIdAndDelete(goal_id, function(err, goal) {
+                if (err) {
+                    console.log(err);
+                } else {}
+            });
+
+            User.findById(user_id, function(err, user) {
                 if (err) {
                     console.log(err);
                 } else {
-                    if (goal) {
-                        res.status(204).json(goal);
-                    } else {
-                        res.sendStatus(404);
+                    for (var i = 0; i < user.goals.length; i++) {
+                        if (user.goals[i]._id == goal_id) {
+                            user.goals.pull(goal_id);
+                            user.save();
+                            res.status(200).json(user);
+                            return;
+                        }
                     }
+                    res.status(304);
+                    return;
                 }
             });
         } else {

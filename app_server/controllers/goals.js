@@ -1,5 +1,6 @@
 //Dependencies
 const c = require('config');
+const user = require('../../app_api/models/user');
 var dictionary = require('./Dictionary');
 var Client = require('node-rest-client').Client;
 
@@ -78,9 +79,11 @@ var translationKeys = {
 }
 
 function translate (language) {
+    var translatedKeys = JSON.parse(JSON.stringify(translationKeys));
     Object.keys(translationKeys).forEach(function(key) {
-        translationKeys[key] = dictionary.getTranslation(translationKeys[key], language);
+        translatedKeys[key] = dictionary.getTranslation(translatedKeys[key], language);
     });
+    return translatedKeys;
 }
 
 function parseRequestBody(body, res, session) {
@@ -165,14 +168,45 @@ function addGoal(body, res, session) {
     );
 }
 
+function deleteGoal(body, res, session) {
+    const data = {
+        user_id: session.user._id,
+        goal_id: body.id
+    }
+
+    var args = {
+        data: data,
+        headers: { "Content-Type": "application/x-www-form-urlencoded" }
+    };
+
+    console.log(data);
+
+    var client = new Client();
+    client.post("http://localhost:8080/api/deleteGoal", args,
+        function(data, response) {
+            if (response.statusCode == 200) {
+                console.log("tukaj ");
+                res.session = session;
+                res.session.user = data;
+                res.redirect('/goals');
+            } else {
+                console.log(response.statusCode);
+                res.redirect('/goals#error');
+            }
+        }
+    );
+}
+
 
 function respond(res, session) {
     if (session.user) {
         if (session.user.language) {
-            translate(session.user.language);
+            data = {...data, ...translate(session.user.language)};
+        } else {
+            data = {...data, ...translationKeys};
         }
-        data = {...data, ...translationKeys};
         data.goal = generateGoals(session.user.goals);
+        //console.log(data.goal)
         res.render('goals', data);
     } else {
         res.redirect('/');
@@ -186,10 +220,10 @@ function generateGoals(goals){
         var date = goal.date.split("-");
         var progress = Math.ceil(goal.saved / goal.target * 100);
         var targetLeft = goal.target - goal.saved;
-        var monthlyTarget = calculateMonthlyTarget(goal.date, targetLeft);
+        var monthlyTarget = calculateDailyTarget(goal.date, targetLeft);
         
         goalsArray.push({
-            id: goal._id,
+            _id: goal._id,
             title: goal.title,
             progress: progress,
             target: goal.target,
@@ -204,7 +238,7 @@ function generateGoals(goals){
     return goalsArray;
 }
 
-function calculateMonthlyTarget(date, targetLeft){
+function calculateDailyTarget(date, targetLeft){
     var today = new Date();
 
     var goalDate = date.split("-");

@@ -37,7 +37,7 @@ router.post('/changeIncome', (req, res) => {
     user.changeIncome(req, res);
 });
 
-router.post('/uploadPfp', user.uploadImg , user.postImg);
+router.post('/uploadPfp', user.uploadImg, user.postImg);
 
 router.get('/getPfp', (req, res) => {
     user.getPfp(req, res);
@@ -79,11 +79,11 @@ router.get('/converter', (req, res) => {
     converter.converter(req, res);
 })
 
-router.put('/editBill', (req, res) => {
+router.post('/editBill', (req, res) => {
     bills.editBill(req, res);
 })
 
-router.delete('/deleteBill', (req, res) => {
+router.post('/deleteBill', (req, res) => {
     bills.deleteBill(req, res);
 })
 
@@ -91,7 +91,7 @@ router.post('/addGoal', (req, res) => {
     goals.addGoal(req, res);
 })
 
-router.put('/editGoal', (req, res) => {
+router.post('/editGoal', (req, res) => {
     goals.editGoal(req, res);
 })
 
@@ -99,7 +99,7 @@ router.post('/addToGoalWithCategory', (req, res) => {
     goals.addToGoalWithCategory(req, res);
 })
 
-router.delete('/deleteGoal', (req, res) => {
+router.post('/deleteGoal', (req, res) => {
     goals.deleteGoal(req, res);
 })
 
