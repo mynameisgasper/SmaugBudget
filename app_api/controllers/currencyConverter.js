@@ -21,7 +21,6 @@ function currencyConverter() {
             });
             currency.save(function callback(err) {
                 if(err) {
-                    console.log("Currency already exists.");
                 }
             })
             for (var key in data.rates) {
