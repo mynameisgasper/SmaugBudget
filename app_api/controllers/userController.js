@@ -1,10 +1,12 @@
 const smtp = require("../../app_api/controllers/smtpClient");
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
+const Categories = mongoose.model('Categories');
 const multer = require('multer');
 const user = require("../models/user");
 const fs = require('fs');
 const path = require("path");
+const categories = require("../models/categories");
 
 function register(requestBody, res) {
     try {
@@ -29,6 +31,8 @@ function register(requestBody, res) {
         }
         */
 
+
+
         var regex = new RegExp("^([a-zA-Z])+$");
         var regex2 = new RegExp("^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})");
         const firstName = regex.test(requestBody.nameup);
@@ -40,30 +44,47 @@ function register(requestBody, res) {
             var urlCode = smtp.generateCode(64);
             var confirmationCode = smtp.generateCode(64);
 
-            let user = new User({
-                firstname: requestBody.nameup,
-                lastname: requestBody.surnameup,
-                email: email1,
-                password: pass1,
-                passwordSalt: "tempSalt",
-                confirmationUrl: urlCode,
-                confirmationCode: confirmationCode,
-                isPremium: false,
-                language: "English"
+            let promise = new Promise(function(res, err) {
+                var basicCategories;
+                Categories.find({ 'basic': 'true' }, function(error, categories) {
+                    if (error) {
+                        console.log(error);
+                    } else {
+                        basicCategories = categories;
+                        res(basicCategories);
+                    }
+                });
+
             });
 
-            user.save(function callback(err) {
-                if (err) {
-                    res.sendStatus(400);
-                } else {
-                    var response = {
-                        user: user,
-                        urlCode: urlCode
+            promise.then(function(basicCategories) {
+                let user = new User({
+                    firstname: requestBody.nameup,
+                    lastname: requestBody.surnameup,
+                    email: email1,
+                    password: pass1,
+                    passwordSalt: "tempSalt",
+                    confirmationUrl: urlCode,
+                    confirmationCode: confirmationCode,
+                    isPremium: false,
+                    language: "English",
+                    categories: basicCategories
+                });
+                user.save(function callback(err) {
+                    if (err) {
+                        res.sendStatus(400);
+                    } else {
+                        var response = {
+                            user: user,
+                            urlCode: urlCode
+                        }
+                        smtp.sendCode(email1, requestBody.nameup, requestBody.surnameup, urlCode, confirmationCode);
+                        res.status(200).json(response);
                     }
-                    smtp.sendCode(email1, requestBody.nameup, requestBody.surnameup, urlCode, confirmationCode);
-                    res.status(200).json(response);
-                }
+                });
             });
+
+
         } else {
             console.log(requestBody);
             res.sendStatus(400);
@@ -74,12 +95,10 @@ function register(requestBody, res) {
     }
 }
 
-
 function login(requestBody, res) {
     try {
         var email = requestBody.email;
         var password = requestBody.password;
-
         User.findOne({ 'email': email }, function(err, user) {
             if (err) {
                 res.sendStatus(500);
@@ -132,8 +151,7 @@ function confirm(req, res) {
         User.findOne({ 'confirmationUrl': url, 'confirmationCode': code }, function name(err, user) {
             if (err || user == null) {
                 res.sendStatus(404);
-            }
-            else {
+            } else {
                 user.confirmationUrl = null;
                 user.confirmationCode = null;
                 user.save();
@@ -153,13 +171,12 @@ function changeIncome(requestBody, res, session) {
     var income = regex.test(paycheck);
 
     if (income && day > 0 && day < 29) {
-        User.findOne({ 'email': session.user.email}, function name(err, user) {
+        User.findOne({ 'email': session.user.email }, function name(err, user) {
             if (err || user == null) {
                 res.sendStatus(404);
-            }
-            else {
+            } else {
                 user.paycheck = paycheck,
-                user.paycheckDate = day
+                    user.paycheckDate = day
                 user.save();
                 res.sendStatus(200);
             }
@@ -176,21 +193,21 @@ function updateUser(requestBody, res, session) {
         const firstName = requestBody.firstName ? regex.test(requestBody.firstName) : true;
         const lastName = requestBody.lastName ? regex.test(requestBody.lastName) : true;
         const password = requestBody.password ? regex2.test(requestBody.password) : true;
-        
+
         if (firstName && lastName && password) {
             User.findOne({ 'email': requestBody.email }, function(err, user) {
                 if (err) {
                     console.log(err);
                 } else {
                     if (user) {
-                        
+
                         user.firstname = requestBody.firstName ? requestBody.firstName : user.firstname;
                         user.lastname = requestBody.lastName ? requestBody.lastName : user.lastname;
                         user.email = requestBody.email ? requestBody.email : user.email;
                         user.password = requestBody.password ? requestBody.password : user.password;
                         user.language = requestBody.language ? requestBody.language : user.language;
                         user.defaultCurrency = requestBody.defaultCurrency ? requestBody.defaultCurrency : user.defaultCurrency;
-                    
+
                         user.save();
                         res.status(200).json(user);
                     } else {
@@ -207,17 +224,17 @@ function updateUser(requestBody, res, session) {
 }
 
 const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
+    destination: function(req, file, cb) {
         cb(null, './uploads');
-      },
-    filename: function (req, file, cb) {
+    },
+    filename: function(req, file, cb) {
         cb(null, Date.now() + '-' + file.originalname);
     }
 });
 
-const uploadImg = multer({storage: storage}).single('image');
+const uploadImg = multer({ storage: storage }).single('image');
 
-function postImg (req, res) {
+function postImg(req, res) {
     try {
         User.findOne({ 'email': req.session.user.email }, function(err, user) {
             if (err) {
@@ -246,7 +263,7 @@ function postImg (req, res) {
     }
 }
 
-function getPfp (req, res) {
+function getPfp(req, res) {
     try {
         User.findOne({ 'email': req.session.user.email }, function(err, user) {
             if (err) {
@@ -255,8 +272,7 @@ function getPfp (req, res) {
                 if (user) {
                     if (user.profilePic == null) {
                         res.status(404).sendFile(path.resolve("public/images/Default_pfp.png"));
-                    }
-                    else {
+                    } else {
                         res.status(200).sendFile(path.resolve(user.profilePic));
                     }
                 } else {
@@ -276,26 +292,50 @@ function requestResetPassword(requestBody, res) {
         User.findOne({ email: email }, function(err, user) {
             if (err) {
                 res.sendStatus(500);
-            }
-            else {
+            } else {
                 if (user) {
                     var resetPasswordCode = smtp.generateCode(64);
                     user.resetPasswordCode = resetPasswordCode;
                     user.save(function(err) {
                         if (err) {
                             res.sendStatus(500);
-                        }
-                        else {
+                        } else {
                             smtp.sendResetPassword(email, user.firstname, user.lastname, resetPasswordCode);
                             res.sendStatus(200);
                         }
                     });
-                }
-                else {
+                } else {
                     res.sendStatus(404);
                 }
             }
         });
+    } catch (ex) {
+        res.sendStatus(500);
+    }
+}
+
+function resetPassword(requestBody, res) {
+    try {
+        var code = requestBody.code;
+        var password = requestBody.password;
+        if (password) {
+            User.findOne({ resetPasswordCode: code }, function(err, user) {
+                if (err) {
+                    res.sendStatus(500);
+                } else {
+                    if (user) {
+                        user.password = password;
+                        user.resetPasswordCode = null;
+                        user.save();
+                        res.sendStatus(200);
+                    } else {
+                        res.sendStatus(404);
+                    }
+                }
+            });
+        } else {
+            res.sendStatus(400);
+        }
     } catch (ex) {
         res.sendStatus(500);
     }
@@ -312,7 +352,7 @@ module.exports = {
         requestResetPassword(req.body, res);
     },
     resetPassword: function(req, res) {
-
+        resetPassword(req.body, res);
     },
     retrieveUser: function(req, res) {
         retrieveUser(req.body, res, req.session);

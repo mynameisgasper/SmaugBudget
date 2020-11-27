@@ -108,17 +108,19 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form name="addExpense" method="post" action="/goals" onsubmit="return disableButton()">
+            <form name="addExpense" method="post" action="/goals" onsubmit="return disableButton4()">
                 <input type="hidden" name="formType" value="addToGoalWithCategory">
                 <div class="modal-body">
                     <div class="ena"><label for="inputGoal">Goal</label></br>
                         <select id="inputCategory" name="inputCategory" class="form-control">
                             {{#each goal}}
-                            <option id="category{{_id}}">{{title}}</option>
+                              {{#ifLengthNotZero targetLeft}}
+                                <option id="category{{_id}}">{{title}}</option>
+                              {{/ifLengthNotZero}}
                             {{/each}}
                         </select>
                     </div>
-                    <div class="ena"><label for="inputAmount">Amount</label></br>
+                    <div class="ena"><label for="inputAmount" id="">Amount</label></br>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">€</span>
@@ -128,7 +130,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit"  onclick="disableButton()" class="btn btn-primary">Add</button>
+                    <button type="submit" onclick="disableButton4()" class="btn btn-primary">Add</button>
                 </div>
             </form>
         </div>
@@ -139,7 +141,7 @@
 <!--- Modal Form Edit --->
 
 {{#each goal}}
-<div class="modal fade" id="editForm{{id}}" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="editForm{{_id}}" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
   <div class="position-absolute w-100 p-4 d-flex flex-column align-items-end">
       <div class="w-25 toastek" >
         <div class="toast ml-auto tt5" role="alert" data-delay="3000" data-autohide="false">
@@ -184,7 +186,9 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form name="signup" method="post" action="/" onsubmit="return disableButton2({{id}})">
+      <form name="signup" method="post" action="/goals" onsubmit="return disableButton2({{id}})">
+        <input type="hidden" name="formType" value="editGoal">
+        <input type="hidden" name="id" value="{{_id}}">
         <div class="modal-body">
           <label for="inputGoal">What's your goal?</label>
           <input type="text" class="form-control" onfocusout="nameAdd2(this,{{id}})" id="Goal3" name="goal3" value="{{title}}"required="required"> 
@@ -215,7 +219,6 @@
 
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-danger" onClick="removeGoal({{id}});">Delete Goal</button>
           <button type="submit" onclick="disableButton2({{id}})" class="btn btn-primary">Save Changes</button>
         </div>
       </form>

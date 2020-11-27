@@ -5,6 +5,7 @@ var dictionary = require('./Dictionary');
 
 var data = {
     index: true,
+    encryption: true,
     fileName: 'index',
     index: {
         used: true
@@ -60,30 +61,25 @@ function respond(res, session) {
 
 function parseRequestBody(body, res, session) {
     switch (body.formType) {
-        case 'signup':
-            {
-                signup(body, res, session);
-                break;
-            }
-        case 'signin':
-            {
-                signin(body, res, session);
-                break;
-            }
-        case 'forgotPassword':
-            {
-                forgotPassword(body, res);
-                break;
-            }
-        case 'logout':
-            {
-                logout(body, res, session);
-                break;
-            }
-        default:
-            {
-                notFound404.get(null, res);
-            }
+        case 'signup': {
+            signup(body, res, session);
+            break;
+        }
+        case 'signin': {
+            signin(body, res, session);
+            break;
+        }
+        case 'forgotPassword': {
+            forgotPassword(body, res);
+            break;
+        }
+        case 'logout': {
+            logout(body, res, session);
+            break;
+        }
+        default: {
+            notFound404.get(null, res);
+        }
     }
 }
 
@@ -139,7 +135,24 @@ function signin(body, res, session) {
 }
 
 function forgotPassword(body, res) {
+    const data = {
+        email: body.email
+    }
 
+    var args = {
+        data: data,
+        headers: { "Content-Type": "application/x-www-form-urlencoded" }
+    };
+
+
+    var client = new Client();
+    client.post("http://localhost:8080/api/requestResetPassword", args, function(data, response) {
+        if (response.statusCode == 200) {
+            res.redirect('/');
+        } else {
+            res.redirect('#error');
+        }
+    });
 }
 
 function logout(body, res, session) {

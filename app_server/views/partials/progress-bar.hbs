@@ -25,13 +25,12 @@
                 (<b>{{monthlyTarget}}€</b> per day)
             </p>
         </p>
-        
-        <form name="deleteForm{{_id}}" method="post" action="/goals">
+        <form name="deleteForm{{_id}}" method="post" action="/goals" style="display: inline">
             <input type="hidden" value="deleteGoal" name="formType">
             <input type="hidden" value="{{_id}}" name="id">
-            <button type="submit" class="btn edit-btn" data-toggle="modal" ><i class="fas fa-minus-square"></i></button>
+            <button type="submit" class="btn edit-btn" data-toggle="modal"><i class="fas fa-minus-square"></i></button>
          </form>
-        <button type="button" class="btn edit-btn" data-toggle="modal" href="#addMoneyForm{{_id}}"><i class="fas fa-plus"></i></button>
+        <button type="button" class="btn edit-btn" data-toggle="modal" href="#editForm{{_id}}"><i class="fas fa-pencil-alt"></i></button>
     </div>
 </div>
 {{/each}}

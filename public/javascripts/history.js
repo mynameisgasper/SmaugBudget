@@ -2,6 +2,7 @@ window.onload = function() {
     const parsedTable = parseTable(getRows());
     document.querySelector(".totaltext").innerHTML = "<h5>Total spent: " + parsedTable.sum.toFixed(2); + "€</h5>";
     loadGraphs(groupByCategories(parsedTable));
+    loadGraphs2(makeDataForGraph(filterByCategory()));
 }
 
 function getRows() {
@@ -18,7 +19,7 @@ function parseTable(rows) {
         if(row.style.display != 'none'){
             const idNum = row.cells[0].id.substring(4);
             const year = parseInt(document.getElementById('year' + idNum).innerHTML);
-            const month = convertMonthsToName(document.getElementById('month' + idNum).innerHTML);
+            const month = document.getElementById('month' + idNum).innerHTML;
             const day = parseInt(document.getElementById('day' + idNum).innerHTML);
             const category = document.getElementById('category' + idNum).innerHTML;
             const receiver = document.getElementById('receiver' + idNum).innerHTML;
@@ -39,6 +40,41 @@ function parseTable(rows) {
         }
     }
     return parsedTable;
+}
+
+function filterByCategory() {
+    let table = parseTable(getRows());
+    var categories = new Map();
+    for (var expense of table.data) {
+        //console.log(table);
+        if (!categories.get(expense.category)) {
+            categories.set(expense.category,[]);
+        }
+        categories.get(expense.category).push(expense);
+    }
+    return categories;
+}
+
+function filterByMonth(expenses) {
+    var month = new Map();
+    for (var expense of expenses) {
+        //console.log(table);
+        if (!month.get(expense.month)) {
+            month.set(expense.month,{});
+        }
+        month.get(expense.month).sum = expense.value;
+    }
+    return month;
+}
+
+function makeDataForGraph(category) {
+
+    var month = new Map();
+    let keys = Array.from(category.keys());
+    for (let name of keys) {
+        month.set(name, filterByMonth(category.get(name)));
+    }
+    return month;
 }
 
 //DATE PICKER
@@ -151,8 +187,9 @@ $(function() {
                 tr[i].style.display = "";
             }
         }
+
         const parsedTable = parseTable(getRows());
-        console.log(parsedTable);
+        //console.log(parsedTable);
         document.querySelector(".totaltext").innerHTML = "<h5>Total spent: " + parsedTable.sum.toFixed(2); + "€</h5>";
         loadGraphs(groupByCategories(parsedTable));
 

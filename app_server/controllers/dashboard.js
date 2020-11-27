@@ -294,12 +294,17 @@ function generateBillsAlerts(bills, language) {
 }
 
 function generateGoalsAlerts(goals, language) {
-    //TODO
-    return [{
-        type: 'alert-success',
-        name: dictionary.getTranslation("alertName3", language),
-        text: dictionary.getTranslation("alertText3", language)
-    }];
+    var count = goalsCompleted(goals);
+    if (count) {
+        return [{
+            type: 'alert-success',
+            name: dictionary.getTranslation("alertName3", language),
+            text: count + dictionary.getTranslation("alertText3", language)
+        }];
+    }
+    else {
+        return [];
+    }
 }
 
 function getTotalAlmostEmptyEnvelopes(envelopes, month) {
@@ -363,6 +368,18 @@ function getCurrentMonth(month) {
 
     return monthArray[month];
 
+}
+
+function goalsCompleted(goals) {
+    var completed = 0;
+
+    for (var i = 0; i < goals.length; i++){
+        if (goals[i].saved >= goals[i].target){
+            completed++;
+        }  
+    }
+
+    return completed;
 }
 
 module.exports = {

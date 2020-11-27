@@ -6,48 +6,6 @@ var Client = require('node-rest-client').Client;
 
 var data = {
     fileName: 'goals',
-    /*goal: [{
-            id: 0,
-            title: 'iPhone',
-            progress: 100,
-            target: 1200,
-            targetLeft: 0,
-            monthlyTarget: 0,
-            category: 'Electronics',
-            color: '#00cf1d',
-            year: '2021',
-            month: '06',
-            day: '12',
-        },
-        {
-            id: 1,
-            title: 'Ferrari F8 Tributo',
-            progress: 69,
-            target: 1500,
-            targetLeft: 1500,
-            monthlyTarget: 1000,
-            category: 'Car',
-            year: '2021',
-            month: '03',
-            day: '25',
-        }
-    ],*/
-    card: [{
-            id: 1,
-            title: 'Goals Total',
-            color: 'bg-primary',
-            count: 3,
-            icon: 'fa-bullseye'
-        },
-        {
-            id: 2,
-            title: 'Goals Completed',
-            color: 'green-panel',
-            count: 1,
-            icon: 'fa-check-circle',
-            comment: 'iPhone 12 Pro completed!'
-        }
-    ],
     categories: [
         { id: 1, category: "Furniture" },
         { id: 2, category: "Electronics" },
@@ -168,6 +126,35 @@ function addGoal(body, res, session) {
     );
 }
 
+function editGoal(body, res, session) {
+    const data = {
+        title: body.goal3,
+        target: body.Amount3,
+        date: body.inputDate,
+        category: body.inputCategory,
+        user_id: session.user._id,
+        goal_id: body.id
+    }
+
+    var args = {
+        data: data,
+        headers: { "Content-Type": "application/x-www-form-urlencoded" }
+    };
+
+    var client = new Client();
+    client.post("http://localhost:8080/api/editGoal", args,
+        function(data, response) {
+            if (response.statusCode == 200) {
+                res.session = session;
+                res.session.user = data;
+                res.redirect('/goals');
+            } else {
+                res.redirect('/goals#error');
+            }
+        }
+    );
+}
+
 function deleteGoal(body, res, session) {
     const data = {
         user_id: session.user._id,
@@ -179,18 +166,14 @@ function deleteGoal(body, res, session) {
         headers: { "Content-Type": "application/x-www-form-urlencoded" }
     };
 
-    console.log(data);
-
     var client = new Client();
     client.post("http://localhost:8080/api/deleteGoal", args,
         function(data, response) {
             if (response.statusCode == 200) {
-                console.log("tukaj ");
                 res.session = session;
                 res.session.user = data;
                 res.redirect('/goals');
             } else {
-                console.log(response.statusCode);
                 res.redirect('/goals#error');
             }
         }
@@ -206,21 +189,25 @@ function respond(res, session) {
             data = {...data, ...translationKeys};
         }
         data.goal = generateGoals(session.user.goals);
-        //console.log(data.goal)
+        data.card = generateCards(session.user);
         res.render('goals', data);
     } else {
         res.redirect('/');
     }
 }
 
-function generateGoals(goals){
+function generateGoals(goals) {
     var goalsArray = [];
+    //console.log(goals);
 
     for (var goal of goals) {
         var date = goal.date.split("-");
         var progress = Math.ceil(goal.saved / goal.target * 100);
         var targetLeft = goal.target - goal.saved;
         var monthlyTarget = calculateDailyTarget(goal.date, targetLeft);
+        var color = "#2f7cfe";
+        if(targetLeft <= 0)
+           color = "#00cf1d"
         
         goalsArray.push({
             _id: goal._id,
@@ -228,6 +215,7 @@ function generateGoals(goals){
             progress: progress,
             target: goal.target,
             targetLeft: targetLeft,
+            color: color,
             monthlyTarget: monthlyTarget,
             category: goal.category,
             year: date[0],
@@ -236,6 +224,39 @@ function generateGoals(goals){
         });
     }
     return goalsArray;
+}
+
+function generateCards(currentUser) {
+    var totalGoals = currentUser.goals.length;
+    var completed = 0;
+    var goalCompleted = "";
+    for(var i = 0; i < currentUser.goals.length; i++){
+        if(currentUser.goals[i].saved >= currentUser.goals[i].target){
+            completed++;
+            goalCompleted += currentUser.goals[i].title + ", ";
+        }  
+    }
+    if(completed > 2)
+        goalCompleted = "Multiple goals";
+    else
+        goalCompleted = goalCompleted.substring(0, goalCompleted.length - 2);
+
+    return [{
+        id: 1,
+        title: 'Goals Total',
+        color: 'bg-primary',
+        count: totalGoals,
+        icon: 'fa-bullseye'
+    },
+    {
+        id: 2,
+        title: 'Goals Completed',
+        color: 'green-panel',
+        count: completed,
+        icon: 'fa-check-circle',
+        comment: goalCompleted + ' completed!'
+    }
+    ];
 }
 
 function calculateDailyTarget(date, targetLeft){

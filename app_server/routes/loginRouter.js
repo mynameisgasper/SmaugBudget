@@ -5,6 +5,7 @@ var bodyParser = require('body-parser');
 //Business logic
 var index = require('../controllers/index.js');
 var confirmation = require('../controllers/confirmation.js');
+var passwordReset = require('../controllers/passwordReset.js');
 
 var jsonParser = bodyParser.json()
 
@@ -35,5 +36,16 @@ router.get('/confirmation/:urlCode', (req, res) => {
 router.get('/confirmation/:urlCode/:code', (req, res) => {
     confirmation.confirm(req, res);
 });
+
+//Password reset
+router.get('/passwordReset/:code', (req, res) => {
+    passwordReset.get(req, res);
+});
+
+//Password reset
+router.post('/passwordReset/:code', (req, res) => {
+    passwordReset.post(req, res);
+});
+
 
 module.exports = router;
