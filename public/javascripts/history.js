@@ -15,36 +15,41 @@ function parseTable(rows) {
     };
 
     for (let row of rows) {
-        const idNum = row.cells[0].id.substring(4);
-        const year = parseInt(document.getElementById('year' + idNum).innerHTML);
-        const month = convertMonthsToName(document.getElementById('month' + idNum).innerHTML);
-        const day = parseInt(document.getElementById('day' + idNum).innerHTML);
-        const category = document.getElementById('category' + idNum).innerHTML;
-        const receiver = document.getElementById('receiver' + idNum).innerHTML;
-        const currency = document.getElementById('currency' + idNum).innerHTML;
-        const price = parseFloat(document.getElementById('price' + idNum).innerHTML);
+        if(row.style.display != 'none'){
+            const idNum = row.cells[0].id.substring(4);
+            const year = parseInt(document.getElementById('year' + idNum).innerHTML);
+            const month = convertMonthsToName(document.getElementById('month' + idNum).innerHTML);
+            const day = parseInt(document.getElementById('day' + idNum).innerHTML);
+            const category = document.getElementById('category' + idNum).innerHTML;
+            const receiver = document.getElementById('receiver' + idNum).innerHTML;
+            const currency = document.getElementById('currency' + idNum).innerHTML;
+            const price = parseFloat(document.getElementById('price' + idNum).innerHTML);
 
-        parsedTable.data.push({
-            id: idNum,
-            year: year,
-            month: month,
-            day: day,
-            category: category,
-            receiver: receiver,
-            currency: currency,
-            value: price
-        });
-        parsedTable.sum += price;
+            parsedTable.data.push({
+                id: idNum,
+                year: year,
+                month: month,
+                day: day,
+                category: category,
+                receiver: receiver,
+                currency: currency,
+                value: price
+            });
+            parsedTable.sum += price;
+        }
     }
     return parsedTable;
 }
 
 //DATE PICKER
 $(function() {
+    var today = new Date();
+    var yyyy = today.getFullYear();
+
     $('input[name="daterange"]').daterangepicker({
         showDropdowns: true,
-        minYear: 2019,
-        maxYear: 2020,
+        minYear: 1990,
+        maxYear: yyyy,
         autoApply: true,
         opens: 'left',
         locale: {
@@ -146,6 +151,10 @@ $(function() {
                 tr[i].style.display = "";
             }
         }
+        const parsedTable = parseTable(getRows());
+        console.log(parsedTable);
+        document.querySelector(".totaltext").innerHTML = "<h5>Total spent: " + parsedTable.sum.toFixed(2); + "€</h5>";
+        loadGraphs(groupByCategories(parsedTable));
 
     });
 });
