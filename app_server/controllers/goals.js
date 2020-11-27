@@ -121,13 +121,10 @@ function addToGoalWithCategory(body, res, session) {
         headers: { "Content-Type": "application/x-www-form-urlencoded" }
     };
 
-    console.log(data);
-
     var client = new Client();
     client.post("http://localhost:8080/api/addToGoalWithCategory", args,
         function(data, response) {
             if (response.statusCode == 200) {
-                console.log("a");
                 res.session = session;
                 res.session.user = data;
                 res.redirect('/goals');
@@ -187,7 +184,7 @@ function generateGoals(goals){
 
     for (var goal of goals) {
         var date = goal.date.split("-");
-        var progress = goal.saved / goal.target;
+        var progress = Math.ceil(goal.saved / goal.target * 100);
         var targetLeft = goal.target - goal.saved;
         var monthlyTarget = calculateMonthlyTarget(goal.date, targetLeft);
         
@@ -218,9 +215,6 @@ function calculateMonthlyTarget(date, targetLeft){
 
     const diffTime = Math.abs(today - endDate);
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
-    console.log("days: " + diffDays);
-
 
     if(diffDays < 1)
         return targetLeft;

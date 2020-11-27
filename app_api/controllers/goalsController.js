@@ -137,24 +137,14 @@ function addToGoalWithCategory(requestBody, res) {
                     res.sendStatus(500);
                 } else {
                     //? find the correct goal
-                    var goalId = null;
                     for (var i = 0; i < user.goals.length; i++) {
                         if (user.goals[i].title === title) {
-                            goalId = user.goals[i]._id;
-                            console.log(user.goals[i].saved)
-                            
-                            user.goals[i].saved += amount;
+                            amount = parseInt(amount) + user.goals[i].saved;
+                            user.goals[i].saved = amount;
                             user.save();
-                            console.log(user.goals[i].saved)
-                            //amount = user.goals[i].saved;
                             break;
                         }
                     }
-                    //console.log(goalId);
-                    //Goal.findByIdAndUpdate(goalId, {saved: 15512}, function(err, goal) {
-                       
-                    //});
-                    
                     res.status(200).json(user);
                 }
             });
