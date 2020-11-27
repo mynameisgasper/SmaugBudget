@@ -35,7 +35,6 @@ function respond(res, session) {
     if (session.user) {
         data.categories = session.user.categories;
         data.expense = generateExpenses(session.user.expense);
-        console.log(data.expense);
         res.render('history', data);
     } else {
         res.redirect('/');
