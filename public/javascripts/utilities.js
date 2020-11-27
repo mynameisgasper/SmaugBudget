@@ -51,7 +51,7 @@ function convertCurrency() {
   var amount2 = document.getElementById("Amount2");
 
   if (currency1.value === currency2.value) {
-    amount2.innerHTML = "1";
+    amount2.innerHTML = amount.value;
   }
   else {
     $.ajax({
