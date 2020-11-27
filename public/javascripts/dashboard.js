@@ -1,9 +1,11 @@
 $(document).ready(function() {
 
-  if(window.location.href.indexOf('#changeIncom') != -1) {
+  if(window.location.href.indexOf('#notpremium') != -1) {
+    $('.premium-page').modal('show');
+  }
+  if(window.location.href.indexOf('#changeIncome') != -1) {
     $('#changeIncome').modal('show');
   }
-
 });
 
 function disableButton() {

@@ -52,7 +52,12 @@ router.post('/bills', (req, res) => {
 
 //History
 router.get('/history', (req, res) => {
-    history.get(req, res);
+    if(req.session.user.isPremium == true) {
+        history.get(req, res);
+    }
+    else {
+        res.redirect('dashboard#notpremium');
+    }
 });
 router.post('/history', (req, res) => {
     history.post(req, res);
@@ -60,7 +65,12 @@ router.post('/history', (req, res) => {
 
 //Utilities
 router.get('/utility', (req, res) => {
-    utility.get(req, res);
+    if(req.session.user.isPremium == true) {
+        utility.get(req, res);
+    }
+    else {
+        res.redirect('dashboard#notpremium');
+    }
 });
 
 //Account info
