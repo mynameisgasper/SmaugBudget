@@ -183,15 +183,14 @@ function updateUser(requestBody, res, session) {
                     console.log(err);
                 } else {
                     if (user) {
-                        console.log(requestBody.lastName);
+                        
                         user.firstname = requestBody.firstName ? requestBody.firstName : user.firstname;
                         user.lastname = requestBody.lastName ? requestBody.lastName : user.lastname;
                         user.email = requestBody.email ? requestBody.email : user.email;
                         user.password = requestBody.password ? requestBody.password : user.password;
                         user.language = requestBody.language ? requestBody.language : user.language;
                         user.defaultCurrency = requestBody.defaultCurrency ? requestBody.defaultCurrency : user.defaultCurrency;
-                        console.log(user.lastName);
-                        //console.log(user);
+                    
                         user.save();
                         res.status(200).json(user);
                     } else {
@@ -292,7 +291,6 @@ module.exports = {
         getPfp(req, res);
     },
     updateUser: function(req, res) {
-        console.log(req.session);
         updateUser(req.body, res, req.session);
     }
 }

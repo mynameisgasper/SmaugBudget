@@ -100,9 +100,8 @@ function changeName(body, res, session) {
         data: data,
         headers: { "Content-Type": "application/x-www-form-urlencoded" }
     };
-    console.log("userController_pre");
+    
     var client = new Client();
-    console.log(session);
     client.post("http://localhost:8080/api/updateUser", args,
         function(data, response) {
             if (response.statusCode == 200) {
