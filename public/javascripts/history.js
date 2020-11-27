@@ -188,14 +188,6 @@ $(function() {
             }
         }
 
-        var dropdown = document.querySelector(".kategorije");
-        var inputs = dropdown.getElementsByTagName("input");
-        //console.log(inputs);
-        for(i = 0; i < inputs.length; i++) {
-            //inputs[i] = inputs[i].id.substr(8);
-            //console.log(inputs[i].id.substr(8));
-        }
-
         const parsedTable = parseTable(getRows());
         //console.log(parsedTable);
         document.querySelector(".totaltext").innerHTML = "<h5>Total spent: " + parsedTable.sum.toFixed(2); + "€</h5>";
