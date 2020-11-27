@@ -75,13 +75,13 @@
             </div>
             <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
                 <!-- Search form -->
-                <input class="form-control search" type="text" placeholder="Search" aria-label="Search">
+                <input class="form-control search" type="text" id="search" onkeydown="searchFunction()" placeholder="Search" aria-label="Search">
             </div>
         </div>
         <div class="row">
             <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                 <div class="table-responsive" data-aos="fade-up" data-aos-duration="500">
-                    <table class="table" id="expeseTable">
+                    <table class="table" id="table">
                         <tbody>
                             {{> historyTableElement}}
                         </tbody>
