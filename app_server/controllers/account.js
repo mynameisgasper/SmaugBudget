@@ -80,9 +80,14 @@ function respond(res, session) {
 }
 
 function parseRequestBody(reqBody, res, session) {
+    console.log(reqBody);
     switch (reqBody.formType) {
         case 'changeName': {
             changeName(reqBody, res, session);
+            break;
+        }
+        case 'changeLanguage': {
+            changeLanguage(reqBody, res, session);
             break;
         }
         
@@ -93,6 +98,31 @@ function changeName(body, res, session) {
     const data = {
         firstName: body.firstName,
         lastName: body.lastName,
+        email: session.user.email
+    }
+
+    var args = {
+        data: data,
+        headers: { "Content-Type": "application/x-www-form-urlencoded" }
+    };
+    
+    var client = new Client();
+    client.post("http://localhost:8080/api/updateUser", args,
+        function(data, response) {
+            if (response.statusCode == 200) {
+                res.session = session;
+                res.session.user = data;
+                res.redirect('/account');
+            } else {
+                res.redirect('/account#error');
+            }
+        }
+    );
+}
+
+function changeLanguage(body, res, session) {
+    const data = {
+        language: body.language,
         email: session.user.email
     }
 
