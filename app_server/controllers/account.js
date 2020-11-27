@@ -66,17 +66,21 @@ var translationKeys = {
 }
 
 function translate (language) {
+    var translatedKeys = JSON.parse(JSON.stringify(translationKeys));
+    console.log(translationKeys);
     Object.keys(translationKeys).forEach(function(key) {
-        translationKeys[key] = dictionary.getTranslation(translationKeys[key], language);
+        translatedKeys[key] = dictionary.getTranslation(translatedKeys[key], language);
     });
+    return translatedKeys;
 }
 
 function respond(res, session) {
     if (session.user) {
         if (session.user.language) {
-            translate(session.user.language);
+            data = {...data, ...translate(session.user.language)};
+        } else {
+            data = {...data, ...translationKeys};
         }
-        data = {...data, ...translationKeys};
         data.data_firstName = session.user.firstname;
         data.data_lastName = session.user.lastname;
         data.data_email = session.user.email;
