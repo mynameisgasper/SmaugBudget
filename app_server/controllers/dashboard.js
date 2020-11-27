@@ -55,7 +55,6 @@ function translate (language) {
             }
         }
     }
-    console.log(translatedKeys);
     return translatedKeys;
 }
 

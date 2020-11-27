@@ -197,13 +197,32 @@ function getBillsInTheNext7Days(bills) {
     return billsArray;
 }
 
+function findClosestBill(bills) {
+    var nearestBill = null;
+    const currentTime = new Date();
+
+    var minDiff = null
+    for (var bill of bills) {
+        const billDate = new Date(Date.parse(bill.date)).getTime();
+        const diff = (billDate - currentTime.getTime());
+
+        if (!minDiff || diff < minDiff) {
+            minDiff = diff;
+            nearestBill = bill;
+        }
+    }
+    
+    return nearestBill
+}
+
 function generateComment(bills) {
     var comment = '';
-    for (var bill of bills) {
-        const billDate = new Date(Date.parse(bill.date));
-        const dtfUK = new Intl.DateTimeFormat('UK', { year: 'numeric', month: '2-digit', day: '2-digit' });
-        comment += bill.recipient + " - " + dtfUK.format(billDate);
-    }
+
+    var bill = findClosestBill(bills);
+    const billDate = new Date(Date.parse(bill.date));
+    const dtfUK = new Intl.DateTimeFormat('UK', { year: 'numeric', month: '2-digit', day: '2-digit' });
+    comment = "Closest bill:\n" + bill.recipient + " - " + dtfUK.format(billDate);
+    
 
     return comment;
 }
