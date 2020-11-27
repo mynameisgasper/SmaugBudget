@@ -76,11 +76,6 @@ var doughnutConfig = {
     data: {
         datasets: [{
             backgroundColor: [
-                window.chartColors.red,
-                window.chartColors.orange,
-                window.chartColors.yellow,
-                window.chartColors.green,
-                window.chartColors.blue,
             ],
             label: 'Expenses by category',
             borderColor: "#ffffff"
@@ -99,6 +94,7 @@ var doughnutConfig = {
 };
 
 function loadGraphs(categoryData) {
+    doughnutConfig.data.datasets[0].backgroundColor = getBackgroundColors(categoryData.length);
     //console.log(categoryData);
     if (categoryData != null) {
         doughnutConfig.data.datasets[0].data = extractValues(categoryData);
@@ -121,19 +117,22 @@ function loadGraphs(categoryData) {
 }
 
 function loadGraphs2(categoryData) {
+    var i = 0;
     let keys = Array.from(categoryData.keys());
+    var colors = getBackgroundColors(keys.length);
     for (let key of keys) {
         //console.log(key);
        // console.log(categoryData.get(key));
         var json = {
                 label: key,
-                backgroundColor: window.chartColors.green,
-                borderColor: window.chartColors.green,
+                backgroundColor: colors[i],
+                borderColor: colors[i],
                 data: generateDataset(categoryData.get(key)),
                 fill: false,
             
         }
         lineConfig.data.datasets.push(json);
+        i++;
         //console.log(json);
         //month.set(name, filterByMonth(category.get(name)));
     }
@@ -165,6 +164,38 @@ function loadGraphs2(categoryData) {
 
     var ctx = document.getElementById('line-canvas').getContext('2d');
     window.myLine = new Chart(ctx, lineConfig);
+}
+
+function getBackgroundColors(length) {
+    var colors = [];
+
+    var current1 = 255;
+    var current2 = 200;
+    var current3 = 200;
+    for (var i = 0; i < length; i++) {
+        colors.push("rgb(" + current1 + ", " + current2 + "," + current3 + ")");
+        
+        if (current1 < 100) {
+        	if (current2 < 100) {
+            	if (current3 < 100) {
+                	current1 = 255;
+                    current2 = 200;
+                    current3 = 200;
+                }
+                else {
+                    current3 -= 100;
+                }
+            }
+            else {
+                current2 -= 100;
+            }
+        }
+        else {
+        	current1 -= 100;
+        }
+    }
+
+    return colors;
 }
 
 function extractNames(data) {
