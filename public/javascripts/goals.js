@@ -46,6 +46,16 @@ function disableButton3(id) {
     }
 }
 
+function disableButton4() {
+    var amount = amount2(document.getElementById("Amount2"));
+
+    if (amount == 0 ) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
 
 function amount5(field) {
 

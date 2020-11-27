@@ -16,5 +16,14 @@ module.exports = {
     },
     plus: function(arg1, arg2) {
         return (isNaN(arg1 + arg2) ? 0 : arg1 + arg2);
-    }
+    },
+    /*ifNotFull: function(arg1){
+        console.log(arg1);
+        /*if(arg1 > 0)
+            return true;
+        else
+            return false
+        
+        return ((arg1 > 0) ? options.fn(this) : options.inverse(this));
+    }*/
 }
