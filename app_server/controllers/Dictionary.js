@@ -62,11 +62,11 @@ var slovenian = {
     //alert
     "alertSection": "Opozorila",
     "alertName1": "KUVERTE",
-    "alertText1": "1 skoraj prazna",
+    "alertText1": " kuverta/e skoraj prazna",
     "alertName2": "RAČUNI",
-    "alertText2": "1 račun z rokom v tem tednu",
+    "alertText2": " račun/ov z rokom v tem tednu",
     "alertName3": "CILJI",
-    "alertText3": "1 cilj dosežen",
+    "alertText3": " cilj/ev dosežen",
 
     //overview
     "overview": "Pregled preteklega meseca",
@@ -217,11 +217,11 @@ var english = {
     //alert
     "alertSection": "Alert Section",
     "alertName1": "ENVELOPES",
-    "alertText1": "1 almost empty",
+    "alertText1": " almost empty",
     "alertName2": "BILLS",
-    "alertText2": "1 bill to pay this week",
+    "alertText2": " bill to pay this week",
     "alertName3": "GOALS",
-    "alertText3": "1 goal completed",
+    "alertText3": " goal completed",
     "overview": "Last month overview",
     "incomeRow": "Income",
     "expensesRow": "Expenses",

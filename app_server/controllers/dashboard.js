@@ -68,7 +68,7 @@ function respond(res, session) {
         data.analytics = generateAnalyitcs(session.user);
         data.incomeLastMonth = (session.user.paycheckLastMonth ? session.user.paycheckLastMonth : 0);
         data.expensesLastMonth = getTotalCost(getLastMonthExpenses(session.user.expense, session.user.paycheckDate));
-        data.alert = generateAlerts(session.user);
+        data.alert = generateAlerts(session.user, session.user.language);
         data.alertLength = data.alert.length;
         data.id = session.user._id;
 
@@ -128,15 +128,15 @@ function generateAnalyitcs(user) {
     }]
 }
 
-function generateAlerts(user) {
+function generateAlerts(user, language) {
     var alertArray = [];
-    for (var element of generateEnvelopeAlerts()) {
+    for (var element of generateEnvelopeAlerts(user.envelopes, language)) {
         alertArray.push(element);
     }
-    for (var element of generateBillsAlerts()) {
+    for (var element of generateBillsAlerts(user.bills, language)) {
         alertArray.push(element);
     }
-    for (var element of generateGoalsAlerts()) {
+    for (var element of generateGoalsAlerts(user.goals, language)) {
         alertArray.push(element);
     }
 
@@ -219,7 +219,6 @@ function getLastMonthExpenses(expenses, paycheckDate) {
         if ((expenseMonth == previousMonth && expenseDay <= paycheckDate) || (expenseMonth == prepreviousMonth && expenseDay > paycheckDate)) {
             lastMonthExpenses.push(expense);
         }
-
     }
 
     return lastMonthExpenses;
@@ -255,28 +254,89 @@ function getMostTimesPurchased(expenseAnalitics) {
     }
 }
 
-function generateEnvelopeAlerts() {
-    return [{
-        type: 'alert-warning',
-        name: dictionary.getTranslation("alertName1"),
-        text: dictionary.getTranslation("alertText1")
-    }];
+function generateEnvelopeAlerts(envelopes, language) {
+    var envelopesAlerts = [];
+
+    var date = new Date();
+    var month = getCurrentMonth(date.getMonth());
+    var totalAlmostEmptyEnvelopes = getTotalAlmostEmptyEnvelopes(envelopes, month);
+    var totalEmptyEnvelopes = getTotalEmptyEnvelopes(envelopes, month);
+ 
+    if (totalAlmostEmptyEnvelopes > 0) {
+        envelopesAlerts.push({
+            type: 'alert-warning',
+            name: dictionary.getTranslation("alertName1", language),
+            text: totalAlmostEmptyEnvelopes + dictionary.getTranslation("alertText1", language)
+        });
+    }
+    if (totalEmptyEnvelopes > 0) {
+        envelopesAlerts.push({
+            type: 'alert-danger',
+            name: dictionary.getTranslation("alertName1", language),
+            text: totalEmptyEnvelopes + dictionary.getTranslation("alertText1", language)
+        });
+
+    }
+
+    return envelopesAlerts;
 }
 
-function generateBillsAlerts() {
-    return [{
-        type: 'alert-warning',
-        name: dictionary.getTranslation("alertName2"),
-        text: dictionary.getTranslation("alertText2")
-    }];
+function generateBillsAlerts(bills, language) {
+    var billsAlerts = [];
+
+    const nearBills = getBillsInTheNext7Days(bills);
+    if (nearBills.length > 0) {
+        billsAlerts.push({
+            type: 'alert-warning',
+            name: dictionary.getTranslation("alertName2", language),
+            text: nearBills.length + dictionary.getTranslation("alertText2", language)
+        })
+    }
+    return billsAlerts;
 }
 
-function generateGoalsAlerts() {
+function generateGoalsAlerts(goals, language) {
+    //TODO
     return [{
         type: 'alert-success',
-        name: dictionary.getTranslation("alertName3"),
-        text: dictionary.getTranslation("alertText3")
+        name: dictionary.getTranslation("alertName3", language),
+        text: dictionary.getTranslation("alertText3", language)
     }];
+}
+
+function getTotalAlmostEmptyEnvelopes(envelopes, month) {
+    var counter = 0;
+    for (var i = 0; i < envelopes.length; i++) {
+        if (envelopes[i].progress < 100 && envelopes[i].progress > 74 && envelopes[i].month === month) {
+            counter++;
+        }
+    }
+    return counter;
+}
+
+function getTotalEmptyEnvelopes(envelopes, month) {
+    var counter = 0;
+    for (var i = 0; i < envelopes.length; i++) {
+        if (envelopes[i].progress >= 100 && envelopes[i].month === month) {
+            counter++;
+        }
+    }
+    return counter;
+}
+
+function getBillsInTheNext7Days(bills) {
+    const currentTime = new Date();
+    var billsArray = [];
+
+    for (var bill of bills) {
+        const billDate = new Date(Date.parse(bill.date)).getTime();
+        const diff = (billDate - currentTime.getTime()) / 86400000;
+        
+        if (diff < 7) {
+            billsArray.push(bill);
+        }
+    }
+    return billsArray;
 }
 
 function getTotalCost(bills) {
@@ -286,6 +346,25 @@ function getTotalCost(bills) {
     }
 
     return sum;
+}
+
+function getCurrentMonth(month) {
+    var monthArray = new Array();
+    monthArray[0] = "JAN";
+    monthArray[1] = "FEB";
+    monthArray[2] = "MAR";
+    monthArray[3] = "APR";
+    monthArray[4] = "MAY";
+    monthArray[5] = "JUN";
+    monthArray[6] = "JUL";
+    monthArray[7] = "AUG";
+    monthArray[8] = "SEP";
+    monthArray[9] = "OCT";
+    monthArray[10] = 'NOV';
+    monthArray[11] = 'DEC';
+
+    return monthArray[month];
+
 }
 
 module.exports = {
