@@ -67,7 +67,7 @@ var translationKeys = {
 
 function translate (language) {
     Object.keys(translationKeys).forEach(function(key) {
-        translationKeys[key] = dictionary.getTranslation(key, language);
+        translationKeys[key] = dictionary.getTranslation(translationKeys[key], language);
     });
 }
 

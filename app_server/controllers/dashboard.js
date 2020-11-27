@@ -3,8 +3,7 @@ var dictionary = require('./Dictionary');
 
 var data = {
     fileName: 'dashboard',
-    message:dictionary.getTranslation("messageDashboard"),
-    welcomeMessage: dictionary.getTranslation("welcomeMessageDashboard"),
+    
     alert: [{
         type: 'alert-warning',
         name: dictionary.getTranslation("alertName1"),
@@ -25,38 +24,61 @@ var data = {
     graph: {
         used: true,
         name: 'DashboardChart'
-    },
-    
-    alertSection: dictionary.getTranslation("alertSection"),
-    overview:  dictionary.getTranslation("overview"),
-    incomeRow: dictionary.getTranslation("incomeRow"),
-    expensesRow: dictionary.getTranslation("expensesRow"),
-    balanceRow: dictionary.getTranslation("balanceRow"),
-    analyticsField: dictionary.getTranslation("analyticsField"),
-    incomeModalTitle: dictionary.getTranslation("incomeModalTitle"),
-    incomeModalPlaceholderIncome: dictionary.getTranslation("incomeModalPlaceholderIncome"),
-    incomeModalPlaceholderDate: dictionary.getTranslation("incomeModalPlaceholderDate"),
-    incomeModalSaveButton: dictionary.getTranslation("incomeModalSaveButton"),
-    incomeModalCloseButton: dictionary.getTranslation("incomeModalCloseButton"),
+    }
+};
+
+var translationKeys = {
+    message: "messageDashboard",
+    welcomeMessage: "welcomeMessageDashboard",
+
+    alertSection: "alertSection",
+    overview:  "overview",
+    incomeRow: "incomeRow",
+    expensesRow: "expensesRow",
+    balanceRow: "balanceRow",
+    analyticsField: "analyticsField",
+    incomeModalTitle: "incomeModalTitle",
+    incomeModalPlaceholderIncome: "incomeModalPlaceholderIncome",
+    incomeModalPlaceholderDate: "incomeModalPlaceholderDate",
+    incomeModalSaveButton: "incomeModalSaveButton",
+    incomeModalCloseButton: "incomeModalCloseButton",
 
     //translations main
-    logout: dictionary.getTranslation("logout"),
+    logout: "logout",
     //translations navbar
-    DASHBOARD: dictionary.getTranslation("DASHBOARD"),
-    ENVELOPES: dictionary.getTranslation("ENVELOPES"),
-    GOALS: dictionary.getTranslation("GOALS"),
-    BILLS: dictionary.getTranslation("BILLS"),
-    HISTORY: dictionary.getTranslation("HISTORY"),
-    UTILITIES: dictionary.getTranslation("UTILITIES"),
-    user: dictionary.getTranslation("user"),
-    settings: dictionary.getTranslation("settings"),
-    appearance: dictionary.getTranslation("appearance"),
-    light: dictionary.getTranslation("light"),
-    dark: dictionary.getTranslation("dark")
-};
+    DASHBOARD: "DASHBOARD",
+    ENVELOPES: "ENVELOPES",
+    GOALS: "GOALS",
+    BILLS: "BILLS",
+    HISTORY: "HISTORY",
+    UTILITIES: "UTILITIES",
+    user: "user",
+    settings: "settings",
+    appearance: "appearance",
+    light: "light",
+    dark: "dark"
+}
+
+function translate (language) {
+    Object.keys(translationKeys).forEach(function(key) {
+        translationKeys[key] = dictionary.getTranslation(translationKeys[key], language);
+    });
+    for (var i = 0; i < data.alert.length; i++) {
+        //console.log(data.alert[i]);
+        if (data.alert[i]) {
+            data.alert[i].name = dictionary.getTranslation(data.alert[i].name, language);
+            data.alert[i].text = dictionary.getTranslation(data.alert[i].text, language);
+        }
+    }
+}
 
 function respond(res, session) {
     if (session.user) {
+        if (session.user.language) {
+            translate(session.user.language);
+        }
+        data = {...data, ...translationKeys};
+
         data.card = generateCards(session.user);
         data.analytics = generateAnalyitcs(session.user);
         data.incomeLastMonth = (session.user.paycheckLastMonth ? session.user.paycheckLastMonth : 0);
