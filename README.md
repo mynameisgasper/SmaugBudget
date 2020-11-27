@@ -25,8 +25,6 @@ Lastni projekt pri predmetu **Spletno programiranje** v študijskem letu **2020/
     - Sistem sestavljanja mesečnega proračuna po kategorijah oziroma t.i. kuvertah.	
         - Možnost ustvarjanja, spreminjanja in brisanja kuvert ter nastavljanja količine denarja in vpis stroškov po mesecih.(Tudi nastavitev barve progress bara)
         - Možen premik po mesecih nazaj (za pregled) in naprej (za nastavitev proračuna za naslednji mesec)	
-        - Search funkcija, ki omogoča prikaz samo določenih kategorij	
-        - Microbudgeting: omogoča deljenje kategorij na podkategorije na enostaven način z znakom za dvopičje (primer: Entertainment:Netflix, Entertainment: Games)	
     - Hitri pregled na karticah in enostaven pregled v obliki progress barov. Kartice vsebujejo master-detail vzorec.
 
 - [**Goals**](https://github.com/sp-2020-2021/LP-30/blob/master/docs/goals.html)	
