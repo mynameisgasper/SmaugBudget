@@ -40,7 +40,8 @@
                 <img id="pfpNavBar" src="/api/getPfp" alt="Profile pic"></a>
             <div class="dropdown-menu dropdown-menu-right dropdown-info" id="dropdown-user" aria-labelledby="navbarDropdownMenuLink-4">
                 <a class="dropdown-item" href="account"><i class="fas fa-cog"></i>{{settings}}</a>
-                <a class="dropdown-item" href="#" onclick="toggleDarkMode();loadGraphs();" id="appearance"><i class="fas fa-adjust"></i>{{appearance}}: {{light}}</a>
+                <a class="dropdown-item" href="#" onclick="toggleDarkMode();loadGraphs();" id="appearanceDark" style="display: none;"><i class="fas fa-adjust"></i>{{appearance}}: {{dark}}</a>
+                <a class="dropdown-item" href="#" onclick="toggleDarkMode();loadGraphs();" id="appearanceLight"><i class="fas fa-adjust"></i>{{appearance}}: {{light}}</a>
                 <hr>
                 <form method="POST" action="/" id="logout">
                     <input type="hidden" id="formType" name="formType" value="logout"/>

@@ -308,7 +308,8 @@ var english = {
 }   
 
 module.exports = {
-    getTranslation: (key) => {
+    getTranslation: (key, language) => {
+        //console.log(language);
         switch (language) {
             case "Slovenski":
                 if (slovenian[key]) {
@@ -321,14 +322,16 @@ module.exports = {
                 } 
                 break;
             default:
-                console.log(globalVar.language + " language is not supported!");
+                //console.log(language + " language is not supported!");
                 return key;
         }
-        console.log("No " + globalVar.language + " translation for key: " + key);
+        //console.log("No " + language + " translation for key: " + key);
         return key;
     },
     setLanguage: (lang) => {
         language = lang;
-        console.log(lang);
+    },
+    getLanguage: () => {
+        return language
     }
 }

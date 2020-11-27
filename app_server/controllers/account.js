@@ -6,69 +6,77 @@ var Client = require('node-rest-client').Client;
 
 var data = {
     fileName: "account",
-    //translations main
-    title: dictionary.getTranslation("account_title"),
-    logout: dictionary.getTranslation("logout"),
-    saveChanges: dictionary.getTranslation("saveChanges"),
-    name: dictionary.getTranslation("name"),
-    edit: dictionary.getTranslation("edit"),
-    close: dictionary.getTranslation("close"),
-    remove: dictionary.getTranslation("remove"),
-    //translations navbar
-    DASHBOARD: dictionary.getTranslation("DASHBOARD"),
-    ENVELOPES: dictionary.getTranslation("ENVELOPES"),
-    GOALS: dictionary.getTranslation("GOALS"),
-    BILLS: dictionary.getTranslation("BILLS"),
-    HISTORY: dictionary.getTranslation("HISTORY"),
-    UTILITIES: dictionary.getTranslation("UTILITIES"),
-    user: dictionary.getTranslation("user"),
-    settings: dictionary.getTranslation("settings"),
-    appearance: dictionary.getTranslation("appearance"),
-    light: dictionary.getTranslation("light"),
-    dark: dictionary.getTranslation("dark"),
-    //translations account
-    username: dictionary.getTranslation("username"),
-    firstName: dictionary.getTranslation("firstName"),
-    lastName: dictionary.getTranslation("lastName"),
-    password: dictionary.getTranslation("password"),
-    changePassword: dictionary.getTranslation("changePassword"),
-    email: dictionary.getTranslation("email"),
-    changeImage: dictionary.getTranslation("changeImage"),
-    connections: dictionary.getTranslation("connections"),
-    addConnections: dictionary.getTranslation("addConnections"),
-    members: dictionary.getTranslation("members"),
-    active: dictionary.getTranslation("active"),
-    application: dictionary.getTranslation("application"),
-    darkMode: dictionary.getTranslation("darkMode"),
-    language: dictionary.getTranslation("language"),
-    currency: dictionary.getTranslation("currency"),
-    oldPassword: dictionary.getTranslation("oldPassword"),
-    newPassword: dictionary.getTranslation("newPassword"),
-    confirmPassword: dictionary.getTranslation("confirmPassword"),
-    connectionName: dictionary.getTranslation("connectionName"),
-    envelopes: dictionary.getTranslation("envelopes"),
-    editConnection: dictionary.getTranslation("editConnection"),
-    dragAndDropOr: dictionary.getTranslation("dragAndDropOr"),
-    selLanguage: dictionary.getTranslation("selLanguage"),
-    
-    //data
     data_firstName: "",
     data_lastName: "",
     data_email: "",
-    data_connections: connections,
+    data_connections: connections
+}
+
+var translationKeys = {
+    //translations main
+    title: "account_title",
+    logout: "logout",
+    saveChanges: "saveChanges",
+    name: "name",
+    edit: "edit",
+    close: "close",
+    remove: "remove",
+    //translations navbar
+    DASHBOARD: "DASHBOARD",
+    ENVELOPES: "ENVELOPES",
+    GOALS: "GOALS",
+    BILLS: "BILLS",
+    HISTORY: "HISTORY",
+    UTILITIES: "UTILITIES",
+    user: "user",
+    settings: "settings",
+    appearance: "appearance",
+    light: "light",
+    dark: "dark",
+    //translations account
+    username: "username",
+    firstName: "firstName",
+    lastName: "lastName",
+    password: "password",
+    changePassword: "changePassword",
+    email: "email",
+    changeImage: "changeImage",
+    connections: "connections",
+    addConnections: "addConnections",
+    members: "members",
+    active: "active",
+    application: "application",
+    darkMode: "darkMode",
+    language: "language",
+    currency: "currency",
+    oldPassword: "oldPassword",
+    newPassword: "newPassword",
+    confirmPassword: "confirmPassword",
+    connectionName: "connectionName",
+    envelopes: "envelopes",
+    editConnection: "editConnection",
+    dragAndDropOr: "dragAndDropOr",
+    selLanguage: "selLanguage",
 
     //validation
-    HINT: dictionary.getTranslation("HINT"),
-    nameHint: dictionary.getTranslation("nameHint"),
-    surnameHint: dictionary.getTranslation("surnameHint"),
-    emailHint: dictionary.getTranslation("emailHint")
+    HINT: "HINT",
+    nameHint: "nameHint",
+    surnameHint: "surnameHint",
+    emailHint: "emailHint"
+}
+
+function translate (language) {
+    Object.keys(translationKeys).forEach(function(key) {
+        translationKeys[key] = dictionary.getTranslation(key, language);
+    });
 }
 
 function respond(res, session) {
     if (session.user) {
         if (session.user.language) {
-            dictionary.setLanguage(session.user.language);
+            translate(session.user.language);
         }
+        data = {...data, ...translationKeys};
         data.data_firstName = session.user.firstname;
         data.data_lastName = session.user.lastname;
         data.data_email = session.user.email;

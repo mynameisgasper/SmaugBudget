@@ -32,7 +32,8 @@ function addDarkModeCss() {
     link.setAttribute('id', 'darkmode')
     document.getElementsByTagName('head')[0].appendChild(link);
     
-    document.getElementById('appearance').innerHTML = '<i class="fas fa-adjust"></i>Appearance: Dark';
+    document.getElementById('appearanceDark').removeAttribute("style");
+    document.getElementById('appearanceLight').setAttribute("style", "display: none");
     darkMode.isSet = true;
     localStorage.setItem('dark',"true");
     console.log("addDark " +localStorage.getItem('dark'));
@@ -43,7 +44,8 @@ function removeDarkModeCss() {
         document.getElementById("darkmode").remove();
     }
 
-    document.getElementById('appearance').innerHTML = '<i class="fas fa-adjust"></i>Appearance: Light';
+    document.getElementById('appearanceLight').removeAttribute("style");
+    document.getElementById('appearanceDark').setAttribute("style", "display: none");
     darkMode.isSet = false;
     localStorage.setItem('dark',"false");
     console.log("removeDark "+localStorage.getItem('dark'));
