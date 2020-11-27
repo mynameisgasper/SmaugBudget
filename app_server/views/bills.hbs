@@ -1,5 +1,4 @@
 <main>
-
     {{> welcome}}
 
     <!--{{> card}}-->
@@ -169,13 +168,13 @@
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
-                                        <form name="editBill" method="post" action="/bills" onsubmit="return disableButton2()">
+                                        <form name="editBill" method="post" action="/bills" onsubmit="return disableButton2({{_id}})">
                                             <input type="hidden" value="editBill" name="formType"/>
-                                            <input type="hidden" value="{{id}}" name="billId"/>
+                                            <input type="hidden" value="{{_id}}" name="billId"/>
                                             <div class="modal-body">
                                                 <div class="ena">
                                                     <label for="Category">Category</label><br>
-                                                    <select id="inputCategory" name="inputCategory" class="form-control">
+                                                    <select id="inputCategory{{_id}}" name="inputCategory" class="form-control">
                                                         <option selected>{{category}}</option>
                                                         {{#each ../categories}}
                                                                 <option id="{{_id}}">{{name}}</option>
@@ -184,8 +183,8 @@
                                                 </div>
                                                 <div class="ena">
                                                     <label for="Payee">Payee</label><br>
-                                                    <input type="text" id="Payee2" name="Payee2" onfocusout="check2(this,{{id}})" class="form-control" value={{recipient}} required="required">
-                                                    <div id="alarm{{id}}"></div>
+                                                    <input type="text" id="Payee2{{id}}" name="Payee2" onfocusout="check2(this)" class="form-control" value="{{recipient}}" required="required">
+                                                    <div id="alarm{{_id}}"></div>
                                                 </div>
                                                 
                                                 <div class="ena">
@@ -194,26 +193,26 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text">€</span>
                                                         </div>
-                                                        <input type="number" id="Amount2"  onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" name="Amount2" onfocusout="amount2(this,{{id}})" class="form-control" value="{{value}}" step="any"required="required"> 
+                                                        <input type="number" id="Amount2{{_id}}"  onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" name="Amount2" onfocusout="amount2(this)" class="form-control" value="{{value}}" step="any" required="required"> 
                                                     </div>
-                                                    <div id="amm{{id}}"></div>
+                                                    <div id="amm{{_id}}"></div>
                                                 </div>
                                                 <div class="ena">
                                                     <label for="date">Date due</label><br>
-                                                     <input class="form-control" type="date" value="{{year}}-{{month}}-{{day}}" id="inputDate" name="inputDate" onfocusout="dateCheckEditBill(this, {{id}});" required="required">
+                                                     <input class="form-control" type="date" value="{{year}}-{{month}}-{{day}}" id="inputDate{{id}}" name="inputDate" onfocusout="dateCheckEditBill(this,'{{id}}')" required="required">
                                                 </div>
                                                 <div class="ena">
                                                     <b>How often?</b><br>
-                                                    <input type="radio" name="radio" id="once" value="once" required {{#ifEquals repeat "once"}}checked{{/ifEquals}}>
+                                                    <input type="radio" name="radio{{_id}}" value="once" required {{#ifEquals repeat "once"}}checked{{/ifEquals}}>
                                                     <label for="once">Once</label><br>
-                                                    <input type="radio" name="radio" id="monthly" value="monthly" {{#ifEquals repeat "monthly"}}checked{{/ifEquals}}>
+                                                    <input type="radio" name="radio" value="monthly" {{#ifEquals repeat "monthly"}}checked{{/ifEquals}}>
                                                     <label for="monthly">Monthly</label><br>
-                                                    <input type="radio" name="radio" id="yearly" value="yearly" {{#ifEquals repeat "yearly"}}checked{{/ifEquals}}>
+                                                    <input type="radio" name="radio" value="yearly" {{#ifEquals repeat "yearly"}}checked{{/ifEquals}}>
                                                     <label for="yearly">Yearly</label><br>
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="submit" onclick="disableButton2()" class="btn btn-primary">Save Changes</button>
+                                                <button type="submit" onclick="disableButton2({{_id}})" class="btn btn-primary">Save Changes</button>
                                             </div>
                                         </form>
                                     </div>

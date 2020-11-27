@@ -1,8 +1,7 @@
 function disableButton() {
   var amount1 = amount(document.getElementById("Amount"));
   var check1 = check(document.getElementById("Payee"));
-  var date1 = dateCheckAddBill(document.getElementById("date-hintAdd"));
-
+  var date1 = dateCheckAddBill(document.getElementById("inputDateAddBill"));
   if (amount1 == 0 || check1 == 0 || date1 == 0) {
     return false;
   }
@@ -11,10 +10,10 @@ function disableButton() {
   }
 }
 
-function disableButton2() {
-  var amount1 = amount(document.getElementById("Amount2"));
-  var check1 = check(document.getElementById("Payee2"));
-  var date1 = dateCheckAddBill(document.getElementById("date-hintEdit"));
+function disableButton2(id) {
+  var amount1 = amount(document.getElementById("Amount2"+id));
+  var check1 = check(document.getElementById("Payee2"+id));
+  var date1 = dateCheckAddBill(document.getElementById("inputDate"+id));
 
   if (amount1 == 0 || check1 == 0 || date1) {
     return false;
@@ -40,7 +39,7 @@ function check(field) {
       return 1;
     }
 }
-function check2(field, id) {
+function check2(field) {
   
     //var field = document.getElementById("PayeeModal");
     var regex = new RegExp("^[ A-Za-z0-9_@./#&+-]{1,20}$"); 
@@ -57,7 +56,7 @@ function check2(field, id) {
     }
 }
 
-function amount2(field, id) {
+function amount2(field) {
   
     //var field = document.getElementById("PayeeModal");
     var regex = new RegExp("^[0-9]+(\.[0-9]{1,2})?$"); 
@@ -132,7 +131,8 @@ function dateCheckAddBill(field) {
   }
 }
 
-function dateCheckEditBill(field, id) {
+function dateCheckEditBill(field) {
+  id = field.id.substr(9);
   var today = new Date();
   var dd = String(today.getDate()).padStart(2, '0');
   var mm = String(today.getMonth() + 1).padStart(2, '0');
@@ -140,12 +140,12 @@ function dateCheckEditBill(field, id) {
   var inputDate = field.value.split("-");
 
   if (inputDate[0] > yyyy) {
-      $('#date-hintEdit'+ id).toast('hide');
+      $("#date-hintEdit"+ id).toast('hide');
       field.style.borderColor = "#ced4da";
       return 1;
   } else if (inputDate[0] == yyyy) {
       if (inputDate[1] > mm) {
-          $('#date-hintEdit'+ id).toast('hide');
+          $("#date-hintEdit'+ id").toast('hide');
           field.style.borderColor = "#ced4da";
           return 1;
       } else if (inputDate[1] == mm) {
@@ -166,6 +166,7 @@ function dateCheckEditBill(field, id) {
           return 0;
       }
   } else {
+    console.log('#date-hintEdit'+ id);
       $('#date-hintEdit'+ id).toast('show');
       field.style.setProperty("border-color", "red", "important");
       return 0;
