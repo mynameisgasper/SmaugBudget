@@ -29,15 +29,16 @@
   
   <div id="accountBody"  class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
     <h2>{{title}}</h2>
-    <form name="userInfo" method="post" action="/account" onsubmit="return updateUsetInfo()">
+    <form name="userInfo" method="post" action="/account" onsubmit="return disableButton()">
       <div class="row">
         <div class="del-margin col-sm-12 col-md-9 col-lg-9 col-xl-9">
           <div class="row">
+            <input type="hidden" name="formType" value="changeName">
             <label id="nameInputLbl" for="nameInput" class="col-sm-3 col-md-3 col-lg-2 col-xl-2">{{firstName}}:</label>
-            <input type="text" id="nameInput" name="firstName" placeholder="{{firstName}}" class="form-control col-sm-3 col-md-3 col-lg-3 col-xl-3" onfocusout="nameRegex()" required="required">
+            <input type="text" id="nameInput" name="firstName" placeholder="{{firstName}}" value="{{data_firstName}}" class="form-control col-sm-3 col-md-3 col-lg-3 col-xl-3" onfocusout="nameRegex()" required="required">
         
             <label id="lastnameInputLbl" for="lastnameInput" class="col-sm-3 col-md-3 col-lg-4 col-xl-4">{{lastName}}:</label>
-            <input type="text" id="lastnameInput" name="lastName" placeholder="{{lastName}}"  class="form-control col-sm-3 col-md-3 col-lg-3 col-xl-3" onfocusout="surnameRegex()" required="required">
+            <input type="text" id="lastnameInput" name="lastName" placeholder="{{lastName}}" value="{{data_lastName}}" class="form-control col-sm-3 col-md-3 col-lg-3 col-xl-3" onfocusout="surnameRegex()" required="required">
           </div>
           <div class="row">
               <label id="passwordChangeLbl" for="passwordChange" class="col-sm-3 col-md-3 col-lg-2 col-xl-2">{{password}}:</label>
@@ -45,7 +46,7 @@
           </div>
           <div class="row">
               <label id="emailInputLbl" for="emailInput" class="col-sm-3 col-md-3 col-lg-2 col-xl-2">{{email}}:</label>
-              <input type="email" id="emailInput" name="email" value="{{data_email}}"  class="form-control col-sm-9 col-md-9 col-lg-10 col-xl-10" required="required">
+              <input type="email" id="emailInput" name="email" value="{{data_email}}"  class="form-control col-sm-9 col-md-9 col-lg-10 col-xl-10" disabled>
           </div>
         </div>
         <div id="pfpImg" class="del-margin col-sm-12 col-md-3 col-lg-3 col-xl-3">
@@ -59,7 +60,7 @@
       </div>
       <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-          <button type="submit" id="userInfoButton" onclick="updateUserInfo()" class="btn btn-primary" style="float: right;">{{saveChanges}}</button>
+          <button type="submit" id="userInfoButton" onclick="disableButton()" class="btn btn-primary" style="float: right;">{{saveChanges}}</button>
         </div>
       </div>
     </form>

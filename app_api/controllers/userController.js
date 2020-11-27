@@ -169,6 +169,43 @@ function changeIncome(requestBody, res, session) {
     }
 }
 
+function updateUser(requestBody, res, session) {
+    try {
+        var regex = new RegExp("^([a-zA-Z])+$");
+        var regex2 = new RegExp("^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})");
+        const firstName = requestBody.firstName ? regex.test(requestBody.firstName) : true;
+        const lastName = requestBody.lastName ? regex.test(requestBody.lastName) : true;
+        const password = requestBody.password ? regex2.test(requestBody.password) : true;
+        
+        if (firstName && lastName && password) {
+            User.findOne({ 'email': requestBody.email }, function(err, user) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    if (user) {
+                        
+                        user.firstname = requestBody.firstName ? requestBody.firstName : user.firstname;
+                        user.lastname = requestBody.lastName ? requestBody.lastName : user.lastname;
+                        user.email = requestBody.email ? requestBody.email : user.email;
+                        user.password = requestBody.password ? requestBody.password : user.password;
+                        user.language = requestBody.language ? requestBody.language : user.language;
+                        user.defaultCurrency = requestBody.defaultCurrency ? requestBody.defaultCurrency : user.defaultCurrency;
+                    
+                        user.save();
+                        res.status(200).json(user);
+                    } else {
+                        res.sendStatus(404);
+                    }
+                }
+            });
+        } else {
+            res.sendStatus(404);
+        }
+    } catch (ex) {
+        res.sendStatus(500);
+    }
+}
+
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, './uploads');
@@ -252,5 +289,8 @@ module.exports = {
     uploadImg,
     getPfp: function(req, res) {
         getPfp(req, res);
+    },
+    updateUser: function(req, res) {
+        updateUser(req.body, res, req.session);
     }
 }

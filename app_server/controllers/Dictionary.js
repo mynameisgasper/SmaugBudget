@@ -329,5 +329,6 @@ module.exports = {
     },
     setLanguage: (lang) => {
         language = lang;
+        console.log(lang);
     }
 }

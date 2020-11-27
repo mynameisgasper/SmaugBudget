@@ -52,8 +52,16 @@ $(document).ready(function() {
 
 function changeLanguage(language) {
     $("#languageChange")[0].innerText = language;
-    
-    location.reload();
+    var xhr  = new XMLHttpRequest();                       
+
+    xhr.onload = function() {
+        console.log(this.responseText); 
+        location.reload();
+    }
+
+    xhr.open("POST", "/account");      // open connection
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.send("formType=changeLanguage&language="+language);                     // send data
 }
 
 function updateUserInfo() {
