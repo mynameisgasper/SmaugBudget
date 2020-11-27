@@ -27,17 +27,20 @@ var translationKeys = {
 }
 
 function translate (language) {
+    var translatedKeys = JSON.parse(JSON.stringify(translationKeys));
     Object.keys(translationKeys).forEach(function(key) {
-        translationKeys[key] = dictionary.getTranslation(translationKeys[key], language);
+        translatedKeys[key] = dictionary.getTranslation(translatedKeys[key], language);
     });
+    return translatedKeys;
 }
 
 function respond(res, session) {
     if (session.user) {
         if (session.user.language) {
-            translate(session.user.language);
+            data = {...data, ...translate(session.user.language)};
+        } else {
+            data = {...data, ...translationKeys};
         }
-        data = {...data, ...translationKeys};
         data.categories = session.user.categories;
         data.card = generateCards(session.user.bills);
         data.bill = generateBills(session.user.bills);
