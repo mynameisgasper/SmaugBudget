@@ -122,4 +122,8 @@ router.get('/getNewUsers', (req, res) => {
     connections.getNewUsers(req, res);
 });
 
+router.get('/getUserConnections', (req, res) => {
+    connections.getUserConnections(req, res);
+});
+
 module.exports = router;

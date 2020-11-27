@@ -67,8 +67,31 @@ function getNewUsers(params, res, session) {
     }
 }
 
+function getUserConnections(params, res, session) {
+    try {
+        User.findOne({ 'email': params.email }, function(err, user) {
+            if (err) {
+                console.log(err);
+            } else {
+                if (user) {
+                    
+                    res.status(200).json(user.connections);  
+                    
+                } else {
+                    res.sendStatus(404);
+                }
+            }
+        });
+    } catch (ex) {
+        res.sendStatus(500);
+    }
+}
+
 module.exports = {
     getNewUsers: function(req, res) {
         getNewUsers(req.query, res, req.session);
+    },
+    getUserConnections: function(req, res) {
+        getUserConnections(req.query, res, req.session);
     }
 }

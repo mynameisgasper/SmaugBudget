@@ -83,6 +83,8 @@ function respond(res, session) {
         data.data_firstName = session.user.firstname;
         data.data_lastName = session.user.lastname;
         data.data_email = session.user.email;
+        data.data_connections = getUserConnections(res, session);
+        console.log(data);
         res.render('account', data);
     }
     else {
@@ -159,6 +161,18 @@ function changeLanguage(body, res, session) {
 function getNewUsers(res, session, connectionName) {
     var client = new Client();
     client.get("http://localhost:8080/api/getNewUsers?email=" + session.user.email + "&connectionName='" + connectionName + "'", function(data, response) {
+            return data;
+        }
+    );
+}
+
+function getUserConnections(res, session) {
+    var client = new Client();
+    client.get("http://localhost:8080/api/getUserConnections?email=" + session.user.email, function(data, response) {
+        console.log(data);
+            for(var i = 0; i < data.length; i++) {
+                data[i].user = getNewUsers(res, session, data.name);
+            }
             return data;
         }
     );
