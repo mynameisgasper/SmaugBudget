@@ -6,48 +6,6 @@ var Client = require('node-rest-client').Client;
 
 var data = {
     fileName: 'goals',
-    /*goal: [{
-            id: 0,
-            title: 'iPhone',
-            progress: 100,
-            target: 1200,
-            targetLeft: 0,
-            monthlyTarget: 0,
-            category: 'Electronics',
-            color: '#00cf1d',
-            year: '2021',
-            month: '06',
-            day: '12',
-        },
-        {
-            id: 1,
-            title: 'Ferrari F8 Tributo',
-            progress: 69,
-            target: 1500,
-            targetLeft: 1500,
-            monthlyTarget: 1000,
-            category: 'Car',
-            year: '2021',
-            month: '03',
-            day: '25',
-        }
-    ],*/
-    /*card: [{
-            id: 1,
-            title: 'Goals Total',
-            color: 'bg-primary',
-            count: 3,
-            icon: 'fa-bullseye'
-        },
-        {
-            id: 2,
-            title: 'Goals Completed',
-            color: 'green-panel',
-            count: 1,
-            icon: 'fa-check-circle',
-            comment: 'iPhone 12 Pro completed!'
-        }
-    ],*/
     categories: [
         { id: 1, category: "Furniture" },
         { id: 2, category: "Electronics" },
