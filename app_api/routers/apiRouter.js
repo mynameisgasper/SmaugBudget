@@ -43,6 +43,10 @@ router.get('/getPfp', (req, res) => {
     user.getPfp(req, res);
 });
 
+router.post('/updateUser', (req, res) => {
+    user.updateUser(req, res);
+});
+
 router.post('/addBill', (req, res) => {
     bills.addBill(req, res);
 });
