@@ -39,6 +39,118 @@ function parseTable(rows) {
     return parsedTable;
 }
 
+//DATE PICKER
+$(function() {
+    $('input[name="daterange"]').daterangepicker({
+        showDropdowns: true,
+        minYear: 2019,
+        maxYear: 2020,
+        autoApply: true,
+        opens: 'left',
+        locale: {
+            format: "DD/MM/YYYY",
+            separator: " - ",
+            applyLabel: "Apply",
+            cancelLabel: "Cancel",
+            fromLabel: "From",
+            toLabel: "To",
+            customRangeLabel: "Custom",
+            weekLabel: "W",
+            daysOfWeek: [
+                "Su",
+                "Mo",
+                "Tu",
+                "We",
+                "Th",
+                "Fr",
+                "Sa"
+            ],
+            monthNames: [
+                "January",
+                "February",
+                "March",
+                "April",
+                "May",
+                "June",
+                "July",
+                "August",
+                "September",
+                "October",
+                "November",
+                "December"
+            ],
+            firstDay: 1,
+            startDate: "10/15/1990",
+            endDate: "10/21/2020",
+            drops: "auto"
+        }
+
+    }, function(start, end, label) {
+        //filterbyDate(start.format('DD/MM/YYYY'), end.format('DD/MM/YYYY'))
+        start =  start.format('DD/MM/YYYY')
+        end = end.format('DD/MM/YYYY')
+        dateStart = start.split("/");
+        dateEnd = end.split("/");
+
+        ddStart = dateStart[0];
+        mmStart = dateStart[1];
+        yyyyStart = dateStart[2];
+
+        ddEnd = dateEnd[0];
+        mmEnd = dateEnd[1];
+        yyyyEnd = dateEnd[2];
+
+        table = document.getElementById("table");
+        tr = table.getElementsByTagName("tr");
+
+        // Loop through all table rows, and hide those who don't match the search query
+        for (i = 0; i < tr.length; i++) {
+            tr[i].style.display = "";
+            td = tr[i].getElementsByTagName("td")[0];
+
+            txtValue = td.innerText.split("\n");
+            ddCheck = txtValue[2];
+            mmCheck = txtValue[1];
+            yyyyCheck = txtValue[0];
+
+            
+            if (mmCheck == 'JAN') mmCheck = 1;
+            else if (mmCheck == 'FEB') mmCheck = 2;
+            else if (mmCheck == 'MAR') mmCheck = 3;
+            else if (mmCheck == 'APR') mmCheck = 4;
+            else if (mmCheck == 'MAY') mmCheck = 5;
+            else if (mmCheck == 'JUN') mmCheck = 6;
+            else if (mmCheck == 'JUL') mmCheck = 7;
+            else if (mmCheck == 'AUG') mmCheck = 8;
+            else if (mmCheck == 'SEP') mmCheck = 9;
+            else if (mmCheck == 'OCT') mmCheck = 10;
+            else if (mmCheck == 'NOV') mmCheck = 11;
+            else if (mmCheck == 'DEC') mmCheck = 12;
+            
+            if (yyyyCheck < yyyyStart || yyyyCheck > yyyyEnd) {
+                tr[i].style.display = "none";
+            } 
+            else if (yyyyCheck == yyyyStart && mmCheck < mmStart){
+                tr[i].style.display = "none";
+            }
+            else if (yyyyCheck == yyyyStart && mmCheck == mmStart && ddCheck < ddStart){
+                tr[i].style.display = "none";
+            }
+            else if (yyyyCheck == yyyyEnd && mmCheck > mmEnd){
+                tr[i].style.display = "none";
+            }
+            else if (yyyyCheck == yyyyEnd && mmCheck == mmEnd && ddCheck > ddEnd){
+                tr[i].style.display = "none";
+            }
+            else {
+                tr[i].style.display = "";
+            }
+        }
+
+    });
+});
+
+
 function groupByCategories(parsedTable) {
     const groups = [];
     for (let entry of parsedTable.data) {
@@ -66,8 +178,7 @@ function findGroupByCategory(groups, category) {
 }
 
 function groupByMonth(parsedTable) {
-    const groups = [
-    ];
+    const groups = [];
 
     for (let entry of parsedTable.data) {
         const group = findGroupByMonth(groups, entry.month);
@@ -110,9 +221,8 @@ function convertMonthsToName(month) {
         case 'DEC': return "December";
     }
 }
-
+// FORM VALIDATIONI
 function disableButton2(id) {
-    console.log(id);
     var amount1 = amount3(document.getElementById("Amount3"+id),id);
     var name = nameAdd2(document.getElementById("Payee2"+id),id);
     var date = dateCheck2(document.getElementById("inputDate"),id);
@@ -201,7 +311,7 @@ function dateCheck2(field) {
         return 0;
     }
 }
-
+//SEARCH FUNCTION
 function searchFunction() {
     // Declare variables
     var input, filter, table, tr, td, i, txtValue;
@@ -231,6 +341,8 @@ function searchFunction() {
 }
 
 
+
+//HIDE WELCOME
 $(window).on("load", function() {
     document.querySelector('#search').addEventListener('keyup', searchFunction, false);
     if (sessionStorage.getItem(page) === "false") {
