@@ -32,7 +32,7 @@ var data = {
             day: '25',
         }
     ],*/
-    card: [{
+    /*card: [{
             id: 1,
             title: 'Goals Total',
             color: 'bg-primary',
@@ -47,7 +47,7 @@ var data = {
             icon: 'fa-check-circle',
             comment: 'iPhone 12 Pro completed!'
         }
-    ],
+    ],*/
     categories: [
         { id: 1, category: "Furniture" },
         { id: 2, category: "Electronics" },
@@ -231,13 +231,14 @@ function respond(res, session) {
             data = {...data, ...translationKeys};
         }
         data.goal = generateGoals(session.user.goals);
+        data.card = generateCards(session.user);
         res.render('goals', data);
     } else {
         res.redirect('/');
     }
 }
 
-function generateGoals(goals){
+function generateGoals(goals) {
     var goalsArray = [];
     //console.log(goals);
 
@@ -246,6 +247,9 @@ function generateGoals(goals){
         var progress = Math.ceil(goal.saved / goal.target * 100);
         var targetLeft = goal.target - goal.saved;
         var monthlyTarget = calculateDailyTarget(goal.date, targetLeft);
+        var color = "#2f7cfe";
+        if(targetLeft <= 0)
+           color = "#00cf1d"
         
         goalsArray.push({
             _id: goal._id,
@@ -253,6 +257,7 @@ function generateGoals(goals){
             progress: progress,
             target: goal.target,
             targetLeft: targetLeft,
+            color: color,
             monthlyTarget: monthlyTarget,
             category: goal.category,
             year: date[0],
@@ -261,6 +266,35 @@ function generateGoals(goals){
         });
     }
     return goalsArray;
+}
+
+function generateCards(currentUser) {
+    var totalGoals = currentUser.goals.length;
+    var completed = 0;
+    var goalCompleted = "";
+    for(var i = 0; i < currentUser.goals.length; i++){
+        if(currentUser.goals[i].saved >= currentUser.goals[i].target){
+            completed++;
+            goalCompleted += currentUser.goals[i].title + ", ";
+        }  
+    }
+    goalCompleted = goalCompleted.substring(0, goalCompleted.length - 2);
+    return [{
+        id: 1,
+        title: 'Goals Total',
+        color: 'bg-primary',
+        count: totalGoals,
+        icon: 'fa-bullseye'
+    },
+    {
+        id: 2,
+        title: 'Goals Completed',
+        color: 'green-panel',
+        count: completed,
+        icon: 'fa-check-circle',
+        comment: goalCompleted + ' completed!'
+    }
+    ];
 }
 
 function calculateDailyTarget(date, targetLeft){
