@@ -6,13 +6,6 @@ var doughnutConfig = {
     type: 'doughnut',
     data: {
         datasets: [{
-            backgroundColor: [
-                window.chartColors.red,
-                window.chartColors.orange,
-                window.chartColors.yellow,
-                window.chartColors.green,
-                window.chartColors.blue,
-            ],
             label: 'Expenses by category',
             borderColor: "#ffffff"
         }]
@@ -25,14 +18,47 @@ var doughnutConfig = {
             labels: {
                 fontColor: '#666'
             }
-        }
+        },
     }
 };
+
+function getBackgroundColors(length) {
+    var colors = [];
+
+    var current1 = 255;
+    var current2 = 200;
+    var current3 = 200;
+    for (var i = 0; i < length; i++) {
+        colors.push("rgb(" + current1 + ", " + current2 + "," + current3 + ")");
+        
+        if (current1 < 100) {
+        	if (current2 < 100) {
+            	if (current3 < 100) {
+                	current1 = 255;
+                    current2 = 200;
+                    current3 = 200;
+                }
+                else {
+                    current3 -= 100;
+                }
+            }
+            else {
+                current2 -= 100;
+            }
+        }
+        else {
+        	current1 -= 100;
+        }
+    }
+
+    return colors;
+}
 
 function loadGraphs(categories, values) {
 
     doughnutConfig.data.labels = categories;
     doughnutConfig.data.datasets[0].data = values;
+    doughnutConfig.data.datasets[0].backgroundColor = getBackgroundColors(categories.length);
 
     if (!darkMode.isSet) {
         doughnutConfig.data.datasets[0].borderColor = "#ffffff";
