@@ -26,8 +26,8 @@ function getBackgroundColors(length) {
     var colors = [];
 
     var current1 = 255;
-    var current2 = 180;
-    var current3 = 180;
+    var current2 = 200;
+    var current3 = 200;
     for (var i = 0; i < length; i++) {
         colors.push("rgb(" + current1 + ", " + current2 + "," + current3 + ")");
         
@@ -35,8 +35,8 @@ function getBackgroundColors(length) {
         	if (current2 < 100) {
             	if (current3 < 100) {
                 	current1 = 255;
-                    current2 = 180;
-                    current3 = 180;
+                    current2 = 200;
+                    current3 = 200;
                 }
                 else {
                     current3 -= 100;
