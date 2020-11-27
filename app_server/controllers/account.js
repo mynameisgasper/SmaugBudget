@@ -156,6 +156,14 @@ function changeLanguage(body, res, session) {
     );
 }
 
+function getNewUsers(res, session, connectionName) {
+    var client = new Client();
+    client.get("http://localhost:8080/api/getNewUsers?email=" + session.user.email + "&connectionName='" + connectionName + "'", function(data, response) {
+            return data;
+        }
+    );
+}
+
 module.exports = {
     get: function(req, res) {
         if (req.method == 'POST') {

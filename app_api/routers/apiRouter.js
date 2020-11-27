@@ -4,6 +4,7 @@ var envelopes = require('../controllers/envelopesController');
 var goals = require('../controllers/goalsController');
 var history = require('../controllers/expenseController');
 var dbController = require('../controllers/dbController');
+var connections = require('../controllers/connectionsController');
 
 var converter = require('../controllers/currencyConverter');
 converter.currencyConverter();
@@ -115,6 +116,10 @@ router.post('/deleteGoal', (req, res) => {
 
 router.post('/removeAllDbData', (req, res) => {
     dbController.removeAllDbData(req, res);
+});
+
+router.get('/getNewUsers', (req, res) => {
+    connections.getNewUsers(req, res);
 });
 
 module.exports = router;

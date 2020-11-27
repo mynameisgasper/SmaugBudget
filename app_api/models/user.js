@@ -33,7 +33,7 @@ userSchema.add({
 });
 
 connectionsSchema.add({
-    type: { type: String, required: true },
+    name: { type: String, required: true },
     user: { type: userSchema, required: true },
     envelopes: [envelopesSchema]
 });
