@@ -4,27 +4,40 @@ var Client = require('node-rest-client').Client;
 
 var data = {
     bills: true,
-    fileName: 'bills',
-    message: dictionary.getTranslation("messageBills"),
-    welcomeMessage: dictionary.getTranslation("welcomeMessageBills"),
-    //translations main
-    logout: dictionary.getTranslation("logout"),
-    //translations navbar
-    DASHBOARD: dictionary.getTranslation("DASHBOARD"),
-    ENVELOPES: dictionary.getTranslation("ENVELOPES"),
-    GOALS: dictionary.getTranslation("GOALS"),
-    BILLS: dictionary.getTranslation("BILLS"),
-    HISTORY: dictionary.getTranslation("HISTORY"),
-    UTILITIES: dictionary.getTranslation("UTILITIES"),
-    user: dictionary.getTranslation("user"),
-    settings: dictionary.getTranslation("settings"),
-    appearance: dictionary.getTranslation("appearance"),
-    light: dictionary.getTranslation("light"),
-    dark: dictionary.getTranslation("dark")
+    fileName: 'bills'
 };
+
+var translationKeys = {
+    message: "messageBills",
+    welcomeMessage: "welcomeMessageBills",
+    //translations main
+    logout: "logout",
+    //translations navbar
+    DASHBOARD: "DASHBOARD",
+    ENVELOPES: "ENVELOPES",
+    GOALS: "GOALS",
+    BILLS: "BILLS",
+    HISTORY: "HISTORY",
+    UTILITIES: "UTILITIES",
+    user: "user",
+    settings: "settings",
+    appearance: "appearance",
+    light: "light",
+    dark: "dark"
+}
+
+function translate (language) {
+    Object.keys(translationKeys).forEach(function(key) {
+        translationKeys[key] = dictionary.getTranslation(translationKeys[key], language);
+    });
+}
 
 function respond(res, session) {
     if (session.user) {
+        if (session.user.language) {
+            translate(session.user.language);
+        }
+        data = {...data, ...translationKeys};
         data.categories = session.user.categories;
         data.card = generateCards(session.user.bills);
         data.bill = generateBills(session.user.bills);
