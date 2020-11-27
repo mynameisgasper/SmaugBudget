@@ -18,10 +18,28 @@ function resetPassword(req, res) {
     var password2 = req.body.hashPasswordConfirm;
 
     if (password1 === password2) {
-        
+        const data = {
+            code: req.params.code,
+            password: password1
+        }
+    
+        var args = {
+            data: data,
+            headers: { "Content-Type": "application/x-www-form-urlencoded" }
+        };
+    
+    
+        var client = new Client();
+        client.post("http://localhost:8080/api/resetPassword", args, function(data, response) {
+            if (response.statusCode == 200) {
+                res.redirect('/#login');
+            } else {
+                res.redirect(req.originalUrl);
+            }
+        });
     }
     else {
-        res.redirect(req.originalUrl)
+        res.redirect(req.originalUrl);
     }
 }
 
