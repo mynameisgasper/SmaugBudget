@@ -5,6 +5,7 @@ var dictionary = require('./Dictionary');
 
 var data = {
     index: true,
+    encryption: true,
     fileName: 'index',
     index: {
         used: true
