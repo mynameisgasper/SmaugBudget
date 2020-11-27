@@ -6,13 +6,6 @@ var doughnutConfig = {
     type: 'doughnut',
     data: {
         datasets: [{
-            data: [
-                70,
-                40,
-                170,
-                222,
-                53,
-            ],
             backgroundColor: [
                 window.chartColors.red,
                 window.chartColors.orange,
@@ -22,14 +15,7 @@ var doughnutConfig = {
             ],
             label: 'Expenses by category',
             borderColor: "#ffffff"
-        }],
-        labels: [
-            'Gas',
-            'Phone',
-            'Groceries',
-            'Entertainment',
-            'Eating out',
-        ]
+        }]
     },
     options: {
         responsive: true,
@@ -43,11 +29,10 @@ var doughnutConfig = {
     }
 };
 
-window.onload = function() {
-    loadGraphs();
-}
+function loadGraphs(categories, values) {
 
-function loadGraphs() {
+    doughnutConfig.data.labels = categories;
+    doughnutConfig.data.datasets[0].data = values;
 
     if (!darkMode.isSet) {
         doughnutConfig.data.datasets[0].borderColor = "#ffffff";
