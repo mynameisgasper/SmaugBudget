@@ -29,8 +29,46 @@ var data = {
     dark: dictionary.getTranslation("dark")
 };
 
+var translationKeys = {
+    message: "messageEnvelopes",
+    welcomeMessage: "welcomeMessageEnvelopes",
+
+    /* 
+     * Translations Main
+     */
+    logout: "logout",
+
+    /* 
+     * Translations Navbar 
+     */
+    DASHBOARD: "DASHBOARD",
+    ENVELOPES: "ENVELOPES",
+    GOALS: "GOALS",
+    BILLS: "BILLS",
+    HISTORY: "HISTORY",
+    UTILITIES: "UTILITIES",
+    user: "user",
+    settings: "settings",
+    appearance: "appearance",
+    light: "light",
+    dark: "dark"
+}
+
+function translate (language) {
+    var translatedKeys = JSON.parse(JSON.stringify(translationKeys));
+    Object.keys(translationKeys).forEach(function(key) {
+        translatedKeys[key] = dictionary.getTranslation(translatedKeys[key], language);
+    });
+    return translatedKeys;
+}
+
 function respond(res, session, req) {
     if (session.user) {
+        if (session.user.language) {
+            data = {...data, ...translate(session.user.language)};
+        } else {
+            data = {...data, ...translationKeys};
+        }
         var d = new Date();
         if (req.query.monthMinus == null && req.query.monthPlus == null) {
             data.setMonthNumber = d.getMonth();
