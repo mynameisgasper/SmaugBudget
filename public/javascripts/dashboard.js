@@ -70,8 +70,39 @@ function date1(field) {
     }
 }
 
+function getLastWeekExpenses() {
+  $.ajax({
+    url: "/api/getLastMonthExpenses",
+    type: "post",
+    data: { 
+      userId: document.getElementById("id").value, 
+    },
+    success: function(response) {
+      parseResponse(response);
+      return response;
+    },
+    error: function(xhr) {
+      console.log(xhr);
+    }
+  });
+}
+
+function parseResponse(response) {
+  var categories = [];
+  var values = [];
+
+  for (var object of response) {
+    categories.push(object.name);
+    values.push(object.sum);
+  }
+
+  loadGraphs(categories, values);
+}
+
 $(window).on("load", function() {
   if (sessionStorage.getItem(page) === "false") {
       hideWelcome();
   }
+
+  getLastWeekExpenses();
 });

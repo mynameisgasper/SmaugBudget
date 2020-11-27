@@ -61,6 +61,7 @@ function respond(res, session) {
         data.analytics = generateAnalyitcs(session.user);
         data.incomeLastMonth = (session.user.paycheckLastMonth ? session.user.paycheckLastMonth : 0);
         data.expensesLastMonth = getTotalCost(getLastMonthExpenses(session.user.expense, session.user.paycheckDate));
+        data.id = session.user._id;
         res.render('dashboard', data);
     }
     else {
