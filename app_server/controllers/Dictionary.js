@@ -218,6 +218,7 @@ var english = {
     "alertSection": "Alert Section",
     "alertName1": "ENVELOPES",
     "alertText1": " almost empty",
+    "alertText1_1": " empty",
     "alertName2": "BILLS",
     "alertText2": " bill to pay this week",
     "alertName3": "GOALS",

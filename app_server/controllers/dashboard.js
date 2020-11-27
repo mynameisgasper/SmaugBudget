@@ -271,7 +271,7 @@ function generateEnvelopeAlerts(envelopes, language) {
         envelopesAlerts.push({
             type: 'alert-danger',
             name: dictionary.getTranslation("alertName1", language),
-            text: totalEmptyEnvelopes + dictionary.getTranslation("alertText1", language)
+            text: totalEmptyEnvelopes + dictionary.getTranslation("alertText1_1", language)
         });
 
     }
