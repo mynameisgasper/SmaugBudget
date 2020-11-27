@@ -52,8 +52,17 @@
                 <input type="hidden" value="addEnvelope" name="formType">
                 <input type="hidden" value="{{setMonthNumber}}" name="setMonth">
                 <div class="modal-body">
-                    <div class="ena"><label for="categoryAddEnvelope">Category</label></br>
-                        <input type="text" class="form-control" id="ime" onfocusout="nameAdd(this)" name="categoryAddEnvelope" placeholder="Entertainment">
+                    <div class="ena">
+                        <label for="chooseCategoryEnvelope">Category</label>
+                        <select id="inputCategory" name="chooseCategoryEnvelope" class="form-control">
+                            <option selected>Choose a category</option>
+                            {{#each category}}
+                            <option id="category{{_id}}">{{name}}</option>
+                            {{/each}}
+                        </select>
+                   
+                        <label for="categoryAddEnvelope"></label>
+                        <input type="text" class="form-control" id="ime" onfocusout="nameAdd(this)" name="categoryAddEnvelope" placeholder="Or create your own">
                     </div>
 
                     <div class="ena"><label for="inputAmount">Amount</label></br>
@@ -186,6 +195,7 @@
                 <div class="modal-body">
                     <div class="ena"><label for="inputGoal">Category</label></br>
                         <select id="inputCategory" name="inputCategory" class="form-control">
+                            <option selected>Choose a category</option>
                             {{#each category}}
                             <option id="category{{_id}}">{{name}}</option>
                             {{/each}}

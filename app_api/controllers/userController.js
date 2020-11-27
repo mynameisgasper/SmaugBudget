@@ -15,31 +15,12 @@ function register(requestBody, res) {
         var pass1 = requestBody.password1up;
         var pass2 = requestBody.password2up;
 
-        /* 
-        //check if email is already used - ne dela tko, skos crasha nwm zakva
-        if(email1 === email2){
-            User.findOne({'email': email1}, function(err, user) {
-                if (err) {
-                    console.log(err);
-                }
-                else {
-                    if (user) {
-                        res.sendStatus(400);
-                    }
-                }
-            });
-        }
-        */
-
-
-
         var regex = new RegExp("^([a-zA-Z])+$");
         var regex2 = new RegExp("^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})");
         const firstName = regex.test(requestBody.nameup);
         const lastName = regex.test(requestBody.surnameup);
         const password = regex2.test(requestBody.password1up);
 
-        //dodate treba še če je bil mail poslan a.k.a. mail obstaja!!!
         if (firstName && lastName && email1 === email2 && pass1 == pass2 && password) {
             var urlCode = smtp.generateCode(64);
             var confirmationCode = smtp.generateCode(64);
@@ -54,7 +35,6 @@ function register(requestBody, res) {
                         res(basicCategories);
                     }
                 });
-
             });
 
             promise.then(function(basicCategories) {
@@ -83,7 +63,6 @@ function register(requestBody, res) {
                     }
                 });
             });
-
 
         } else {
             console.log(requestBody);

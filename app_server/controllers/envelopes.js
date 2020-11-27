@@ -54,7 +54,7 @@ var translationKeys = {
     dark: "dark"
 }
 
-function translate (language) {
+function translate(language) {
     var translatedKeys = JSON.parse(JSON.stringify(translationKeys));
     Object.keys(translationKeys).forEach(function(key) {
         translatedKeys[key] = dictionary.getTranslation(translatedKeys[key], language);
@@ -65,9 +65,9 @@ function translate (language) {
 function respond(res, session, req) {
     if (session.user) {
         if (session.user.language) {
-            data = {...data, ...translate(session.user.language)};
+            data = {...data, ...translate(session.user.language) };
         } else {
-            data = {...data, ...translationKeys};
+            data = {...data, ...translationKeys };
         }
         var d = new Date();
         if (req.query.monthMinus == null && req.query.monthPlus == null) {
@@ -88,8 +88,7 @@ function respond(res, session, req) {
         data.setMonth = getCurrentMonth(data.setMonthNumber);
         data.currentMonth = getCurrentMonth(d.getMonth());
         data.envelope = session.user.envelopes;
-        data.category = getCategories(session.user.envelopes);
-
+        data.category = getCategories(session.user.categories);
 
         res.render('envelopes', data);
     } else {
@@ -204,12 +203,12 @@ function getAlmostEmpty(envelopes, month) {
     return -1;
 }
 
-function getCategories(envelopes) {
+function getCategories(categories) {
     var category = [];
     var j = 0;
-    for (var i = 0; i < envelopes.length; i++) {
-        if (uniqueCategory(category, envelopes[i].category)) {
-            category[j] = envelopes[i].category
+    for (var i = 0; i < categories.length; i++) {
+        if (uniqueCategory(category, categories[i])) {
+            category[j] = categories[i];
             j++;
         }
 
