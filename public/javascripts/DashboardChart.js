@@ -55,7 +55,6 @@ function getBackgroundColors(length) {
 }
 
 function loadGraphs(categories, values) {
-
     doughnutConfig.data.labels = categories;
     doughnutConfig.data.datasets[0].data = values;
     doughnutConfig.data.datasets[0].backgroundColor = getBackgroundColors(categories.length);
