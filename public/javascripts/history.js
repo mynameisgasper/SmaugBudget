@@ -223,7 +223,12 @@ function searchFunction() {
         if (txtValue.toUpperCase().indexOf(filter) > -1) {
             tr[i].style.display = "";
         } else {
-            tr[i].style.display = "none";
+            txtValue = td2.textContent || td2.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
         }
     }
 }
