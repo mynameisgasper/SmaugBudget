@@ -13,7 +13,7 @@ var data = {
     dateRangePicker: {
         used: true
     },
-    totalExpenses: 335,
+
 
     //translations main
     logout: dictionary.getTranslation("logout"),

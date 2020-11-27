@@ -1,10 +1,11 @@
 window.onload = function() {
     const parsedTable = parseTable(getRows());
+    document.querySelector(".totaltext").innerHTML = "<h5>Total spent: " + parsedTable.sum.toFixed(2); + "€</h5>";
     loadGraphs(groupByCategories(parsedTable));
 }
 
 function getRows() {
-    return document.getElementById('#table').tBodies[0].rows;
+    return document.getElementById('table').tBodies[0].rows;
 }
 
 function parseTable(rows) {
@@ -14,14 +15,14 @@ function parseTable(rows) {
     };
 
     for (let row of rows) {
-        const idNum = parseInt(row.cells[0].id.replace('date', ''));
+        const idNum = row.cells[0].id.substring(4);
         const year = parseInt(document.getElementById('year' + idNum).innerHTML);
         const month = convertMonthsToName(document.getElementById('month' + idNum).innerHTML);
         const day = parseInt(document.getElementById('day' + idNum).innerHTML);
         const category = document.getElementById('category' + idNum).innerHTML;
         const receiver = document.getElementById('receiver' + idNum).innerHTML;
         const currency = document.getElementById('currency' + idNum).innerHTML;
-        const price = parseInt(document.getElementById('price' + idNum).innerHTML);
+        const price = parseFloat(document.getElementById('price' + idNum).innerHTML);
 
         parsedTable.data.push({
             id: idNum,
@@ -35,13 +36,11 @@ function parseTable(rows) {
         });
         parsedTable.sum += price;
     }
-
     return parsedTable;
 }
 
 function groupByCategories(parsedTable) {
     const groups = [];
-
     for (let entry of parsedTable.data) {
         const group = findGroupByCategory(groups, entry.category);
         if (group != null) {
