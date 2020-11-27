@@ -78,9 +78,11 @@ var translationKeys = {
 }
 
 function translate (language) {
+    var translatedKeys = JSON.parse(JSON.stringify(translationKeys));
     Object.keys(translationKeys).forEach(function(key) {
-        translationKeys[key] = dictionary.getTranslation(translationKeys[key], language);
+        translatedKeys[key] = dictionary.getTranslation(translatedKeys[key], language);
     });
+    return translatedKeys;
 }
 
 function parseRequestBody(body, res, session) {
@@ -169,9 +171,10 @@ function addGoal(body, res, session) {
 function respond(res, session) {
     if (session.user) {
         if (session.user.language) {
-            translate(session.user.language);
+            data = {...data, ...translate(session.user.language)};
+        } else {
+            data = {...data, ...translationKeys};
         }
-        data = {...data, ...translationKeys};
         data.goal = generateGoals(session.user.goals);
         res.render('goals', data);
     } else {
