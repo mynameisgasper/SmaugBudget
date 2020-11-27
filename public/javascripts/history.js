@@ -1,12 +1,10 @@
-const { localsAsTemplateData } = require("hbs");
-
 window.onload = function() {
     const parsedTable = parseTable(getRows());
     loadGraphs(groupByCategories(parsedTable));
 }
 
 function getRows() {
-    return document.getElementById('expeseTable').tBodies[0].rows;
+    return document.getElementById('#table').tBodies[0].rows;
 }
 
 function parseTable(rows) {
@@ -233,10 +231,9 @@ function searchFunction() {
     }
 }
 
-document.querySelector('#search').addEventListener('keyup', searchFunction, false);
-
 
 $(window).on("load", function() {
+    document.querySelector('#search').addEventListener('keyup', searchFunction, false);
     if (sessionStorage.getItem(page) === "false") {
         hideWelcome();
     }
