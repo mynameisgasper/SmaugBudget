@@ -203,7 +203,7 @@ function searchFunction() {
 
 $(window).on("load", function() {
   document.querySelector('#search').addEventListener('keyup', searchFunction, false);
-  if (sessionStorage.getItem(page) === "false") {
+  if (localStorage.getItem(page) === "false") {
     hideWelcome();
   }
 });
