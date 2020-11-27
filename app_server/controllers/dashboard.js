@@ -46,13 +46,16 @@ function translate (language) {
     Object.keys(translationKeys).forEach(function(key) {
         translatedKeys[key] = dictionary.getTranslation(translatedKeys[key], language);
     });
-    for (var i = 0; i < data.alert.length; i++) {
-        //console.log(data.alert[i]);
-        if (data.alert[i]) {
-            data.alert[i].name = dictionary.getTranslation(data.alert[i].name, language);
-            data.alert[i].text = dictionary.getTranslation(data.alert[i].text, language);
+    if (data.alert) {
+        for (var i = 0; i < data.alert.length; i++) {
+            //console.log(data.alert[i]);
+            if (data.alert[i]) {
+                data.alert[i].name = dictionary.getTranslation(data.alert[i].name, language);
+                data.alert[i].text = dictionary.getTranslation(data.alert[i].text, language);
+            }
         }
     }
+    console.log(translatedKeys);
     return translatedKeys;
 }
 
@@ -72,10 +75,6 @@ function respond(res, session) {
         data.alertLength = data.alert.length;
         data.id = session.user._id;
 
-        if (session.user.language) {
-            translate(session.user.language);
-        }
-        data = {...data, ...translationKeys};
         res.render('dashboard', data);
     }
     else {
