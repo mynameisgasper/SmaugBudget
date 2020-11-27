@@ -35,6 +35,7 @@ function respond(res, session) {
     if (session.user) {
         data.categories = session.user.categories;
         data.expense = generateExpenses(session.user.expense);
+        console.log(data.expense);
         res.render('history', data);
     } else {
         res.redirect('/');
@@ -122,8 +123,35 @@ function generateExpenses(expense) {
             currency: exp.currency,
         });
     }
+    expensesArray.sort(compare)
     
     return expensesArray;
+}
+
+function compare (a,b) { //1 menjava, -1 ni menjava
+    if ( a.year < b.year ){
+        return 1;
+    }
+    else if ( a.year == b.year) {
+        if (a.month < b.month) {
+            return 1;
+        }
+        else if (a.month == b.month) {
+            if (a.day < b.day) {
+                return 1;
+            }
+            else {
+                return -1;
+            }
+        }
+        else {
+            return -1;
+        }
+    }
+    else {
+        return -1;
+    }
+    return 0;
 }
 
 module.exports = {

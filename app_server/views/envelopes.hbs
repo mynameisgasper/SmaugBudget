@@ -186,8 +186,8 @@
                 <div class="modal-body">
                     <div class="ena"><label for="inputGoal">Category</label></br>
                         <select id="inputCategory" name="inputCategory" class="form-control">
-                            {{#each envelope}}
-                            <option id="category{{_id}}">{{category.name}}</option>
+                            {{#each category}}
+                            <option id="category{{_id}}">{{name}}</option>
                             {{/each}}
                         </select>
                     </div>

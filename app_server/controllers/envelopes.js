@@ -7,31 +7,6 @@ var data = {
     fileName: 'envelopes',
     message: dictionary.getTranslation("messageEnvelopes"),
     welcomeMessage: dictionary.getTranslation("welcomeMessageEnvelopes"),
-    card: [{
-            id: 1,
-            title: 'Envelopes Total',
-            color: 'bg-primary',
-            count: 3,
-            icon: 'fa-envelope'
-        },
-        {
-            id: 2,
-            title: 'Almost Empty',
-            color: 'bg-warning',
-            count: 1,
-            icon: 'fa-exclamation-triangle',
-            comment: "Entertainment: 108 of 120 € spent!"
-        },
-        {
-            id: 3,
-            title: 'Empty',
-            color: 'bg-danger',
-            count: 1,
-            icon: 'fa-radiation',
-            comment: "No envelopes over the limit!"
-
-        }
-    ],
 
     /* 
      * Translations Main
@@ -70,14 +45,153 @@ function respond(res, session, req) {
             if (data.setMonthNumber > 11)
                 data.setMonthNumber = data.setMonthNumber - 12;
         }
+
+        data.card = generateCards(session.user, data.setMonthNumber);
         data.setMonth = getCurrentMonth(data.setMonthNumber);
         data.currentMonth = getCurrentMonth(d.getMonth());
         data.envelope = session.user.envelopes;
+        data.category = getCategories(session.user.envelopes);
+
+
         res.render('envelopes', data);
     } else {
         res.redirect('/');
     }
 }
+
+function generateCards(user, month) {
+    var monthString = getCurrentMonth(month);
+    var totalEnvelopes = getTotalEnvelopes(user.envelopes, monthString);
+    var totalAlmostEmptyEnvelopes = getTotalAlmostEmptyEnvelopes(user.envelopes, monthString);
+    var totalEmptyEnvelopes = getTotalEmptyEnvelopes(user.envelopes, monthString);
+    var mostEmpty = getMostEmpty(user.envelopes, monthString);
+    var almostEmpty = getAlmostEmpty(user.envelopes, monthString);
+
+    if (totalEmptyEnvelopes == 1 && totalEnvelopes > 0) {
+        var commentEmpty = user.envelopes[mostEmpty[1]].category.name + " is empty!";
+    } else if (totalEnvelopes > 0 && totalEmptyEnvelopes > 1) {
+        var commentEmpty = "Multiple envelopes are empty!";
+    } else if (totalEnvelopes == 0) {
+        var commentEmpty = "You don't have any envelopes!";
+    } else {
+        var commentEmpty = "No empty envelopes!"
+    }
+
+    if (totalAlmostEmptyEnvelopes == 1 && totalEnvelopes > 0) {
+        var commentAlmostEmpty = user.envelopes[almostEmpty].category.name + " is almost empty!";
+    } else if (totalEnvelopes > 0 && totalAlmostEmptyEnvelopes > 1) {
+        var commentAlmostEmpty = "Multiple envelopes are almost empty!";
+    } else if (totalEnvelopes == 0) {
+        var commentAlmostEmpty = "You don't have any envelopes!";
+    } else {
+        var commentAlmostEmpty = "No almost empty envelopes!"
+    }
+
+
+    return [{
+            id: 1,
+            title: 'Envelopes Total',
+            color: 'bg-primary',
+            icon: 'fa-envelope',
+            count: totalEnvelopes
+        },
+        {
+            id: 2,
+            title: 'Almost Empty',
+            color: 'bg-warning',
+            count: totalAlmostEmptyEnvelopes,
+            icon: 'fa-exclamation-triangle',
+            comment: commentAlmostEmpty
+        },
+        {
+            id: 3,
+            title: 'Empty',
+            color: 'bg-danger',
+            count: totalEmptyEnvelopes,
+            icon: 'fa-radiation',
+            comment: commentEmpty
+        }
+    ]
+
+}
+
+function getTotalEnvelopes(envelopes, month) {
+    var counter = 0;
+    for (var i = 0; i < envelopes.length; i++) {
+        if (envelopes[i].month === month) {
+            counter++;
+        }
+    }
+    return counter;
+}
+
+function getTotalAlmostEmptyEnvelopes(envelopes, month) {
+    var counter = 0;
+    for (var i = 0; i < envelopes.length; i++) {
+        if (envelopes[i].progress < 100 && envelopes[i].progress > 74 && envelopes[i].month === month) {
+            counter++;
+        }
+    }
+    return counter;
+}
+
+function getTotalEmptyEnvelopes(envelopes, month) {
+    var counter = 0;
+    for (var i = 0; i < envelopes.length; i++) {
+        if (envelopes[i].progress >= 100 && envelopes[i].month === month) {
+            counter++;
+        }
+    }
+    return counter;
+}
+
+function getMostEmpty(envelopes, month) {
+    var currentMax = [0, -1];
+    for (var i = 0; i < envelopes.length; i++) {
+        if (envelopes[i].progress >= 100 && envelopes[i].month === month) {
+            if (currentMax[0] < envelopes[i].progress) {
+                currentMax = [envelopes[i].progress, i];
+            }
+        }
+    }
+    return currentMax;
+}
+
+function getAlmostEmpty(envelopes, month) {
+    for (var i = 0; i < envelopes.length; i++) {
+        if (envelopes[i].progress < 100 && envelopes[i].progress > 74 && envelopes[i].month === month) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+function getCategories(envelopes) {
+    var category = [];
+    var j = 0;
+    for (var i = 0; i < envelopes.length; i++) {
+        if (uniqueCategory(category, envelopes[i].category)) {
+            category[j] = envelopes[i].category
+            j++;
+        }
+
+    }
+
+    return category;
+}
+
+function uniqueCategory(categories, category) {
+    if (categories == null) {
+        return true;
+    }
+    for (var i = 0; i < categories.length; i++) {
+        if (categories[i]._id === category._id) {
+            return false;
+        }
+    }
+    return true;
+}
+
 
 function parseRequestBody(body, res, session) {
     switch (body.formType) {
