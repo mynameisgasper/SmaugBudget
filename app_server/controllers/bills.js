@@ -200,8 +200,34 @@ function generateBills(bills) {
             repeat: bill.repeating
         });
     }
-
+    billsArray.sort(compare)
     return billsArray;
+}
+
+function compare (a,b) { //1 menjava, -1 ni menjava
+    if ( a.year < b.year ){
+        return 1;
+    }
+    else if ( a.year == b.year) {
+        if (a.month < b.month) {
+            return 1;
+        }
+        else if (a.month == b.month) {
+            if (a.day < b.day) {
+                return 1;
+            }
+            else {
+                return -1;
+            }
+        }
+        else {
+            return -1;
+        }
+    }
+    else {
+        return -1;
+    }
+    return 0;
 }
 
 function generateCards(bills) {
