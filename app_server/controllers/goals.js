@@ -1,5 +1,6 @@
 //Dependencies
 const c = require('config');
+const user = require('../../app_api/models/user');
 var dictionary = require('./Dictionary');
 var Client = require('node-rest-client').Client;
 
@@ -205,6 +206,7 @@ function respond(res, session) {
             data = {...data, ...translationKeys};
         }
         data.goal = generateGoals(session.user.goals);
+        //console.log(data.goal)
         res.render('goals', data);
     } else {
         res.redirect('/');
@@ -221,7 +223,7 @@ function generateGoals(goals){
         var monthlyTarget = calculateDailyTarget(goal.date, targetLeft);
         
         goalsArray.push({
-            id: goal._id,
+            _id: goal._id,
             title: goal.title,
             progress: progress,
             target: goal.target,

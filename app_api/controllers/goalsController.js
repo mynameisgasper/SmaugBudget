@@ -192,21 +192,30 @@ function addToGoalWithoutCategory(requestBody, res) {
 
 function deleteGoal(requestBody, res) {
     try {
-        console.log("aahah");
-        var envelope_id = requestBody.envelope_id;
-        console.log(envelope_id);
+        var goal_id = requestBody.goal_id;
         var user_id = requestBody.user_id;
 
-        if (envelope_id != undefined) {
-            Goal.findByIdAndDelete(envelope_id, function(err, goal) {
+        if (goal_id != undefined) {
+            Goal.findByIdAndDelete(goal_id, function(err, goal) {
+                if (err) {
+                    console.log(err);
+                } else {}
+            });
+
+            User.findById(user_id, function(err, user) {
                 if (err) {
                     console.log(err);
                 } else {
-                    if (goal) {
-                        res.status(204).json(goal);
-                    } else {
-                        res.sendStatus(404);
+                    for (var i = 0; i < user.goals.length; i++) {
+                        if (user.goals[i]._id == goal_id) {
+                            user.goals.pull(goal_id);
+                            user.save();
+                            res.status(200).json(user);
+                            return;
+                        }
                     }
+                    res.status(304);
+                    return;
                 }
             });
         } else {
