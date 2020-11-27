@@ -64,7 +64,6 @@ function register(requestBody, res) {
                 });
             });
 
-
         } else {
             console.log(requestBody);
             res.sendStatus(400);
