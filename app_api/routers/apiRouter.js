@@ -99,7 +99,7 @@ router.post('/addToGoalWithCategory', (req, res) => {
     goals.addToGoalWithCategory(req, res);
 })
 
-router.delete('/deleteGoal', (req, res) => {
+router.post('/deleteGoal', (req, res) => {
     goals.deleteGoal(req, res);
 })
 
