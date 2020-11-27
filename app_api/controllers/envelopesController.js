@@ -6,6 +6,12 @@ const Expense = mongoose.model('Expense');
 const User = mongoose.model('User');
 
 /*
+TODO REGEX CHECK FOR
+! colorPicker
+! month
+*/
+
+/*
 ? Add Envelope Function
 ! Adds an envelope into DB. 
 */
@@ -108,7 +114,6 @@ function addEnvelope(requestBody, res) {
 ? EDIT Envelope Function
 ! find the envelope and add an amount or/and change color 
 */
-
 function editEnvelope(requestBody, res) {
     try {
         var newBudget = requestBody.inputAmount;
@@ -200,6 +205,7 @@ function deleteEnvelope(requestBody, res) {
 /*
 ? Add Expense Function
 ! find the envelope and add an amount or/and change color 
+* If there is no matching envelope, just create expense.
 */
 function addExpense(requestBody, res) {
     try {
@@ -325,6 +331,10 @@ function addExpense(requestBody, res) {
 }
 
 /*
+ * Auxiliary Functions
+ */
+
+/*
 ? Converts HEX color code to rgb if alpha is empty
 ! Converts HEX color code to rgba if alpha is present
 */
@@ -340,6 +350,10 @@ function hexToRGB(hex, alpha) {
     }
 }
 
+/*
+? Gets month number from string abbreviation
+! If invalid returns -1
+*/
 function getMonthNumber(month) {
     var monthArray = new Array();
     monthArray[1] = "JAN";
