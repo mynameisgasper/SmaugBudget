@@ -6,12 +6,6 @@ const Expense = mongoose.model('Expense');
 const User = mongoose.model('User');
 
 /*
-TODO REGEX CHECK FOR
-! colorPicker
-! month
-*/
-
-/*
 ? Add Envelope Function
 ! Adds an envelope into DB. 
 */

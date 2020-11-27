@@ -3,12 +3,14 @@ var bills = require('../controllers/billsController');
 var envelopes = require('../controllers/envelopesController');
 var goals = require('../controllers/goalsController');
 var history = require('../controllers/expenseController');
+var dbController = require('../controllers/dbController');
 
 var converter = require('../controllers/currencyConverter');
 converter.currencyConverter();
 
 var express = require('express');
 const currencyConverter = require('../controllers/currencyConverter');
+const db = require('../../app_server/controllers/db');
 var router = express.Router();
 
 //Index
@@ -109,6 +111,10 @@ router.post('/addToGoalWithCategory', (req, res) => {
 
 router.post('/deleteGoal', (req, res) => {
     goals.deleteGoal(req, res);
+});
+
+router.post('/removeAllDbData', (req, res) => {
+    dbController.removeAllDbData(req, res);
 });
 
 module.exports = router;

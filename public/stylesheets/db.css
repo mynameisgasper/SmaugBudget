@@ -1,0 +1,30 @@
+.row {
+    margin-left: 5%;
+}
+
+.btn {
+    width: 50%;
+}
+
+.dbRow {
+    margin: 0 auto;
+}
+
+.container {
+    margin-top: 27.5vh;
+}
+
+.container div {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.row p {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.info-db {
+    margin-top: 2.5vw !important;
+    margin-bottom: 2.5vw !important;
+}
