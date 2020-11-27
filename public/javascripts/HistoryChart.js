@@ -5,32 +5,8 @@
 var lineConfig = {
     type: 'line',
     data: {
-        labels: ['January', 'February', 'March', 'April', 'May'],
-            datasets: [{
-            label: 'Expenses',
-            backgroundColor: window.chartColors.red,
-            borderColor: window.chartColors.red,
-            data: [
-                0,
-                0,
-                335,
-                120,
-                0,
-            ],
-            fill: false,
-        }, {
-            label: 'Balance',
-            fill: false,
-            backgroundColor: window.chartColors.blue,
-            borderColor: window.chartColors.blue,
-            data: [
-                0,
-                0,
-                1135,
-                800,
-                680,
-            ],
-        }]
+        labels: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
+            datasets: []
     },
     options: {
         responsive: true,
@@ -123,6 +99,7 @@ var doughnutConfig = {
 };
 
 function loadGraphs(categoryData) {
+    //console.log(categoryData);
     if (categoryData != null) {
         doughnutConfig.data.datasets[0].data = extractValues(categoryData);
         doughnutConfig.data.labels = extractNames(categoryData);
@@ -133,6 +110,43 @@ function loadGraphs(categoryData) {
     if (!darkMode.isSet) {
         doughnutConfig.data.datasets[0].borderColor = "#ffffff";
         doughnutConfig.options.legend.labels.fontColor ="#666";
+    }
+    else {
+        doughnutConfig.data.datasets[0].borderColor = "#2b2b2b";
+        doughnutConfig.options.legend.labels.fontColor ="#ffffff";
+    }
+
+    var ctx = document.getElementById('doughnut-canvas').getContext('2d');
+    window.myPie = new Chart(ctx, doughnutConfig);
+}
+
+function loadGraphs2(categoryData) {
+    let keys = Array.from(categoryData.keys());
+    for (let key of keys) {
+        //console.log(key);
+       // console.log(categoryData.get(key));
+        var json = {
+                label: key,
+                backgroundColor: window.chartColors.green,
+                borderColor: window.chartColors.green,
+                data: generateDataset(categoryData.get(key)),
+                fill: false,
+            
+        }
+        lineConfig.data.datasets.push(json);
+        //console.log(json);
+        //month.set(name, filterByMonth(category.get(name)));
+    }
+    //console.log(categoryData[0].key);
+    if (categoryData != null) {
+        lineConfig.data.datasets[0].data = filterByMonth(categoryData);
+        //doughnutConfig.data.labels = extractNames(categoryData);
+        //var neki = extractNames(categoryData);
+    }
+
+    lineConfig.options.aspectRatio = ($(window).width() < 960 ? 1 : 2);
+
+    if (!darkMode.isSet) {
         lineConfig.options.legend.labels.fontColor ="#666";
         lineConfig.options.title.fontColor ="#666";
         lineConfig.options.scales.xAxes[0].ticks.fontColor ="#666";
@@ -141,8 +155,6 @@ function loadGraphs(categoryData) {
         lineConfig.options.scales.yAxes[0].gridLines.color ="rgba(0, 0, 0, 0.1)";
     }
     else {
-        doughnutConfig.data.datasets[0].borderColor = "#2b2b2b";
-        doughnutConfig.options.legend.labels.fontColor ="#ffffff";
         lineConfig.options.legend.labels.fontColor ="#ffffff";
         lineConfig.options.title.fontColor ="#ffffff";
         lineConfig.options.scales.xAxes[0].ticks.fontColor ="#ffffff";
@@ -150,9 +162,6 @@ function loadGraphs(categoryData) {
         lineConfig.options.scales.xAxes[0].gridLines.color ="#999999";
         lineConfig.options.scales.yAxes[0].gridLines.color ="#999999";
     }
-
-    var ctx = document.getElementById('doughnut-canvas').getContext('2d');
-    window.myPie = new Chart(ctx, doughnutConfig);
 
     var ctx = document.getElementById('line-canvas').getContext('2d');
     window.myLine = new Chart(ctx, lineConfig);
@@ -172,4 +181,31 @@ function extractValues(data) {
         values.push(entry.sum);
     }
     return values;
+}
+
+function generateDataset(category) {
+    const arr = [0,0,0,0,0,0,0,0,0,0,0,0];
+    let keys = Array.from(category.keys());
+    for (let i of keys) {
+       arr[monthToNumber(i)-1] = category.get(i).sum;
+       //console.log(category.get(i).sum);
+    }
+    return arr;
+}
+
+function monthToNumber(month) {
+    switch (month) {
+        case 'JAN': return 1;
+        case 'FEB': return 2;
+        case 'MAR': return 3;
+        case 'APR': return 4;
+        case 'MAY': return 5;
+        case 'JUN': return 6;
+        case 'JUL': return 7;
+        case 'AUG': return 8;
+        case 'SEP': return 9;
+        case 'OCT': return 10;
+        case 'NOV': return 11;
+        case 'DEC': return 12;
+    }
 }
