@@ -60,8 +60,9 @@ var translationKeys = {
 }
 
 function translate (language) {
+    var translatedKeys = JSON.parse(JSON.stringify(translationKeys));
     Object.keys(translationKeys).forEach(function(key) {
-        translationKeys[key] = dictionary.getTranslation(translationKeys[key], language);
+        translatedKeys[key] = dictionary.getTranslation(translatedKeys[key], language);
     });
     for (var i = 0; i < data.alert.length; i++) {
         //console.log(data.alert[i]);
@@ -70,14 +71,16 @@ function translate (language) {
             data.alert[i].text = dictionary.getTranslation(data.alert[i].text, language);
         }
     }
+    return translatedKeys;
 }
 
 function respond(res, session) {
     if (session.user) {
         if (session.user.language) {
-            translate(session.user.language);
+            data = {...data, ...translate(session.user.language)};
+        } else {
+            data = {...data, ...translationKeys};
         }
-        data = {...data, ...translationKeys};
 
         data.card = generateCards(session.user);
         data.analytics = generateAnalyitcs(session.user);
