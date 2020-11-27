@@ -128,7 +128,7 @@ function getTotalEnvelopes(envelopes, month) {
 function getTotalAlmostEmptyEnvelopes(envelopes, month) {
     var counter = 0;
     for (var i = 0; i < envelopes.length; i++) {
-        if (envelopes[i].progress < 100 && envelopes[i].progress > 74 && envelopes[i].month === month) {
+        if (envelopes[i].progress < 100 && envelopes[i].progress > 85 && envelopes[i].month === month) {
             counter++;
         }
     }

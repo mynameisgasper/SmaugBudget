@@ -56,7 +56,7 @@ function addGoal(requestBody, res) {
                         date: date,
                         category: { name: category }
                     });
-                
+
                     goal.save(function callback(err) {
                         if (err) {
                             console.log(err);

@@ -20,8 +20,12 @@ function addEnvelope(requestBody, res) {
         var colorHexPicker = requestBody.colorPicker;
         var categoryName = requestBody.categoryAddEnvelope;
         var amount = requestBody.inputAmount;
-        var colorRGB = hexToRGB(colorHexPicker);
-        var colorBackground = hexToRGB(colorHexPicker, 0.5);
+        const colorCorrect = checkColorCode(colorHexPicker)
+        if (colorCorrect) {
+            var colorRGB = hexToRGB(colorHexPicker);
+            var colorBackground = hexToRGB(colorHexPicker, 0.5);
+        }
+
         var user_id = requestBody.id;
         var curMonth = requestBody.month;
 
@@ -42,8 +46,10 @@ function addEnvelope(requestBody, res) {
 
         var regex = new RegExp("^[0-9]+(\.[0-9]{1,2})?$");
         const amountCorrect = regex.test(requestBody.inputAmount)
+        const titleCorrect = checkTitle(categoryName);
 
-        if (amountCorrect) {
+
+        if (amountCorrect && titleCorrect && colorCorrect) {
             //? Try to find current user
             User.findById(user_id, function(error, user) {
                 if (error) {
@@ -71,6 +77,7 @@ function addEnvelope(requestBody, res) {
                     if (category == null) {
                         let cat = new Categories({
                             name: categoryName,
+                            color: colorRGB
                         })
                         cat.save();
                         category = cat;
@@ -118,15 +125,18 @@ function editEnvelope(requestBody, res) {
     try {
         var newBudget = requestBody.inputAmount;
         var colorHexPicker = requestBody.colorPicker
-        var colorRGB = hexToRGB(colorHexPicker);
-        var colorBackground = hexToRGB(colorHexPicker, 0.5);
+        const colorCorrect = checkColorCode(colorHexPicker)
+        if (colorCorrect) {
+            var colorRGB = hexToRGB(colorHexPicker);
+            var colorBackground = hexToRGB(colorHexPicker, 0.5);
+        }
         var envelope_id = requestBody.id;
         var user_id = requestBody.user;
 
         var regex = new RegExp("^[0-9]+");
         const amountCorrect = regex.test(newBudget);
 
-        if (amountCorrect) {
+        if (amountCorrect && colorCorrect) {
             User.findById(user_id, function(error, user) {
                 if (error) {
                     console.log(error);
@@ -217,33 +227,13 @@ function addExpense(requestBody, res) {
         //TODO Implement Currency
         var currency = '€';
 
-
+        var inputDate = date.split("-");
         var regex = new RegExp("^[0-9]+(\.[0-9]{1,2})?$");
         const amountCorrect = regex.test(requestBody.inputAmount)
+        const recipientCorrect = checkTitle(recipient);
+        const dateBool = checkDatePast(inputDate);
 
-        var today = new Date();
-        var dd = String(today.getDate()).padStart(2, '0');
-        var mm = String(today.getMonth() + 1).padStart(2, '0');
-        var yyyy = today.getFullYear();
-        var inputDate = date.split("-");
-        var dateBool = false;
-
-        if (inputDate[0] < yyyy) {
-            dateBool = true;
-        } else if (inputDate[0] == yyyy) {
-            if (inputDate[1] < mm) {
-                dateBool = true;
-            } else if (inputDate[1] == mm) {
-                if (inputDate[2] <= dd) dateBool = true;
-                else dateBool = false;
-            } else {
-                dateBool = false;
-            }
-        } else {
-            dateBool = false;
-        }
-
-        if (amountCorrect && dateBool) {
+        if (amountCorrect && dateBool && recipientCorrect) {
             User.findById(user_id, function(error, user) {
                 if (error) {
                     res.sendStatus(500);
@@ -371,6 +361,55 @@ function getMonthNumber(month) {
     }
     return -1;
 
+}
+
+/*
+? Check if Date is valid (before today)
+*/
+
+function checkDatePast(inputDate) {
+    console.log(inputDate);
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+
+    if (inputDate[0] < yyyy) {
+        return true;
+    } else if (inputDate[0] == yyyy) {
+        if (inputDate[1] < mm) {
+            return true;
+        } else if (inputDate[1] == mm) {
+            if (inputDate[2] <= dd) return true;
+            else return false;
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
+}
+
+
+function checkTitle(title) {
+    var regexTitle = new RegExp("^[A-Za-z0-9]{1,20}$");
+    const titleTest = regexTitle.test(title);
+
+    return titleTest;
+}
+
+function checkAmount(amount) {
+    var regexTarget = new RegExp("^[0-9]+(\.[0-9]{1,2})?$");
+    const amountTest = regexTarget.test(amount);
+
+    return amountTest;
+}
+
+function checkColorCode(colorCode) {
+    var regexColor = new RegExp("^#(?:[0-9a-fA-F]{3}){1,2}$");
+    const colorTest = regexColor.test(colorCode);
+
+    return colorTest;
 }
 
 module.exports = {
