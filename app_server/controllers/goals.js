@@ -278,7 +278,11 @@ function generateCards(currentUser) {
             goalCompleted += currentUser.goals[i].title + ", ";
         }  
     }
-    goalCompleted = goalCompleted.substring(0, goalCompleted.length - 2);
+    if(completed > 2)
+        goalCompleted = "Multiple goals";
+    else
+        goalCompleted = goalCompleted.substring(0, goalCompleted.length - 2);
+
     return [{
         id: 1,
         title: 'Goals Total',
