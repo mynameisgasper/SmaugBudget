@@ -192,9 +192,13 @@ function addToGoalWithoutCategory(requestBody, res) {
 
 function deleteGoal(requestBody, res) {
     try {
-        var id_requested = "5fbec13be03d4a2d402da505"; //primer iz moje baze
-        if (id_requested != undefined) {
-            Goal.findByIdAndDelete(id_requested, function(err, goal) {
+        console.log("aahah");
+        var envelope_id = requestBody.envelope_id;
+        console.log(envelope_id);
+        var user_id = requestBody.user_id;
+
+        if (envelope_id != undefined) {
+            Goal.findByIdAndDelete(envelope_id, function(err, goal) {
                 if (err) {
                     console.log(err);
                 } else {
