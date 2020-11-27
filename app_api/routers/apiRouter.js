@@ -5,7 +5,6 @@ var goals = require('../controllers/goalsController');
 var history = require('../controllers/expenseController');
 
 var converter = require('../controllers/currencyConverter');
-
 converter.currencyConverter();
 
 var express = require('express');
@@ -25,9 +24,18 @@ router.post('/login', (req, res) => {
     user.login(req, res);
 });
 
+router.post('/requestResetPassword', (req, res) => {
+    user.requestResetPassword(req, res);
+});
+
+router.post('/resetPassword', (req, res) => {
+    user.resetPassword(req, res);
+});
+
+
 router.post('/getUser/', (req, res) => {
     user.retrieveUser(req, res);
-})
+});
 
 router.all('/confirm/:urlCode/:code', (req, res) => {
     user.confirm(req, res);
@@ -53,15 +61,15 @@ router.post('/addBill', (req, res) => {
 
 router.post('/addEnvelope', (req, res) => {
     envelopes.addEnvelope(req, res);
-})
+});
 
 router.post('/editEnvelope', (req, res) => {
     envelopes.editEnvelope(req, res);
-})
+});
 
 router.post('/addExpense', (req, res) => {
     envelopes.addExpense(req, res);
-})
+});
 
 router.post('/getLastMonthExpenses', (req, res) => {
     history.getLastMonthExpenses(req, res);
@@ -69,38 +77,38 @@ router.post('/getLastMonthExpenses', (req, res) => {
 
 router.post('/deleteEnvelope', (req, res) => {
     envelopes.deleteEnvelope(req, res);
-})
+});
 
 router.post('/editExpense', (req, res) => {
     history.editExpense(req, res);
-})
+});
 
 router.get('/converter', (req, res) => {
     converter.converter(req, res);
-})
+});
 
 router.post('/editBill', (req, res) => {
     bills.editBill(req, res);
-})
+});
 
 router.post('/deleteBill', (req, res) => {
     bills.deleteBill(req, res);
-})
+});
 
 router.post('/addGoal', (req, res) => {
     goals.addGoal(req, res);
-})
+});
 
 router.post('/editGoal', (req, res) => {
     goals.editGoal(req, res);
-})
+});
 
 router.post('/addToGoalWithCategory', (req, res) => {
     goals.addToGoalWithCategory(req, res);
-})
+});
 
 router.post('/deleteGoal', (req, res) => {
     goals.deleteGoal(req, res);
-})
+});
 
 module.exports = router;

@@ -48,14 +48,25 @@ module.exports = {
     send: function(to, subject, text) { 
         sendEmail(to, subject, text);
     },
-    sendCode: async function sendCode(email, firstName, lastName, url, confirmationCode, callback) {
+    sendCode: async function sendCode(email, firstName, lastName, url, confirmationCode) {
         fs.readFile('./app_server/views/confirmationEmail.hbs', 'UTF-8', function(err, data) {
             if (err) {
                 console.log(err);
             }
             else {
                 data = data.replace('{{FIRSTNAME}}', firstName).replace('{{LASTNAME}}', lastName).replace('{{CODE}}', confirmationCode).replace('{{LINK}}', 'http://localhost:8080/confirmation/' + url + '/' + confirmationCode);
-                sendEmail(email, 'Confirmation code', data, callback);    
+                sendEmail(email, 'Confirmation code', data);    
+            }
+        });
+    },
+    sendResetPassword: async function sendResetPassword(email, firstName, lastName, url) {
+        fs.readFile('./app_server/views/resetPasswordEmail.hbs', 'UTF-8', function(err, data) {
+            if (err) {
+                console.log(err);
+            }
+            else {
+                data = data.replace('{{FIRSTNAME}}', firstName).replace('{{LASTNAME}}', lastName).replace('{{LINK}}', 'http://localhost:8080/passwordReset/' + url);
+                sendEmail(email, 'Password reset', data);    
             }
         });
     },

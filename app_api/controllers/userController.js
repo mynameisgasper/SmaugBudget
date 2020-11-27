@@ -269,12 +269,50 @@ function getPfp (req, res) {
     }
 }
 
+function requestResetPassword(requestBody, res) {
+    try {
+        const email = requestBody.email;
+
+        User.findOne({ email: email }, function(err, user) {
+            if (err) {
+                res.sendStatus(500);
+            }
+            else {
+                if (user) {
+                    var resetPasswordCode = smtp.generateCode(64);
+                    user.resetPasswordCode = resetPasswordCode;
+                    user.save(function(err) {
+                        if (err) {
+                            res.sendStatus(500);
+                        }
+                        else {
+                            smtp.sendResetPassword(email, user.firstname, user.lastname, resetPasswordCode);
+                            res.sendStatus(200);
+                        }
+                    });
+                }
+                else {
+                    res.sendStatus(404);
+                }
+            }
+        });
+    } catch (ex) {
+        res.sendStatus(500);
+    }
+}
+
 module.exports = {
     register: function(req, res) {
         register(req.body, res);
     },
     login: function(req, res) {
         login(req.body, res);
+    },
+    requestResetPassword: function(req, res) {
+        requestResetPassword(req.body, res);
+    },
+    resetPassword: function(req, res) {
+
     },
     retrieveUser: function(req, res) {
         retrieveUser(req.body, res, req.session);

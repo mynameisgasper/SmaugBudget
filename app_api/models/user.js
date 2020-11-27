@@ -19,6 +19,7 @@ userSchema.add({
     paycheckDate: { type: Number, required: false },
     confirmationUrl: { type: String },
     confirmationCode: { type: String },
+    resetPasswordCode: {type: String },
     balance: { type: Number, required: false },
     isPremium: { type: Boolean, required: true, default: false },
     profilePic: { type: String, required: false },
