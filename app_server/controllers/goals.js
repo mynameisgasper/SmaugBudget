@@ -5,8 +5,6 @@ var Client = require('node-rest-client').Client;
 
 var data = {
     fileName: 'goals',
-    message: dictionary.getTranslation("messageGoals"),
-    welcomeMessage: dictionary.getTranslation("welcomeMessageGoals"),
     /*goal: [{
             id: 0,
             title: 'iPhone',
@@ -57,23 +55,33 @@ var data = {
         { id: 5, category: "Wedding" },
         { id: 6, category: "Car" },
         { id: 7, category: "Other" },
-    ],
-    //translations main
-    logout: dictionary.getTranslation("logout"),
-    //translations navbar
-    DASHBOARD: dictionary.getTranslation("DASHBOARD"),
-    ENVELOPES: dictionary.getTranslation("ENVELOPES"),
-    GOALS: dictionary.getTranslation("GOALS"),
-    BILLS: dictionary.getTranslation("BILLS"),
-    HISTORY: dictionary.getTranslation("HISTORY"),
-    UTILITIES: dictionary.getTranslation("UTILITIES"),
-    user: dictionary.getTranslation("user"),
-    settings: dictionary.getTranslation("settings"),
-    appearance: dictionary.getTranslation("appearance"),
-    light: dictionary.getTranslation("light"),
-    dark: dictionary.getTranslation("dark")
-
+    ]
 };
+
+var translationKeys = {
+    message: "messageGoals",
+    welcomeMessage: "welcomeMessageGoals",
+    //translations main
+    logout: "logout",
+    //translations navbar
+    DASHBOARD: "DASHBOARD",
+    ENVELOPES: "ENVELOPES",
+    GOALS: "GOALS",
+    BILLS: "BILLS",
+    HISTORY: "HISTORY",
+    UTILITIES: "UTILITIES",
+    user: "user",
+    settings: "settings",
+    appearance: "appearance",
+    light: "light",
+    dark: "dark"
+}
+
+function translate (language) {
+    Object.keys(translationKeys).forEach(function(key) {
+        translationKeys[key] = dictionary.getTranslation(translationKeys[key], language);
+    });
+}
 
 function parseRequestBody(body, res, session) {
     switch (body.formType) {
@@ -163,6 +171,10 @@ function addGoal(body, res, session) {
 
 function respond(res, session) {
     if (session.user) {
+        if (session.user.language) {
+            translate(session.user.language);
+        }
+        data = {...data, ...translationKeys};
         data.goal = generateGoals(session.user.goals);
         res.render('goals', data);
     } else {
