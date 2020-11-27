@@ -8,40 +8,51 @@ var data = {
     fileName: 'index',
     index: {
         used: true
-    },
-    //navbar
-    HOME: dictionary.getTranslation("HOME"),
-    FEATURES: dictionary.getTranslation("FEATURES"),
-    ABOUTUS: dictionary.getTranslation("ABOUTUS"),
-    SIGNIN: dictionary.getTranslation("SIGNIN"),
-    //sign in modal
-    memberSignIn: dictionary.getTranslation("memberSignIn"),
-    email: dictionary.getTranslation("email"),
-    password: dictionary.getTranslation("password"),
-    loginButton: dictionary.getTranslation("loginButton"),
-    passwordForgot: dictionary.getTranslation("passwordForgot"),
-    notMember: dictionary.getTranslation("notMember"),
-    //sign up modal
-    HINT: dictionary.getTranslation("HINT"),
-    nameHint: dictionary.getTranslation("nameHint"),
-    surnameHint: dictionary.getTranslation("surnameHint"),
-    emailHint: dictionary.getTranslation("emailHint"),
-    passwordHint: dictionary.getTranslation("passwordHint"),
-    passwordNoMatch: dictionary.getTranslation("passwordNoMatch"),
-    memberSignUp: dictionary.getTranslation("memberSignUp"),
-    name: dictionary.getTranslation("name"),
-    surname: dictionary.getTranslation("surname"),
-    confirmEmail: dictionary.getTranslation("confirmEmail"),
-    confirmPassword: dictionary.getTranslation("confirmPassword"),
-    createAccount: dictionary.getTranslation("createAccount"),
-    alreadyMember: dictionary.getTranslation("alreadyMember"),
+    }
 
+}
+
+var translationKeys = {
+    //navbar
+    HOME: "HOME",
+    FEATURES: "FEATURES",
+    ABOUTUS: "ABOUTUS",
+    SIGNIN: "SIGNIN",
+    //sign in modal
+    memberSignIn: "memberSignIn",
+    email: "email",
+    password: "password",
+    loginButton: "loginButton",
+    passwordForgot: "passwordForgot",
+    notMember: "notMember",
+    //sign up modal
+    HINT: "HINT",
+    nameHint: "nameHint",
+    surnameHint: "surnameHint",
+    emailHint: "emailHint",
+    passwordHint: "passwordHint",
+    passwordNoMatch: "passwordNoMatch",
+    memberSignUp: "memberSignUp",
+    name: "name",
+    surname: "surname",
+    confirmEmail: "confirmEmail",
+    confirmPassword: "confirmPassword",
+    createAccount: "createAccount",
+    alreadyMember: "alreadyMember"
+}
+
+function translate (language) {
+    Object.keys(translationKeys).forEach(function(key) {
+        translationKeys[key] = dictionary.getTranslation(translationKeys[key], language);
+    });
 }
 
 function respond(res, session) {
     if (session.user) {
         res.redirect('/dashboard');
     } else {
+        translate("English");
+        data = {...data, ...translationKeys};
         res.render('index', data);
     }
 }
