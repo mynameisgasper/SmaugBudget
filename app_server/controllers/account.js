@@ -51,8 +51,9 @@ var data = {
     selLanguage: dictionary.getTranslation("selLanguage"),
     
     //data
-    data_username: "Grega",
-    data_email: "Grega@gmail.com",
+    data_firstName: "",
+    data_lastName: "",
+    data_email: "",
     data_connections: connections,
 
     //validation
@@ -67,6 +68,9 @@ function respond(res, session) {
         if (session.user.language) {
             dictionary.setLanguage(session.user.language);
         }
+        data.data_firstName = session.user.firstName;
+        data.data_lasttName = session.user.lastName;
+        data.data_email = session.user.email;
         res.render('account', data);
     }
     else {
