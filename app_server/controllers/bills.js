@@ -253,7 +253,7 @@ function findClosestBill(bills) {
             nearestBill = bill;
         }
     }
-    
+
     return nearestBill
 }
 
@@ -261,10 +261,10 @@ function generateComment(bills) {
     var comment = '';
 
     var bill = findClosestBill(bills);
+    if (!bill) return comment;
     const billDate = new Date(Date.parse(bill.date));
-    const dtfUK = new Intl.DateTimeFormat('UK', { year: 'numeric', month: '2-digit', day: '2-digit' });
+    const dtfUK = new Intl.DateTimeFormat('UK', { month: '2-digit', day: '2-digit' });
     comment = "Closest bill:\n" + bill.recipient + " - " + dtfUK.format(billDate);
-    
 
     return comment;
 }
