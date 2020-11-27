@@ -108,17 +108,19 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form name="addExpense" method="post" action="/goals" onsubmit="return disableButton()">
+            <form name="addExpense" method="post" action="/goals" onsubmit="return disableButton4()">
                 <input type="hidden" name="formType" value="addToGoalWithCategory">
                 <div class="modal-body">
                     <div class="ena"><label for="inputGoal">Goal</label></br>
                         <select id="inputCategory" name="inputCategory" class="form-control">
                             {{#each goal}}
-                            <option id="category{{_id}}">{{title}}</option>
+                              {{#ifLengthNotZero targetLeft}}
+                                <option id="category{{_id}}">{{title}}</option>
+                              {{/ifLengthNotZero}}
                             {{/each}}
                         </select>
                     </div>
-                    <div class="ena"><label for="inputAmount">Amount</label></br>
+                    <div class="ena"><label for="inputAmount" id="">Amount</label></br>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">€</span>
@@ -128,7 +130,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit"  onclick="disableButton()" class="btn btn-primary">Add</button>
+                    <button type="submit" onclick="disableButton4()" class="btn btn-primary">Add</button>
                 </div>
             </form>
         </div>

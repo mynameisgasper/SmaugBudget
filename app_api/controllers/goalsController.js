@@ -158,6 +158,9 @@ function addToGoalWithCategory(requestBody, res) {
                         if (user.goals[i].title === title) {
                             goal_id = user.goals[i]._id;
                             amount = parseInt(amount) + user.goals[i].saved;
+                            if(amount >  user.goals[i].target)
+                                amount = user.goals[i].target
+
                             user.goals[i].saved = amount;
                             user.save();
                             break;
