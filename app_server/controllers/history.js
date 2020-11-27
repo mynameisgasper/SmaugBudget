@@ -4,35 +4,49 @@ var Client = require('node-rest-client').Client;
 
 var data = {
     fileName: 'history',
-    message: dictionary.getTranslation("messageHistory"),
-    welcomeMessage: dictionary.getTranslation("welcomeMessageHistory"),
     graph: {
         used: true,
         name: 'HistoryChart'
     },
     dateRangePicker: {
         used: true
-    },
+    }
+}
 
-
+var translationKeys = {
+    message: "messageHistory",
+    welcomeMessage: "welcomeMessageHistory",
     //translations main
-    logout: dictionary.getTranslation("logout"),
+    logout: "logout",
     //translations navbar
-    DASHBOARD: dictionary.getTranslation("DASHBOARD"),
-    ENVELOPES: dictionary.getTranslation("ENVELOPES"),
-    GOALS: dictionary.getTranslation("GOALS"),
-    BILLS: dictionary.getTranslation("BILLS"),
-    HISTORY: dictionary.getTranslation("HISTORY"),
-    UTILITIES: dictionary.getTranslation("UTILITIES"),
-    user: dictionary.getTranslation("user"),
-    settings: dictionary.getTranslation("settings"),
-    appearance: dictionary.getTranslation("appearance"),
-    light: dictionary.getTranslation("light"),
-    dark: dictionary.getTranslation("dark")
+    DASHBOARD: "DASHBOARD",
+    ENVELOPES: "ENVELOPES",
+    GOALS: "GOALS",
+    BILLS: "BILLS",
+    HISTORY: "HISTORY",
+    UTILITIES: "UTILITIES",
+    user: "user",
+    settings: "settings",
+    appearance: "appearance",
+    light: "light",
+    dark: "dark"
+}
+
+function translate (language) {
+    var translatedKeys = JSON.parse(JSON.stringify(translationKeys));
+    Object.keys(translationKeys).forEach(function(key) {
+        translatedKeys[key] = dictionary.getTranslation(translatedKeys[key], language);
+    });
+    return translatedKeys;
 }
 
 function respond(res, session) {
     if (session.user) {
+        if (session.user.language) {
+            data = {...data, ...translate(session.user.language)};
+        } else {
+            data = {...data, ...translationKeys};
+        }
         data.categories = session.user.categories;
         data.expense = generateExpenses(session.user.expense);
         res.render('history', data);
