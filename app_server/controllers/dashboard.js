@@ -186,7 +186,6 @@ function getLastMonthExpenses(expenses, paycheckDate) {
         const expenseDate = new Date(expense.date);
         const expenseDay = expenseDate.getDate();
         const expenseMonth = expenseDate.getMonth();
-
         if ((expenseMonth == previousMonth && expenseDay <= paycheckDate) || (expenseMonth == prepreviousMonth && expenseDay > paycheckDate)) {
             lastMonthExpenses.push(expense);
         }
@@ -198,28 +197,31 @@ function getLastMonthExpenses(expenses, paycheckDate) {
 
 function getMostMoneySpentOn(expenseAnalitics) {
     var selectedAnalitic = null;
-    for (var analitic of expenseAnalitics) {
-        if (selectedAnalitic == null || analitic.sum > selectedAnalitic.sum) {
-            console.log(analitic);
-            selectedAnalitic = analitic;
+
+    let keys = Array.from(expenseAnalitics.keys());
+    for (let key of keys) {
+        if (selectedAnalitic == null || expenseAnalitics.get(key).sum > selectedAnalitic.sum) {
+            selectedAnalitic = expenseAnalitics.get(key);
         }
     }
 
     if (selectedAnalitic) {
-        return selectedAnalitic[0];
+        return selectedAnalitic.name;
     }
 }
 
 function getMostTimesPurchased(expenseAnalitics) {
     var selectedAnalitic = null;
-    for (var analitic of expenseAnalitics) {
-        if (selectedAnalitic == null || analitic.count > selectedAnalitic.count) {
-            selectedAnalitic = analitic;
+
+    let keys = Array.from(expenseAnalitics.keys());
+    for (let key of keys) {
+        if (selectedAnalitic == null || expenseAnalitics.get(key).count > selectedAnalitic.count) {
+            selectedAnalitic = expenseAnalitics.get(key);
         }
     }
 
     if (selectedAnalitic) {
-        return selectedAnalitic[0];
+        return selectedAnalitic.name;
     }
 }
 

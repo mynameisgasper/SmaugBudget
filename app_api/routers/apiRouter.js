@@ -63,6 +63,10 @@ router.post('/addExpense', (req, res) => {
     envelopes.addExpense(req, res);
 })
 
+router.post('/getLastMonthExpenses', (req, res) => {
+    history.getLastMonthExpenses(req, res);
+});
+
 router.post('/deleteEnvelope', (req, res) => {
     envelopes.deleteEnvelope(req, res);
 })

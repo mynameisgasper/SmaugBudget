@@ -255,8 +255,6 @@ function addExpense(requestBody, res) {
                             user.envelopes[i].spent += parseInt(amountAdded);
                             user.envelopes[i].progress = Math.round((parseFloat(parseFloat(user.envelopes[i].spent) / parseFloat(user.envelopes[i].budget))) * 100);
 
-                            console.log(user.envelopes[i]);
-
                             Envelopes.findById(user.envelopes[i]._id, function(error, envelope) {
                                 if (error) {
                                     console.log(error);
@@ -295,7 +293,6 @@ function addExpense(requestBody, res) {
                             if (error) {
                                 console.log(error);
                             } else {
-                                console.log(category);
                                 let expense = new Expense({
                                     date: date,
                                     category: category,
@@ -303,7 +300,6 @@ function addExpense(requestBody, res) {
                                     value: amountAdded,
                                     currency: currency
                                 });
-                                console.log(expense);
 
                                 expense.save(function callback(err) {
                                     if (err) {
