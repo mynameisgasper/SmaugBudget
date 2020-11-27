@@ -11,6 +11,7 @@
         </div>
     </div>
 
+    {{#ifLengthNotZero alertLength}}
     <div class="container" id="cards-section">
         <div class="row">
             <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
@@ -19,6 +20,7 @@
         </div>
         {{> alert}}
     </div>
+    {{/ifLengthNotZero}}
 
     <!----- Overview section ----->
     <div class="container" id="overview-section">

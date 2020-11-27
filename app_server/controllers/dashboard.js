@@ -3,24 +3,6 @@ var dictionary = require('./Dictionary');
 
 var data = {
     fileName: 'dashboard',
-    
-    alert: [{
-        type: 'alert-warning',
-        name: dictionary.getTranslation("alertName1"),
-        text: dictionary.getTranslation("alertText1")
-    },
-    {
-        type: 'alert-warning',
-        name: dictionary.getTranslation("alertName2"),
-        text: dictionary.getTranslation("alertText2")
-    },
-    ,{
-        type: 'alert-success',
-        name: dictionary.getTranslation("alertName3"),
-        text: dictionary.getTranslation("alertText3")
-    }],
-    incomeLastMonth: 1500,
-    expensesLastMonth: 900,
     graph: {
         used: true,
         name: 'DashboardChart'
@@ -74,16 +56,18 @@ function translate (language) {
 
 function respond(res, session) {
     if (session.user) {
-        if (session.user.language) {
-            translate(session.user.language);
-        }
-        data = {...data, ...translationKeys};
-
         data.card = generateCards(session.user);
         data.analytics = generateAnalyitcs(session.user);
         data.incomeLastMonth = (session.user.paycheckLastMonth ? session.user.paycheckLastMonth : 0);
         data.expensesLastMonth = getTotalCost(getLastMonthExpenses(session.user.expense, session.user.paycheckDate));
+        data.alert = generateAlerts(session.user);
+        data.alertLength = data.alert.length;
         data.id = session.user._id;
+
+        if (session.user.language) {
+            translate(session.user.language);
+        }
+        data = {...data, ...translationKeys};
         res.render('dashboard', data);
     }
     else {
@@ -134,6 +118,21 @@ function generateAnalyitcs(user) {
         color: 'rgb(251, 203, 72)',
         category: mostTimesPurchased
     }]
+}
+
+function generateAlerts(user) {
+    var alertArray = [];
+    for (var element of generateEnvelopeAlerts()) {
+        alertArray.push(element);
+    }
+    for (var element of generateBillsAlerts()) {
+        alertArray.push(element);
+    }
+    for (var element of generateGoalsAlerts()) {
+        alertArray.push(element);
+    }
+
+    return alertArray;
 }
 
 function getExpenseAnalysis(expenses) {
@@ -246,6 +245,30 @@ function getMostTimesPurchased(expenseAnalitics) {
     if (selectedAnalitic) {
         return selectedAnalitic.name;
     }
+}
+
+function generateEnvelopeAlerts() {
+    return [{
+        type: 'alert-warning',
+        name: dictionary.getTranslation("alertName1"),
+        text: dictionary.getTranslation("alertText1")
+    }];
+}
+
+function generateBillsAlerts() {
+    return [{
+        type: 'alert-warning',
+        name: dictionary.getTranslation("alertName2"),
+        text: dictionary.getTranslation("alertText2")
+    }];
+}
+
+function generateGoalsAlerts() {
+    return [{
+        type: 'alert-success',
+        name: dictionary.getTranslation("alertName3"),
+        text: dictionary.getTranslation("alertText3")
+    }];
 }
 
 function getTotalCost(bills) {
