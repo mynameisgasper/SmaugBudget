@@ -23,7 +23,7 @@
         <!--Modal form2-->
         <!--- Modal Form Edit --->
         {{#each bill}}
-            <div class="modal fade billModal" id="editForm" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
+            <div class="modal fade billModal" id="editForm{{_id}}" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
                 <div class="position-absolute w-100 p-4 d-flex flex-column align-items-end">
                     <div class="w-25 toastek">
                         <div class="toast ml-auto tt3" role="alert" data-delay="3000" data-autohide="false">
@@ -102,6 +102,7 @@
                                     <label for="date">Date due</label><br>
                                     <input class="form-control" type="date" value="{{year}}-{{month}}-{{day}}" id="inputDate{{id}}" name="inputDate" onfocusout="dateCheckEditBill(this,'{{id}}')" required="required">
                                 </div>
+                                {{year}}-{{month}}-{{day}}
                                 <div class="ena">
                                     <b>How often?</b><br>
                                     <input type="radio" name="radio" value="once" required {{#ifEquals repeat "once"}}checked{{/ifEquals}}>

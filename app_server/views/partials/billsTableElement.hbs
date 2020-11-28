@@ -11,7 +11,7 @@
             {{value}}{{currency}}
         </td>
         <td class="zadnji align-middle">
-            <button type="button" class="btn p" data-toggle="modal" href="#editForm{{id}}"><i class="fas fa-pencil-alt"></i></button>
+            <button type="button" class="btn p" data-toggle="modal" href="#editForm{{_id}}"><i class="fas fa-pencil-alt"></i></button>
             <form name="deleteForm{{_id}}" method="post" action="/bills">
                 <input type="hidden" value="deleteBill" name="formType">
                 <input type="hidden" value="{{_id}}" name="id">
