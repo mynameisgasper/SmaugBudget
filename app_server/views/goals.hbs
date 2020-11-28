@@ -196,12 +196,13 @@
 
           <label for="inputCategory">Choose a Category</label>
           <select id="inputCategory" name="inputCategory" class="form-control" required="required">
-            <option selected>{{category}}</option>
+            <option selected disabled>Select Category</option>
             {{#each ../categories}}
               {{#ifNotEquals ../category category}}
                 <option id="category{{id}}">{{category}}</option>
               {{/ifNotEquals}}
             {{/each}}
+            
           </select>
 
           </br>

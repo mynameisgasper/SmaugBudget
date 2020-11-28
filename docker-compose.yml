@@ -14,9 +14,13 @@ services:
     command: "npm start"
     networks:
       - sp-network
+    environment:
+      - NODE_ENV=docker
+    depends_on: 
+      - mongo-db
 
   mongo-db:
-    image: mongo
+    image: mongo:4.2
     container_name: sp-smaugbudget-mongodb
     ports:
       - "27017-27019:27017-27019"
@@ -26,4 +30,3 @@ services:
 networks:
   sp-network:
     name: sp-network
-    driver: bridge

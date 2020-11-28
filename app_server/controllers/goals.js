@@ -6,7 +6,7 @@ var Client = require('node-rest-client').Client;
 
 var data = {
     fileName: 'goals',
-    categories: [
+    /*categories: [
         { id: 1, category: "Furniture" },
         { id: 2, category: "Electronics" },
         { id: 3, category: "Trip" },
@@ -14,7 +14,7 @@ var data = {
         { id: 5, category: "Wedding" },
         { id: 6, category: "Car" },
         { id: 7, category: "Other" },
-    ]
+    ]*/
 };
 
 var translationKeys = {
@@ -135,6 +135,7 @@ function editGoal(body, res, session) {
         user_id: session.user._id,
         goal_id: body.id
     }
+    
 
     var args = {
         data: data,
@@ -190,6 +191,7 @@ function respond(res, session) {
         }
         data.goal = generateGoals(session.user.goals);
         data.card = generateCards(session.user);
+        data.categories = getCategories(session.user.categories);
         res.render('goals', data);
     } else {
         res.redirect('/');
@@ -276,6 +278,37 @@ function calculateDailyTarget(date, targetLeft){
     else
         return Math.ceil(targetLeft / diffDays);
     
+}
+
+function getCategories(categories) {
+    var category = [];
+    var j = 0;
+    for (var i = 0; i < categories.length; i++) {
+        if (uniqueCategory(category, categories[i])) {
+            category.push({
+                _id: categories[i]._id,
+                category: categories[i].name
+            });
+            //category[j] = categories[i].name;
+            j++;
+        }
+
+    }
+
+    //console.log(category);
+    return category;
+}
+
+function uniqueCategory(categories, category) {
+    if (categories == null) {
+        return true;
+    }
+    for (var i = 0; i < categories.length; i++) {
+        if (categories[i]._id === category._id) {
+            return false;
+        }
+    }
+    return true;
 }
 
 module.exports = {
