@@ -324,15 +324,13 @@ function handlePaychecks() {
     User.find(function(err, users) {
         if (err) {
             console.log(err);
-        }
-        else {
+        } else {
             if (users.length > 0) {
                 for (var user of users) {
                     handlePaycheck(user);
                     user.save();
                 }
-            }
-            else {
+            } else {
                 console.log('There are no users to take care of');
             }
         }

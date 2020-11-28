@@ -69,6 +69,7 @@ function createDummyAccounts(requestBody, res) {
         var categoriesArray = [];
         var expensesArray = [];
         var billsArray = [];
+        var goalsArray = [];
 
         for (var i = 0; i < podatki.categories.length; i++) {
             let category = new Categories({
@@ -107,6 +108,19 @@ function createDummyAccounts(requestBody, res) {
             expense.save();
         }
 
+        for (var i = 0; i < podatki.goals.length; i++) {
+            let goal = new Goals({
+                title: podatki.goals[i].title,
+                target: podatki.goals[i].target,
+                saved: podatki.goals[i].saved,
+                date: podatki.goals[i].date,
+                monthlyTarget: podatki.goals[i].monthlyTarget,
+                category: podatki.goals[i].category,
+            });
+            goalsArray[i] = goal;
+            goal.save();
+        }
+
         for (var i = 0; i < podatki.bills.length; i++) {
             let bill = new Bills({
                 recipient: podatki.bills[i].recipient,
@@ -135,6 +149,7 @@ function createDummyAccounts(requestBody, res) {
             envelopes: envelopesArray,
             expense: expensesArray,
             bills: billsArray,
+            goals: goalsArray
         });
         let userPremium = new User({
             firstname: "Premium",
@@ -151,6 +166,8 @@ function createDummyAccounts(requestBody, res) {
             envelopes: envelopesArray,
             expense: expensesArray,
             bills: billsArray,
+            goals: goalsArray
+
         });
         user.save();
         userPremium.save();

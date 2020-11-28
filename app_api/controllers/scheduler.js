@@ -46,6 +46,7 @@ async function categoriesSeeder() {
     categories[6] = { name: 'Gifts', color: 'rgb(50, 168, 82)' };
     categories[7] = { name: 'Shopping', color: 'rgb(48, 191, 98)' };
     categories[8] = { name: 'Utilities', color: 'rgb(81, 219, 237)' };
+    categories[9] = { name: 'Electronics', color: 'rgb(28, 214, 40)' };
 
     let promise = new Promise(function(res, err) {
         var bool = true;

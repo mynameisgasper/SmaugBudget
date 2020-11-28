@@ -4,7 +4,7 @@ const { use } = require('../routers/apiRouter');
 const Goal = mongoose.model('Goals');
 const User = mongoose.model('User');
 const Categories = mongoose.model('Categories');
-
+const Expenses = mongoose.model('Expense');
 
 function addGoal(requestBody, res) {
     try {
@@ -103,17 +103,17 @@ function editGoal(requestBody, res) {
                             user.goals[i].target = newTarget;
                             user.goals[i].date = newDate;
                             user.goals[i].category.name = newCategory,
-                            user.save();
+                                user.save();
 
                             break;
                         }
                     }
-                    
+
                     Goal.findByIdAndUpdate(goal_id, {
                         title: newTitle,
                         target: newTarget,
                         date: newDate,
-                        category:  { name: newCategory }
+                        category: { name: newCategory }
                     }, function(err, goal) {
                         if (err) {
                             console.log(err);
@@ -121,11 +121,10 @@ function editGoal(requestBody, res) {
                             res.status(200).json(user);
                         }
                     });
-                    
+
                 }
             });
-        }
-         else {
+        } else {
             res.sendStatus(400);
         }
     } catch (ex) {
@@ -154,24 +153,54 @@ function addToGoalWithCategory(requestBody, res) {
                     for (var i = 0; i < user.goals.length; i++) {
                         if (user.goals[i].title === title) {
                             goal_id = user.goals[i]._id;
-                            amount = parseInt(amount) + user.goals[i].saved;
-                            if(amount >  user.goals[i].target)
+                            var new_amount = parseInt(amount) + user.goals[i].saved;
+                            if (new_amount > user.goals[i].target)
                                 amount = user.goals[i].target
 
-                            user.goals[i].saved = amount;
+                            user.goals[i].saved = new_amount;
+
+                            Goal.findById(goal_id, function(error, goal) {
+                                if (error) {
+                                    console.log(error);
+                                } else {
+                                    goal.saved = new_amount;
+                                    goal.save();
+
+                                    var today = new Date();
+
+                                    let expense = new Expenses({
+                                        date: today,
+                                        category: goal.category,
+                                        recipient: 'Added to goal: ' + goal.title,
+                                        value: amount,
+                                        currency: '€'
+                                    });
+
+                                    expense.save(function callback(err) {
+                                        if (err) {
+                                            console.log(err);
+                                            res.sendStatus(500);
+                                            return;
+                                        } else {
+                                            user.expense.push(expense);
+                                            user.save();
+                                            res.status(200).json(user);
+                                            return;
+                                        }
+                                    });
+
+                                }
+                            });
+
+
                             user.save();
                             break;
                         }
                     }
-                    Goal.findByIdAndUpdate(goal_id, {
-                        saved: amount
-                    }, function(err, goal) {
-                        if (err) {
-                            console.log(err);
-                        } else {
-                            res.status(200).json(user);
-                        }
-                    });
+
+
+
+
                 }
             });
         } else {
@@ -253,7 +282,7 @@ function checkDate(date) {
 }
 
 function checkTitle(title) {
-    var regexTitle = new RegExp("^[A-Za-z0-9]{1,20}$");
+    var regexTitle = new RegExp("^[A-Za-z0-9 ]{1,20}$");
     const titleTest = regexTitle.test(title);
 
     return titleTest;
