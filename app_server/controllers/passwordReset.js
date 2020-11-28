@@ -30,7 +30,7 @@ function resetPassword(req, res) {
     
     
         var client = new Client();
-        client.post("http://localhost:8080/api/resetPassword", args, function(data, response) {
+        client.post("http://" + req.headers.host + "/api/resetPassword", args, function(data, response) {
             if (response.statusCode == 200) {
                 res.redirect('/#login');
             } else {

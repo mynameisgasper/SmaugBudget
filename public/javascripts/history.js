@@ -406,3 +406,12 @@ $(window).on("load", function() {
         hideWelcome();
     }
 });
+
+$(window).ready(function(){
+    $(".expensesModal").on('hidden.bs.modal', function () {
+        $('.tt1').toast('hide');
+        $('.tt2').toast('hide');
+        $('.tt7').toast('hide');
+    });
+  });
+  

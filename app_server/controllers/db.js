@@ -12,32 +12,32 @@ function respond(res, req) {
     res.render('db', data);
 }
 
-function parseRequestBody(body, res, session) {
-    switch (body.formType) {
+function parseRequestBody(req, res, session) {
+    switch (req.body.formType) {
         case 'removeAllDbData':
             {
-                removeAllDbData(body, res);
+                removeAllDbData(req, res);
                 break;
             }
         case 'createDummyAccounts':
             {
-                createDummyAccounts(body, res);
+                createDummyAccounts(req, res);
             }
         case 'loadCategories':
             {
-                loadCategories(body, res);
+                loadCategories(req, res);
             }
 
     }
 }
 
-function removeAllDbData(body, res) {
+function removeAllDbData(req, res) {
     var args = {
         headers: { "Content-Type": "application/x-www-form-urlencoded" }
     }
 
     var client = new Client();
-    client.post("http://localhost:8080/api/removeAllDbData", args,
+    client.post("http://" + req.headers.host + "/api/removeAllDbData", args,
         function(data, response) {
             if (response.statusCode == 204) {
                 res.redirect('/db');
@@ -48,14 +48,14 @@ function removeAllDbData(body, res) {
     );
 }
 
-function createDummyAccounts(body, res) {
+function createDummyAccounts(req, res) {
     var args = {
         headers: { "Content-Type": "application/x-www-form-urlencoded" }
     }
 
 
     var client = new Client();
-    client.post("http://localhost:8080/api/createDummyAccounts", args,
+    client.post("http://" + req.headers.host + "/api/createDummyAccounts", args,
         function(data, response) {
             if (response.statusCode == 200) {
                 res.redirect('/db');
@@ -66,13 +66,13 @@ function createDummyAccounts(body, res) {
     );
 }
 
-function loadCategories(body, res) {
+function loadCategories(req, res) {
     var args = {
         headers: { "Content-Type": "application/x-www-form-urlencoded" }
     }
 
     var client = new Client();
-    client.post("http://localhost:8080/api/loadCategories", args,
+    client.post("http://" + req.headers.host + "/api/loadCategories", args,
         function(data, response) {
             if (response.statusCode == 200) {
                 res.redirect('/db');
@@ -90,6 +90,6 @@ module.exports = {
         respond(res, req);
     },
     post: function(req, res) {
-        parseRequestBody(req.body, res);
+        parseRequestBody(req, res);
     }
 }

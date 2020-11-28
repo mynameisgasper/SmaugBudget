@@ -130,3 +130,33 @@ function surnameRegex() {
         return 1;
     }
 }
+
+function addMemberBtn(conId) {
+    if (conId) {
+
+    } else {
+        var inputs = $("#edit-personNew")[0].parentNode.parentNode.parentNode.getElementsByTagName("input");
+        checkIfAdded(inputs, "edit-personNew");
+    }
+}
+
+function checkIfAdded(inputs, last) {
+    for (var i = 0; i < inputs.length; i++) {
+        if ((inputs[i].id != last) && (inputs[i].value == $("#"+last)[0].value)) {
+            return true;
+        }
+    }
+
+    var xhr  = new XMLHttpRequest();              // create XMLHttpRequest
+    var data = {email: $("#"+last)[0].value};     // create formData object
+    
+    
+    xhr.onload = function() {
+        console.log(xhr.status); // whatever the server returns
+        
+    }
+
+    xhr.open("post", "/api/retrieveUserEmail");      // open connection
+    xhr.send(data);                     // send data
+    return false;
+}

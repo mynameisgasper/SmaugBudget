@@ -207,3 +207,11 @@ $(window).on("load", function() {
     hideWelcome();
   }
 });
+
+$(window).ready(function(){
+  $(".billModal").on('hidden.bs.modal', function () {
+      $('.tt3').toast('hide');
+      $('.tt4').toast('hide');
+      $('.tt5').toast('hide');
+  });
+});

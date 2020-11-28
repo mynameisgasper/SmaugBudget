@@ -2,7 +2,6 @@ const config = require('../../app_server/config/server.json');
 const mongoose = require('mongoose');
 
 //var dbURI = config.database.url;
-console.log(process.env);
 var dbURI = config.database.url;
 if (process.env.NODE_ENV === 'production') {
     dbURI = "mongodb+srv://user:smauguser!@smaugbudget.tv1kk.mongodb.net/SmaugBudget?retryWrites=true&w=majority";

@@ -99,7 +99,7 @@ function refreshSession(req) {
     
     
         var client = new Client();
-        client.post("http://localhost:8080/api/getUser", args, function(data, response) {
+        client.post("http://" + req.headers.host + "/api/getUser", args, function(data, response) {
             if (response.statusCode == 200) {
                 req.session.user = data;
             } else {

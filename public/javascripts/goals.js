@@ -270,7 +270,7 @@ $(window).ready(function(){
         $('.tt7').toast('hide');
         $('.tt420').toast('hide');
     });
-  });
+});
 
 
 

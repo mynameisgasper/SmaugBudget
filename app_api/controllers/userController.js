@@ -8,18 +8,18 @@ const fs = require('fs');
 const path = require("path");
 const categories = require("../models/categories");
 
-function register(requestBody, res) {
+function register(req, res) {
     try {
-        var email1 = requestBody.email1up;
-        var email2 = requestBody.email2up;
-        var pass1 = requestBody.password1up;
-        var pass2 = requestBody.password2up;
+        var email1 = req.body.email1up;
+        var email2 = req.body.email2up;
+        var pass1 = req.body.password1up;
+        var pass2 = req.body.password2up;
 
         var regex = new RegExp("^([a-zA-Z])+$");
         var regex2 = new RegExp("^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})");
-        const firstName = regex.test(requestBody.nameup);
-        const lastName = regex.test(requestBody.surnameup);
-        const password = regex2.test(requestBody.password1up);
+        const firstName = regex.test(req.body.nameup);
+        const lastName = regex.test(req.body.surnameup);
+        const password = regex2.test(req.body.password1up);
 
         if (firstName && lastName && email1 === email2 && pass1 == pass2 && password) {
             var urlCode = smtp.generateCode(64);
@@ -39,8 +39,8 @@ function register(requestBody, res) {
 
             promise.then(function(basicCategories) {
                 let user = new User({
-                    firstname: requestBody.nameup,
-                    lastname: requestBody.surnameup,
+                    firstname: req.body.nameup,
+                    lastname: req.body.surnameup,
                     email: email1,
                     password: pass1,
                     passwordSalt: "tempSalt",
@@ -58,7 +58,7 @@ function register(requestBody, res) {
                             user: user,
                             urlCode: urlCode
                         }
-                        smtp.sendCode(email1, requestBody.nameup, requestBody.surnameup, urlCode, confirmationCode);
+                        smtp.sendCode(email1, req.body.nameup, req.body.surnameup, urlCode, confirmationCode, req.headers.host);
                         res.status(200).json(response);
                     }
                 });
@@ -112,6 +112,28 @@ function retrieveUser(requestBody, res) {
                     user.password = null;
                     user.passwordSalt = null;
                     res.status(200).json(user);
+                } else {
+                    res.sendStatus(404);
+                }
+            }
+        });
+    } catch (ex) {
+        res.sendStatus(500);
+    }
+}
+
+function retrieveUserEmail(requestBody, res) {
+    try {
+        var email = requestBody.email;
+
+        User.findOne({ 'email': email }, function(err, user) {
+            if (err) {
+                res.sendStatus(500);
+            } else {
+                if (user) {
+                    user.password = null;
+                    user.passwordSalt = null;
+                    res.sendStatus(200);
                 } else {
                     res.sendStatus(404);
                 }
@@ -264,9 +286,9 @@ function getPfp(req, res) {
     }
 }
 
-function requestResetPassword(requestBody, res) {
+function requestResetPassword(req, res) {
     try {
-        const email = requestBody.email;
+        const email = req.body.email;
 
         User.findOne({ email: email }, function(err, user) {
             if (err) {
@@ -279,7 +301,7 @@ function requestResetPassword(requestBody, res) {
                         if (err) {
                             res.sendStatus(500);
                         } else {
-                            smtp.sendResetPassword(email, user.firstname, user.lastname, resetPasswordCode);
+                            smtp.sendResetPassword(email, user.firstname, user.lastname, resetPasswordCode, req.headers.host);
                             res.sendStatus(200);
                         }
                     });
@@ -324,15 +346,13 @@ function handlePaychecks() {
     User.find(function(err, users) {
         if (err) {
             console.log(err);
-        }
-        else {
+        } else {
             if (users.length > 0) {
                 for (var user of users) {
                     handlePaycheck(user);
                     user.save();
                 }
-            }
-            else {
+            } else {
                 console.log('There are no users to take care of');
             }
         }
@@ -348,7 +368,7 @@ function handlePaycheck(user) {
 
 module.exports = {
     register: function(req, res) {
-        register(req.body, res);
+        register(req, res);
     },
     login: function(req, res) {
         login(req.body, res);
@@ -357,10 +377,13 @@ module.exports = {
         requestResetPassword(req.body, res);
     },
     resetPassword: function(req, res) {
-        resetPassword(req.body, res);
+        resetPassword(req, res);
     },
     retrieveUser: function(req, res) {
         retrieveUser(req.body, res, req.session);
+    },
+    retrieveUserEmail: function(req, res) {
+        retrieveUserEmail(req.body, res, req.session);
     },
     confirm: function(req, res) {
         confirm(req, res);

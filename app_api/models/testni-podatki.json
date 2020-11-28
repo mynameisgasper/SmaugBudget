@@ -336,6 +336,12 @@
             "basic": true,
             "name": "Utilities",
             "__v": 0
+        },
+        {
+            "color": "rgb(40, 235, 79)",
+            "basic": true,
+            "name": "Electronics",
+            "__v": 0
         }
 
 
@@ -531,6 +537,18 @@
             "value": 100,
             "currency": "€",
             "__v": 0
+        },
+        {
+            "date": "2020-11-28T21:27:05.603Z",
+            "category": {
+                "color": "rgb(40, 235, 79)",
+                "basic": true,
+                "name": "Electronics"
+            },
+            "recipient": "Added to goal: Headphones",
+            "value": 250,
+            "currency": "€",
+            "__v": 0
         }
 
     ],
@@ -561,6 +579,35 @@
             "date": "2020-12-04T00:00:00Z",
             "currency": "€",
             "repeating": "monthly",
+            "__v": 0
+        }
+
+
+    ],
+    "goals": [{
+            "title": "Playstation 5",
+            "target": 450,
+            "saved": 0,
+            "monthlyTarget": 0,
+            "date": "2021-07-01T00:00:00Z",
+            "category": {
+                "color": "rgb(191, 33, 194)",
+                "basic": true,
+                "name": "Electronics"
+            },
+            "__v": 0
+        },
+        {
+            "title": "Headphones",
+            "target": 250,
+            "saved": 250,
+            "monthlyTarget": 0,
+            "date": "2021-07-28T00:00:00Z",
+            "category": {
+                "color": "rgb(40, 235, 79)",
+                "basic": true,
+                "name": "Electronics"
+            },
             "__v": 0
         }
 

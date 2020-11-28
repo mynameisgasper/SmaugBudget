@@ -35,36 +35,36 @@ function translate (language) {
     return translatedKeys;
 }
 
-function parseRequestBody(body, res, session) {
-    switch (body.formType) {
+function parseRequestBody(req, res, session) {
+    switch (req.body.formType) {
         case 'addGoal':
             {
-                addGoal(body, res, session);
+                addGoal(req, res, session);
                 break;
             }
         case 'addToGoalWithCategory':
             {
-                addToGoalWithCategory(body, res, session);
+                addToGoalWithCategory(req, res, session);
                 break;
             }
         case 'editGoal':
             {
-                editGoal(body, res, session);
+                editGoal(req, res, session);
                 break;
             }
         case 'deleteGoal':
             {
-                deleteGoal(body, res, session);
+                deleteGoal(req, res, session);
                 break;
             }
     }
 }
 
 
-function addToGoalWithCategory(body, res, session) {
+function addToGoalWithCategory(req, res, session) {
     const data = {
-        title: body.inputCategory,
-        amount: body.inputAmount,
+        title: req.body.inputCategory,
+        amount: req.body.inputAmount,
         id: session.user._id
     }
 
@@ -74,7 +74,7 @@ function addToGoalWithCategory(body, res, session) {
     };
 
     var client = new Client();
-    client.post("http://localhost:8080/api/addToGoalWithCategory", args,
+    client.post("http://" + req.headers.host + "/api/addToGoalWithCategory", args,
         function(data, response) {
             if (response.statusCode == 200) {
                 res.session = session;
@@ -89,12 +89,12 @@ function addToGoalWithCategory(body, res, session) {
     );
 }
 
-function addGoal(body, res, session) {
+function addGoal(req, res, session) {
     const data = {
-        title: body.goal,
-        target: body.amount,
-        date: body.inputDateAddGoal,
-        category: body.inputCategory,
+        title: req.body.goal,
+        target: req.body.amount,
+        date: req.body.inputDateAddGoal,
+        category: req.body.inputCategory,
         id: session.user._id
     }
 
@@ -104,7 +104,7 @@ function addGoal(body, res, session) {
     };
 
     var client = new Client();
-    client.post("http://localhost:8080/api/addGoal", args,
+    client.post("http://" + req.headers.host + "/api/addGoal", args,
         function(data, response) {
             if (response.statusCode == 200) {
                 res.session = session;
@@ -117,14 +117,14 @@ function addGoal(body, res, session) {
     );
 }
 
-function editGoal(body, res, session) {
+function editGoal(req, res, session) {
     const data = {
-        title: body.goal3,
-        target: body.Amount3,
-        date: body.inputDate,
-        category: body.inputCategory,
+        title: req.body.goal3,
+        target: req.body.Amount3,
+        date: req.body.inputDate,
+        category: req.body.inputCategory,
         user_id: session.user._id,
-        goal_id: body.id
+        goal_id: req.body.id
     }
     
 
@@ -134,7 +134,7 @@ function editGoal(body, res, session) {
     };
 
     var client = new Client();
-    client.post("http://localhost:8080/api/editGoal", args,
+    client.post("http://" + req.headers.host + "/api/editGoal", args,
         function(data, response) {
             if (response.statusCode == 200) {
                 res.session = session;
@@ -147,10 +147,10 @@ function editGoal(body, res, session) {
     );
 }
 
-function deleteGoal(body, res, session) {
+function deleteGoal(req, res, session) {
     const data = {
         user_id: session.user._id,
-        goal_id: body.id
+        goal_id: req.body.id
     }
 
     var args = {
@@ -159,7 +159,7 @@ function deleteGoal(body, res, session) {
     };
 
     var client = new Client();
-    client.post("http://localhost:8080/api/deleteGoal", args,
+    client.post("http://" + req.headers.host + "/api/deleteGoal", args,
         function(data, response) {
             if (response.statusCode == 200) {
                 res.session = session;
@@ -311,6 +311,6 @@ module.exports = {
         respond(res, req.session);
     },
     post: function(req, res) {
-        parseRequestBody(req.body, res, req.session);
+        parseRequestBody(req, res, req.session);
     }
 }
