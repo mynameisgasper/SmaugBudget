@@ -47,11 +47,14 @@ process.on('SIGTERM', () => {
   
 
 
-const dbURI = config.database.url;
-dbURI = "mongodb+srv://user:smauguser!@smaugbudget.tv1kk.mongodb.net/SmaugBudget?retryWrites=true&w=majority";
-
-
-
+const MongoClient = require('mongodb').MongoClient;
+const uri = "mongodb+srv://user:smauguser!@smaugbudget.tv1kk.mongodb.net/SmaugBudget?retryWrites=true&w=majority";
+const client = new MongoClient(uri, { useNewUrlParser: true });
+client.connect(err => {
+  const collection = client.db("test").collection("devices");
+  // perform actions on the collection object
+  client.close();
+});
 
 mongoose.connect(dbURI, { 
     useNewUrlParser: true, 
