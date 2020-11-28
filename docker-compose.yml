@@ -10,8 +10,7 @@ services:
       context: ./
       dockerfile: Dockerfile
     volumes:
-      - .:/usr/src/app
-      - /usr/src/app/node_modules
+      - /node_modules
     command: "npm start"
     networks:
       - sp-network
