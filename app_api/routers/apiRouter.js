@@ -6,8 +6,6 @@ var history = require('../controllers/expenseController');
 var dbController = require('../controllers/dbController');
 
 var express = require('express');
-const currencyConverter = require('../controllers/currencyConverter');
-const db = require('../../app_server/controllers/db');
 var router = express.Router();
 
 //Index

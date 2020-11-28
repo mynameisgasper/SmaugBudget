@@ -1,6 +1,7 @@
 var Scheduler = require('cron').CronJob;
 const mongoose = require('mongoose');
 const Categories = mongoose.model('Categories');
+var bills = require('./billsController');
 
 //Startup jobs
 var converter = require('../controllers/currencyConverter');
@@ -14,8 +15,15 @@ var periodicCurrencyUpdate = new Scheduler('0 0 * * * *', function() {
 }, null, true, 'Europe/Ljubljana');
 periodicCurrencyUpdate.start();
 
+var billsUpdate = new Scheduler('0 59 23 * * *', function() {
+    handleBills();
+    console.log('Bills updated');
+}, null, true, 'Europe/Ljubljana');
+periodicCurrencyUpdate.start();
+
 function initializeDatabase() {
     categoriesSeeder();
+    handleBills();
 }
 
 //Add Basic Categories
@@ -57,4 +65,8 @@ async function categoriesSeeder() {
             }
         }
     });
+}
+
+async function handleBills() {
+    bills.handleBills();
 }
