@@ -1,10 +1,9 @@
 const config = require('../../app_server/config/server.json');
 const mongoose = require('mongoose');
 
-//var dbURI = config.database.url;
-var dbURI = "mongodb+srv://user:smauguser!@smaugbudget.tv1kk.mongodb.net/SmaugBudget?retryWrites=true&w=majority";
-if (process.env.NODE_ENV === 'production') {
-    dbURI = process.env.MONGODB_CLOUD_URI;
+var dbURI = config.database.url;
+if (process.env.HEROKU_UPDATE_INSTRUCTIONS) {
+    dbURI = "mongodb+srv://user:smauguser!@smaugbudget.tv1kk.mongodb.net/SmaugBudget?retryWrites=true&w=majority";
 } else if (process.env.NODE_ENV === 'docker') {
     dbURI = 'mongodb://mongo-db/SmaugBudget';
 }
