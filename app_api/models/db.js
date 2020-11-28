@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 var dbURI = config.database.url;
 if (process.env.NODE_ENV === 'production') {
-    dbURI = MONGODB_CLOUD_URI;
+    dbURI = proccess.env.MONGODB_CLOUD_URI;
 } else if (process.env.NODE_ENV === 'docker') {
     dbURI = 'mongodb://mongo-db/SmaugBudget';
 }
