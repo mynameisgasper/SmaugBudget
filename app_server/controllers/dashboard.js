@@ -38,7 +38,9 @@ var translationKeys = {
     settings: "settings",
     appearance: "appearance",
     light: "light",
-    dark: "dark"
+    dark: "dark",
+
+    noData: "No data"
 }
 
 function translate (language) {
@@ -66,8 +68,8 @@ function respond(res, session) {
             data = {...data, ...translationKeys};
         }
 
-        data.card = generateCards(session.user);
-        data.analytics = generateAnalyitcs(session.user);
+        data.card = generateCards(session.user, session.user.language);
+        data.analytics = generateAnalyitcs(session.user, session.user.language);
         data.incomeLastMonth = (session.user.paycheckLastMonth ? session.user.paycheckLastMonth : 0);
         data.expensesLastMonth = getTotalCost(getLastMonthExpenses(session.user.expense, session.user.paycheckDate));
         data.alert = generateAlerts(session.user, session.user.language);
@@ -81,7 +83,7 @@ function respond(res, session) {
     }
 }
 
-function generateCards(user) {
+function generateCards(user, language) {
     var billsUntilPaycheck = getBillsUntilPaycheck(user.bills, user.paycheckDate);
     var expensesSincePaycheck = getExpensesSincePaycheck(user.expense, user.paycheckDate);
 
@@ -89,41 +91,46 @@ function generateCards(user) {
     var totalBills = getTotalCost(billsUntilPaycheck);
     var budgetLeft = user.paycheck - totalCost;
     return [{
-        title: dictionary.getTranslation("cardTitle1"),
+        title: dictionary.getTranslation("cardTitle1", language),
         color: 'bg-primary',
         count: (isNaN(budgetLeft) ? 0 : budgetLeft),
         icon: 'fa-university'
     },
     {
-        title: dictionary.getTranslation("cardTitle2"),
+        title: dictionary.getTranslation("cardTitle2", language),
         color: 'bg-primary',
         count: totalBills,
         icon: 'fa-coins'
     },
     {
-        title: dictionary.getTranslation("cardTitle3"),
+        title: dictionary.getTranslation("cardTitle3", language),
         color: 'bg-primary',
         count: (isNaN(budgetLeft - totalBills) ? 0 : budgetLeft - totalBills),
         icon: 'fa-piggy-bank'
     }];
 }
 
-function generateAnalyitcs(user) {
+function generateAnalyitcs(user, language) {
     var lastMonthExpenses = getLastMonthExpenses(user.expense, user.paycheckDate);
     var analyzeExpenses = getExpenseAnalysis(lastMonthExpenses);
     var mostMoneySpentOn = getMostMoneySpentOn(analyzeExpenses);
     var mostTimesPurchased = getMostTimesPurchased(analyzeExpenses);
-
-    return [{
-        rowName: dictionary.getTranslation("analyticsRowName1"),
-        color: 'rgb(94, 192, 193)',
-        category: mostMoneySpentOn
-    },
-    {
-        rowName: dictionary.getTranslation("analyticsRowName2"),
-        color: 'rgb(251, 203, 72)',
-        category: mostTimesPurchased
-    }]
+    
+    if (mostMoneySpentOn && mostTimesPurchased) {
+        return [{
+            rowName: dictionary.getTranslation("analyticsRowName1", language),
+            color: mostMoneySpentOn.color,
+            category: mostMoneySpentOn.name
+        },
+        {
+            rowName: dictionary.getTranslation("analyticsRowName2", language),
+            color: mostTimesPurchased.color,
+            category: mostTimesPurchased.name
+        }];
+    }
+    else {
+        return [];
+    }
 }
 
 function generateAlerts(user, language) {
@@ -148,12 +155,14 @@ function getExpenseAnalysis(expenses) {
         if (categories.get(expense.category.name)) {
             categories.get(expense.category.name).sum += parseInt(expense.value);
             categories.get(expense.category.name).count += 1;
+            categories.get(expense.category.name).color = expense.category.color;            
         }
         else {
             categories.set(expense.category.name, {});
             categories.get(expense.category.name).name = expense.category.name
             categories.get(expense.category.name).sum = parseInt(expense.value);
-            categories.get(expense.category.name).count = 1;    
+            categories.get(expense.category.name).count = 1;
+            categories.get(expense.category.name).color = expense.category.color;            
         }
     }
 
@@ -233,7 +242,7 @@ function getMostMoneySpentOn(expenseAnalitics) {
     }
 
     if (selectedAnalitic) {
-        return selectedAnalitic.name;
+        return selectedAnalitic;
     }
 }
 
@@ -248,7 +257,7 @@ function getMostTimesPurchased(expenseAnalitics) {
     }
 
     if (selectedAnalitic) {
-        return selectedAnalitic.name;
+        return selectedAnalitic;
     }
 }
 
