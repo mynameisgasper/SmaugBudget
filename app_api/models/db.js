@@ -5,6 +5,9 @@ const dbURI = config.database.url;
 
 mongoose.connection.on('connected', () => {
     console.log(`Connected to MongoDB ${dbURI}.`);
+
+    //Scheduler - scheduling starts when required connection is established
+    require('../controllers/scheduler');
 });
 
 mongoose.connection.on('error', napaka => {
@@ -43,6 +46,19 @@ process.on('SIGTERM', () => {
     });
 });
   
+/*
+const MongoClient = require('mongodb').MongoClient;
+const uri = "mongodb+srv://user:<password>@smaugbudget.tv1kk.mongodb.net/<dbname>?retryWrites=true&w=majority";
+const client = new MongoClient(uri, { useNewUrlParser: true });
+client.connect(err => {
+  const collection = client.db("test").collection("devices");
+  // perform actions on the collection object
+  client.close();
+});
+
+
+*/
+
 mongoose.connect(dbURI, { 
     useNewUrlParser: true, 
     useCreateIndex: true,

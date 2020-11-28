@@ -5,9 +5,6 @@ var goals = require('../controllers/goalsController');
 var history = require('../controllers/expenseController');
 var dbController = require('../controllers/dbController');
 
-var converter = require('../controllers/currencyConverter');
-converter.currencyConverter();
-
 var express = require('express');
 const currencyConverter = require('../controllers/currencyConverter');
 const db = require('../../app_server/controllers/db');
