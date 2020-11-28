@@ -320,6 +320,32 @@ function resetPassword(requestBody, res) {
     }
 }
 
+function handlePaychecks() {
+    User.find(function(err, users) {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            if (users.length > 0) {
+                for (var user of users) {
+                    handlePaycheck(user);
+                    user.save();
+                }
+            }
+            else {
+                console.log('There are no users to take care of');
+            }
+        }
+    });
+}
+
+function handlePaycheck(user) {
+    const day = new Date().getDate();
+    if (user.paycheckDate === day) {
+        user.paycheckLastMonth = user.paycheck;
+    }
+}
+
 module.exports = {
     register: function(req, res) {
         register(req.body, res);
@@ -349,5 +375,8 @@ module.exports = {
     },
     updateUser: function(req, res) {
         updateUser(req.body, res, req.session);
+    },
+    handlePaychecks: function() {
+        handlePaychecks();
     }
 }

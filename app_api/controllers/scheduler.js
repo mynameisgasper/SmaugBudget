@@ -2,6 +2,7 @@ var Scheduler = require('cron').CronJob;
 const mongoose = require('mongoose');
 const Categories = mongoose.model('Categories');
 var bills = require('./billsController');
+var users = require('./userController');
 
 //Startup jobs
 var converter = require('../controllers/currencyConverter');
@@ -19,11 +20,18 @@ var billsUpdate = new Scheduler('0 59 23 * * *', function() {
     handleBills();
     console.log('Bills updated');
 }, null, true, 'Europe/Ljubljana');
-periodicCurrencyUpdate.start();
+billsUpdate.start();
+
+var paycheckUpdate = new Scheduler('0 59 23 * * *', function() {
+    handlePaychecks();
+    console.log('Bills updated');
+}, null, true, 'Europe/Ljubljana');
+paycheckUpdate.start();
 
 function initializeDatabase() {
     categoriesSeeder();
     handleBills();
+    handlePaychecks();
 }
 
 //Add Basic Categories
@@ -69,4 +77,8 @@ async function categoriesSeeder() {
 
 async function handleBills() {
     bills.handleBills();
+}
+
+async function handlePaychecks() {
+    users.handlePaychecks();
 }
