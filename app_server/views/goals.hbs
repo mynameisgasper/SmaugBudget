@@ -35,7 +35,18 @@
               <div class="toast-body">
                   Input a valid date (today or in the future).
               </div>
-          </div>  
+          </div>
+          <div class="toast ml-auto tt69" role="alert" data-delay="1000" data-autohide="false">
+              <div class="toast-header">
+                  <strong class="mr-auto text-primary">HINT</strong>
+                  <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                  </button>
+              </div>
+              <div class="toast-body">
+                  Select a category.
+              </div>
+          </div>
       </div>
   </div>
   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -53,7 +64,7 @@
           <input type="text" class="form-control" id="Goal" name="goal" onfocusout="nameAdd(this)" placeholder="e.g. new car" required="required">
           <div id="txt1"></div>
           <label for="inputCategory">Choose a Category</label>
-          <select id="inputCategory" name="inputCategory" class="form-control" required="required">
+          <select id="inputCategory" name="inputCategory" onfocusout="categoryCheckAddGoal(this)" class="form-control" required="required">
             <option selected disabled>Select Category</option>
             {{#each categories}}
             <option id="category{{id}}">{{category}}</option>
@@ -77,7 +88,7 @@
 
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-primary">Add Goal</button>
+          <button type="submit" onclick="disableButton()" class="btn btn-primary">Add Goal</button>
         </div>
       </form>
     </div>
@@ -176,6 +187,17 @@
               <div class="toast-body">
                   Input a valid date (today or in the future).
               </div>
+          </div>
+          <div class="toast ml-auto tt420" role="alert" data-delay="1000" data-autohide="false">
+              <div class="toast-header">
+                  <strong class="mr-auto text-primary">HINT</strong>
+                  <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                  </button>
+              </div>
+              <div class="toast-body">
+                  Select a category.
+              </div>
           </div> 
       </div>
   </div>
@@ -195,13 +217,14 @@
           <div id="{{id}}txt"></div>
 
           <label for="inputCategory">Choose a Category</label>
-          <select id="inputCategory" name="inputCategory" class="form-control" required="required">
-            <option selected>{{category}}</option>
+          <select id="inputCategory" name="inputCategory" onfocusout="categoryCheckEditGoal(this,{{id}})" class="form-control" required="required">
+            <option selected disabled>{{category.name}}</option>
             {{#each ../categories}}
-              {{#ifNotEquals ../category category}}
+              {{#ifNotEquals category ../category}}
                 <option id="category{{id}}">{{category}}</option>
               {{/ifNotEquals}}
             {{/each}}
+            
           </select>
 
           </br>
@@ -211,11 +234,11 @@
             <div class="input-group-prepend">
               <span class="input-group-text">€</span>
             </div>
-            <input type="number" class="form-control" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" onfocusout="amount3(this,{{id}})" id="amount3" name="Amount3" value="{{target}}" step="any"required="required"> 
+            <input type="number" class="form-control" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" onfocusout="amount77(this, {{id}})" id="amount3" name="Amount3" value="{{target}}" step="any"required="required"> 
             <div id="{{id}}amm"></div>
           </div>
           <label for="inputDate">Planned Date</label>
-          <input class="form-control" type="date" placeholder="{{year}}-{{month}}-{{day}}" id="inputDate" name="inputDate" onfocusout="dateCheck(this, {{id}});" required="required">
+          <input class="form-control" type="date" placeholder="{{goal.date}}" id="inputDate" name="inputDate" onfocusout="dateCheck(this, {{id}});" required="required">
 
         </div>
         <div class="modal-footer">

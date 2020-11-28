@@ -6,13 +6,13 @@ var history = require('../controllers/expenseController');
 var dbController = require('../controllers/dbController');
 var connections = require('../controllers/connectionsController');
 
-var converter = require('../controllers/currencyConverter');
-converter.currencyConverter();
-
 var express = require('express');
+<<<<<<< HEAD
 const currencyConverter = require('../controllers/currencyConverter');
 const db = require('../../app_server/controllers/db');
 const { connection } = require('mongoose');
+=======
+>>>>>>> fcd86d69bc2554fbafd84b21e32cd1efde34987c
 var router = express.Router();
 
 //Index
@@ -133,6 +133,14 @@ router.post('/addConnection', (req, res) => {
 
 router.get('/getEnvelopesForDropdown', (req, res) => {
     connections.getEnvelopesForDropdown(req, res);
-})
+});
+
+router.post('/createDummyAccounts', (req, res) => {
+    dbController.createDummyAccounts(req, res);
+});
+
+router.post('/loadCategories', (req, res) => {
+    dbController.loadCategories(req, res);
+});
 
 module.exports = router;

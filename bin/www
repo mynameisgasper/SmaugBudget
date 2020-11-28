@@ -7,4 +7,4 @@ const config = require('../app_server/config/server.json');
 var server = require('../app');
 
 //Express server
-server.startServer(config.server.port);
+server.startServer(process.env.PORT || config.server.port);

@@ -3,9 +3,18 @@
         {{#ifEquals month ../setMonth}}
             <div class="row" id="envelope{{_id}}">
                 <div class="col-sm-12 col-md-12 col-lg-2 col-xl-2">
-                    <h3>{{category.name}}</h3>
+                    {{#ifSmaller progress 85}}
+                        <h3>{{category.name}}</h3>
+                    {{/ifSmaller}}
+                    {{#ifBigger progress 85}}
+                        {{#ifSmaller progress 100}}
+                            <h3 style="color:#ff7b00">{{category.name}}</h3>
+                        {{/ifSmaller}}
+                    {{/ifBigger}}
+                    {{#ifBigger progress 100}}
+                        <h3 style="color:red">{{category.name}}</h3>
+                    {{/ifBigger}}
                 </div>
-
                 <div class="col-sm-12 col-md-12 col-lg-5 col-xl-6">
                     <div class="progress" style="background-color:{{bgColor}};">
                         <div class="progress-bar"  role="progressbar" style="width:{{progress}}%; height:auto; background-color:{{color}}; border-color:{{color}};" aria-valuenow="{{progress}}" aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" data-placement="top">
@@ -13,9 +22,19 @@
                         </div>
                     </div>
                 </div>
-
+                
                 <div class="col-sm-12 col-md-12 col-lg-5 col-xl-4 envelope-info">
-                    <p class="info">You have spent <span>{{spent}}€</span> of <span>{{budget}}€</span></p>
+                    {{#ifSmaller progress 85}}
+                        <p class="info">You have spent <span>{{spent}}€</span> of <span>{{budget}}€</span></p>
+                    {{/ifSmaller}}
+                    {{#ifBigger progress 85}}
+                        {{#ifSmaller progress 100}}
+                            <p class="info" style="color:#ff7b00">You have spent <span>{{spent}}€</span> of <span>{{budget}}€</span></p>
+                        {{/ifSmaller}}
+                    {{/ifBigger}}
+                    {{#ifBigger progress 100}}
+                        <p class="info" style="color:red">You have spent <span>{{spent}}€</span> of <span>{{budget}}€</span></p>
+                    {{/ifBigger}}
                     <form name="deleteForm{{_id}}" method="post" action="/envelopes">
                         <input type="hidden" value="deleteEnvelope" name="formType">
                         <input type="hidden" value="{{_id}}" name="id">

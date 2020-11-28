@@ -18,7 +18,7 @@ function disableButton() {
     var date1 = dateCheck2(document.getElementById("inputDate15"));
 
 
-    if (amount1 == 0 || name1 == 0 || date1== 0) {
+    if (amount1 == 0 || name1 == 0 || date1 == 0) {
         return false;
     } else {
         return true;
@@ -95,6 +95,68 @@ function amount5(field, id) {
 }
 
 function nameAdd(field) {
+    if (!field.disabled) {
+        //var field = document.getElementById("PayeeModal");
+        var regex = new RegExp("^[ A-Za-z0-9_@./#&+-]{1,20}$");
+        //uppercase, lowercase, številke, posebni znaki, dolžina od 1-20
+        if (!field.value.match(regex)) {
+            field.style.setProperty("border-color", "red", "important");
+            $('.tt5').toast('show');
+            return 0;
+        } else {
+            field.style.borderColor = "#ced4da";
+            $('.tt5').toast('hide')
+            return 1;
+        }
+    } else {
+        return 1;
+    }
+
+
+}
+
+function dateCheck2(field) {
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+    var inputDate = field.value.split("-");
+
+    if (inputDate[0] < yyyy) {
+        $('.tt4').toast('hide');
+        field.style.borderColor = "#ced4da";
+        return 1;
+    } else if (inputDate[0] == yyyy) {
+        if (inputDate[1] < mm) {
+            $('.tt4').toast('hide');
+            field.style.borderColor = "#ced4da";
+            return 1;
+        } else if (inputDate[1] == mm) {
+            /* 
+            ? IF DAY IS >= NOW */
+            if (inputDate[2] <= dd) {
+                $('.tt4').toast('hide');
+                field.style.borderColor = "#ced4da";
+                return 1;
+            } else {
+                $('.tt4').toast('show');
+                field.style.setProperty("border-color", "red", "important");
+                return 0;
+            }
+        } else {
+            $('.tt4').toast('show');
+            field.style.setProperty("border-color", "red", "important");
+            return 0;
+        }
+    } else {
+        $('.tt4').toast('show');
+        field.style.setProperty("border-color", "red", "important");
+        return 0;
+    }
+}
+
+
+function nameAdd2(field) {
 
     //var field = document.getElementById("PayeeModal");
     var regex = new RegExp("^[ A-Za-z0-9_@./#&+-]{1,20}$");
@@ -110,64 +172,27 @@ function nameAdd(field) {
     }
 }
 
-function dateCheck2(field) {
-    var today = new Date();
-    var dd = String(today.getDate()).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0');
-    var yyyy = today.getFullYear();
-    var inputDate = field.value.split("-");
 
-    if (inputDate[0] < yyyy) { 
-        $('.tt4').toast('hide');
-        field.style.borderColor = "#ced4da";
-        return 1;
-    } else if (inputDate[0] == yyyy) {
-        if (inputDate[1] < mm) { 
-            $('.tt4').toast('hide');
-            field.style.borderColor = "#ced4da";
-            return 1;
-        } else if (inputDate[1] == mm) {
-            /* 
-            ? IF DAY IS >= NOW */
-            if (inputDate[2] <= dd) { 
-                $('.tt4').toast('hide');
-                field.style.borderColor = "#ced4da";
-                return 1;
-            } else {
-                $('.tt4').toast('show');
-                field.style.setProperty("border-color", "red", "important");
-                return 0;
-            }
-        } else { 
-            $('.tt4').toast('show');
-            field.style.setProperty("border-color", "red", "important");
-            return 0;
-        }
+function checkCategory(that) {
+    if (that.value == "other") {
+        document.getElementById("ime").style.display = "block";
+        document.getElementById("ime").disabled = false;
+        document.getElementById("ime").focus();
+        document.getElementById("colorPicker").disabled = false;
+        document.getElementById("colorPicker").style.display = "block";
+        document.getElementById("colorPickerLabel").style.display = "inline-block";
+
+
     } else {
-        $('.tt4').toast('show');
-        field.style.setProperty("border-color", "red", "important");
-        return 0;
+        document.getElementById("ime").style.display = "none";
+        document.getElementById("ime").disabled = true;
+        document.getElementById("colorPicker").disabled = true;
+        document.getElementById("colorPicker").style.display = "none";
+        document.getElementById("colorPickerLabel").style.display = "none";
+
+
     }
 }
-
-
-function nameAdd2(field) {
-  
-    //var field = document.getElementById("PayeeModal");
-    var regex = new RegExp("^[ A-Za-z0-9_@./#&+-]{1,20}$"); 
-    //uppercase, lowercase, številke, posebni znaki, dolžina od 1-20
-    if(!field.value.match(regex)) {
-        field.style.setProperty("border-color", "red", "important");
-      $('.tt2').toast('show')
-      return 0;
-    }
-    else {
-      field.style.borderColor = "#ced4da";
-      $('.tt2').toast('hide')
-      return 1;
-    }
-}
-
 
 function deleteEnvelope(id) {
     document.getElementById('envelope' + id).style.display = 'none';

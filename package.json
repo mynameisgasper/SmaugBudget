@@ -2,10 +2,10 @@
     "name": "smaug-budget",
     "version": "1.0.0",
     "description": "SP group project",
-    "main": "server.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "node ./bin/www"
+        "start": "node ./bin/www",
+        "atlas-1": "docker exec -it sp-smaugbudget-mongodb bash -c 'mongodump -h localhost -d SmaugBudget -o ./'; docker exec -it sp-smaugbudget-mongodb bash -c 'mongorestore --host smaugbudget-shard-00-00.tv1kk.mongodb.net:27017,smaugbudget-shard-00-01.tv1kk.mongodb.net:27017,smaugbudget-shard-00-02.tv1kk.mongodb.net:27017 --ssl --username user --authenticationDatabase admin -d SmaugBudget ./SmaugBudget'; docker exec -it sp-smaugbudget-mongodb bash -c 'rm -rf ./SmaugBudget''"
     },
     "repository": {
         "type": "git",
@@ -27,18 +27,22 @@
         "config": "3.0.1",
         "cookie-parser": "^1.4.5",
         "cookie-session": "^1.4.0",
+        "cron": "^1.8.2",
         "express": "^4.17.1",
         "express-handlebars": "^5.2.0",
         "express-session": "^1.17.1",
         "hbs": "*",
         "jssha": "^3.1.2",
         "mongoose": "*",
+        "mongodb": "*",
+        "multer": "^1.4.2",
         "node-rest-client": "^3.1.0",
         "nodemailer": "^5.1.1",
         "nodemailer-mailgun-transport": "1.4.0",
+        "nodemon": "^2.0.6",
         "pdf-creator-node": "^1.4.1",
         "sequelize": "^6.3.5",
-        "multer": "^1.4.2",
+        "start": "^5.1.0",
         "xmlhttprequest": "^1.8.0"
     }
 }

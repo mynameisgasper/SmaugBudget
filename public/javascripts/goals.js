@@ -13,11 +13,12 @@ $(document).ready(function() {
 });
 
 function disableButton() {
-    var amount1 = amount(document.getElementById("Amount"));
+    var amount1 = amount5(document.getElementById("Amount"));
     var name = nameAdd(document.getElementById("Goal"));
-    var date = dateCheck(document.getElementById("inputDate"));
+    var date = dateCheckAddGoal(document.getElementById("inputDateAddGoal"));
+    var category = categoryCheckAddGoal(document.getElementById("inputCategory"));
 
-    if (amount1 == 0 || name == 0 || date == 0) {
+    if (amount1 == 0 || name == 0 || date == 0 || category == 0) {
         return false;
     } else {
         return true;
@@ -25,9 +26,9 @@ function disableButton() {
 }
 
 function disableButton2(id) {
-    var amount1 = amount3(document.getElementById("Amount3"), id);
+    var amount1 = amount77(document.getElementById("amount3"), id);
     var name = nameAdd2(document.getElementById("Goal3"), id);
-    var date = dateCheck(document.getElementById("inputDateAddGoal"), id);
+    var date = dateCheck(document.getElementById("inputDate"), id);
 
     if (amount1 == 0 || name == 0 || date == 0) {
         return false;
@@ -57,6 +58,20 @@ function disableButton4() {
 }
 
 
+function categoryCheckAddGoal(field){
+    if(field.value == "Select Category"){
+        field.style.setProperty("border-color", "red", "important");
+        $('.tt69').toast('show');
+        return 0;
+    }
+    else {
+        field.style.borderColor = "#ced4da";
+        $('.tt69').toast('hide');
+        return 1;
+    }
+}
+
+
 function amount5(field) {
 
     //var field = document.getElementById("PayeeModal");
@@ -65,11 +80,11 @@ function amount5(field) {
     //črkev male,velike,številke ne veljajo števila kot so .73, 
     if (!field.value.match(regex)) {
         field.style.setProperty("border-color", "red", "important");
-        $('.tt3').toast('show')
+        $('.tt3').toast('show');
         return 0;
     } else {
         field.style.borderColor = "#ced4da";
-        $('.tt3').toast('hide')
+        $('.tt3').toast('hide');
         return 1;
     }
 }
@@ -91,7 +106,7 @@ function amount2(field, id) {
     }
 }
 
-function amount3(field, id) {
+function amount77(field, id) {
 
     //var field = document.getElementById("PayeeModal");
     var regex = new RegExp("^[0-9]+(\.[0-9]{1,2})?$");
@@ -100,6 +115,7 @@ function amount3(field, id) {
     if (!field.value.match(regex)) {
         field.style.setProperty("border-color", "red", "important");
         $('.tt6').toast('show')
+        console.log("222");
         return 0;
     } else {
         field.style.borderColor = "#ced4da";
@@ -146,6 +162,13 @@ function dateCheck(field, id) {
     var mm = String(today.getMonth() + 1).padStart(2, '0');
     var yyyy = today.getFullYear();
     var inputDate = field.value.split("-");
+    console.log(field.value);
+
+    if(inputDate == ""){
+        $('.tt7').toast('show');
+        field.style.setProperty("border-color", "red", "important");
+        return 0;
+    }
 
     if (inputDate[0] > yyyy) {
         $('.tt7').toast('hide');
@@ -187,29 +210,35 @@ function dateCheckAddGoal(field) {
     var yyyy = today.getFullYear();
     var inputDate = field.value.split("-");
 
+    if(inputDate == ""){
+        $('#mjav').toast('show');
+        field.style.setProperty("border-color", "red", "important");
+        return 0;
+    }
+
     if (inputDate[0] > yyyy) {
-        $('#date-hint').toast('hide');
+        $('#mjav').toast('hide');
         field.style.borderColor = "#ced4da";
         return 1;
     } else if (inputDate[0] == yyyy) {
         if (inputDate[1] > mm) {
-            $('#date-hint').toast('hide');
+            $('#mjav').toast('hide');
             field.style.borderColor = "#ced4da";
             return 1;
         } else if (inputDate[1] == mm) {
             /* 
             ? IF DAY IS >= NOW */
             if (inputDate[2] >= dd) {
-                $('#date-hint').toast('hide');
+                $('#mjav').toast('hide');
                 field.style.borderColor = "#ced4da";
                 return 1;
             } else {
-                $('#date-hint').toast('show');
+                $('#mjav').toast('show');
                 field.style.setProperty("border-color", "red", "important");
                 return 0;
             }
         } else {
-            $('#date-hint').toast('show');
+            $('#mjav').toast('show');
             field.style.setProperty("border-color", "red", "important");
             return 0;
         }

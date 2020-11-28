@@ -15,6 +15,6 @@ RUN npm install
 # Kopiraj izvorno kodo aplikacije
 COPY . .
 
-EXPOSE 3000
+EXPOSE 8080
 
 CMD [ "npm", "run", "start" ]

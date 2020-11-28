@@ -257,18 +257,30 @@ function parseRequestBody(body, res, session) {
 
 
 function addEnvelope(body, res, session) {
-    const data = {
-        colorPicker: body.colorPicker,
-        categoryAddEnvelope: body.categoryAddEnvelope,
-        inputAmount: body.inputAmount,
-        month: body.setMonth,
-        id: session.user._id
+    let data = {}
+    if (body.categoryAddEnvelope == undefined) {
+        data = {
+            colorPicker: 'default',
+            categoryAddEnvelope: body.chooseCategoryEnvelope,
+            inputAmount: body.inputAmount,
+            month: body.setMonth,
+            id: session.user._id
+        }
+    } else {
+        data = {
+            colorPicker: body.colorPicker,
+            categoryAddEnvelope: body.categoryAddEnvelope,
+            inputAmount: body.inputAmount,
+            month: body.setMonth,
+            id: session.user._id
+        }
     }
 
     var args = {
         data: data,
         headers: { "Content-Type": "application/x-www-form-urlencoded" }
     };
+
 
     var referer = res.req.headers.referer;
     if (referer.indexOf("?") != -1)

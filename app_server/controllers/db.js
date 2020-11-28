@@ -9,8 +9,6 @@ var data = {
 
 function respond(res, req) {
 
-
-
     res.render('db', data);
 }
 
@@ -20,6 +18,14 @@ function parseRequestBody(body, res, session) {
             {
                 removeAllDbData(body, res);
                 break;
+            }
+        case 'createDummyAccounts':
+            {
+                createDummyAccounts(body, res);
+            }
+        case 'loadCategories':
+            {
+                loadCategories(body, res);
             }
 
     }
@@ -34,6 +40,41 @@ function removeAllDbData(body, res) {
     client.post("http://localhost:8080/api/removeAllDbData", args,
         function(data, response) {
             if (response.statusCode == 204) {
+                res.redirect('/db');
+            } else {
+                res.redirect('/db#error');
+            }
+        }
+    );
+}
+
+function createDummyAccounts(body, res) {
+    var args = {
+        headers: { "Content-Type": "application/x-www-form-urlencoded" }
+    }
+
+
+    var client = new Client();
+    client.post("http://localhost:8080/api/createDummyAccounts", args,
+        function(data, response) {
+            if (response.statusCode == 200) {
+                res.redirect('/db');
+            } else {
+                res.redirect('/db#error');
+            }
+        }
+    );
+}
+
+function loadCategories(body, res) {
+    var args = {
+        headers: { "Content-Type": "application/x-www-form-urlencoded" }
+    }
+
+    var client = new Client();
+    client.post("http://localhost:8080/api/loadCategories", args,
+        function(data, response) {
+            if (response.statusCode == 200) {
                 res.redirect('/db');
             } else {
                 res.redirect('/db#error');

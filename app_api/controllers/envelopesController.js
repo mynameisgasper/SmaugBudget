@@ -14,11 +14,15 @@ function addEnvelope(requestBody, res) {
         var colorHexPicker = requestBody.colorPicker;
         var categoryName = requestBody.categoryAddEnvelope;
         var amount = requestBody.inputAmount;
-        const colorCorrect = checkColorCode(colorHexPicker)
+        const colorCorrect = checkColorCode(colorHexPicker);
+        const colorDefault = checkDefaultColor(colorHexPicker);
+        var colorRGB = "";
+        var colorBackground = "";
         if (colorCorrect) {
-            var colorRGB = hexToRGB(colorHexPicker);
-            var colorBackground = hexToRGB(colorHexPicker, 0.5);
+            colorRGB = hexToRGB(colorHexPicker);
+            colorBackground = hexToRGB(colorHexPicker, 0.5);
         }
+
 
         var user_id = requestBody.id;
         var curMonth = requestBody.month;
@@ -43,7 +47,7 @@ function addEnvelope(requestBody, res) {
         const titleCorrect = checkTitle(categoryName);
 
 
-        if (amountCorrect && titleCorrect && colorCorrect) {
+        if (amountCorrect && titleCorrect && (colorCorrect || colorDefault)) {
             //? Try to find current user
             User.findById(user_id, function(error, user) {
                 if (error) {
@@ -61,9 +65,11 @@ function addEnvelope(requestBody, res) {
 
                     //? Try to find the category, create it if it doesn't exist.
                     var category = null;
+                    var categoryExists = false;
                     for (var i = 0; i < user.categories.length; i++) {
                         if (user.categories[i].name === categoryName) {
                             category = user.categories[i];
+                            categoryExists = true;
                             break;
                         }
                     }
@@ -75,6 +81,12 @@ function addEnvelope(requestBody, res) {
                         })
                         cat.save();
                         category = cat;
+                    } else {
+                        if (colorDefault) {
+                            colorHexPicker = rgbToHex(category.color);
+                            colorRGB = category.color;
+                            colorBackground = hexToRGB(colorHexPicker, 0.5);
+                        }
                     }
 
                     let envelope = new Envelopes({
@@ -92,7 +104,11 @@ function addEnvelope(requestBody, res) {
                             console.log(err);
                             res.sendStatus(500);
                         } else {
-                            user.categories.push(category);
+                            console.log(categoryExists);
+                            if (!categoryExists) {
+                                user.categories.push(category);
+
+                            }
                             user.envelopes.push(envelope);
                             user.save();
                             res.status(200).json(user);
@@ -224,7 +240,7 @@ function addExpense(requestBody, res) {
         var inputDate = date.split("-");
         var regex = new RegExp("^[0-9]+(\.[0-9]{1,2})?$");
         const amountCorrect = regex.test(requestBody.inputAmount)
-        const recipientCorrect = checkTitle(recipient);
+        const recipientCorrect = checkRecipient(recipient);
         const dateBool = checkDatePast(inputDate);
 
         if (amountCorrect && dateBool && recipientCorrect) {
@@ -330,6 +346,18 @@ function hexToRGB(hex, alpha) {
     }
 }
 
+function componentToHex(c) {
+    var hex = c.toString(16);
+    return hex.length == 1 ? "0" + hex : hex;
+}
+
+function rgbToHex(rgb) {
+    rgb = rgb.substring(4, rgb.length - 1)
+        .replace(/ /g, '')
+        .split(',');
+    return "#" + componentToHex(parseInt(rgb[0])) + componentToHex(parseInt(rgb[1])) + componentToHex(parseInt(rgb[2]));
+}
+
 /*
 ? Gets month number from string abbreviation
 ! If invalid returns -1
@@ -392,6 +420,13 @@ function checkTitle(title) {
     return titleTest;
 }
 
+function checkRecipient(title) {
+    var regexTitle = new RegExp("^[A-Za-z0-9 ]{1,20}$");
+    const checkRecipient = regexTitle.test(title);
+
+    return checkRecipient;
+}
+
 function checkAmount(amount) {
     var regexTarget = new RegExp("^[0-9]+(\.[0-9]{1,2})?$");
     const amountTest = regexTarget.test(amount);
@@ -401,6 +436,13 @@ function checkAmount(amount) {
 
 function checkColorCode(colorCode) {
     var regexColor = new RegExp("^#(?:[0-9a-fA-F]{3}){1,2}$");
+    const colorTest = regexColor.test(colorCode);
+
+    return colorTest;
+}
+
+function checkDefaultColor(colorCode) {
+    var regexColor = new RegExp('\\b' + 'default' + '\\b');
     const colorTest = regexColor.test(colorCode);
 
     return colorTest;
