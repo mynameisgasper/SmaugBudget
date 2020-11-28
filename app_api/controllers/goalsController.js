@@ -32,7 +32,7 @@ function addGoal(requestBody, res) {
                         }
                     }
 
-                    //? Try to find the category, create it if it doesn't exist.
+                    //? Try to find the category
                     var category = null;
                     for (var i = 0; i < user.categories.length; i++) {
                         if (user.categories[i].name == categoryName) {
@@ -52,7 +52,7 @@ function addGoal(requestBody, res) {
                         saved: 0,
                         monthlyTarget: 0,
                         date: date,
-                        category: category 
+                        category: category
                     });
 
                     goal.save(function callback(err) {
