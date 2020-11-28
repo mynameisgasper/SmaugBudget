@@ -182,7 +182,7 @@ Lastni projekt pri predmetu **Spletno programiranje** v študijskem letu **2020/
     - How often: Izbrana mora biti ena izmed opcij.  
       
 - Edit bill  
-    - - Category: Uporabnik mora izbrati eno izmed kategorij. Izbira ne sme ostati na Select Category.  
+    - Category: Uporabnik mora izbrati eno izmed kategorij. Izbira ne sme ostati na Select Category.  
     - Payee: What's your goal: Dovoljen je vnos malih in velikih tiskanih èrk angleške abecede, števil ter posebnih znakov (_ @ . / # & + -). Niz je omejen na najveèjo dolžino 20  
     - Amount: Dovoljen je vnos decimalnega števila z najveè 2 decimalni mesti in decimalno piko.  
     - Date: Date: Dovoljen je vnos datuma, ki je "veèji" ali enak današnjemu.  
