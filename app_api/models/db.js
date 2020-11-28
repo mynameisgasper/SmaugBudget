@@ -7,6 +7,8 @@ if (process.env.NODE_ENV === 'production') {
 } else if (process.env.NODE_ENV === 'docker') {
     dbURI = 'mongodb://mongo-db/SmaugBudget';
 }
+
+
 console.log(dbURI);
 mongoose.connect(dbURI, {
     useNewUrlParser: true,
