@@ -41,8 +41,25 @@ h5 {
 }
 
 #accountBody-container {
-    margin-top: 10vh;
     padding: 4vh;
+}
+
+@media only screen and (min-width: 900px) {
+    #accountBody-container {
+        margin-top: 15vh;
+    }
+}
+
+@media only screen and (max-width: 991px) {
+    #accountBody-container {
+        margin-top: 10vh;
+    }
+}
+
+@media only screen and (max-height: 768px) and (min-width:560px) {
+    #accountBody-container {
+        margin-top: 20vh;
+    }
 }
 
 #appSettings-container {
