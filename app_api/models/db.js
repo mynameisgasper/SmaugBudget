@@ -1,20 +1,6 @@
 const config = require('../../app_server/config/server.json');
 const mongoose = require('mongoose');
 
-const dbURI = config.database.url;
-if (process.env.NODE_ENV === 'production') {
-    dbURI = "mongodb+srv://user:smauguser!@smaugbudget.tv1kk.mongodb.net/SmaugBudget?retryWrites=true&w=majority";;
-} else if (process.env.NODE_ENV === 'docker') {
-    dbURI = 'mongodb://sp-smaugbudget-mongodb/SmaugBudget';
-}
-console.log(dbURI);
-mongoose.connect(dbURI, {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false
-});
-
 
 mongoose.connection.on('connected', () => {
     console.log(`Connected to MongoDB ${dbURI}.`);
@@ -60,14 +46,9 @@ process.on('SIGTERM', () => {
 });
   
 
-const MongoClient = require('mongodb').MongoClient;
-const uri = "mongodb+srv://user:<password>@smaugbudget.tv1kk.mongodb.net/<dbname>?retryWrites=true&w=majority";
-const client = new MongoClient(uri, { useNewUrlParser: true });
-client.connect(err => {
-  const collection = client.db("test").collection("devices");
-  // perform actions on the collection object
-  client.close();
-});
+
+const dbURI = config.database.url;
+dbURI = "mongodb+srv://user:smauguser!@smaugbudget.tv1kk.mongodb.net/SmaugBudget?retryWrites=true&w=majority";
 
 
 
