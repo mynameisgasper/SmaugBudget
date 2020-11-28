@@ -55,8 +55,8 @@ nav .button {
     padding: 0;
 }
 
-.toast-body{
-    color:#212529;
+.toast-body {
+    color: #212529;
     opacity: 1 !important;
 }
 
@@ -118,8 +118,8 @@ nav .button {
 
 .toastek {
     z-index: 999999 !important;
-
 }
+
 
 /*@media only screen and (min-width: 900px) {
     .notification{
@@ -326,4 +326,17 @@ html {
 
 .input-group-lg {
     align-self: flex-start;
+}
+
+input[type="color"] {
+    border: white;
+    border-radius: 5px;
+}
+
+input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+
+input[type="color"]::-webkit-color-swatch {
+    border: none;
 }

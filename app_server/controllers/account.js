@@ -67,7 +67,7 @@ var translationKeys = {
     emailHint: "emailHint"
 }
 
-function translate (language) {
+function translate(language) {
     var translatedKeys = JSON.parse(JSON.stringify(translationKeys));
     Object.keys(translationKeys).forEach(function(key) {
         translatedKeys[key] = dictionary.getTranslation(translatedKeys[key], language);
@@ -78,36 +78,43 @@ function translate (language) {
 function respond(res, session) {
     if (session.user) {
         if (session.user.language) {
-            data = {...data, ...translate(session.user.language)};
+            data = {...data, ...translate(session.user.language) };
         } else {
-            data = {...data, ...translationKeys};
+            data = {...data, ...translationKeys };
         }
         data.data_firstName = session.user.firstname;
         data.data_lastName = session.user.lastname;
         data.data_email = session.user.email;
+        data.categories = session.user.categories;
+
+        for (var i = 0; i < data.categories.length; i++) {
+            data.categories[i].hexColor = rgbToHex(data.categories[i].color);
+        }
+
         getUserConnections(res, session);
-        
+
         //console.log(data.data_connections);
         getEnvelopesForDropdown(res, session);
         console.log(data);
         res.render('account', data);
-    }
-    else {
+    } else {
         res.redirect('/');
     }
 }
 
 function parseRequestBody(reqBody, res, session) {
     switch (reqBody.formType) {
-        case 'changeName': {
-            changeName(reqBody, res, session);
-            break;
-        }
-        case 'changeLanguage': {
-            changeLanguage(reqBody, res, session);
-            break;
-        }
-        
+        case 'changeName':
+            {
+                changeName(reqBody, res, session);
+                break;
+            }
+        case 'changeLanguage':
+            {
+                changeLanguage(reqBody, res, session);
+                break;
+            }
+
     }
 }
 
@@ -122,7 +129,7 @@ function changeName(body, res, session) {
         data: data,
         headers: { "Content-Type": "application/x-www-form-urlencoded" }
     };
-    
+
     var client = new Client();
     client.post("http://localhost:8080/api/updateUser", args,
         function(data, response) {
@@ -147,7 +154,7 @@ function changeLanguage(body, res, session) {
         data: data,
         headers: { "Content-Type": "application/x-www-form-urlencoded" }
     };
-    
+
     var client = new Client();
     client.post("http://localhost:8080/api/updateUser", args,
         function(data, response) {
@@ -165,12 +172,12 @@ function changeLanguage(body, res, session) {
 function getNewUsers(res, session, connectionName) {
     var allUsers = "wait";
     var client = new Client();
-    client.get("http://localhost:8080/api/getNewUsers?email=KRzoneee@gmail.com&connectionName='" + connectionName + "'", function(resData, response) {  
+    client.get("http://localhost:8080/api/getNewUsers?email=KRzoneee@gmail.com&connectionName='" + connectionName + "'", function(resData, response) {
         allUsers = resData;
     });
-    while (allUsers === "wait") ;
+    while (allUsers === "wait");
     var user = session.user;
-    console.log(allUsers);    
+    console.log(allUsers);
     var connection = user.connections.find(con => con.name === connectionName);
     var users;
     if (connection) {
@@ -186,20 +193,19 @@ function getNewUsers(res, session, connectionName) {
                 id: users[i]._id,
                 firstName: users[i].firstname,
                 lastName: users[i].lastname
-                //pfp: base64_encode(path.resolve("public/images/Default_pfp.png"))
+                    //pfp: base64_encode(path.resolve("public/images/Default_pfp.png"))
             });
-        }
-        else {
+        } else {
             dataTren.push({
                 id: users[i]._id,
                 firstName: users[i].firstname,
                 lastName: users[i].lastname
-                //pfp: base64_encode(path.resolve(user.profilePic))
+                    //pfp: base64_encode(path.resolve(user.profilePic))
             });
         }
     }
-    console.log(dataTren);           
-            
+    console.log(dataTren);
+
 }
 
 function getUserConnections(res, session) {
@@ -220,6 +226,18 @@ function getEnvelopesForDropdown(res, session) {
             }
         }
     }
+}
+
+function componentToHex(c) {
+    var hex = c.toString(16);
+    return hex.length == 1 ? "0" + hex : hex;
+}
+
+function rgbToHex(rgb) {
+    rgb = rgb.substring(4, rgb.length - 1)
+        .replace(/ /g, '')
+        .split(',');
+    return "#" + componentToHex(parseInt(rgb[0])) + componentToHex(parseInt(rgb[1])) + componentToHex(parseInt(rgb[2]));
 }
 
 module.exports = {
