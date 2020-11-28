@@ -15,6 +15,7 @@ mongoose.connect(dbURI, {
     useFindAndModify: false
 });
 
+console.log("HEJ HOJ");
 
 mongoose.connection.on('connected', () => {
     console.log(`Connected to MongoDB ${dbURI}.`);
