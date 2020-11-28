@@ -9,7 +9,8 @@ var data = {
     data_firstName: "",
     data_lastName: "",
     data_email: "",
-    data_connections: connections
+    data_connections: connections,
+    data_envelopes: []
 }
 
 var translationKeys = {
@@ -84,7 +85,7 @@ function respond(res, session) {
         data.data_lastName = session.user.lastname;
         data.data_email = session.user.email;
         data.data_connections = getUserConnections(res, session);
-        console.log(data);
+        data.data_envelopes = getEnvelopesForDropdown(res, session);
         res.render('account', data);
     }
     else {
@@ -169,13 +170,19 @@ function getNewUsers(res, session, connectionName) {
 function getUserConnections(res, session) {
     var client = new Client();
     client.get("http://localhost:8080/api/getUserConnections?email=" + session.user.email, function(data, response) {
-        console.log(data);
             for(var i = 0; i < data.length; i++) {
                 data[i].user = getNewUsers(res, session, data.name);
             }
             return data;
         }
     );
+}
+
+function getEnvelopesForDropdown(res, session) {
+    var client = new Client();
+    client.get("http://localhost:8080/api/getEnvelopesForDropdown?email=" + session.user.email, function(data, response) {
+        return data;
+    });
 }
 
 module.exports = {

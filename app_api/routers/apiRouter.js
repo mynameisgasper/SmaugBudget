@@ -12,6 +12,7 @@ converter.currencyConverter();
 var express = require('express');
 const currencyConverter = require('../controllers/currencyConverter');
 const db = require('../../app_server/controllers/db');
+const { connection } = require('mongoose');
 var router = express.Router();
 
 //Index
@@ -125,5 +126,13 @@ router.get('/getNewUsers', (req, res) => {
 router.get('/getUserConnections', (req, res) => {
     connections.getUserConnections(req, res);
 });
+
+router.post('/addConnection', (req, res) => {
+    connections.addConnection(req, res);
+});
+
+router.get('/getEnvelopesForDropdown', (req, res) => {
+    connections.getEnvelopesForDropdown(req, res);
+})
 
 module.exports = router;
