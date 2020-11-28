@@ -112,4 +112,12 @@ router.post('/removeAllDbData', (req, res) => {
     dbController.removeAllDbData(req, res);
 });
 
+router.post('/createDummyAccounts', (req, res) => {
+    dbController.createDummyAccounts(req, res);
+});
+
+router.post('/loadCategories', (req, res) => {
+    dbController.loadCategories(req, res);
+});
+
 module.exports = router;
