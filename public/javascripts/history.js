@@ -3,6 +3,7 @@ window.onload = function() {
     document.querySelector(".totaltext").innerHTML = "<h5>Total spent: " + parsedTable.sum.toFixed(2); + "€</h5>";
     loadGraphs(groupByCategories(parsedTable));
     loadGraphs2(makeDataForGraph(filterByCategory()));
+
 }
 
 function getRows() {
@@ -16,7 +17,7 @@ function parseTable(rows) {
     };
 
     for (let row of rows) {
-        if(row.style.display != 'none'){
+        if (row.style.display != 'none') {
             const idNum = row.cells[0].id.substring(4);
             const year = parseInt(document.getElementById('year' + idNum).innerHTML);
             const month = document.getElementById('month' + idNum).innerHTML;
@@ -25,6 +26,7 @@ function parseTable(rows) {
             const receiver = document.getElementById('receiver' + idNum).innerHTML;
             const currency = document.getElementById('currency' + idNum).innerHTML;
             const price = parseFloat(document.getElementById('price' + idNum).innerHTML);
+            const color = document.getElementById('color' + idNum).value;
 
             parsedTable.data.push({
                 id: idNum,
@@ -34,7 +36,8 @@ function parseTable(rows) {
                 category: category,
                 receiver: receiver,
                 currency: currency,
-                value: price
+                value: price,
+                color: color,
             });
             parsedTable.sum += price;
         }
@@ -48,9 +51,14 @@ function filterByCategory() {
     for (var expense of table.data) {
         //console.log(table);
         if (!categories.get(expense.category)) {
-            categories.set(expense.category,[]);
+            categories.set(expense.category, []);
         }
+
         categories.get(expense.category).push(expense);
+        categories.get(expense.category).color = expense.color;
+
+
+
     }
     return categories;
 }
@@ -60,7 +68,7 @@ function filterByMonth(expenses) {
     for (var expense of expenses) {
         //console.log(table);
         if (!month.get(expense.month)) {
-            month.set(expense.month,{});
+            month.set(expense.month, {});
         }
         month.get(expense.month).sum = expense.value;
     }
@@ -68,12 +76,16 @@ function filterByMonth(expenses) {
 }
 
 function makeDataForGraph(category) {
+    console.log("aaaaaaaaa");
+
 
     var month = new Map();
     let keys = Array.from(category.keys());
     for (let name of keys) {
         month.set(name, filterByMonth(category.get(name)));
+        month.get(name).color = category.get(name).color;
     }
+    console.log(month);
     return month;
 }
 
@@ -128,7 +140,7 @@ $(function() {
 
     }, function(start, end, label) {
         //filterbyDate(start.format('DD/MM/YYYY'), end.format('DD/MM/YYYY'))
-        start =  start.format('DD/MM/YYYY')
+        start = start.format('DD/MM/YYYY')
         end = end.format('DD/MM/YYYY')
         dateStart = start.split("/");
         dateEnd = end.split("/");
@@ -154,7 +166,7 @@ $(function() {
             mmCheck = txtValue[1];
             yyyyCheck = txtValue[0];
 
-            
+
             if (mmCheck == 'JAN') mmCheck = 1;
             else if (mmCheck == 'FEB') mmCheck = 2;
             else if (mmCheck == 'MAR') mmCheck = 3;
@@ -167,31 +179,26 @@ $(function() {
             else if (mmCheck == 'OCT') mmCheck = 10;
             else if (mmCheck == 'NOV') mmCheck = 11;
             else if (mmCheck == 'DEC') mmCheck = 12;
-            
+
             if (yyyyCheck < yyyyStart || yyyyCheck > yyyyEnd) {
                 tr[i].style.display = "none";
-            } 
-            else if (yyyyCheck == yyyyStart && mmCheck < mmStart){
+            } else if (yyyyCheck == yyyyStart && mmCheck < mmStart) {
                 tr[i].style.display = "none";
-            }
-            else if (yyyyCheck == yyyyStart && mmCheck == mmStart && ddCheck < ddStart){
+            } else if (yyyyCheck == yyyyStart && mmCheck == mmStart && ddCheck < ddStart) {
                 tr[i].style.display = "none";
-            }
-            else if (yyyyCheck == yyyyEnd && mmCheck > mmEnd){
+            } else if (yyyyCheck == yyyyEnd && mmCheck > mmEnd) {
                 tr[i].style.display = "none";
-            }
-            else if (yyyyCheck == yyyyEnd && mmCheck == mmEnd && ddCheck > ddEnd){
+            } else if (yyyyCheck == yyyyEnd && mmCheck == mmEnd && ddCheck > ddEnd) {
                 tr[i].style.display = "none";
-            }
-            else {
+            } else {
                 tr[i].style.display = "";
             }
         }
 
         const parsedTable = parseTable(getRows());
-        //console.log(parsedTable);
         document.querySelector(".totaltext").innerHTML = "<h5>Total spent: " + parsedTable.sum.toFixed(2); + "€</h5>";
         loadGraphs(groupByCategories(parsedTable));
+
 
     });
 });
@@ -203,11 +210,11 @@ function groupByCategories(parsedTable) {
         const group = findGroupByCategory(groups, entry.category);
         if (group != null) {
             group.sum += parseInt(entry.value);
-        }
-        else {
+        } else {
             groups.push({
                 name: entry.category,
-                sum: entry.value
+                sum: entry.value,
+                color: entry.color,
             });
         }
     }
@@ -230,8 +237,7 @@ function groupByMonth(parsedTable) {
         const group = findGroupByMonth(groups, entry.month);
         if (group != null) {
             group.sum += parseInt(entry.value);
-        }
-        else {
+        } else {
             groups.push({
                 name: entry.month,
                 sum: entry.value
@@ -253,68 +259,76 @@ function findGroupByMonth(groups, month) {
 
 function convertMonthsToName(month) {
     switch (month) {
-        case 'JAN': return "January";
-        case 'FEB': return "February";
-        case 'MAR': return "March";
-        case 'APR': return "April";
-        case 'MAY': return "May";
-        case 'JUN': return "June";
-        case 'JUL': return "July";
-        case 'AUG': return "August";
-        case 'SEP': return "September";
-        case 'OCT': return "October";
-        case 'NOV': return "November";
-        case 'DEC': return "December";
+        case 'JAN':
+            return "January";
+        case 'FEB':
+            return "February";
+        case 'MAR':
+            return "March";
+        case 'APR':
+            return "April";
+        case 'MAY':
+            return "May";
+        case 'JUN':
+            return "June";
+        case 'JUL':
+            return "July";
+        case 'AUG':
+            return "August";
+        case 'SEP':
+            return "September";
+        case 'OCT':
+            return "October";
+        case 'NOV':
+            return "November";
+        case 'DEC':
+            return "December";
     }
 }
 // FORM VALIDATIONI
 function disableButton2(id) {
-    var amount1 = amount3(document.getElementById("Amount3"+id),id);
-    var name = nameAdd2(document.getElementById("Payee2"+id),id);
-    var date = dateCheck2(document.getElementById("inputDate"),id);
-  
-    if (amount1 == 0 || name == 0 || date == 0) {
-      return false;
-    }
-    else {
-      return true;
-    }
-  }
+    var amount1 = amount3(document.getElementById("Amount3" + id), id);
+    var name = nameAdd2(document.getElementById("Payee2" + id), id);
+    var date = dateCheck2(document.getElementById("inputDate"), id);
 
+    if (amount1 == 0 || name == 0 || date == 0) {
+        return false;
+    } else {
+        return true;
+    }
+}
 
 function nameAdd2(field) {
-  
+
     //var field = document.getElementById("PayeeModal");
-    var regex = new RegExp("^[ A-Za-z0-9_@./#&+-]{1,20}$"); 
+    var regex = new RegExp("^[ A-Za-z0-9_@./#&+-]{1,20}$");
     //uppercase, lowercase, številke, posebni znaki, dolžina od 1-20
-    if(!field.value.match(regex)) {
+    if (!field.value.match(regex)) {
         field.style.setProperty("border-color", "red", "important");
-      $('.tt1').toast('show')
-      return 0;
-    }
-    else {
-      field.style.borderColor = "#ced4da";
-      $('.tt1').toast('hide')
-      return 1;
+        $('.tt1').toast('show')
+        return 0;
+    } else {
+        field.style.borderColor = "#ced4da";
+        $('.tt1').toast('hide')
+        return 1;
     }
 }
 
 
 function amount3(field) {
-  
+
     //var field = document.getElementById("PayeeModal");
-    var regex = new RegExp("^[0-9]+(\.[0-9]{1,2})?$"); 
+    var regex = new RegExp("^[0-9]+(\.[0-9]{1,2})?$");
     //decimalna števila z največj 2ma decimalnima mestoma ločilo je pika, prva mora biti številka!
     //črkev male,velike,številke
-    if(!field.value.match(regex)) {
+    if (!field.value.match(regex)) {
         field.style.setProperty("border-color", "red", "important");
-      $('.tt2').toast('show')
-      return 0;
-    }
-    else {
-      field.style.borderColor = "#ced4da";
-      $('.tt2').toast('hide')
-      return 1;
+        $('.tt2').toast('show')
+        return 0;
+    } else {
+        field.style.borderColor = "#ced4da";
+        $('.tt2').toast('hide')
+        return 1;
     }
 }
 
@@ -325,19 +339,19 @@ function dateCheck2(field) {
     var yyyy = today.getFullYear();
     var inputDate = field.value.split("-");
 
-    if (inputDate[0] < yyyy) { 
+    if (inputDate[0] < yyyy) {
         $('.tt7').toast('hide');
         field.style.borderColor = "#ced4da";
         return 1;
     } else if (inputDate[0] == yyyy) {
-        if (inputDate[1] < mm) { 
+        if (inputDate[1] < mm) {
             $('.tt7').toast('hide');
             field.style.borderColor = "#ced4da";
             return 1;
         } else if (inputDate[1] == mm) {
             /* 
             ? IF DAY IS >= NOW */
-            if (inputDate[2] <= dd) { 
+            if (inputDate[2] <= dd) {
                 $('.tt7').toast('hide');
                 field.style.borderColor = "#ced4da";
                 return 1;
@@ -346,7 +360,7 @@ function dateCheck2(field) {
                 field.style.setProperty("border-color", "red", "important");
                 return 0;
             }
-        } else { 
+        } else {
             $('.tt7').toast('show');
             field.style.setProperty("border-color", "red", "important");
             return 0;

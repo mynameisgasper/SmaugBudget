@@ -32,7 +32,7 @@ var translationKeys = {
     dark: "dark"
 }
 
-function translate (language) {
+function translate(language) {
     var translatedKeys = JSON.parse(JSON.stringify(translationKeys));
     Object.keys(translationKeys).forEach(function(key) {
         translatedKeys[key] = dictionary.getTranslation(translatedKeys[key], language);
@@ -43,9 +43,9 @@ function translate (language) {
 function respond(res, session) {
     if (session.user) {
         if (session.user.language) {
-            data = {...data, ...translate(session.user.language)};
+            data = {...data, ...translate(session.user.language) };
         } else {
-            data = {...data, ...translationKeys};
+            data = {...data, ...translationKeys };
         }
         data.categories = session.user.categories;
         data.expense = generateExpenses(session.user.expense);
@@ -56,19 +56,31 @@ function respond(res, session) {
 }
 
 function translateMonth(month) {
-    switch(month) {
-        case '01': return "JAN";
-        case '02': return "FEB";
-        case '03': return "MAR";
-        case '04': return "APR";
-        case '05': return "MAY";
-        case '06': return "JUN";
-        case '07': return "JUL";
-        case '08': return "AUG";
-        case '09': return "SEP";
-        case '10': return "OCT";
-        case '11': return "NOV";
-        case '12': return "DEC";
+    switch (month) {
+        case '01':
+            return "JAN";
+        case '02':
+            return "FEB";
+        case '03':
+            return "MAR";
+        case '04':
+            return "APR";
+        case '05':
+            return "MAY";
+        case '06':
+            return "JUN";
+        case '07':
+            return "JUL";
+        case '08':
+            return "AUG";
+        case '09':
+            return "SEP";
+        case '10':
+            return "OCT";
+        case '11':
+            return "NOV";
+        case '12':
+            return "DEC";
     }
 }
 
@@ -90,32 +102,43 @@ function editExpense(body, res, session) {
 
     var client = new Client();
     client.post("http://localhost:8080/api/editExpense", args, function(data, response) {
-            if (response.statusCode == 200) {
-                res.session = session;
-                res.session.user = data;
-                res.redirect('/history');
-            } else {
-                console.log(response.statusCode);
-                res.redirect('/history#error');
-            }
+        if (response.statusCode == 200) {
+            res.session = session;
+            res.session.user = data;
+            res.redirect('/history');
+        } else {
+            console.log(response.statusCode);
+            res.redirect('/history#error');
         }
-    );
+    });
 }
 
 function translateMonth(month) {
-    switch(month) {
-        case '01': return "JAN";
-        case '02': return "FEB";
-        case '03': return "MAR";
-        case '04': return "APR";
-        case '05': return "MAY";
-        case '06': return "JUN";
-        case '07': return "JUL";
-        case '08': return "AUG";
-        case '09': return "SEP";
-        case '10': return "OCT";
-        case '11': return "NOV";
-        case '12': return "DEC";
+    switch (month) {
+        case '01':
+            return "JAN";
+        case '02':
+            return "FEB";
+        case '03':
+            return "MAR";
+        case '04':
+            return "APR";
+        case '05':
+            return "MAY";
+        case '06':
+            return "JUN";
+        case '07':
+            return "JUL";
+        case '08':
+            return "AUG";
+        case '09':
+            return "SEP";
+        case '10':
+            return "OCT";
+        case '11':
+            return "NOV";
+        case '12':
+            return "DEC";
     }
 }
 
@@ -134,34 +157,30 @@ function generateExpenses(expense) {
             recipient: exp.recipient,
             value: exp.value,
             currency: exp.currency,
+            color: exp.category.color,
         });
     }
     expensesArray.sort(compare)
-    
+
     return expensesArray;
 }
 
-function compare (a,b) { //1 menjava, -1 ni menjava
-    if ( a.year < b.year ){
+function compare(a, b) { //1 menjava, -1 ni menjava
+    if (a.year < b.year) {
         return 1;
-    }
-    else if ( a.year == b.year) {
+    } else if (a.year == b.year) {
         if (a.month < b.month) {
             return 1;
-        }
-        else if (a.month == b.month) {
+        } else if (a.month == b.month) {
             if (a.day < b.day) {
                 return 1;
-            }
-            else {
+            } else {
                 return -1;
             }
-        }
-        else {
+        } else {
             return -1;
         }
-    }
-    else {
+    } else {
         return -1;
     }
     return 0;
