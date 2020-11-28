@@ -74,7 +74,7 @@ function convertCurrency() {
 }
 
 $(window).on("load", function() {
-  if (sessionStorage.getItem(page) === "false") {
+  if (localStorage.getItem(page) === "false") {
     hideWelcome();
   }
 });

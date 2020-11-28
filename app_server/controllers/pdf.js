@@ -8,7 +8,6 @@ function respond(res, path) {
 
 function generatePDF(req, res) {
     var parsedBody = mapToArray(parseBody(req.body));
-
     var html = fs.readFileSync('./app_server/views/pdfTemplate.hbs', 'utf8');
     var options = {
         format: "A4",
