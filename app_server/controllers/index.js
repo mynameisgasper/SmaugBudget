@@ -59,22 +59,22 @@ function respond(res, session) {
     }
 }
 
-function parseRequestBody(body, res, session) {
-    switch (body.formType) {
+function parseRequestBody(req, res, session) {
+    switch (req.body.formType) {
         case 'signup': {
-            signup(body, res, session);
+            signup(req, res, session);
             break;
         }
         case 'signin': {
-            signin(body, res, session);
+            signin(req, res, session);
             break;
         }
         case 'forgotPassword': {
-            forgotPassword(body, res);
+            forgotPassword(req, res);
             break;
         }
         case 'logout': {
-            logout(body, res, session);
+            logout(req, res, session);
             break;
         }
         default: {
@@ -83,14 +83,14 @@ function parseRequestBody(body, res, session) {
     }
 }
 
-function signup(body, res, session) {
+function signup(req, res, session) {
     const data = {
-        email1up: body.email1up,
-        email2up: body.email2up,
-        password1up: body.password1up,
-        password2up: body.password2up,
-        nameup: body.nameup,
-        surnameup: body.surnameup
+        email1up: req.body.email1up,
+        email2up: req.body.email2up,
+        password1up: req.body.password1up,
+        password2up: req.body.password2up,
+        nameup: req.body.nameup,
+        surnameup: req.body.surnameup
     }
 
     var args = {
@@ -100,7 +100,7 @@ function signup(body, res, session) {
 
 
     var client = new Client();
-    client.post("http://localhost:8080/api/register", args, function(data, response) {
+    client.post("http://" + req.headers.host + "/api/register", args, function(data, response) {
         if (response.statusCode == 200) {
             res.redirect('/confirmation/' + data.urlCode);
         } else {
@@ -109,10 +109,10 @@ function signup(body, res, session) {
     });
 }
 
-function signin(body, res, session) {
+function signin(req, res, session) {
     const data = {
-        email: body.emailin,
-        password: body.passwordin,
+        email: req.body.emailin,
+        password: req.body.passwordin,
     }
 
     var args = {
@@ -122,7 +122,7 @@ function signin(body, res, session) {
 
 
     var client = new Client();
-    client.post("http://localhost:8080/api/login", args, function(data, response) {
+    client.post("http://" + req.headers.host + "/api/login", args, function(data, response) {
         if (response.statusCode == 200) {
             res.session = session;
             res.session.user = data;
@@ -134,9 +134,9 @@ function signin(body, res, session) {
     });
 }
 
-function forgotPassword(body, res) {
+function forgotPassword(req, res) {
     const data = {
-        email: body.email
+        email: req.body.email
     }
 
     var args = {
@@ -146,7 +146,7 @@ function forgotPassword(body, res) {
 
 
     var client = new Client();
-    client.post("http://localhost:8080/api/requestResetPassword", args, function(data, response) {
+    client.post("http://" + req.headers.host + "/api/requestResetPassword", args, function(data, response) {
         if (response.statusCode == 200) {
             res.redirect('/');
         } else {
@@ -155,16 +155,17 @@ function forgotPassword(body, res) {
     });
 }
 
-function logout(body, res, session) {
+function logout(req, res, session) {
     res.clearCookie('user_sid');
     res.redirect('/');
 }
 
 module.exports = {
     get: function(req, res) {
+        console.log(req.headers.host);
         respond(res, req.session);
     },
     post: function(req, res) {
-        parseRequestBody(req.body, res, req.session);
+        parseRequestBody(req, res, req.session);
     }
 }
