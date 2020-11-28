@@ -205,8 +205,7 @@ function handleBills() {
             if (users.length > 0) {
                 for (var user of users) {
                     transferBill(user);
-                    //console.log(user);
-                    //user.save();
+                    user.save();
                 }
             }
             else {
