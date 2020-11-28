@@ -22,10 +22,8 @@
     },
     "homepage": "https://github.com/sp-2020-2021/LP-30#readme",
     "dependencies": {
-        "bcrypt": "^5.0.0",
         "body-parser": "^1.19.0",
         "config": "3.0.1",
-        "cookie-session": "^1.4.0",
         "cron": "^1.8.2",
         "express": "^4.17.1",
         "express-handlebars": "^5.2.0",
