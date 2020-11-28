@@ -122,6 +122,28 @@ function retrieveUser(requestBody, res) {
     }
 }
 
+function retrieveUserEmail(requestBody, res) {
+    try {
+        var email = requestBody.email;
+
+        User.findOne({ 'email': email }, function(err, user) {
+            if (err) {
+                res.sendStatus(500);
+            } else {
+                if (user) {
+                    user.password = null;
+                    user.passwordSalt = null;
+                    res.sendStatus(200);
+                } else {
+                    res.sendStatus(404);
+                }
+            }
+        });
+    } catch (ex) {
+        res.sendStatus(500);
+    }
+}
+
 function confirm(req, res) {
     try {
         var url = req.params.urlCode;
@@ -359,6 +381,9 @@ module.exports = {
     },
     retrieveUser: function(req, res) {
         retrieveUser(req.body, res, req.session);
+    },
+    retrieveUserEmail: function(req, res) {
+        retrieveUserEmail(req.body, res, req.session);
     },
     confirm: function(req, res) {
         confirm(req, res);

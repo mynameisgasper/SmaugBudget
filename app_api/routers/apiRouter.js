@@ -38,6 +38,10 @@ router.post('/getUser/', (req, res) => {
     user.retrieveUser(req, res);
 });
 
+router.post('/getUserEmail/', (req, res) => {
+    user.retrieveUserEmail(req, res);
+});
+
 router.all('/confirm/:urlCode/:code', (req, res) => {
     user.confirm(req, res);
 });
