@@ -26,6 +26,7 @@ function disableButton() {
 }
 
 function disableButton2(id) {
+    console.log("asd");
     var amount1 = amount77(document.getElementById("amount3"), id);
     var name = nameAdd2(document.getElementById("Goal3"), id);
     var date = dateCheck(document.getElementById("inputDate"), id);
@@ -157,6 +158,7 @@ function nameAdd2(field, id) {
 }
 
 function dateCheck(field, id) {
+    console.log(field.value);
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
     var mm = String(today.getMonth() + 1).padStart(2, '0');
@@ -258,3 +260,17 @@ $(window).on("load", function() {
         hideWelcome();
     }
 });
+
+$(window).ready(function(){
+    $(".goalModal").on('hidden.bs.modal', function () {
+        console.log("asd");
+        $('#mjav').toast('hide');
+        $('.tt5').toast('hide');
+        $('.tt6').toast('hide');
+        $('.tt7').toast('hide');
+        $('.tt420').toast('hide');
+    });
+  });
+
+
+

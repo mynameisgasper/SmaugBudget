@@ -64,7 +64,7 @@
                     <input type="hidden" name="id" value="{{id}}">
                     <div class="modal-body">
                         <div class="ena"><label for="inputGoal">Category</label></br>
-                            <select name="kategorija" id="inputCategory" class="form-control">
+                            <select name="kategorija" id="inputCategory{{id}}" class="form-control">
                                 <option selected>{{category}}</option>
                                 {{#each ../categories}}
                                     <option id="categoryName{{id}}">{{name}}</option>

@@ -6,15 +6,6 @@ var Client = require('node-rest-client').Client;
 
 var data = {
     fileName: 'goals',
-    /*categories: [
-        { id: 1, category: "Furniture" },
-        { id: 2, category: "Electronics" },
-        { id: 3, category: "Trip" },
-        { id: 4, category: "Party" },
-        { id: 5, category: "Wedding" },
-        { id: 6, category: "Car" },
-        { id: 7, category: "Other" },
-    ]*/
 };
 
 var translationKeys = {
@@ -200,10 +191,10 @@ function respond(res, session) {
 
 function generateGoals(goals) {
     var goalsArray = [];
-    //console.log(goals);
 
     for (var goal of goals) {
         var date = goal.date.split("-");
+        date[2] = date[2].substring(0,2);
         var progress = Math.ceil(goal.saved / goal.target * 100);
         var targetLeft = goal.target - goal.saved;
         var monthlyTarget = calculateDailyTarget(goal.date, targetLeft);
@@ -238,10 +229,14 @@ function generateCards(currentUser) {
             goalCompleted += currentUser.goals[i].title + ", ";
         }  
     }
-    if(completed > 2)
-        goalCompleted = "Multiple goals";
-    else
+    if(completed == 0)
+        goalCompleted = "No goals completed.";
+    else if(completed > 2)
+        goalCompleted = "Multiple goals completed!";
+    else{
         goalCompleted = goalCompleted.substring(0, goalCompleted.length - 2);
+        goalCompleted += " completed!"
+    }
 
     return [{
         id: 1,
@@ -256,7 +251,7 @@ function generateCards(currentUser) {
         color: 'green-panel',
         count: completed,
         icon: 'fa-check-circle',
-        comment: goalCompleted + ' completed!'
+        comment: goalCompleted
     }
     ];
 }

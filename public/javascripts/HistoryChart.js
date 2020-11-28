@@ -47,10 +47,11 @@ var lineConfig = {
                 display: true,
                 scaleLabel: {
                     display: true,
-                    labelString: 'Value in $'
+                    labelString: 'MONEY SPENT IN €'
                 },
                 ticks: {
                     beginAtZero: true,
+                    stepSize: 50,
                     fontColor: '#666'
                 },
                 gridLines: {
@@ -93,7 +94,6 @@ var doughnutConfig = {
 };
 
 function loadGraphs(categoryData) {
-    console.log(categoryData);
     doughnutConfig.data.datasets[0].backgroundColor = extractColors(categoryData);
     //console.log(categoryData);
     if (categoryData != null) {
@@ -116,12 +116,8 @@ function loadGraphs(categoryData) {
 }
 
 function loadGraphs2(categoryData) {
-    console.log("categoryData");
-    console.log(categoryData);
-
     var i = 0;
     let keys = Array.from(categoryData.keys());
-    var colors = getBackgroundColors(keys.length);
 
     for (let key of keys) {
 
@@ -165,6 +161,8 @@ function loadGraphs2(categoryData) {
 
     var ctx = document.getElementById('line-canvas').getContext('2d');
     window.myLine = new Chart(ctx, lineConfig);
+
+
 }
 
 function getBackgroundColors(length) {

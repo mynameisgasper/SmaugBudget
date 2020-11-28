@@ -153,6 +153,25 @@
     </div>
   </div>
 </div>
+
+<div class="container" id="categoriesColor-container">
+  <div id="categories-setting"  class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+    <h2>Categories</h2>
+    <form name="editColor" method="post" action="/account">
+    {{#each categories}}
+      <div class="category-row col-6 col-sm-6 col-md-5 col-lg-5 col-xl-5">
+        <label for="color-picker{{name}}" style=" text-align:left;">{{name}}</label>
+      </div>
+      <div class="category-row col-5 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+          <input type="color" class="color-picker" id="color-picker{{name}}" value="{{hexColor}}" style=" background: {{hexColor}}; ">
+      </div>
+      <div class="category-row col-12 col-sm-12 col-md-1 col-lg-1 col-xl-1">
+      </div>
+       {{/each}}
+      <button type="submit" class="btn btn-primary" style="float:right;">Change Colors</button>
+    </form>
+  </div>
+</div>
 <!-- End AccountBody -->
 
 <!-- changePassowrd -->

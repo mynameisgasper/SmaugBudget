@@ -83,7 +83,6 @@ function makeDataForGraph(category) {
         month.set(name, filterByMonth(category.get(name)));
         month.get(name).color = category.get(name).color;
     }
-    console.log(month);
     return month;
 }
 
