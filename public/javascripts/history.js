@@ -76,8 +76,6 @@ function filterByMonth(expenses) {
 }
 
 function makeDataForGraph(category) {
-    console.log("aaaaaaaaa");
-
 
     var month = new Map();
     let keys = Array.from(category.keys());

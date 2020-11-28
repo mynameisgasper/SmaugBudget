@@ -1,9 +1,10 @@
 const config = require('../../app_server/config/server.json');
 const mongoose = require('mongoose');
 
-var dbURI = config.database.url;
+//var dbURI = config.database.url;
+var dbURI = "mongodb+srv://user:smauguser!@smaugbudget.tv1kk.mongodb.net/SmaugBudget?retryWrites=true&w=majority";
 if (process.env.NODE_ENV === 'production') {
-    dbURI = proccess.env.MONGODB_CLOUD_URI;
+    dbURI = process.env.MONGODB_CLOUD_URI;
 } else if (process.env.NODE_ENV === 'docker') {
     dbURI = 'mongodb://mongo-db/SmaugBudget';
 }
@@ -11,7 +12,7 @@ if (process.env.NODE_ENV === 'production') {
 
 
 
-console.log(dbURI);
+console.log("awawad " + dbURI);
 mongoose.connect(dbURI, {
     useNewUrlParser: true,
     useCreateIndex: true,
