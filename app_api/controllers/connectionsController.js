@@ -22,42 +22,15 @@ function createCon(body, res, session) {
 function getNewUsers(params, res, session) {
     try {
         console.log(params);
-        User.findOne({ 'email': params.email }, function(err, user) {
+        User.find({}, function(err, user) {
             if (err) {
                 console.log(err);
             } else {
                 if (user) {
-                    var connection = user.connections.find(con => con.name === params.connectionName);
-                    var used = [];
-                    if (connection) {
-                        used.push(connection.users.email);
-                    }
-                    User.find({ 'email': { $nin: used }}, function(err, users) {
-                        if (err) {
-                            console.log(err); 
-                        } else {
-                            var data = [];
-                            for (var i = 0; i < users.length; i++) {
-                                if (users[i].profilePic == null) {
-                                    data.push({
-                                        id: users[i]._id,
-                                        firstName: users[i].firstname,
-                                        lastName: users[i].lastname,
-                                        pfp: base64_encode(path.resolve("public/images/Default_pfp.png"))
-                                    });
-                                }
-                                else {
-                                    data.push({
-                                        id: users[i]._id,
-                                        firstName: users[i].firstname,
-                                        lastName: users[i].lastname,
-                                        pfp: base64_encode(path.resolve(user.profilePic))
-                                    });
-                                }
-                            }
-                            res.status(200).json(data);
-                        }
-                    });   
+                    
+                    res.status(200).json(user);
+                        
+                    
                     
                 } else {
                     res.sendStatus(404);
@@ -171,7 +144,6 @@ function getEnvelopesForDropdown (parameters, res, session) {
                         }
                     });
                 } else {
-                    console.log("HERE===dsf");
                     Envelopes.find({}, function (err, unchecked) {
                         if (err) {
                             console.log(err);

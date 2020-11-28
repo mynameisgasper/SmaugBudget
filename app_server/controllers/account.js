@@ -10,7 +10,8 @@ var data = {
     data_lastName: "",
     data_email: "",
     data_connections: connections,
-    data_envelopes: []
+    data_envelopes: [],
+    data_currency: []
 }
 
 var translationKeys = {
@@ -84,8 +85,11 @@ function respond(res, session) {
         data.data_firstName = session.user.firstname;
         data.data_lastName = session.user.lastname;
         data.data_email = session.user.email;
-        data.data_connections = getUserConnections(res, session);
-        data.data_envelopes = getEnvelopesForDropdown(res, session);
+        getUserConnections(res, session);
+        
+        //console.log(data.data_connections);
+        getEnvelopesForDropdown(res, session);
+        console.log(data);
         res.render('account', data);
     }
     else {
@@ -94,7 +98,6 @@ function respond(res, session) {
 }
 
 function parseRequestBody(reqBody, res, session) {
-    console.log(reqBody);
     switch (reqBody.formType) {
         case 'changeName': {
             changeName(reqBody, res, session);
@@ -160,29 +163,63 @@ function changeLanguage(body, res, session) {
 }
 
 function getNewUsers(res, session, connectionName) {
+    var allUsers = "wait";
     var client = new Client();
-    client.get("http://localhost:8080/api/getNewUsers?email=" + session.user.email + "&connectionName='" + connectionName + "'", function(data, response) {
-            return data;
+    client.get("http://localhost:8080/api/getNewUsers?email=KRzoneee@gmail.com&connectionName='" + connectionName + "'", function(resData, response) {  
+        allUsers = resData;
+    });
+    while (allUsers === "wait") ;
+    var user = session.user;
+    console.log(allUsers);    
+    var connection = user.connections.find(con => con.name === connectionName);
+    var users;
+    if (connection) {
+        users = connection.users.find(u => u.email !== user.email);
+    } else {
+        users = [];
+    }
+
+    var dataTren = [];
+    for (var i = 0; i < users.length; i++) {
+        if (users[i].profilePic == null) {
+            dataTren.push({
+                id: users[i]._id,
+                firstName: users[i].firstname,
+                lastName: users[i].lastname
+                //pfp: base64_encode(path.resolve("public/images/Default_pfp.png"))
+            });
         }
-    );
+        else {
+            dataTren.push({
+                id: users[i]._id,
+                firstName: users[i].firstname,
+                lastName: users[i].lastname
+                //pfp: base64_encode(path.resolve(user.profilePic))
+            });
+        }
+    }
+    console.log(dataTren);           
+            
 }
 
 function getUserConnections(res, session) {
-    var client = new Client();
-    client.get("http://localhost:8080/api/getUserConnections?email=" + session.user.email, function(data, response) {
-            for(var i = 0; i < data.length; i++) {
-                data[i].user = getNewUsers(res, session, data.name);
-            }
-            return data;
-        }
-    );
+    data.data_connections = session.user.connections;
 }
 
 function getEnvelopesForDropdown(res, session) {
-    var client = new Client();
-    client.get("http://localhost:8080/api/getEnvelopesForDropdown?email=" + session.user.email, function(data, response) {
-        return data;
-    });
+    data.data_envelopes = session.user.envelopes;
+    for (var i = 0; i < data.data_connections.length; i++) {
+        for (var j = 0; j < data.data_envelopes; j++) {
+            var found = data.data_connections[i].envelopes.findIndex(e => e.category.name === data.data_envelopes[j].category.name);
+            if (found == -1) {
+                var tren = JSON.parse(JSON.stringify(data.data_envelopes[j]));
+                tren.selected = false;
+                data.data_connections[i].envelopes.push(tren);
+            } else {
+                data.data_connections[i].envelopes[found].selected = true;
+            }
+        }
+    }
 }
 
 module.exports = {
