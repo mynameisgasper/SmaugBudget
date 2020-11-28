@@ -4,8 +4,12 @@ var envelopes = require('../controllers/envelopesController');
 var goals = require('../controllers/goalsController');
 var history = require('../controllers/expenseController');
 var dbController = require('../controllers/dbController');
+var connections = require('../controllers/connectionsController');
 
 var express = require('express');
+const currencyConverter = require('../controllers/currencyConverter');
+const db = require('../../app_server/controllers/db');
+const { connection } = require('mongoose');
 var router = express.Router();
 
 //Index
@@ -110,6 +114,22 @@ router.post('/deleteGoal', (req, res) => {
 
 router.post('/removeAllDbData', (req, res) => {
     dbController.removeAllDbData(req, res);
+});
+
+router.get('/getNewUsers', (req, res) => {
+    connections.getNewUsers(req, res);
+});
+
+router.get('/getUserConnections', (req, res) => {
+    connections.getUserConnections(req, res);
+});
+
+router.post('/addConnection', (req, res) => {
+    connections.addConnection(req, res);
+});
+
+router.get('/getEnvelopesForDropdown', (req, res) => {
+    connections.getEnvelopesForDropdown(req, res);
 });
 
 router.post('/createDummyAccounts', (req, res) => {

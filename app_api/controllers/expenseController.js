@@ -10,21 +10,19 @@ function getLastMonthExpenses(requestBody, res) {
             if (err) {
                 console.log(err);
                 res.sendStatus(500);
-            }
-            else {
+            } else {
                 if (user) {
 
                     var lastMonthExpenses = getLastMonthExpensesArray(user.expense, user.paycheckDate);
                     var lastMonthAnalysis = getExpenseAnalysis(lastMonthExpenses);
 
                     res.status(200).json(buildArrayFromMap(lastMonthAnalysis));
-                }
-                else {
+                } else {
                     res.sendStatus(404);
                 }
             }
         });
-    } catch(ex) {
+    } catch (ex) {
         console.log(ex);
         res.sendStatus(500);
     }
@@ -42,15 +40,14 @@ function editExpense(requestBody, res) {
         //validate date, recipient and amount
         var dateOk = checkDate(date);
         const recipientTest = checkRecipient(recipient);
-        const amountTest  = checkAmount(amount);
+        const amountTest = checkAmount(amount);
 
         if (recipientTest && amountTest && dateOk) {
             User.findById(userId, function(err, user) {
                 if (err) {
                     console.log(err);
                     res.sendStatus(500);
-                }
-                else {
+                } else {
                     var category = null;
                     for (var i = 0; i < user.expense.length; i++) {
                         if (user.expense[i]._id == id) {
@@ -72,18 +69,16 @@ function editExpense(requestBody, res) {
                     res.status(200).json(user);
                 }
             });
-        }
-        else {
+        } else {
             res.sendStatus(400);
         }
-    } 
-    catch (ex) {
+    } catch (ex) {
         console.log(ex);
         res.sendStatus(500);
     }
 }
 
-function checkDate(date){
+function checkDate(date) {
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
     var mm = String(today.getMonth() + 1).padStart(2, '0');
@@ -96,40 +91,35 @@ function checkDate(date){
 
     if (y > yyyy) {
         dateOk = false;
-    } 
-    else if (y == yyyy) {
+    } else if (y == yyyy) {
         if (m > mm) {
             dateOk = false;
-        } 
-        else if (m == mm) {
+        } else if (m == mm) {
             if (d > dd) {
                 dateOk = false;
-            } 
-            else {
+            } else {
                 dateOk = true;
             }
-        } 
-        else {
+        } else {
             dateOk = true;
         }
-    } 
-    else {
+    } else {
         dateOk = true;
     }
 
     return dateOk;
 }
 
-function checkRecipient(recipient){
-    var regexRecipient = new RegExp("^[ A-Za-z0-9_@./#&+-]{1,20}$"); 
+function checkRecipient(recipient) {
+    var regexRecipient = new RegExp("^[ A-Za-z0-9_@./#&+-]{1,20}$");
     const recipientTest = regexRecipient.test(recipient);
 
     return recipientTest;
 }
 
-function checkAmount(amount){
+function checkAmount(amount) {
     var regexAmount = new RegExp("^[0-9]+(\.[0-9]{1,2})?$");
-    const amountTest  = regexAmount.test(amount);
+    const amountTest = regexAmount.test(amount);
 
     return amountTest;
 }
@@ -162,12 +152,13 @@ function getExpenseAnalysis(expenses) {
         if (categories.get(expense.category.name)) {
             categories.get(expense.category.name).sum += parseInt(expense.value);
             categories.get(expense.category.name).count += 1;
-        }
-        else {
+            categories.get(expense.category.name).color = expense.category.color;
+        } else {
             categories.set(expense.category.name, {});
             categories.get(expense.category.name).name = expense.category.name
             categories.get(expense.category.name).sum = parseInt(expense.value);
-            categories.get(expense.category.name).count = 1;    
+            categories.get(expense.category.name).count = 1;
+            categories.get(expense.category.name).color = expense.category.color;
         }
     }
 
