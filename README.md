@@ -74,7 +74,154 @@ Lastni projekt pri predmetu **Spletno programiranje** v študijskem letu **2020/
 
 ## 2. LP
 
-Dinamična spletna aplikacija z logiko na strani strežnika
+
+### Naprave  
+
+- Naša spletna stran deluja na raèunalnikih, ter tabliènih raèunalniki v pokonènem in ležeèem položaju.  
+  
+
+### Knjižnice  
+
+#### Body-parser(https://www.npmjs.com/package/body-parser)  
+- Branje body requesta.  
+  
+#### Cron(https://www.npmjs.com/package/cron)  
+- Periodièno posodabljanje tarif za pretvorbo valut  
+- Periodièno vstavljanje raèunov med stroške  
+- Postavljanje plaè v prejšni mesec (in ob posodabljanju plaèe)  
+  
+#### jssha(https://www.npmjs.com/package/jssha)  
+- Enkripcija gesel  
+  
+#### multer(https://www.npmjs.com/package/multer)  
+- Nalaganje slik ter vrnitev poti do slike  
+  
+#### Node-rest-client(https://www.npmjs.com/package/node-rest-client)  
+- Upravljanje z zahtevami na REST Clientu  
+  
+#### Nodemailer(https://www.npmjs.com/package/nodemailer)  
+- Pošiljanje e-pošte za potrditev registracije in ponastavitev gesla.
+  
+#### Nodemailer-mailgun-transport(https://www.npmjs.com/package/nodemailer-mailgun-transport)  
+- Pošiljanje e-pošte za potrditev registracije in ponastavitev gesla.  
+  
+#### pdf-creator-node(https://www.npmjs.com/package/pdf-creator-node)  
+- Ustvarjanje preprostih PDF poroèil.  
+  
+#### Chart-js(https://www.chartjs.org/)  
+- Ustvarjanje grafov  
+  
+#### Date-range-selector(https://www.daterangepicker.com/)  
+- Izbira dveh datumov za filtriranje podatkov  
+  
+#### Bootstrap select(https://developer.snapappointments.com/bootstrap-select/)  
+- Za multiselect, dropdown, izbiro envelopov itd.  
+  
+  
+### Uporabniška vnosna polja  
+
+#### Landing page  
+
+- Registracija  
+    - Ime: Dovoljene so vse èrke angleške abecede. Niz je omejen na najveèjo dolžino 20 znakov.  
+    - Priimek: Dovoljene so vse èrke angleške abecede. Niz je omejen na najveèjo dolžino 20 znakov.  
+    - E-mail: Polje mora vsebovati znak @.  
+    - Geslo: Mora vsebovati vsaj 6 znakov in izpolnjevati vsaj eno od sledeèih kategorij:  
+        - vsebuje vsaj eno malo in vsaj en veliko tiskano èrko,  
+        - vsebuje vsaj eno malo tiskano èrko in vsaj eno številko,  
+        - vsebuje vsaj eno veliko tiskano èrko in vsaj eno številko  
+          
+#### Dashboard  
+
+- Change Income  
+    - Plaèa: Dovoljen je vnos decimalnega števila z najveè 2 decimalni mesti in decimalno piko.   
+    - Dan v mesecu: Število med 1 in 28.  
+      
+      
+#### Envelopes  
+
+- Add Expense  
+    - Category: Uporabnik mora izbrati eno izmed kategorij. Izbira ne sme ostati na Choose a Category.  
+    - Recipient: Dovoljen je vnos malih in velikih tiskanih èrk angleške abecede, števil ter posebnih znakov (_ @ . / # & + -). Niz je omejen na najveèjo dolžino 20 znakov.  
+    - Amount: Dovoljen je vnos decimalnega števila z najveè 2 decimalni mesti in decimalno piko.  
+    - Date: Dovoljen je vnos datuma, ki je "manjši" ali enak današnjemu.  
+      
+- Add Envelope  
+    - Category: Uporabnik mora izbrati eno izmed kategorij. Izbira ne sme ostati na Choose a Category.  
+    - Amount: Dovoljen je vnos decimalnega števila z najveè 2 decimalni mesti in decimalno piko.  
+      
+- Edit Envelope
+    - New Budget: Dovoljen je vnos decimalnega števila z najveè 2 decimalni mesti in decimalno piko.  
+      
+      
+#### Goals  
+
+- Add Money  
+    - Amount: Dovoljen je vnos decimalnega števila z najveè 2 decimalni mesti in decimalno piko.  
+      
+- Add Goal  
+    - What's your goal: Dovoljen je vnos malih in velikih tiskanih èrk angleške abecede, števil ter posebnih znakov (_ @ . / # & + -). Niz je omejen na najveèjo dolžino 20 znakov.  
+    - Category: Uporabnik mora izbrati eno izmed kategorij. Izbira ne sme ostati na Select Category.  
+    - How much: Dovoljen je vnos decimalnega števila z najveè 2 decimalni mesti in decimalno piko. 
+    - Date: Dovoljen je vnos datuma, ki je "veèji" ali enak današnjemu. 
+      
+- Edit Goal  
+    - What's your goal: Dovoljen je vnos malih in velikih tiskanih èrk angleške abecede, števil ter posebnih znakov (_ @ . / # & + -). Niz je omejen na najveèjo dolžino 20 znakov.  
+    - Category: Uporabnik mora izbrati eno izmed kategorij. Izbira ne sme ostati na Select Category.  
+    - How much: Dovoljen je vnos decimalnega števila z najveè 2 decimalni mesti in decimalno piko.  
+    - Date: Dovoljen je vnos datuma, ki je "veèji" ali enak današnjemu.  
+      
+        
+#### Bills  
+
+- Add bill  
+    - Category: Uporabnik mora izbrati eno izmed kategorij. Izbira ne sme ostati na Select Category.  
+    - Payee: What's your goal: Dovoljen je vnos malih in velikih tiskanih èrk angleške abecede, števil ter posebnih znakov (_ @ . / # & + -). Niz je omejen na najveèjo dolžino 20  
+    - Amount: Dovoljen je vnos decimalnega števila z najveè 2 decimalni mesti in decimalno piko.  
+    - Date: Date: Dovoljen je vnos datuma, ki je "veèji" ali enak današnjemu.  
+    - How often: Izbrana mora biti ena izmed opcij.  
+      
+- Edit bill  
+    - - Category: Uporabnik mora izbrati eno izmed kategorij. Izbira ne sme ostati na Select Category.  
+    - Payee: What's your goal: Dovoljen je vnos malih in velikih tiskanih èrk angleške abecede, števil ter posebnih znakov (_ @ . / # & + -). Niz je omejen na najveèjo dolžino 20  
+    - Amount: Dovoljen je vnos decimalnega števila z najveè 2 decimalni mesti in decimalno piko.  
+    - Date: Date: Dovoljen je vnos datuma, ki je "veèji" ali enak današnjemu.  
+    - How often: Izbrana mora biti ena izmed opcij.  
+      
+        
+#### History  
+
+- Edit expense  
+    - Recipient: What's your goal: Dovoljen je vnos malih in velikih tiskanih èrk angleške abecede, števil ter posebnih znakov (_ @ . / # & + -). Niz je omejen na najveèjo dolžino 20  
+    - Amount: Dovoljen je vnos decimalnega števila z najveè 2 decimalni mesti in decimalno piko.  
+    - Date: Dovoljen je vnos datuma, ki je "manjši" ali enak današnjemu.  
+      
+        
+#### Utilities  
+
+- Friend groups  
+    - Bill amount: Dovoljen je vnos decimalnega števila z najveè 2 decimalni mesti in decimalno piko.  
+    - Money paid: Dovoljen je vnos decimalnega števila z najveè 2 decimalni mesti in decimalno piko.  
+      
+        
+#### Settings  
+
+- Account  
+    - First name: Dovoljene so vse èrke angleške abecede. Niz je omejen na najveèjo dolžino 20 znakov.  
+    - Last name: Dovoljene so vse èrke angleške abecede. Niz je omejen na najveèjo dolžino 20 znakov.  
+    - Geslo: Mora vsebovati vsaj 6 znakov in izpolnjevati vsaj eno od sledeèih kategorij:  
+        - vsebuje vsaj eno malo in vsaj en veliko tiskano èrko,  
+        - vsebuje vsaj eno malo tiskano èrko in vsaj eno številko,  
+        - vsebuje vsaj eno veliko tiskano èrko in vsaj eno številko  
+      
+- Connections  
+    - Add connection  
+        - Connection name: Dovoljen je vnos malih in velikih tiskanih èrk angleške abecede ter števil.  
+          
+    - Edit connection  
+        - Connection name: Dovoljen je vnos malih in velikih tiskanih èrk angleške abecede ter števil.  
+          
+
 
 
 ## 3. LP
