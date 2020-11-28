@@ -20,109 +20,10 @@
                 <input class="form-control search" id="search" type="text" placeholder="Search" aria-label="Search">
             </div>
         </div>
-        <div class="row">
-            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                <div class="table-responsive">
-                    <table class="table" id="table">
-                        <thead class="headertop">
-                            <!--Modal form 1-->
-                            <div class="modal fade " id="modalForm" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
-                                <div class="position-absolute w-100 p-4 d-flex flex-column align-items-end">
-                                    <div class="w-25 toastek">
-                                        <div class="toast ml-auto tt1" role="alert" data-delay="3000" data-autohide="false">
-                                            <div class="toast-header">
-                                                <strong class="mr-auto text-primary">HINT</strong>
-                                                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                                                    <span aria-hidden="true">×</span>
-                                                </button>
-                                            </div>
-                                            <div class="toast-body">
-                                                Input may only contain letters, numbers and some special characters (_@./#&+-). Length allowed: 1-20
-                                            </div>
-                                        </div>
-                                        <div class="toast ml-auto tt2" role="alert" data-delay="1000" data-autohide="false">
-                                            <div class="toast-header">
-                                                <strong class="mr-auto text-primary">HINT</strong>
-                                                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                                                    <span aria-hidden="true">×</span>
-                                                </button>
-                                            </div>
-                                            <div class="toast-body">
-                                                Input may only contain decimal numbers separated by . with max 2 decimal places.
-                                            </div>
-                                        </div> 
-                                        <div class="toast ml-auto" id="date-hintAdd" role="alert" data-delay="1000" data-autohide="false">
-                                            <div class="toast-header">
-                                                <strong class="mr-auto text-primary">HINT</strong>
-                                                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                                                    <span aria-hidden="true">×</span>
-                                                </button>
-                                            </div>
-                                            <div class="toast-body">
-                                                Input a valid date (today or in the future).
-                                            </div>
-                                        </div>  
-                                    </div>
-                                </div>
-                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <form name="signup" method="post" onsubmit="return disableButton()">
-                                        <input type="hidden" name="formType" value="addBill">
-                                        <div class="modal-body">
-                                            <div class="ena"><label for="inputGoal">Category</label></br>
-                                                <select id="inputCategory" name="inputCategory" class="form-control" required>
-                                                    <option value="" selected disabled>Select Category</option>
-                                                    {{#each categories}}
-                                                    <option id="{{_id}}" value="{{_id}}" name="category">{{name}}</option>
-                                                    {{/each}}
-                                                </select>
-                                            </div>
-                                            <div class="checker">
-                                                <label for="Payee">Payee</label><br>
-                                                <input type="text" id="Payee" name="Payee" class="form-control" onfocusout="check(this)" placeholder="e.g. Elektro Ljubljana d.d." required="required">
-                                            </div>
-                                            <div id="alerts"></div>
-                                            <div class="ena">
-                                                <label for="Amount">Amount</label><br>
-                                                <div class="input-group mb-3">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text">€</span>
-                                                    </div>
-                                                    <input type="number" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" class="form-control" onfocusout="amount(this)" id="Amount" name="Amount" placeholder="e.g. 15" step="any" required="required"> 
-                                                </div>    
-                                                <div id="amm"></div>
-                                            </div>
-                                            <div class="ena">
-                                                <label for="date">Date due</label><br>
-                                                <input class="form-control" type="date" placeholder="2020-01-01" id="inputDateAddBill" name="inputDateAddBill" onfocusout="dateCheckAddBill(this);" required="required">
-                                            </div>
-                                            <div class="ena">
-                                                <label for="once">How often?</label><br>
-                                                <input type="radio" id="once" name="rad" value="once" required>
-                                                <label for="once">Once</label><br>
-                                                <input type="radio" id="monthly" name="rad" value="monthly">
-                                                <label for="monthly">Monthly</label><br>
-                                                <input type="radio" id="yearly" name="rad" value="yearly">
-                                                <label for="yearly">Yearly</label><br>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="submit" onclick="disableButton()" class="btn btn-primary">Add Bill</button>
-                                        </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--Modal form2-->
+        <!--Modal form2-->
                             <!--- Modal Form Edit --->
-
-                            {{#each bill}}
-                            <div class="modal fade" id="editForm{{id}}" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
+        {{#each bill}}
+                            <div class="modal fade" id="editForm{{_id}}" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
                                 <div class="position-absolute w-100 p-4 d-flex flex-column align-items-end">
                                     <div class="w-25 toastek">
                                         <div class="toast ml-auto tt3" role="alert" data-delay="3000" data-autohide="false">
@@ -219,11 +120,112 @@
                                 </div>
                             </div>
                             {{/each}}
+
+                            <!--Modal form 1-->
+                            <div class="modal fade " id="modalForm" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
+                                <div class="position-absolute w-100 p-4 d-flex flex-column align-items-end">
+                                    <div class="w-25 toastek">
+                                        <div class="toast ml-auto tt1" role="alert" data-delay="3000" data-autohide="false">
+                                            <div class="toast-header">
+                                                <strong class="mr-auto text-primary">HINT</strong>
+                                                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                                                    <span aria-hidden="true">×</span>
+                                                </button>
+                                            </div>
+                                            <div class="toast-body">
+                                                Input may only contain letters, numbers and some special characters (_@./#&+-). Length allowed: 1-20
+                                            </div>
+                                        </div>
+                                        <div class="toast ml-auto tt2" role="alert" data-delay="1000" data-autohide="false">
+                                            <div class="toast-header">
+                                                <strong class="mr-auto text-primary">HINT</strong>
+                                                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                                                    <span aria-hidden="true">×</span>
+                                                </button>
+                                            </div>
+                                            <div class="toast-body">
+                                                Input may only contain decimal numbers separated by . with max 2 decimal places.
+                                            </div>
+                                        </div> 
+                                        <div class="toast ml-auto" id="date-hintAdd" role="alert" data-delay="1000" data-autohide="false">
+                                            <div class="toast-header">
+                                                <strong class="mr-auto text-primary">HINT</strong>
+                                                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                                                    <span aria-hidden="true">×</span>
+                                                </button>
+                                            </div>
+                                            <div class="toast-body">
+                                                Input a valid date (today or in the future).
+                                            </div>
+                                        </div>  
+                                    </div>
+                                </div>
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <form name="signup" method="post" onsubmit="return disableButton()">
+                                        <input type="hidden" name="formType" value="addBill">
+                                        <div class="modal-body">
+                                            <div class="ena"><label for="inputGoal">Category</label></br>
+                                                <select id="inputCategory" name="inputCategory" class="form-control" required>
+                                                    <option value="" selected disabled>Select Category</option>
+                                                    {{#each categories}}
+                                                    <option id="{{_id}}" value="{{_id}}" name="category">{{name}}</option>
+                                                    {{/each}}
+                                                </select>
+                                            </div>
+                                            <div class="checker">
+                                                <label for="Payee">Payee</label><br>
+                                                <input type="text" id="Payee" name="Payee" class="form-control" onfocusout="check(this)" placeholder="e.g. Elektro Ljubljana d.d." required="required">
+                                            </div>
+                                            <div id="alerts"></div>
+                                            <div class="ena">
+                                                <label for="Amount">Amount</label><br>
+                                                <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">€</span>
+                                                    </div>
+                                                    <input type="number" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" class="form-control" onfocusout="amount(this)" id="Amount" name="Amount" placeholder="e.g. 15" step="any" required="required"> 
+                                                </div>    
+                                                <div id="amm"></div>
+                                            </div>
+                                            <div class="ena">
+                                                <label for="date">Date due</label><br>
+                                                <input class="form-control" type="date" placeholder="2020-01-01" id="inputDateAddBill" name="inputDateAddBill" onfocusout="dateCheckAddBill(this);" required="required">
+                                            </div>
+                                            <div class="ena">
+                                                <label for="once">How often?</label><br>
+                                                <input type="radio" id="once" name="rad" value="once" required>
+                                                <label for="once">Once</label><br>
+                                                <input type="radio" id="monthly" name="rad" value="monthly">
+                                                <label for="monthly">Monthly</label><br>
+                                                <input type="radio" id="yearly" name="rad" value="yearly">
+                                                <label for="yearly">Yearly</label><br>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" onclick="disableButton()" class="btn btn-primary">Add Bill</button>
+                                        </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                             
+
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <div class="table-responsive">
+                    <table class="table" id="table">
+                        <thead class="headertop"> 
                         </thead>
                         </div>
                     <tbody>
-                    
-                    
+
                     {{> billsTableElement}}                 
 
                 </table>
