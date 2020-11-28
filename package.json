@@ -40,6 +40,7 @@
         "nodemailer-mailgun-transport": "1.4.0",
         "pdf-creator-node": "^1.4.1",
         "sequelize": "^6.3.5",
+        "start": "^5.1.0",
         "xmlhttprequest": "^1.8.0"
     }
 }
