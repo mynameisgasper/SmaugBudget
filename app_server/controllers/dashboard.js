@@ -66,8 +66,8 @@ function respond(res, session) {
             data = {...data, ...translationKeys};
         }
 
-        data.card = generateCards(session.user);
-        data.analytics = generateAnalyitcs(session.user);
+        data.card = generateCards(session.user, session.user.language);
+        data.analytics = generateAnalyitcs(session.user, session.user.language);
         data.incomeLastMonth = (session.user.paycheckLastMonth ? session.user.paycheckLastMonth : 0);
         data.expensesLastMonth = getTotalCost(getLastMonthExpenses(session.user.expense, session.user.paycheckDate));
         data.alert = generateAlerts(session.user, session.user.language);
@@ -81,7 +81,7 @@ function respond(res, session) {
     }
 }
 
-function generateCards(user) {
+function generateCards(user, language) {
     var billsUntilPaycheck = getBillsUntilPaycheck(user.bills, user.paycheckDate);
     var expensesSincePaycheck = getExpensesSincePaycheck(user.expense, user.paycheckDate);
 
@@ -89,38 +89,38 @@ function generateCards(user) {
     var totalBills = getTotalCost(billsUntilPaycheck);
     var budgetLeft = user.paycheck - totalCost;
     return [{
-        title: dictionary.getTranslation("cardTitle1"),
+        title: dictionary.getTranslation("cardTitle1", language),
         color: 'bg-primary',
         count: (isNaN(budgetLeft) ? 0 : budgetLeft),
         icon: 'fa-university'
     },
     {
-        title: dictionary.getTranslation("cardTitle2"),
+        title: dictionary.getTranslation("cardTitle2", language),
         color: 'bg-primary',
         count: totalBills,
         icon: 'fa-coins'
     },
     {
-        title: dictionary.getTranslation("cardTitle3"),
+        title: dictionary.getTranslation("cardTitle3", language),
         color: 'bg-primary',
         count: (isNaN(budgetLeft - totalBills) ? 0 : budgetLeft - totalBills),
         icon: 'fa-piggy-bank'
     }];
 }
 
-function generateAnalyitcs(user) {
+function generateAnalyitcs(user, language) {
     var lastMonthExpenses = getLastMonthExpenses(user.expense, user.paycheckDate);
     var analyzeExpenses = getExpenseAnalysis(lastMonthExpenses);
     var mostMoneySpentOn = getMostMoneySpentOn(analyzeExpenses);
     var mostTimesPurchased = getMostTimesPurchased(analyzeExpenses);
 
     return [{
-        rowName: dictionary.getTranslation("analyticsRowName1"),
+        rowName: dictionary.getTranslation("analyticsRowName1", language),
         color: 'rgb(94, 192, 193)',
         category: mostMoneySpentOn
     },
     {
-        rowName: dictionary.getTranslation("analyticsRowName2"),
+        rowName: dictionary.getTranslation("analyticsRowName2", language),
         color: 'rgb(251, 203, 72)',
         category: mostTimesPurchased
     }]
