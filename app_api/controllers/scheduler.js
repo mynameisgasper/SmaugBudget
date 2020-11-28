@@ -44,7 +44,7 @@ async function categoriesSeeder() {
     categories[4] = { name: 'Travel', color: 'rgb(88, 52, 179)' };
     categories[5] = { name: 'Home', color: 'rgb(173, 209, 52)' };
     categories[6] = { name: 'Gifts', color: 'rgb(50, 168, 82)' };
-    categories[7] = { name: 'Shopping', color: 'rgb(233, 125, 245)' };
+    categories[7] = { name: 'Shopping', color: 'rgb(48, 191, 98)' };
     categories[8] = { name: 'Utilities', color: 'rgb(81, 219, 237)' };
 
     let promise = new Promise(function(res, err) {

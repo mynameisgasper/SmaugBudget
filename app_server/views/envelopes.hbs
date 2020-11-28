@@ -54,15 +54,16 @@
                 <div class="modal-body">
                     <div class="ena">
                         <label for="chooseCategoryEnvelope">Category</label>
-                        <select id="inputCategory" name="chooseCategoryEnvelope" class="form-control">
-                            <option selected>Choose a category</option>
+                        <select id="inputCategory" name="chooseCategoryEnvelope" class="form-control" onchange="checkCategory(this)" required>
+                            <option value="" selected>Choose a category</option>
                             {{#each category}}
-                            <option id="category{{_id}}">{{name}}</option>
+                            <option value="{{name}}" id="category{{_id}}">{{name}}</option>
                             {{/each}}
+                            <option value="other">Make your own</option>
                         </select>
                    
                         <label for="categoryAddEnvelope"></label>
-                        <input type="text" class="form-control" id="ime" onfocusout="nameAdd(this)" name="categoryAddEnvelope" placeholder="Or create your own">
+                        <input type="text" class="form-control" id="ime" onfocusout="nameAdd(this)" name="categoryAddEnvelope" placeholder="Or create your own" style="display:none" disabled>
                     </div>
 
                     <div class="ena"><label for="inputAmount">Amount</label></br>
@@ -76,8 +77,8 @@
                     </div>
 
                     <div class="ena">
-                        <label for="colorPicker">Color Picker</label></br>
-                        <input type="color" id="colorPicker" name="colorPicker" value="#0000ff">
+                        <label id="colorPickerLabel" for="colorPicker" style="display:none" >Color Picker</label></br>
+                        <input type="color" id="colorPicker" name="colorPicker"  style="display:none" disabled>
                     </div>
 
                 </div>
@@ -88,7 +89,6 @@
         </div>
     </div>
 </div>
-
 
 {{#each envelope}}
 <div class="modal fade" id="editForm{{_id}}" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
@@ -118,7 +118,7 @@
             <!--- ADD FORM --->
             <form name="addEnvelope" method="post" action="/envelopes" onsubmit="return disableButton3({{id}})">
                 <div class="modal-body">
-                    <div class="ena"><label for="inputAmount">Amount</label></br>
+                    <div class="ena"><label for="inputAmount">New Budget</label></br>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">€</span>
