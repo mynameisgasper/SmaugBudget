@@ -38,7 +38,9 @@ var translationKeys = {
     settings: "settings",
     appearance: "appearance",
     light: "light",
-    dark: "dark"
+    dark: "dark",
+
+    noData: "No data"
 }
 
 function translate (language) {
@@ -113,17 +115,22 @@ function generateAnalyitcs(user, language) {
     var analyzeExpenses = getExpenseAnalysis(lastMonthExpenses);
     var mostMoneySpentOn = getMostMoneySpentOn(analyzeExpenses);
     var mostTimesPurchased = getMostTimesPurchased(analyzeExpenses);
-
-    return [{
-        rowName: dictionary.getTranslation("analyticsRowName1", language),
-        color: 'rgb(94, 192, 193)',
-        category: mostMoneySpentOn
-    },
-    {
-        rowName: dictionary.getTranslation("analyticsRowName2", language),
-        color: 'rgb(251, 203, 72)',
-        category: mostTimesPurchased
-    }]
+    
+    if (mostMoneySpentOn && mostTimesPurchased) {
+        return [{
+            rowName: dictionary.getTranslation("analyticsRowName1", language),
+            color: mostMoneySpentOn.color,
+            category: mostMoneySpentOn.name
+        },
+        {
+            rowName: dictionary.getTranslation("analyticsRowName2", language),
+            color: mostTimesPurchased.color,
+            category: mostTimesPurchased.name
+        }];
+    }
+    else {
+        return [];
+    }
 }
 
 function generateAlerts(user, language) {
@@ -148,12 +155,14 @@ function getExpenseAnalysis(expenses) {
         if (categories.get(expense.category.name)) {
             categories.get(expense.category.name).sum += parseInt(expense.value);
             categories.get(expense.category.name).count += 1;
+            categories.get(expense.category.name).color = expense.category.color;            
         }
         else {
             categories.set(expense.category.name, {});
             categories.get(expense.category.name).name = expense.category.name
             categories.get(expense.category.name).sum = parseInt(expense.value);
-            categories.get(expense.category.name).count = 1;    
+            categories.get(expense.category.name).count = 1;
+            categories.get(expense.category.name).color = expense.category.color;            
         }
     }
 
@@ -233,7 +242,7 @@ function getMostMoneySpentOn(expenseAnalitics) {
     }
 
     if (selectedAnalitic) {
-        return selectedAnalitic.name;
+        return selectedAnalitic;
     }
 }
 
@@ -248,7 +257,7 @@ function getMostTimesPurchased(expenseAnalitics) {
     }
 
     if (selectedAnalitic) {
-        return selectedAnalitic.name;
+        return selectedAnalitic;
     }
 }
 

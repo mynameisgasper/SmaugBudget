@@ -66,22 +66,29 @@
                         </table>
                     </div>
 
+                    {{#if analytics}}
                     <!----- Analytics section ----->
                     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                         <h4 style="text-align: center; padding-top: 35px; padding-bottom: 10px;">{{analyticsField}}</h4>
                     </div>
                     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 analytics-col" style="padding-bottom: 20px;">
+                        
                         <table class="table table-borderless table-hover tabela">
                             <tbody class="analytics-table">
                                 {{> analytics}}
                             </tbody>
                         </table>
                     </div>
+                    {{/if}}
                 </div>
             </div>
             <!----- Graph ----->
             <div class="col-xl-6 col-lg-6" style="padding-top: 25px;">
+                {{#if analytics}}
                 <canvas id="doughnut-canvas"></canvas>
+                {{else}}
+                <h4 style="text-align: center; padding-top: 35px; padding-bottom: 10px;">{{noData}}</h4>
+                {{/if}}
             </div>
         </div>
     </div>

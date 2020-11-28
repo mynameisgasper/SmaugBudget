@@ -84,7 +84,8 @@ var slovenian = {
     "analyticsCategory3": "Zabava",
     "analyticsRowName4": "Najmanjša sprememba od prejšnega meseca",
     "analyticsCategory4": "Telefon",
-    
+    "noData": "Ni podatkov",
+
     //income modal
     "incomeModalTitle": "Posodobite svoj prihodek",
     "incomeModalPlaceholderIncome": "Vnesite svoj prihodek",
@@ -238,6 +239,7 @@ var english = {
     "analyticsCategory3": "Entertainment",
     "analyticsRowName4": "Least change from last month",
     "analyticsCategory4": "Phone",
+    "noData": "No data",
     
     //income modal
     "incomeModalTitle": "Update your Income",
