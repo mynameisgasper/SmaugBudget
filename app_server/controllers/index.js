@@ -162,7 +162,6 @@ function logout(req, res, session) {
 
 module.exports = {
     get: function(req, res) {
-        console.log(req.headers.host);
         respond(res, req.session);
     },
     post: function(req, res) {

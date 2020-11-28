@@ -230,48 +230,48 @@ function uniqueCategory(categories, category) {
 }
 
 
-function parseRequestBody(body, res, session) {
-    switch (body.formType) {
+function parseRequestBody(req, res, session) {
+    switch (req.body.formType) {
         case 'addExpense':
             {
-                addExpense(body, res, session);
+                addExpense(req, res, session);
                 break;
             }
         case 'addEnvelope':
             {
-                addEnvelope(body, res, session);
+                addEnvelope(req, res, session);
                 break;
             }
         case 'deleteEnvelope':
             {
-                deleteEnvelope(body, res, session);
+                deleteEnvelope(req, res, session);
                 break;
             }
         case 'editEnvelope':
             {
-                editEnvelope(body, res, session);
+                editEnvelope(req, res, session);
                 break;
             }
     }
 }
 
 
-function addEnvelope(body, res, session) {
+function addEnvelope(req, res, session) {
     let data = {}
-    if (body.categoryAddEnvelope == undefined) {
+    if (req.body.categoryAddEnvelope == undefined) {
         data = {
             colorPicker: 'default',
-            categoryAddEnvelope: body.chooseCategoryEnvelope,
-            inputAmount: body.inputAmount,
-            month: body.setMonth,
+            categoryAddEnvelope: req.body.chooseCategoryEnvelope,
+            inputAmount: req.body.inputAmount,
+            month: req.body.setMonth,
             id: session.user._id
         }
     } else {
         data = {
-            colorPicker: body.colorPicker,
-            categoryAddEnvelope: body.categoryAddEnvelope,
-            inputAmount: body.inputAmount,
-            month: body.setMonth,
+            colorPicker: req.body.colorPicker,
+            categoryAddEnvelope: req.body.categoryAddEnvelope,
+            inputAmount: req.body.inputAmount,
+            month: req.body.setMonth,
             id: session.user._id
         }
     }
@@ -289,7 +289,7 @@ function addEnvelope(body, res, session) {
         var redirectLocation = '';
 
     var client = new Client();
-    client.post("http://localhost:8080/api/addEnvelope", args,
+    client.post("http://" + req.headers.host +"/api/addEnvelope", args,
         function(data, response) {
             if (response.statusCode == 200) {
                 res.session = session;
@@ -302,12 +302,12 @@ function addEnvelope(body, res, session) {
     );
 }
 
-function addExpense(body, res, session) {
+function addExpense(req, res, session) {
     const data = {
-        inputAmount: body.inputAmount,
-        category: body.inputCategory,
-        recipient: body.recipient,
-        date: body.date,
+        inputAmount: req.body.inputAmount,
+        category: req.body.inputCategory,
+        recipient: req.body.recipient,
+        date: req.body.date,
         user: session.user._id
     }
 
@@ -323,7 +323,7 @@ function addExpense(body, res, session) {
         var redirectLocation = '';
 
     var client = new Client();
-    client.post("http://localhost:8080/api/addExpense", args, function(data, response) {
+    client.post("http://" + req.headers.host + "/api/addExpense", args, function(data, response) {
         if (response.statusCode == 200) {
             res.session = session;
             res.session.user = data;
@@ -334,10 +334,10 @@ function addExpense(body, res, session) {
     });
 }
 
-function deleteEnvelope(body, res, session) {
+function deleteEnvelope(req, res, session) {
     const data = {
         user: session.user._id,
-        envelope_id: body.id
+        envelope_id: req.body.id
     }
 
     var args = {
@@ -352,7 +352,7 @@ function deleteEnvelope(body, res, session) {
         var redirectLocation = '';
 
     var client = new Client();
-    client.post("http://localhost:8080/api/deleteEnvelope", args, function(data, response) {
+    client.post("http://" + req.headers.host + "/api/deleteEnvelope", args, function(data, response) {
         if (response.statusCode == 200) {
             res.session = session;
             res.session.user = data;
@@ -364,11 +364,11 @@ function deleteEnvelope(body, res, session) {
 
 }
 
-function editEnvelope(body, res, session) {
+function editEnvelope(req, res, session) {
     const data = {
-        inputAmount: body.inputAmount,
-        colorPicker: body.colorPicker,
-        id: body.id,
+        inputAmount: req.body.inputAmount,
+        colorPicker: req.body.colorPicker,
+        id: req.body.id,
         user: session.user._id
     }
 
@@ -384,7 +384,7 @@ function editEnvelope(body, res, session) {
         var redirectLocation = '';
 
     var client = new Client();
-    client.post("http://localhost:8080/api/editEnvelope", args, function(data, response) {
+    client.post("http://" + req.headers.host + "/api/editEnvelope", args, function(data, response) {
         if (response.statusCode == 200) {
             res.session = session;
             res.session.user = data;
@@ -419,6 +419,6 @@ module.exports = {
         respond(res, req.session, req);
     },
     post: function(req, res) {
-        parseRequestBody(req.body, res, req.session);
+        parseRequestBody(req, res, req.session);
     }
 }

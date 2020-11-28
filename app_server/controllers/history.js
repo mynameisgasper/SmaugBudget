@@ -84,14 +84,14 @@ function translateMonth(month) {
     }
 }
 
-function editExpense(body, res, session) {
+function editExpense(req, res, session) {
 
     const data = {
-        expId: body.id,
-        expCategory: body.kategorija,
-        payee: body.prejemnik,
-        amount: body.vsota,
-        date: body.datumcek,
+        expId: req.body.id,
+        expCategory: req.body.kategorija,
+        payee: req.body.prejemnik,
+        amount: req.body.vsota,
+        date: req.body.datumcek,
         id: session.user._id
     }
 
@@ -101,7 +101,7 @@ function editExpense(body, res, session) {
     };
 
     var client = new Client();
-    client.post("http://localhost:8080/api/editExpense", args, function(data, response) {
+    client.post("http://" + req.headers.host + "/api/editExpense", args, function(data, response) {
         if (response.statusCode == 200) {
             res.session = session;
             res.session.user = data;
@@ -191,6 +191,6 @@ module.exports = {
         respond(res, req.session);
     },
     post: function(req, res) {
-        editExpense(req.body, res, req.session);
+        editExpense(req, res, req.session);
     }
 }

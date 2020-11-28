@@ -22,7 +22,7 @@ function confirmEmail(req, res) {
     
 
     var client = new Client();
-    client.post('http://localhost:8080/api/confirm/' + url + '/' + code, args, function (data, response) {
+    client.post('http://' + req.headers.host + '/api/confirm/' + url + '/' + code, args, function (data, response) {
         if (response.statusCode == 200) {
             res.redirect('/');
         }

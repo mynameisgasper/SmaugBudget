@@ -102,26 +102,26 @@ function respond(res, session) {
     }
 }
 
-function parseRequestBody(reqBody, res, session) {
-    switch (reqBody.formType) {
+function parseRequestBody(req, res, session) {
+    switch (req.body.formType) {
         case 'changeName':
             {
-                changeName(reqBody, res, session);
+                changeName(req, res, session);
                 break;
             }
         case 'changeLanguage':
             {
-                changeLanguage(reqBody, res, session);
+                changeLanguage(req, res, session);
                 break;
             }
 
     }
 }
 
-function changeName(body, res, session) {
+function changeName(req, res, session) {
     const data = {
-        firstName: body.firstName,
-        lastName: body.lastName,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
         email: session.user.email
     }
 
@@ -131,7 +131,7 @@ function changeName(body, res, session) {
     };
 
     var client = new Client();
-    client.post("http://localhost:8080/api/updateUser", args,
+    client.post("http://" + req.headers.host + "/api/updateUser", args,
         function(data, response) {
             if (response.statusCode == 200) {
                 res.session = session;
@@ -144,9 +144,9 @@ function changeName(body, res, session) {
     );
 }
 
-function changeLanguage(body, res, session) {
+function changeLanguage(req, res, session) {
     const data = {
-        language: body.language,
+        language: req.body.language,
         email: session.user.email
     }
 
@@ -156,7 +156,7 @@ function changeLanguage(body, res, session) {
     };
 
     var client = new Client();
-    client.post("http://localhost:8080/api/updateUser", args,
+    client.post("http://" + req.headers.host + "/api/updateUser", args,
         function(data, response) {
             if (response.statusCode == 200) {
                 res.session = session;
@@ -169,10 +169,10 @@ function changeLanguage(body, res, session) {
     );
 }
 
-function getNewUsers(res, session, connectionName) {
+function getNewUsers(req, res, session, connectionName) {
     var allUsers = "wait";
     var client = new Client();
-    client.get("http://localhost:8080/api/getNewUsers?email=KRzoneee@gmail.com&connectionName='" + connectionName + "'", function(resData, response) {
+    client.get("http://" + req.headers.host + "/api/getNewUsers?email=KRzoneee@gmail.com&connectionName='" + connectionName + "'", function(resData, response) {
         allUsers = resData;
     });
     while (allUsers === "wait");
@@ -249,6 +249,6 @@ module.exports = {
         }
     },
     post: function(req, res) {
-        parseRequestBody(req.body, res, req.session);
+        parseRequestBody(req, res, req.session);
     }
 }

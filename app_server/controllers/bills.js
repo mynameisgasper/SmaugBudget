@@ -50,34 +50,34 @@ function respond(res, session) {
     }
 }
 
-function parseRequestBody(body, res, session) {
-    switch (body.formType) {
+function parseRequestBody(req, res, session) {
+    switch (req.body.formType) {
         case 'addBill':
             {
-                addBill(body, res, session);
+                addBill(req, res, session);
                 break;
             }
         case 'editBill':
             {
-                editBill(body, res, session);
+                editBill(req, res, session);
                 break;
             }
         case 'deleteBill':
             {
-                deleteBill(body, res, session);
+                deleteBill(req, res, session);
                 break;
             }
     }
 }
 
 
-function addBill(body, res, session) {
+function addBill(req, res, session) {
     const data = {
-        inputCategory: body.inputCategory,
-        Payee: body.Payee,
-        Amount: body.Amount,
-        inputDateAddBill: body.inputDateAddBill,
-        rad: body.rad,
+        inputCategory: req.body.inputCategory,
+        Payee: req.body.Payee,
+        Amount: req.body.Amount,
+        inputDateAddBill: req.body.inputDateAddBill,
+        rad: req.body.rad,
         id: session.user._id
     }
 
@@ -87,7 +87,7 @@ function addBill(body, res, session) {
     };
 
     var client = new Client();
-    client.post("http://localhost:8080/api/addBill", args,
+    client.post("http://" + req.headers.host + "/api/addBill", args,
         function(data, response) {
             if (response.statusCode == 200) {
                 res.session = session;
@@ -100,14 +100,14 @@ function addBill(body, res, session) {
     );
 }
 
-function editBill(body, res, session) {
+function editBill(req, res, session) {
     const data = {
-        billId: body.billId,
-        inputCategory: body.inputCategory,
-        payee: body.Payee2,
-        amount: body.Amount2,
-        date: body.inputDate,
-        repeat: body.radio,
+        billId: req.body.billId,
+        inputCategory: req.body.inputCategory,
+        payee: req.body.Payee2,
+        amount: req.body.Amount2,
+        date: req.body.inputDate,
+        repeat: req.body.radio,
         id: session.user._id
     }
 
@@ -117,7 +117,7 @@ function editBill(body, res, session) {
     };
 
     var client = new Client();
-    client.post("http://localhost:8080/api/editBill", args, function(data, response) {
+    client.post("http://" + req.headers.host + "/api/editBill", args, function(data, response) {
         if (response.statusCode == 200) {
             res.session = session;
             res.session.user = data;
@@ -128,9 +128,9 @@ function editBill(body, res, session) {
     });
 }
 
-function deleteBill(body, res, session) {
+function deleteBill(req, res, session) {
     const data = {
-        bill_id: body.id,
+        bill_id: req.body.id,
         user_id: session.user._id
     }
 
@@ -141,7 +141,7 @@ function deleteBill(body, res, session) {
 
 
     var client = new Client();
-    client.post("http://localhost:8080/api/deleteBill", args, function(data, response) {
+    client.post("http://" + req.headers.host + "/api/deleteBill", args, function(data, response) {
         if (response.statusCode == 200) {
             res.session = session;
             res.session.user = data;
@@ -300,6 +300,6 @@ module.exports = {
         respond(res, req.session);
     },
     post: function(req, res) {
-        parseRequestBody(req.body, res, req.session);
+        parseRequestBody(req, res, req.session);
     }
 }
