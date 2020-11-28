@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 var dbURI = config.database.url;
 if (process.env.NODE_ENV === 'production') {
-    dbURI = "mongodb+srv://user:smauguser!@smaugbudget.tv1kk.mongodb.net/SmaugBudget?retryWrites=true&w=majority";;
+    dbURI = MONGODB_CLOUD_URI;
 } else if (process.env.NODE_ENV === 'docker') {
     dbURI = 'mongodb://mongo-db/SmaugBudget';
 }
@@ -13,9 +13,7 @@ mongoose.connect(dbURI, {
     useCreateIndex: true,
     useUnifiedTopology: true,
     useFindAndModify: false
-});
-
-console.log("HEJ HOJ");
+}).catch(err => console.log( err ));
 
 mongoose.connection.on('connected', () => {
     console.log(`Connected to MongoDB ${dbURI}.`);
