@@ -82,39 +82,39 @@ Lastni projekt pri predmetu **Spletno programiranje** v študijskem letu **2020/
 
 ### Knjižnice  
 
-#### Body-parser(https://www.npmjs.com/package/body-parser)  
+#### [Body-parser](https://www.npmjs.com/package/body-parser)  
 - Branje body requesta.  
   
-#### Cron(https://www.npmjs.com/package/cron)  
+#### [Cron](https://www.npmjs.com/package/cron)  
 - Periodièno posodabljanje tarif za pretvorbo valut  
 - Periodièno vstavljanje raèunov med stroške  
 - Postavljanje plaè v prejšni mesec (in ob posodabljanju plaèe)  
   
-#### jssha(https://www.npmjs.com/package/jssha)  
+#### [jssha](https://www.npmjs.com/package/jssha)  
 - Enkripcija gesel  
   
-#### multer(https://www.npmjs.com/package/multer)  
+#### [multer](https://www.npmjs.com/package/multer)  
 - Nalaganje slik ter vrnitev poti do slike  
   
-#### Node-rest-client(https://www.npmjs.com/package/node-rest-client)  
+#### [Node-rest-client](https://www.npmjs.com/package/node-rest-client)  
 - Upravljanje z zahtevami na REST Clientu  
   
-#### Nodemailer(https://www.npmjs.com/package/nodemailer)  
+#### [Nodemailer](https://www.npmjs.com/package/nodemailer)  
 - Pošiljanje e-pošte za potrditev registracije in ponastavitev gesla.
   
-#### Nodemailer-mailgun-transport(https://www.npmjs.com/package/nodemailer-mailgun-transport)  
+#### [Nodemailer-mailgun-transport](https://www.npmjs.com/package/nodemailer-mailgun-transport)  
 - Pošiljanje e-pošte za potrditev registracije in ponastavitev gesla.  
   
-#### pdf-creator-node(https://www.npmjs.com/package/pdf-creator-node)  
+#### [pdf-creator-node](https://www.npmjs.com/package/pdf-creator-node)  
 - Ustvarjanje preprostih PDF poroèil.  
   
-#### Chart-js(https://www.chartjs.org/)  
+#### [Chart-js](https://www.chartjs.org/)  
 - Ustvarjanje grafov  
   
-#### Date-range-selector(https://www.daterangepicker.com/)  
+#### [Date-range-selector](https://www.daterangepicker.com/)  
 - Izbira dveh datumov za filtriranje podatkov  
   
-#### Bootstrap select(https://developer.snapappointments.com/bootstrap-select/)  
+#### [Bootstrap select](https://developer.snapappointments.com/bootstrap-select/)  
 - Za multiselect, dropdown, izbiro envelopov itd.  
   
   
@@ -142,7 +142,7 @@ Lastni projekt pri predmetu **Spletno programiranje** v študijskem letu **2020/
 
 - Add Expense  
     - Category: Uporabnik mora izbrati eno izmed kategorij. Izbira ne sme ostati na Choose a Category.  
-    - Recipient: Dovoljen je vnos malih in velikih tiskanih èrk angleške abecede, števil ter posebnih znakov (_ @ . / # & + -). Niz je omejen na najveèjo dolžino 20 znakov.  
+    - Recipient: Dovoljen je vnos malih in velikih tiskanih èrk angleške abecede, števil ter posebnih znakov (_ @ . / # & + - in presledk). Niz je omejen na najveèjo dolžino 20 znakov.  
     - Amount: Dovoljen je vnos decimalnega števila z najveè 2 decimalni mesti in decimalno piko.  
     - Date: Dovoljen je vnos datuma, ki je "manjši" ali enak današnjemu.  
       
@@ -192,7 +192,7 @@ Lastni projekt pri predmetu **Spletno programiranje** v študijskem letu **2020/
 #### History  
 
 - Edit expense  
-    - Recipient: What's your goal: Dovoljen je vnos malih in velikih tiskanih èrk angleške abecede, števil ter posebnih znakov (_ @ . / # & + -). Niz je omejen na najveèjo dolžino 20  
+    - Recipient: What's your goal: Dovoljen je vnos malih in velikih tiskanih èrk angleške abecede, števil ter posebnih znakov (_ @ . / # & + - in preseledk). Niz je omejen na najveèjo dolžino 20  
     - Amount: Dovoljen je vnos decimalnega števila z najveè 2 decimalni mesti in decimalno piko.  
     - Date: Dovoljen je vnos datuma, ki je "manjši" ali enak današnjemu.  
       
@@ -207,8 +207,8 @@ Lastni projekt pri predmetu **Spletno programiranje** v študijskem letu **2020/
 #### Settings  
 
 - Account  
-    - First name: Dovoljene so vse èrke angleške abecede. Niz je omejen na najveèjo dolžino 20 znakov.  
-    - Last name: Dovoljene so vse èrke angleške abecede. Niz je omejen na najveèjo dolžino 20 znakov.  
+    - First name: Dovoljene so vse črke angleške abecede. Niz je omejen na najveèjo dolžino 20 znakov.  
+    - Last name: Dovoljene so vse črke angleške abecede. Niz je omejen na najveèjo dolžino 20 znakov.  
     - Geslo: Mora vsebovati vsaj 6 znakov in izpolnjevati vsaj eno od sledeèih kategorij:  
         - vsebuje vsaj eno malo in vsaj en veliko tiskano èrko,  
         - vsebuje vsaj eno malo tiskano èrko in vsaj eno številko,  
@@ -225,8 +225,6 @@ Lastni projekt pri predmetu **Spletno programiranje** v študijskem letu **2020/
 
 
 ## 3. LP
-
-Dinamična spletna aplikacija s podatkovno bazo
 
 
 ## 4. LP
