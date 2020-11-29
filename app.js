@@ -8,6 +8,9 @@ var helpers = require('./app_server/views/helpers/hbsh');
 const session = require('express-session');
 var app = express();
 
+//Currencies
+var currencies = [];
+
 //Business logic
 var notFound404 = require('./app_server/controllers/not_found.js');
 
@@ -60,5 +63,6 @@ app.all('*', (req, res) => {
 module.exports = {
     startServer: (port) => {
         app.listen(port, () => console.log("Server started"));
-    }
+    },
+    currencies: currencies
 }

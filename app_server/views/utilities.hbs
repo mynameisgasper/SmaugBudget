@@ -223,9 +223,9 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form name="addGroup" method="post" action="/" onsubmit="return disableButton2()">
+            <form name="addGroup" method="post" action="/utility" onsubmit="return disableButton2()">
                 <input type="hidden" value="addGroup" name="formType">
-                <input type="hidden" value="{{setMonthNumber}}" name="setMonth">
+                <input type="hidden" value="2" name="counter" id="counter">
                 <div class="modal-body" id="inputMemberBody">  
                   <label for="inputGroupName">Input group name</label>
                   <input type="text" class="form-control" placeholder="Group Name" name="inputGroupName"></br>

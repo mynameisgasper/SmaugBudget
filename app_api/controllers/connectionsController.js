@@ -64,39 +64,58 @@ function getUserConnections(params, res, session) {
 
 function addConnection(body, res, session) {
     try {
+        console.log(body.users);
+        if (body.users !== "undefined") {
+            body.users = JSON.parse(body.users);
+        } else {
+            body.users = [];
+        }
+        if (body.envelopes !== "undefined") {
+            body.envelopes = JSON.parse(body.envelopes);
+        } else {
+            body.envelopes = [];
+        }
+        body.users.push(body.email);
+        
         if (body.users && body.envelopes) {
-            Connections.findOne({ 'name' : body.connectionName, 'hostUser.email' : session.user.email }, function(err, user) {
+            console.log("line0" + body.email);
+            Connections.findOne({ 'name' : body.connectionName, 'hostUser.email' : body.email }, function(err, user) {
                 if (err) {
                     console.log(err);
                 } else {
+                    console.log("line1");
                     if (user) {
                         res.sendStatus(403);
                     } else {
-                        User.find({ '_id' : { $in : body.users }}, function (err, users) {
+                        User.find({ 'email' : { $in : body.users }}, function (err, users) {
                             if (err) {
                                 console.log(err);
                             } else {
+                                console.log("line2");
                                 if (users) {
                                     Envelopes.find({ '_id' : { $in : body.envelopes } }, function (err, envelopes) {
                                         if (err) {
                                             console.log(err);
                                         } else {
                                             if (envelopes) {
+                                                console.log(users);
                                                 let con = new Connections ({
                                                     name: body.connectionName,
-                                                    guestName: body.connectionName_session.user.lastname,
+                                                    guestName: body.connectionName+"_",
                                                     active: true,
                                                     user: users,
-                                                    hostUser: users.find(x => x.email === session.user.email),
+                                                    hostUser: users.find(x => x.email === body.email),
                                                     envelopes: envelopes
                                                 });
+                                                con.guestName = con.guestName + con.hostUser.lastname;
+                                                
                                                 con.save();
                                                 for (var i = 0; i < users.length; i++) {
                                                     users[i].connections.push(con);
                                                     let usrTren = users[i];
                                                     usrTren.save();
                                                 }
-                                                res.sendStatus(200).json("success");
+                                                res.status(200).json(con.hostUser);
                                             } else {
                                                 res.sendStatus(404); 
                                             }
@@ -114,6 +133,7 @@ function addConnection(body, res, session) {
             res.sendStatus(403);
         }
     } catch (ex) {
+        console.log(ex);
         res.sendStatus(500);
     }
 }

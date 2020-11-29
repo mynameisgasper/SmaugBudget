@@ -1,10 +1,11 @@
 //Dependencies
 var dictionary = require('./Dictionary');
+var Client = require('node-rest-client').Client;
 
 var data = {
     utility: true,
     fileName: 'utilities',
-    groupMember: [{
+    /*groupMember: [{
         id: 1,
         name: 'Grega',
         amount: '+5,00'
@@ -33,7 +34,7 @@ var data = {
         Group: 'Fri group',
         Next: 'Kranjec',
         Balance: '+15,3'
-    }]
+    }]*/
 };
 
 var translationKeys = {
@@ -63,6 +64,52 @@ function translate (language) {
     return translatedKeys;
 }
 
+function parseRequestBody(req, res, session) {
+    switch (req.body.formType) {
+        case 'addGroup':
+            {
+                addGroup(req, res, session);
+                break;
+            }
+    }
+}
+
+function addGroup(req, res, session) {
+    var counter = req.body.counter;
+    var friends = [];
+    for(var i = 1; i <= counter; i++){
+        var inputMember = "inputMember" + i;
+        friends[i - 1] = req.body[inputMember];
+    }
+
+    const data = {
+        name: req.body.inputGroupName,
+        friends: JSON.stringify(friends),
+        user_id: session.user._id
+    }
+
+    var args = {
+        data: data,
+        headers: { "Content-Type": "application/x-www-form-urlencoded" }
+    };
+
+    var client = new Client();
+    client.post("http://" + req.headers.host + "/api/addFriendGroup", args,
+        function(data, response) {
+            if (response.statusCode == 200) {
+                res.session = session;
+                res.session.user = data;
+                res.redirect('/utility');
+            } else {
+                console.log(response.statusCode);
+                res.redirect('/utility#error');
+                
+            }
+        }
+    );
+}
+
+
 function respond(res, session) {
     if (session.user) {
         if (session.user.language) {
@@ -70,6 +117,7 @@ function respond(res, session) {
         } else {
             data = {...data, ...translationKeys};
         }
+        data.Friend = generateGroups(session.user.friendgroups)
         res.render('utilities', data);
     }
     else {
@@ -77,8 +125,24 @@ function respond(res, session) {
     }
 }
 
+function generateGroups(groups){
+    var groupsArray = [];
+
+    for(var group of groups){
+        groupsArray.push({
+            Group: group.name,
+            Next: 'TBD',
+            Balance: group.balance
+        })
+    }
+    return groupsArray;
+}
+
 module.exports = {
     get: function(req, res) {
         respond(res, req.session);
+    },
+    post: function(req, res) {
+        parseRequestBody(req, res, req.session);
     }
 }

@@ -46,7 +46,7 @@ Lastni projekt pri predmetu **Spletno programiranje** v študijskem letu **2020/
     - Mikroaplikacija, ki omogoča pregled plačil v tvoji družbi in poskrbi za poravnane račune. (Plačila tudi avtomatsko doda med plačila)	
 
 - [**Settings**](https://github.com/sp-2020-2021/LP-30/blob/master/docs/account.html)	
-    - Nastavitve uporabniškega profila vključno s profilno sliko (nastavitev profilne slike bo mogoča z drag&drop)
+    - Nastavitve uporabniškega profila vključno s profilno sliko.
     - Povezovanje z drugimi računi (partner, prijatelji). Sistem omogoča da deliš z njimi le določene kategorije oz. kuverte, ostale ostanejo skrite	
 
 - **Ostale funkcionalnosti**	
@@ -142,7 +142,7 @@ Lastni projekt pri predmetu **Spletno programiranje** v študijskem letu **2020/
 
 - Add Expense  
     - Category: Uporabnik mora izbrati eno izmed kategorij. Izbira ne sme ostati na Choose a Category.  
-    - Recipient: Dovoljen je vnos malih in velikih tiskanih črk angleške abecede, števil ter posebnih znakov (_ @ . / # & + -). Niz je omejen na največjo dolžino 20 znakov.  
+    - Recipient: Dovoljen je vnos malih in velikih tiskanih črk angleške abecede, števil, posebnih znakov (_ @ . / # & + - :) ter presledkov. Niz je omejen na največjo dolžino 20 znakov.  
     - Amount: Dovoljen je vnos decimalnega števila z največ 2 decimalni mesti in decimalno piko.  
     - Date: Dovoljen je vnos datuma, ki je "manjši" ali enak današnjemu.  
       
@@ -160,13 +160,13 @@ Lastni projekt pri predmetu **Spletno programiranje** v študijskem letu **2020/
     - Amount: Dovoljen je vnos decimalnega števila z največ 2 decimalni mesti in decimalno piko.  
       
 - Add Goal  
-    - What's your goal: Dovoljen je vnos malih in velikih tiskanih črk angleške abecede, števil ter posebnih znakov (_ @ . / # & + -). Niz je omejen na največjo dolžino 20 znakov.  
+    - What's your goal: Dovoljen je vnos malih in velikih tiskanih črk angleške abecede, števil, posebnih znakov (_ @ . / # & + - :) ter presledkov. Niz je omejen na največjo dolžino 20 znakov.  
     - Category: Uporabnik mora izbrati eno izmed kategorij. Izbira ne sme ostati na Select Category.  
     - How much: Dovoljen je vnos decimalnega števila z največ 2 decimalni mesti in decimalno piko. 
     - Date: Dovoljen je vnos datuma, ki je "večji" ali enak današnjemu. 
       
 - Edit Goal  
-    - What's your goal: Dovoljen je vnos malih in velikih tiskanih črk angleške abecede, števil ter posebnih znakov (_ @ . / # & + -). Niz je omejen na največjo dolžino 20 znakov.  
+    - What's your goal: Dovoljen je vnos malih in velikih tiskanih črk angleške abecede, števil, posebnih znakov (_ @ . / # & + - :) ter presledkov. Niz je omejen na največjo dolžino 20 znakov.  
     - Category: Uporabnik mora izbrati eno izmed kategorij. Izbira ne sme ostati na Select Category.  
     - How much: Dovoljen je vnos decimalnega števila z največ 2 decimalni mesti in decimalno piko.  
     - Date: Dovoljen je vnos datuma, ki je "večji" ali enak današnjemu.  
@@ -176,14 +176,14 @@ Lastni projekt pri predmetu **Spletno programiranje** v študijskem letu **2020/
 
 - Add bill  
     - Category: Uporabnik mora izbrati eno izmed kategorij. Izbira ne sme ostati na Select Category.  
-    - Payee: What's your goal: Dovoljen je vnos malih in velikih tiskanih črk angleške abecede, števil ter posebnih znakov (_ @ . / # & + -). Niz je omejen na največjo dolžino 20  
+    - Payee: What's your goal: Dovoljen je vnos malih in velikih tiskanih črk angleške abecede, števil, posebnih znakov (_ @ . / # & + - :) ter presledkov. Niz je omejen na največjo dolžino 20  
     - Amount: Dovoljen je vnos decimalnega števila z največ 2 decimalni mesti in decimalno piko.  
     - Date: Date: Dovoljen je vnos datuma, ki je "večji" ali enak današnjemu.  
     - How often: Izbrana mora biti ena izmed opcij.  
       
 - Edit bill  
     - Category: Uporabnik mora izbrati eno izmed kategorij. Izbira ne sme ostati na Select Category.  
-    - Payee: What's your goal: Dovoljen je vnos malih in velikih tiskanih črk angleške abecede, števil ter posebnih znakov (_ @ . / # & + -). Niz je omejen na največjo dolžino 20  
+    - Payee: What's your goal: Dovoljen je vnos malih in velikih tiskanih črk angleške abecede, števil, posebnih znakov (_ @ . / # & + - :) ter presledkov. Niz je omejen na največjo dolžino 20  
     - Amount: Dovoljen je vnos decimalnega števila z največ 2 decimalni mesti in decimalno piko.  
     - Date: Date: Dovoljen je vnos datuma, ki je "večji" ali enak današnjemu.  
     - How often: Izbrana mora biti ena izmed opcij.  
@@ -192,7 +192,7 @@ Lastni projekt pri predmetu **Spletno programiranje** v študijskem letu **2020/
 #### History  
 
 - Edit expense  
-    - Recipient: What's your goal: Dovoljen je vnos malih in velikih tiskanih črk angleške abecede, števil ter posebnih znakov (_ @ . / # & + -). Niz je omejen na največjo dolžino 20  
+    - Recipient: What's your goal: Dovoljen je vnos malih in velikih tiskanih črk angleške abecede, števil, posebnih znakov (_ @ . / # & + - :) ter presledkov. Niz je omejen na največjo dolžino 20  
     - Amount: Dovoljen je vnos decimalnega števila z največ 2 decimalni mesti in decimalno piko.  
     - Date: Dovoljen je vnos datuma, ki je "manjši" ali enak današnjemu.  
       
@@ -231,7 +231,7 @@ Lastni projekt pri predmetu **Spletno programiranje** v študijskem letu **2020/
   
 ### Navodila za uporabo z Docker  
 
-1. Vpišemo ukaz docker-compose up  
+1. Vpišemo ukaz docker-compose up --build  
 2. Gremo na brsklalnik na spletni naslov localhost:8080/db  
 3. Ustvarimo podatke v bazi  
 4. Gremo na brsklalnik na spletni naslov localhost:8080

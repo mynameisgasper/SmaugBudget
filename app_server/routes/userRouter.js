@@ -73,6 +73,15 @@ router.get('/utility', (req, res) => {
     }
 });
 
+router.post('/utility', (req, res) => {
+    if(req.session.user.isPremium == true) {
+        utility.post(req, res);
+    }
+    else {
+        res.redirect('dashboard#notpremium');
+    }
+});
+
 //Account info
 router.get('/account', (req, res) => {
     account.get(req, res);

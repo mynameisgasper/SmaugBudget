@@ -131,16 +131,56 @@ function surnameRegex() {
     }
 }
 
-function addMemberBtn(conId) {
-    if (conId) {
+function ConNameRegex(element) {
 
+    var regex = new RegExp("^([a-zA-Z0-9 ]){1,20}$");
+    if (!element.value.match(regex)) {
+        element.style.borderColor = "red";
+        $('.tt1').toast('show');
+        return 0;
     } else {
-        var inputs = $("#edit-personNew")[0].parentNode.parentNode.parentNode.getElementsByTagName("input");
-        checkIfAdded(inputs, "edit-personNew");
+        element.style.borderColor = "#ced4da";
+        $('.tt1').toast('hide');
+        return 1;
     }
 }
 
-function checkIfAdded(inputs, last) {
+function disableButton2(button) {
+    var form = button.parentNode.parentNode;
+    var name = ConNameRegex(button.parentNode.parentNode.getElementsByClassName("connectionName")[0]);
+
+    if (name == 0) {
+        return false;
+    } else {
+        var inputs = form.getElementsByTagName("input");
+        for (var i = 0; i < inputs.length; i++) {
+            inputs[i].removeAttribute("disabled");
+        }
+        
+        return true;
+    }
+}
+
+var counter = 0;
+
+function addMemberBtn(button) {
+    button.parentNode.parentNode.parentNode.innerHTML = '<tr id="edit-addConTr{{_id}}" class="collapse show">' +
+    '<th>' +
+    '  <input type="text" name="editPerson[]" placeholder="" value="' + $("#editPersonNew")[0].value + '" class="form-control col-sm-9 col-md-9 col-lg-9 col-xl-9" disabled>' +
+    '</th>' +
+    '<th>' +
+    '  <button type="button" class="btn btn-danger" onclick="removeConUser(this)" style="float: right;" data-toggle="collapse" data-target="#edit-addConTr{{_id}}" aria-expanded="false" aria-controls="collapseExample">' +
+    '   <i class="fas fa-trash-alt"></i>' +
+    '  </button>' +
+    '</th>' +
+    '</tr>' + $("#editPersonNew")[0].parentNode.parentNode.parentNode.innerHTML;
+
+    $("#editPersonNew")[0].value = "";
+}
+
+function checkIfAdded(button) {
+    var inputs = button.parentNode.parentNode.parentNode.getElementsByTagName("input");
+    var last = "editPersonNew";
     for (var i = 0; i < inputs.length; i++) {
         if ((inputs[i].id != last) && (inputs[i].value == $("#"+last)[0].value)) {
             return true;
@@ -148,15 +188,23 @@ function checkIfAdded(inputs, last) {
     }
 
     var xhr  = new XMLHttpRequest();              // create XMLHttpRequest
-    var data = {email: $("#"+last)[0].value};     // create formData object
+        // create formData object
     
     
     xhr.onload = function() {
         console.log(xhr.status); // whatever the server returns
-        
+        if (xhr.status == 200) {
+            addMemberBtn(button);
+        } else {
+            return true;
+        }
     }
 
-    xhr.open("post", "/api/retrieveUserEmail");      // open connection
-    xhr.send(data);                     // send data
-    return false;
+    xhr.open("post", "/api/getUserEmail");      // open connection
+    xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    xhr.send("email=" + $("#"+last)[0].value);                     // send data
+}
+
+function removeConUser(element) {
+    element.parentNode.parentNode.remove();
 }
