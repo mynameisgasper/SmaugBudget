@@ -79,7 +79,7 @@
                             <label for="Amount">Amount</label><br>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text">€</span>
+                                        <span class="input-group-text">{{../currency}}</span>
                                     </div>
                             <input type="number" id="Amount3{{id}}" name="vsota" class="form-control"  onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" onfocusout="amount3(this)" placeholder="e.g. $150.30" value="{{value}}" step="any"required="required">
                             <div id="{{id}}amm"></div>

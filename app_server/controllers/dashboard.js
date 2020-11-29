@@ -14,7 +14,7 @@ var translationKeys = {
     welcomeMessage: "welcomeMessageDashboard",
 
     alertSection: "alertSection",
-    overview:  "overview",
+    overview: "overview",
     incomeRow: "incomeRow",
     expensesRow: "expensesRow",
     balanceRow: "balanceRow",
@@ -43,7 +43,7 @@ var translationKeys = {
     noData: "No data"
 }
 
-function translate (language) {
+function translate(language) {
     var translatedKeys = JSON.parse(JSON.stringify(translationKeys));
     Object.keys(translationKeys).forEach(function(key) {
         translatedKeys[key] = dictionary.getTranslation(translatedKeys[key], language);
@@ -63,9 +63,9 @@ function translate (language) {
 function respond(res, session) {
     if (session.user) {
         if (session.user.language) {
-            data = {...data, ...translate(session.user.language)};
+            data = {...data, ...translate(session.user.language) };
         } else {
-            data = {...data, ...translationKeys};
+            data = {...data, ...translationKeys };
         }
 
         data.card = generateCards(session.user, session.user.language);
@@ -75,10 +75,10 @@ function respond(res, session) {
         data.alert = generateAlerts(session.user, session.user.language);
         data.alertLength = data.alert.length;
         data.id = session.user._id;
+        data.currency = session.user.defaultCurrency;
 
         res.render('dashboard', data);
-    }
-    else {
+    } else {
         res.redirect('/');
     }
 }
@@ -91,23 +91,24 @@ function generateCards(user, language) {
     var totalBills = getTotalCost(billsUntilPaycheck);
     var budgetLeft = user.paycheck - totalCost;
     return [{
-        title: dictionary.getTranslation("cardTitle1", language),
-        color: 'bg-primary',
-        count: (isNaN(budgetLeft) ? 0 : budgetLeft),
-        icon: 'fa-university'
-    },
-    {
-        title: dictionary.getTranslation("cardTitle2", language),
-        color: 'bg-primary',
-        count: totalBills,
-        icon: 'fa-coins'
-    },
-    {
-        title: dictionary.getTranslation("cardTitle3", language),
-        color: 'bg-primary',
-        count: (isNaN(budgetLeft - totalBills) ? 0 : budgetLeft - totalBills),
-        icon: 'fa-piggy-bank'
-    }];
+            title: dictionary.getTranslation("cardTitle1", language),
+            color: 'bg-primary',
+            count: (isNaN(budgetLeft) ? 0 : budgetLeft),
+            icon: 'fa-university'
+        },
+        {
+            title: dictionary.getTranslation("cardTitle2", language),
+            color: 'bg-primary',
+            count: totalBills,
+            icon: 'fa-coins'
+        },
+        {
+            title: dictionary.getTranslation("cardTitle3", language),
+            color: 'bg-primary',
+            count: (isNaN(budgetLeft - totalBills) ? 0 : budgetLeft - totalBills),
+            icon: 'fa-piggy-bank'
+        }
+    ];
 }
 
 function generateAnalyitcs(user, language) {
@@ -115,20 +116,20 @@ function generateAnalyitcs(user, language) {
     var analyzeExpenses = getExpenseAnalysis(lastMonthExpenses);
     var mostMoneySpentOn = getMostMoneySpentOn(analyzeExpenses);
     var mostTimesPurchased = getMostTimesPurchased(analyzeExpenses);
-    
+
     if (mostMoneySpentOn && mostTimesPurchased) {
         return [{
-            rowName: dictionary.getTranslation("analyticsRowName1", language),
-            color: mostMoneySpentOn.color,
-            category: mostMoneySpentOn.name
-        },
-        {
-            rowName: dictionary.getTranslation("analyticsRowName2", language),
-            color: mostTimesPurchased.color,
-            category: mostTimesPurchased.name
-        }];
-    }
-    else {
+                rowName: dictionary.getTranslation("analyticsRowName1", language),
+                color: mostMoneySpentOn.color,
+                category: mostMoneySpentOn.name
+            },
+            {
+                rowName: dictionary.getTranslation("analyticsRowName2", language),
+                color: mostTimesPurchased.color,
+                category: mostTimesPurchased.name
+            }
+        ];
+    } else {
         return [];
     }
 }
@@ -155,14 +156,13 @@ function getExpenseAnalysis(expenses) {
         if (categories.get(expense.category.name)) {
             categories.get(expense.category.name).sum += parseInt(expense.value);
             categories.get(expense.category.name).count += 1;
-            categories.get(expense.category.name).color = expense.category.color;            
-        }
-        else {
+            categories.get(expense.category.name).color = expense.category.color;
+        } else {
             categories.set(expense.category.name, {});
             categories.get(expense.category.name).name = expense.category.name
             categories.get(expense.category.name).sum = parseInt(expense.value);
             categories.get(expense.category.name).count = 1;
-            categories.get(expense.category.name).color = expense.category.color;            
+            categories.get(expense.category.name).color = expense.category.color;
         }
     }
 
@@ -236,8 +236,7 @@ function getLastMonthExpenses(expenses, paycheckDate) {
             if ((expenseMonth == previousMonth + 1 && expenseDay <= paycheckDate) || (expenseMonth == prepreviousMonth && expenseDay > paycheckDate)) {
                 lastMonthExpenses.push(expense);
             }
-        }
-        else {
+        } else {
             if ((expenseMonth == previousMonth && expense2Day <= paycheckDate) || (expenseMonth == prepreviousMonth && expenseDay > paycheckDate)) {
                 lastMonthExpenses.push(expense);
             }
@@ -284,7 +283,7 @@ function generateEnvelopeAlerts(envelopes, language) {
     var month = getCurrentMonth(date.getMonth());
     var totalAlmostEmptyEnvelopes = getTotalAlmostEmptyEnvelopes(envelopes, month);
     var totalEmptyEnvelopes = getTotalEmptyEnvelopes(envelopes, month);
- 
+
     if (totalAlmostEmptyEnvelopes > 0) {
         envelopesAlerts.push({
             type: 'alert-warning',
@@ -326,8 +325,7 @@ function generateGoalsAlerts(goals, language) {
             name: dictionary.getTranslation("alertName3", language),
             text: count + dictionary.getTranslation("alertText3", language)
         }];
-    }
-    else {
+    } else {
         return [];
     }
 }
@@ -359,7 +357,7 @@ function getBillsInTheNext7Days(bills) {
     for (var bill of bills) {
         const billDate = new Date(Date.parse(bill.date)).getTime();
         const diff = (billDate - currentTime.getTime()) / 86400000;
-        
+
         if (diff < 7) {
             billsArray.push(bill);
         }
@@ -398,10 +396,10 @@ function getCurrentMonth(month) {
 function goalsCompleted(goals) {
     var completed = 0;
 
-    for (var i = 0; i < goals.length; i++){
-        if (goals[i].saved >= goals[i].target){
+    for (var i = 0; i < goals.length; i++) {
+        if (goals[i].saved >= goals[i].target) {
             completed++;
-        }  
+        }
     }
 
     return completed;

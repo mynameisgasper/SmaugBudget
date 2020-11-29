@@ -49,6 +49,7 @@ function respond(res, session) {
         }
         data.categories = session.user.categories;
         data.expense = generateExpenses(session.user.expense);
+        data.currency = session.user.defaultCurrency;
         res.render('history', data);
     } else {
         res.redirect('/');

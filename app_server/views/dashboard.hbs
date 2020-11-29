@@ -49,17 +49,17 @@
                             <tbody>
                                 <tr id="income-tr">
                                     <th>{{incomeRow}}</th>
-                                    <td>{{incomeLastMonth}}€</td>
+                                    <td>{{incomeLastMonth}} {{currency}}</td>
                                     <td style="padding: 0px; text-align: right;"><button type="button" class="btn p" data-toggle="modal" href="#changeIncome"><i class="fas fa-pencil-alt"></i></button></td>
                                 </tr>
                                 <tr id="expenses-tr">
                                     <th>{{expensesRow}}</th>
-                                    <td>{{expensesLastMonth}}€</td>
+                                    <td>{{expensesLastMonth}} {{currency}}</td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <th id="border-th">{{balanceRow}}</th>
-                                    <td id="border-td">{{#minus incomeLastMonth expensesLastMonth}}{{/minus}}€</td>
+                                    <td id="border-td">{{#minus incomeLastMonth expensesLastMonth}}{{/minus}} {{currency}}</td>
                                     <td id="border-td"></td>
                                 </tr>
                             </tbody>

@@ -171,9 +171,9 @@ function addToGoalWithCategory(requestBody, res) {
                                     let expense = new Expenses({
                                         date: today,
                                         category: goal.category,
-                                        recipient: 'Added to goal: ' + goal.title,
+                                        recipient: 'Goal: ' + goal.title,
                                         value: amount,
-                                        currency: '€'
+                                        currency: user.defaultCurrency
                                     });
 
                                     expense.save(function callback(err) {
