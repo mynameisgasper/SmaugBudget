@@ -226,7 +226,15 @@ Lastni projekt pri predmetu **Spletno programiranje** v študijskem letu **2020/
 
 ## 3. LP  
   
-### [Povezava do aplikacije](https://smaugbudget.herokuapp.com/) 
+### [Povezava do aplikacije](https://smaugbudget.herokuapp.com/)  
+
+  
+### Navodila za uporabo z Docker  
+
+1. Vpišemo ukaz docker-compose up  
+2. Gremo na brsklalnik na spletni naslov localhost:8080/db  
+3. Ustvarimo podatke v bazi  
+4. Gremo na brsklalnik na spletni naslov localhost:8080
 
 
 ## 4. LP
