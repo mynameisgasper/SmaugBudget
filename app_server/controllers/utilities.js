@@ -117,7 +117,7 @@ function respond(res, session) {
         } else {
             data = {...data, ...translationKeys};
         }
-        data.Friend = generateGroups(session.user.friendgroups)
+        data.Friend = generateGroups(session.user.friendgroups);
         res.render('utilities', data);
     }
     else {
@@ -129,10 +129,21 @@ function generateGroups(groups){
     var groupsArray = [];
 
     for(var group of groups){
+        var memberArray = [];
+        var members = group.friends;
+        for(var member of members){
+            memberArray.push({
+                id: member._id,
+                name: member.name,
+                amount: member.balance
+            },)
+        }
         groupsArray.push({
+            id: group._id,
             Group: group.name,
             Next: 'TBD',
-            Balance: group.balance
+            Balance: group.balance,
+            groupMember: memberArray
         })
     }
     return groupsArray;
