@@ -66,6 +66,7 @@ function createDummyAccounts(req, res) {
     );
 }
 
+
 function loadCategories(req, res) {
     var args = {
         headers: { "Content-Type": "application/x-www-form-urlencoded" }

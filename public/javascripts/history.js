@@ -298,7 +298,7 @@ function disableButton2(id) {
 function nameAdd2(field) {
 
     //var field = document.getElementById("PayeeModal");
-    var regex = new RegExp("^[ A-Za-z0-9_@./#&+-]{1,20}$");
+    var regex = new RegExp("^[ A-Za-z0-9_@./#&+- ]{1,20}$");
     //uppercase, lowercase, številke, posebni znaki, dolžina od 1-20
     if (!field.value.match(regex)) {
         field.style.setProperty("border-color", "red", "important");
