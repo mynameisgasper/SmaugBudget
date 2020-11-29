@@ -5,7 +5,7 @@ const friendGroupSchema = new mongoose.Schema();
 
 friendGroupSchema.add({
     name: {  type: String, required: true },
-    friend:[friendSchema]
+    friends: [friendSchema]
 });
 
 mongoose.model('FriendGroup', friendGroupSchema, 'FriendGroup');

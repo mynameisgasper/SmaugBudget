@@ -6,6 +6,7 @@ var history = require('../controllers/expenseController');
 var dbController = require('../controllers/dbController');
 var connections = require('../controllers/connectionsController');
 var categories = require('../controllers/categoryController');
+var friendGroup = require('../controllers/friendGroupController');
 
 var express = require('express');
 const currencyConverter = require('../controllers/currencyConverter');
@@ -147,6 +148,10 @@ router.post('/loadCategories', (req, res) => {
 
 router.post('/changeColorCategory', (req, res) => {
     categories.changeColorCategory(req, res);
+})
+
+router.post('/addFriendGroup', (req, res) => {
+    friendGroup.addFriendGroup(req, res);
 })
 
 module.exports = router;
