@@ -9,7 +9,7 @@ var categories = require('../controllers/categoryController');
 var friendGroup = require('../controllers/friendGroupController');
 
 var express = require('express');
-const currencyConverter = require('../controllers/currencyConverter');
+const converter = require('../controllers/currencyConverter');
 const db = require('../../app_server/controllers/db');
 const { connection } = require('mongoose');
 var router = express.Router();
