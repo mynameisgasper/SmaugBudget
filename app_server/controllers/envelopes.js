@@ -89,6 +89,7 @@ function respond(res, session, req) {
         data.currentMonth = getCurrentMonth(d.getMonth());
         data.envelope = session.user.envelopes;
         data.category = getCategories(session.user.categories);
+        data.currency = session.user.defaultCurrency;
 
         res.render('envelopes', data);
     } else {

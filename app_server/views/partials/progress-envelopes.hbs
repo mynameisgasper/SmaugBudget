@@ -2,7 +2,7 @@
     {{#each envelope}}
         {{#ifEquals month ../setMonth}}
             <div class="row" id="envelope{{_id}}">
-                <div class="col-sm-12 col-md-12 col-lg-2 col-xl-2">
+                <div class="col-sm-12 col-md-12 col-lg-3 col-xl-2">
                     {{#ifSmaller progress 85}}
                         <h3>{{category.name}}</h3>
                     {{/ifSmaller}}
@@ -23,17 +23,17 @@
                     </div>
                 </div>
                 
-                <div class="col-sm-12 col-md-12 col-lg-5 col-xl-4 envelope-info">
+                <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 envelope-info">
                     {{#ifSmaller progress 85}}
-                        <p class="info">You have spent <span>{{spent}}€</span> of <span>{{budget}}€</span></p>
+                        <p class="info"> <span>{{spent}} {{../currency}}</span> of <span>{{budget}} {{../currency}}</span></p>
                     {{/ifSmaller}}
                     {{#ifBigger progress 85}}
                         {{#ifSmaller progress 100}}
-                            <p class="info" style="color:#ff7b00">You have spent <span>{{spent}}€</span> of <span>{{budget}}€</span></p>
+                            <p class="info" style="color:#ff7b00"> <span>{{spent}} {{../currency}}</span> of <span>{{budget}} {{../currency}}</span></p>
                         {{/ifSmaller}}
                     {{/ifBigger}}
                     {{#ifBigger progress 100}}
-                        <p class="info" style="color:red">You have spent <span>{{spent}}€</span> of <span>{{budget}}€</span></p>
+                        <p class="info" style="color:red"> <span>{{spent}} {{../currency}}</span> of <span>{{budget}} {{../currency}}</span></p>
                     {{/ifBigger}}
                     <form name="deleteForm{{_id}}" method="post" action="/envelopes">
                         <input type="hidden" value="deleteEnvelope" name="formType">

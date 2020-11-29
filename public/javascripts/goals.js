@@ -61,13 +61,12 @@ function disableButton4() {
 }
 
 
-function categoryCheckAddGoal(field){
-    if(field.value == "Select Category"){
+function categoryCheckAddGoal(field) {
+    if (field.value == "Select Category") {
         field.style.setProperty("border-color", "red", "important");
         $('.tt69').toast('show');
         return 0;
-    }
-    else {
+    } else {
         field.style.borderColor = "#ced4da";
         $('.tt69').toast('hide');
         return 1;
@@ -130,8 +129,8 @@ function amount77(field, id) {
 function nameAdd(field) {
 
     //var field = document.getElementById("PayeeModal");
-    var regex = new RegExp("^[ A-Za-z0-9_@./#&+-: ]{1,20}$");
-    //uppercase, lowercase, številke, posebni znaki, dolžina od 1-20
+    var regex = new RegExp("^[ A-Za-z0-9_@./#&+-: ]{1,16}$");
+    //uppercase, lowercase, številke, posebni znaki, dolžina od 1-16
     if (!field.value.match(regex)) {
         field.style.setProperty("border-color", "red", "important");
         $('.tt4').toast('show')
@@ -146,8 +145,8 @@ function nameAdd(field) {
 function nameAdd2(field, id) {
 
     //var field = document.getElementById("PayeeModal");
-    var regex = new RegExp("^[ A-Za-z0-9_@./#&+-: ]{1,20}$");
-    //uppercase, lowercase, številke, posebni znaki, dolžina od 1-20
+    var regex = new RegExp("^[ A-Za-z0-9_@./#&+-: ]{1,16}$");
+    //uppercase, lowercase, številke, posebni znaki, dolžina od 1-16
     if (!field.value.match(regex)) {
         field.style.setProperty("border-color", "red", "important");
         $('.tt5').toast('show')
@@ -168,7 +167,7 @@ function dateCheck(field, id) {
     var inputDate = field.value.split("-");
     console.log(field.value);
 
-    if(inputDate == ""){
+    if (inputDate == "") {
         $('.tt7').toast('show');
         field.style.setProperty("border-color", "red", "important");
         return 0;
@@ -214,7 +213,7 @@ function dateCheckAddGoal(field) {
     var yyyy = today.getFullYear();
     var inputDate = field.value.split("-");
 
-    if(inputDate == ""){
+    if (inputDate == "") {
         $('#mjav').toast('show');
         field.style.setProperty("border-color", "red", "important");
         return 0;
@@ -263,8 +262,8 @@ $(window).on("load", function() {
     }
 });
 
-$(window).ready(function(){
-    $(".goalModal").on('hidden.bs.modal', function () {
+$(window).ready(function() {
+    $(".goalModal").on('hidden.bs.modal', function() {
         $('#mjav').toast('hide');
         $('.tt5').toast('hide');
         $('.tt6').toast('hide');
@@ -273,8 +272,7 @@ $(window).ready(function(){
     });
 });
 
-function nameAddCheck(field, goals){
+function nameAddCheck(field, goals) {
     console.log(field.value);
     console.log(goals);
 }
-

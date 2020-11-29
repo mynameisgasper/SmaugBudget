@@ -486,14 +486,14 @@ function checkDatePast(inputDate) {
 
 
 function checkTitle(title) {
-    var regexTitle = new RegExp("^[A-Za-z0-9]{1,20}$");
+    var regexTitle = new RegExp("^[A-Za-z0-9]{1,14}$");
     const titleTest = regexTitle.test(title);
 
     return titleTest;
 }
 
 function checkRecipient(title) {
-    var regexTitle = new RegExp("^[A-Za-z0-9 ]{1,20}$");
+    var regexTitle = new RegExp("^[A-Za-z0-9 ]{1,16}$");
     const checkRecipient = regexTitle.test(title);
 
     return checkRecipient;

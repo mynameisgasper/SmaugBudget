@@ -108,6 +108,7 @@ function createDummyAccounts(requestBody, res) {
             expense.save();
         }
 
+
         for (var i = 0; i < podatki.goals.length; i++) {
             let goal = new Goals({
                 title: podatki.goals[i].title,

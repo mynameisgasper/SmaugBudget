@@ -19,13 +19,13 @@
     </div>
     <!---  Row 1 Col 3 --->
     <div class="col-sm-12 col-md-12 col-lg-6 col-xl-5 goal-col">
-        <p class="goal-p">{{targetLeft}}€
+        <p class="goal-p">{{targetLeft}}<span> {{../currency}}</span>
             <p style="color: gray; font-family:'Open Sans'; margin-left:2%">
-                needed of {{target}}€
-                (<b>{{monthlyTarget}}€</b> per day)
+                of {{target}} {{../currency}}
+                (<b>{{monthlyTarget}} {{../currency}}</b>/day)
             </p>
         </p>
-        <form name="deleteForm{{_id}}" method="post" action="/goals" style="display: inline">
+        <form name="deleteForm{{_id}}" method="post" action="/goals" style="display: inline; text-align: right;">
             <input type="hidden" value="deleteGoal" name="formType">
             <input type="hidden" value="{{_id}}" name="id">
             <button type="submit" class="btn edit-btn" data-toggle="modal"><i class="fas fa-minus-square"></i></button>

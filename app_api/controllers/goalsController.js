@@ -282,7 +282,7 @@ function checkDate(date) {
 }
 
 function checkTitle(title) {
-    var regexTitle = new RegExp("^[A-Za-z0-9 ]{1,20}$");
+    var regexTitle = new RegExp("^[A-Za-z0-9 ]{1,16}$");
     const titleTest = regexTitle.test(title);
 
     return titleTest;

@@ -27,7 +27,7 @@ var translationKeys = {
     dark: "dark"
 }
 
-function translate (language) {
+function translate(language) {
     var translatedKeys = JSON.parse(JSON.stringify(translationKeys));
     Object.keys(translationKeys).forEach(function(key) {
         translatedKeys[key] = dictionary.getTranslation(translatedKeys[key], language);
@@ -83,7 +83,7 @@ function addToGoalWithCategory(req, res, session) {
             } else {
                 console.log(response.statusCode);
                 res.redirect('/goals#error');
-                
+
             }
         }
     );
@@ -126,7 +126,7 @@ function editGoal(req, res, session) {
         user_id: session.user._id,
         goal_id: req.body.id
     }
-    
+
 
     var args = {
         data: data,
@@ -176,13 +176,14 @@ function deleteGoal(req, res, session) {
 function respond(res, session) {
     if (session.user) {
         if (session.user.language) {
-            data = {...data, ...translate(session.user.language)};
+            data = {...data, ...translate(session.user.language) };
         } else {
-            data = {...data, ...translationKeys};
+            data = {...data, ...translationKeys };
         }
         data.goal = generateGoals(session.user.goals);
         data.card = generateCards(session.user);
         data.categories = getCategories(session.user.categories);
+        data.currency = session.user.defaultCurrency;
         res.render('goals', data);
     } else {
         res.redirect('/');
@@ -194,14 +195,14 @@ function generateGoals(goals) {
 
     for (var goal of goals) {
         var date = goal.date.split("-");
-        date[2] = date[2].substring(0,2);
+        date[2] = date[2].substring(0, 2);
         var progress = Math.ceil(goal.saved / goal.target * 100);
         var targetLeft = goal.target - goal.saved;
         var monthlyTarget = calculateDailyTarget(goal.date, targetLeft);
         var color = "#2f7cfe";
-        if(targetLeft <= 0)
-           color = "#00cf1d"
-        
+        if (targetLeft <= 0)
+            color = "#00cf1d"
+
         goalsArray.push({
             _id: goal._id,
             title: goal.title,
@@ -223,40 +224,40 @@ function generateCards(currentUser) {
     var totalGoals = currentUser.goals.length;
     var completed = 0;
     var goalCompleted = "";
-    for(var i = 0; i < currentUser.goals.length; i++){
-        if(currentUser.goals[i].saved >= currentUser.goals[i].target){
+    for (var i = 0; i < currentUser.goals.length; i++) {
+        if (currentUser.goals[i].saved >= currentUser.goals[i].target) {
             completed++;
             goalCompleted += currentUser.goals[i].title + ", ";
-        }  
+        }
     }
-    if(completed == 0)
+    if (completed == 0)
         goalCompleted = "No goals completed.";
-    else if(completed > 2)
+    else if (completed > 2)
         goalCompleted = "Multiple goals completed!";
-    else{
+    else {
         goalCompleted = goalCompleted.substring(0, goalCompleted.length - 2);
         goalCompleted += " completed!"
     }
 
     return [{
-        id: 1,
-        title: 'Goals Total',
-        color: 'bg-primary',
-        count: totalGoals,
-        icon: 'fa-bullseye'
-    },
-    {
-        id: 2,
-        title: 'Goals Completed',
-        color: 'green-panel',
-        count: completed,
-        icon: 'fa-check-circle',
-        comment: goalCompleted
-    }
+            id: 1,
+            title: 'Goals Total',
+            color: 'bg-primary',
+            count: totalGoals,
+            icon: 'fa-bullseye'
+        },
+        {
+            id: 2,
+            title: 'Goals Completed',
+            color: 'green-panel',
+            count: completed,
+            icon: 'fa-check-circle',
+            comment: goalCompleted
+        }
     ];
 }
 
-function calculateDailyTarget(date, targetLeft){
+function calculateDailyTarget(date, targetLeft) {
     var today = new Date();
 
     var goalDate = date.split("-");
@@ -268,11 +269,11 @@ function calculateDailyTarget(date, targetLeft){
     const diffTime = Math.abs(today - endDate);
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
-    if(diffDays < 1)
+    if (diffDays < 1)
         return targetLeft;
     else
         return Math.ceil(targetLeft / diffDays);
-    
+
 }
 
 function getCategories(categories) {

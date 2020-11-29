@@ -36,7 +36,7 @@ function disableButton2() {
 }
 
 function disableButton3(id) {
-    var amount1 = amount3(document.getElementById("Amount3"),id);
+    var amount1 = amount3(document.getElementById("Amount3"), id);
 
     if (amount1 == 0) {
         return false;
@@ -60,6 +60,7 @@ function amount(field) {
         return 1;
     }
 }
+
 function amount3(field) {
 
     //var field = document.getElementById("PayeeModal");
@@ -113,8 +114,8 @@ function amount5(field, id) {
 function nameAdd(field) {
     if (!field.disabled) {
         //var field = document.getElementById("PayeeModal");
-        var regex = new RegExp("^[ A-Za-z0-9_@./#&+-: ]{1,20}$");
-        //uppercase, lowercase, številke, posebni znaki, dolžina od 1-20
+        var regex = new RegExp("^[ A-Za-z0-9_@./#&+-: ]{1,14}$");
+        //uppercase, lowercase, številke, posebni znaki, dolžina od 1-16
         if (!field.value.match(regex)) {
             field.style.setProperty("border-color", "red", "important");
             $('.tt5').toast('show');
@@ -175,8 +176,8 @@ function dateCheck2(field) {
 function nameAdd2(field) {
 
     //var field = document.getElementById("PayeeModal");
-    var regex = new RegExp("^[ A-Za-z0-9_@./#&+-: ]{1,20}$");
-    //uppercase, lowercase, številke, posebni znaki, dolžina od 1-20
+    var regex = new RegExp("^[ A-Za-z0-9_@./#&+-: ]{1,16}$");
+    //uppercase, lowercase, številke, posebni znaki, dolžina od 1-16
     if (!field.value.match(regex)) {
         field.style.setProperty("border-color", "red", "important");
         $('.tt2').toast('show')
@@ -220,9 +221,8 @@ $(window).on("load", function() {
     }
 });
 
-$(window).ready(function(){
-    $(".editForm").on('hidden.bs.modal', function () {
+$(window).ready(function() {
+    $(".editForm").on('hidden.bs.modal', function() {
         $('.tt8').toast('hide');
     });
-  });
-  
+});
