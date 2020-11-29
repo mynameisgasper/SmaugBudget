@@ -82,6 +82,7 @@ function editBill(requestBody, res) {
                             user.bills[i].recipient = recipient;
                             user.bills[i].value = amount;
                             user.bills[i].repeating = repeat;
+                            user.bills[i].date = date;
 
                             for (var j = 0; j < user.categories.length; j++) {
                                 if (user.categories[j].name == inputCategory) {
@@ -99,6 +100,7 @@ function editBill(requestBody, res) {
                         bill.recipient = recipient;
                         bill.value = amount;
                         bill.repeating = repeat;
+                        bill.date = date;
                         if (category != null) bill.category = category;
                     });
                     res.status(200).json(user);
