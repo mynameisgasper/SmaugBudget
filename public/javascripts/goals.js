@@ -128,7 +128,7 @@ function amount77(field, id) {
 function nameAdd(field) {
 
     //var field = document.getElementById("PayeeModal");
-    var regex = new RegExp("^[ A-Za-z0-9_@./#&+-]{1,20}$");
+    var regex = new RegExp("^[ A-Za-z0-9_@./#&+-: ]{1,20}$");
     //uppercase, lowercase, številke, posebni znaki, dolžina od 1-20
     if (!field.value.match(regex)) {
         field.style.setProperty("border-color", "red", "important");
@@ -144,7 +144,7 @@ function nameAdd(field) {
 function nameAdd2(field, id) {
 
     //var field = document.getElementById("PayeeModal");
-    var regex = new RegExp("^[ A-Za-z0-9_@./#&+-]{1,20}$");
+    var regex = new RegExp("^[ A-Za-z0-9_@./#&+-: ]{1,20}$");
     //uppercase, lowercase, številke, posebni znaki, dolžina od 1-20
     if (!field.value.match(regex)) {
         field.style.setProperty("border-color", "red", "important");

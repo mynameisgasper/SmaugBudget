@@ -287,8 +287,8 @@ function convertMonthsToName(month) {
 function disableButton2(id) {
     var amount1 = amount3(document.getElementById("Amount3" + id), id);
     var name = nameAdd2(document.getElementById("Payee2" + id), id);
-    var date = dateCheck2(document.getElementById("inputDate"), id);
-
+    var date = dateCheck2(document.getElementById("inputDate"+id), id);
+    console.log(amount1 + " " + name + " " + date);
     if (amount1 == 0 || name == 0 || date == 0) {
         return false;
     } else {
@@ -299,7 +299,7 @@ function disableButton2(id) {
 function nameAdd2(field) {
 
     //var field = document.getElementById("PayeeModal");
-    var regex = new RegExp("^[ A-Za-z0-9_@./#&+- ]{1,20}$");
+    var regex = new RegExp("^[A-Za-z0-9_@./#&+-: ]{1,20}$");
     //uppercase, lowercase, številke, posebni znaki, dolžina od 1-20
     if (!field.value.match(regex)) {
         field.style.setProperty("border-color", "red", "important");
