@@ -294,7 +294,6 @@ function disableButton2(id) {
         return true;
     }
 }
-
 function nameAdd2(field) {
 
     //var field = document.getElementById("PayeeModal");
