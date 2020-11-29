@@ -6,6 +6,8 @@ const Envelopes = mongoose.model('Envelopes');
 const Expenses = mongoose.model('Expense');
 const Goals = mongoose.model('Goals');
 const User = mongoose.model('User');
+const FriendGroup = mongoose.model('FriendGroup');
+const Friend = mongoose.model('Friend');
 const podatki = require('../models/testni-podatki.json');
 /*
 ? Remove all data currently in DB
@@ -56,6 +58,20 @@ function removeAllDbData(requestBody, res) {
             res.sendStatus(500);
         });
 
+        Friend.deleteMany({}).then(function() {
+            console.log("Deleted all friend data");
+        }).catch(function(error) {
+            console.log(error);
+            res.sendStatus(500);
+        });
+
+        FriendGroup.deleteMany({}).then(function() {
+            console.log("Deleted all friend groups data");
+        }).catch(function(error) {
+            console.log(error);
+            res.sendStatus(500);
+        });
+
         res.sendStatus(204);
     } catch (ex) {
         console.log(ex);
@@ -70,6 +86,8 @@ function createDummyAccounts(requestBody, res) {
         var expensesArray = [];
         var billsArray = [];
         var goalsArray = [];
+        var friendsArray = [];
+        var friendGroupsArray = [];
 
         for (var i = 0; i < podatki.categories.length; i++) {
             let category = new Categories({
@@ -135,6 +153,25 @@ function createDummyAccounts(requestBody, res) {
             bill.save();
         }
 
+        for (var i = 0; i < podatki.friends.length; i++) {
+            let friend = new Friend({
+                name: podatki.friends[i].name,
+                balance: podatki.friends[i].balance,
+            });
+            friendsArray[i] = friend;
+            friend.save();
+        }
+
+        for (var i = 0; i < podatki.friendgroups.length; i++) {
+            let friendGroup = new FriendGroup({
+                name: podatki.friendgroups[0].name,
+                balance: podatki.friendgroups[0].balance,
+                friends: podatki.friendgroups[0].friends,
+            });
+            friendGroupsArray[i] = friendGroup;
+            friendGroup.save();
+        }
+
         let user = new User({
             firstname: "Basic",
             lastname: "User",
@@ -150,7 +187,9 @@ function createDummyAccounts(requestBody, res) {
             envelopes: envelopesArray,
             expense: expensesArray,
             bills: billsArray,
-            goals: goalsArray
+            goals: goalsArray,
+            friendgroups: friendGroupsArray
+
         });
         let userPremium = new User({
             firstname: "Premium",
@@ -167,7 +206,8 @@ function createDummyAccounts(requestBody, res) {
             envelopes: envelopesArray,
             expense: expensesArray,
             bills: billsArray,
-            goals: goalsArray
+            goals: goalsArray,
+            friendgroups: friendGroupsArray
 
         });
         user.save();

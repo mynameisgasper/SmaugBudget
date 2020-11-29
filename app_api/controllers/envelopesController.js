@@ -143,7 +143,7 @@ function editEnvelope(requestBody, res) {
         var regex = new RegExp("^[0-9]+");
         const amountCorrect = regex.test(newBudget);
 
-        if (amountCorrect && colorCorrect) {
+        if (amountCorrect) {
             User.findById(user_id, function(error, user) {
                 if (error) {
                     console.log(error);
@@ -161,9 +161,6 @@ function editEnvelope(requestBody, res) {
                     Envelopes.findById(envelope_id, function(err, envelope) {
                         envelope.budget = newBudget;
                         envelope.progress = Math.round((parseFloat(parseFloat(envelope.spent) / parseFloat(newBudget))) * 100);
-                        envelope.colorHex = colorHexPicker;
-                        envelope.color = colorRGB;
-                        envelope.bgColor = colorBackground;
                     });
                     res.status(200).json(user);
                 }
