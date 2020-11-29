@@ -50,8 +50,10 @@ function disableButton3(id) {
 
 function disableButton4() {
     var amount = amount2(document.getElementById("Amount2"));
+    let optionsLength = document.getElementById("selectMoney").length;
 
-    if (amount == 0 ) {
+
+    if (amount == 0 || optionsLength == 0) {
         return false;
     } else {
         return true;
