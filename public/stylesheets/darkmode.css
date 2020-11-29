@@ -191,3 +191,7 @@ nav {
 .tabela-balance td {
     color: white;
 }
+
+.alert {
+    opacity: 0.85;
+}

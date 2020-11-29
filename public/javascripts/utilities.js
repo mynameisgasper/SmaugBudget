@@ -81,8 +81,13 @@ $(window).on("load", function() {
 var counter = 2;
 
 function addNewInput() {
-    counter++;
-    var form = document.getElementById('inputMemberBody');
-    var input = '<input type="text" style="margin-top:4%" class="form-control" id="inputMember' + counter + '" placeholder="Member ' + counter + ' " name="inputMember' + counter + '"></input>';
-    form.innerHTML = form.innerHTML + input;
+    if (counter >= 10) {
+        alert("Only 10 members allowed");
+    } else {
+        counter++;
+        var form = document.getElementById('inputMemberBody');
+        var input = '<input type="text" style="margin-top:4%" class="form-control" id="inputMember' + counter + '" placeholder="Member ' + counter + ' " name="inputMember' + counter + '"></input>';
+        form.innerHTML = form.innerHTML + input;
+    }
+
 }
