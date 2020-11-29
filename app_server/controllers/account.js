@@ -4,6 +4,7 @@ var connections = require('../../app_api/models/connections.json');
 var Client = require('node-rest-client').Client;
 
 var data = {
+    encryption: true,
     fileName: "account",
     data_firstName: "",
     data_lastName: "",
@@ -86,7 +87,6 @@ function respond(res, session) {
         data.data_email = session.user.email;
         data.data_defCurrency = session.user.defaultCurrency;
         data.categories = session.user.categories;
-        console.log(session.user.envelopes);
         for (var i = 0; i < data.categories.length; i++) {
             data.categories[i].hexColor = rgbToHex(data.categories[i].color);
         }
@@ -94,7 +94,6 @@ function respond(res, session) {
 
         getUserConnections(res, session);
         getEnvelopesForDropdown(res, session);
-        //console.log(data);
         res.render('account', data);
     } else {
         res.redirect('/');
@@ -139,38 +138,35 @@ function getCurrencies() {
 }
 
 function parseRequestBody(req, res, session) {
-    //console.log(req.body.formType);
     switch (req.body.formType) {
-        case 'changeName':
-            {
-                changeName(req, res, session);
-                break;
-            }
-        case 'changeLanguage':
-            {
-                changeLanguage(req, res, session);
-                break;
-            }
-        case 'changeCurrency':
-            {
-                changeCurrency(req, res, session);
-                break;
-            }
-        case 'changeColorCategory':
-            {
-                changeColorCategory(req, res, session);
-                break;
-            }
-        case 'addConnection':
-            {
-                addConnection(req, res, session);
-                break;
-            }
-        case 'deleteCategory':
-            {
-                deleteCategory(req, res, session);
-            }
-
+        case 'changeName': {
+            changeName(req, res, session);
+            break;
+        }
+        case 'changeLanguage': {
+            changeLanguage(req, res, session);
+            break;
+        }
+        case 'changeCurrency': {
+            changeCurrency(req, res, session);
+            break;
+        }
+        case 'changeColorCategory': {
+            changeColorCategory(req, res, session);
+            break;
+        }
+        case 'addConnection': {
+            addConnection(req, res, session);
+            break;
+        }
+        case 'deleteCategory': {
+            deleteCategory(req, res, session);
+            break;
+        }
+        case 'changePassword': {
+            changePassword(req, res, session);
+            break;
+        }
     }
 }
 
@@ -212,12 +208,9 @@ function deleteCategory(req, res, session) {
         headers: { "Content-Type": "application/x-www-form-urlencoded" }
     }
 
-    console.log(args);
-
     var client = new Client();
     client.post("http://" + req.headers.host + "/api/deleteCategory", args,
         function(data, response) {
-            console.log(response.statusCode);
             if (response.statusCode == 200) {
                 res.session = session;
                 res.session.user = data;
@@ -230,7 +223,6 @@ function deleteCategory(req, res, session) {
 }
 
 function addConnection(req, res, session) {
-    //console.log(session);
     const data = {
         connectionName: req.body.connectionName,
         users: JSON.stringify(req.body.editPerson),
@@ -342,7 +334,6 @@ function getNewUsers(req, res, session, connectionName) {
     });
     while (allUsers === "wait");
     var user = session.user;
-    console.log(allUsers);
     var connection = user.connections.find(con => con.name === connectionName);
     var users;
     if (connection) {
@@ -369,8 +360,6 @@ function getNewUsers(req, res, session, connectionName) {
             });
         }
     }
-    console.log(dataTren);
-
 }
 
 function getUserConnections(res, session) {
@@ -410,6 +399,34 @@ function rgbToHex(rgb) {
         .replace(/ /g, '')
         .split(',');
     return "#" + componentToHex(parseInt(rgb[0])) + componentToHex(parseInt(rgb[1])) + componentToHex(parseInt(rgb[2]));
+}
+
+function changePassword(req, res, session) {
+    const data = {
+        oldPassword: req.body.oldPassword,
+        newPassword1: req.body.newPassword1,
+        newPassword2: req.body.newPassword2,
+        id: session.user._id
+    }
+
+    var args = {
+        data: data,
+        headers: { "Content-Type": "application/x-www-form-urlencoded" }
+    };
+
+
+    var client = new Client();
+    client.post("http://" + req.headers.host + "/api/changePassword", args,
+        function(data, response) {
+            if (response.statusCode == 200) {
+                res.session = session;
+                res.session.user = data;
+                res.redirect('/account');
+            } else {
+                res.redirect('/account#error');
+            }
+        }
+    );
 }
 
 module.exports = {

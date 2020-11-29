@@ -275,3 +275,20 @@ function passwordCheckSignUp() {
         return 1;
     }
 }
+
+function passwordSubmit(obj) {
+    var password1 = document.getElementById('oldPassword');
+    var hashOne1 = new jsSHA("SHA-512", "TEXT", { numRounds: 1 });
+    hashOne1.update(password1.value);
+    document.getElementById('oldPasswordHash').value = hashOne1.getHash("HEX");
+
+    var password2 = document.getElementById('newPassword');
+    var hashOne2 = new jsSHA("SHA-512", "TEXT", { numRounds: 1 });
+    hashOne2.update(password2.value);
+    document.getElementById('newPasswordHash1').value = hashOne2.getHash("HEX");
+
+    var password3 = document.getElementById('confirmPassword');
+    var hashOne3 = new jsSHA("SHA-512", "TEXT", { numRounds: 1 });
+    hashOne3.update(password3.value);
+    document.getElementById('newPasswordHash2').value = hashOne3.getHash("HEX");
+}

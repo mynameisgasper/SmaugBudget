@@ -212,33 +212,38 @@
     </div>
 </div>
   <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">{{changePassword}}</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="row">
-          <label id="oldPasswordLbl" for="oldPassword" class="col-sm-4 col-md-4 col-lg-4 col-xl-4">{{oldPassword}}:</label>
-          <input type="password" id="oldPassword" placeholder="{{oldPassword}}"  class="form-control col-sm-7 col-md-7 col-lg-7 col-xl-7">
+    <form method="POST" action="/account">
+      <input type="hidden" name="formType" value="changePassword" />
+      <input type="hidden" name="oldPassword" id="oldPasswordHash" value=""/>
+      <input type="hidden" name="newPassword1" id="newPasswordHash1" value=""/>
+      <input type="hidden" name="newPassword2" id="newPasswordHash2" value=""/>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">{{changePassword}}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
-        <div class="row">
-          <label id="newPasswordLbl" for="newPassword" class="col-sm-4 col-md-4 col-lg-4 col-xl-4">{{newPassword}}:</label>
-          <input type="password" id="newPassword" onfocusout="passwordStrength(this)" placeholder="{{newPassword}}"  class="form-control col-sm-7 col-md-7 col-lg-7 col-xl-7">
+        <div class="modal-body">
+          <div class="row">
+            <label id="oldPasswordLbl" for="oldPassword" class="col-sm-4 col-md-4 col-lg-4 col-xl-4">{{oldPassword}}:</label>
+            <input type="password" id="oldPassword" placeholder="{{oldPassword}}"  class="form-control col-sm-7 col-md-7 col-lg-7 col-xl-7">
+          </div>
+          <div class="row">
+            <label id="newPasswordLbl" for="newPassword" class="col-sm-4 col-md-4 col-lg-4 col-xl-4">{{newPassword}}:</label>
+            <input type="password" id="newPassword" onfocusout="passwordStrength(this)" placeholder="{{newPassword}}"  class="form-control col-sm-7 col-md-7 col-lg-7 col-xl-7">
+          </div>
+          <div class="row">
+            <label id="confirmPasswordLbl" for="confirmPassword" class="col-sm-4 col-md-4 col-lg-4 col-xl-4">{{confirmPassword}}:</label>
+            <input type="password" id="confirmPassword" onfocusout="passwordCheckSignUp()" placeholder="{{confirmPassword}}"  class="form-control col-sm-7 col-md-7 col-lg-7 col-xl-7">
+          </div>
         </div>
-        <div class="row">
-          <label id="confirmPasswordLbl" for="confirmPassword" class="col-sm-4 col-md-4 col-lg-4 col-xl-4">{{confirmPassword}}:</label>
-          <input type="password" id="confirmPassword" onfocusout="passwordCheckSignUp()" placeholder="{{confirmPassword}}"  class="form-control col-sm-7 col-md-7 col-lg-7 col-xl-7">
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary" onclick="passwordSubmit();">{{saveChanges}}</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">{{close}}</button>
         </div>
-        
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary">{{saveChanges}}</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{close}}</button>
-      </div>
-    </div>
+    </form>
   </div>
 </div>
 <!-- End changePassowrd -->
