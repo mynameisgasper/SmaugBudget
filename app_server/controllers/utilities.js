@@ -76,6 +76,11 @@ function parseRequestBody(req, res, session) {
                 deleteGroup(req, res, session);
                 break;
             }
+        case 'calculateBalances':
+            {
+                calculateBalances(req, res, session);
+                break;
+            }
     }
 }
 
@@ -127,6 +132,57 @@ function deleteGroup(req, res, session) {
 
     var client = new Client();
     client.post("http://" + req.headers.host + "/api/deleteFriendGroup", args,
+        function(data, response) {
+            if (response.statusCode == 200) {
+                res.session = session;
+                res.session.user = data;
+                res.redirect('/utility');
+            } else {
+                console.log(response.statusCode);
+                res.redirect('/utility#error');
+                
+            }
+        }
+    );
+}
+
+function calculateBalances(req, res, session) {
+    var group_id = req.body.id;
+
+    var friends;
+    //group data
+    for(var i = 0; i < session.user.friendgroups.length; i++){
+        if(group_id == session.user.friendgroups[i]._id){
+            friends = Array.from(Array(session.user.friendgroups[i].friends.length + 1), () => new Array(2));
+            for(var j = 0; j < session.user.friendgroups[i].friends.length; j++){
+                var price = "price" + session.user.friendgroups[i].friends[j]._id;
+                var paid = "paid" + session.user.friendgroups[i].friends[j]._id
+                friends[j + 1][0] = req.body[price];
+                friends[j + 1][1] = req.body[paid];
+
+            }
+            break;
+        }
+    }
+    //user data
+    var price = "price" +  session.user._id;
+    var paid = "paid" +  session.user._id;
+    friends[0][0] = req.body[price];
+    friends[0][1] = req.body[paid];
+
+    const data = {
+        friends: JSON.stringify(friends),
+        group_id: group_id,
+        user_id: session.user._id
+    }
+
+    var args = {
+        data: data,
+        headers: { "Content-Type": "application/x-www-form-urlencoded" }
+    };
+
+    var client = new Client();
+    client.post("http://" + req.headers.host + "/api/calculateBalances", args,
         function(data, response) {
             if (response.statusCode == 200) {
                 res.session = session;

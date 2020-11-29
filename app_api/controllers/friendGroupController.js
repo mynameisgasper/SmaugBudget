@@ -1,3 +1,4 @@
+const { request } = require('express');
 const mongoose = require('mongoose');
 const friend = require('../models/friend');
 const user = require('../models/user');
@@ -15,8 +16,10 @@ function addFriendGroup(requestBody, res){
         var check = true;
         for(var i = 0; i < friends.length; i++){
             const nameTest = checkName(name);
-            if(!nameTest)
+            if(!nameTest){
                 check = false; 
+                break;
+            }
         }
 
         if(check){
@@ -51,6 +54,8 @@ function addFriendGroup(requestBody, res){
                     });
                 }
             });
+        } else {
+            res.sendStatus(400);
         }
     }
     catch (ex) {
@@ -61,13 +66,22 @@ function addFriendGroup(requestBody, res){
 
 function calculateBalances(requestBody, res){
     try {
-        var group_id = "5fc3a5f976b32f35a42bd3cf";
-        var user_id = "5fc2b56a9b5aac361006f64c";
-        
-        //const nameTest = checkName(name);
+        var group_id = requestBody.group_id;
+        var user_id = requestBody.user_id;
+        var friends = JSON.parse(requestBody.friends);
 
-        if(true){
-            User.findById(user_id, function(error, user) {
+        var check = true;
+        for(var i = 0; i < friends.length; i++){
+            for(var j = 0; j < 2; j++){
+                const valueTest = checkValues(friends[i][j]);
+                if(!valueTest){
+                    check = false;
+                }
+            }
+        }
+
+       if(check){
+           User.findById(user_id, function(error, user) {
                 if (error) {
                     console.log(error);
                     res.sendStatus(500);
@@ -77,30 +91,12 @@ function calculateBalances(requestBody, res){
                             console.log(error);
                             res.sendStatus(500);
                         } else {
-                            var data = Array.from(Array(group.friends.length), () => new Array(3))
-                            data[0][0]  = requestBody.friend1name;
-                            data[0][1]  = requestBody.friend1bill;
-                            data[0][2]  = requestBody.friend1paid;
-                            data[1][0] = requestBody.friend2name;
-                            data[1][1] = requestBody.friend2bill;
-                            data[1][2] = requestBody.friend2paid;
-
                             for(var i = 0; i < group.friends.length; i++){
-                                var newBalance = group.friends[i].balance + (data[i][2] - data[i][1]);
+                                var newBalance = group.friends[i].balance + (friends[i + 1][1] - friends[i + 1][0]);
                                 group.friends[i].balance = newBalance;
-                                //console.log(newBalance + " " + i + " " + group.friends[i]._id);
-                                /*Friend.findById(group.friends[i]._id, function(error, friend){
-                                    if (error) {
-                                        console.log(error);
-                                        res.sendStatus(500);
-                                    } else {
-                                            console.log(friend.name + " " + i + " " + friend._id);
-                                            friend.balance = newBalance;
-                                            console.log(friend.balance);
-                                            friend.save();
-                                    }
-                                });*/
                             }
+                            var myBalance = group.balance + (friends[0][1] - friends[0][0]);
+                            group.balance = myBalance;
                             group.save();
                             for(var i = 0; i < user.friendgroups.length; i++){
                                 if(user.friendgroups[i]._id == group_id){
@@ -109,11 +105,13 @@ function calculateBalances(requestBody, res){
                                     break;
                                 }
                             }
-                            res.sendStatus(200);
+                            res.status(200).json(user);
                         }
                     });
                 }
             });
+        } else {
+            res.sendStatus(400);
         }
     }
     catch (ex) {
@@ -127,7 +125,7 @@ function deleteFriendGroup(requestBody, res){
         var group_id = requestBody.group_id;
         var user_id = requestBody.user_id;
 
-        if (group_id != undefined) {
+        if(group_id != undefined) {
             FriendGroup.findByIdAndDelete(group_id, function(err, group) {
                 if (err) {
                     console.log(err);
@@ -163,6 +161,13 @@ function checkName(title) {
     const titleTest = regexTitle.test(title);
 
     return titleTest;
+}
+
+function checkValues(value) {
+    var regexValue = new RegExp("^[0-9]+(\.[0-9]{1,2})?$");
+    const valueTest = regexValue.test(value);
+
+    return valueTest;
 }
 
 

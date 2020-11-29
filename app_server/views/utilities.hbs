@@ -163,7 +163,9 @@
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <form name="signup" method="post" action="/" onsubmit="return disableButton({{id}})">
+            <form name="calculateBalances{{id}}" method="post" action="/utility" onsubmit="return disableButton({{id}})">
+              <input type="hidden" value="calculateBalances" name="formType">
+              <input type="hidden" value="{{id}}" name="id">
               <div class="modal-body">
                 <div class="row">
                   <table class="table">
@@ -179,8 +181,8 @@
                       {{#each groupMember}}
                         <tr>
                           <td>{{name}}</td>
-                          <td><input type="number" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" id="price{{id}}" class="form-control" onfocusout="check(this,{{id}})" placeholder="Bill amount" step="any" required="required"></td>
-                          <td><input type="number" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" id="paid{{id}}" class="form-control" onfocusout="check(this,{{id}})" placeholder="Money paid"step="any" required="required"></td>
+                          <td><input type="number" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" id="price{{id}}" name="price{{id}}" class="form-control" onfocusout="check(this,{{id}})" placeholder="Bill amount" step="any" required="required"></td>
+                          <td><input type="number" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" id="paid{{id}}" name="paid{{id}}" class="form-control" onfocusout="check(this,{{id}})" placeholder="Money paid"step="any" required="required"></td>
                           <td>{{amount}}</td>
                         </tr>
                         <div id="amm"></div>
