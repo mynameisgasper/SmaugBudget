@@ -43,7 +43,7 @@ var lineConfig = {
                 }
             }],
             yAxes: [{
-                stacked: true,
+                stacked: false,
                 display: true,
                 scaleLabel: {
                     display: true,
@@ -67,6 +67,8 @@ var lineConfig = {
         }
     }
 };
+
+console.log(lineConfig);
 
 var randomScalingFactor = function() {
     return Math.round(Math.random() * 100);
@@ -116,30 +118,19 @@ function loadGraphs(categoryData) {
 }
 
 function loadGraphs2(categoryData) {
-    var i = 0;
     let keys = Array.from(categoryData.keys());
-
     for (let key of keys) {
-
         var json = {
             label: key,
             backgroundColor: categoryData.get(key).color,
             borderColor: categoryData.get(key).color,
             data: generateDataset(categoryData.get(key)),
             fill: false,
-
         }
+
         lineConfig.data.datasets.push(json);
-        i++;
-        //console.log(json);
-        //month.set(name, filterByMonth(category.get(name)));
     }
-    //console.log(categoryData[0].key);
-    if (categoryData != null) {
-        lineConfig.data.datasets[0].data = filterByMonth(categoryData);
-        //doughnutConfig.data.labels = extractNames(categoryData);
-        //var neki = extractNames(categoryData);
-    }
+
 
     lineConfig.options.aspectRatio = ($(window).width() < 960 ? 1 : 2);
 

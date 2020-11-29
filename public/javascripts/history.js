@@ -53,12 +53,8 @@ function filterByCategory() {
         if (!categories.get(expense.category)) {
             categories.set(expense.category, []);
         }
-
         categories.get(expense.category).push(expense);
         categories.get(expense.category).color = expense.color;
-
-
-
     }
     return categories;
 }
@@ -69,13 +65,16 @@ function filterByMonth(expenses) {
         //console.log(table);
         if (!month.get(expense.month)) {
             month.set(expense.month, {});
+            month.get(expense.month).sum = 0;
         }
-        month.get(expense.month).sum = expense.value;
+
+        month.get(expense.month).sum += expense.value;
     }
     return month;
 }
 
 function makeDataForGraph(category) {
+    console.log(category);
 
     var month = new Map();
     let keys = Array.from(category.keys());
@@ -83,6 +82,8 @@ function makeDataForGraph(category) {
         month.set(name, filterByMonth(category.get(name)));
         month.get(name).color = category.get(name).color;
     }
+
+    console.log(month);
     return month;
 }
 
@@ -294,6 +295,7 @@ function disableButton2(id) {
         return true;
     }
 }
+
 function nameAdd2(field) {
 
     //var field = document.getElementById("PayeeModal");
@@ -406,11 +408,10 @@ $(window).on("load", function() {
     }
 });
 
-$(window).ready(function(){
-    $(".expensesModal").on('hidden.bs.modal', function () {
+$(window).ready(function() {
+    $(".expensesModal").on('hidden.bs.modal', function() {
         $('.tt1').toast('hide');
         $('.tt2').toast('hide');
         $('.tt7').toast('hide');
     });
-  });
-  
+});
