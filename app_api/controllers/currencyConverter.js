@@ -1,12 +1,12 @@
+const app = require('../../app');
 const { request } = require('express');
 const mongoose = require('mongoose');
 const { currencySchema } = require('../models/currency');
+const { currencies } = require('../../app');
 const Currency = mongoose.model('Currency');
 var Client = require('node-rest-client').Client;
 
 function currencyConverter() {
-
-
     //get data
     var args = {
         headers: { "Content-Type": "application/JSON" }
@@ -43,6 +43,11 @@ function currencyConverter() {
                         });
                     }
                 });
+
+                if (!app.currencies) {
+                    app.currencies = [];
+                }
+                app.currencies.push(currency);
             }
         }
         else {
