@@ -7,6 +7,7 @@ const user = require("../models/user");
 const fs = require('fs');
 const path = require("path");
 const categories = require("../models/categories");
+const session = require("express-session");
 
 function register(req, res) {
     try {
@@ -122,10 +123,12 @@ function retrieveUser(requestBody, res) {
     }
 }
 
-function retrieveUserEmail(requestBody, res) {
+function retrieveUserEmail(requestBody, res, session) {
     try {
         var email = requestBody.email;
-
+        if (email === session.user.email) {
+            res.status(404).json("cannot add yourself!");
+        }
         User.findOne({ 'email': email }, function(err, user) {
             if (err) {
                 res.sendStatus(500);
@@ -135,7 +138,7 @@ function retrieveUserEmail(requestBody, res) {
                     user.passwordSalt = null;
                     res.sendStatus(200);
                 } else {
-                    res.sendStatus(404);
+                    res.status(404).json("no user!");
                 }
             }
         });

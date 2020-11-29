@@ -92,6 +92,7 @@ function respond(res, session) {
         }
         getUserConnections(res, session);
         getEnvelopesForDropdown(res, session);
+        //console.log(data);
         res.render('account', data);
     } else {
         res.redirect('/');
@@ -99,6 +100,7 @@ function respond(res, session) {
 }
 
 function parseRequestBody(req, res, session) {
+    //console.log(req.body.formType);
     switch (req.body.formType) {
         case 'changeName':
             {
@@ -113,6 +115,10 @@ function parseRequestBody(req, res, session) {
         case 'changeColorCategory':
             {
                 changeColorCategory(req, res, session);
+                break;
+            }
+            case 'addConnection': {
+                addConnection(req, res, session);
                 break;
             }
 
@@ -147,6 +153,32 @@ function changeColorCategory(req, res, session) {
     );
 }
 
+function addConnection(req, res, session) {
+    //console.log(session);
+    const data = {
+        connectionName: req.body.connectionName,
+        users: JSON.stringify(req.body.editPerson),
+        envelopes: JSON.stringify(req.body.selEnvelopes),
+        email: "premium@smaug.com"
+    }
+
+    var args = {
+        data: data,
+        headers: { "Content-Type": "application/x-www-form-urlencoded" }
+    };
+    var client = new Client();
+    client.post("http://" + req.headers.host + "/api/addConnection", args,
+    function(data, response) {
+        if (response.statusCode == 200) {
+            res.session = session;
+            res.session.user = data;
+            res.redirect('/account');
+        } else {
+            res.redirect('/account#error');
+        }
+    }
+);
+}
 function changeName(req, res, session) {
     const data = {
         firstName: req.body.firstName,
