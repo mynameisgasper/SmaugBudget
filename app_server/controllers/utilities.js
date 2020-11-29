@@ -222,9 +222,9 @@ function generateGroups(groups, myId, myName){
         var nextToPay = 'Me';
         var min = group.balance;
         for(var member of members){
-            if(member.amount < min){
+            if(member.balance < min){
                 nextToPay = member.name;
-                min = member.amount;
+                min = member.balance;
             }
             memberArray.push({
                 id: member._id,

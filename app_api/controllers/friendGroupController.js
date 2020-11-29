@@ -71,16 +71,22 @@ function calculateBalances(requestBody, res){
         var friends = JSON.parse(requestBody.friends);
 
         var check = true;
+        var sumPrice = 0;
+        var sumPaid = 0;
         for(var i = 0; i < friends.length; i++){
             for(var j = 0; j < 2; j++){
                 const valueTest = checkValues(friends[i][j]);
+                if(j == 0)
+                    sumPrice += parseInt(friends[i][j]); 
+                else
+                    sumPaid += parseInt(friends[i][j]); 
                 if(!valueTest){
                     check = false;
                 }
             }
         }
 
-       if(check){
+       if(check && sumPrice == sumPaid){
            User.findById(user_id, function(error, user) {
                 if (error) {
                     console.log(error);
