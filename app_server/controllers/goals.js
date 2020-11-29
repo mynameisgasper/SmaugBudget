@@ -190,6 +190,13 @@ function respond(res, session) {
 }
 
 function generateGoals(goals) {
+    var goalsArray = [];
+
+    for (var goal of goals) {
+        var date = goal.date.split("-");
+        date[2] = date[2].substring(0,2);
+        var progress = Math.ceil(goal.saved / goal.target * 100);
+        var targetLeft = goal.target - goal.saved;
         var monthlyTarget = calculateDailyTarget(goal.date, targetLeft);
         var color = "#2f7cfe";
         if(targetLeft <= 0)

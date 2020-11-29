@@ -7,7 +7,7 @@ friendSchema.add({
     balance: { type: Number, required: true }
 });
 
-mongoose.model('Friend', friendGroupSchema, 'Friend');
+mongoose.model('Friend', friendSchema, 'Friend');
 
 module.exports = {
     friendSchema: friendSchema
