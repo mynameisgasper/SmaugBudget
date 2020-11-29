@@ -174,22 +174,26 @@ function getExpensesAndBills(expenses, bills) {
 }
 
 function getExpensesSincePaycheck(expenses, paycheckDate) {
-    var expensesSincePaycheck = [];
+    try {
+        var expensesSincePaycheck = [];
 
-    const today = new Date();
-    const todayMonth = today.getMonth();
-    today.setMonth(today.getMonth() - 1);
-    const previousMonth = today.getMonth();
-    for (var expense of expenses) {
-        const expenseDate = new Date(expense.date);
-        const expenseDay = expenseDate.getDate();
-        const expenseMonth = expenseDate.getMonth();
-        if ((expenseMonth == todayMonth && expenseDay <= paycheckDate) || (expenseMonth == previousMonth && expenseDay > paycheckDate)) {
-            expensesSincePaycheck.push(expense);
+        const today = new Date();
+        const todayMonth = today.getMonth();
+        today.setMonth(today.getMonth() - 1);
+        const previousMonth = today.getMonth();
+        for (var expense of expenses) {
+            const expenseDate = new Date(expense.date);
+            const expenseDay = expenseDate.getDate();
+            const expenseMonth = expenseDate.getMonth();
+            if ((expenseMonth == todayMonth && expenseDay <= paycheckDate) || (expenseMonth == previousMonth && expenseDay > paycheckDate)) {
+                expensesSincePaycheck.push(expense);
+            }
         }
-    }
 
-    return expensesSincePaycheck;
+        return expensesSincePaycheck;
+    } catch {
+        return [];
+    }
 }
 
 function getBillsUntilPaycheck(bills, paycheckDate) {
