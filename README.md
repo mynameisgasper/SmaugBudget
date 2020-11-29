@@ -231,7 +231,7 @@ Lastni projekt pri predmetu **Spletno programiranje** v študijskem letu **2020/
   
 ### Navodila za uporabo z Docker  
 
-1. Vpišemo ukaz docker-compose up  
+1. Vpišemo ukaz docker-compose up --build  
 2. Gremo na brsklalnik na spletni naslov localhost:8080/db  
 3. Ustvarimo podatke v bazi  
 4. Gremo na brsklalnik na spletni naslov localhost:8080
