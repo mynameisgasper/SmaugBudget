@@ -147,7 +147,7 @@ Lastni projekt pri predmetu **Spletno programiranje** v študijskem letu **2020/
     - Date: Dovoljen je vnos datuma, ki je "manjši" ali enak današnjemu.  
       
 - Add Envelope  
-    - Category: Uporabnik mora izbrati eno izmed kategorij. Če izbere kategorijo "Make your own" se mu odpre novo vnosno polje kjer je dovoljen vnos malih in velikih tiskanih črk angleške abecede, števil ter posebnih znakov (_ @ . / # & + -). Niz je omejen na največjo dolžino 16 znakov.  Izbira ne sme ostati na Select Category.
+    - Category: Uporabnik mora izbrati eno izmed kategorij. Če izbere kategorijo "Make your own" se mu odpre novo vnosno polje kjer je dovoljen vnos malih in velikih tiskanih črk angleške abecede, števil ter posebnih znakov (_ @ . / # & + -). Niz je omejen na največjo dolžino 14 znakov.  Izbira ne sme ostati na Select Category.
     - Amount: Dovoljen je vnos decimalnega števila z največ 2 decimalni mesti in decimalno piko.  
       
 - Edit Envelope
