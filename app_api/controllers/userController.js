@@ -129,7 +129,7 @@ function retrieveUserEmail(requestBody, res, session) {
         if (email === session.user.email) {
             res.status(404).json("cannot add yourself!");
         }
-        console.log(email);
+        
         User.findOne({ 'email': email }, function(err, user) {
             if (err) {
                 res.sendStatus(500);
@@ -223,6 +223,28 @@ function updateUser(requestBody, res, session) {
         } else {
             res.sendStatus(404);
         }
+    } catch (ex) {
+        res.sendStatus(500);
+    }
+}
+
+function setCurrency(requestBody, res, session) {
+    try {
+        
+        User.findOne({ 'email': requestBody.email}, function (err, user) {
+            if (err) {
+                console.log(err);
+            } else {
+                if (user) {
+                    user.defaultCurrency = requestBody.currency ;
+                    console.log(requestBody);
+                    user.save();
+                    res.status(200).json(user);
+                } else {
+                    res.sendStatus(404);
+                }
+            }
+        });
     } catch (ex) {
         res.sendStatus(500);
     }
@@ -402,6 +424,9 @@ module.exports = {
     },
     updateUser: function(req, res) {
         updateUser(req.body, res, req.session);
+    },
+    setCurrency: function(req, res) {
+        setCurrency(req.body, res, req.session);
     },
     handlePaychecks: function() {
         handlePaychecks();

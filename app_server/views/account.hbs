@@ -146,7 +146,7 @@
         </button>
         <div class="dropdown-menu dropdown-menu-right scrollable-menu" aria-labelledby="currencyChange">
           {{#each data_currency}}
-          <a class="dropdown-item" id="{{key}}">{{name}} ({{key}})</a>
+          <a class="dropdown-item" onclick="changeCurrency('{{key}}')">{{name}} ({{key}})</a>
           {{/each}}
         </div>
       </div>

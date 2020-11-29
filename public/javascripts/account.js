@@ -66,6 +66,19 @@ function changeLanguage(language) {
     xhr.send("formType=changeLanguage&language="+language);                     // send data
 }
 
+function changeCurrency(curr) {
+    $("#currencyChange")[0].innerText = curr;
+    var xhr  = new XMLHttpRequest();                       
+
+    xhr.onload = function() {
+        console.log(this.responseText); 
+    }
+
+    xhr.open("POST", "/account");      // open connection
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.send("formType=changeCurrency&currency="+curr);                     // send data
+}
+
 function updateUserInfo() {
     var forms = document.forms["userInfo"];
     console.log(forms);

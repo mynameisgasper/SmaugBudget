@@ -84,12 +84,14 @@ function respond(res, session) {
         data.data_firstName = session.user.firstname;
         data.data_lastName = session.user.lastname;
         data.data_email = session.user.email;
-        console.log(session.user.categories);
+        data.data_defCurrency = session.user.defaultCurrency;
         data.categories = session.user.categories;
 
         for (var i = 0; i < data.categories.length; i++) {
             data.categories[i].hexColor = rgbToHex(data.categories[i].color);
         }
+        getCurrencies();
+        
         getUserConnections(res, session);
         getEnvelopesForDropdown(res, session);
         //console.log(data);
@@ -97,6 +99,43 @@ function respond(res, session) {
     } else {
         res.redirect('/');
     }
+}
+
+function getCurrencies() {
+    data.data_currency = [
+        {key: "EUR", name: "EURO"},
+        {key: "USD", name: "US Dollar"},
+        {key: "INR", name: "Indian Rupee"},
+        {key: "AUD", name: "Australian Dollar"},
+        {key: "CAD", name: "Canadian Dollar"},
+        {key: "SGD", name: "Singapore Dollar"},
+        {key: "RUB", name: "Russian Ruble"},
+        {key: "BGN", name: "Bulgarian Lev"},
+        {key: "BRL", name: "Brazilian Real"},
+        {key: "CHF", name: "Swis Franc"},
+        {key: "CNY", name: "Chinese Yuan Renmibi"},
+        {key: "CZK", name: "Czech Koruna"},
+        {key: "DKK", name: "Danish Krone"},
+        {key: "HKD", name: "Hong Kong Dollar"},
+        {key: "HRK", name: "Croatian Kuna"},
+        {key: "HUF", name: "Hungarian Forint"},
+        {key: "IDR", name: "Indonesian Rupiah"},
+        {key: "ILS", name: "Israeli Shekel"},
+        {key: "ISK", name: "Icelandic Krona"},
+        {key: "JPY", name: "Japanese Yen"},
+        {key: "KRW", name: "South Korean Won"},
+        {key: "MXN", name: "Mexican Peso"},
+        {key: "MYR", name: "Malaysian Ringgit"},
+        {key: "NOK", name: "Norwegian Krone"},
+        {key: "NZD", name: "New Zeland Dollar"},
+        {key: "PHP", name: "Philipine Peso"},
+        {key: "PLN", name: "Polish Zloty"},
+        {key: "RON", name: "Romanian Leu"},
+        {key: "SEK", name: "Swedish Krona"},
+        {key: "THB", name: "Thai Baht"},
+        {key: "TRY", name: "Turkish Lira"},
+        {key: "ZAR", name: "South African Rand"}
+    ];
 }
 
 function parseRequestBody(req, res, session) {
@@ -110,6 +149,11 @@ function parseRequestBody(req, res, session) {
         case 'changeLanguage':
             {
                 changeLanguage(req, res, session);
+                break;
+            }
+        case 'changeCurrency':
+            {
+                changeCurrency(req, res, session);
                 break;
             }
         case 'changeColorCategory':
@@ -137,7 +181,6 @@ function changeColorCategory(req, res, session) {
         headers: { "Content-Type": "application/x-www-form-urlencoded" }
     }
 
-    console.log(args);
 
     var client = new Client();
     client.post("http://" + req.headers.host + "/api/changeColorCategory", args,
@@ -220,6 +263,33 @@ function changeLanguage(req, res, session) {
     client.post("http://" + req.headers.host + "/api/updateUser", args,
         function(data, response) {
             if (response.statusCode == 200) {
+                res.session = session;
+                res.session.user = data;
+                res.redirect('/account');
+            } else {
+                res.redirect('/account#error');
+            }
+        }
+    );
+}
+
+function changeCurrency(req, res, session) {
+    const data = {
+        currency: req.body.currency,
+        email: session.user.email
+    }
+
+    var args = {
+        data: data,
+        headers: { "Content-Type": "application/x-www-form-urlencoded" }
+    };
+
+
+    var client = new Client();
+    client.post("http://" + req.headers.host + "/api/setCurrency", args,
+        function(data, response) {
+            if (response.statusCode == 200) {
+                
                 res.session = session;
                 res.session.user = data;
                 res.redirect('/account');

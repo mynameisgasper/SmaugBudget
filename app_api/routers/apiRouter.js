@@ -62,6 +62,10 @@ router.post('/updateUser', (req, res) => {
     user.updateUser(req, res);
 });
 
+router.post('/setCurrency', (req, res) => {
+    user.setCurrency(req, res);
+})
+
 router.post('/addBill', (req, res) => {
     bills.addBill(req, res);
 });
