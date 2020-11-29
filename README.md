@@ -82,7 +82,7 @@ Lastni projekt pri predmetu **Spletno programiranje** v študijskem letu **2020/
 
 ### Knjižnice  
 
-#### Body-parser(https://www.npmjs.com/package/body-parser)  
+#### [Body-parser](https://www.npmjs.com/package/body-parser)  
 - Branje body requesta.  
   
 #### Cron(https://www.npmjs.com/package/cron)  
@@ -90,31 +90,31 @@ Lastni projekt pri predmetu **Spletno programiranje** v študijskem letu **2020/
 - Periodično vstavljanje računov med stroške  
 - Postavljanje plač v prejšni mesec (in ob posodabljanju plače)  
   
-#### jssha(https://www.npmjs.com/package/jssha)  
+#### [jssha](https://www.npmjs.com/package/jssha)  
 - Enkripcija gesel  
   
-#### multer(https://www.npmjs.com/package/multer)  
+#### [multer](https://www.npmjs.com/package/multer)  
 - Nalaganje slik ter vrnitev poti do slike  
   
-#### Node-rest-client(https://www.npmjs.com/package/node-rest-client)  
+#### [Node-rest-client](https://www.npmjs.com/package/node-rest-client)  
 - Upravljanje z zahtevami na REST Clientu  
   
-#### Nodemailer(https://www.npmjs.com/package/nodemailer)  
+#### [Nodemailer](https://www.npmjs.com/package/nodemailer)  
 - Pošiljanje e-pošte za potrditev registracije in ponastavitev gesla.
   
-#### Nodemailer-mailgun-transport(https://www.npmjs.com/package/nodemailer-mailgun-transport)  
+#### [Nodemailer-mailgun-transport](https://www.npmjs.com/package/nodemailer-mailgun-transport)  
 - Pošiljanje e-pošte za potrditev registracije in ponastavitev gesla.  
   
 #### pdf-creator-node(https://www.npmjs.com/package/pdf-creator-node)  
 - Ustvarjanje preprostih PDF poročil.  
   
-#### Chart-js(https://www.chartjs.org/)  
+#### [Chart-js](https://www.chartjs.org/)  
 - Ustvarjanje grafov  
   
-#### Date-range-selector(https://www.daterangepicker.com/)  
+#### [Date-range-selector](https://www.daterangepicker.com/)  
 - Izbira dveh datumov za filtriranje podatkov  
   
-#### Bootstrap select(https://developer.snapappointments.com/bootstrap-select/)  
+#### [Bootstrap select](https://developer.snapappointments.com/bootstrap-select/)  
 - Za multiselect, dropdown, izbiro envelopov itd.  
   
   
