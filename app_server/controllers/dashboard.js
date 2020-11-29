@@ -223,8 +223,16 @@ function getLastMonthExpenses(expenses, paycheckDate) {
         const expenseDate = new Date(expense.date);
         const expenseDay = expenseDate.getDate();
         const expenseMonth = expenseDate.getMonth();
-        if ((expenseMonth == previousMonth && expenseDay <= paycheckDate) || (expenseMonth == prepreviousMonth && expenseDay > paycheckDate)) {
-            lastMonthExpenses.push(expense);
+
+        if (today > paycheckDate) {
+            if ((expenseMonth == previousMonth + 1 && expenseDay <= paycheckDate) || (expenseMonth == prepreviousMonth && expenseDay > paycheckDate)) {
+                lastMonthExpenses.push(expense);
+            }
+        }
+        else {
+            if ((expenseMonth == previousMonth && expenseDay <= paycheckDate) || (expenseMonth == prepreviousMonth && expenseDay > paycheckDate)) {
+                lastMonthExpenses.push(expense);
+            }
         }
     }
 
