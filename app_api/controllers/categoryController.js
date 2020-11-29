@@ -1,11 +1,12 @@
 const mongoose = require('mongoose');
 const envelopes = require('../models/envelopes');
 const expense = require('../models/expense');
-const { use } = require('../routers/apiRouter');
+const goals = require('../models/goals');
 const Envelopes = mongoose.model('Envelopes');
 const Categories = mongoose.model('Categories');
 const User = mongoose.model('User');
 const Expense = mongoose.model('Expense');
+const Goals = mongoose.model('Goals');
 /*
 ? Change category color
 */
@@ -94,6 +95,95 @@ function changeColorCategory(requestBody, res) {
 
     } catch (ex) {
         console.log(ex);
+    }
+}
+
+function deleteCategory(requestBody, res) {
+    try {
+        var category_id = requestBody.category_id;
+        var user_id = requestBody.user_id;
+
+        console.log(category_id);
+        console.log(user_id);
+        var categoryName;
+
+        const promise = new Promise((resolve, reject) => {
+            Categories.findById(category_id, function(error, category) {
+                if (error) {
+                    console.log(err);
+                } else {
+                    categoryName = category.name;
+                    resolve(categoryName);
+                }
+            });
+        });
+
+
+        promise.then((categoryName) => {
+            Categories.findByIdAndDelete(category_id, function(err, docs) {
+                if (err) {
+                    console.log(err);
+                } else {}
+            });
+
+            Goals.deleteMany({ 'category.name': categoryName }, function(error, docs) {
+                if (error) {
+                    console.log(error);
+                } else {}
+            });
+
+            Envelopes.deleteMany({ 'category.name': categoryName }, function(error, docs) {
+                if (error) {
+                    console.log(error);
+                } else {}
+            });
+
+            User.findById(user_id, function(err, user) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    var categoriesLength = user.categories.length;
+                    for (var i = 0; i < categoriesLength; i++) {
+                        if (user.categories[i].name === categoryName) {
+                            user.categories.pull(category_id);
+                            break;
+                        }
+                    }
+
+                    var envelopesLength = user.envelopes.length;
+                    var envelopesArray = user.envelopes;
+                    for (var i = 0; i < envelopesLength; i++) {
+                        if (envelopesArray.length > 0) {
+                            if (envelopesArray[i].category.name === categoryName) {
+                                user.envelopes.pull(envelopesArray[i]._id);
+                                envelopesLength = envelopesLength - 1;
+                                i = i - 1;
+                            }
+                        }
+                    }
+
+                    var goalLength = user.goals.length;
+                    var goalsArray = user.goals;
+                    for (var i = 0; i < goalLength; i++) {
+                        if (goalsArray.length > 0) {
+                            if (goalsArray[i].category.name === categoryName) {
+                                user.goals.pull(goalsArray[i]._id);
+                                goalLength = goalLength - 1;
+                                i = i - 1;
+                            }
+                        }
+                    }
+
+                    user.save();
+                    res.status(200).json(user);
+                    return;
+                }
+            });
+        });
+
+    } catch (ex) {
+        console.log(ex);
+        res.sendStatus(500);
     }
 }
 

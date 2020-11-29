@@ -155,26 +155,30 @@
 </div>
 
 <div class="container" id="categoriesColor-container">
-  <div id="categories-setting"  class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+  <div id="categories-setting"  class="col-sm-12 col-md-12 col-lg-12 col-xl-12" >
     <h2>Categories</h2>
     {{#each categories}}
-      <form name="editColor{{_id}}" method="post" action="/account">
-        <div class="category-row col-5 col-sm-6 col-md-5 col-lg-5 col-xl-5">
+      <form  name="editColor{{_id}}" method="post" action="/account">
+        <div class="category-row col-5 col-sm-6 col-md-5 col-lg-4 col-xl-4">
           <label for="color-picker{{_id}}" style=" text-align:left;">{{name}}</label>
         </div>
-        <div class="category-row col-3 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+        <div class="category-row col-3 col-sm-5 col-md-5 col-lg-3 col-xl-3" style="text-align: center;">
             <input type="color" class="color-picker" name="colorPicker{{id}}" value="{{hexColor}}">
         </div>
-        <div class="category-row col-3 col-sm-12 col-md-1 col-lg-1 col-xl-1">
+        <div class="category-row col-3 col-sm-12 col-md-1 col-lg-4 col-xl-4" style="text-align: right;">
           <button type="submit" class="btn btn-primary"><i class="fas fa-pencil-alt"></i></button>
+          <button type="submit" form="deleteColor{{_id}}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
           <input type="hidden" name="id" value="{{_id}}" />
           <input type="hidden" name="formType" value="changeColorCategory" />
-
         </div>
       </form>
-        {{/each}}
-        
-    
+      <form id="deleteColor{{_id}}" name="deleteColor{{_id}}" method="post" action="/account" onsubmit="return confirm('Deleting category will remove all related envelopes and goals!');">
+        <input type="hidden" name="formType" value="deleteCategory">
+        <input type="hidden" name="id" value="{{_id}}">
+      </form>
+      
+      
+     {{/each}}
   </div>
 </div>
 <!-- End AccountBody -->

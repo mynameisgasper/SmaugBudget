@@ -122,6 +122,7 @@ router.post('/deleteGoal', (req, res) => {
     goals.deleteGoal(req, res);
 });
 
+
 router.post('/removeAllDbData', (req, res) => {
     dbController.removeAllDbData(req, res);
 });
@@ -153,6 +154,11 @@ router.post('/loadCategories', (req, res) => {
 router.post('/changeColorCategory', (req, res) => {
     categories.changeColorCategory(req, res);
 })
+
+router.post('/deleteCategory', (req, res) => {
+    categories.deleteCategory(req, res);
+});
+
 
 router.post('/addFriendGroup', (req, res) => {
     friendGroup.addFriendGroup(req, res);
