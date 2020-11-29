@@ -1,6 +1,5 @@
 //Dependencies
 var dictionary = require('./Dictionary');
-var globalVar = require('../../app_api/models/globalVar.json');
 var connections = require('../../app_api/models/connections.json');
 var Client = require('node-rest-client').Client;
 

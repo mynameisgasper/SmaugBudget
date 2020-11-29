@@ -1,4 +1,4 @@
-const app = require('../../app');
+const globalVar = require('../models/globalVar');
 const { request } = require('express');
 const mongoose = require('mongoose');
 const { currencySchema } = require('../models/currency');
@@ -44,10 +44,10 @@ function currencyConverter() {
                     }
                 });
 
-                if (!app.currencies) {
-                    app.currencies = [];
+                if (!globalVar.currencies) {
+                    globalVar.currencies = [];
                 }
-                app.currencies.push(currency);
+                globalVar.currencies.push(currency);
             }
         }
         else {
