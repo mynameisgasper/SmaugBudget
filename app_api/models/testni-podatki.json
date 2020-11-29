@@ -280,7 +280,180 @@
                 "name": "Utilities"
             },
             "__v": 0
+        },
+
+
+        {
+            "_id": "5fc42036ee6abc07603460b0",
+            "progress": 0,
+            "budget": 100,
+            "spent": 0,
+            "colorHex": "#32a89c",
+            "color": "rgb(50, 168, 156)",
+            "bgColor": "rgba(50, 168, 156, 0.5)",
+            "month": "DEC",
+            "category": {
+                "_id": "5fc42028ee6abc0760345c38",
+                "color": "rgb(50, 168, 156)",
+                "basic": true,
+                "name": "Car"
+            },
+            "__v": 0
+        },
+        {
+            "_id": "5fc4203aee6abc076034617c",
+            "progress": 0,
+            "budget": 120,
+            "spent": 0,
+            "colorHex": "#e8b017",
+            "color": "rgb(232, 176, 23)",
+            "bgColor": "rgba(232, 176, 23, 0.5)",
+            "month": "DEC",
+            "category": {
+                "_id": "5fc42028ee6abc0760345c39",
+                "color": "rgb(232, 176, 23)",
+                "basic": true,
+                "name": "Groceries"
+            },
+            "__v": 0
+        },
+        {
+            "_id": "5fc4203eee6abc076034624d",
+            "progress": 0,
+            "budget": 60,
+            "spent": 0,
+            "colorHex": "#bf21c2",
+            "color": "rgb(191, 33, 194)",
+            "bgColor": "rgba(191, 33, 194, 0.5)",
+            "month": "DEC",
+            "category": {
+                "_id": "5fc42028ee6abc0760345c3a",
+                "color": "rgb(191, 33, 194)",
+                "basic": true,
+                "name": "Leisure"
+            },
+            "__v": 0
+        },
+        {
+            "_id": "5fc42043ee6abc0760346323",
+            "progress": 0,
+            "budget": 35,
+            "spent": 0,
+            "colorHex": "#d11768",
+            "color": "rgb(209, 23, 104)",
+            "bgColor": "rgba(209, 23, 104, 0.5)",
+            "month": "DEC",
+            "category": {
+                "_id": "5fc42028ee6abc0760345c3b",
+                "color": "rgb(209, 23, 104)",
+                "basic": true,
+                "name": "Subscriptions"
+            },
+            "__v": 0
+        },
+        {
+            "_id": "5fc42048ee6abc07603463fe",
+            "progress": 0,
+            "budget": 40,
+            "spent": 0,
+            "colorHex": "#5834b3",
+            "color": "rgb(88, 52, 179)",
+            "bgColor": "rgba(88, 52, 179, 0.5)",
+            "month": "DEC",
+            "category": {
+                "_id": "5fc42028ee6abc0760345c3c",
+                "color": "rgb(88, 52, 179)",
+                "basic": true,
+                "name": "Travel"
+            },
+            "__v": 0
+        },
+        {
+            "_id": "5fc4204cee6abc07603464de",
+            "progress": 0,
+            "budget": 30,
+            "spent": 0,
+            "colorHex": "#add134",
+            "color": "rgb(173, 209, 52)",
+            "bgColor": "rgba(173, 209, 52, 0.5)",
+            "month": "DEC",
+            "category": {
+                "_id": "5fc42028ee6abc0760345c3d",
+                "color": "rgb(173, 209, 52)",
+                "basic": true,
+                "name": "Home"
+            },
+            "__v": 0
+        },
+        {
+            "_id": "5fc42052ee6abc07603465c3",
+            "progress": 0,
+            "budget": 30,
+            "spent": 0,
+            "colorHex": "#32a852",
+            "color": "rgb(50, 168, 82)",
+            "bgColor": "rgba(50, 168, 82, 0.5)",
+            "month": "DEC",
+            "category": {
+                "_id": "5fc42028ee6abc0760345c3e",
+                "color": "rgb(50, 168, 82)",
+                "basic": true,
+                "name": "Gifts"
+            },
+            "__v": 0
+        },
+        {
+            "_id": "5fc42058ee6abc07603466ad",
+            "progress": 0,
+            "budget": 100,
+            "spent": 0,
+            "colorHex": "#d14917",
+            "color": "rgb(209, 73, 23)",
+            "bgColor": "rgba(209, 73, 23, 0.5)",
+            "month": "DEC",
+            "category": {
+                "_id": "5fc42028ee6abc0760345c3f",
+                "color": "rgb(209, 73, 23)",
+                "basic": true,
+                "name": "Shopping"
+            },
+            "__v": 0
+        },
+        {
+            "_id": "5fc4205eee6abc076034679c",
+            "progress": 0,
+            "budget": 100,
+            "spent": 0,
+            "colorHex": "#51dbed",
+            "color": "rgb(81, 219, 237)",
+            "bgColor": "rgba(81, 219, 237, 0.5)",
+            "month": "DEC",
+            "category": {
+                "_id": "5fc42028ee6abc0760345c40",
+                "color": "rgb(81, 219, 237)",
+                "basic": true,
+                "name": "Utilities"
+            },
+            "__v": 0
+        },
+        {
+            "_id": "5fc42064ee6abc0760346890",
+            "progress": 0,
+            "budget": 100,
+            "spent": 0,
+            "colorHex": "#28eb4f",
+            "color": "rgb(40, 235, 79)",
+            "bgColor": "rgba(40, 235, 79, 0.5)",
+            "month": "DEC",
+            "category": {
+                "_id": "5fc42028ee6abc0760345c41",
+                "color": "rgb(40, 235, 79)",
+                "basic": true,
+                "name": "Electronics"
+            },
+            "__v": 0
         }
+
     ],
     "categories": [{
             "color": "rgb(50, 168, 156)",
@@ -610,8 +783,59 @@
             },
             "__v": 0
         }
-
-
+    ],
+    "friendgroups": [{
+        "_id": "5fc41a53856f8e02780b4b2f",
+        "name": "FRI",
+        "balance": -2.5,
+        "friends": [{
+                "_id": "5fc41a53856f8e02780b4b30",
+                "name": "Luka",
+                "balance": 5.5
+            },
+            {
+                "_id": "5fc41a53856f8e02780b4b32",
+                "name": "Miha",
+                "balance": -1.5
+            },
+            {
+                "_id": "5fc41a53856f8e02780b4b34",
+                "name": "Gasper",
+                "balance": -4.5
+            },
+            {
+                "_id": "5fc41a53856f8e02780b4b36",
+                "name": "Tim",
+                "balance": 3
+            }
+        ],
+        "__v": 0
+    }],
+    "friends": [{
+            "_id": "5fc41a53856f8e02780b4b30",
+            "name": "Luka",
+            "balance": 0,
+            "__v": 0
+        },
+        {
+            "_id": "5fc41a53856f8e02780b4b32",
+            "name": "Miha",
+            "balance": 0,
+            "__v": 0
+        },
+        {
+            "_id": "5fc41a53856f8e02780b4b36",
+            "name": "Tim",
+            "balance": 0,
+            "__v": 0
+        },
+        {
+            "_id": "5fc41a53856f8e02780b4b34",
+            "name": "Gasper",
+            "balance": 0,
+            "__v": 0
+        }
     ]
+
 
 }
