@@ -124,8 +124,8 @@ function calculateBalances(requestBody, res){
 
 function deleteFriendGroup(requestBody, res){
     try {
-        var group_id = "5fc3a6475714a42eaca5042a";
-        var user_id = "5fc2b56a9b5aac361006f64c";
+        var group_id = requestBody.group_id;
+        var user_id = requestBody.user_id;
 
         if (group_id != undefined) {
             FriendGroup.findByIdAndDelete(group_id, function(err, group) {

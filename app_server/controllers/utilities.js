@@ -71,6 +71,11 @@ function parseRequestBody(req, res, session) {
                 addGroup(req, res, session);
                 break;
             }
+        case 'deleteFriendGroup':
+            {
+                deleteGroup(req, res, session);
+                break;
+            }
     }
 }
 
@@ -109,6 +114,33 @@ function addGroup(req, res, session) {
     );
 }
 
+function deleteGroup(req, res, session) {
+    const data = {
+        group_id: req.body.id,
+        user_id: session.user._id
+    }
+
+    var args = {
+        data: data,
+        headers: { "Content-Type": "application/x-www-form-urlencoded" }
+    };
+
+    var client = new Client();
+    client.post("http://" + req.headers.host + "/api/deleteFriendGroup", args,
+        function(data, response) {
+            if (response.statusCode == 200) {
+                res.session = session;
+                res.session.user = data;
+                res.redirect('/utility');
+            } else {
+                console.log(response.statusCode);
+                res.redirect('/utility#error');
+                
+            }
+        }
+    );
+}
+
 
 function respond(res, session) {
     if (session.user) {
@@ -117,7 +149,7 @@ function respond(res, session) {
         } else {
             data = {...data, ...translationKeys};
         }
-        data.Friend = generateGroups(session.user.friendgroups);
+        data.Friend = generateGroups(session.user.friendgroups, session.user._id);
         res.render('utilities', data);
     }
     else {
@@ -125,18 +157,19 @@ function respond(res, session) {
     }
 }
 
-function generateGroups(groups){
+function generateGroups(groups, myId, myName){
     var groupsArray = [];
 
     for(var group of groups){
         var memberArray = [];
         var members = group.friends;
+        memberArray = insertMe(memberArray, myId, group.balance);
         for(var member of members){
             memberArray.push({
                 id: member._id,
                 name: member.name,
                 amount: member.balance
-            },)
+            })
         }
         groupsArray.push({
             id: group._id,
@@ -147,6 +180,16 @@ function generateGroups(groups){
         })
     }
     return groupsArray;
+}
+
+function insertMe(memberArray, myId, myBalance){
+    memberArray.push({
+        id: myId,
+        name: 'Me',
+        amount: myBalance
+    });
+
+    return memberArray;
 }
 
 module.exports = {
