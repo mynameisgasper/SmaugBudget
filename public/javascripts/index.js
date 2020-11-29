@@ -33,7 +33,7 @@ function disableButton() {
 function nameRegex() {
 
     var username = document.getElementById("nameup");
-    var regex = new RegExp("^([a-zA-Z])+$");
+    var regex = new RegExp("^([a-zA-Z]){1,20}$");
     if (!username.value.match(regex)) {
         username.style.borderColor = "red";
         $('.tt1').toast('show');
@@ -47,7 +47,7 @@ function nameRegex() {
 
 function surnameRegex() {
     var username = document.getElementById("surnameup");
-    var regex = new RegExp("^([a-zA-Z])+$");
+    var regex = new RegExp("^([a-zA-Z]){1,20}$");
     if (!username.value.match(regex)) {
         username.style.borderColor = "red";
         $('.tt2').toast('show')
