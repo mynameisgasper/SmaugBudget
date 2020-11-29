@@ -163,89 +163,46 @@ function disableButton2(button) {
 
 var counter = 0;
 
-function addMemberBtn(conId) {
-    counter++;
-    if (conId) {
-        $("#conId")[0].parentNode.parentNode.parentNode.innerHTML = '<tr id="edit-addConTr{{_id}}" class="collapse show">' +
-        '<th>' +
-        '  <input type="text" name="editPerson[]" placeholder="" value="' + $("#conId")[0].value + '" class="form-control col-sm-9 col-md-9 col-lg-9 col-xl-9" disabled>' +
-        '</th>' +
-        '<th>' +
-        '  <button type="button" class="btn btn-danger" onclick="removeConUser(this)" style="float: right;" data-toggle="collapse" data-target="#edit-addConTr{{_id}}" aria-expanded="false" aria-controls="collapseExample">' +
-        '   <i class="fas fa-trash-alt"></i>' +
-        '  </button>' +
-        '</th>' +
-        '</tr>' + $("#conId")[0].parentNode.parentNode.parentNode.innerHTML;
+function addMemberBtn(button) {
+    button.parentNode.parentNode.parentNode.innerHTML = '<tr id="edit-addConTr{{_id}}" class="collapse show">' +
+    '<th>' +
+    '  <input type="text" name="editPerson[]" placeholder="" value="' + $("#editPersonNew")[0].value + '" class="form-control col-sm-9 col-md-9 col-lg-9 col-xl-9" disabled>' +
+    '</th>' +
+    '<th>' +
+    '  <button type="button" class="btn btn-danger" onclick="removeConUser(this)" style="float: right;" data-toggle="collapse" data-target="#edit-addConTr{{_id}}" aria-expanded="false" aria-controls="collapseExample">' +
+    '   <i class="fas fa-trash-alt"></i>' +
+    '  </button>' +
+    '</th>' +
+    '</tr>' + $("#editPersonNew")[0].parentNode.parentNode.parentNode.innerHTML;
 
-        $("#editPersonNew")[0].value = "";
-    } else {
-        $("#editPersonNew")[0].parentNode.parentNode.parentNode.innerHTML = '<tr id="edit-addConTr{{_id}}" class="collapse show">' +
-        '<th>' +
-        '  <input type="text" name="editPerson[]" placeholder="" value="' + $("#editPersonNew")[0].value + '" class="form-control col-sm-9 col-md-9 col-lg-9 col-xl-9" disabled>' +
-        '</th>' +
-        '<th>' +
-        '  <button type="button" class="btn btn-danger" onclick="removeConUser(this)" style="float: right;" data-toggle="collapse" data-target="#edit-addConTr{{_id}}" aria-expanded="false" aria-controls="collapseExample">' +
-        '   <i class="fas fa-trash-alt"></i>' +
-        '  </button>' +
-        '</th>' +
-        '</tr>' + $("#editPersonNew")[0].parentNode.parentNode.parentNode.innerHTML;
-
-        $("#editPersonNew")[0].value = "";
-    }
+    $("#editPersonNew")[0].value = "";
 }
 
-function checkIfAdded(conId) {
-    if (conId) {
-        var inputs = $("#conId")[0].parentNode.parentNode.parentNode.getElementsByTagName("input");
-        var last = "conId";
-        for (var i = 0; i < inputs.length; i++) {
-            if ((inputs[i].id != last) && (inputs[i].value == $("#"+last)[0].value)) {
-                return true;
-            }
+function checkIfAdded(button) {
+    var inputs = button.parentNode.parentNode.parentNode.getElementsByTagName("input");
+    var last = "editPersonNew";
+    for (var i = 0; i < inputs.length; i++) {
+        if ((inputs[i].id != last) && (inputs[i].value == $("#"+last)[0].value)) {
+            return true;
         }
-
-        var xhr  = new XMLHttpRequest();              // create XMLHttpRequest
-            // create formData object
-        
-        
-        xhr.onload = function() {
-            console.log(xhr.status); // whatever the server returns
-            if (xhr.status == 200) {
-                addMemberBtn(conId);
-            } else {
-                return true;
-            }
-        }
-
-        xhr.open("post", "/api/getUserEmail");      // open connection
-        xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-        xhr.send("email=" + $("#"+last)[0].value);                     // send data
-    } else {
-        var inputs = $("#editPersonNew")[0].parentNode.parentNode.parentNode.getElementsByTagName("input");
-        var last = "editPersonNew";
-        for (var i = 0; i < inputs.length; i++) {
-            if ((inputs[i].id != last) && (inputs[i].value == $("#"+last)[0].value)) {
-                return true;
-            }
-        }
-
-        var xhr  = new XMLHttpRequest();              // create XMLHttpRequest
-            // create formData object
-        
-        
-        xhr.onload = function() {
-            console.log(xhr.status); // whatever the server returns
-            if (xhr.status == 200) {
-                addMemberBtn(conId);
-            } else {
-                return true;
-            }
-        }
-
-        xhr.open("post", "/api/getUserEmail");      // open connection
-        xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-        xhr.send("email=" + $("#"+last)[0].value);                     // send data
     }
+
+    var xhr  = new XMLHttpRequest();              // create XMLHttpRequest
+        // create formData object
+    
+    
+    xhr.onload = function() {
+        console.log(xhr.status); // whatever the server returns
+        if (xhr.status == 200) {
+            addMemberBtn(button);
+        } else {
+            return true;
+        }
+    }
+
+    xhr.open("post", "/api/getUserEmail");      // open connection
+    xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    xhr.send("email=" + $("#"+last)[0].value);                     // send data
 }
 
 function removeConUser(element) {

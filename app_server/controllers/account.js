@@ -85,6 +85,7 @@ function respond(res, session) {
         data.data_firstName = session.user.firstname;
         data.data_lastName = session.user.lastname;
         data.data_email = session.user.email;
+        console.log(session.user.categories);
         data.categories = session.user.categories;
 
         for (var i = 0; i < data.categories.length; i++) {

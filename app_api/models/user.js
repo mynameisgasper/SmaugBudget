@@ -38,7 +38,7 @@ connectionsSchema.add({
     name: { type: String, required: true },
     guestName: { type: String, required: true},
     active: { type: Boolean, required: true},
-    user: { type: userSchema, required: true },
+    user: [userSchema],
     hostUser: { type: userSchema, required: true },
     envelopes: [envelopesSchema]
 });

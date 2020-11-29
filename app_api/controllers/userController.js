@@ -129,6 +129,7 @@ function retrieveUserEmail(requestBody, res, session) {
         if (email === session.user.email) {
             res.status(404).json("cannot add yourself!");
         }
+        console.log(email);
         User.findOne({ 'email': email }, function(err, user) {
             if (err) {
                 res.sendStatus(500);

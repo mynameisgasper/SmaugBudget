@@ -98,7 +98,7 @@ function addConnection(body, res, session) {
                                             console.log(err);
                                         } else {
                                             if (envelopes) {
-                                                console.log(typeof users);
+                                                console.log(users);
                                                 let con = new Connections ({
                                                     name: body.connectionName,
                                                     guestName: body.connectionName+"_",
@@ -115,7 +115,7 @@ function addConnection(body, res, session) {
                                                     let usrTren = users[i];
                                                     usrTren.save();
                                                 }
-                                                res.status(200).json("success");
+                                                res.status(200).json(con.hostUser);
                                             } else {
                                                 res.sendStatus(404); 
                                             }
