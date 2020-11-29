@@ -90,12 +90,8 @@ function respond(res, session) {
         for (var i = 0; i < data.categories.length; i++) {
             data.categories[i].hexColor = rgbToHex(data.categories[i].color);
         }
-
         getUserConnections(res, session);
-
-        //console.log(data.data_connections);
         getEnvelopesForDropdown(res, session);
-        console.log(data);
         res.render('account', data);
     } else {
         res.redirect('/');
@@ -114,8 +110,41 @@ function parseRequestBody(req, res, session) {
                 changeLanguage(req, res, session);
                 break;
             }
+        case 'changeColorCategory':
+            {
+                changeColorCategory(req, res, session);
+                break;
+            }
 
     }
+}
+
+function changeColorCategory(req, res, session) {
+    const data = {
+        colorPicker: req.body.colorPicker,
+        category_id: req.body.id,
+        user_id: session.user._id,
+    }
+
+    var args = {
+        data: data,
+        headers: { "Content-Type": "application/x-www-form-urlencoded" }
+    }
+
+    console.log(args);
+
+    var client = new Client();
+    client.post("http://" + req.headers.host + "/api/changeColorCategory", args,
+        function(data, response) {
+            if (response.statusCode == 200) {
+                res.session = session;
+                res.session.user = data;
+                res.redirect('/account');
+            } else {
+                res.redirect('/account#error');
+            }
+        }
+    );
 }
 
 function changeName(req, res, session) {
