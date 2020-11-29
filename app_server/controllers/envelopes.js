@@ -289,7 +289,7 @@ function addEnvelope(req, res, session) {
         var redirectLocation = '';
 
     var client = new Client();
-    client.post("http://" + req.headers.host +"/api/addEnvelope", args,
+    client.post("http://" + req.headers.host + "/api/addEnvelope", args,
         function(data, response) {
             if (response.statusCode == 200) {
                 res.session = session;
@@ -308,7 +308,8 @@ function addExpense(req, res, session) {
         category: req.body.inputCategory,
         recipient: req.body.recipient,
         date: req.body.date,
-        user: session.user._id
+        user: session.user._id,
+        inputCurrency: req.body.inputCurrency,
     }
 
     var args = {

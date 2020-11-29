@@ -4,6 +4,9 @@ const Envelopes = mongoose.model('Envelopes');
 const Categories = mongoose.model('Categories');
 const Expense = mongoose.model('Expense');
 const User = mongoose.model('User');
+const { currencySchema } = require('../models/currency');
+const Currency = mongoose.model('Currency');
+
 
 /*
 ? Add Envelope Function
@@ -226,7 +229,8 @@ function addExpense(requestBody, res) {
         var date = requestBody.date;
         var user_id = requestBody.user;
         //TODO Implement Currency
-        var currency = '€';
+        var currency = requestBody.inputCurrency;
+        console.log(amountAdded);
 
         var inputDate = date.split("-");
         var regex = new RegExp("^[0-9]+(\.[0-9]{1,2})?$");
@@ -240,25 +244,84 @@ function addExpense(requestBody, res) {
                     res.sendStatus(500);
                 } else {
                     var envelopeExists = false;
-                    for (var i = 0; i < user.envelopes.length; i++) {
-                        if (user.envelopes[i].category.name === categoryName && inputDate[1] == getMonthNumber(user.envelopes[i].month)) {
-                            envelopeExists = true;
-                            user.envelopes[i].spent += parseInt(amountAdded);
-                            user.envelopes[i].progress = Math.round((parseFloat(parseFloat(user.envelopes[i].spent) / parseFloat(user.envelopes[i].budget))) * 100);
 
-                            Envelopes.findById(user.envelopes[i]._id, function(error, envelope) {
+                    const promise = new Promise((resolution, rejection) => {
+                        if (!(currency === user.defaultCurrency)) {
+                            Currency.findOne({ 'currency': currency }, function(error, currencyFrom) {
+                                if (error) {
+                                    //alert("Currency converter unavailable, user your default currency");
+                                    res.sendStatus(500);
+                                } else {
+                                    if (currencyFrom) {
+                                        Currency.findOne({ 'currency': user.defaultCurrency }, function(error, currencyTo) {
+                                            if (error) {
+                                                //alert("Currency converter unavailable, user your default currency");
+                                                res.sendStatus(500);
+                                            } else {
+                                                if (currencyTo) {
+                                                    amountAdded = (amountAdded / currencyFrom.value) * currencyTo.value;
+                                                    resolution(amountAdded);
+                                                }
+                                            }
+                                        });
+                                    }
+                                }
+                            });
+                        } else {
+                            resolution(amountAdded);
+                        }
+                    });
+
+                    promise.then((amountAdded) => {
+                        for (var i = 0; i < user.envelopes.length; i++) {
+                            if (user.envelopes[i].category.name === categoryName && inputDate[1] == getMonthNumber(user.envelopes[i].month)) {
+                                envelopeExists = true;
+                                user.envelopes[i].spent += parseFloat(amountAdded).toFixed(2);
+                                user.envelopes[i].progress = Math.round((parseFloat(parseFloat(user.envelopes[i].spent) / parseFloat(user.envelopes[i].budget))) * 100);
+
+                                Envelopes.findById(user.envelopes[i]._id, function(error, envelope) {
+                                    if (error) {
+                                        console.log(error);
+                                    } else {
+                                        envelope.spent = user.envelopes[i - 1].spent;
+                                        envelope.progress = user.envelopes[i - 1].progress;
+                                        envelope.save();
+
+                                        let expense = new Expense({
+                                            date: date,
+                                            category: envelope.category,
+                                            recipient: recipient,
+                                            value: parseFloat(amountAdded).toFixed(2),
+                                            currency: user.defaultCurrency
+                                        });
+
+                                        expense.save(function callback(err) {
+                                            if (err) {
+                                                console.log(err);
+                                                res.sendStatus(500);
+                                                return;
+                                            } else {
+                                                user.expense.push(expense);
+                                                user.save();
+                                                res.status(200).json(user);
+                                                return;
+                                            }
+                                        });
+                                    }
+                                });
+                            }
+                        }
+
+                        if (!envelopeExists) {
+                            Categories.findOne({ name: categoryName }, function(error, category) {
                                 if (error) {
                                     console.log(error);
                                 } else {
-                                    envelope.spent = user.envelopes[i - 1].spent;
-                                    envelope.progress = user.envelopes[i - 1].progress;
-                                    envelope.save();
-
                                     let expense = new Expense({
                                         date: date,
-                                        category: envelope.category,
+                                        category: category,
                                         recipient: recipient,
-                                        value: amountAdded,
+                                        value: parseFloat(amountAdded).toFixed(2),
                                         currency: currency
                                     });
 
@@ -277,36 +340,8 @@ function addExpense(requestBody, res) {
                                 }
                             });
                         }
-                    }
+                    });
 
-                    if (!envelopeExists) {
-                        Categories.findOne({ name: categoryName }, function(error, category) {
-                            if (error) {
-                                console.log(error);
-                            } else {
-                                let expense = new Expense({
-                                    date: date,
-                                    category: category,
-                                    recipient: recipient,
-                                    value: amountAdded,
-                                    currency: currency
-                                });
-
-                                expense.save(function callback(err) {
-                                    if (err) {
-                                        console.log(err);
-                                        res.sendStatus(500);
-                                        return;
-                                    } else {
-                                        user.expense.push(expense);
-                                        user.save();
-                                        res.status(200).json(user);
-                                        return;
-                                    }
-                                });
-                            }
-                        });
-                    }
                 }
             });
         }
@@ -347,6 +382,52 @@ function rgbToHex(rgb) {
         .replace(/ /g, '')
         .split(',');
     return "#" + componentToHex(parseInt(rgb[0])) + componentToHex(parseInt(rgb[1])) + componentToHex(parseInt(rgb[2]));
+}
+
+/*
+? Currency Converter
+*/
+
+function currencyConverter() {
+    //get data
+    var args = {
+        headers: { "Content-Type": "application/JSON" }
+    };
+
+    var client = new Client();
+    client.get("https://api.exchangeratesapi.io/latest?base=EUR", args, function(data, response) {
+        if (response.statusCode == 200) {
+            let currency = new Currency({
+                currency: data.base,
+                value: 1
+            });
+            currency.save(function callback(err) {
+                if (err) {}
+            })
+            for (var key in data.rates) {
+                let currency = new Currency({
+                    currency: key,
+                    value: data.rates[key]
+                });
+                currency.save(function callback(err) {
+                    if (err) {
+                        Currency.findOne({ 'currency': key }, function(err, currency) {
+                            if (err) {
+                                console.log(err);
+                            } else {
+                                if (currency) {
+                                    currency.value = data.rates[key];
+                                    currency.save();
+                                }
+                            }
+                        });
+                    }
+                });
+            }
+        } else {
+            console.log(response.statusCode);
+        }
+    });
 }
 
 /*
