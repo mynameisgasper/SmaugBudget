@@ -6,7 +6,7 @@
           <h2>Friend groups</h2> 
         </div>
         <div class="col-sm-1 col-md-1 col-lg-1 col-xl-1">
-          <button type="button" class="btn btn-primary" id="createGroup" style="text-align: right;">Create</button>
+          <button type="button" class="btn btn-primary" id="createGroup" data-toggle="modal" href="#addGroupModal" style="text-align: right;">Create</button>
         </div>
       </div>
       <div class="row" style="padding-left: 25px;">
@@ -196,3 +196,52 @@
         </div>
       </div>
     </div>
+
+
+    <!--- Create Group Modal --->
+
+    <div class="modal fade" id="addGroupModal" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
+    <div class="position-absolute w-100 p-4 d-flex flex-column align-items-end">
+        <div class="w-25 toastek">
+            <div class="toast ml-auto tt5" role="alert" data-delay="3000" data-autohide="false">
+              <div class="toast-header">
+                  <strong class="mr-auto text-primary">HINT</strong>
+                  <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                  </button>
+              </div>
+              <div class="toast-body">
+                 Input may only contain letters, numbers and some special characters (_@./#&+-). Length allowed: 1-20
+              </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form name="addGroup" method="post" action="/" onsubmit="return disableButton2()">
+                <input type="hidden" value="addGroup" name="formType">
+                <input type="hidden" value="{{setMonthNumber}}" name="setMonth">
+                <div class="modal-body" id="inputMemberBody">  
+                  <label for="inputGroupName">Input group name</label>
+                  <input type="text" class="form-control" placeholder="Group Name" name="inputGroupName"></br>
+                  <label for="inputGroupName">Add Members</label>
+                  <input type="text" class="form-control" placeholder="Member 1" name="inputMember1" id="inputMember1" style="margin-top:1%">
+                  <input type="text" class="form-control" placeholder="Member 2" name="inputMember2" id="inputMember2" style="margin-top:4%">
+                  
+                 
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" onclick="disableButton2()" class="btn btn-primary">Add Group</button>
+                     <button type="button" id="addGroupMember" class="btn btn-primary" onclick="addNewInput();"> 
+                        <i class="fas fa-plus-square"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
