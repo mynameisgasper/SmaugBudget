@@ -1,5 +1,5 @@
 <!-- Account body -->
-<div class="position-absolute w-100 p-4 d-flex flex-column align-items-end">
+<div class="position-absolute w-100 p-4 d-flex flex-column align-items-end Zind">
     <div class="w-25 toast-front">
         <div class="toast ml-auto tt1" role="alert" data-delay="1000" data-autohide="false">
             <div class="toast-header">
@@ -185,6 +185,32 @@
 
 <!-- changePassowrd -->
 <div class="modal fade" id="changePassowrd" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="position-absolute w-100 p-4 d-flex flex-column align-items-end">
+    <div class="w-25 toast-front">
+        <div class="toast ml-auto tt3" role="alert" data-delay="1000" data-autohide="false">
+            <div class="toast-header">
+                <strong class="mr-auto text-primary">{{HINT}}</strong>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="toast-body">
+                {{passwordHint1}}
+            </div>
+        </div>
+        <div class="toast ml-auto tt4" role="alert" data-delay="1000" data-autohide="false">
+            <div class="toast-header">
+                <strong class="mr-auto text-primary">{{HINT}}</strong>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="toast-body">
+                {{passwordHint2}}
+            </div>
+        </div>        
+    </div>
+</div>
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -200,11 +226,11 @@
         </div>
         <div class="row">
           <label id="newPasswordLbl" for="newPassword" class="col-sm-4 col-md-4 col-lg-4 col-xl-4">{{newPassword}}:</label>
-          <input type="password" id="newPassword" placeholder="{{newPassword}}"  class="form-control col-sm-7 col-md-7 col-lg-7 col-xl-7">
+          <input type="password" id="newPassword" onfocusout="passwordStrength(this)" placeholder="{{newPassword}}"  class="form-control col-sm-7 col-md-7 col-lg-7 col-xl-7">
         </div>
         <div class="row">
           <label id="confirmPasswordLbl" for="confirmPassword" class="col-sm-4 col-md-4 col-lg-4 col-xl-4">{{confirmPassword}}:</label>
-          <input type="password" id="confirmPassword" placeholder="{{confirmPassword}}"  class="form-control col-sm-7 col-md-7 col-lg-7 col-xl-7">
+          <input type="password" id="confirmPassword" onfocusout="passwordCheckSignUp()" placeholder="{{confirmPassword}}"  class="form-control col-sm-7 col-md-7 col-lg-7 col-xl-7">
         </div>
         
       </div>
@@ -219,6 +245,21 @@
 
 <!-- addConnectionModal -->
 <div class="modal fade" id="addConnectionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="position-absolute w-100 p-4 d-flex flex-column align-items-end">
+    <div class="w-25 toast-front">
+        <div class="toast ml-auto tt5" role="alert" data-delay="1000" data-autohide="false">
+            <div class="toast-header">
+                <strong class="mr-auto text-primary">{{HINT}}</strong>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="toast-body">
+                {{conNameHint}}
+            </div>
+        </div>
+    </div>
+  </div>
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -292,7 +333,7 @@
       <div class="modal-body">
         <div class="row">
           <label id="edit-connectionNameLbl" for="edit-connectionName" class="col-sm-4 col-md-4 col-lg-4 col-xl-4">{{../connectionName}}:</label>
-          <input type="text" id="edit-connectionName" onfocusout="ConNameRegex(this)" placeholder="{{../name}}" value="{{name}}" class="form-control col-sm-7 col-md-7 col-lg-7 col-xl-7">
+          <input type="text" id="edit-connectionName" placeholder="{{../name}}" value="{{name}}" class="form-control col-sm-7 col-md-7 col-lg-7 col-xl-7" disabled>
         </div>
         <div class="row">
           <label id="edit-activeLbl" for="edit-active" class="col-5 col-sm-4 col-md-4 col-lg-4 col-xl-4" style="padding-right: 0px;">{{../active}}:</label>
@@ -338,7 +379,7 @@
           </table>
         </div>
         <div class="row">
-          <h5 style="padding-left: 5%;">{{envelopes}}</h5>
+          <h5 style="padding-left: 5%;">{{../envelopes}}</h5>
         </div>
         <div class="row">
           <select class="selectpicker" multiple data-live-search="true">
@@ -349,8 +390,8 @@
         </div>  
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary">{{saveChanges}}</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{close}}</button>
+        <button type="button" class="btn btn-primary">{{../saveChanges}}</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-trash-alt"></i>{{../remove}}</button>
       </div>
     </div>
   </div>

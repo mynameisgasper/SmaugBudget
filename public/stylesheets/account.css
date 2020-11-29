@@ -301,3 +301,7 @@ body a:hover {
     border: none;
     border-radius: 5px;
 }
+
+.Zind {
+    z-index: 90000 !important;
+}

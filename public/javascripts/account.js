@@ -120,7 +120,7 @@ function nameRegex() {
     var username = document.getElementById("nameInput");
     var regex = new RegExp("^([a-zA-Z])+$");
     if (!username.value.match(regex)) {
-        username.style.borderColor = "red";
+        username.style.setProperty("border-color", "red", "important");
         $('.tt1').toast('show');
         return 0;
     } else {
@@ -134,7 +134,7 @@ function surnameRegex() {
     var username = document.getElementById("lastnameInput");
     var regex = new RegExp("^([a-zA-Z])+$");
     if (!username.value.match(regex)) {
-        username.style.borderColor = "red";
+        username.style.setProperty("border-color", "red", "important");
         $('.tt2').toast('show')
         return 0;
     } else {
@@ -148,12 +148,12 @@ function ConNameRegex(element) {
 
     var regex = new RegExp("^([a-zA-Z0-9 ]){1,20}$");
     if (!element.value.match(regex)) {
-        element.style.borderColor = "red";
-        $('.tt1').toast('show');
+        element.style.setProperty("border-color", "red", "important");
+        $('.tt5').toast('show');
         return 0;
     } else {
         element.style.borderColor = "#ced4da";
-        $('.tt1').toast('hide');
+        $('.tt5').toast('hide');
         return 1;
     }
 }
@@ -222,7 +222,7 @@ function removeConUser(element) {
     element.parentNode.parentNode.remove();
 }
 
-function passwordStrength() {
+function passwordStrength(element) {
     //var button = document.getElementById("buttonup");
     //var email1 = document.getElementById(email1up);
     //var email2 = document.getElementById(email2up);
@@ -243,19 +243,35 @@ function passwordStrength() {
      * - Include at least 1 lowercase letter AND 1 numeric character
      *  OR
      * - Include at least 1 uppercase letter AND 1 numeric character*/
-    var pass = document.getElementById("password1up");
+    var pass = element;
     if (pass.value.match(strongRegex)) {
-        pass.style.borderColor = "green";
-        $('.tt4').toast('hide')
+        pass.style.setProperty("border-color", "green", "important");
+        $('.tt3').toast('hide')
         return 1;
     } else if (pass.value.match(mediumRegex)) {
 
-        pass.style.borderColor = "orange";
-        $('.tt4').toast('hide')
+        pass.style.setProperty("border-color", "orange", "important");
+        $('.tt3').toast('hide')
         return 1;
     } else {
-        pass.style.borderColor = "red";
+        pass.style.setProperty("border-color", "red", "important");
+        $('.tt3').toast('show')
+        return 0;
+    }
+}
+
+function passwordCheckSignUp() {
+    var pass1 = document.getElementById("newPassword");
+    var pass2 = document.getElementById("confirmPassword");
+    if (pass1.value != pass2.value) {
+        pass1.style.setProperty("border-color", "red", "important");
+        pass2.style.setProperty("border-color", "red", "important");
         $('.tt4').toast('show')
         return 0;
+    } else {
+        pass1.style.borderColor = "#ced4da";
+        pass2.style.borderColor = "#ced4da";
+        $('.tt4').toast('hide')
+        return 1;
     }
 }

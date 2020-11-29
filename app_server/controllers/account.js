@@ -86,7 +86,7 @@ function respond(res, session) {
         data.data_email = session.user.email;
         data.data_defCurrency = session.user.defaultCurrency;
         data.categories = session.user.categories;
-
+        console.log(session.user.envelopes);
         for (var i = 0; i < data.categories.length; i++) {
             data.categories[i].hexColor = rgbToHex(data.categories[i].color);
         }
@@ -375,13 +375,20 @@ function getNewUsers(req, res, session, connectionName) {
 
 function getUserConnections(res, session) {
     data.data_connections = session.user.connections;
+    for (var i = 0; i < data.data_connections.length; i++) {
+        data.data_connections[i].user = data.data_connections[i].user.filter(e => e.email !== session.user.email);
+        if (data.data_connections[i].hostUser.email !== session.user.email) {
+            data.data_connections[i].name = data.data_connections[i].guestName;
+        }
+    }
 }
 
 function getEnvelopesForDropdown(res, session) {
-    data.data_envelopes = session.user.envelopes;
+    data.data_envelopes = session.user.envelopes.filter(e => e.month === "NOV");
     for (var i = 0; i < data.data_connections.length; i++) {
-        for (var j = 0; j < data.data_envelopes; j++) {
+        for (var j = 0; j < data.data_envelopes.length; j++) {
             var found = data.data_connections[i].envelopes.findIndex(e => e.category.name === data.data_envelopes[j].category.name);
+            
             if (found == -1) {
                 var tren = JSON.parse(JSON.stringify(data.data_envelopes[j]));
                 tren.selected = false;
