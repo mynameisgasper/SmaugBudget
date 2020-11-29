@@ -5,6 +5,7 @@ var goals = require('../controllers/goalsController');
 var history = require('../controllers/expenseController');
 var dbController = require('../controllers/dbController');
 var connections = require('../controllers/connectionsController');
+var categories = require('../controllers/categoryController');
 
 var express = require('express');
 const currencyConverter = require('../controllers/currencyConverter');
@@ -143,5 +144,9 @@ router.post('/createDummyAccounts', (req, res) => {
 router.post('/loadCategories', (req, res) => {
     dbController.loadCategories(req, res);
 });
+
+router.post('/changeColorCategory', (req, res) => {
+    categories.changeColorCategory(req, res);
+})
 
 module.exports = router;

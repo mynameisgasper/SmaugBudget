@@ -104,7 +104,6 @@ function addEnvelope(requestBody, res) {
                             console.log(err);
                             res.sendStatus(500);
                         } else {
-                            console.log(categoryExists);
                             if (!categoryExists) {
                                 user.categories.push(category);
 
@@ -135,11 +134,6 @@ function editEnvelope(requestBody, res) {
     try {
         var newBudget = requestBody.inputAmount;
         var colorHexPicker = requestBody.colorPicker
-        const colorCorrect = checkColorCode(colorHexPicker)
-        if (colorCorrect) {
-            var colorRGB = hexToRGB(colorHexPicker);
-            var colorBackground = hexToRGB(colorHexPicker, 0.5);
-        }
         var envelope_id = requestBody.id;
         var user_id = requestBody.user;
 
@@ -156,9 +150,6 @@ function editEnvelope(requestBody, res) {
                         if (user.envelopes[i]._id == envelope_id) {
                             user.envelopes[i].progress = Math.round((parseFloat(parseFloat(user.envelopes[i].spent) / parseFloat(newBudget))) * 100);
                             user.envelopes[i].budget = newBudget;
-                            user.envelopes[i].colorHex = colorHexPicker;
-                            user.envelopes[i].color = colorRGB;
-                            user.envelopes[i].bgColor = colorBackground;
                             user.save();
                             break;
                         }
