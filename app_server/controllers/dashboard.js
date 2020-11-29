@@ -193,22 +193,26 @@ function getExpensesSincePaycheck(expenses, paycheckDate) {
 }
 
 function getBillsUntilPaycheck(bills, paycheckDate) {
-    var billsUntilPaycheck = [];
+    try {
+        var billsUntilPaycheck = [];
 
-    const today = new Date();
-    const todayMonth = today.getMonth();
-    today.setMonth(today.getMonth() + 1);
-    const nextMonth = today.getMonth();
-    for (var bill of bills) {
-        const billDate = new Date(bill.date);
-        const billDay = billDate.getDate();
-        const billMonth = billDate.getMonth();
-        if ((billMonth == todayMonth && billDay > paycheckDate) || (billMonth == nextMonth && billDay <= paycheckDate)) {
-            billsUntilPaycheck.push(bill);
+        const today = new Date();
+        const todayMonth = today.getMonth();
+        today.setMonth(today.getMonth() + 1);
+        const nextMonth = today.getMonth();
+        for (var bill of bills) {
+            const billDate = new Date(bill.date);
+            const billDay = billDate.getDate();
+            const billMonth = billDate.getMonth();
+            if ((billMonth == todayMonth && billDay > paycheckDate) || (billMonth == nextMonth && billDay <= paycheckDate)) {
+                billsUntilPaycheck.push(bill);
+            }
         }
-    }
 
-    return billsUntilPaycheck;
+        return billsUntilPaycheck;
+    } catch {
+        return [];
+    }
 }
 
 function getLastMonthExpenses(expenses, paycheckDate) {
@@ -230,7 +234,7 @@ function getLastMonthExpenses(expenses, paycheckDate) {
             }
         }
         else {
-            if ((expenseMonth == previousMonth && expenseDay <= paycheckDate) || (expenseMonth == prepreviousMonth && expenseDay > paycheckDate)) {
+            if ((expenseMonth == previousMonth && expense2Day <= paycheckDate) || (expenseMonth == prepreviousMonth && expenseDay > paycheckDate)) {
                 lastMonthExpenses.push(expense);
             }
         }
