@@ -157,13 +157,13 @@ function addToGoalWithCategory(requestBody, res) {
                             if (new_amount > user.goals[i].target)
                                 amount = user.goals[i].target
 
-                            user.goals[i].saved = new_amount;
+                            user.goals[i].saved = amount;
 
                             Goal.findById(goal_id, function(error, goal) {
                                 if (error) {
                                     console.log(error);
                                 } else {
-                                    goal.saved = new_amount;
+                                    goal.saved = amount;
                                     goal.save();
 
                                     var today = new Date();
