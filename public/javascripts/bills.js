@@ -14,7 +14,7 @@ function disableButton2(id) {
   var amount1 = amount(document.getElementById("Amount2"+id));
   var check1 = check(document.getElementById("Payee2"+id));
   var date1 = dateCheckAddBill(document.getElementById("inputDate"+id));
-
+  console.log(amount1 + " " + check1 + " " + date1);
   if (amount1 == 0 || check1 == 0 || date1) {
     return false;
   }
@@ -99,33 +99,33 @@ function dateCheckAddBill(field) {
   var inputDate = field.value.split("-");
 
   if (inputDate[0] > yyyy) {
-      $('#date-hintAdd').toast('hide');
+      $('.tt5').toast('hide');
       field.style.borderColor = "#ced4da";
       return 1;
   } else if (inputDate[0] == yyyy) {
       if (inputDate[1] > mm) {
-          $('#date-hintAdd').toast('hide');
+          $('.tt5').toast('hide');
           field.style.borderColor = "#ced4da";
           return 1;
       } else if (inputDate[1] == mm) {
           /* 
           ? IF DAY IS >= NOW */
           if (inputDate[2] >= dd) {
-              $('#date-hintAdd').toast('hide');
+              $('.tt5').toast('hide');
               field.style.borderColor = "#ced4da";
               return 1;
           } else {
-              $('#date-hintAdd').toast('show');
+              $('.tt5').toast('show');
               field.style.setProperty("border-color", "red", "important");
               return 0;
           }
       } else {
-          $('#date-hintAdd').toast('show');
+          $('.tt5').toast('show');
           field.style.setProperty("border-color", "red", "important");
           return 0;
       }
   } else {
-      $('#date-hintAdd').toast('show');
+      $('.tt5').toast('show');
       field.style.setProperty("border-color", "red", "important");
       return 0;
   }
@@ -140,34 +140,33 @@ function dateCheckEditBill(field) {
   var inputDate = field.value.split("-");
 
   if (inputDate[0] > yyyy) {
-      $("#date-hintEdit"+ id).toast('hide');
+      $(".tt6").toast('hide');
       field.style.borderColor = "#ced4da";
       return 1;
   } else if (inputDate[0] == yyyy) {
       if (inputDate[1] > mm) {
-          $("#date-hintEdit'+ id").toast('hide');
+        $(".tt6").toast('hide');
           field.style.borderColor = "#ced4da";
           return 1;
       } else if (inputDate[1] == mm) {
           /* 
           ? IF DAY IS >= NOW */
           if (inputDate[2] >= dd) {
-              $('#date-hintEdit'+ id).toast('hide');
+            $(".tt6").toast('hide');
               field.style.borderColor = "#ced4da";
               return 1;
           } else {
-              $('#date-hintEdit'+ id).toast('show');
+            $(".tt6").toast('show');
               field.style.setProperty("border-color", "red", "important");
               return 0;
           }
       } else {
-          $('#date-hintEdit'+ id).toast('show');
+        $(".tt6").toast('show');
           field.style.setProperty("border-color", "red", "important");
           return 0;
       }
   } else {
-    console.log('#date-hintEdit'+ id);
-      $('#date-hintEdit'+ id).toast('show');
+    $(".tt6").toast('show');
       field.style.setProperty("border-color", "red", "important");
       return 0;
   }

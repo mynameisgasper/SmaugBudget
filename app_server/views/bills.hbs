@@ -48,7 +48,7 @@
                                 Input may only contain decimal numbers separated by . with max 2 decimal places.
                             </div>
                         </div>
-                        <div class="toast ml-auto tt5" id="date-hintEdit{{id}}" role="alert" data-delay="1000" data-autohide="false">
+                        <div class="toast ml-auto tt6" id="date-hintEdit{{id}}" role="alert" data-delay="1000" data-autohide="false">
                             <div class="toast-header">
                                 <strong class="mr-auto text-primary">HINT</strong>
                                 <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
@@ -102,7 +102,6 @@
                                     <label for="date">Date due</label><br>
                                     <input class="form-control" type="date" value="{{year}}-{{month}}-{{day}}" id="inputDate{{id}}" name="inputDate" onfocusout="dateCheckEditBill(this,'{{id}}')" required="required">
                                 </div>
-                                {{year}}-{{month}}-{{day}}
                                 <div class="ena">
                                     <b>How often?</b><br>
                                     <input type="radio" name="radio" value="once" required {{#ifEquals repeat "once"}}checked{{/ifEquals}}>
@@ -149,7 +148,7 @@
                             Input may only contain decimal numbers separated by . with max 2 decimal places.
                         </div>
                     </div> 
-                    <div class="toast ml-auto" id="date-hintAdd" role="alert" data-delay="1000" data-autohide="false">
+                    <div class="toast ml-auto tt5" id="date-hintAdd" role="alert" data-delay="1000" data-autohide="false">
                         <div class="toast-header">
                             <strong class="mr-auto text-primary">HINT</strong>
                             <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
