@@ -46,7 +46,7 @@ Lastni projekt pri predmetu **Spletno programiranje** v študijskem letu **2020/
     - Mikroaplikacija, ki omogoča pregled plačil v tvoji družbi in poskrbi za poravnane račune. (Plačila tudi avtomatsko doda med plačila)	
 
 - [**Settings**](https://github.com/sp-2020-2021/LP-30/blob/master/docs/account.html)	
-    - Nastavitve uporabniškega profila vključno s profilno sliko (nastavitev profilne slike bo mogoča z drag&drop)
+    - Nastavitve uporabniškega profila vključno s profilno sliko.
     - Povezovanje z drugimi računi (partner, prijatelji). Sistem omogoča da deliš z njimi le določene kategorije oz. kuverte, ostale ostanejo skrite	
 
 - **Ostale funkcionalnosti**	
