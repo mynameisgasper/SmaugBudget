@@ -1,45 +1,57 @@
 var n = -1;
 
-function check(field, id) {
-
-    if (field.id == "price" + id) {
-        var regex = new RegExp("^[0-9]+(\.[0-9]{1,2})?$");
-        //decimalna števila z največj 2ma decimalnima mestoma ločilo je pika, prva mora biti številka!
-        //črkev male,velike,številke
-        if (!field.value.match(regex)) {
-            field.style.setProperty("border-color", "red", "important");
-            $('.tt1').toast('show')
-            n = 0;
-        } else {
-            field.style.borderColor = "#ced4da";
-            $('.tt1').toast('hide')
-            n = 1;
-        }
+function checkName(field){
+    var regex = new RegExp("^[ A-Za-z0-9_@./#&+-: ]{1,16}$");
+    console.log("prišeč")
+    if (!field.value.match(regex)) {
+        field.style.setProperty("border-color", "red", "important");
+        $('.tt5').toast('show');
+        console.log("slabo " + field.value)
+        return 0;
+    } else {
+        field.style.borderColor = "#ced4da";
+        $('.tt5').toast('hide');
+        console.log("dobr" +  field.value)
+        return 1;
     }
+}
 
-    if (field.id == "paid" + id) {
-        //var field = document.getElementById("PayeeModal");
-        var regex = new RegExp("^[0-9]+(\.[0-9]{1,2})?$");
-        //decimalna števila z največj 2ma decimalnima mestoma ločilo je pika, prva mora biti številka!
-        //črkev male,velike,številke
-        if (!field.value.match(regex)) {
-            field.style.setProperty("border-color", "red", "important");
-            $('.tt1').toast('show')
-            n = 0;
-        } else {
-            field.style.borderColor = "#ced4da";
-            $('.tt1').toast('hide')
-            n = 1;
-        }
+function checkValue(field) {
+    var regex = new RegExp("^[0-9]+(\.[0-9]{1,2})?$");
+    //decimalna števila z največj 2ma decimalnima mestoma ločilo je pika, prva mora biti številka!
+    //črkev male,velike,številke
+    if (!field.value.match(regex)) {
+        field.style.setProperty("border-color", "red", "important");
+        $('.tt1').toast('show')
+        return 0;
+    } else {
+        field.style.borderColor = "#ced4da";
+        $('.tt1').toast('hide')
+        return 1;
     }
 }
 
 function disableButton(id) {
-    if (n === 0) {
+    console.log("22");
+    var rows = document.getElementById('table' + id).rows.length;
+    console.log(rows);
+}
+
+function disableButton2() {
+    var groupName = checkName(document.getElementById("inputGroupName"));
+    if(groupName == 0)
         return false;
-    } else {
-        return true;
+
+    var check = true;
+    console.log("count" + counter);
+    for(var i = 1; i <= counter; i++){
+        var testName = checkName(document.getElementById("inputMember" + i));
+        if(testName == 0){
+            check = false
+            return false;
+        }
     }
+    return check;
 }
 
 function convertCurrency() {
@@ -86,7 +98,7 @@ function addNewInput() {
     } else {
         counter++;
         var form = document.getElementById('inputMemberBody');
-        var input = '<input type="text" style="margin-top:4%" class="form-control" id="inputMember' + counter + '" placeholder="Member ' + counter + ' " name="inputMember' + counter + '"></input>';
+        var input = '<input type="text" onfocusout="checkName(this)" style="margin-top:4%" class="form-control" id="inputMember' + counter + '" placeholder="Member ' + counter + ' " name="inputMember' + counter + '"></input>';
         form.innerHTML = form.innerHTML + input;
         document.getElementById('counter').value = counter;
     }

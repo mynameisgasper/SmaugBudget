@@ -26,7 +26,6 @@ function disableButton() {
 }
 
 function disableButton2(id) {
-    console.log("asd");
     var amount1 = amount77(document.getElementById("amount3"), id);
     var name = nameAdd2(document.getElementById("Goal3"), id);
     var date = dateCheck(document.getElementById("inputDate"), id);

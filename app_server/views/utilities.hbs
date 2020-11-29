@@ -168,7 +168,7 @@
               <input type="hidden" value="{{id}}" name="id">
               <div class="modal-body">
                 <div class="row">
-                  <table class="table">
+                  <table class="table" id="table{{id}}">
                     <thead>
                       <tr>
                         <th scope="col">Name</th>
@@ -181,8 +181,8 @@
                       {{#each groupMember}}
                         <tr>
                           <td>{{name}}</td>
-                          <td><input type="number" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" id="price{{id}}" name="price{{id}}" class="form-control" onfocusout="check(this,{{id}})" placeholder="Bill amount" step="any" required="required"></td>
-                          <td><input type="number" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" id="paid{{id}}" name="paid{{id}}" class="form-control" onfocusout="check(this,{{id}})" placeholder="Money paid"step="any" required="required"></td>
+                          <td><input type="number" onfocusout="checkValue(this)" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" id="price{{id}}" name="price{{id}}" class="form-control" onfocusout="check(this,{{id}})" placeholder="Bill amount" step="any" required="required"></td>
+                          <td><input type="number" onfocusout="checkValue(this)" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" id="paid{{id}}" name="paid{{id}}" class="form-control" onfocusout="check(this,{{id}})" placeholder="Money paid"step="any" required="required"></td>
                           <td>{{amount}}</td>
                         </tr>
                         <div id="amm"></div>
@@ -193,7 +193,7 @@
                 </div>
               </div>
               <div class="modal-footer">
-                <button type="submit" onclick="disableButton({{id}})"class="btn btn-primary">Save changes</button>
+                <button type="submit" onclick="disableButton({{id}})" class="btn btn-primary">Save changes</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
               </div>
             </form>
@@ -232,17 +232,17 @@
                 <input type="hidden" value="2" name="counter" id="counter">
                 <div class="modal-body" id="inputMemberBody">  
                   <label for="inputGroupName">Input group name</label>
-                  <input type="text" class="form-control" placeholder="Group Name" name="inputGroupName"></br>
+                  <input type="text" class="form-control" placeholder="Group Name" name="inputGroupName" id="inputGroupName" onfocusout="checkName(this)" required="required"></br>
                   <label for="inputGroupName">Add Members</label>
-                  <input type="text" class="form-control" placeholder="Member 1" name="inputMember1" id="inputMember1" style="margin-top:1%">
-                  <input type="text" class="form-control" placeholder="Member 2" name="inputMember2" id="inputMember2" style="margin-top:4%">
+                  <input type="text" class="form-control" placeholder="Member 1" name="inputMember1" id="inputMember1" style="margin-top:1%" onfocusout="checkName(this)">
+                  <input type="text" class="form-control" placeholder="Member 2" name="inputMember2" id="inputMember2" style="margin-top:4%" onfocusout="checkName(this)">
                   
                  
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" onclick="disableButton2()" class="btn btn-primary">Add Group</button>
-                     <button type="button" id="addGroupMember" class="btn btn-primary" onclick="addNewInput();"> 
-                        <i class="fas fa-plus-square"></i>
+                    <button type="submit" onclick="disableButton2();" class="btn btn-primary">Add Group</button>
+                    <button type="button" id="addGroupMember" class="btn btn-primary" onclick="addNewInput();"> 
+                      <i class="fas fa-plus-square"></i>
                     </button>
                 </div>
             </form>
