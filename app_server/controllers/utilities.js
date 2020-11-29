@@ -141,7 +141,6 @@ function deleteGroup(req, res, session) {
     );
 }
 
-
 function respond(res, session) {
     if (session.user) {
         if (session.user.language) {
@@ -164,7 +163,13 @@ function generateGroups(groups, myId, myName){
         var memberArray = [];
         var members = group.friends;
         memberArray = insertMe(memberArray, myId, group.balance);
+        var nextToPay = 'Me';
+        var min = group.balance;
         for(var member of members){
+            if(member.amount < min){
+                nextToPay = member.name;
+                min = member.amount;
+            }
             memberArray.push({
                 id: member._id,
                 name: member.name,
@@ -174,7 +179,7 @@ function generateGroups(groups, myId, myName){
         groupsArray.push({
             id: group._id,
             Group: group.name,
-            Next: 'TBD',
+            Next: nextToPay,
             Balance: group.balance,
             groupMember: memberArray
         })
