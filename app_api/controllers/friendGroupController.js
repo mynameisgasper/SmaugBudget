@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const friend = require('../models/friend');
 const user = require('../models/user');
 const { use } = require('../routers/apiRouter');
 const FriendGroup = mongoose.model('FriendGroup');
@@ -8,33 +9,35 @@ const User = mongoose.model('User');
 function addFriendGroup(requestBody, res){
     try {
         var name = requestBody.name;
-        var friend1 = requestBody.friend1;
-        var friend2 = requestBody.friend2;
-        var user_id = "5fc2b56a9b5aac361006f64c";
-        
-        const nameTest = checkName(name);
+        var friends = JSON.parse(requestBody.friends);
+        var user_id = requestBody.user_id;
 
-        if(nameTest){
+        var check = true;
+        for(var i = 0; i < friends.length; i++){
+            const nameTest = checkName(name);
+            if(!nameTest)
+                check = false; 
+        }
+
+        if(check){
             User.findById(user_id, function(error, user) {
                 if (error) {
                     console.log(error);
                     res.sendStatus(500);
                 } else {
-                    let newFriend1 = new Friend({
-                        name: friend1,
-                        balance: 0
-                    });
-                    let newFriend2 = new Friend({
-                        name: friend2,
-                        balance: 0
-                    });
-                    newFriend1.save();
-                    newFriend2.save();
-
                     let friendGroup = new FriendGroup({
                         name: name,
-                        friends: [ newFriend1 , newFriend2 ]
+                        balance: 0,
+                        friends: []
                     });
+                    for(var i = 0; i < friends.length; i++){
+                        let newFriend = new Friend({
+                            name: friends[i],
+                            balance: 0
+                        });
+                        newFriend.save();
+                        friendGroup.friends.push(newFriend);
+                    }
 
                     friendGroup.save(function callback(err) {
                         if (err) {
