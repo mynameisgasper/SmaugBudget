@@ -142,12 +142,12 @@ Lastni projekt pri predmetu **Spletno programiranje** v študijskem letu **2020/
 
 - Add Expense  
     - Category: Uporabnik mora izbrati eno izmed kategorij. Izbira ne sme ostati na Choose a Category.  
-    - Recipient: Dovoljen je vnos malih in velikih tiskanih črk angleške abecede, števil, posebnih znakov (_ @ . / # & + - :) ter presledkov. Niz je omejen na največjo dolžino 20 znakov.  
+    - Recipient: Dovoljen je vnos malih in velikih tiskanih črk angleške abecede, števil, posebnih znakov (_ @ . / # & + - :) ter presledkov. Niz je omejen na največjo dolžino 16 znakov.  
     - Amount: Dovoljen je vnos decimalnega števila z največ 2 decimalni mesti in decimalno piko.  
     - Date: Dovoljen je vnos datuma, ki je "manjši" ali enak današnjemu.  
       
 - Add Envelope  
-    - Category: Uporabnik mora izbrati eno izmed kategorij. Če izbere kategorijo "Make your own" se mu odpre novo vnosno polje kjer je dovoljen vnos malih in velikih tiskanih črk angleške abecede, števil ter posebnih znakov (_ @ . / # & + -). Niz je omejen na največjo dolžino 20 znakov.  Izbira ne sme ostati na Select Category.
+    - Category: Uporabnik mora izbrati eno izmed kategorij. Če izbere kategorijo "Make your own" se mu odpre novo vnosno polje kjer je dovoljen vnos malih in velikih tiskanih črk angleške abecede, števil ter posebnih znakov (_ @ . / # & + -). Niz je omejen na največjo dolžino 16 znakov.  Izbira ne sme ostati na Select Category.
     - Amount: Dovoljen je vnos decimalnega števila z največ 2 decimalni mesti in decimalno piko.  
       
 - Edit Envelope
@@ -160,13 +160,13 @@ Lastni projekt pri predmetu **Spletno programiranje** v študijskem letu **2020/
     - Amount: Dovoljen je vnos decimalnega števila z največ 2 decimalni mesti in decimalno piko.  
       
 - Add Goal  
-    - What's your goal: Dovoljen je vnos malih in velikih tiskanih črk angleške abecede, števil, posebnih znakov (_ @ . / # & + - :) ter presledkov. Niz je omejen na največjo dolžino 20 znakov.  
+    - What's your goal: Dovoljen je vnos malih in velikih tiskanih črk angleške abecede, števil, posebnih znakov (_ @ . / # & + - :) ter presledkov. Niz je omejen na največjo dolžino 16 znakov.  
     - Category: Uporabnik mora izbrati eno izmed kategorij. Izbira ne sme ostati na Select Category.  
     - How much: Dovoljen je vnos decimalnega števila z največ 2 decimalni mesti in decimalno piko. 
     - Date: Dovoljen je vnos datuma, ki je "večji" ali enak današnjemu. 
       
 - Edit Goal  
-    - What's your goal: Dovoljen je vnos malih in velikih tiskanih črk angleške abecede, števil, posebnih znakov (_ @ . / # & + - :) ter presledkov. Niz je omejen na največjo dolžino 20 znakov.  
+    - What's your goal: Dovoljen je vnos malih in velikih tiskanih črk angleške abecede, števil, posebnih znakov (_ @ . / # & + - :) ter presledkov. Niz je omejen na največjo dolžino 16 znakov.  
     - Category: Uporabnik mora izbrati eno izmed kategorij. Izbira ne sme ostati na Select Category.  
     - How much: Dovoljen je vnos decimalnega števila z največ 2 decimalni mesti in decimalno piko.  
     - Date: Dovoljen je vnos datuma, ki je "večji" ali enak današnjemu.  
@@ -192,7 +192,7 @@ Lastni projekt pri predmetu **Spletno programiranje** v študijskem letu **2020/
 #### History  
 
 - Edit expense  
-    - Recipient: What's your goal: Dovoljen je vnos malih in velikih tiskanih črk angleške abecede, števil, posebnih znakov (_ @ . / # & + - :) ter presledkov. Niz je omejen na največjo dolžino 20  
+    - Recipient: What's your goal: Dovoljen je vnos malih in velikih tiskanih črk angleške abecede, števil, posebnih znakov (_ @ . / # & + - :) ter presledkov. Niz je omejen na največjo dolžino 16  
     - Amount: Dovoljen je vnos decimalnega števila z največ 2 decimalni mesti in decimalno piko.  
     - Date: Dovoljen je vnos datuma, ki je "manjši" ali enak današnjemu.  
       
