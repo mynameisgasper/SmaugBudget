@@ -35,6 +35,9 @@ router.post('/resetPassword', (req, res) => {
     user.resetPassword(req, res);
 });
 
+router.post('/changePassword', (req, res) => {
+    user.changePassword(req, res);
+});
 
 router.post('/getUser/', (req, res) => {
     user.retrieveUser(req, res);

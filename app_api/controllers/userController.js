@@ -368,6 +368,42 @@ function resetPassword(requestBody, res) {
     }
 }
 
+function changePassword(req, res) {
+    try {
+        var oldPassword = req.body.oldPassword;
+        var newPassword1 = req.body.newPassword1;
+        var newPassword2 = req.body.newPassword2;
+        var id = req.body.id;
+
+        if (newPassword1 === newPassword2) {
+            User.findById(id, function(err, user) {
+                if (err) {
+                    res.sendStatus(500);
+                }
+                else {
+                    if (user.password === oldPassword) {
+                        user.password = newPassword1;
+                        user.passwordSalt = "tempSalt"    
+                        user.save(function callback(err) {
+                            user.password = null;
+                            user.passwordSalt = null;
+                            res.status(200).json(user);
+                        });
+                    }
+                    else {
+                        res.sendStatus(401);
+                    }
+                }
+            });
+        }
+        else {
+            res.sendStatus(400);
+        }
+    } catch (ex) {
+        res.sendStatus(500);
+    }
+}
+
 function handlePaychecks() {
     User.find(function(err, users) {
         if (err) {
@@ -404,6 +440,9 @@ module.exports = {
     },
     resetPassword: function(req, res) {
         resetPassword(req, res);
+    },
+    changePassword: function(req, res) {
+        changePassword(req, res);
     },
     retrieveUser: function(req, res) {
         retrieveUser(req.body, res, req.session);

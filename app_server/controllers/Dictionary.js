@@ -184,7 +184,7 @@ var english = {
     "firstName": "First name",
     "lastName": "Last name",
     "password": "Password",
-    "changePassword": "Change password",
+    "changePassword": "Change Password",
     "email": "Email",
     "changeImage": "Change image",
     "connections": "Connections",
@@ -245,7 +245,7 @@ var english = {
     "incomeModalTitle": "Update your Income",
     "incomeModalPlaceholderIncome": "Enter your income",
     "incomeModalPlaceholderDate": "Day in month you receive paycheck",
-    "incomeModalSaveButton": "Save changes",
+    "incomeModalSaveButton": "Save Changes",
     "incomeModalCloseButton": "Close",
 
 
