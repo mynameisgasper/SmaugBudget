@@ -49,9 +49,69 @@ function addFriendGroup(requestBody, res){
                 }
             });
         }
+    }
+    catch (ex) {
+        console.log(ex);
+        res.sendStatus(500);
+    }
+}
 
-    
+function calculateBalances(requestBody, res){
+    try {
+        var group_id = "5fc3a5f976b32f35a42bd3cf";
+        var user_id = "5fc2b56a9b5aac361006f64c";
+        
+        //const nameTest = checkName(name);
 
+        if(true){
+            User.findById(user_id, function(error, user) {
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(500);
+                } else {
+                    FriendGroup.findById(group_id, function(error, group){
+                        if (error) {
+                            console.log(error);
+                            res.sendStatus(500);
+                        } else {
+                            var data = Array.from(Array(group.friends.length), () => new Array(3))
+                            data[0][0]  = requestBody.friend1name;
+                            data[0][1]  = requestBody.friend1bill;
+                            data[0][2]  = requestBody.friend1paid;
+                            data[1][0] = requestBody.friend2name;
+                            data[1][1] = requestBody.friend2bill;
+                            data[1][2] = requestBody.friend2paid;
+
+                            for(var i = 0; i < group.friends.length; i++){
+                                var newBalance = group.friends[i].balance + (data[i][2] - data[i][1]);
+                                group.friends[i].balance = newBalance;
+                                //console.log(newBalance + " " + i + " " + group.friends[i]._id);
+                                /*Friend.findById(group.friends[i]._id, function(error, friend){
+                                    if (error) {
+                                        console.log(error);
+                                        res.sendStatus(500);
+                                    } else {
+                                            console.log(friend.name + " " + i + " " + friend._id);
+                                            friend.balance = newBalance;
+                                            console.log(friend.balance);
+                                            friend.save();
+                                    }
+                                });*/
+                            }
+                            group.save();
+                            for(var i = 0; i < user.friendgroups.length; i++){
+                                if(user.friendgroups[i]._id == group_id){
+                                    user.friendgroups[i] = group;
+                                    user.save();
+                                    break;
+                                }
+                            }
+                            res.sendStatus(200);
+                        }
+                    });
+                }
+            });
+        }
     }
     catch (ex) {
         console.log(ex);
@@ -71,5 +131,8 @@ function checkName(title) {
 module.exports = {
     addFriendGroup: function(req, res) {
         addFriendGroup(req.body, res);
+    },
+    calculateBalances: function(req, res) {
+        calculateBalances(req.body, res);
     }
 }

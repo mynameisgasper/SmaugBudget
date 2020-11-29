@@ -154,4 +154,8 @@ router.post('/addFriendGroup', (req, res) => {
     friendGroup.addFriendGroup(req, res);
 })
 
+router.post('/calculateBalances', (req, res) => {
+    friendGroup.calculateBalances(req, res);
+})
+
 module.exports = router;
