@@ -25,6 +25,7 @@ userSchema.add({
     isPremium: { type: Boolean, required: true, default: false },
     profilePic: { type: String, required: false },
     language: { type: String, required: true, default: 'English' },
+    defaultCurrency: { type: String, required: true, default: 'EUR' },
     connections: [connectionsSchema],
     envelopes: [envelopesSchema],
     goals: [goalsSchema],
@@ -36,8 +37,8 @@ userSchema.add({
 
 connectionsSchema.add({
     name: { type: String, required: true },
-    guestName: { type: String, required: true},
-    active: { type: Boolean, required: true},
+    guestName: { type: String, required: true },
+    active: { type: Boolean, required: true },
     user: [userSchema],
     hostUser: { type: userSchema, required: true },
     envelopes: [envelopesSchema]

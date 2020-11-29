@@ -210,6 +210,50 @@
                             <input type="number" class="form-control" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" onfocusout="amount5(this)" id="Amount2{{id}}" name="inputAmount" placeholder="0.00" step="any">
                         </div>
                     </div>
+                    <div class="ena"><label for="inputAmount">Currency</label></br>
+                        <div class="input-group mb-3">
+                            <select id="inputCurrency" name="inputCurrency" class="form-control">
+                                <option selected>Select Currency</option>
+                                <option value="EUR" selected="selected" label="Euro">EUR</option>
+                                <option value="USD" label="US dollar">USD</option>
+                                <option value="GBP" label="British Pound sterling">GBP</option>
+                                <option value="HRK" label="Croatian kuna">HRK</option>
+                                <option disabled>──────────</option>
+                                <option value="JPY" label="Japanese yen">JPY</option>
+                                <option value="AUD" label="Australian dollar">AUD</option>
+                                <option value="BGN" label="Bulgarian lev">BGN</option>
+                                <option value="BRL" label="Brazilian real">BRL</option>
+                                <option value="CAD" label="Canadian dollar">CAD</option>
+                                <option value="CHF" label="Swiss franc">CHF</option>
+                                <option value="CNY" label="Chinese yuan">CNY</option>
+                                <option value="CZK" label="Czech koruna">CZK</option>
+                                <option value="EUR" label="EURO">EUR</option>
+                                <option value="GBP" label="British pound">GBP</option>
+                                <option value="HKD" label="Hong Kong dollar">HKD</option>
+                                <option value="HRK" label="Croatian kuna">HRK</option>
+                                <option value="HUF" label="Hungarian forint">HUF</option>
+                                <option value="ILS" label="Israeli new shekel">ILS</option>
+                                <option value="INR" label="Indian rupee">INR</option>
+                                <option value="ISK" label="Icelandic króna">ISK</option>
+                                <option value="JPY" label="Japanese yen">JPY</option>
+                                <option value="KRW" label="South Korean won">KRW</option>
+                                <option value="MXN" label="Mexican peso">MXN</option>
+                                <option value="MYR" label="Malaysian ringgit">MYR</option>
+                                <option value="NOK" label="Norwegian krone">NOK</option>
+                                <option value="NZD" label="New Zealand dollar">NZD</option>
+                                <option value="PHP" label="Philippine peso">PHP</option>
+                                <option value="PLN" label="Polish złoty">PLN</option>
+                                <option value="RON" label="Romanian leu">RON</option>
+                                <option value="RUB" label="Russian ruble">RUB</option>
+                                <option value="SEK" label="Swedish krona">SEK</option>
+                                <option value="SGD" label="Singapore dollar">SGD</option>
+                                <option value="THB" label="Thai baht">THB</option>
+                                <option value="TRY" label="Turkish lira">TRY</option>
+                                <option value="USD" label="United States dollar">USD</option>
+                            </select>                      
+                          </div>
+                    </div>
+
                     <div class="ena">
                         <label for="datum">Date</label><br>
                         <input type="date" id="inputDate15" name="date" onfocusout="dateCheck2(this)"class="form-control" value="{{year}}-{{month}}-{{day}}"required="required">
