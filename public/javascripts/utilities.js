@@ -88,6 +88,7 @@ function addNewInput() {
         var form = document.getElementById('inputMemberBody');
         var input = '<input type="text" style="margin-top:4%" class="form-control" id="inputMember' + counter + '" placeholder="Member ' + counter + ' " name="inputMember' + counter + '"></input>';
         form.innerHTML = form.innerHTML + input;
+        document.getElementById('counter').value = counter;
     }
 
 }
