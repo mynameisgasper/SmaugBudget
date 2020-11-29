@@ -15,7 +15,7 @@ h5 {
     background: white;
 }
 
-@media only screen and (min-width: 900px){
+@media only screen and (min-width: 900px) {
     .footer {
         padding-top: 12vh;
     }
@@ -256,7 +256,7 @@ body a:hover {
     margin: auto;
 }
 
-.modal-content{
+.modal-content {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -311,4 +311,8 @@ body a:hover {
 
 .Zind {
     z-index: 90000 !important;
+}
+
+input[type="color"] {
+    width: 100%;
 }
