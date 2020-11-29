@@ -119,6 +119,41 @@ function calculateBalances(requestBody, res){
     }
 }
 
+function deleteFriendGroup(requestBody, res){
+    try {
+        var group_id = "5fc3a6475714a42eaca5042a";
+        var user_id = "5fc2b56a9b5aac361006f64c";
+
+        if (group_id != undefined) {
+            FriendGroup.findByIdAndDelete(group_id, function(err, group) {
+                if (err) {
+                    console.log(err);
+                } else {}
+            });
+
+            User.findById(user_id, function(err, user) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    user.friendgroups.pull(group_id);
+                    user.save();
+                    res.status(200).json(user);
+                    return;
+                }
+                res.status(304);
+                 return;
+            });
+        } else {
+            res.sendStatus(400);
+        }
+    } catch (ex) {
+        console.log(ex);
+        res.sendStatus(500);
+    }
+
+
+}
+
 
 function checkName(title) {
     var regexTitle = new RegExp("^[A-Za-z0-9 ]{1,20}$");
@@ -134,5 +169,8 @@ module.exports = {
     },
     calculateBalances: function(req, res) {
         calculateBalances(req.body, res);
+    },
+    deleteFriendGroup: function(req, res) {
+        deleteFriendGroup(req.body, res);
     }
 }

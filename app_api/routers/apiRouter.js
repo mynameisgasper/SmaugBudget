@@ -158,4 +158,8 @@ router.post('/calculateBalances', (req, res) => {
     friendGroup.calculateBalances(req, res);
 })
 
+router.post('/deleteFriendGroup', (req, res) => {
+    friendGroup.deleteFriendGroup(req, res);
+})
+
 module.exports = router;
