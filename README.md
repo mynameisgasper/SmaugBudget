@@ -85,7 +85,7 @@ Lastni projekt pri predmetu **Spletno programiranje** v študijskem letu **2020/
 #### [Body-parser](https://www.npmjs.com/package/body-parser)  
 - Branje body requesta.  
   
-#### Cron(https://www.npmjs.com/package/cron)  
+#### [Cron](https://www.npmjs.com/package/cron)  
 - Periodično posodabljanje tarif za pretvorbo valut  
 - Periodično vstavljanje računov med stroške  
 - Postavljanje plač v prejšni mesec (in ob posodabljanju plače)  
@@ -105,7 +105,7 @@ Lastni projekt pri predmetu **Spletno programiranje** v študijskem letu **2020/
 #### [Nodemailer-mailgun-transport](https://www.npmjs.com/package/nodemailer-mailgun-transport)  
 - Pošiljanje e-pošte za potrditev registracije in ponastavitev gesla.  
   
-#### pdf-creator-node(https://www.npmjs.com/package/pdf-creator-node)  
+#### [pdf-creator-node](https://www.npmjs.com/package/pdf-creator-node)  
 - Ustvarjanje preprostih PDF poročil.  
   
 #### [Chart-js](https://www.chartjs.org/)  
@@ -235,6 +235,7 @@ Lastni projekt pri predmetu **Spletno programiranje** v študijskem letu **2020/
 2. Gremo na brsklalnik na spletni naslov localhost:8080/db  
 3. Ustvarimo podatke v bazi  
 4. Gremo na brsklalnik na spletni naslov localhost:8080
+5. Opozorilo: Podatki so kreirani le za "preteklost" tako da se je potrebno (če je že december) prestaviti na strani envelopes za en mesec nazaj.
 
 
 ## 4. LP
