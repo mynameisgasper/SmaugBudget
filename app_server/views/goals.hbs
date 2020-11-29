@@ -76,7 +76,7 @@
           <label for="inputAmount">How much do you want to save?</label>
           <div class="input-group mb-3">
             <div class="input-group-prepend">
-              <span class="input-group-text">€</span>
+              <span class="input-group-text">{{currency}}</span>
             </div>
             <input type="number" class="form-control" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" onfocusout="amount5(this)" id="Amount" name="amount" placeholder="e.g. 1500" step="any" required="required">
             <div id="amm"></div>
@@ -134,7 +134,7 @@
                     <div class="ena"><label for="inputAmount" id="">Amount</label></br>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                                <span class="input-group-text">€</span>
+                                <span class="input-group-text">{{currency}}</span>
                             </div>
                             <input type="number" class="form-control" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" onfocusout="amount2(this)" id="Amount2" name="inputAmount" placeholder="0.00" step="any">
                         </div>
@@ -232,7 +232,7 @@
           <label for="inputAmount">How much do you want to save?</label>
           <div class="input-group mb-3">
             <div class="input-group-prepend">
-              <span class="input-group-text">€</span>
+              <span class="input-group-text">{{../currency}}</span>
             </div>
             <input type="number" class="form-control" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" onfocusout="amount77(this, {{id}})" id="amount3" name="Amount3" value="{{target}}" step="any"required="required"> 
             <div id="{{id}}amm"></div>

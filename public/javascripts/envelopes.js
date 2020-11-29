@@ -211,6 +211,10 @@ function checkCategory(that) {
     }
 }
 
+function setCurrency() {
+    document.getElementById('currencyPrepend').innerHTML = document.getElementById('inputCurrency').value;
+}
+
 function deleteEnvelope(id) {
     document.getElementById('envelope' + id).style.display = 'none';
 }

@@ -92,7 +92,7 @@
                                     <label for="Amount">Amount</label><br>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text">€</span>
+                                            <span class="input-group-text">{{../currency}}</span>
                                         </div>
                                         <input type="number" id="Amount2{{_id}}"  onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" name="Amount2" onfocusout="amount2(this)" class="form-control" value="{{value}}" step="any" required="required"> 
                                     </div>
@@ -188,7 +188,7 @@
                             <label for="Amount">Amount</label><br>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text">€</span>
+                                    <span class="input-group-text">{{currency}}</span>
                                 </div>
                                 <input type="number" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" class="form-control" onfocusout="amount(this)" id="Amount" name="Amount" placeholder="e.g. 15" step="any" required="required"> 
                             </div>    

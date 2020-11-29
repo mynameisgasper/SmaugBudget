@@ -69,7 +69,7 @@
                     <div class="ena"><label for="inputAmount">Amount</label></br>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                                <span class="input-group-text">€</span>
+                                <span class="input-group-text">{{currency}}</span>
                             </div>
                             <input type="number" class="form-control" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" name="inputAmount" onfocusout="amount(this)"id="inputAmount" placeholder="0.00" step="any">
                         </div>
@@ -121,7 +121,7 @@
                     <div class="ena"><label for="inputAmount">New Budget</label></br>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                                <span class="input-group-text">€</span>
+                                <span class="input-group-text">{{../currency}}</span>
                             </div>
                             <input type="hidden" value="{{_id}}" name="id">
                             <input type="hidden" name="formType" value="editEnvelope" />
@@ -205,14 +205,14 @@
                     <div class="ena"><label for="inputAmount">Amount</label></br>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                                <span class="input-group-text">€</span>
+                                <span id="currencyPrepend" class="input-group-text">{{currency}}</span>
                             </div>
                             <input type="number" class="form-control" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" onfocusout="amount5(this)" id="Amount2{{id}}" name="inputAmount" placeholder="0.00" step="any">
                         </div>
                     </div>
                     <div class="ena"><label for="inputAmount">Currency</label></br>
                         <div class="input-group mb-3">
-                            <select id="inputCurrency" name="inputCurrency" class="form-control">
+                            <select id="inputCurrency" onchange="setCurrency();" name="inputCurrency" class="form-control">
                                 <option selected>Select Currency</option>
                                 <option value="EUR" selected="selected" label="Euro">EUR</option>
                                 <option value="USD" label="US dollar">USD</option>
