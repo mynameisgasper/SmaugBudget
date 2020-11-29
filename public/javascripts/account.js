@@ -221,3 +221,41 @@ function checkIfAdded(button) {
 function removeConUser(element) {
     element.parentNode.parentNode.remove();
 }
+
+function passwordStrength() {
+    //var button = document.getElementById("buttonup");
+    //var email1 = document.getElementById(email1up);
+    //var email2 = document.getElementById(email2up);
+
+    var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
+    var mediumRegex = new RegExp("^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})");
+    /* STRONG Passwords must be 
+     * - At least 8 characters long, max length anything
+     * - Include at least 1 lowercase letter
+     * - 1 capital letter
+     * - 1 number
+     * - 1 special character => !@#$%^&**/
+
+    /* MEDIUM Passwords must be 
+     * - At least 6 characters long, max length anything
+     * - Include at least 1 lowercase letter AND 1 capital letter
+     *  OR
+     * - Include at least 1 lowercase letter AND 1 numeric character
+     *  OR
+     * - Include at least 1 uppercase letter AND 1 numeric character*/
+    var pass = document.getElementById("password1up");
+    if (pass.value.match(strongRegex)) {
+        pass.style.borderColor = "green";
+        $('.tt4').toast('hide')
+        return 1;
+    } else if (pass.value.match(mediumRegex)) {
+
+        pass.style.borderColor = "orange";
+        $('.tt4').toast('hide')
+        return 1;
+    } else {
+        pass.style.borderColor = "red";
+        $('.tt4').toast('show')
+        return 0;
+    }
+}

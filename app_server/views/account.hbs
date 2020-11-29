@@ -241,7 +241,7 @@
               <tbody>
                 <tr id="edit-addConTrNew" class="collapse show">
                   <th>
-                    <input type="text" id="editPersonNew" placeholder="{{../name}}"  class="form-control col-sm-9 col-md-9 col-lg-9 col-xl-9">
+                    <input type="text" id="editPersonNew" placeholder="EMAIL"  class="form-control col-sm-9 col-md-9 col-lg-9 col-xl-9">
                   </th>
                   <th>
                     <button type="button" class="btn btn-primary" onclick="checkIfAdded(this)" style="float: right;">
@@ -309,7 +309,7 @@
               {{#each user}}
               <tr id="edit-addConTr{{_id}}" class="collapse show">
                 <th>
-                  <input type="text" id="editPerson{{_id}}" placeholder="{{../../name}}" value="{{email}}" class="form-control col-sm-9 col-md-9 col-lg-9 col-xl-9">
+                  <input type="text" id="editPerson{{_id}}" placeholder="EMAIL" value="{{email}}" class="form-control col-sm-9 col-md-9 col-lg-9 col-xl-9" disabled>
                 </th>
                 <th>
                   <button type="button" class="btn btn-danger" style="float: right;" data-toggle="collapse" data-target="#edit-addConTr{{_id}}" aria-expanded="false" aria-controls="collapseExample">
@@ -321,7 +321,7 @@
               {{/each}}
               <tr id="edit-addConTrNew" class="collapse show">
                 <th>
-                  <input type="text" id="editPersonNew" placeholder="{{../name}}"  class="form-control col-sm-9 col-md-9 col-lg-9 col-xl-9">
+                  <input type="text" id="editPersonNew" placeholder="EMAIL"  class="form-control col-sm-9 col-md-9 col-lg-9 col-xl-9">
                 </th>
                 <th>
                   <button type="button" class="btn btn-primary" onclick="checkIfAdded(this)" style="float: right;">
