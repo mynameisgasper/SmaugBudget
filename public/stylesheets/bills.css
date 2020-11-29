@@ -44,6 +44,12 @@ td {
     padding-bottom: 10px;
 }
 
+@media only screen and (min-width: 900px){
+.footer {
+    padding-top: 12vh;
+}
+}
+
 .add:active {
     position: relative;
     top: 2px;

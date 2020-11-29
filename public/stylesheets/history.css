@@ -11,6 +11,12 @@ td {
     text-align: left;
 }
 
+@media only screen and (min-width: 900px){
+    .footer {
+        padding-top: 12vh;
+    }
+}
+
 .cena{
     text-align: center;
     font-family: 'Open Sans Bold';
