@@ -15,6 +15,12 @@ h5 {
     background: white;
 }
 
+@media only screen and (min-width: 900px){
+    .footer {
+        padding-top: 12vh;
+    }
+}
+
 .container {
     -webkit-box-shadow: 0px 1px 15px 1px rgba(209, 209, 209, 1);
     -moz-box-shadow: 0px 1px 15px 1px rgba(209, 209, 209, 1);

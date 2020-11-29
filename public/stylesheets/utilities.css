@@ -17,6 +17,11 @@ body {
     margin: 0;
 }
 
+@media only screen and (min-width: 900px){
+    .footer {
+        padding-top: 12vh;
+    }
+}
 
 @media only screen and (min-width: 900px) {
     #welcome-alert-section {
