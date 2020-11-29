@@ -61,7 +61,7 @@
       <input type="hidden" name="formType" value="addGoal">
         <div class="modal-body">
           <label for="inputGoal">What's your goal?</label>
-          <input type="text" class="form-control" id="Goal" name="goal" onfocusout="nameAdd(this)" placeholder="e.g. new car" required="required">
+          <input type="text" class="form-control" id="Goal" name="goal" onfocusout="nameAddCheck(this, {{firstname}})" placeholder="e.g. new car" required="required">
           <div id="txt1"></div>
           <label for="inputCategory">Choose a Category</label>
           <select id="inputCategory" name="inputCategory" onfocusout="categoryCheckAddGoal(this)" class="form-control" required="required">

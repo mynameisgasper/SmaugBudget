@@ -4,6 +4,7 @@ const { billsSchema } = require('./bills');
 const { envelopesSchema } = require('./envelopes');
 const { categorySchema } = require('./categories');
 const { expenseSchema } = require('./expense');
+const { friendGroupSchema } = require('./friendGroup');
 
 const userSchema = new mongoose.Schema();
 const connectionsSchema = new mongoose.Schema();
@@ -29,7 +30,8 @@ userSchema.add({
     goals: [goalsSchema],
     bills: [billsSchema],
     categories: [categorySchema],
-    expense: [expenseSchema]
+    expense: [expenseSchema],
+    friendgroups: [friendGroupSchema]
 });
 
 connectionsSchema.add({

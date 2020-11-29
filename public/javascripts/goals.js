@@ -263,7 +263,6 @@ $(window).on("load", function() {
 
 $(window).ready(function(){
     $(".goalModal").on('hidden.bs.modal', function () {
-        console.log("asd");
         $('#mjav').toast('hide');
         $('.tt5').toast('hide');
         $('.tt6').toast('hide');
@@ -272,5 +271,8 @@ $(window).ready(function(){
     });
 });
 
-
+function nameAddCheck(field, goals){
+    console.log(field.value);
+    console.log(goals);
+}
 
