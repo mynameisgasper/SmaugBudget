@@ -106,7 +106,7 @@ function addConnection(body, res, session) {
                                                 console.log(users);
                                                 let con = new Connections ({
                                                     name: body.connectionName,
-                                                    guestName: body.connectionName+" ",
+                                                    guestName: body.connectionName+": ",
                                                     active: true,
                                                     user: users,
                                                     hostUser: users.find(x => x.email === body.email),
