@@ -280,31 +280,33 @@ function addExpense(requestBody, res) {
                                     if (error) {
                                         console.log(error);
                                     } else {
-                                        envelope.spent = user.envelopes[i - 1].spent;
-                                        envelope.progress = user.envelopes[i - 1].progress;
-                                        envelope.save();
+                                        if (envelope) {
+                                            envelope.spent = user.envelopes[i - 1].spent;
+                                            envelope.progress = user.envelopes[i - 1].progress;
+                                            envelope.save();
 
-                                        let expense = new Expense({
-                                            date: date,
-                                            category: envelope.category,
-                                            recipient: recipient,
-                                            value: parseFloat(amountAdded).toFixed(2),
-                                            currency: user.defaultCurrency
-                                        });
+                                            let expense = new Expense({
+                                                date: date,
+                                                category: envelope.category,
+                                                recipient: recipient,
+                                                value: parseFloat(amountAdded).toFixed(2),
+                                                currency: user.defaultCurrency
+                                            });
 
 
-                                        expense.save(function callback(err) {
-                                            if (err) {
-                                                console.log(err);
-                                                res.sendStatus(500);
-                                                return;
-                                            } else {
-                                                user.expense.push(expense);
-                                                user.save();
-                                                res.status(200).json(user);
-                                                return;
-                                            }
-                                        });
+                                            expense.save(function callback(err) {
+                                                if (err) {
+                                                    console.log(err);
+                                                    res.sendStatus(500);
+                                                    return;
+                                                } else {
+                                                    user.expense.push(expense);
+                                                    user.save();
+                                                    res.status(200).json(user);
+                                                    return;
+                                                }
+                                            });
+                                        }
                                     }
                                 });
                             }
