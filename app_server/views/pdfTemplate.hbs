@@ -8,17 +8,17 @@
         <h1 style="font-family: 'Calibri'; text-align: center ">Expenses</h1>
         <table style="font-family: 'Calibri';  text-align: left; font-size:small;">
             <tr >
-                <th style="padding-left: 30px;">Date</th>
-                <th style="padding-left: 110px;">Category</th>
-                <th style="padding-left: 110px;">Recipient</th>
-                <th style="padding-left: 110px;">Value</th>
+                <th style="padding-left: 3px;">Date</th>
+                <th style="padding-left: 11px;">Category</th>
+                <th style="padding-left: 11px;">Recipient</th>
+                <th style="padding-left: 11px;">Value</th>
             </tr>
             {{#each parsedBody}}
             <tr style="text-align: left">
-                <td style="padding-left: 30px; ">{{date}}</td>
-                <td style="padding-left: 110px;">{{category}}</td>
-                <td style="padding-left: 110px;">{{recipient}}</td>
-                <td style="padding-left: 110px;">{{currency}}{{value}}</td>
+                <td style="padding-left: 3px; ">{{date}}</td>
+                <td style="padding-left: 11px;">{{category}}</td>
+                <td style="padding-left: 11px;">{{recipient}}</td>
+                <td style="padding-left: 11px;">{{currency}}{{value}}</td>
             </tr>
             {{/each}}
         </table>
