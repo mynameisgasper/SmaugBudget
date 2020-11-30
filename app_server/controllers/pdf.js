@@ -21,7 +21,7 @@ function generatePDF(req, res) {
         data: {
             parsedBody: parsedBody
         },
-        path: "../generated/output.pdf"
+        path: "./generated/output.pdf"
     };
 
     pdf.create(document, options).then(path => {
