@@ -27,6 +27,9 @@
     <script src="../javascripts/{{fileName}}.js"></script>
     {{#if encryption}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jsSHA/2.0.2/sha.js"></script>
+    {{#ifEquals fileName "account"}}
+    <script src="../javascripts/DarkMode.js"></script>
+    {{/ifEquals}}
     {{else}}
     <script src="../javascripts/DarkMode.js"></script>
     <script src="../javascripts/functions.js"></script>
