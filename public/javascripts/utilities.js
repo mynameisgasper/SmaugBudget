@@ -1,5 +1,3 @@
-var n = -1;
-
 function checkName(field){
     var regex = new RegExp("^[ A-Za-z0-9_@./#&+-: ]{1,16}$");
     console.log("prišeč")
@@ -31,10 +29,44 @@ function checkValue(field) {
     }
 }
 
+function checkValue2(value, field){
+    console.log(value + " " + field);
+    var regex = new RegExp("^[0-9]+(\.[0-9]{1,2})?$");
+    if(!value.match(regex)){
+        field.style.setProperty("border-color", "red", "important");
+        $('.tt1').toast('show')
+        return 0;
+    }
+}
+
 function disableButton(id) {
-    console.log("22");
-    var rows = document.getElementById('table' + id).rows.length;
-    console.log(rows);
+    var table = document.getElementById('table' + id);
+    console.log(table);
+    var check = true;
+    var sumPrice = 0;
+    var sumPaid = 0;
+    for(var i = 1; i < table.rows.length; i++){
+        var testValue = checkValue2(table.rows[i].cells[1].children[0].value, table.rows[i].cells[1]);
+        if(testValue == 0){
+            check = false;
+            return false;
+        }
+        testValue = checkValue2(table.rows[i].cells[2].children[0].value, table.rows[i].cells[2]);
+        if(testValue == 0){
+            check = false;
+            return false;
+        }
+        sumPrice += parseInt(table.rows[i].cells[1].children[0].value);
+        sumPaid += parseInt(table.rows[i].cells[2].children[0].value);
+    }
+    if(sumPrice != sumPaid){
+        $('.tt69').toast('show');
+        return false;
+    }
+    else{
+        $('.tt69').toast('hide');
+        return true;
+    }
 }
 
 function disableButton2() {
@@ -47,9 +79,11 @@ function disableButton2() {
     for(var i = 1; i <= counter; i++){
         var testName = checkName(document.getElementById("inputMember" + i));
         if(testName == 0){
+            $('.tt6').toast('show');
             check = false
             return false;
         }
+        $('.tt6').toast('hide');
     }
     return check;
 }
@@ -90,7 +124,7 @@ $(window).on("load", function() {
 
 
 
-var counter = 2;
+var counter = 1;
 
 function addNewInput() {
     if (counter >= 10) {
