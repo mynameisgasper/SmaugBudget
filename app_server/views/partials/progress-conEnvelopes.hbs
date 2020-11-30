@@ -1,7 +1,8 @@
 <div id="data">
-    {{#each conEnvelope}}
+    {{#each conEnvelopes}}
+        <h2 style="text-align: center;">{{guestName}}</h2>
         {{#each envelopes}}
-            {{#ifEquals month ../setMonth}}
+            <!--{{#ifEquals month ../../setMonth}}-->
                 <div class="row" id="envelope{{_id}}">
                     <div class="col-sm-12 col-md-12 col-lg-3 col-xl-2">
                         {{#ifSmaller progress 85}}
@@ -26,22 +27,22 @@
                     
                     <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 envelope-info">
                         {{#ifSmaller progress 85}}
-                            <p class="info"> <span>{{spent}} {{../currency}}</span> of <span>{{budget}} {{../currency}}</span></p>
+                            <p class="info"> <span>{{spent}} {{../hostUser.defaultCurrency}}</span> of <span>{{budget}} {{../hostUser.defaultCurrency}}</span></p>
                         {{/ifSmaller}}
                         {{#ifBigger progress 85}}
                             {{#ifSmaller progress 100}}
-                                <p class="info" style="color:#ff7b00"> <span>{{spent}} {{../currency}}</span> of <span>{{budget}} {{../currency}}</span></p>
+                                <p class="info" style="color:#ff7b00"> <span>{{spent}} {{../hostUser.defaultCurrency}}</span> of <span>{{budget}} {{../hostUser.defaultCurrency}}</span></p>
                             {{/ifSmaller}}
                         {{/ifBigger}}
                         {{#ifBigger progress 100}}
-                            <p class="info" style="color:red"> <span>{{spent}} {{../currency}}</span> of <span>{{budget}} {{../currency}}</span></p>
+                            <p class="info" style="color:red"> <span>{{spent}} {{../hostUser.defaultCurrency}}</span> of <span>{{budget}} {{../hostUser.defaultCurrency}}</span></p>
                         {{/ifBigger}}
                         
                     </div>
                 </div>
 
                 
-            {{/ifEquals}}
+            <!--{{/ifEquals}}-->
         {{/each}}
     {{/each}}
 </div>

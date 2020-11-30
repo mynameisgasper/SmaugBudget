@@ -91,6 +91,7 @@ function respond(res, session, req) {
         data.category = getCategories(session.user.categories);
         data.currency = session.user.defaultCurrency;
         data.conEnvelopes = getConEnvelopes(session.user.email, session.user.connections);
+        
         res.render('envelopes', data);
     } else {
         res.redirect('/');
@@ -98,8 +99,10 @@ function respond(res, session, req) {
 }
 
 function getConEnvelopes(email, connections) {
-    var tren = connections.filter(c => c.hostUser.email !== email);
-    console.log(connections[0].hostUser);
+    var tren = [];
+    if (connections) {
+        tren = connections.filter(c => c.hostUser.email !== email);
+    }
     return tren;
 }
 
