@@ -259,10 +259,11 @@ async function loadCategories(requestBody, res) {
                 new_category.save();
             }
             res.sendStatus(200);
-
+        } else{
+            res.sendStatus(304);
         }
     });
-
+    
 }
 
 
