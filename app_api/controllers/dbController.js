@@ -286,7 +286,7 @@ async function loadCategories(requestBody, res) {
             }
             res.sendStatus(200);
         } else{
-            res.sendStatus(304);
+            //res.sendStatus(304);
         }
     });
     
