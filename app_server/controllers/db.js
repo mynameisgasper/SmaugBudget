@@ -22,10 +22,12 @@ function parseRequestBody(req, res, session) {
         case 'createDummyAccounts':
             {
                 createDummyAccounts(req, res);
+                break;
             }
         case 'loadCategories':
             {
                 loadCategories(req, res);
+                break;
             }
 
     }
