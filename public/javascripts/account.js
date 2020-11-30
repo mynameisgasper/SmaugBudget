@@ -219,6 +219,20 @@ function checkIfAdded(button) {
     xhr.send("email=" + $("#"+last)[0].value);                     // send data
 }
 
+function removeConn(id) {
+    $("#active" + id)[0].parentNode.parentNode.parentNode.remove();
+    var xhr  = new XMLHttpRequest();              // create XMLHttpRequest
+        // create formData object
+    
+    
+    xhr.onload = function() {
+        console.log(xhr.status); // whatever the server returns
+    }
+
+    xhr.open("post", "/account");      // open connection
+    xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    xhr.send("connection_id=" + id + "&formType=removeConnection");
+}
 function saveActive(id, toggle) {
     var idTable = "active" + id;
     var idModal = "edit-active" + id;
