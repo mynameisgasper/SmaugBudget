@@ -164,6 +164,10 @@ router.post('/deleteCategory', (req, res) => {
 
 router.post('/toggleVisible', (req, res) => {
     connections.toggleVisible(req, res);
+});
+
+router.post('/removeConnection', (req, res) => {
+    connections.removeConnection(req, res);
 })
 
 router.post('/addFriendGroup', (req, res) => {

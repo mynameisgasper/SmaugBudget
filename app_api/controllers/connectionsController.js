@@ -216,6 +216,35 @@ function toggleVisible (body, res, session) {
     }
 }
 
+function removeConnection (body, res, session) {
+    try {
+        User.find({ "connections._id": body.connection_id }, function (err, users) {
+            if (err) {
+                console.log(err);
+            } else {
+                if (users) {
+                    var userTren;
+                    for (var i = 0; i < users.length; i++) {
+                        var user = users[i];
+                        if (user.email === body.email) {
+                            userTren = user;
+                        }
+                        if (user.connections) {
+                            user.connections = user.connections.filter(c => c._id+"" !== body.connection_id);
+                        }
+                        user.save();
+                    }
+                    res.status(200).json(user);
+                } else {
+                    res.sendStatus(404);
+                }
+            }
+        });
+    } catch (ex) {
+
+    }
+}
+
 module.exports = {
     getNewUsers: function(req, res) {
         getNewUsers(req.query, res, req.session);
@@ -231,5 +260,8 @@ module.exports = {
     },
     toggleVisible: function(req, res) {
         toggleVisible(req.body, res, req.session);
+    },
+    removeConnection: function(req, res) {
+        removeConnection(req.body, res, req.session);
     }
 }

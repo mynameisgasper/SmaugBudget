@@ -173,7 +173,37 @@ function parseRequestBody(req, res, session) {
             toggleActive(req, res, session);
             break;
         }
+        case 'removeConnection': {
+            removeConnection(req, res, session);
+            break;
+        }
     }
+}
+
+function removeConnection(req, res, session) {
+    const data = {
+        connection_id: req.body.connection_id,
+        email: session.user.email,
+    }
+
+    var args = {
+        data: data,
+        headers: { "Content-Type": "application/x-www-form-urlencoded" }
+    }
+
+
+    var client = new Client();
+    client.post("http://" + req.headers.host + "/api/removeConnection", args,
+        function(data, response) {
+            if (response.statusCode == 200) {
+                res.session = session;
+                res.session.user = data;
+                res.redirect('/account');
+            } else {
+                res.redirect('/account#error');
+            }
+        }
+    );
 }
 
 function toggleActive(req, res, session) {
