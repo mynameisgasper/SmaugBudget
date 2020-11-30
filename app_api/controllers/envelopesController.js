@@ -220,14 +220,13 @@ function deleteEnvelope(requestBody, res) {
 */
 function addExpense(requestBody, res) {
     try {
-        var amountAdded = requestBody.inputAmount;
+        var amountAdded = parseFloat(requestBody.inputAmount);
         var categoryName = requestBody.category;
         var recipient = requestBody.recipient;
         var date = requestBody.date;
         var user_id = requestBody.user;
         //TODO Implement Currency
         var currency = requestBody.inputCurrency;
-        console.log(amountAdded);
 
         var inputDate = date.split("-");
         var regex = new RegExp("^[0-9]+(\.[0-9]{1,2})?$");
@@ -257,6 +256,7 @@ function addExpense(requestBody, res) {
                                             } else {
                                                 if (currencyTo) {
                                                     amountAdded = (amountAdded / currencyFrom.value) * currencyTo.value;
+                                                    console.log(typeof amountAdded);
                                                     resolution(amountAdded);
                                                 }
                                             }
@@ -267,15 +267,15 @@ function addExpense(requestBody, res) {
                         } else {
                             resolution(amountAdded);
                         }
+                        resolution(amountAdded);
                     });
 
                     promise.then((amountAdded) => {
                         for (var i = 0; i < user.envelopes.length; i++) {
                             if (user.envelopes[i].category.name === categoryName && inputDate[1] == getMonthNumber(user.envelopes[i].month)) {
                                 envelopeExists = true;
-                                user.envelopes[i].spent += parseFloat(amountAdded).toFixed(2);
+                                user.envelopes[i].spent += parseFloat(parseFloat(amountAdded).toFixed(2));
                                 user.envelopes[i].progress = Math.round((parseFloat(parseFloat(user.envelopes[i].spent) / parseFloat(user.envelopes[i].budget))) * 100);
-
                                 Envelopes.findById(user.envelopes[i]._id, function(error, envelope) {
                                     if (error) {
                                         console.log(error);
@@ -291,6 +291,7 @@ function addExpense(requestBody, res) {
                                             value: parseFloat(amountAdded).toFixed(2),
                                             currency: user.defaultCurrency
                                         });
+
 
                                         expense.save(function callback(err) {
                                             if (err) {
@@ -321,7 +322,6 @@ function addExpense(requestBody, res) {
                                         value: parseFloat(amountAdded).toFixed(2),
                                         currency: currency
                                     });
-
                                     expense.save(function callback(err) {
                                         if (err) {
                                             console.log(err);
