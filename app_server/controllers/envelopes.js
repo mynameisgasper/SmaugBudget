@@ -91,7 +91,7 @@ function respond(res, session, req) {
         data.category = getCategories(session.user.categories);
         data.currency = session.user.defaultCurrency;
         data.conEnvelopes = getConEnvelopes(session.user.email, session.user.connections);
-        console.log(data.conEnvelopes[0].envelopes);
+        
         res.render('envelopes', data);
     } else {
         res.redirect('/');
