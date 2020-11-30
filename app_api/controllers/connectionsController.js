@@ -79,14 +79,19 @@ function addConnection(body, res, session) {
         
         if (body.users && body.envelopes) {
             console.log("line0" + body.email);
-            Connections.findOne({ 'name' : body.connectionName, 'hostUser.email' : body.email }, function(err, user) {
+            User.findOne({ 'email' : body.email }, function(err, user) {
                 if (err) {
                     console.log(err);
                 } else {
                     console.log("line1");
                     if (user) {
-                        res.sendStatus(403);
-                    } else {
+                        var con = user.connections.find(c => c.name === body.connectionName);
+                        if (con) {
+                            if (con.hostUser.email === user.email) {
+                                res.sendStatus(403);
+                            }
+                        }
+
                         User.find({ 'email' : { $in : body.users }}, function (err, users) {
                             if (err) {
                                 console.log(err);
@@ -126,6 +131,9 @@ function addConnection(body, res, session) {
                                 }
                             }
                         });
+                        
+                    } else {
+                        res.sendStatus(404);
                     }
                 }
             });

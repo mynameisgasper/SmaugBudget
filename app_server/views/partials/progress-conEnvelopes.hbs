@@ -1,0 +1,47 @@
+<div id="data">
+    {{#each conEnvelope}}
+        {{#each envelopes}}
+            {{#ifEquals month ../setMonth}}
+                <div class="row" id="envelope{{_id}}">
+                    <div class="col-sm-12 col-md-12 col-lg-3 col-xl-2">
+                        {{#ifSmaller progress 85}}
+                            <h3>{{category.name}}</h3>
+                        {{/ifSmaller}}
+                        {{#ifBigger progress 85}}
+                            {{#ifSmaller progress 100}}
+                                <h3 style="color:#ff7b00">{{category.name}}</h3>
+                            {{/ifSmaller}}
+                        {{/ifBigger}}
+                        {{#ifBigger progress 100}}
+                            <h3 style="color:red">{{category.name}}</h3>
+                        {{/ifBigger}}
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-5 col-xl-6">
+                        <div class="progress" style="background-color:{{bgColor}};">
+                            <div class="progress-bar"  role="progressbar" style="width:{{progress}}%; height:auto; background-color:{{color}}; border-color:{{color}};" aria-valuenow="{{progress}}" aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" data-placement="top">
+                                {{progress}}%
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 envelope-info">
+                        {{#ifSmaller progress 85}}
+                            <p class="info"> <span>{{spent}} {{../currency}}</span> of <span>{{budget}} {{../currency}}</span></p>
+                        {{/ifSmaller}}
+                        {{#ifBigger progress 85}}
+                            {{#ifSmaller progress 100}}
+                                <p class="info" style="color:#ff7b00"> <span>{{spent}} {{../currency}}</span> of <span>{{budget}} {{../currency}}</span></p>
+                            {{/ifSmaller}}
+                        {{/ifBigger}}
+                        {{#ifBigger progress 100}}
+                            <p class="info" style="color:red"> <span>{{spent}} {{../currency}}</span> of <span>{{budget}} {{../currency}}</span></p>
+                        {{/ifBigger}}
+                        
+                    </div>
+                </div>
+
+                
+            {{/ifEquals}}
+        {{/each}}
+    {{/each}}
+</div>
