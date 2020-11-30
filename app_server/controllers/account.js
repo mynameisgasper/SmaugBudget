@@ -64,7 +64,9 @@ var translationKeys = {
     HINT: "HINT",
     nameHint: "nameHint",
     surnameHint: "surnameHint",
-    emailHint: "emailHint"
+    emailHint: "emailHint",
+    passwordHint: "passwordHint",
+    passwordNoMatch: "passwordNoMatch"
 }
 
 function translate(language) {
@@ -167,7 +169,37 @@ function parseRequestBody(req, res, session) {
             changePassword(req, res, session);
             break;
         }
+        case 'toggleActive': {
+            toggleActive(req, res, session);
+            break;
+        }
     }
+}
+
+function toggleActive(req, res, session) {
+    const data = {
+        connection_id: req.body.connection_id,
+        email: session.user.email,
+    }
+
+    var args = {
+        data: data,
+        headers: { "Content-Type": "application/x-www-form-urlencoded" }
+    }
+
+
+    var client = new Client();
+    client.post("http://" + req.headers.host + "/api/toggleVisible", args,
+        function(data, response) {
+            if (response.statusCode == 200) {
+                res.session = session;
+                res.session.user = data;
+                res.redirect('/account');
+            } else {
+                res.redirect('/account#error');
+            }
+        }
+    );
 }
 
 function changeColorCategory(req, res, session) {

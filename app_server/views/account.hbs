@@ -99,7 +99,7 @@
             </td>
             <td>
               <div class="custom-control custom-switch">
-                <input type="checkbox" class="custom-control-input" id="active{{_id}}" checked="{{active}}">
+                <input type="checkbox" class="custom-control-input" onclick="saveActive('{{_id}}', this)" id="active{{_id}}" {{#if active}}checked{{/if}}>
                 <label class="custom-control-label" for="active{{_id}}"></label>
               </div>
             </td>
@@ -195,7 +195,7 @@
                 </button>
             </div>
             <div class="toast-body">
-                {{passwordHint1}}
+                {{passwordHint}}
             </div>
         </div>
         <div class="toast ml-auto tt4" role="alert" data-delay="1000" data-autohide="false">
@@ -206,7 +206,7 @@
                 </button>
             </div>
             <div class="toast-body">
-                {{passwordHint2}}
+                {{passwordNoMatch}}
             </div>
         </div>        
     </div>
@@ -260,7 +260,7 @@
                 </button>
             </div>
             <div class="toast-body">
-                {{conNameHint}}
+                {{nameHint}}
             </div>
         </div>
     </div>
@@ -343,8 +343,8 @@
         <div class="row">
           <label id="edit-activeLbl" for="edit-active" class="col-5 col-sm-4 col-md-4 col-lg-4 col-xl-4" style="padding-right: 0px;">{{../active}}:</label>
           <div class="custom-control custom-switch">
-            <input type="checkbox" class="custom-control-input" id="edit-active{{data_id}}" checked="{{data_active}}">
-            <label class="custom-control-label" for="edit-active{{data_id}}"></label>
+            <input type="checkbox" class="custom-control-input" onclick="saveActive('{{_id}}', this)" id="edit-active{{_id}}" {{#if active}}checked{{/if}}>
+                <label class="custom-control-label" for="edit-active{{_id}}"></label>
           </div>
         </div>
         <div class="row" style="padding-top: 2em;">

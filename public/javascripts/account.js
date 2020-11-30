@@ -219,6 +219,28 @@ function checkIfAdded(button) {
     xhr.send("email=" + $("#"+last)[0].value);                     // send data
 }
 
+function saveActive(id, toggle) {
+    var idTable = "active" + id;
+    var idModal = "edit-active" + id;
+    if (toggle.id == idTable) {
+        $("#" + idModal)[0].checked = $("#" + idTable)[0].checked;
+    } else {
+        $("#" + idTable)[0].checked = $("#" + idModal)[0].checked;
+    }
+
+    var xhr  = new XMLHttpRequest();              // create XMLHttpRequest
+        // create formData object
+    
+    
+    xhr.onload = function() {
+        console.log(xhr.status); // whatever the server returns
+    }
+
+    xhr.open("post", "/account");      // open connection
+    xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    xhr.send("connection_id=" + id + "&formType=toggleActive");                     // send data
+}
+
 function removeConUser(element) {
     element.parentNode.parentNode.remove();
 }

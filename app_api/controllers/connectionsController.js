@@ -191,6 +191,31 @@ function getEnvelopesForDropdown (parameters, res, session) {
     }
 }
 
+function toggleVisible (body, res, session) {
+    try {
+        User.findOne({ "email": body.email }, function (err, user) {
+            if (err) {
+                console.log(err);
+            } else {
+                if (user) {
+                    var con = user.connections.findIndex(c => c._id+"" === body.connection_id);
+                    if (user.connections[con].active) {
+                        user.connections[con].active = false;
+                    } else {
+                        user.connections[con].active = true;
+                    }
+                    user.save();
+                    res.status(200).json(user);
+                } else {
+                    res.sendStatus(404);
+                }
+            }
+        });
+    } catch (ex) {
+        res.sendStatus(500);
+    }
+}
+
 module.exports = {
     getNewUsers: function(req, res) {
         getNewUsers(req.query, res, req.session);
@@ -203,5 +228,8 @@ module.exports = {
     },
     getEnvelopesForDropdown: function(req, res) {
         getEnvelopesForDropdown(req.query, res, req.session);
+    },
+    toggleVisible: function(req, res) {
+        toggleVisible(req.body, res, req.session);
     }
 }

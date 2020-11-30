@@ -101,7 +101,7 @@ function respond(res, session, req) {
 function getConEnvelopes(email, connections) {
     var tren = [];
     if (connections) {
-        tren = connections.filter(c => c.hostUser.email !== email);
+        tren = connections.filter(c => c.hostUser.email !== email && c.active);
     }
     return tren;
 }
