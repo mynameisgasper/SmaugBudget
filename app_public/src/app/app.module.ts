@@ -6,12 +6,13 @@ import { HomeComponent } from './home/home.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FrameComponent } from './frame/frame.component';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { CardComponent } from './card/card.component';
+import { AnalyticsComponent } from './analytics/analytics.component';
 
 @NgModule({
   declarations: [
     FrameComponent,
-    HomeComponent,
-    WelcomeComponent
+    HomeComponent
   ],
   imports: [
     BrowserModule,
