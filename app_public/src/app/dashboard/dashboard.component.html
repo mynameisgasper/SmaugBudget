@@ -1,1 +1,154 @@
-<p>dashboard works!</p>
+<main>
+    <!---- Main Section ---->
+    <div class="modal fade premium-page" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                    
+                <div class="modal-body text-center">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4>Get premium to gain access to History and Utilities page!</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!----- Welcome section ----->
+    <app-welcome [message]="data.message" [welcomeMessage]="data.welcomeMessage"></app-welcome>
+
+    <!----- Cards section ----->
+    <div class="container" id="cards-section">
+        <div class="row">
+           <div *ngFor="let item of data.card">
+                <div class="col-xl-3 col-lg-4 col-md-12 col-sm-12" id="card{{item.id}}" data-aos="flip-down" data-aos-duration="500" style="margin: 0 auto">
+                    <card [id]="item.id" [color]="item.color" [icon]="item.icon" [count]="item.count" [title]="item.title" [comment]="item.comment"></card>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="cards-section" *ngIf="data.alertLength != 0">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <h2>{{ data.alertSection }}</h2>
+            </div>
+        </div>
+        <alert [alert]="alert"></alert>
+    </div>
+
+    <!----- Overview section ----->
+    <div class="container" id="overview-section">
+        <input type="hidden" id="id" value="{{ data.id }}"/>
+        <h2 style="text-align: left; padding-bottom: 10px;">{{ data.overview }}</h2>
+        <div class="row">
+            <div class="col-xl-6 col-lg-6 left-col">
+
+                <!----- Expense section----->
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12" style="border-bottom:1px solid rgb(204, 204, 204); padding-bottom: 20px">
+                        <table class="table table-borderless table-hover tabela-balance">
+                            <tbody>
+                                <tr id="income-tr">
+                                    <th>{{ data.incomeRow }}</th>
+                                    <td>{{ data.incomeLastMonth }} {{ data.currency }}</td>
+                                    <td style="padding: 0px; text-align: right;"><button type="button" class="btn p" data-toggle="modal" href="#changeIncome"><i class="fas fa-pencil-alt"></i></button></td>
+                                </tr>
+                                <tr id="expenses-tr">
+                                    <th>{{ data.expensesRow }}</th>
+                                    <td>{{ data.expensesLastMonth }} {{ data.currency }}</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <th id="border-th">{{ data.balanceRow }}</th>
+                                    <td id="border-td">{{ data.incomeLastMonth - data.expensesLastMonth }}{{ data.currency }}</td>
+                                    <td id="border-td"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!----- Analytics section ----->
+                    <div *ngIf="data.analytics">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <h4 style="text-align: center; padding-top: 35px; padding-bottom: 10px;">{{ data.analyticsField }}</h4>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 analytics-col" style="padding-bottom: 20px;">
+                            
+                            <table class="table table-borderless table-hover tabela">
+                                <tbody class="analytics-table">
+                                    <tr *ngFor="let item of data.analytics">
+                                        <th>{{item.rowName}}</th>
+                                        <td style="background-color:{{item.color}}; text-align:center;">{{item.category}}</td>
+                                    </tr>                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!----- Graph ----->
+            <div class="col-xl-6 col-lg-6" style="padding-top: 25px;">
+                <canvas id="doughnut-canvas" *ngIf="data.analytics; else noData"></canvas>
+                <ng-template #noData><h4 style="text-align: center; padding-top: 35px; padding-bottom: 10px;">{{ data.noData }}</h4></ng-template>
+            </div>
+        </div>
+    </div>
+
+
+    <!----- Chane income modal ----->
+    <div class="modal fade" id="changeIncome" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="position-absolute w-100 p-4 d-flex flex-column align-items-end">
+            <div class="w-25 toastek">
+                <div class="toast ml-auto tt1" role="alert" data-delay="1000" data-autohide="false">
+                    <div class="toast-header">
+                        <strong class="mr-auto text-primary">HINT</strong>
+                        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="toast-body">
+                        Input may only contain decimal numbers separated by . with max 2 decimal places.
+                    </div>
+                </div>
+                <div class="toast ml-auto tt2" role="alert" data-delay="3000" data-autohide="false">
+                    <div class="toast-header">
+                        <strong class="mr-auto text-primary">HINT</strong>
+                        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="toast-body">
+                        Only numbers between 1 and 28 allowed.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-dialog modal-dialog-centered" id="modal1" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">{{ data.incomeModalTitle }}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form name="changeIncome"  onsubmit="return disableButton()">
+                    <div class="modal-body">
+                        <input type="number" id="amount" name="amount" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" class="form-control" onfocusout="amount1(this)" placeholder="{{ data.incomeModalPlaceholderIncome }}" step="any" required="required">
+                        <div id="amm"></div><br />
+                        <input type="number" id="date" name="date" class="form-control" onfocusout="date1(this)" placeholder="{{ data.incomeModalPlaceholderDate }}" required="required">
+                        <div id="dat"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" onclick="disableButton()" class="btn btn-primary">{{ data.incomeModalSaveButton }}</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ data.incomeModalCloseButton }}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 200px;">
+  <!-- Position it -->
+</div>
+</main>

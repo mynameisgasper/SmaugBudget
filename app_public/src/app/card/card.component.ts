@@ -8,7 +8,12 @@ import { Component, OnInit, Input } from '@angular/core';
 export class CardComponent implements OnInit {
 
   @Input()
-  card: object;
+  id: number;
+  color: string;
+  icon: string;
+  count: number;
+  title: string;
+  comment: string;
 
   constructor() { }
 

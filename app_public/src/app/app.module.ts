@@ -7,12 +7,16 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { FrameComponent } from './frame/frame.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { CardComponent } from './card/card.component';
-import { AnalyticsComponent } from './analytics/analytics.component';
+import { AlertComponent } from './alert/alert.component';
 
 @NgModule({
   declarations: [
     FrameComponent,
-    HomeComponent
+    DashboardComponent,
+    HomeComponent,
+    CardComponent,
+    WelcomeComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,
@@ -27,6 +31,7 @@ import { AnalyticsComponent } from './analytics/analytics.component';
       }
     ])
   ],
+  exports: [CardComponent, WelcomeComponent, AlertComponent],
   providers: [],
   bootstrap: [FrameComponent]
 })

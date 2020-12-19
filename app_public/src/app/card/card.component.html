@@ -1,11 +1,9 @@
-<div class="col-xl-3 col-lg-4 col-md-12 col-sm-12" id="card{{id}}" data-aos="flip-down" data-aos-duration="500" style="margin: 0 auto" *ngFor="let item of card">
-    <div class="card-counter {{item.color}}">
-        <span id="replies{{item.id}}">
-        <i class="fas {{item.icon}}"></i>
-        <p class="count-numbers">{{item.count}}</p>
-        <p class="count-name">{{item.title}}</p></span>
-        <p id="card{{item.id}}-after">
-            <span id="comments{{item.id}}">{{item.comment}}</span>
-        </p>
-    </div>
+<div class="card-counter {{color}}">
+    <span id="replies{{id}}">
+    <i class="fas {{icon}}"></i>
+    <p class="count-numbers">{{count}}</p>
+    <p class="count-name">{{title}}</p></span>
+    <p id="card{{id}}-after">
+        <span id="comments{{id}}">{{comment}}</span>
+    </p>
 </div>
