@@ -46,24 +46,12 @@
             "aot": true,
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets/images"
             ],
             "styles": [
-              "src/assets/stylesheets/404notfound.css",
-              "src/assets/stylesheets/account.css",
-              "src/assets/stylesheets/bills.css",
-              "src/assets/stylesheets/confirmation.css",
-              "src/assets/stylesheets/darkmode.css",
-              "src/assets/stylesheets/dashboard.css",
-              "src/assets/stylesheets/db.css",
-              "src/assets/stylesheets/envelopes.css",
               "src/assets/stylesheets/fonts.css",
-              "src/assets/stylesheets/goals.css",
-              "src/assets/stylesheets/history.css",
               "src/assets/stylesheets/index.css",
               "src/assets/stylesheets/main.css",
-              "src/assets/stylesheets/passwordReset.css",
-              "src/assets/stylesheets/utilities.css",
               "src/assets/webfonts/OpenSans-Bold.ttf",
               "src/assets/webfonts/OpenSans-Italic.ttf",
               "src/assets/webfonts/OpenSans-Light.ttf",
