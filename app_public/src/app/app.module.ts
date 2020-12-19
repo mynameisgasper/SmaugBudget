@@ -5,12 +5,13 @@ import { RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FrameComponent } from './frame/frame.component';
+import { WelcomeComponent } from './welcome/welcome.component';
 
 @NgModule({
   declarations: [
     FrameComponent,
-    HomeComponent, 
-    DashboardComponent
+    HomeComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,
