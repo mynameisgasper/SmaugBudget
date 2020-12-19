@@ -9,6 +9,7 @@ export class WelcomeComponent implements OnInit {
 
   @Input()
   message: string;
+  @Input()
   welcomeMessage: string;
 
   constructor() { }
