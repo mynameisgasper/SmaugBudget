@@ -137,6 +137,7 @@ function passwordLoginSubmit(obj) {
     hashOne.update(password.value);
 
     document.getElementById('hashpassword').value = hashOne.getHash("HEX");
+    document.getElementsByClassName('modal-backdrop')[0].remove();
 }
 
 function passwordRegisterSubmit(obj) {
