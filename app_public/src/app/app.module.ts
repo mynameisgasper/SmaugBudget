@@ -9,6 +9,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { CardComponent } from './card/card.component';
 import { AlertComponent } from './alert/alert.component';
 import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { HeaderComponent } from './header/header.component';
     CardComponent,
     WelcomeComponent,
     AlertComponent,
-    HeaderComponent
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +35,13 @@ import { HeaderComponent } from './header/header.component';
       }
     ])
   ],
-  exports: [CardComponent, WelcomeComponent, AlertComponent, HeaderComponent],
+  exports: [
+    CardComponent, 
+    WelcomeComponent, 
+    AlertComponent, 
+    HeaderComponent,
+    FooterComponent
+  ],
   providers: [],
   bootstrap: [FrameComponent]
 })
