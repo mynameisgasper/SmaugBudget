@@ -54,7 +54,8 @@ export class DashboardComponent implements OnInit {
     {
       "title":"Expenses Left",
       "color":"bg-primary",
-      "count":376,"icon":"fa-coins"
+      "count":376,
+      "icon":"fa-coins"
     },
     {
       "title":"Savings",

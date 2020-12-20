@@ -1,0 +1,135 @@
+@media screen and (max-height:450px) and (max-width:900px) {
+    .navbar-collapse {
+        max-height: 90vh;
+        overflow-y: auto;
+        padding-bottom: 5vh;
+    }
+}
+
+nav .button {
+    font-size: 16px;
+    font-family: 'Open Sans';
+    text-align: center;
+    user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+}
+
+.container {
+    position: relative;
+    padding-top: 10vh;
+}
+
+.navbar-light {
+    text-decoration: none;
+}
+
+.nav-link {
+    transition: text-shadow .3s;
+}
+
+.nav-link:hover {
+    text-shadow: 0 0 1px #fff, 0 0 1px #fff;
+}
+
+.nav-item {
+    padding: 1vh;
+}
+
+.navbar-brand {
+    font-family: 'Open Sans';
+}
+
+.navbar-brand img {
+    margin-top: -3%;
+    padding: 0;
+}
+
+.toast-body {
+    color: #212529;
+    opacity: 1 !important;
+}
+
+.active {
+    text-shadow: 0 0 1px #fff, 0 0 1px #fff;
+}
+
+.fas {
+    user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+    cursor: pointer;
+    font-family: 'Open Sans';
+}
+
+.dropdown-info .dropdown-item {
+    width: 25vh;
+}
+
+.dropdown-info .fas {
+    margin-right: 10%;
+}
+
+.dropdown-info hr {
+    margin: 1vh;
+}
+
+.center {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+}
+
+@keyframes slideInFromLeft {
+    0% {
+        width: 0%;
+    }
+    100% {}
+}
+
+.progress-bar {
+    animation: .75s ease-out 0s 1 slideInFromLeft;
+}
+
+.goals .progress-bar {
+    animation: .9s ease-out 0s 1 slideInFromLeft;
+}
+
+.container {
+    overflow: hidden;
+}
+
+.toast {
+    display: none;
+    opacity: 1 !important;
+}
+
+.toastek {
+    z-index: 999999 !important;
+}
+
+
+/*@media only screen and (min-width: 900px) {
+    .notification{
+        white-space: nowrap;
+    }
+   .alert{
+        padding-top: 0.75rem;
+        padding-right: 0;
+        margin-right: 2.25rem;
+        padding-bottom: 0.75rem;
+        padding-left: 1.25rem;
+    }
+    .dropdown-menu{
+        width: auto;
+        height: auto;
+    }
+}*/
+
+.tekst {
+    vertical-align: sub;
+}
