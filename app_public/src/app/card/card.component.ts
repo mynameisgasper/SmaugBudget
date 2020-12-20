@@ -9,10 +9,15 @@ export class CardComponent implements OnInit {
 
   @Input()
   id: number;
+  @Input()
   color: string;
+  @Input()
   icon: string;
+  @Input()
   count: number;
+  @Input()
   title: string;
+  @Input()
   comment: string;
 
   constructor() { }
