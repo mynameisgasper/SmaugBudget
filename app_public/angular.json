@@ -46,11 +46,12 @@
             "aot": true,
             "assets": [
               "src/favicon.ico",
-              "src/assets/images"
+              "src/assets/images",
+              "src/assets/stylesheets/fonts.css",
+              "src/assets/stylesheets/main.css"
             ],
             "styles": [
               "src/assets/stylesheets/fonts.css",
-              "src/assets/stylesheets/index.css",
               "src/assets/stylesheets/main.css",
               "src/assets/webfonts/OpenSans-Bold.ttf",
               "src/assets/webfonts/OpenSans-Italic.ttf",
