@@ -16,27 +16,27 @@
         <ul class="navbar-nav">
             <li class="nav-item">
                 <a class="nav-link active" href="dashboard" *ngIf="component=='dashboard'; else dashboardBlock">DASHBOARD<span class="sr-only">(current)</span></a>
-                <a class="nav-link" href="dashboard" #dashboardBlock>DASHBOARD</a>
+                <ng-template #dashboardBlock><a class="nav-link" href="dashboard">DASHBOARD</a></ng-template>
             </li>
             <li class="nav-item">
                 <a class="nav-link active" href="envelopes" *ngIf="component=='envelopes'; else envelopesBlock">ENVELOPES<span class="sr-only">(current)</span></a>
-                <a class="nav-link" href="envelopes" #envelopesBlock>ENVELOPES</a>
+                <ng-template #envelopesBlock><a class="nav-link" href="envelopes">ENVELOPES</a></ng-template>
             </li>
             <li class="nav-item">
                 <a class="nav-link active" href="goals" *ngIf="component=='goals'; else goalsBlock">GOALS<span class="sr-only">(current)</span></a>
-                <a class="nav-link" href="goals" #goalsBlock>GOALS</a>
+                <ng-template #goalsBlock><a class="nav-link" href="goals">GOALS</a></ng-template>
             </li>
             <li class="nav-item">
                 <a class="nav-link active" href="bills" *ngIf="component=='bills'; else billsBlock">BILLS<span class="sr-only">(current)</span></a>
-                <a class="nav-link" href="bills" #billsBlock>BILLS</a>
+                <ng-template #billsBlock><a class="nav-link" href="bills">BILLS</a></ng-template>
             </li>
             <li class="nav-item">
                 <a class="nav-link active" href="history" *ngIf="component=='history'; else historyBlock">HISTORY<span class="sr-only">(current)</span></a>
-                <a class="nav-link" href="history" #historyBlock>HISTORY</a>
+                <ng-template #historyBlock><a class="nav-link" href="history">HISTORY</a></ng-template>
             </li>
             <li class="nav-item">
                 <a class="nav-link active" href="utilities" *ngIf="component=='utilities'; else utilitiesBlock">UTILITIES<span class="sr-only">(current)</span></a>
-                <a class="nav-link" href="utilities" #utilitiesBlock>UTILITIES</a>
+                <ng-template #utilitiesBlock><a class="nav-link" href="utilities">UTILITIES</a></ng-template>
             </li>
         </ul>
 
