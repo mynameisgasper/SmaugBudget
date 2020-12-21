@@ -13,6 +13,7 @@ import { CardComponent } from './card/card.component';
 import { AlertComponent } from './alert/alert.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { EnvelopesComponent } from './envelopes/envelopes.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { FooterComponent } from './footer/footer.component';
     WelcomeComponent,
     AlertComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    EnvelopesComponent
   ],
   imports: [
     BrowserModule,
@@ -37,6 +39,10 @@ import { FooterComponent } from './footer/footer.component';
       {
         path: 'dashboard',
         component: DashboardComponent
+      },
+      {
+        path: 'envelopes',
+        component: EnvelopesComponent
       }
     ])
   ],

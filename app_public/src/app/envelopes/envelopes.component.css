@@ -1,0 +1,256 @@
+main {
+    background: #ededed;
+}
+
+.container {
+    background: white;
+}
+
+.container {
+    -webkit-box-shadow: 0px 1px 15px 1px rgba(209, 209, 209, 1);
+    -moz-box-shadow: 0px 1px 15px 1px rgba(209, 209, 209, 1);
+    box-shadow: 0px 1px 15px 1px rgba(209, 209, 209, 1);
+    padding: 0;
+}
+
+.center-row-9 {
+    margin: 0 12.5%
+}
+
+.row {
+    margin: 0;
+}
+
+.arrow {
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+}
+
+.right {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+}
+
+.left {
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+}
+
+.puscica-leva {
+    text-align: right;
+}
+
+.mesec {
+    text-align: center;
+}
+
+.puscica-desna {
+    text-align: left;
+}
+
+#welcome-alert-section {
+    margin-top: 2vh;
+}
+
+#welcome-alert-section .row {
+    padding: 1.5vh;
+}
+
+#cards-section .row {
+    padding: 1.5vh;
+}
+
+#main-section .row {
+    padding: 1.5vh;
+}
+
+#welcome-alert-section {
+    padding: 4vh;
+}
+
+#cards-section {
+    padding: 4vh;
+    margin-top: 2vh;
+}
+
+#main-section {
+    padding: 4vh;
+    margin-top: 2vh;
+}
+
+@media only screen and (min-width: 900px) {
+    #welcome-alert-section {
+        margin-top: 15vh;
+    }
+}
+
+@media only screen and (max-width: 991px) {
+    #welcome-alert-section {
+        margin-top: 10vh;
+    }
+}
+
+@media only screen and (min-width: 900px) {
+    .footer {
+        padding-top: 12vh;
+    }
+}
+
+@media only screen and (max-width: 991px) {
+    .footer {
+        padding-top: 6vh;
+    }
+}
+
+.card-counter i {
+    font-size: 6vh;
+    opacity: 0.3
+}
+
+.container #cards-section {
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+}
+
+.progress-bar {
+    height: auto;
+}
+
+
+/* Envelope Category IDs */
+
+#gas {
+    width: 69%;
+    background: #0096ff;
+    border-color: #0096ff;
+}
+
+#gas-back {
+    background: #9ebde3;
+}
+
+#groceries {
+    width: 50%;
+    background: green;
+    border-color: green;
+}
+
+#groceries-back {
+    background: green;
+    opacity: 1;
+}
+
+#utilites {
+    background: purple;
+    border-color: purple;
+}
+
+#utilites-back {
+    background: plum;
+}
+
+#entertainment {
+    background: #ffbb33;
+    border-color: #ffbb33;
+}
+
+#entertainment-back {
+    background: #fdce6f;
+}
+
+.ena {
+    padding-bottom: 20px;
+}
+
+
+/* End Envelope Category IDs */
+
+
+/* Main Section Envelopes CSS */
+
+#main-section h3 {
+    font-family: 'Open Sans Bold';
+    font-size: 1.2em;
+}
+
+#main-section p {
+    float: left;
+}
+
+#main-section p .info {
+    color: gray;
+    font-family: 'Open Sans';
+    display: inline;
+}
+
+#main-section p .monetary-value {
+    font-family: 'Open Sans Bold';
+    display: inline;
+}
+
+.envelope-info button {
+    margin: 0;
+    float: right;
+}
+
+.info span {
+    font-family: 'Open Sans Bold';
+}
+
+
+/*
+* CARDS
+*/
+
+#comments2 {
+    opacity: 0;
+}
+
+#comments3 {
+    opacity: 0;
+}
+
+#card2:hover #comments2 {
+    opacity: 1;
+}
+
+#card3:hover #comments3 {
+    opacity: 1;
+}
+
+#card2:hover #replies2 {
+    display: none;
+}
+
+#card3:hover #replies3 {
+    display: none;
+}
+
+#card2-after {
+    text-align: center;
+    font-size: 2.5vh;
+}
+
+#card3-after {
+    text-align: center;
+    font-size: 2.5vh;
+}
+
+#pfpNavBar {
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+}
+
+.hover-red:hover {
+    color: red;
+}
+
+.arrowButton {
+    border: none;
+    text-decoration: none;
+    color: black;
+    background: none;
+}
