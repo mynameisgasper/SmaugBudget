@@ -92,6 +92,7 @@
             <div class="col-xl-6 col-lg-6" style="padding-top: 25px;">
                 <canvas baseChart *ngIf="data.analytics; else noData" id="doughnut-canvas" style="display: block; width: 482px; height: 482px;" width="482" height="482"
                     [data]="data.chartData"
+                    [colors]="data.chartColors"
                     [labels]="data.chartLabels"
                     [chartType]="data.chartType">
                 </canvas>

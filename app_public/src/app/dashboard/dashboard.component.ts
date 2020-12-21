@@ -86,6 +86,7 @@ export class DashboardComponent implements OnInit {
     "id":"5fc600b4507a6800112af56e",
     "currency":"EUR",
     "chartData": [310],
+    "chartColors": [{backgroundColor: ['rgb(50, 168, 156)']}],
     "chartLabels": ["Car"],
     "chartType": "doughnut"
   }
