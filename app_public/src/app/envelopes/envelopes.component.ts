@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-envelopes',
@@ -12,6 +13,7 @@ export class EnvelopesComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  faPlusSquare = faPlusSquare;
 
   data = {
     "fileName":"envelopes",

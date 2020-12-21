@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { faMinusSquare, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-envelopes-progress',
@@ -12,6 +13,9 @@ export class EnvelopesProgressComponent implements OnInit {
     "currency": "EUR",
     "envelope": {}
   }
+
+  faMinusSquare = faMinusSquare;
+  faPencilAlt = faPencilAlt
 
   isLow(value: Number): Boolean {
     return value < 85;

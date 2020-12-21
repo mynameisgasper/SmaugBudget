@@ -22,12 +22,12 @@
                     <input type="hidden" value="deleteEnvelope" name="formType">
                     <input type="hidden" value="{{item._id}}" name="id">
                     <button type="submit" class="btn edit-btn" data-toggle="modal">
-                        <i class="fas fa-minus-square hover-red"></i>
+                        <fa-icon [icon]="faMinusSquare"></fa-icon>
                     </button>
                 </form>
                 
                 <button type="button" class="btn edit-btn" data-toggle="modal" href="#editForm{{item._id}}" role="button">
-                    <i class="fas fa-pencil-alt"></i>
+                    <fa-icon [icon]="faPencilAlt"></fa-icon>
                 </button>
             </div>
         </div>
