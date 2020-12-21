@@ -1,1 +1,36 @@
-<p>envelopes-con-progress works!</p>
+<div id="data">
+    <div *ngFor="let item of data.envelope;">
+        <div *ngIf="item.month==data.setMonth" class="row" id="envelope{{_id}}">
+            <h2 style="text-align: center;">{{data.guestName}}</h2>
+            <div class="col-sm-12 col-md-12 col-lg-3 col-xl-2">
+                <h3 *ngIf="isLow(item.progress)">{{item.category.name}}</h3>
+                <h3 *ngIf="isMedium(item.progress)" style="color:#ff7b00">{{item.category.name}}</h3>
+                <h3 *ngIf="isHigh(item.progress)" style="color:red">{{item.category.name}}</h3>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-5 col-xl-6">
+                <div class="progress" style="background-color:{{item.bgColor}};">
+                    <div class="progress-bar"  role="progressbar" style="width:{{item.progress}}%; height:auto; background-color:{{item.color}}; border-color:{{item.color}};" aria-valuenow="{{item.progress}}" aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" data-placement="top">
+                        {{item.progress}}%
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 envelope-info">
+                <p *ngIf="isLow(item.progress)" class="info"><span>{{item.spent}} {{data.currency}}</span> of <span>{{item.budget}} {{data.currency}}</span></p>
+                <p *ngIf="isMedium(item.progress)" class="info" style="color:#ff7b00"> <span>{{item.spent}} {{data.currency}}</span> of <span>{{item.budget}} {{data.currency}}</span></p>
+                <p *ngIf="isHigh(item.progress)" class="info" style="color:red"> <span>{{item.spent}} {{data.currency}}</span> of <span>{{item.budget}} {{data.currency}}</span></p>
+                <form name="deleteForm{{item._id}}" method="post" action="/envelopes">
+                    <input type="hidden" value="deleteEnvelope" name="formType">
+                    <input type="hidden" value="{{item._id}}" name="id">
+                    <button type="submit" class="btn edit-btn" data-toggle="modal">
+                        <fa-icon [icon]="faMinusSquare"></fa-icon>
+                    </button>
+                </form>
+                
+                <button type="button" class="btn edit-btn" data-toggle="modal" href="#editForm{{item._id}}" role="button">
+                    <fa-icon [icon]="faPencilAlt"></fa-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
