@@ -33,7 +33,9 @@
                 <h2>{{ data.alertSection }}</h2>
             </div>
         </div>
-        <alert [alert]="alert"></alert>
+        <div class="row" *ngFor="let item of data.alert" class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <alert [type]="item.type" [name]="item.name" [text]="item.text"></alert>
+        </div>
     </div>
 
     <!----- Overview section ----->
@@ -151,5 +153,7 @@
   <!-- Position it -->
 </div>
 
-<app-footer></app-footer>
+    <app-footer></app-footer>
+
+    <script type="text/javascript" src="src/assets/javascripts/DashboardChart.js"></script>
 </main>
