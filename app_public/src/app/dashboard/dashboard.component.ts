@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-dashboard',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+
+  pencilIcon = faPencilAlt;
 
   constructor() { }
 
@@ -49,19 +52,19 @@ export class DashboardComponent implements OnInit {
       "title":"Budget Left",
       "color":"bg-primary",
       "count":435,
-      "icon":"fa-university"
+      "icon":"faUniversity"
     },
     {
       "title":"Expenses Left",
       "color":"bg-primary",
       "count":376,
-      "icon":"fa-coins"
+      "icon":"faCoins"
     },
     {
       "title":"Savings",
       "color":"bg-primary",
       "count":59,
-      "icon":"fa-piggy-bank"
+      "icon":"faPiggyBank"
     }],
     "analytics":[
     {

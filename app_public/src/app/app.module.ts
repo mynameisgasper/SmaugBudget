@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ChartsModule } from 'ng2-charts';
 
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
+
 import { HomeComponent } from './home/home.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FrameComponent } from './frame/frame.component';
@@ -26,6 +28,7 @@ import { FooterComponent } from './footer/footer.component';
   imports: [
     BrowserModule,
     ChartsModule,
+    FontAwesomeModule,
     RouterModule.forRoot([
       {
         path: '',
