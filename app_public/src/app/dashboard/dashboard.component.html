@@ -62,7 +62,7 @@
                                 </tr>
                                 <tr>
                                     <th id="border-th">{{ data.balanceRow }}</th>
-                                    <td id="border-td">{{ data.incomeLastMonth - data.expensesLastMonth }}{{ data.currency }}</td>
+                                    <td id="border-td">{{ data.incomeLastMonth - data.expensesLastMonth }} {{ data.currency }}</td>
                                     <td id="border-td"></td>
                                 </tr>
                             </tbody>
@@ -90,7 +90,11 @@
             </div>
             <!----- Graph ----->
             <div class="col-xl-6 col-lg-6" style="padding-top: 25px;">
-                <canvas id="doughnut-canvas" *ngIf="data.analytics; else noData"></canvas>
+                <canvas baseChart *ngIf="data.analytics; else noData" id="doughnut-canvas" style="display: block; width: 482px; height: 482px;" width="482" height="482"
+                    [data]="data.chartData"
+                    [labels]="data.chartLabels"
+                    [chartType]="data.chartType">
+                </canvas>
                 <ng-template #noData><h4 style="text-align: center; padding-top: 35px; padding-bottom: 10px;">{{ data.noData }}</h4></ng-template>
             </div>
         </div>

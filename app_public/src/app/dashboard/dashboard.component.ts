@@ -84,6 +84,9 @@ export class DashboardComponent implements OnInit {
     }],
     "alertLength":1,
     "id":"5fc600b4507a6800112af56e",
-    "currency":"EUR"
+    "currency":"EUR",
+    "chartData": [310],
+    "chartLabels": ["Car"],
+    "chartType": "doughnut"
   }
 }
