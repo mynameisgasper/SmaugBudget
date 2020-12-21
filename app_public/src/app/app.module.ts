@@ -14,6 +14,8 @@ import { AlertComponent } from './alert/alert.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { EnvelopesComponent } from './envelopes/envelopes.component';
+import { EnvelopesProgressComponent } from './envelopes-progress/envelopes-progress.component';
+import { EnvelopesConProgressComponent } from './envelopes-con-progress/envelopes-con-progress.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { EnvelopesComponent } from './envelopes/envelopes.component';
     AlertComponent,
     HeaderComponent,
     FooterComponent,
-    EnvelopesComponent
+    EnvelopesComponent,
+    EnvelopesProgressComponent,
+    EnvelopesConProgressComponent
   ],
   imports: [
     BrowserModule,
