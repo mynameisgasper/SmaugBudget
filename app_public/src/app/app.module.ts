@@ -18,10 +18,12 @@ import { EnvelopesProgressComponent } from './envelopes-progress/envelopes-progr
 import { EnvelopesConProgressComponent } from './envelopes-con-progress/envelopes-con-progress.component';
 import { GoalsComponent } from './goals/goals.component';
 import { GoalsProgressComponent } from './goals-progress/goals-progress.component';
+import { DbComponent } from './db/db.component';
 
 @NgModule({
   declarations: [
     FrameComponent,
+    DbComponent,
     DashboardComponent,
     HomeComponent,
     CardComponent,
@@ -43,6 +45,10 @@ import { GoalsProgressComponent } from './goals-progress/goals-progress.componen
       {
         path: '',
         component: HomeComponent
+      },
+      {
+        path: 'db',
+        component: DbComponent
       },
       {
         path: 'dashboard',

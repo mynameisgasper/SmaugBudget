@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-goals-progress',
+  selector: 'app-goals-progress-bar',
   templateUrl: './goals-progress.component.html',
   styleUrls: ['./goals-progress.component.css']
 })
