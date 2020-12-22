@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  styleUrls: ['./dashboard.component.css'],
+  encapsulation: ViewEncapsulation.Emulated
 })
 export class DashboardComponent implements OnInit {
 
@@ -54,7 +55,7 @@ export class DashboardComponent implements OnInit {
       "color":"bg-primary",
       "count":435,
       "icon":"faUniversity",
-      "comment":"placeholder"
+      "comment":""
     },
     {
       "id":2,
@@ -62,7 +63,7 @@ export class DashboardComponent implements OnInit {
       "color":"bg-primary",
       "count":376,
       "icon":"faCoins",
-      "comment":"placeholder"
+      "comment":""
     },
     {
       "id":3,
@@ -70,7 +71,7 @@ export class DashboardComponent implements OnInit {
       "color":"bg-primary",
       "count":59,
       "icon":"faPiggyBank",
-      "comment":"placeholder"
+      "comment":""
     }],
     "analytics":[
     {

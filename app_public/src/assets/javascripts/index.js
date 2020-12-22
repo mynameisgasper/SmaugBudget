@@ -138,6 +138,8 @@ function passwordLoginSubmit(obj) {
 
     document.getElementById('hashpassword').value = hashOne.getHash("HEX");
     document.getElementsByClassName('modal-backdrop')[0].remove();
+    document.getElementsByTagName('body')[0].classList.remove('modal-open');
+    document.getElementsByTagName('body')[0].style.removeProperty('padding-right');
 }
 
 function passwordRegisterSubmit(obj) {
