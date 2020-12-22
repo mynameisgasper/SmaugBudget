@@ -1,0 +1,438 @@
+<main>
+    <!-- Account body -->
+    <div class="position-absolute w-100 p-4 d-flex flex-column align-items-end Zind">
+        <div class="w-25 toast-front">
+            <div class="toast ml-auto tt1" role="alert" data-delay="1000" data-autohide="false">
+                <div class="toast-header">
+                    <strong class="mr-auto text-primary">{{HINT}}</strong>
+                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="toast-body">
+                    {{nameHint}} 
+                </div>
+            </div>
+            <div class="toast ml-auto tt2" role="alert" data-delay="1000" data-autohide="false">
+                <div class="toast-header">
+                    <strong class="mr-auto text-primary">{{HINT}}</strong>
+                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="toast-body">
+                    {{surnameHint}}
+                </div>
+            </div>        
+        </div>
+    </div>
+    <div class="container" id="accountBody-container">  
+    
+    <div id="accountBody"  class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <h2>{{title}}</h2>
+        <form name="userInfo" method="post" action="/account" onsubmit="return disableButton()">
+        <div class="row">
+            <div class="del-margin col-sm-12 col-md-9 col-lg-9 col-xl-9">
+            <div class="row">
+                <input type="hidden" name="formType" value="changeName">
+                <label id="nameInputLbl" for="nameInput" class="col-sm-3 col-md-3 col-lg-2 col-xl-2">{{firstName}}:</label>
+                <input type="text" id="nameInput" name="firstName" placeholder="{{firstName}}" value="{{data_firstName}}" class="form-control col-sm-3 col-md-3 col-lg-3 col-xl-3" onfocusout="nameRegex()" required="required">
+            
+                <label id="lastnameInputLbl" for="lastnameInput" class="col-sm-3 col-md-3 col-lg-4 col-xl-4">{{lastName}}:</label>
+                <input type="text" id="lastnameInput" name="lastName" placeholder="{{lastName}}" value="{{data_lastName}}" class="form-control col-sm-3 col-md-3 col-lg-3 col-xl-3" onfocusout="surnameRegex()" required="required">
+            </div>
+            <div class="row">
+                <label id="passwordChangeLbl" for="passwordChange" class="col-sm-3 col-md-3 col-lg-2 col-xl-2">{{password}}:</label>
+                <button id ="passwordChange" type="button" class="btn btn-primary" data-toggle="modal" data-target="#changePassowrd">{{changePassword}}</button>
+            </div>
+            <div class="row">
+                <label id="emailInputLbl" for="emailInput" class="col-sm-3 col-md-3 col-lg-2 col-xl-2">{{email}}:</label>
+                <input type="email" id="emailInput" name="email" value="{{data_email}}"  class="form-control col-sm-9 col-md-9 col-lg-10 col-xl-10" disabled>
+            </div>
+            </div>
+            <div id="pfpImg" class="del-margin col-sm-12 col-md-3 col-lg-3 col-xl-3">
+            <a data-toggle="modal" data-target="#changePfp" aria-label="Change Profile Picture">
+                <div id="profile-pic" class="profile-pic" style="background-image: url('/api/getPfp')" >
+                <span class="fas fa-camera"></span>
+                <span>{{changeImage}}</span>
+                </div>
+            </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <button type="submit" id="userInfoButton" onclick="disableButton()" class="btn btn-primary" style="float: right;">{{saveChanges}}</button>
+            </div>
+        </div>
+        </form>
+    </div>
+    </div>
+
+    <div class="container" id="connectionsBody-container">
+    <div id="connectionsBody"  class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <h2>{{connections}}</h2>
+        <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <button type="button" class="btn btn-primary" style="float: right;" data-toggle="modal" data-target="#addConnectionModal">
+            {{addConnection}}
+            <i class="fas fa-plus-square" aria-hidden="true"></i>
+            </button>
+        </div>
+        </div>
+        <div class="row">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col" style="width: 20%;">{{name}}</th>
+                <th scope="col" class="d-none d-sm-block">{{members}}</th>
+                <th scope="col" style="width: 10%;">{{active}}</th>
+                <th scope="col" style="width: 5%;">{{edit}}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#each data_connections}}
+            <tr>
+                <td>{{name}}</td>
+                <td class="d-none d-sm-block fixFirst">
+                {{#each user}}
+                , {{firstname}} {{lastname}}
+                {{/each}}
+                </td>
+                <td>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" onclick="saveActive('{{_id}}', this)" id="active{{_id}}" {{#if active}}checked{{/if}}>
+                    <label class="custom-control-label" for="active{{_id}}"></label>
+                </div>
+                </td>
+                <td>
+                <button type="button" class="btn" data-toggle="modal" data-target="#editConnectionModal{{_id}}">
+                    <i class="fas fa-pencil-alt"></i>
+                </button>
+                </td>
+            </tr>
+            {{/each}}
+            </tbody>
+        </table>
+        </div>
+    </div>
+    </div>
+
+    <div class="container" id="appSettings-container">  
+    <div id="appSettings"  class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <h2>{{application}}</h2>
+        <div class="row">
+            <label id="darkmodeEnableLbl" for="darkmodeEnable" class="col-5 col-sm-4 col-md-4 col-lg-4 col-xl-4" style="padding-right: 0px;">{{darkMode}}:</label>
+            <div class="custom-control custom-switch">
+            <input type="checkbox" class="custom-control-input" id="darkmodeEnable">
+            <label class="custom-control-label" for="darkmodeEnable"></label>
+            </div>
+        </div>
+        <div class="row">
+            <label id="languageChangeLbl" for="languageChange" class="col-5 col-sm-4 col-md-4 col-lg-4 col-xl-4">{{language}}:</label>
+            <div class="dropdown col-sm-4 col-md-4 col-lg-4 col-xl-4">
+            <button class="btn btn-secondary dropdown-toggle col-sm-12 col-md-12 col-lg-12 col-xl-12" type="button" id="languageChange" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{selLanguage}}
+            </button>
+            <div class="dropdown-menu" aria-labelledby="languageChange">
+                <a class="dropdown-item" onclick="changeLanguage('English')">English</a>
+                <a class="dropdown-item" onclick="changeLanguage('Slovenski')">Slovenski</a>
+            </div>
+            </div>
+        </div>
+        <div class="row">
+        <label id="currencyChangeLbl" for="currencyChange" class="col-5 col-sm-4 col-md-4 col-lg-4 col-xl-4">{{currency}}:</label>
+        <div class="dropdown col-sm-4 col-md-4 col-lg-4 col-xl-4">
+            <button class="btn btn-secondary dropdown-toggle col-sm-12 col-md-12 col-lg-12 col-xl-12" type="button" id="currencyChange" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{data_defCurrency}}
+            </button>
+            <div class="dropdown-menu dropdown-menu-right scrollable-menu" aria-labelledby="currencyChange">
+            {{#each data_currency}}
+            <a class="dropdown-item" onclick="changeCurrency('{{key}}')">{{name}} ({{key}})</a>
+            {{/each}}
+            </div>
+        </div>
+        </div>
+    </div>
+    </div>
+
+    <div class="container" id="categoriesColor-container">
+    <div id="categories-setting"  class="col-sm-12 col-md-12 col-lg-12 col-xl-12" >
+        <h2>Categories</h2>
+        {{#each categories}}
+        <form  name="editColor{{_id}}" method="post" action="/account">
+            <div class="category-row col-5 col-sm-6 col-md-5 col-lg-4 col-xl-4">
+            <label for="color-picker{{_id}}" style=" text-align:left;">{{name}}</label>
+            </div>
+            <div class="category-row col-3 col-sm-5 col-md-5 col-lg-3 col-xl-3" style="text-align: center;">
+                <input type="color" class="color-picker" name="colorPicker{{id}}" value="{{hexColor}}">
+            </div>
+            <div class="category-row col-3 col-sm-12 col-md-1 col-lg-4 col-xl-4" style="text-align: right;">
+            <button type="submit" class="btn btn-primary"><i class="fas fa-pencil-alt"></i></button>
+            <button type="submit" form="deleteColor{{_id}}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+            <input type="hidden" name="id" value="{{_id}}" />
+            <input type="hidden" name="formType" value="changeColorCategory" />
+            </div>
+        </form>
+        <form id="deleteColor{{_id}}" name="deleteColor{{_id}}" method="post" action="/account" onsubmit="return confirm('Deleting category will remove all related envelopes and goals!');">
+            <input type="hidden" name="formType" value="deleteCategory">
+            <input type="hidden" name="id" value="{{_id}}">
+        </form>
+        
+        
+        {{/each}}
+    </div>
+    </div>
+    <!-- End AccountBody -->
+
+    <!-- changePassowrd -->
+    <div class="modal fade" id="changePassowrd" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="position-absolute w-100 p-4 d-flex flex-column align-items-end">
+        <div class="w-25 toast-front">
+            <div class="toast ml-auto tt3" role="alert" data-delay="1000" data-autohide="false">
+                <div class="toast-header">
+                    <strong class="mr-auto text-primary">{{HINT}}</strong>
+                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="toast-body">
+                    {{passwordHint}}
+                </div>
+            </div>
+            <div class="toast ml-auto tt4" role="alert" data-delay="1000" data-autohide="false">
+                <div class="toast-header">
+                    <strong class="mr-auto text-primary">{{HINT}}</strong>
+                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="toast-body">
+                    {{passwordNoMatch}}
+                </div>
+            </div>        
+        </div>
+    </div>
+    <div class="modal-dialog" role="document">
+        <form method="POST" action="/account">
+        <input type="hidden" name="formType" value="changePassword" />
+        <input type="hidden" name="oldPassword" id="oldPasswordHash" value=""/>
+        <input type="hidden" name="newPassword1" id="newPasswordHash1" value=""/>
+        <input type="hidden" name="newPassword2" id="newPasswordHash2" value=""/>
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title">{{changePassword}}</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+            <div class="row">
+                <label id="oldPasswordLbl" for="oldPassword" class="col-sm-4 col-md-4 col-lg-4 col-xl-4">{{oldPassword}}:</label>
+                <input type="password" id="oldPassword" placeholder="{{oldPassword}}"  class="form-control col-sm-7 col-md-7 col-lg-7 col-xl-7">
+            </div>
+            <div class="row">
+                <label id="newPasswordLbl" for="newPassword" class="col-sm-4 col-md-4 col-lg-4 col-xl-4">{{newPassword}}:</label>
+                <input type="password" id="newPassword" onfocusout="passwordStrength(this)" placeholder="{{newPassword}}"  class="form-control col-sm-7 col-md-7 col-lg-7 col-xl-7">
+            </div>
+            <div class="row">
+                <label id="confirmPasswordLbl" for="confirmPassword" class="col-sm-4 col-md-4 col-lg-4 col-xl-4">{{confirmPassword}}:</label>
+                <input type="password" id="confirmPassword" onfocusout="passwordCheckSignUp()" placeholder="{{confirmPassword}}"  class="form-control col-sm-7 col-md-7 col-lg-7 col-xl-7">
+            </div>
+            </div>
+            <div class="modal-footer">
+            <button type="submit" class="btn btn-primary" onclick="passwordSubmit();">{{saveChanges}}</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">{{close}}</button>
+            </div>
+        </div>
+        </form>
+    </div>
+    </div>
+    <!-- End changePassowrd -->
+
+    <!-- addConnectionModal -->
+    <div class="modal fade" id="addConnectionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="position-absolute w-100 p-4 d-flex flex-column align-items-end">
+        <div class="w-25 toast-front">
+            <div class="toast ml-auto tt5" role="alert" data-delay="1000" data-autohide="false">
+                <div class="toast-header">
+                    <strong class="mr-auto text-primary">{{HINT}}</strong>
+                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="toast-body">
+                    {{nameHint}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">{{addConnection}}</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <form name="addConnection" method="post" action="/account" onsubmit="return disableButton2(this)">
+        <input type="hidden" value="addConnection" name="formType">
+            <div class="modal-body">
+            <div class="row">
+                <label id="connectionNameLbl" for="connectionName" class="col-sm-4 col-md-4 col-lg-4 col-xl-4">{{connectionName}}:</label>
+                <input type="text" id="connectionName" name="connectionName" onfocusout="ConNameRegex(this)" placeholder="{{connectionName}}"  class="form-control col-sm-7 col-md-7 col-lg-7 col-xl-7 connectionName">
+            </div>
+            <div class="row" style="padding-top: 2em;">
+                <table class="table">
+                <thead>
+                    <tr>
+                    <th scope="col" style="padding-left: 5%;">{{members}}</th>
+                    <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr id="edit-addConTrNew" class="collapse show">
+                    <th>
+                        <input type="text" id="editPersonNew" placeholder="EMAIL"  class="form-control col-sm-9 col-md-9 col-lg-9 col-xl-9">
+                    </th>
+                    <th>
+                        <button type="button" class="btn btn-primary" onclick="checkIfAdded(this)" style="float: right;">
+                        <i class="fas fa-plus-square" aria-hidden="true"></i>
+                        </button>
+                    </th>
+                    
+                    </tr>
+                </tbody>
+                </table>
+            </div>
+            <div class="row">
+                <h5 style="padding-left: 5%;">{{envelopes}}</h5>
+            </div>
+            <div class="row">
+                <select name="selEnvelopes" class="selectpicker" multiple data-live-search="true">
+                {{#each data_envelopes}}
+                <option value="{{_id}}">{{category.name}}</option>
+                {{/each}}
+                </select>
+            </div>  
+            </div>
+            <div class="modal-footer">
+            <button type="submit" onclick="disableButton2(this)" class="btn btn-primary">{{saveChanges}}</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">{{close}}</button>
+            </div>
+        </form>
+        </div>
+    </div>
+    </div>
+    <!-- End addConnectionModal -->
+
+    <!-- editConnectionModal -->
+    {{#each data_connections}}
+    <div class="modal fade" id="editConnectionModal{{_id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">{{../editConnection}}</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+            <label id="edit-connectionNameLbl" for="edit-connectionName" class="col-sm-4 col-md-4 col-lg-4 col-xl-4">{{../connectionName}}:</label>
+            <input type="text" id="edit-connectionName" placeholder="{{../name}}" value="{{name}}" class="form-control col-sm-7 col-md-7 col-lg-7 col-xl-7" disabled>
+            </div>
+            <div class="row">
+            <label id="edit-activeLbl" for="edit-active" class="col-5 col-sm-4 col-md-4 col-lg-4 col-xl-4" style="padding-right: 0px;">{{../active}}:</label>
+            <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" onclick="saveActive('{{_id}}', this)" id="edit-active{{_id}}" {{#if active}}checked{{/if}}>
+                    <label class="custom-control-label" for="edit-active{{_id}}"></label>
+            </div>
+            </div>
+            <div class="row" style="padding-top: 2em;">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col" style="padding-left: 5%;">{{../members}}</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                {{#each user}}
+                <tr id="edit-addConTr{{_id}}" class="collapse show">
+                    <th>
+                    <input type="text" id="editPerson{{_id}}" placeholder="EMAIL" value="{{email}}" class="form-control col-sm-9 col-md-9 col-lg-9 col-xl-9" disabled>
+                    </th>
+                    <th>
+                    <button type="button" class="btn btn-danger" style="float: right;" data-toggle="collapse" data-target="#edit-addConTr{{_id}}" aria-expanded="false" aria-controls="collapseExample">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                    </th>
+                    
+                </tr>
+                {{/each}}
+                <tr id="edit-addConTrNew" class="collapse show">
+                    <th>
+                    <input type="text" id="editPersonNew" placeholder="EMAIL"  class="form-control col-sm-9 col-md-9 col-lg-9 col-xl-9">
+                    </th>
+                    <th>
+                    <button type="button" class="btn btn-primary" onclick="checkIfAdded(this)" style="float: right;">
+                        <i class="fas fa-plus-square" aria-hidden="true"></i>
+                    </button>
+                    </th>
+                    
+                </tr>
+                </tbody>
+            </table>
+            </div>
+            <div class="row">
+            <h5 style="padding-left: 5%;">{{../envelopes}}</h5>
+            </div>
+            <div class="row">
+            <select class="selectpicker" multiple data-live-search="true">
+                {{#each envelopes}}
+                <option value="{{_id}}" {{#if selected}}selected{{/if}}>{{category.name}}</option>
+                {{/each}}
+            </select>
+            </div>  
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary">{{../saveChanges}}</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="removeConn('{{_id}}')"><i class="fas fa-trash-alt"></i>{{../remove}}</button>
+        </div>
+        </div>
+    </div>
+    </div>
+    {{/each}}
+    <!-- End editConnectionModal -->
+
+    <!-- changePfp -->
+    <div class="modal fade" id="changePfp" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">{{changeProfilePicture}}</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form name="userPfp" id="userPfp" method="post" action="/api/uploadPfp">
+            <div class="form-group">
+                <label for="addPfp">{{dragAndDropOr}}:</label>
+                <input type="file" name="image" class="form-control-file" id="addPfp" accept="image/*">
+            </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" id="submitPfp" class="btn btn-primary" disabled>{{saveChanges}}</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">{{close}}</button>
+        </div>
+        </div>
+    </div>
+    </div>
+    <!-- End changePfp -->
+
+
+
+    <app-footer></app-footer>
+</main>
