@@ -47,8 +47,8 @@
                 <img id="pfpNavBar" src="/api/getPfp" alt="Profile pic"></a>
             <div class="dropdown-menu dropdown-menu-right dropdown-info" id="dropdown-user" aria-labelledby="navbarDropdownMenuLink-4">
                 <a class="dropdown-item" routerLink="../account"><fa-icon [icon]="faCog"></fa-icon> Settings</a>
-                <a class="dropdown-item" href="#" onclick="toggleDarkMode();loadGraphs();" id="appearanceDark" style="display: none;"><fa-icon [icon]="faAdjust"></fa-icon> Appearance: Dark</a>
-                <a class="dropdown-item" href="#" onclick="toggleDarkMode();loadGraphs();" id="appearanceLight"><fa-icon [icon]="faAdjust"></fa-icon> Appearance: Light</a>
+                <a class="dropdown-item" onclick="toggleDarkMode();loadGraphs();" id="appearanceDark" style="display: none;"><fa-icon [icon]="faAdjust"></fa-icon> Appearance: Dark</a>
+                <a class="dropdown-item" onclick="toggleDarkMode();loadGraphs();" id="appearanceLight"><fa-icon [icon]="faAdjust"></fa-icon> Appearance: Light</a>
                 <hr>
                 <a class="dropdown-item" routerLink=""><fa-icon [icon]="faSignOutAlt"></fa-icon> Logout</a>
             </div>
