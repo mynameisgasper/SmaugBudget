@@ -17,6 +17,7 @@ import { EnvelopesComponent } from './envelopes/envelopes.component';
 import { EnvelopesProgressComponent } from './envelopes-progress/envelopes-progress.component';
 import { EnvelopesConProgressComponent } from './envelopes-con-progress/envelopes-con-progress.component';
 import { GoalsComponent } from './goals/goals.component';
+import { GoalsProgressComponent } from './goals-progress/goals-progress.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { GoalsComponent } from './goals/goals.component';
     EnvelopesComponent,
     EnvelopesProgressComponent,
     EnvelopesConProgressComponent,
-    GoalsComponent
+    GoalsComponent,
+    GoalsProgressComponent
   ],
   imports: [
     BrowserModule,
