@@ -49,22 +49,28 @@ export class DashboardComponent implements OnInit {
     "noData":"No data",
     "card":[
     {
+      "id":1,
       "title":"Budget Left",
       "color":"bg-primary",
       "count":435,
-      "icon":"faUniversity"
+      "icon":"faUniversity",
+      "comment":"placeholder"
     },
     {
+      "id":2,
       "title":"Expenses Left",
       "color":"bg-primary",
       "count":376,
-      "icon":"faCoins"
+      "icon":"faCoins",
+      "comment":"placeholder"
     },
     {
+      "id":3,
       "title":"Savings",
       "color":"bg-primary",
       "count":59,
-      "icon":"faPiggyBank"
+      "icon":"faPiggyBank",
+      "comment":"placeholder"
     }],
     "analytics":[
     {
