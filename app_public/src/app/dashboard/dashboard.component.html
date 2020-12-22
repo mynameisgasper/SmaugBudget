@@ -80,7 +80,7 @@
                                 <tbody class="analytics-table">
                                     <tr *ngFor="let item of data.analytics">
                                         <th>{{item.rowName}}</th>
-                                        <td style="background-color:{{item.color}}; text-align:center;">{{item.category}}</td>
+                                        <td [ngStyle]="{'background-color':item.color}" style="text-align:center;" >{{item.category}}</td>
                                     </tr>                                    
                                 </tbody>
                             </table>
