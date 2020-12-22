@@ -16,6 +16,7 @@ import { FooterComponent } from './footer/footer.component';
 import { EnvelopesComponent } from './envelopes/envelopes.component';
 import { EnvelopesProgressComponent } from './envelopes-progress/envelopes-progress.component';
 import { EnvelopesConProgressComponent } from './envelopes-con-progress/envelopes-con-progress.component';
+import { GoalsComponent } from './goals/goals.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { EnvelopesConProgressComponent } from './envelopes-con-progress/envelope
     FooterComponent,
     EnvelopesComponent,
     EnvelopesProgressComponent,
-    EnvelopesConProgressComponent
+    EnvelopesConProgressComponent,
+    GoalsComponent
   ],
   imports: [
     BrowserModule,
@@ -47,6 +49,10 @@ import { EnvelopesConProgressComponent } from './envelopes-con-progress/envelope
       {
         path: 'envelopes',
         component: EnvelopesComponent
+      },
+      {
+        path: 'goals',
+        component: GoalsComponent
       }
     ])
   ],
