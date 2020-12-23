@@ -26,6 +26,33 @@
     font-size: 2vh;
 }
 
+.green-panel {
+    background: #00c851;
+}
+
+#card2:hover #replies2 {
+    display: none;
+}
+
+#comments2 {
+    opacity: 0;
+}
+
+#card2:hover #comments2 {
+    opacity: 1;
+}
+
+#card2-after {
+    text-align: center;
+    font-size: 2.5vh;
+}
+
+#pfpNavBar {
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+}
+
 
 /* Shadows */
 
