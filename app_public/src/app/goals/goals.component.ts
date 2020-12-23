@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-goals',
@@ -19,6 +20,8 @@ export class GoalsComponent implements OnInit {
   areEqual(val1: String, val2: String): Boolean {
     return val1 === val2;
   }
+
+  faPlusSquare = faPlusSquare;
 
   data = {
     "fileName":"goals",
