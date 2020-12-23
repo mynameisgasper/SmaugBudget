@@ -5,6 +5,7 @@ const Categories = mongoose.model('Categories');
 const multer = require('multer');
 const fs = require('fs');
 const path = require("path");
+const hasher = require('./hasher');
 
 function register(req, res) {
     try {
@@ -36,12 +37,14 @@ function register(req, res) {
             });
 
             promise.then(function(basicCategories) {
+                var hash = hasher.hashPassword(pass1);
+
                 let user = new User({
                     firstname: req.body.nameup,
                     lastname: req.body.surnameup,
                     email: email1,
-                    password: pass1,
-                    passwordSalt: "tempSalt",
+                    password: hash.hash,
+                    passwordSalt: hash.salt,
                     confirmationUrl: urlCode,
                     confirmationCode: confirmationCode,
                     isPremium: false,
