@@ -23,11 +23,6 @@ export class ApiService {
     return this.http.post(url, body).toPromise().then(response => this.response).catch(this.parseError);
   }
 
-  private parseResponse(odgovor: any): Promise<any> {
-    console.log(odgovor)
-    return Promise.apply(odgovor.message || odgovor);
-  }
-
   public converter(currency1: string, currency2: string, value: number, callback): Promise<Converter> {
     const url: string = `${this.apiUrl}/converter`;
     let params = new HttpParams();
@@ -36,6 +31,21 @@ export class ApiService {
     params = params.append('amm1' , value.toString());
 
     return this.http.get(url, {params: params}).toPromise().then(response => callback(response)).catch(this.parseError);
+  }
+
+  public register(firstname: string, lastname: string, email1: string, email2: string, password1: string, password2: string, callback) {
+    const url: string = `${this.apiUrl}/register`;
+
+    const body = {
+      'nameup': firstname,
+      'surnameup': lastname,
+      'email1up': email1,
+      'email2up': email2,
+      'password1up': password1,
+      'password2up': password2,
+    }
+
+    return this.http.post(url, body).toPromise().then(response => callback(response)).catch(this.parseError);
   }
 
   private parseError(error: any): Promise<any> {

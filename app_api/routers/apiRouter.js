@@ -10,9 +10,9 @@ var friendGroup = require('../controllers/friendGroupController');
 
 var express = require('express');
 const converter = require('../controllers/currencyConverter');
-const db = require('../../app_server/controllers/db');
-const { connection } = require('mongoose');
+
 var router = express.Router();
+router.use(express.json());
 
 //Index
 router.all('/', (req, res) => {

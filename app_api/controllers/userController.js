@@ -3,11 +3,8 @@ const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const Categories = mongoose.model('Categories');
 const multer = require('multer');
-const user = require("../models/user");
 const fs = require('fs');
 const path = require("path");
-const categories = require("../models/categories");
-const session = require("express-session");
 
 function register(req, res) {
     try {
@@ -66,7 +63,6 @@ function register(req, res) {
             });
 
         } else {
-            console.log(requestBody);
             res.sendStatus(400);
         }
     } catch (ex) {
