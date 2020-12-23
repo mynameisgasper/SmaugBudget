@@ -56,7 +56,6 @@ function register(req, res) {
                         res.sendStatus(400);
                     } else {
                         var response = {
-                            user: user,
                             urlCode: urlCode
                         }
                         smtp.sendCode(email1, req.body.nameup, req.body.surnameup, urlCode, confirmationCode, req.headers.host);

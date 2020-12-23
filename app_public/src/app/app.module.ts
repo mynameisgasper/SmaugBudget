@@ -27,6 +27,7 @@ import { HistoryComponent } from './history/history.component';
 import { HistoryTableElementComponent } from './history-table-element/history-table-element.component';
 import { EnvelopesEditModalComponent } from './envelopes-edit-modal/envelopes-edit-modal.component';
 import { AccountComponent } from './account/account.component';
+import { ConfirmationComponent } from './confirmation/confirmation.component';
 
 @NgModule({
   declarations: [
@@ -89,6 +90,14 @@ import { AccountComponent } from './account/account.component';
       {
         path: 'account',
         component: AccountComponent
+      },
+      {
+        path: 'confirm/:url',
+        component: ConfirmationComponent
+      },
+      {
+        path: 'confirm/:url/:code',
+        component: ConfirmationComponent
       }
     ])
   ],
