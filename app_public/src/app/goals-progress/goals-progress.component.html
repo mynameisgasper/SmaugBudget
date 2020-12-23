@@ -1,1 +1,87 @@
-<p>goals-progress works!</p>
+<div id="data">
+    <div *ngFor="let item of data.goal;">
+        <div class="row">
+        <!---Row 1 Col 1 --->
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-2 goal-col">
+            <p class="goal-p">{{item.title}}</p>
+        <div class="w-100"></div>
+            <p class="p-date"></p>
+        </div>
+        <!---Row 1 Col 2 --->
+        <div class="col-sm-12 col-md-12 col-lg-6 col-xl-5 goal-col">
+            <!--  Progress Bar --->
+            <div class="progress" style="background-color:{{item.color}};">
+                <div class="progress-bar"  role="progressbar" style="width:{{item.progress}}%; height:auto; background-color:{{item.color}}; border-color:{{item.color}};" aria-valuenow="{{item.progress}}" aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" data-placement="top">
+                    <!--{{item.progress}}%-->
+                </div>
+            </div>
+        </div>
+        <!---  Row 1 Col 3 --->
+        <div class="col-sm-12 col-md-12 col-lg-6 col-xl-5 goal-col">
+            <p class="goal-p">{{item.targetLeft}}<span> EUR<!--{{../currency}}--></span></p>
+            <p style="color: gray; font-family:'Open Sans'; margin-left:2%">
+                of {{item.target}} EUR<!--{{../currency}}-->
+                (<b>{{item.monthlyTarget}} EUR<!--{{../currency}}--></b>/day)
+            </p>
+            <form name="deleteForm" method="post" action="/goals" style="display: inline; text-align: right;">
+                <input type="hidden" value="deleteGoal" name="formType">
+                <button type="submit" class="btn edit-btn" data-toggle="modal"><fa-icon [icon]="faMinusSquare"></fa-icon></button>
+            </form>
+            <button type="button" class="btn edit-btn" data-toggle="modal" router=""><fa-icon [icon]="faPencilAlt"></fa-icon></button>
+            <!--<form name="deleteForm{{_id}}" method="post" action="/goals" style="display: inline; text-align: right;">
+                <input type="hidden" value="deleteGoal" name="formType">
+                <input type="hidden" value="{{_id}}" name="id">
+                <button type="submit" class="btn edit-btn" data-toggle="modal"><i class="fas fa-minus-square"></i></button>
+            </form>
+            <button type="button" class="btn edit-btn" data-toggle="modal" href="#editForm{{_id}}"><i class="fas fa-pencil-alt"></i></button>
+        --></div>
+    </div>
+</div>
+
+
+<!--
+    [attr.data-target]="'#showGroup' +item.id"
+data-target = "#showGroup{{item.id}}"
+    <div class="col-sm-12 col-md-12 col-lg-5 col-xl-6">
+                <div class="progress" style="background-color:{{item.bgColor}};">
+                    <div class="progress-bar"  role="progressbar" style="width:{{item.progress}}%; height:auto; background-color:{{item.color}}; border-color:{{item.color}};" aria-valuenow="{{item.progress}}" aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" data-placement="top">
+                        {{item.progress}}%
+                    </div>
+                </div>
+            </div>
+div class="row" id="goal{{_id}}">
+    Row 1 Col 1 ---
+    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-2 goal-col">
+        <p class="goal-p">{{title}}</p>
+    <div class="w-100"></div>
+    <p class="p-date">{{date}}</p>
+    </div>
+
+    Row 1 Col 2 --
+    <div class="col-sm-12 col-md-12 col-lg-6 col-xl-5 goal-col">
+    --  Progress Bar ---
+    <div class="progress">
+        <div class="progress-bar" role="progressbar" style="width:{{progress}}%; height:auto; background-color:{{color}}; border-color: {{color}};" 
+        aria-valuenow="{{progress}}"; aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" data-placement="top">
+            {{progress}}%
+        </div>
+    </div>
+    </div>
+    <---  Row 1 Col 3 ---
+    <div class="col-sm-12 col-md-12 col-lg-6 col-xl-5 goal-col">
+        <p class="goal-p">{{targetLeft}}<span> {{../currency}}</span>
+            <p style="color: gray; font-family:'Open Sans'; margin-left:2%">
+                of {{target}} {{../currency}}
+                (<b>{{monthlyTarget}} {{../currency}}</b>/day)
+            </p>
+        </p>
+        <form name="deleteForm{{_id}}" method="post" action="/goals" style="display: inline; text-align: right;">
+            <input type="hidden" value="deleteGoal" name="formType">
+            <input type="hidden" value="{{_id}}" name="id">
+            <button type="submit" class="btn edit-btn" data-toggle="modal"><i class="fas fa-minus-square"></i></button>
+         </form>
+        <button type="button" class="btn edit-btn" data-toggle="modal" href="#editForm{{_id}}"><i class="fas fa-pencil-alt"></i></button>
+    </div>
+</div>
+
+-->

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { faMinusSquare, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-goals-progress-bar',
@@ -11,5 +12,11 @@ export class GoalsProgressComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  faMinusSquare = faMinusSquare;
+  faPencilAlt = faPencilAlt
+
+  @Input()
+  data:any
 
 }
