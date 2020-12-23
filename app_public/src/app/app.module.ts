@@ -23,6 +23,8 @@ import { DbComponent } from './db/db.component';
 import { UtilitiesComponent } from './utilities/utilities.component';
 import { UtilityTableElementComponent } from './utility-table-element/utility-table-element.component';
 import { UtilitiesEditModalComponent } from './utilities-edit-modal/utilities-edit-modal.component';
+import { HistoryComponent } from './history/history.component';
+import { HistoryTableElementComponent } from './history-table-element/history-table-element.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,9 @@ import { UtilitiesEditModalComponent } from './utilities-edit-modal/utilities-ed
     GoalsProgressComponent,
     UtilitiesComponent,
     UtilityTableElementComponent,
-    UtilitiesEditModalComponent
+    UtilitiesEditModalComponent,
+    HistoryComponent,
+    HistoryTableElementComponent
   ],
   imports: [
     BrowserModule,
@@ -73,6 +77,10 @@ import { UtilitiesEditModalComponent } from './utilities-edit-modal/utilities-ed
       {
         path: 'utilities',
         component: UtilitiesComponent
+      },
+      {
+        path: 'history',
+        component: HistoryComponent
       }
     ])
   ],
