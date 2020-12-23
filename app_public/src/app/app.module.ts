@@ -1,8 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { ChartsModule } from 'ng2-charts';
+import { HttpClientModule } from '@angular/common/http';
 
+import { ChartsModule } from 'ng2-charts';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 
 import { HomeComponent } from './home/home.component';
@@ -45,6 +46,7 @@ import { UtilitiesEditModalComponent } from './utilities-edit-modal/utilities-ed
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     ChartsModule,
     FontAwesomeModule,
     RouterModule.forRoot([
@@ -74,13 +76,7 @@ import { UtilitiesEditModalComponent } from './utilities-edit-modal/utilities-ed
       }
     ])
   ],
-  exports: [
-    CardComponent, 
-    WelcomeComponent, 
-    AlertComponent, 
-    HeaderComponent,
-    FooterComponent
-  ],
+  exports: [],
   providers: [],
   bootstrap: [FrameComponent]
 })

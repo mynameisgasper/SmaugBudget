@@ -1,19 +1,13 @@
 <div class="container">   
     <div class="dbRow col-12 col-sm-12 col-md-6 col-lg-6 col-lg-6 col-xl-6">
-        <form name="deleteForm" method="post" action="/db">
-            <input type="hidden" value="removeAllDbData" name="formType">
-            <button type="submit" class="btn btn-danger">Izbriši vse podatke</button>   
-        </form>
+        <button class="btn btn-danger" (click)="deleteData()">Izbriši vse podatke</button>   
     </div>
     
     <div class="info-db">
         <p></p>
     </div>
     <div class="dbRow col-12 col-sm-12 col-md-6 col-lg-6 col-lg-6 col-xl-6">
-        <form name="loadUser" method="post" action="/db">
-            <input type="hidden" value="createDummyAccounts" name="formType">
-            <button type="submit" class="btn btn-success">Naloži testne podatke</button>
-        </form>
+        <button class="btn btn-success" (click)="loadData()">Naloži testne podatke</button>
     </div>
     <div class="info-db">
         <p>Login Email 1: basic@smaug.com</p>
@@ -27,6 +21,4 @@
     <div class="info-db">
         <p>Login Password 1: Premiumpass1 </p>
     </div>
-    
-    
 </div>

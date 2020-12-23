@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../api.service'
 
 @Component({
   selector: 'app-db',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DbComponent implements OnInit {
 
-  constructor() { }
+  constructor(private api: ApiService) { }
 
   ngOnInit(): void {
   }
 
+  loadData(): void {
+    
+  }
+
+  deleteData(): void {
+    this.api.deleteData();
+  }
 }
