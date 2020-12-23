@@ -43,6 +43,7 @@ export class GoalsComponent implements OnInit {
     "appearance":"Appearance",
     "light":"Light",
     "dark":"Dark",
+
     "goal":[{
       "_id":"5fc600b4507a6800112af239",
       "title":"Playstation 5",
@@ -78,6 +79,7 @@ export class GoalsComponent implements OnInit {
       "month":"07",
       "day":"28"
     }],
+
     "card":[{
       "id":1,
       "title":"Goals Total",
@@ -92,6 +94,7 @@ export class GoalsComponent implements OnInit {
       "icon":"faCheckCircle",
       "comment":"Headphones completed!"
     }],
+
     "categories":[{
       "_id":"5fc600b4507a6800112af1d5",
       "category":"Car"
@@ -123,6 +126,7 @@ export class GoalsComponent implements OnInit {
       "_id":"5fc600b4507a6800112af1de",
       "category":"Electronics"
     }],
+    
     "currency":"EUR"
   }
 }
