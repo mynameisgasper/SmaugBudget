@@ -26,6 +26,7 @@ import { UtilitiesEditModalComponent } from './utilities-edit-modal/utilities-ed
 import { HistoryComponent } from './history/history.component';
 import { HistoryTableElementComponent } from './history-table-element/history-table-element.component';
 import { EnvelopesEditModalComponent } from './envelopes-edit-modal/envelopes-edit-modal.component';
+import { AccountComponent } from './account/account.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { EnvelopesEditModalComponent } from './envelopes-edit-modal/envelopes-ed
     UtilitiesEditModalComponent,
     HistoryComponent,
     HistoryTableElementComponent,
-    EnvelopesEditModalComponent
+    EnvelopesEditModalComponent,
+    AccountComponent
   ],
   imports: [
     BrowserModule,
@@ -83,6 +85,10 @@ import { EnvelopesEditModalComponent } from './envelopes-edit-modal/envelopes-ed
       {
         path: 'history',
         component: HistoryComponent
+      },
+      {
+        path: 'account',
+        component: AccountComponent
       }
     ])
   ],

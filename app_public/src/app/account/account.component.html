@@ -4,24 +4,24 @@
         <div class="w-25 toast-front">
             <div class="toast ml-auto tt1" role="alert" data-delay="1000" data-autohide="false">
                 <div class="toast-header">
-                    <strong class="mr-auto text-primary">{{HINT}}</strong>
+                    <strong class="mr-auto text-primary">{{data.HINT}}</strong>
                     <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
                 <div class="toast-body">
-                    {{nameHint}} 
+                    {{data.nameHint}} 
                 </div>
             </div>
             <div class="toast ml-auto tt2" role="alert" data-delay="1000" data-autohide="false">
                 <div class="toast-header">
-                    <strong class="mr-auto text-primary">{{HINT}}</strong>
+                    <strong class="mr-auto text-primary">{{data.HINT}}</strong>
                     <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
                 <div class="toast-body">
-                    {{surnameHint}}
+                    {{data.surnameHint}}
                 </div>
             </div>        
         </div>
@@ -29,39 +29,39 @@
     <div class="container" id="accountBody-container">  
     
     <div id="accountBody"  class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-        <h2>{{title}}</h2>
+        <h2>{{data.title}}</h2>
         <form name="userInfo" method="post" action="/account" onsubmit="return disableButton()">
         <div class="row">
             <div class="del-margin col-sm-12 col-md-9 col-lg-9 col-xl-9">
             <div class="row">
                 <input type="hidden" name="formType" value="changeName">
-                <label id="nameInputLbl" for="nameInput" class="col-sm-3 col-md-3 col-lg-2 col-xl-2">{{firstName}}:</label>
-                <input type="text" id="nameInput" name="firstName" placeholder="{{firstName}}" value="{{data_firstName}}" class="form-control col-sm-3 col-md-3 col-lg-3 col-xl-3" onfocusout="nameRegex()" required="required">
+                <label id="nameInputLbl" for="nameInput" class="col-sm-3 col-md-3 col-lg-2 col-xl-2">{{data.firstName}}:</label>
+                <input type="text" id="nameInput" name="firstName" placeholder="{{data.firstName}}" value="{{data.data_firstName}}" class="form-control col-sm-3 col-md-3 col-lg-3 col-xl-3" onfocusout="nameRegex()" required="required">
             
-                <label id="lastnameInputLbl" for="lastnameInput" class="col-sm-3 col-md-3 col-lg-4 col-xl-4">{{lastName}}:</label>
-                <input type="text" id="lastnameInput" name="lastName" placeholder="{{lastName}}" value="{{data_lastName}}" class="form-control col-sm-3 col-md-3 col-lg-3 col-xl-3" onfocusout="surnameRegex()" required="required">
+                <label id="lastnameInputLbl" for="lastnameInput" class="col-sm-3 col-md-3 col-lg-4 col-xl-4">{{data.lastName}}:</label>
+                <input type="text" id="lastnameInput" name="lastName" placeholder="{{data.lastName}}" value="{{data.data_lastName}}" class="form-control col-sm-3 col-md-3 col-lg-3 col-xl-3" onfocusout="surnameRegex()" required="required">
             </div>
             <div class="row">
-                <label id="passwordChangeLbl" for="passwordChange" class="col-sm-3 col-md-3 col-lg-2 col-xl-2">{{password}}:</label>
-                <button id ="passwordChange" type="button" class="btn btn-primary" data-toggle="modal" data-target="#changePassowrd">{{changePassword}}</button>
+                <label id="passwordChangeLbl" for="passwordChange" class="col-sm-3 col-md-3 col-lg-2 col-xl-2">{{data.password}}:</label>
+                <button id ="passwordChange" type="button" class="btn btn-primary" data-toggle="modal" data-target="#changePassowrd">{{data.changePassword}}</button>
             </div>
             <div class="row">
-                <label id="emailInputLbl" for="emailInput" class="col-sm-3 col-md-3 col-lg-2 col-xl-2">{{email}}:</label>
-                <input type="email" id="emailInput" name="email" value="{{data_email}}"  class="form-control col-sm-9 col-md-9 col-lg-10 col-xl-10" disabled>
+                <label id="emailInputLbl" for="emailInput" class="col-sm-3 col-md-3 col-lg-2 col-xl-2">{{data.email}}:</label>
+                <input type="email" id="emailInput" name="email" value="{{data.data_email}}"  class="form-control col-sm-9 col-md-9 col-lg-10 col-xl-10" disabled>
             </div>
             </div>
             <div id="pfpImg" class="del-margin col-sm-12 col-md-3 col-lg-3 col-xl-3">
             <a data-toggle="modal" data-target="#changePfp" aria-label="Change Profile Picture">
                 <div id="profile-pic" class="profile-pic" style="background-image: url('/api/getPfp')" >
                 <span class="fas fa-camera"></span>
-                <span>{{changeImage}}</span>
+                <span>{{data.changeImage}}</span>
                 </div>
             </a>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-            <button type="submit" id="userInfoButton" onclick="disableButton()" class="btn btn-primary" style="float: right;">{{saveChanges}}</button>
+            <button type="submit" id="userInfoButton" onclick="disableButton()" class="btn btn-primary" style="float: right;">{{data.saveChanges}}</button>
             </div>
         </div>
         </form>
@@ -70,19 +70,19 @@
 
     <div class="container" id="appSettings-container">  
     <div id="appSettings"  class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-        <h2>{{application}}</h2>
+        <h2>{{data.application}}</h2>
         <div class="row">
-            <label id="darkmodeEnableLbl" for="darkmodeEnable" class="col-5 col-sm-4 col-md-4 col-lg-4 col-xl-4" style="padding-right: 0px;">{{darkMode}}:</label>
+            <label id="darkmodeEnableLbl" for="darkmodeEnable" class="col-5 col-sm-4 col-md-4 col-lg-4 col-xl-4" style="padding-right: 0px;">{{data.darkMode}}:</label>
             <div class="custom-control custom-switch">
             <input type="checkbox" class="custom-control-input" id="darkmodeEnable">
             <label class="custom-control-label" for="darkmodeEnable"></label>
             </div>
         </div>
         <div class="row">
-            <label id="languageChangeLbl" for="languageChange" class="col-5 col-sm-4 col-md-4 col-lg-4 col-xl-4">{{language}}:</label>
+            <label id="languageChangeLbl" for="languageChange" class="col-5 col-sm-4 col-md-4 col-lg-4 col-xl-4">{{data.language}}:</label>
             <div class="dropdown col-sm-4 col-md-4 col-lg-4 col-xl-4">
             <button class="btn btn-secondary dropdown-toggle col-sm-12 col-md-12 col-lg-12 col-xl-12" type="button" id="languageChange" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                {{selLanguage}}
+                {{data.selLanguage}}
             </button>
             <div class="dropdown-menu" aria-labelledby="languageChange">
                 <a class="dropdown-item" onclick="changeLanguage('English')">English</a>
@@ -91,15 +91,15 @@
             </div>
         </div>
         <div class="row">
-        <label id="currencyChangeLbl" for="currencyChange" class="col-5 col-sm-4 col-md-4 col-lg-4 col-xl-4">{{currency}}:</label>
+        <label id="currencyChangeLbl" for="currencyChange" class="col-5 col-sm-4 col-md-4 col-lg-4 col-xl-4">{{data.currency}}:</label>
         <div class="dropdown col-sm-4 col-md-4 col-lg-4 col-xl-4">
             <button class="btn btn-secondary dropdown-toggle col-sm-12 col-md-12 col-lg-12 col-xl-12" type="button" id="currencyChange" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            {{data_defCurrency}}
+            {{data.data_defCurrency}}
             </button>
             <div class="dropdown-menu dropdown-menu-right scrollable-menu" aria-labelledby="currencyChange">
-            {{#each data_currency}}
-            <a class="dropdown-item" onclick="changeCurrency('{{key}}')">{{name}} ({{key}})</a>
-            {{/each}}
+            
+            <a *ngFor="let item of data.data_currency" class="dropdown-item" (click)="this.changeCurrency(item.key)">{{item.name}} ({{item.key}})</a>
+            
             </div>
         </div>
         </div>
@@ -109,28 +109,27 @@
     <div class="container" id="categoriesColor-container">
     <div id="categories-setting"  class="col-sm-12 col-md-12 col-lg-12 col-xl-12" >
         <h2>Categories</h2>
-        {{#each categories}}
-        <form  name="editColor{{_id}}" method="post" action="/account">
-            <div class="category-row col-5 col-sm-6 col-md-5 col-lg-4 col-xl-4">
-            <label for="color-picker{{_id}}" style=" text-align:left;">{{name}}</label>
-            </div>
-            <div class="category-row col-3 col-sm-5 col-md-5 col-lg-3 col-xl-3" style="text-align: center;">
-                <input type="color" class="color-picker" name="colorPicker{{id}}" value="{{hexColor}}">
-            </div>
-            <div class="category-row col-3 col-sm-12 col-md-1 col-lg-4 col-xl-4" style="text-align: right;">
-            <button type="submit" class="btn btn-primary"><i class="fas fa-pencil-alt"></i></button>
-            <button type="submit" form="deleteColor{{_id}}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
-            <input type="hidden" name="id" value="{{_id}}" />
-            <input type="hidden" name="formType" value="changeColorCategory" />
-            </div>
-        </form>
-        <form id="deleteColor{{_id}}" name="deleteColor{{_id}}" method="post" action="/account" onsubmit="return confirm('Deleting category will remove all related envelopes and goals!');">
-            <input type="hidden" name="formType" value="deleteCategory">
-            <input type="hidden" name="id" value="{{_id}}">
-        </form>
+        <div *ngFor="let item of data.data_categories">
+            <form  name="editColor{{item.id}}" method="post" action="/account">
+                <div class="category-row col-5 col-sm-6 col-md-5 col-lg-4 col-xl-4">
+                <label for="color-picker{{item.id}}" style=" text-align:left;">{{item.name}}</label>
+                </div>
+                <div class="category-row col-3 col-sm-5 col-md-5 col-lg-3 col-xl-3" style="text-align: center;">
+                    <input type="color" class="color-picker" name="colorPicker{{item.id}}" value="{{item.hexColor}}">
+                </div>
+                <div class="category-row col-3 col-sm-12 col-md-1 col-lg-4 col-xl-4" style="text-align: right;">
+                <button type="submit" class="btn btn-primary"><i class="fas fa-pencil-alt"></i></button>
+                <button type="submit" [attr.form]="'deleteColor' + item.id" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                <input type="hidden" name="id" value="{{item.id}}" />
+                <input type="hidden" name="formType" value="changeColorCategory" />
+                </div>
+            </form>
+            <form id="deleteColor{{item.id}}" name="deleteColor{{item.id}}" method="post" action="/account" onsubmit="return confirm('Deleting category will remove all related envelopes and goals!');">
+                <input type="hidden" name="formType" value="deleteCategory">
+                <input type="hidden" name="id" value="{{item.id}}">
+            </form>
+        </div>
         
-        
-        {{/each}}
     </div>
     </div>
     <!-- End AccountBody -->
@@ -141,24 +140,24 @@
         <div class="w-25 toast-front">
             <div class="toast ml-auto tt3" role="alert" data-delay="1000" data-autohide="false">
                 <div class="toast-header">
-                    <strong class="mr-auto text-primary">{{HINT}}</strong>
+                    <strong class="mr-auto text-primary">{{data.HINT}}</strong>
                     <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
                 <div class="toast-body">
-                    {{passwordHint}}
+                    {{data.passwordHint}}
                 </div>
             </div>
             <div class="toast ml-auto tt4" role="alert" data-delay="1000" data-autohide="false">
                 <div class="toast-header">
-                    <strong class="mr-auto text-primary">{{HINT}}</strong>
+                    <strong class="mr-auto text-primary">{{data.HINT}}</strong>
                     <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
                 <div class="toast-body">
-                    {{passwordNoMatch}}
+                    {{data.passwordNoMatch}}
                 </div>
             </div>        
         </div>
@@ -171,28 +170,28 @@
         <input type="hidden" name="newPassword2" id="newPasswordHash2" value=""/>
         <div class="modal-content">
             <div class="modal-header">
-            <h5 class="modal-title">{{changePassword}}</h5>
+            <h5 class="modal-title">{{data.changePassword}}</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
             </div>
             <div class="modal-body">
             <div class="row">
-                <label id="oldPasswordLbl" for="oldPassword" class="col-sm-4 col-md-4 col-lg-4 col-xl-4">{{oldPassword}}:</label>
-                <input type="password" id="oldPassword" placeholder="{{oldPassword}}"  class="form-control col-sm-7 col-md-7 col-lg-7 col-xl-7">
+                <label id="oldPasswordLbl" for="oldPassword" class="col-sm-4 col-md-4 col-lg-4 col-xl-4">{{data.oldPassword}}:</label>
+                <input type="password" id="oldPassword" placeholder="{{data.oldPassword}}"  class="form-control col-sm-7 col-md-7 col-lg-7 col-xl-7">
             </div>
             <div class="row">
-                <label id="newPasswordLbl" for="newPassword" class="col-sm-4 col-md-4 col-lg-4 col-xl-4">{{newPassword}}:</label>
-                <input type="password" id="newPassword" onfocusout="passwordStrength(this)" placeholder="{{newPassword}}"  class="form-control col-sm-7 col-md-7 col-lg-7 col-xl-7">
+                <label id="newPasswordLbl" for="newPassword" class="col-sm-4 col-md-4 col-lg-4 col-xl-4">{{data.newPassword}}:</label>
+                <input type="password" id="newPassword" onfocusout="passwordStrength(this)" placeholder="{{data.newPassword}}"  class="form-control col-sm-7 col-md-7 col-lg-7 col-xl-7">
             </div>
             <div class="row">
-                <label id="confirmPasswordLbl" for="confirmPassword" class="col-sm-4 col-md-4 col-lg-4 col-xl-4">{{confirmPassword}}:</label>
-                <input type="password" id="confirmPassword" onfocusout="passwordCheckSignUp()" placeholder="{{confirmPassword}}"  class="form-control col-sm-7 col-md-7 col-lg-7 col-xl-7">
+                <label id="confirmPasswordLbl" for="confirmPassword" class="col-sm-4 col-md-4 col-lg-4 col-xl-4">{{data.confirmPassword}}:</label>
+                <input type="password" id="confirmPassword" onfocusout="passwordCheckSignUp()" placeholder="{{data.confirmPassword}}"  class="form-control col-sm-7 col-md-7 col-lg-7 col-xl-7">
             </div>
             </div>
             <div class="modal-footer">
-            <button type="submit" class="btn btn-primary" onclick="passwordSubmit();">{{saveChanges}}</button>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">{{close}}</button>
+            <button type="submit" class="btn btn-primary" onclick="passwordSubmit();">{{data.saveChanges}}</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">{{data.close}}</button>
             </div>
         </div>
         </form>
@@ -205,7 +204,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title">{{changeProfilePicture}}</h5>
+            <h5 class="modal-title">{{data.changeProfilePicture}}</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
@@ -213,14 +212,14 @@
         <div class="modal-body">
             <form name="userPfp" id="userPfp" method="post" action="/api/uploadPfp">
             <div class="form-group">
-                <label for="addPfp">{{dragAndDropOr}}:</label>
+                <label for="addPfp">{{data.dragAndDropOr}}:</label>
                 <input type="file" name="image" class="form-control-file" id="addPfp" accept="image/*">
             </div>
             </form>
         </div>
         <div class="modal-footer">
-            <button type="button" id="submitPfp" class="btn btn-primary" disabled>{{saveChanges}}</button>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">{{close}}</button>
+            <button type="button" id="submitPfp" class="btn btn-primary" disabled>{{data.saveChanges}}</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">{{data.close}}</button>
         </div>
         </div>
     </div>
