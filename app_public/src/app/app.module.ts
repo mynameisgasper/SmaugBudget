@@ -19,6 +19,9 @@ import { EnvelopesConProgressComponent } from './envelopes-con-progress/envelope
 import { GoalsComponent } from './goals/goals.component';
 import { GoalsProgressComponent } from './goals-progress/goals-progress.component';
 import { DbComponent } from './db/db.component';
+import { UtilitiesComponent } from './utilities/utilities.component';
+import { UtilityTableElementComponent } from './utility-table-element/utility-table-element.component';
+import { UtilitiesEditModalComponent } from './utilities-edit-modal/utilities-edit-modal.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +38,10 @@ import { DbComponent } from './db/db.component';
     EnvelopesProgressComponent,
     EnvelopesConProgressComponent,
     GoalsComponent,
-    GoalsProgressComponent
+    GoalsProgressComponent,
+    UtilitiesComponent,
+    UtilityTableElementComponent,
+    UtilitiesEditModalComponent
   ],
   imports: [
     BrowserModule,
@@ -61,6 +67,10 @@ import { DbComponent } from './db/db.component';
       {
         path: 'goals',
         component: GoalsComponent
+      },
+      {
+        path: 'utilities',
+        component: UtilitiesComponent
       }
     ])
   ],
