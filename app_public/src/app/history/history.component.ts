@@ -293,6 +293,14 @@ export class HistoryComponent implements OnInit {
       "currency":"EUR",
       "color":"rgb(191, 33, 194)"
     }],
-    "currency":"EUR"
+    "currency":"EUR",
+    "chartData1": [310],
+    "chartColors1": [{backgroundColor: ['rgb(50, 168, 156)']}],
+    "chartLabels1": ["Car"],
+    "chartType1": "doughnut",
+    "chartData2": [310],
+    "chartColors2": [{backgroundColor: ['rgb(50, 168, 156)']}],
+    "chartLabels2": ["Car"],
+    "chartType2": "line"
   }
 }

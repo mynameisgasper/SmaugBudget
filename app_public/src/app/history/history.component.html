@@ -23,12 +23,22 @@
 
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-10 col-xl-8 goal-col" style="margin: 0 auto">
-                <canvas id="doughnut-canvas"></canvas>
+                <canvas id="doughnut-canvas" baseChart
+                    [data]="data.chartData1"
+                    [colors]="data.chartColors1"
+                    [labels]="data.chartLabels1"
+                    [chartType]="data.chartType1">
+                </canvas>
                 
             </div>
             <div class="col-sm-12 col-md-12 col-lg-10 col-xl-8 goal-col" style="margin: 0 auto; margin-top:5%;">
                 
-                <canvas id="line-canvas"></canvas>
+                <canvas id="line-canvas" baseChart
+                    [data]="data.chartData2"
+                    [colors]="data.chartColors2"
+                    [labels]="data.chartLabels2"
+                    [chartType]="data.chartType2">
+                </canvas>
             </div>
         </div>
         <div class="row">

@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
+import { ApiService } from '../api.service';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-utilities',
@@ -8,11 +11,27 @@ import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 })
 export class UtilitiesComponent implements OnInit {
 
-    faPlusSquare = faPlusSquare;
+  faPlusSquare = faPlusSquare;
   
-    constructor() { }
+  @ViewChild('output123') output: ElementRef;
+
+  constructor(
+    private api: ApiService,
+    ) {}
 
   ngOnInit(): void {
+  }
+
+  converter(currency1: string, currency2: string, value: number): void {
+    this.api.converter(currency1, currency2, value, (rez) =>{
+
+        this.output.nativeElement.value = rez.value
+    });
+    /*
+    this.service.getData()
+            .subscribe(data => {
+                console.log('data', data);
+            });*/
   }
 
   data = {

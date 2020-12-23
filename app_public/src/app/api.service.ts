@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Converter } from './converter';
 @Injectable({
   providedIn: 'root'
 })
@@ -26,6 +26,16 @@ export class ApiService {
   private parseResponse(odgovor: any): Promise<any> {
     console.log(odgovor)
     return Promise.apply(odgovor.message || odgovor);
+  }
+
+  public converter(currency1: string, currency2: string, value: number, callback): Promise<Converter> {
+    const url: string = `${this.apiUrl}/converter`;
+    let params = new HttpParams();
+    params = params.append('curr1', currency1);
+    params = params.append('curr2', currency2);
+    params = params.append('amm1' , value.toString());
+
+    return this.http.get(url, {params: params}).toPromise().then(response => callback(response)).catch(this.parseError);
   }
 
   private parseError(error: any): Promise<any> {

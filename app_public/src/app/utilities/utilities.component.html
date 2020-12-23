@@ -38,7 +38,7 @@
             <div class="col-md-0 col-sm-0 col-xl-3 col-lg-2"></div>
             <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
                 <label for="curr1">From</label>
-                <select class="form-control curr1" id="curr1">
+                <select #curr1 class="form-control curr1" id="curr1">
                     <option value="EUR" selected="selected" label="Euro">EUR</option>
                     <option value="USD" label="US dollar">USD</option>
                     <option value="JPY" label="Japanese yen">JPY</option>
@@ -79,7 +79,7 @@
             </div>
             <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
                 <label for="curr2">To</label>
-                <select class="form-control curr2" id="curr2">
+                <select #curr2 class="form-control curr2" id="curr2">
                     <option value="EUR" label="Euro">EUR</option>
                     <option value="USD" selected="selected" label="US dollar">USD</option>
                     <option value="JPY" label="Japanese yen">JPY</option>
@@ -120,23 +120,21 @@
             </div>
             <div class="col-md-0 col-sm-0 col-xl-3 col-lg-2"></div>
         </div>
-        <form name="currencyConverter" method="get">
-            <div class="row">
-                <div class="col-md-0 col-sm-0 col-xl-3 col-lg-2"></div>
-                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
-                    <input type="number" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" id="Amount" class="form-control" placeholder="Amount to convert">
-                </div>
-                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
-                    <output type="number" id="Amount2" class="form-control" placeholder="Amount converted"></output>
-                </div>
-                <div class="col-md-0 col-sm-0 col-xl-3 col-lg-2"></div>
+        <div class="row">
+            <div class="col-md-0 col-sm-0 col-xl-3 col-lg-2"></div>
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
+                <input type="number" #value onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" id="Amount" class="form-control" placeholder="Amount to convert">
             </div>
-            <div class="row3">
-                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                    <button type="button" class="btn btn-primary" id="convert" onclick="convertCurrency();">Convert</button>
-                </div>
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
+                <output #output123 type="number" id="Amount2" class="form-control" placeholder="Amount converted" ></output>
             </div>
-        </form>
+            <div class="col-md-0 col-sm-0 col-xl-3 col-lg-2"></div>
+        </div>
+        <div class="row3">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <button type="button" class="btn btn-primary" id="convert" (click)="converter(curr1.value, curr2.value, value.value)">Convert</button>
+            </div>
+        </div>
     </div>
     <!-- showGroup -->
     <app-utilities-edit-modal *ngFor="let item of data.Friend" [Friend]='item'></app-utilities-edit-modal>
