@@ -14,7 +14,7 @@ export class DbComponent implements OnInit {
   }
 
   loadData(): void {
-    
+    this.api.loadData();
   }
 
   deleteData(): void {

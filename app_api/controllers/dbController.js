@@ -82,7 +82,7 @@ function removeAllDbData(requestBody, res) {
 
 
 
-        res.sendStatus(204);
+        res.status(204).json();
     } catch (ex) {
         console.log(ex);
         res.sendStatus(500);
@@ -238,7 +238,7 @@ function createDummyAccounts(requestBody, res) {
         });
         user.save();
         userPremium.save();
-        res.sendStatus(200);
+        res.status(200).json();
     } catch (ex) {
         console.log(ex);
     }
