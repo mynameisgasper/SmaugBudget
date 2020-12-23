@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
-import accountJs from './account.js';
 
 @Component({
   selector: 'app-account',
