@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { DOCUMENT } from '@angular/common'
-import {Router} from "@angular/router"
+import { Router } from "@angular/router"
 import { ApiService } from '../api.service'
 
 @Component({
@@ -20,16 +20,21 @@ export class HomeComponent implements OnInit {
     if (firstname && lastname && email1 && email1 === email2 && password1 && password1 === password2) {
       this.api.register(firstname, lastname, email1, email2, password1, password2, (response) => {
         
-        var elementList = this.document.querySelectorAll('.modal-backdrop');
-        for (let i = 0; i < elementList.length; i++) {
-          elementList[i].removeAttribute('class');
+        try {
+          var elementList = this.document.querySelectorAll('.modal-backdrop');
+          for (let i = 0; i < elementList.length; i++) {
+            elementList[i].removeAttribute('class');
+          }
         }
-
-        var elementList = this.document.querySelectorAll('.modal-open');
-        for (let i = 0; i < elementList.length; i++) {
-          document.removeChild(elementList[i])
+        catch {}
+        
+        try {
+          var elementList = this.document.querySelectorAll('.modal-open');
+          for (let i = 0; i < elementList.length; i++) {
+            document.removeChild(elementList[i])
+          }
         }
-
+        catch {}
         
         this.router.navigate(['/confirm', response.urlCode]);
       });

@@ -48,6 +48,14 @@ export class ApiService {
     return this.http.post(url, body).toPromise().then(response => callback(response)).catch(this.parseError);
   }
 
+  public confirm(urlCode: string, code: string, callback, error) {
+    const url: string = `${this.apiUrl}/confirm/${urlCode}/${code}`;
+    const body = {}
+
+    return this.http.post(url, body).toPromise().then(response => callback(response)).catch(error);
+
+  }
+
   private parseError(error: any): Promise<any> {
     console.error('An error has occured', error);
     return Promise.reject(error.message || error);

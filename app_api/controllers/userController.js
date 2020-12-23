@@ -152,17 +152,33 @@ function confirm(req, res) {
         var code = req.params.code;
 
         User.findOne({ 'confirmationUrl': url, 'confirmationCode': code }, function name(err, user) {
-            if (err || user == null) {
-                res.sendStatus(404);
+            if (err) {
+                var response = {
+                    status: 'server error'
+                }
+                res.status(500).json(response);
+            }
+            else if (err || user == null) {
+                var response = {
+                    status: 'not found'
+                }
+                res.status(404).json(response);
             } else {
                 user.confirmationUrl = null;
                 user.confirmationCode = null;
                 user.save();
-                res.sendStatus(200);
+
+                var response = {
+                    status: 'success'
+                }
+                res.status(200).json(response);
             }
         });
     } catch (ex) {
-        res.sendStatus(500);
+        var response = {
+            status: 'server error'
+        }
+        res.status(500).json(response);
     }
 }
 

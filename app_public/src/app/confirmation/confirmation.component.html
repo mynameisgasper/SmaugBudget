@@ -1,5 +1,8 @@
 <main> 
     <div class="container" id="darkModeContainerFullWidth">
+        <div class="alert alert-danger" role="alert" id="alert" style="display: none;">
+            <b>Code is incorrect!</b>
+        </div>          
         <div class="row h-50">
             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 align-self-end">
                 <div class="text1">
@@ -10,10 +13,10 @@
         </div>
         <div class="row h-50">
             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 align-self-start">
-                <input type="text" class="form-control" id="Verification" name="Verification" placeholder="Enter verification code" required="required">	
+                <input #code type="text" class="form-control" id="Verification" name="Verification" placeholder="Enter verification code" required="required">	
                 <br />
                 <div class="spodnji">
-                    <button class="btn btn-primary btn-lg gumbek" id="darkModeButton" type="submit" onclick="buildAction()">Submit</button>
+                    <a class="btn btn-primary btn-lg gumbek" id="darkModeButton" (click)="submit(code.value)">Submit</a>
                 </div>
             </div>
         </div>
