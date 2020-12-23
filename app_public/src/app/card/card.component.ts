@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { IconDefinition, faBug, faUniversity, faCoins, faPiggyBank, faEnvelope, faExclamationTriangle, faRadiation } from '@fortawesome/free-solid-svg-icons';
+import { IconDefinition, faBug, faUniversity, faCoins, faPiggyBank, faEnvelope, faExclamationTriangle, faRadiation, faBullseye, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'card',
@@ -31,6 +31,8 @@ export class CardComponent implements OnInit {
     else if (icon == 'faEnvelope') return faEnvelope;
     else if (icon == 'faExclamationTriangle') return faExclamationTriangle;
     else if (icon == 'faRadiation') return faRadiation;
+    else if (icon == 'faBullseye') return faBullseye;
+    else if (icon == 'faCheckCircle') return faCheckCircle;
     else return faBug;
   }
 

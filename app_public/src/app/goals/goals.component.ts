@@ -80,13 +80,13 @@ export class GoalsComponent implements OnInit {
       "title":"Goals Total",
       "color":"bg-primary",
       "count":2,
-      "icon":"fa-bullseye"
+      "icon":"faBullseye"
     },{
       "id":2,
       "title":"Goals Completed",
       "color":"green-panel",
       "count":1,
-      "icon":"fa-check-circle",
+      "icon":"faCheckCircle",
       "comment":"Headphones completed!"
     }],
     "categories":[{
