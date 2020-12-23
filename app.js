@@ -4,6 +4,7 @@ require('./app_api/models/db');
 const path = require('path');
 var express = require('express');
 var exphbs = require('express-handlebars');
+var cors = require('cors')
 var helpers = require('./app_server/views/helpers/hbsh');
 const session = require('express-session');
 var app = express();
@@ -30,6 +31,8 @@ var hbs = exphbs.create({
 app.set('views', path.join('./app_server/views'));
 app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
+
+app.use(cors());
 
 //Cookies
 app.use(session({
