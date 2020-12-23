@@ -18,17 +18,17 @@
                 <p *ngIf="isLow(item.progress)" class="info">
                     <span>{{item.spent}} {{data.currency}}</span> of <span>{{item.budget}} {{data.currency}}</span>
                     <button type="submit" class="btn edit-btn" data-toggle="modal"><fa-icon [icon]="faMinusSquare"></fa-icon></button>    
-                    <button type="button" class="btn edit-btn" data-toggle="modal" href="#editForm{{item._id}}" role="button"><fa-icon [icon]="faPencilAlt"></fa-icon></button>
+                    <button type="button" class="btn edit-btn" data-toggle="modal" [attr.data-target]="'#editForm' +item._id" role="button"><fa-icon [icon]="faPencilAlt"></fa-icon></button>
                 </p>
                 <p *ngIf="isMedium(item.progress)" class="info" style="color:#ff7b00">
                     <span>{{item.spent}} {{data.currency}}</span> of <span>{{item.budget}} {{data.currency}}</span>
                     <button type="submit" class="btn edit-btn" data-toggle="modal"><fa-icon [icon]="faMinusSquare"></fa-icon></button>    
-                    <button type="button" class="btn edit-btn" data-toggle="modal" href="#editForm{{item._id}}" role="button"><fa-icon [icon]="faPencilAlt"></fa-icon></button>
+                    <button type="button" class="btn edit-btn" data-toggle="modal" [attr.data-target]="'#editForm' +item._id" role="button"><fa-icon [icon]="faPencilAlt"></fa-icon></button>
                 </p>
                 <p *ngIf="isHigh(item.progress)" class="info" style="color:red">
                     <span>{{item.spent}} {{data.currency}}</span> of <span>{{item.budget}} {{data.currency}}</span>
                     <button type="submit" class="btn edit-btn" data-toggle="modal"><fa-icon [icon]="faMinusSquare"></fa-icon></button>    
-                    <button type="button" class="btn edit-btn" data-toggle="modal" href="#editForm{{item._id}}" role="button"><fa-icon [icon]="faPencilAlt"></fa-icon></button>
+                    <button type="button" class="btn edit-btn" data-toggle="modal" [attr.data-target]="'#editForm' +item._id" role="button"><fa-icon [icon]="faPencilAlt"></fa-icon></button>
                 </p>
             </div>
         </div>

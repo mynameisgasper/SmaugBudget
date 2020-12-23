@@ -1,114 +1,112 @@
 <main>
-    <body>
         <!--- WELCOME SECTION --->
-        <app-header [component]="'history'"></app-header>
+    <app-header [component]="'history'"></app-header>
 
-        <app-welcome [message]="data.message" [welcomeMessage]="data.welcomeMessage"></app-welcome>
+    <app-welcome [message]="data.message" [welcomeMessage]="data.welcomeMessage"></app-welcome>
 
-        <div class="container" id="cards-section">
-            <div class="row" style="margin-bottom: 3%;">
-                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                    <!--button type="button" class="btn btn-primary">Date</button-->
-                    <div class="row">
-                        <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3">
-                            <input class="form-control shadow p-3 mb-5 rounded" id="daterangepicker" type="text" name="daterange" placeholder="01/01/2020 - 31/12/2020" readonly/>
-                        </div>
-
-                        <div class="col-3 col-sm-3 col-md-5 col-lg-3 col-xl-3"></div>
-
-                        <div class="col-3 col-sm-3 col-md-3 col-lg-6 col-xl-6">
-                        </div>
+    <div class="container" id="cards-section">
+        <div class="row" style="margin-bottom: 3%;">
+            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <!--button type="button" class="btn btn-primary">Date</button-->
+                <div class="row">
+                    <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                        <input class="form-control shadow p-3 mb-5 rounded" id="daterangepicker" type="text" name="daterange" placeholder="01/01/2020 - 31/12/2020" readonly/>
                     </div>
-                </div>
-            </div>
 
-            <div class="row">
-                <div class="col-sm-12 col-md-12 col-lg-10 col-xl-8 goal-col" style="margin: 0 auto">
-                    <canvas id="doughnut-canvas"></canvas>
-                    
-                </div>
-                <div class="col-sm-12 col-md-12 col-lg-10 col-xl-8 goal-col" style="margin: 0 auto; margin-top:5%;">
-                    
-                    <canvas id="line-canvas"></canvas>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 totaltext" id="totaltext">
-                    
+                    <div class="col-3 col-sm-3 col-md-5 col-lg-3 col-xl-3"></div>
+
+                    <div class="col-3 col-sm-3 col-md-3 col-lg-6 col-xl-6">
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="container" id="cards-section">
-            <div class="row">
-                <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                    <h3>All expenses</h3>
-
-                </div>
-                <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                    <!-- Search form -->
-                    <input class="form-control search" type="text" id="search" onkeydown="searchFunction()" placeholder="Search" aria-label="Search">
-                </div>
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-10 col-xl-8 goal-col" style="margin: 0 auto">
+                <canvas id="doughnut-canvas"></canvas>
+                
             </div>
-            <div class="row">
-                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                    <div class="table-responsive" data-aos="fade-up" data-aos-duration="500">
-                        <table class="table" id="table">
-                            <tbody>
-                                <tr [history-table-row] *ngFor="let item of data.expense" [Expense]='item' [Currency]='data.currency' [Categories]='data.categories'></tr>
-                            </tbody>
-                        </table>
+            <div class="col-sm-12 col-md-12 col-lg-10 col-xl-8 goal-col" style="margin: 0 auto; margin-top:5%;">
+                
+                <canvas id="line-canvas"></canvas>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 totaltext" id="totaltext">
+                
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="cards-section">
+        <div class="row">
+            <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                <h3>All expenses</h3>
+
+            </div>
+            <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                <!-- Search form -->
+                <input class="form-control search" type="text" id="search" onkeydown="searchFunction()" placeholder="Search" aria-label="Search">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <div class="table-responsive" data-aos="fade-up" data-aos-duration="500">
+                    <table class="table" id="table">
+                        <tbody>
+                            <tr [history-table-row] *ngFor="let item of data.expense" [Expense]='item' [Currency]='data.currency' [Categories]='data.categories'></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row">
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                        <form method="POST" action="/pdf" id="pdf" name="pdf">
+                            <!--{{{#each expense}}
+                            <input type="hidden" name="date{{id}}" value="{{year}}-{{month}}-{{day}}"/>
+                            <input type="hidden" name="category{{id}}" value="{{category}}"/>
+                            <input type="hidden" name="recipient{{id}}" value="{{recipient}}"/>
+                            <input type="hidden" name="value{{id}}" value="{{value}}"/>
+                            <input type="hidden" name="currency{{id}}" value="{{currency}}"/>
+                            {{/each}}-->
+                        </form>
                     </div>
-                    <div class="row">
-                        <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                            <form method="POST" action="/pdf" id="pdf" name="pdf">
-                                <!--{{{#each expense}}
-                                <input type="hidden" name="date{{id}}" value="{{year}}-{{month}}-{{day}}"/>
-                                <input type="hidden" name="category{{id}}" value="{{category}}"/>
-                                <input type="hidden" name="recipient{{id}}" value="{{recipient}}"/>
-                                <input type="hidden" name="value{{id}}" value="{{value}}"/>
-                                <input type="hidden" name="currency{{id}}" value="{{currency}}"/>
-                                {{/each}}-->
-                            </form>
-                        </div>
-                        <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                        <a type="button" style="float: right;" class="btn btn-primary" href="javascript:;" onclick="document.getElementById('pdf').submit()">Export to PDF <i class="far fa-file-pdf"></i></a>
-                        </div>
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                    <a type="button" style="float: right;" class="btn btn-primary" href="javascript:;" onclick="document.getElementById('pdf').submit()">Export to PDF <i class="far fa-file-pdf"></i></a>
                     </div>
-                    
-                    <!--{{{#each expenses}}
-                    <div class="modal fade" id="modalAddExpense" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
-                        <div class="position-absolute w-100 p-4 d-flex flex-column align-items-end toast-front">
-                            <div class="w-25 toastek">
-                                <div class="toast ml-auto tt3" role="alert" data-delay="3000" data-autohide="false">
-                                    <div class="toast-header">
-                                        <strong class="mr-auto text-primary">HINT</strong>
-                                        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                                            <span aria-hidden="true">×</span>
-                                        </button>
-                                    </div>
-                                    <div class="toast-body">
-                                        Input may only contain letters, numbers and some special characters (_@./#&+-). Length allowed: 1-20
-                                    </div>
+                </div>
+                
+                <!--{{{#each expenses}}
+                <div class="modal fade" id="modalAddExpense" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
+                    <div class="position-absolute w-100 p-4 d-flex flex-column align-items-end toast-front">
+                        <div class="w-25 toastek">
+                            <div class="toast ml-auto tt3" role="alert" data-delay="3000" data-autohide="false">
+                                <div class="toast-header">
+                                    <strong class="mr-auto text-primary">HINT</strong>
+                                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
                                 </div>
-                                <div class="toast ml-auto tt4" role="alert" data-delay="1000" data-autohide="false">
-                                    <div class="toast-header">
-                                        <strong class="mr-auto text-primary">HINT</strong>
-                                        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                                            <span aria-hidden="true">×</span>
-                                        </button>
-                                    </div>
-                                    <div class="toast-body">
-                                        Input may only contain decimal numbers separated by . with max 2 decimal places.
-                                    </div>
-                                </div> 
+                                <div class="toast-body">
+                                    Input may only contain letters, numbers and some special characters (_@./#&+-). Length allowed: 1-20
+                                </div>
                             </div>
+                            <div class="toast ml-auto tt4" role="alert" data-delay="1000" data-autohide="false">
+                                <div class="toast-header">
+                                    <strong class="mr-auto text-primary">HINT</strong>
+                                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="toast-body">
+                                    Input may only contain decimal numbers separated by . with max 2 decimal places.
+                                </div>
+                            </div> 
                         </div>
                     </div>
-                    {{/each }}-->
                 </div>
+                {{/each }}-->
             </div>
         </div>
-    </body>
-    <app-footer></app-footer>
+    </div>
+<app-footer></app-footer>
 </main>

@@ -27,7 +27,7 @@
                     </button>
                 </form>
                 
-                <button type="button" class="btn edit-btn" data-toggle="modal" href="#editForm{{item._id}}" role="button">
+                <button type="button" class="btn edit-btn" data-toggle="modal" [attr.data-target]="'#editForm' +item._id" role="button">
                     <fa-icon [icon]="faPencilAlt"></fa-icon>
                 </button>
             </div>

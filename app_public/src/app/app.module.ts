@@ -25,6 +25,7 @@ import { UtilityTableElementComponent } from './utility-table-element/utility-ta
 import { UtilitiesEditModalComponent } from './utilities-edit-modal/utilities-edit-modal.component';
 import { HistoryComponent } from './history/history.component';
 import { HistoryTableElementComponent } from './history-table-element/history-table-element.component';
+import { EnvelopesEditModalComponent } from './envelopes-edit-modal/envelopes-edit-modal.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { HistoryTableElementComponent } from './history-table-element/history-ta
     UtilityTableElementComponent,
     UtilitiesEditModalComponent,
     HistoryComponent,
-    HistoryTableElementComponent
+    HistoryTableElementComponent,
+    EnvelopesEditModalComponent
   ],
   imports: [
     BrowserModule,
