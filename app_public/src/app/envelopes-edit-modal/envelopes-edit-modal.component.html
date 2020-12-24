@@ -1,7 +1,7 @@
 <div class="modal fade editForm" id="editForm{{Envelope._id}}" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
     <div class="position-absolute w-100 p-4 d-flex flex-column align-items-end">
         <div class="w-25 toastek">
-            <div class="toast ml-auto tt8" role="alert" data-delay="1000" data-autohide="false">
+            <div class="toast ml-auto amountEditEnvelopes{{Envelope._id}}" role="alert" data-delay="1000" data-autohide="false">
                 <div class="toast-header">
                     <strong class="mr-auto text-primary">HINT</strong>
                     <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
@@ -32,7 +32,7 @@
                             </div>
                             <input type="hidden" value="{{Envelope._id}}" name="id">
                             <input type="hidden" name="formType" value="editEnvelope" />
-                            <input type="number" id="Amount3{{Envelope._id}}" name="inputAmount" class="form-control" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" onfocusout="amount6(this)" placeholder="0.00" step="any">
+                            <input type="number" id=".amountEditEnvelopes{{Envelope._id}}" name="inputAmount" class="form-control" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" onfocusout="amountEditEnvelopes(this)" placeholder="0.00" step="any">
                         </div>
                         <div id="vnos{{Envelope._id}}"></div>
                     </div>

@@ -15,8 +15,7 @@ export class HomeComponent implements OnInit {
 
   
     @ViewChild('registration') registration: any;
-  
-    @ViewChild('login') login: any;
+
 
   ngOnInit(): void {
   }
@@ -61,7 +60,4 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  login(email: string, password: string): void {
-
-  }
 }
