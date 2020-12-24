@@ -73,8 +73,7 @@ function categoryCheckAddGoal(field) {
 }
 
 
-function amount5(field) {
-
+function amountGoals(field) {
     //var field = document.getElementById("PayeeModal");
     var regex = new RegExp("^[0-9]+(\.[0-9]{1,2})?$");
     //decimalna števila z največj 2ma decimalnima mestoma ločilo je pika!
@@ -90,43 +89,42 @@ function amount5(field) {
     }
 }
 
-function amount2(field, id) {
-
+function amountGoalsAddMoney(field) {
     //var field = document.getElementById("PayeeModal");
     var regex = new RegExp("^[0-9]+(\.[0-9]{1,2})?$");
-    //decimalna števila z največj 2ma decimalnima mestoma ločilo je pika, prva mora biti številka!
-    //črkev male,velike,številke
+    //decimalna števila z največj 2ma decimalnima mestoma ločilo je pika!
+    //črkev male,velike,številke ne veljajo števila kot so .73, 
     if (!field.value.match(regex)) {
         field.style.setProperty("border-color", "red", "important");
-        $('.tt2').toast('show')
+        $('.toastAddMoneyForm').toast('show');
         return 0;
     } else {
         field.style.borderColor = "#ced4da";
-        $('.tt2').toast('hide')
+        $('.toastAddMoneyForm').toast('hide');
         return 1;
     }
 }
 
-function amount77(field, id) {
-
+function amountEditGoal(field) {
+    console.log(field);
     //var field = document.getElementById("PayeeModal");
     var regex = new RegExp("^[0-9]+(\.[0-9]{1,2})?$");
-    //decimalna števila z največj 2ma decimalnima mestoma ločilo je pika, prva mora biti številka!
-    //črkev male,velike,številke
+    //decimalna števila z največj 2ma decimalnima mestoma ločilo je pika!
+    //črkev male,velike,številke ne veljajo števila kot so .73, 
     if (!field.value.match(regex)) {
         field.style.setProperty("border-color", "red", "important");
-        $('.tt6').toast('show')
-        console.log("222");
+        $(field.id).toast('show');
         return 0;
     } else {
         field.style.borderColor = "#ced4da";
-        $('.tt6').toast('hide')
+        $(field.id).toast('hide');
         return 1;
     }
 }
 
-function nameAdd(field) {
 
+
+function nameAddGoals(field) {
     //var field = document.getElementById("PayeeModal");
     var regex = new RegExp("^[ A-Za-z0-9_@./#&+-: ]{1,16}$");
     //uppercase, lowercase, številke, posebni znaki, dolžina od 1-16
@@ -141,21 +139,22 @@ function nameAdd(field) {
     }
 }
 
-function nameAdd2(field, id) {
-
+function nameEditGoal(field) {
     //var field = document.getElementById("PayeeModal");
     var regex = new RegExp("^[ A-Za-z0-9_@./#&+-: ]{1,16}$");
     //uppercase, lowercase, številke, posebni znaki, dolžina od 1-16
     if (!field.value.match(regex)) {
         field.style.setProperty("border-color", "red", "important");
-        $('.tt5').toast('show')
+        $(field.id).toast('show')
         return 0;
     } else {
         field.style.borderColor = "#ced4da";
-        $('.tt5').toast('hide')
+        $(field.id).toast('hide')
         return 1;
     }
 }
+
+
 
 function dateCheck(field, id) {
     console.log(field.value);
@@ -204,6 +203,55 @@ function dateCheck(field, id) {
         return 0;
     }
 }
+
+function dateCheckEdit(field) {
+    console.log(field.value);
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+    var inputDate = field.value.split("-");
+    console.log(field.value);
+
+    if (inputDate == "") {
+        $('.toastEditDate').toast('show');
+        field.style.setProperty("border-color", "red", "important");
+        return 0;
+    }
+
+    if (inputDate[0] > yyyy) {
+        $(field.id).toast('hide');
+        field.style.borderColor = "#ced4da";
+        return 1;
+    } else if (inputDate[0] == yyyy) {
+        if (inputDate[1] > mm) {
+            $(field.id).toast('hide');
+            field.style.borderColor = "#ced4da";
+            return 1;
+        } else if (inputDate[1] == mm) {
+            /* 
+            ? IF DAY IS >= NOW */
+            if (inputDate[2] >= dd) {
+                $(field.id).toast('hide');
+                field.style.borderColor = "#ced4da";
+                return 1;
+            } else {
+                $(field.id).toast('show');
+                field.style.setProperty("border-color", "red", "important");
+                return 0;
+            }
+        } else {
+            $(field.id).toast('show');
+            field.style.setProperty("border-color", "red", "important");
+            return 0;
+        }
+    } else {
+        $(field.id).toast('show');
+        field.style.setProperty("border-color", "red", "important");
+        return 0;
+    }
+}
+
 
 function dateCheckAddGoal(field) {
     var today = new Date();
