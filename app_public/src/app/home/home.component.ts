@@ -60,4 +60,32 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  login(email: string, password: string): void {
+    if (email && password) {
+      this.api.login(email, password, (result) => {
+        try {
+          var elementList = this.document.querySelectorAll('.modal-backdrop');
+          for (let i = 0; i < elementList.length; i++) {
+            elementList[i].removeAttribute('class');
+          }
+        }
+        catch {}
+        
+        try {
+          var elementList = this.document.querySelectorAll('.modal-open');
+          for (let i = 0; i < elementList.length; i++) {
+            document.removeChild(elementList[i])
+          }
+        }
+        catch {}
+
+        this.router.navigate(['/dashboard']);
+      }, (error) => {
+        console.log(error);
+      })
+    }
+    else {
+      //Fields incorrect
+    }
+  }
 }

@@ -48,6 +48,17 @@ export class ApiService {
     return this.http.post(url, body).toPromise().then(response => callback(response)).catch(err => error(err));
   }
 
+  public login(email: string, password: string, callback, error) {
+    const url: string = `${this.apiUrl}/login`;
+
+    const body = {
+      'email': email,
+      'password': password,
+    }
+
+    return this.http.post(url, body).toPromise().then(response => callback(response)).catch(err => error(err));
+  }
+
   public confirm(urlCode: string, code: string, callback, error) {
     const url: string = `${this.apiUrl}/confirm/${urlCode}/${code}`;
     const body = {}

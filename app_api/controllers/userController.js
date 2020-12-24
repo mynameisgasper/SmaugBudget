@@ -44,8 +44,8 @@ function register(req, res) {
                     firstname: req.body.nameup,
                     lastname: req.body.surnameup,
                     email: email1,
-                    password: hash.hash,
-                    passwordSalt: hash.salt,
+                    password: hash.password,
+                    passwordSalt: hash.passwordSalt,
                     confirmationUrl: urlCode,
                     confirmationCode: confirmationCode,
                     isPremium: false,
@@ -94,7 +94,8 @@ function login(requestBody, res) {
                 res.sendStatus(500);
             } else {
                 if (user) {
-                    if (user.password === password && user.confirmationUrl == null && user.confirmationCode == null) {
+                    var hash = hasher.hashPasswordWitSalt(password, user.passwordSalt);
+                    if (user.password === hash.password && user.confirmationUrl == null && user.confirmationCode == null) {
                         user.password = null;
                         user.passwordSalt = null;
                         res.status(200).json(user);
