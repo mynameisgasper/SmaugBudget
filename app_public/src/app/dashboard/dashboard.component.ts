@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation, Renderer2, ElementRef } from '@angular/core';
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
+declare var $:any;
 
 @Component({
   selector: 'app-dashboard',
@@ -11,10 +12,57 @@ export class DashboardComponent implements OnInit {
 
   pencilIcon = faPencilAlt;
 
-  constructor() { }
+  @ViewChild('amountDashboard') amount: ElementRef;
+  @ViewChild('dateDashboard') date: ElementRef;
+
+  constructor(private renderer: Renderer2, private elementRef: ElementRef) { }
 
   ngOnInit(): void {
   }
+
+  amountDashboard1(): number {
+    const field = this.amount.nativeElement;
+    var regex = new RegExp("^[0-9]+(\.[0-9]{1,2})?$");
+    //decimalna števila z največj 2ma decimalnima mestoma ločilo je pika!
+    //črkev male,velike,številke ne veljajo števila kot so .73, 
+    if(!regex.test(field.value)){
+      field.style.setProperty("border-color", "red", "important");
+      $('.tt1').toast('show');
+      return 0;
+    } 
+    else {
+      field.style.borderColor = "#ced4da";
+      $('.tt1').toast('hide');
+      return 1;
+    }
+  }
+
+  dateDashboard1(): number {
+    const field = this.date.nativeElement;
+    if (field.value < 1 || field.value > 28) {
+      field.style.setProperty("border-color", "red", "important");
+      $('.tt2').toast('show');
+      return 0;
+    } 
+    else {
+      field.style.borderColor = "#ced4da";
+      $('.tt2').toast('hide');
+      return 1;
+    }
+  }
+
+  buttonDashboard(): void{
+    var amount = this.amountDashboard1()
+    var date = this.dateDashboard1();
+    if (amount == 0 || date == 0) {
+      //DO NOTHING
+    } 
+    else {
+      //POST REQUEST - TO BE ADDED
+    }
+  }
+
+
 
   data = {
     "fileName":"dashboard",

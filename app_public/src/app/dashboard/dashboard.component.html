@@ -102,7 +102,7 @@
     </div>
 
 
-    <!----- Chane income modal ----->
+    <!----- Change income modal ----->
     <div class="modal fade" id="changeIncome" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="position-absolute w-100 p-4 d-flex flex-column align-items-end">
             <div class="w-25 toastek">
@@ -138,18 +138,16 @@
                     <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form name="changeIncome"  onsubmit="return disableButton()">
-                    <div class="modal-body">
-                        <input type="number" id="amount" name="amount" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" class="form-control" onfocusout="amount1(this)" placeholder="{{ data.incomeModalPlaceholderIncome }}" step="any" required="required">
-                        <div id="amm"></div><br />
-                        <input type="number" id="date" name="date" class="form-control" onfocusout="date1(this)" placeholder="{{ data.incomeModalPlaceholderDate }}" required="required">
-                        <div id="dat"></div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" onclick="disableButton()" class="btn btn-primary">{{ data.incomeModalSaveButton }}</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ data.incomeModalCloseButton }}</button>
-                    </div>
-                </form>
+                <div class="modal-body">
+                    <input type="number" #amountDashboard id="amount" name="amount" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" class="form-control" (focusout)="amountDashboard1()" placeholder="{{ data.incomeModalPlaceholderIncome }}" step="any" required="required">
+                    <div id="amm"></div><br />
+                    <input type="number" #dateDashboard id="date" name="date" class="form-control" (focusout)="dateDashboard1()" placeholder="{{ data.incomeModalPlaceholderDate }}" required="required">
+                    <div id="dat"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" (click)="buttonDashboard()" class="btn btn-primary">{{ data.incomeModalSaveButton }}</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ data.incomeModalCloseButton }}</button>
+                </div>
             </div>
         </div>
     </div>
