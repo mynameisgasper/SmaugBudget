@@ -53,6 +53,22 @@ function check2(field) {
     }
 }
 
+function checkNameEditBill(field) {
+
+    //var field = document.getElementById("PayeeModal");
+    var regex = new RegExp("^[ A-Za-z0-9_@./#&+-: ]{1,20}$");
+    //črkev male,velike,številke
+    if (!field.value.match(regex)) {
+        field.style.setProperty("border-color", "red", "important");
+        $(field.id).toast('show');
+        return 0;
+    } else {
+        field.style.borderColor = "#ced4da";
+        $(field.id).toast('hide');
+        return 1;
+    }
+}
+
 function amount2(field) {
 
     //var field = document.getElementById("PayeeModal");
@@ -86,6 +102,24 @@ function amountBills(field) {
         return 1;
     }
 }
+
+function amountEditBill(field) {
+
+    //var field = document.getElementById("PayeeModal");
+    var regex = new RegExp("^[0-9]+(\.[0-9]{1,2})?$");
+    //decimalna števila z največj 2ma decimalnima mestoma ločilo je pika!
+    //črkev male,velike,številke ne veljajo števila kot so .73, 
+    if (!field.value.match(regex)) {
+        field.style.setProperty("border-color", "red", "important");
+        $(field.id).toast('show');
+        return 0;
+    } else {
+        field.style.borderColor = "#ced4da";
+        $(field.id).toast('hide');
+        return 1;
+    }
+}
+
 
 function dateCheckAddBill(field) {
     var today = new Date();
@@ -128,7 +162,7 @@ function dateCheckAddBill(field) {
 }
 
 function dateCheckEditBill(field) {
-    id = field.id.substr(9);
+    console.log(field);
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
     var mm = String(today.getMonth() + 1).padStart(2, '0');
@@ -136,33 +170,33 @@ function dateCheckEditBill(field) {
     var inputDate = field.value.split("-");
 
     if (inputDate[0] > yyyy) {
-        $(".tt6").toast('hide');
+        $(field.id).toast('hide');
         field.style.borderColor = "#ced4da";
         return 1;
     } else if (inputDate[0] == yyyy) {
         if (inputDate[1] > mm) {
-            $(".tt6").toast('hide');
+            $(field.id).toast('hide');
             field.style.borderColor = "#ced4da";
             return 1;
         } else if (inputDate[1] == mm) {
             /* 
             ? IF DAY IS >= NOW */
             if (inputDate[2] >= dd) {
-                $(".tt6").toast('hide');
+                $(field.id).toast('hide');
                 field.style.borderColor = "#ced4da";
                 return 1;
             } else {
-                $(".tt6").toast('show');
+                $(field.id).toast('show');
                 field.style.setProperty("border-color", "red", "important");
                 return 0;
             }
         } else {
-            $(".tt6").toast('show');
+            $(field.id).toast('show');
             field.style.setProperty("border-color", "red", "important");
             return 0;
         }
     } else {
-        $(".tt6").toast('show');
+        $(field.id).toast('show');
         field.style.setProperty("border-color", "red", "important");
         return 0;
     }
