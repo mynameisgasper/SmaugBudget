@@ -35,7 +35,7 @@
                     Input may only contain letters, numbers, some special characters (_@./#&+-: ) and whitespaces. Length allowed: 1-20
                 </div>
             </div>
-            <div class="toast ml-auto tt4" role="alert" data-delay="1000" data-autohide="false">
+            <div class="toast ml-auto tt2" role="alert" data-delay="1000" data-autohide="false">
                 <div class="toast-header">
                     <strong class="mr-auto text-primary">HINT</strong>
                     <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
@@ -46,7 +46,7 @@
                     Input may only contain decimal numbers separated by . with max 2 decimal places.
                 </div>
             </div>
-            <div class="toast ml-auto tt6" id="date-hintEdit{{data._id}}" role="alert" data-delay="1000" data-autohide="false">
+            <div class="toast ml-auto tt5" id="date-hintEdit{{data._id}}" role="alert" data-delay="1000" data-autohide="false">
                 <div class="toast-header">
                     <strong class="mr-auto text-primary">HINT</strong>
                     <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
@@ -89,13 +89,13 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">{{Currency}}</span>
                         </div>
-                        <input type="number" id="Amount2{{data._id}}" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" name="Amount2" onfocusout="amount2(this)" class="form-control" value="{{data.value}}" step="any" required="required">
+                        <input type="number" id="Amount2{{data._id}}" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" name="Amount2" onfocusout="amountBills(this)" class="form-control" value="{{data.value}}" step="any" required="required">
                     </div>
                     <div id="amm{{data._id}}"></div>
                 </div>
                 <div class="ena">
                     <label for="date">Date due</label><br>
-                    <input class="form-control" type="date" value="{{data.year}}-{{data.month}}-{{data.day}}" id="inputDate{{data._id}}" name="inputDate" required="required">
+                    <input class="form-control" type="date" value="{{data.year}}-{{data.month}}-{{data.day}}" id="inputDate{{data._id}}" name="inputDate" onfocusout="dateCheckAddBill(this)" required="required">
                 </div>
                 <div class="ena">
                     <b>How often?</b><br>
