@@ -98,7 +98,7 @@
                         </div>
                         <div class="checker">
                             <label for="Payee">Payee</label><br/>
-                            <input type="text" id="Payee" name="Payee" class="form-control" onfocusout="check(this)" placeholder="e.g. Elektro Ljubljana d.d." required="required">
+                            <input type="text" #nameAdd id="Payee" name="Payee" class="form-control" (focusout)="nameAddBills()" placeholder="e.g. Elektro Ljubljana d.d." required="required">
                         </div>
                         <div id="alerts"></div>
                         <div class="ena">
@@ -107,13 +107,13 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">{{data.currency}}</span>
                                 </div>
-                                <input type="number" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" class="form-control" onfocusout="amountBills(this)" id="Amount" name="Amount" placeholder="e.g. 15" step="any" required="required">
+                                <input type="number" #amountAdd onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" class="form-control" (focusout)="amountAddBills()" id="Amount" name="Amount" placeholder="e.g. 15" step="any" required="required">
                             </div>
                             <div id="amm"></div>
                         </div>
                         <div class="ena">
                             <label for="date">Date due</label><br/>
-                            <input class="form-control" type="date" placeholder="2020-01-01" id="inputDateAddBill" name="inputDateAddBill" onfocusout="dateCheckAddBill(this);" required="required">
+                            <input class="form-control" #dateAdd type="date" placeholder="2020-01-01" id="inputDateAddBill" name="inputDateAddBill" (focusout)="dateAddBills()" required="required">
                         </div>
                         <div class="ena">
                             <label for="once">How often?</label><br/>
@@ -126,7 +126,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" onclick="disableButton()" class="btn btn-primary">Add Bill</button>
+                        <button (click)="buttonAddBills()" class="btn btn-primary">Add Bill</button>
                     </div>
                 </form>
             </div>

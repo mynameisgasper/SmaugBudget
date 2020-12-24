@@ -79,7 +79,7 @@
                 </div>
                 <div class="ena">
                     <label for="Payee">Payee</label><br>
-                    <input type="text" id=".billEditNameToast{{data._id}}" name="Payee2" onfocusout="check2(this)" class="form-control" value="{{data.recipient}}" required="required" onfocusout="checkNameEditBill(this)">
+                    <input type="text" #nameEdit id=".billEditNameToast{{data._id}}" name="Payee2" (focusout)="nameEditBills()" class="form-control" value="{{data.recipient}}" required="required">
                     <div id="alarm{{data._id}}"></div>
                 </div>
 
@@ -89,13 +89,13 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">{{Currency}}</span>
                         </div>
-                        <input type="number" id=".billEditAmountToast{{data._id}}" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" name="Amount2" onfocusout="amountEditBill(this)" class="form-control" value="{{data.value}}" step="any" required="required">
+                        <input type="number" #amountEdit id=".billEditAmountToast{{data._id}}" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" name="Amount2" (focusout)="amountEditBills()" class="form-control" value="{{data.value}}" step="any" required="required">
                     </div>
                     <div id="amm{{data._id}}"></div>
                 </div>
                 <div class="ena">
                     <label for="date">Date due</label><br>
-                    <input class="form-control" type="date" value="{{data.year}}-{{data.month}}-{{data.day}}" id=".billEditDateToast{{data._id}}" name="inputDate" onfocusout="dateCheckEditBill(this)" required="required">
+                    <input class="form-control" #dateEdit type="date" value="{{data.year}}-{{data.month}}-{{data.day}}" id=".billEditDateToast{{data._id}}" name="inputDate" (focusout)="dateEditBills()" required="required">
                 </div>
                 <div class="ena">
                     <b>How often?</b><br>
@@ -108,7 +108,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-primary" id="{{data._id}}" onclick="disableButtonEditBill(this)">Save Changes</button>
+                <button class="btn btn-primary" id="{{data._id}}" (click)="buttonEditBills()">Save Changes</button>
             </div>
         </div>
     </div>

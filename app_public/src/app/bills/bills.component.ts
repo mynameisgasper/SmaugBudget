@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild} from '@angular/core';
 import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
+declare var $:any;
 
 @Component({
   selector: 'app-bills',
@@ -13,7 +14,96 @@ export class BillsComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  @ViewChild('nameAdd') nameAdd: ElementRef;
+  @ViewChild('amountAdd') amountAdd: ElementRef;
+  @ViewChild('dateAdd') dateAdd: ElementRef;
+
   faPlusSquare = faPlusSquare;
+
+  nameAddBills(): number {
+    const field = this.nameAdd.nativeElement;
+    //var field = document.getElementById("PayeeModal");
+    var regex = new RegExp("^[ A-Za-z0-9_@./#&+-: ]{1,20}$");
+    //črkev male,velike,številke
+    if (!field.value.match(regex)) {
+        field.style.setProperty("border-color", "red", "important");
+        $('.tt1').toast('show');
+        return 0;
+    } else {
+        field.style.borderColor = "#ced4da";
+        $('.tt1').toast('hide');
+        return 1;
+    }
+  }
+
+  amountAddBills(): number {
+    const field = this.amountAdd.nativeElement;
+    //var field = document.getElementById("PayeeModal");
+    var regex = new RegExp("^[0-9]+(\.[0-9]{1,2})?$");
+    //decimalna števila z največj 2ma decimalnima mestoma ločilo je pika!
+    //črkev male,velike,številke ne veljajo števila kot so .73, 
+    if (!field.value.match(regex)) {
+        field.style.setProperty("border-color", "red", "important");
+        $('.tt2').toast('show');
+        return 0;
+    } else {
+        field.style.borderColor = "#ced4da";
+        $('.tt2').toast('hide');
+        return 1;
+    }
+  }
+
+  dateAddBills() {
+    const field = this.dateAdd.nativeElement;
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+    var inputDate = field.value.split("-");
+
+    if (inputDate[0] > yyyy) {
+        $('.tt5').toast('hide');
+        field.style.borderColor = "#ced4da";
+        return 1;
+    } else if (inputDate[0] == yyyy) {
+        if (inputDate[1] > mm) {
+            $('.tt5').toast('hide');
+            field.style.borderColor = "#ced4da";
+            return 1;
+        } else if (inputDate[1] == mm) {
+            /* 
+            ? IF DAY IS >= NOW */
+            if (inputDate[2] >= dd) {
+                $('.tt5').toast('hide');
+                field.style.borderColor = "#ced4da";
+                return 1;
+            } else {
+                $('.tt5').toast('show');
+                field.style.setProperty("border-color", "red", "important");
+                return 0;
+            }
+        } else {
+            $('.tt5').toast('show');
+            field.style.setProperty("border-color", "red", "important");
+            return 0;
+        }
+    } else {
+        $('.tt5').toast('show');
+        field.style.setProperty("border-color", "red", "important");
+        return 0;
+    }
+  }
+
+  buttonAddBills() {
+    var amount1 = this.amountAddBills();
+    var check1 = this.nameAddBills();
+    var date1 = this.dateAddBills();
+    if (amount1 == 0 || check1 == 0 || date1 == 0) {
+        return false;
+    } else {
+        return true;
+    }
+  }
 
   data = {
     "bills": true,

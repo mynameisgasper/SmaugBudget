@@ -64,6 +64,5 @@ export class EnvelopesEditModalComponent implements OnInit {
     } else {
         //POST REQUEST - TO BE ADDED
     }
-}
-
+  }
 }
