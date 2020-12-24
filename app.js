@@ -4,9 +4,12 @@ require('./app_api/models/db');
 const path = require('path');
 var express = require('express');
 var exphbs = require('express-handlebars');
-var cors = require('cors')
 var helpers = require('./app_server/views/helpers/hbsh');
 const session = require('express-session');
+require('dotenv').config();
+var passport = require('passport');
+require('./app_api/config/passport');
+
 var app = express();
 
 //Currencies
@@ -32,8 +35,6 @@ app.set('views', path.join('./app_server/views'));
 app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
 
-app.use(cors());
-
 //Cookies
 app.use(session({
     key: 'user_sid',
@@ -53,7 +54,15 @@ app.use((req, res, next) => {
 });
 
 //Import static files
-app.use(express.static('./public'))
+app.use(express.static('./public'));
+app.use(passport.initialize());
+
+app.use('/api', (req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+    next();
+});
+  
 
 app.use('/', applicationRouter);
 app.use('/api', apiRouter);

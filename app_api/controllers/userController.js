@@ -6,6 +6,7 @@ const multer = require('multer');
 const fs = require('fs');
 const path = require("path");
 const hasher = require('./hasher');
+const passport = require('passport');
 
 function register(req, res) {
     try {
@@ -53,7 +54,16 @@ function register(req, res) {
                 });
                 user.save(function callback(err) {
                     if (err) {
-                        res.sendStatus(400);
+                        if (err.code === 11000) {
+                            var response = {"reson": "Account already exists!"}
+                            res.status(409).json(response);
+                            return;
+                        }
+                        else {
+                            var response = {"reson": "Server error!"}
+                            res.status(500).json(response);
+                            return;
+                        }
                     } else {
                         var response = {
                             urlCode: urlCode
@@ -65,11 +75,13 @@ function register(req, res) {
             });
 
         } else {
-            res.sendStatus(400);
+            var response = {"reson": "Bad request!"}
+            res.status(400).json(response);
         }
     } catch (ex) {
         console.log(ex);
-        res.sendStatus(500);
+        var response = {"reson": "Server error!"}
+        res.status(500).json(response);
     }
 }
 

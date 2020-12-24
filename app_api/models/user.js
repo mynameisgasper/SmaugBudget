@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const jwt = require('jsonwebtoken');
 const { goalsSchema } = require('./goals');
 const { billsSchema } = require('./bills');
 const { envelopesSchema } = require('./envelopes');
@@ -44,9 +45,21 @@ connectionsSchema.add({
     envelopes: [envelopesSchema]
 });
 
+userSchema.method('generateJwt', () => {
+    const expirationTime = new Date();
+    expirationTime.setDate(expirationTime.getDate() + 7);
+  
+    return jwt.sign({
+      _id: this._id,
+      email: this.email,
+      firstname: this.firstname,
+      lastname: this.lastname,
+      exp: parseInt(expirationTime.getTime() / 1000, 10)
+    }, process.env.JWT_PASS || 'jwtsigntoken1!');
+});
+
 mongoose.model('Connections', connectionsSchema, 'Connections');
 mongoose.model('User', userSchema, 'User');
-
 
 module.exports = {
     userSchema: userSchema,
