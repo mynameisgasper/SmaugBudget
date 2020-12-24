@@ -67,7 +67,7 @@
                 </div>
                 <div class="ena">
                     <label for="Payee">Recipient</label><br>
-                    <input type="text" id=".historyName{{Expense.id}}" name="prejemnik" class="form-control" placeholder="e.g. Elektro Ljubljana d.d." onfocusout="nameEditHistory(this)" value="{{Expense.recipient}}"required="required">
+                    <input type="text" #name id=".historyName{{Expense.id}}" name="prejemnik" class="form-control" placeholder="e.g. Elektro Ljubljana d.d." (focusout)="nameEditHistory()" value="{{Expense.recipient}}"required="required">
                     <div id="{{Expense.id}}txt"></div>
                 </div>
                 <div class="ena">
@@ -76,13 +76,13 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">{{Currency}}</span>
                             </div>
-                    <input type="number" id=".historyNumber{{Expense.id}}" name="vsota" class="form-control" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" onfocusout="numberEditHistory(this)" placeholder="e.g. $150.30" value="{{Expense.value}}" step="any"required="required">
+                    <input type="number" #amount id=".historyNumber{{Expense.id}}" name="vsota" class="form-control" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" (focusout)="amountEditHistory()" placeholder="e.g. $150.30" value="{{Expense.value}}" step="any"required="required">
                     <div id="{{Expense.id}}amm"></div>
                     </div>
                 </div>
                 <div class="ena">
                     <label for="datum">Date</label><br>
-                    <input type="date" id=".historyDate{{Expense.id}}" name="datumcek" onfocusout="dateEditHistory(this)"class="form-control" value="{{Expense.year}}-{{Expense.month}}-{{Expense.day}}"required="required">
+                    <input type="date" #date id=".historyDate{{Expense.id}}" name="datumcek" (focusout)="dateEditHistory()"class="form-control" value="{{Expense.year}}-{{Expense.month}}-{{Expense.day}}"required="required">
                 </div>
             </div>
             <div class="modal-footer">

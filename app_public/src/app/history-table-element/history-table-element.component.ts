@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ViewChild, Renderer2 } from '@angular/core';
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
+declare var $:any;
 
 @Component({
   selector: 'tr [history-table-row]',
@@ -35,9 +36,98 @@ export class HistoryTableElementComponent implements OnInit {
     "name":""
   }
 
-  constructor() { }
+  constructor(
+    private renderer: Renderer2,
+    private elementRef: ElementRef
+  ) { }
+
+  @ViewChild('name') name: ElementRef;
+  @ViewChild('amount') amount: ElementRef;
+  @ViewChild('date') date: ElementRef;
 
   ngOnInit(): void {
   }
 
+  nameEditHistory(): number {
+    const field = this.name.nativeElement;
+    var regex = new RegExp("^[A-Za-z0-9_@./#&+-: ]{1,20}$");
+    //uppercase, lowercase, številke, posebni znaki, dolžina od 1-20
+    if (!regex.test(field.value)) {
+        field.style.setProperty("border-color", "red", "important");
+        $(field.id).toast('show')
+        return 0;
+    } else {
+        field.style.borderColor = "#ced4da";
+        $(field.id).toast('hide')
+        return 1;
+    }
+  }
+
+  amountEditHistory(): number {
+    const field = this.amount.nativeElement;
+    var regex = new RegExp("^[0-9]+(\.[0-9]{1,2})?$");
+    //decimalna števila z največj 2ma decimalnima mestoma ločilo je pika, prva mora biti številka!
+    //črkev male,velike,številke
+    if (!regex.test(field.value)) {
+        field.style.setProperty("border-color", "red", "important");
+        $(field.id).toast('show')
+        return 0;
+    } else {
+        field.style.borderColor = "#ced4da";
+        $(field.id).toast('hide')
+        return 1;
+    }
+  }
+
+  dateEditHistory() {
+    const field = this.date.nativeElement;
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+    var inputDate = field.value.split("-");
+
+    if (inputDate[0] < yyyy) {
+        $(field.id).toast('hide');
+        field.style.borderColor = "#ced4da";
+        return 1;
+    } else if (inputDate[0] == yyyy) {
+        if (inputDate[1] < mm) {
+            $(field.id).toast('hide');
+            field.style.borderColor = "#ced4da";
+            return 1;
+        } else if (inputDate[1] == mm) {
+            /* 
+            ? IF DAY IS >= NOW */
+            if (inputDate[2] <= dd) {
+                $(field.id).toast('hide');
+                field.style.borderColor = "#ced4da";
+                return 1;
+            } else {
+                $(field.id).toast('show');
+                field.style.setProperty("border-color", "red", "important");
+                return 0;
+            }
+        } else {
+            $(field.id).toast('show');
+            field.style.setProperty("border-color", "red", "important");
+            return 0;
+        }
+    } else {
+        $(field.id).toast('show');
+        field.style.setProperty("border-color", "red", "important");
+        return 0;
+    }
+  }
+
+  buttonEditHistory(): void {
+    var name = this.nameEditHistory();
+    var amount = this.amountEditHistory();
+    var date = this.dateEditHistory();
+    if (amount == 0 || name == 0 || date == 0) {
+      //DO NOTHING
+    } else {
+      //SEND POST REQUEST
+    }
+  }
 }
