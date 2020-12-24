@@ -29,20 +29,37 @@
 .green-panel {
     background: #00c851;
 }
-
-#card2:hover #replies2 {
-    display: none;
+.card-counter:hover #replies21 {
+    display: none
 }
 
-#comments2 {
+.card-counter #card21-after #comments21 {
     opacity: 0;
 }
 
-#card2:hover #comments2 {
+.card-counter:hover #card21-after #comments21 {
     opacity: 1;
 }
 
-#card2-after {
+.card-counter #card21-after {
+    text-align: center;
+    font-size: 2.5vh;
+}
+
+
+.card-counter:hover #replies31 {
+    display: none
+}
+
+.card-counter #card31-after #comments31 {
+    opacity: 0;
+}
+
+.card-counter:hover #card31-after #comments31 {
+    opacity: 1;
+}
+
+.card-counter #card31-after {
     text-align: center;
     font-size: 2.5vh;
 }
