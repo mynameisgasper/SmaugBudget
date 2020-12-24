@@ -32,7 +32,7 @@
                             </div>
                             <input type="hidden" value="{{Envelope._id}}" name="id">
                             <input type="hidden" name="formType" value="editEnvelope" />
-                            <input type="number" id=".amountEditEnvelopes{{Envelope._id}}" name="inputAmount" class="form-control" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" onfocusout="amountEditEnvelopes(this)" placeholder="0.00" step="any">
+                            <input type="number" #amountEdit id=".amountEditEnvelopes{{Envelope._id}}" name="inputAmount" class="form-control" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" onfocusout="amountEditEnvelopes(this)" placeholder="0.00" step="any">
                         </div>
                         <div id="vnos{{Envelope._id}}"></div>
                     </div>

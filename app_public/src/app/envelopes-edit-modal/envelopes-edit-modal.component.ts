@@ -1,10 +1,13 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ViewChild  } from '@angular/core';
+declare var $:any;
 
 @Component({
   selector: 'app-envelopes-edit-modal',
   templateUrl: './envelopes-edit-modal.component.html',
   styleUrls: ['./envelopes-edit-modal.component.css']
 })
+
+
 export class EnvelopesEditModalComponent implements OnInit {
 
   @Input()
@@ -31,7 +34,26 @@ export class EnvelopesEditModalComponent implements OnInit {
 
   constructor() { }
 
+  @ViewChild('amountEdit') amountEdit: ElementRef;
+
   ngOnInit(): void {
   }
+
+  amountEditEnvelopes() {
+    const field = this.amountEdit.nativeElement;
+    //var field = document.getElementById("PayeeModal");
+    var regex = new RegExp("^[0-9]+(\.[0-9]{1,2})?$");
+    //decimalna števila z največj 2ma decimalnima mestoma ločilo je pika!
+    //črkev male,velike,številke ne veljajo števila kot so .73, 
+    if (!field.value.match(regex)) {
+        field.style.setProperty("border-color", "red", "important");
+        $(field.id).toast('show')
+        return 0;
+    } else {
+        field.style.borderColor = "#ced4da";
+        $(field.id).toast('hide')
+        return 1;
+    }
+}
 
 }
