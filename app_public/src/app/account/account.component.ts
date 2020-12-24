@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
+import { faPlusSquare, faTrashAlt, faCamera, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-account',
@@ -12,6 +12,10 @@ export class AccountComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  faTrashAlt = faTrashAlt;
+  faCamera = faCamera;
+  faPencilAlt = faPencilAlt;
 
   data = {
       "HINT": "hint",

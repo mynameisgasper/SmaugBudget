@@ -54,7 +54,7 @@
             <div id="pfpImg" class="del-margin col-sm-12 col-md-3 col-lg-3 col-xl-3">
             <a data-toggle="modal" data-target="#changePfp" aria-label="Change Profile Picture">
                 <div id="profile-pic" class="profile-pic" style="background-image: url('/api/getPfp')" >
-                <span class="fas fa-camera"></span>
+                    <fa-icon [icon]="faCamera"></fa-icon>
                 <span>{{data.changeImage}}</span>
                 </div>
             </a>
@@ -119,8 +119,8 @@
                     <input type="color" class="color-picker" name="colorPicker{{item.id}}" value="{{item.hexColor}}">
                 </div>
                 <div class="category-row col-3 col-sm-12 col-md-1 col-lg-4 col-xl-4" style="text-align: right;">
-                <button type="submit" class="btn btn-primary"><i class="fas fa-pencil-alt"></i></button>
-                <button type="submit" [attr.form]="'deleteColor' + item.id" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                <button type="submit" class="btn btn-primary"><fa-icon [icon]="faPencilAlt"></fa-icon></button>
+                <button type="submit" [attr.form]="'deleteColor' + item.id" class="btn btn-danger"><fa-icon [icon]="faTrashAlt"></fa-icon></button>
                 <input type="hidden" name="id" value="{{item.id}}" />
                 <input type="hidden" name="formType" value="changeColorCategory" />
                 </div>
