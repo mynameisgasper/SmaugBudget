@@ -1,11 +1,11 @@
 <main>
     <app-header [component]="'goals'"></app-header>
-    
+
     <!---- Add Goal Form ---->
     <div class="modal fade" id="addGoalForm" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
         <div class="position-absolute w-100 p-4 d-flex flex-column align-items-end">
             <div class="w-25 toastek">
-            <div class="toast ml-auto tt4" role="alert" data-delay="3000" data-autohide="false">
+                <div class="toast ml-auto tt4" role="alert" data-delay="3000" data-autohide="false">
                     <div class="toast-header">
                         <strong class="mr-auto text-primary">HINT</strong>
                         <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
@@ -13,7 +13,7 @@
                         </button>
                     </div>
                     <div class="toast-body">
-                    Input may only contain letters, numbers, some special characters (_@./#&+-: ) and whitespaces. Length allowed: 1-16
+                        Input may only contain letters, numbers, some special characters (_@./#&+-: ) and whitespaces. Length allowed: 1-16
                     </div>
                 </div>
                 <div class="toast ml-auto tt3" role="alert" data-delay="1000" data-autohide="false">
@@ -52,46 +52,45 @@
             </div>
         </div>
         <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-    
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
-            </div>
-            <form name="signup" method="post" action="/goals" onsubmit="return disableButton()">
-            <input type="hidden" name="formType" value="addGoal">
-            <div class="modal-body">
-                <label for="inputGoal">What's your goal?</label>
-                <input type="text" class="form-control" id="Goal" name="goal" placeholder="e.g. new car" required="required">
-                <div id="txt1"></div>
-                <label for="inputCategory">Choose a Category</label>
-                <select id="inputCategory" name="inputCategory" onfocusout="categoryCheckAddGoal(this)" class="form-control" required="required">
+                </div>
+                <form name="signup" method="post" action="/goals" onsubmit="return disableButton()">
+                    <input type="hidden" name="formType" value="addGoal">
+                    <div class="modal-body">
+                        <label for="inputGoal">What's your goal?</label>
+                        <input type="text" class="form-control" id="Goal" name="goal" placeholder="e.g. new car" required="required" onfocusout=nameAddGoals(this)>
+                        <div id="txt1"></div>
+                        <label for="inputCategory">Choose a Category</label>
+                        <select id="inputCategory" name="inputCategory" onfocusout="categoryCheckAddGoal(this)" class="form-control" required="required">
                     <option selected disabled>Select Category</option>
                     <option *ngFor="let cat of data.categories" id="category{{cat._id}}">{{cat.category}}</option>
                 </select>
-    
-                <br />
-    
-                <label for="inputAmount">How much do you want to save?</label>
-                <div class="input-group mb-3">
-                <div class="input-group-prepend" style="max-height: 38px;">
-                    <span class="input-group-text">{{data.currency}}</span>
-                </div>
-                <input type="number" class="form-control" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" onfocusout="amount5(this)" id="Amount" name="amount" placeholder="e.g. 1500" step="any" required="required">
-                <div id="amm"></div>
-                </div>
-    
-                <label for="inputDate">Planned Date</label>
-                <input class="form-control" type="date" placeholder="2020-01-01" id="inputDateAddGoal" name="inputDateAddGoal" onfocusout="dateCheckAddGoal(this);" required="required">
-    
-    
+
+                        <br />
+
+                        <label for="inputAmount">How much do you want to save?</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend" style="max-height: 38px;">
+                                <span class="input-group-text">{{data.currency}}</span>
+                            </div>
+                            <input type="number" class="form-control" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" onfocusout="amountGoals(this)" id="Amount" name="amount" placeholder="e.g. 1500" step="any" required="required">
+                            <div id="amm"></div>
+                        </div>
+
+                        <label for="inputDate">Planned Date</label>
+                        <input class="form-control" type="date" placeholder="2020-01-01" id="inputDateAddGoal" name="inputDateAddGoal" onfocusout="dateCheckAddGoal(this);" required="required">
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" onclick="disableButton()" class="btn btn-primary">Add Goal</button>
+                    </div>
+                </form>
             </div>
-            <div class="modal-footer">
-                <button type="submit" onclick="disableButton()" class="btn btn-primary">Add Goal</button>
-            </div>
-            </form>
-        </div>
         </div>
     </div>
 
@@ -99,7 +98,7 @@
     <div class="modal fade" id="addMoneyForm" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
         <div class="position-absolute w-100 p-4 d-flex flex-column align-items-end">
             <div class="w-25 toastek">
-                <div class="toast ml-auto tt2" role="alert" data-delay="1000" data-autohide="false">
+                <div class="toast ml-auto toastAddMoneyForm" role="alert" data-delay="1000" data-autohide="false">
                     <div class="toast-header">
                         <strong class="mr-auto text-primary">HINT</strong>
                         <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
@@ -134,7 +133,7 @@
                                 <div class="input-group-prepend" style="max-height: 38px;">
                                     <span class="input-group-text">{{data.currency}}</span>
                                 </div>
-                                <input type="number" class="form-control" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" onfocusout="amount2(this)" id="Amount2" name="inputAmount" placeholder="0.00" step="any">
+                                <input type="number" class="form-control" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" onfocusout="amountGoalsAddMoney(this)" id="Amount2" name="inputAmount" placeholder="0.00" step="any">
                             </div>
                         </div>
                     </div>
@@ -168,8 +167,7 @@
                 </button>
             </div>
             <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                <button type="button" class="btn btn-primary" style="float:right;" data-toggle="modal" href="#addGoalForm"
-                role="button" aria-expanded="false" aria-controls="about">
+                <button type="button" class="btn btn-primary" style="float:right;" data-toggle="modal" href="#addGoalForm" role="button" aria-expanded="false" aria-controls="about">
                     Add Goal
                     <fa-icon [icon]="faPlusSquare"></fa-icon>
                 </button>
