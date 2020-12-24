@@ -1,8 +1,9 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, Renderer2  } from '@angular/core';
 import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 import { ApiService } from '../api.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
+declare var $:any;
 
 @Component({
   selector: 'app-utilities',
@@ -20,6 +21,10 @@ export class UtilitiesComponent implements OnInit {
     private pit: ActivatedRoute
     ) {}
 
+  @ViewChild('groupName') groupName: ElementRef;
+  @ViewChild('memberName') memberName: ElementRef;
+  @ViewChild('counter') counter1: ElementRef;
+
   ngOnInit(): void {
   }
 
@@ -29,6 +34,67 @@ export class UtilitiesComponent implements OnInit {
         this.output.nativeElement.value = rez.value
     });
     
+  }
+
+  addGroupUtilities(): number{
+    const field = this.groupName.nativeElement;
+    var regex = new RegExp("^[ A-Za-z0-9_@./#&+-: ]{1,16}$");
+    if (!field.value.match(regex)) {
+        field.style.setProperty("border-color", "red", "important");
+        $('.tt5').toast('show');
+        return 0;
+    } else {
+        field.style.borderColor = "#ced4da";
+        $('.tt5').toast('hide');
+        return 1;
+    }
+  }
+
+  addGroupUtilities2(): number{
+    const field = this.memberName.nativeElement;
+    var regex = new RegExp("^[ A-Za-z0-9_@./#&+-: ]{1,16}$");
+    if (!field.value.match(regex)) {
+        field.style.setProperty("border-color", "red", "important");
+        $('.tt5').toast('show');
+        return 0;
+    } else {
+        field.style.borderColor = "#ced4da";
+        $('.tt5').toast('hide');
+        return 1;
+    }
+  }
+
+  counter = 1;
+
+  buttonAddGroupUtilities() {
+    var groupName = this.groupName.nativeElement;
+    if(groupName == 0)
+        return false;
+
+    var check = true;
+    for(var i = 1; i < this.counter; i++){
+        var testName = this.memberName.nativeElement;
+        if(testName == 0){
+            $('.tt6').toast('show');
+            check = false
+            return false;
+        }
+        $('.tt6').toast('hide');
+    }
+    return check;
+  }
+
+
+  addGroupMember() {
+    if (this.counter >= 10) {
+        alert("Only 10 members allowed");
+    } else {
+        this.counter++;
+        var form = document.getElementById('inputMemberBody');
+        var input = '<input type="text" onfocusout="checkName(this)" style="margin-top:4%" class="form-control" id="inputMember' + this.counter + '" placeholder="Member ' + this.counter + ' " name="inputMember' + this.counter + '"></input>';
+        form.innerHTML = form.innerHTML + input;
+        this.counter1.nativeElement.value = this.counter;
+    }
   }
 
   data = {
