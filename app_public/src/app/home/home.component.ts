@@ -60,7 +60,7 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  login(email: string, password: string): void {
+  loginUser(email: string, password: string): void {
     if (email && password) {
       this.api.login(email, password, (result) => {
         try {

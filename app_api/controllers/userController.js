@@ -98,7 +98,11 @@ function login(requestBody, res) {
                     if (user.password === hash.password && user.confirmationUrl == null && user.confirmationCode == null) {
                         user.password = null;
                         user.passwordSalt = null;
-                        res.status(200).json(user);
+
+                        var response = {
+                            token: user.generateJwt()
+                        }
+                        res.status(200).json(response);
                     } else {
                         res.sendStatus(401);
                     }
