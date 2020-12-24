@@ -35,8 +35,9 @@ function disableButton2() {
     }
 }
 
-function disableButton3(id) {
-    var amount1 = amount3(document.getElementById("Amount3"), id);
+function disableButtonEditEnvelopes3(field){
+    var name = ".amountEditEnvelopes"+field.id;
+    var amount1 = amountEditEnvelopes(document.getElementById(name));
 
     if (amount1 == 0) {
         return false;
