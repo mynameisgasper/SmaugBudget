@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
+declare var $:any;
 
 @Component({
   selector: 'app-envelopes',
@@ -13,7 +14,121 @@ export class EnvelopesComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  @ViewChild('categoryAdd') categoryAdd: ElementRef;
+  @ViewChild('amountAdd') amountAdd: ElementRef;
+  @ViewChild('nameExpense') nameExpense: ElementRef;
+  @ViewChild('amountExpense') amountExpense: ElementRef;
+  @ViewChild('dateExpense') dateExpense: ElementRef;
+
   faPlusSquare = faPlusSquare;
+
+  nameAddEnvelopes(): number {
+    const field = this.categoryAdd.nativeElement;
+    if (!field.disabled) {
+        //var field = document.getElementById("PayeeModal");
+        var regex = new RegExp("^[ A-Za-z0-9_@./#&+-: ]{1,14}$");
+        //uppercase, lowercase, številke, posebni znaki, dolžina od 1-16
+        if (!field.value.match(regex)) {
+            field.style.setProperty("border-color", "red", "important");
+            $('.tt5').toast('show');
+            return 0;
+        } else {
+            field.style.borderColor = "#ced4da";
+            $('.tt5').toast('hide')
+            return 1;
+        }
+    } else {
+        return 1;
+    }
+  }
+
+  amountAddEnvelopes(): number {
+    const field = this.amountAdd.nativeElement;
+    var regex = new RegExp("^[0-9]+(\.[0-9]{1,2})?$");
+    //decimalna števila z največj 2ma decimalnima mestoma ločilo je pika!
+    //črkev male,velike,številke ne veljajo števila kot so .73, 
+    if (!field.value.match(regex)) {
+        field.style.setProperty("border-color", "red", "important");
+        $('.tt1').toast('show')
+        return 0;
+    } else {
+        field.style.borderColor = "#ced4da";
+        $('.tt1').toast('hide')
+        return 1;
+    }
+  }
+
+  nameExpenseEnvelopes(): number {
+    const field = this.nameExpense.nativeElement;
+    var regex = new RegExp("^[ A-Za-z0-9_@./#&+-: ]{1,16}$");
+    //uppercase, lowercase, številke, posebni znaki, dolžina od 1-16
+    if (!field.value.match(regex)) {
+        field.style.setProperty("border-color", "red", "important");
+        $('.tt2').toast('show')
+        return 0;
+    } else {
+        field.style.borderColor = "#ced4da";
+        $('.tt2').toast('hide')
+        return 1;
+    }
+  }
+
+  amountExpenseEnvelopes() {
+    const field = this.amountExpense.nativeElement;
+    var regex = new RegExp("^[0-9]+(\.[0-9]{1,2})?$");
+    //decimalna števila z največj 2ma decimalnima mestoma ločilo je pika!
+    //črkev male,velike,številke ne veljajo števila kot so .73, 
+    if (!field.value.match(regex)) {
+        field.style.setProperty("border-color", "red", "important");
+        $('.tt8').toast('show')
+        return 0;
+    } else {
+        field.style.borderColor = "#ced4da";
+        $('.tt8').toast('hide')
+        return 1;
+    }
+  }
+
+  dateExpenseEnvelopes() {
+    const field = this.dateExpense.nativeElement;
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+    var inputDate = field.value.split("-");
+
+    if (inputDate[0] < yyyy) {
+        $('.tt4').toast('hide');
+        field.style.borderColor = "#ced4da";
+        return 1;
+    } else if (inputDate[0] == yyyy) {
+        if (inputDate[1] < mm) {
+            $('.tt4').toast('hide');
+            field.style.borderColor = "#ced4da";
+            return 1;
+        } else if (inputDate[1] == mm) {
+            /* 
+            ? IF DAY IS >= NOW */
+            if (inputDate[2] <= dd) {
+                $('.tt4').toast('hide');
+                field.style.borderColor = "#ced4da";
+                return 1;
+            } else {
+                $('.tt4').toast('show');
+                field.style.setProperty("border-color", "red", "important");
+                return 0;
+            }
+        } else {
+            $('.tt4').toast('show');
+            field.style.setProperty("border-color", "red", "important");
+            return 0;
+        }
+    } else {
+        $('.tt4').toast('show');
+        field.style.setProperty("border-color", "red", "important");
+        return 0;
+    }
+  }
 
   data = {
     "fileName":"envelopes",

@@ -62,7 +62,7 @@
                             </select>
 
                             <label for="categoryAddEnvelope"></label>
-                            <input type="text" class="form-control" id="ime" onfocusout="nameAdd(this)" name="categoryAddEnvelope" placeholder="Or create your own" style="display:none" disabled>
+                            <input #categoryAdd type="text" class="form-control" id="ime" (focusout)="nameAddEnvelopes()" name="categoryAddEnvelope" placeholder="Or create your own" style="display:none" disabled>
                         </div>
 
                         <div class="ena"><label for="inputAmount">Amount</label><br />
@@ -70,7 +70,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">{{data.currency}}</span>
                                 </div>
-                                <input type="number" class="form-control" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" name="inputAmount" onfocusout="amount(this)" id="inputAmount" placeholder="0.00" step="any">
+                                <input #amountAdd type="number" class="form-control" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" name="inputAmount" (focusout)="amountAddEnvelopes()" id="inputAmount" placeholder="0.00" step="any">
                             </div>
                             <div id="amm"></div>
                         </div>
@@ -150,7 +150,7 @@
                         </div>
                         <div class="ena">
                             <label for="Payee">Recipient</label><br>
-                            <input type="text" id="Payee25" name="recipient" class="form-control" placeholder="e.g. Elektro Ljubljana d.d." onfocusout="nameAddEnvelopes2(this)" value="" required="required">
+                            <input type="text" #nameExpense id="Payee25" name="recipient" class="form-control" placeholder="e.g. Elektro Ljubljana d.d." (focusout)="nameExpenseEnvelopes()" value="" required="required">
                             <div id="txt"></div>
                         </div>
                         <div class="ena"><label for="inputAmount">Amount</label><br />
@@ -158,7 +158,7 @@
                                 <div class="input-group-prepend">
                                     <span id="currencyPrepend" class="input-group-text">{{data.currency}}</span>
                                 </div>
-                                <input type="number" class="form-control" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" onfocusout="amount5(this)" id="Amount2" name="inputAmount" placeholder="0.00" step="any">
+                                <input type="number" #amountExpense class="form-control" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" onfocusout="amount5(this)" id="Amount2" name="inputAmount" placeholder="0.00" step="any">
                             </div>
                         </div>
                         <div class="ena"><label for="inputAmount">Currency</label><br />
@@ -206,7 +206,7 @@
 
                         <div class="ena">
                             <label for="datum">Date</label><br>
-                            <input type="date" id="inputDate15" name="date" onfocusout="dateCheckEnvelopes2(this)" class="form-control" value="{{data.year}}-{{data.month}}-{{data.day}}" required="required">
+                            <input type="date" #dateExpense id="inputDate15" name="date" onfocusout="dateCheckEnvelopes2(this)" class="form-control" value="{{data.year}}-{{data.month}}-{{data.day}}" required="required">
                         </div>
                     </div>
                     <div class="modal-footer">
