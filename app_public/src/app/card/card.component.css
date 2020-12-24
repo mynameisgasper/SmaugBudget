@@ -106,3 +106,37 @@ input[type="color"]::-webkit-color-swatch-wrapper {
 input[type="color"]::-webkit-color-swatch {
     border: none;
 }
+
+#card2:hover #replies2 {
+    display: none;
+}
+
+#comments2 {
+    opacity: 0;
+}
+
+#card2:hover #comments2 {
+    opacity: 1;
+}
+
+#card2-after {
+    text-align: center;
+    font-size: 2.5vh;
+}
+
+#card1:hover #replies1 {
+    display: none;
+}
+
+#comments1 {
+    opacity: 0;
+}
+
+#card1:hover #comments1 {
+    opacity: 1;
+}
+
+#card1-after {
+    text-align: center;
+    font-size: 2.5vh;
+}

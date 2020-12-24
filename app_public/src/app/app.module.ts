@@ -28,6 +28,8 @@ import { HistoryTableElementComponent } from './history-table-element/history-ta
 import { EnvelopesEditModalComponent } from './envelopes-edit-modal/envelopes-edit-modal.component';
 import { AccountComponent } from './account/account.component';
 import { ConfirmationComponent } from './confirmation/confirmation.component';
+import { BillsComponent } from './bills/bills.component';
+import { BillTableComponent } from './bill-table/bill-table.component';
 
 @NgModule({
   declarations: [
@@ -45,13 +47,8 @@ import { ConfirmationComponent } from './confirmation/confirmation.component';
     EnvelopesConProgressComponent,
     GoalsComponent,
     GoalsProgressComponent,
-    UtilitiesComponent,
-    UtilityTableElementComponent,
-    UtilitiesEditModalComponent,
-    HistoryComponent,
-    HistoryTableElementComponent,
-    EnvelopesEditModalComponent,
-    AccountComponent
+    BillsComponent,
+    BillTableComponent,
   ],
   imports: [
     BrowserModule,
@@ -98,7 +95,12 @@ import { ConfirmationComponent } from './confirmation/confirmation.component';
       {
         path: 'confirm/:url/:code',
         component: ConfirmationComponent
+      },
+      {
+        path: 'bills',
+        component: BillsComponent
       }
+      
     ])
   ],
   exports: [],

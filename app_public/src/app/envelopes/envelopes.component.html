@@ -5,15 +5,15 @@
         <div class="position-absolute w-100 p-4 d-flex flex-column align-items-end">
             <div class="w-25 toastek">
                 <div class="toast ml-auto tt5" role="alert" data-delay="3000" data-autohide="false">
-                  <div class="toast-header">
-                      <strong class="mr-auto text-primary">HINT</strong>
-                      <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <div class="toast-header">
+                        <strong class="mr-auto text-primary">HINT</strong>
+                        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
                           <span aria-hidden="true">×</span>
                       </button>
-                  </div>
-                  <div class="toast-body">
-                     Input may only contain letters, numbers, some special characters (_@./#&+-: ) and whitespaces. Length allowed: 1-14
-                  </div>
+                    </div>
+                    <div class="toast-body">
+                        Input may only contain letters, numbers, some special characters (_@./#&+-: ) and whitespaces. Length allowed: 1-14
+                    </div>
                 </div>
                 <div class="toast ml-auto tt1" role="alert" data-delay="1000" data-autohide="false">
                     <div class="toast-header">
@@ -27,22 +27,22 @@
                     </div>
                 </div>
                 <div class="toast ml-auto tt7" id="date-hint" role="alert" data-delay="3000" data-autohide="false">
-                        <div class="toast-header">
-                            <strong class="mr-auto text-primary">HINT</strong>
-                            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <div class="toast-header">
+                        <strong class="mr-auto text-primary">HINT</strong>
+                        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
                                 <span aria-hidden="true">×</span>
                             </button>
-                        </div>
-                        <div class="toast-body">
-                            Expense can't be in the future.
-                        </div>
                     </div>
+                    <div class="toast-body">
+                        Expense can't be in the future.
+                    </div>
+                </div>
             </div>
         </div>
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-    
+
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -60,26 +60,26 @@
                                 </div>
                                 <option value="other">Make your own</option>
                             </select>
-                       
+
                             <label for="categoryAddEnvelope"></label>
                             <input type="text" class="form-control" id="ime" onfocusout="nameAdd(this)" name="categoryAddEnvelope" placeholder="Or create your own" style="display:none" disabled>
                         </div>
-    
+
                         <div class="ena"><label for="inputAmount">Amount</label><br />
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">{{data.currency}}</span>
                                 </div>
-                                <input type="number" class="form-control" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" name="inputAmount" onfocusout="amount(this)"id="inputAmount" placeholder="0.00" step="any">
+                                <input type="number" class="form-control" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" name="inputAmount" onfocusout="amount(this)" id="inputAmount" placeholder="0.00" step="any">
                             </div>
                             <div id="amm"></div>
                         </div>
-    
+
                         <div class="ena">
-                            <label id="colorPickerLabel" for="colorPicker" style="display:none" >Color Picker</label><br />
-                            <input type="color" id="colorPicker" name="colorPicker"  style="display:none" disabled>
+                            <label id="colorPickerLabel" for="colorPicker" style="display:none">Color Picker</label><br />
+                            <input type="color" id="colorPicker" name="colorPicker" style="display:none" disabled>
                         </div>
-    
+
                     </div>
                     <div class="modal-footer">
                         <button type="submit" onclick="disableButton2()" class="btn btn-primary">Add</button>
@@ -115,7 +115,7 @@
                     <div class="toast-body">
                         Input may only contain decimal numbers separated by . or , with max 2 decimal places.
                     </div>
-                </div> 
+                </div>
                 <div class="toast ml-auto tt4" id="date-hint" role="alert" data-delay="3000" data-autohide="false">
                     <div class="toast-header">
                         <strong class="mr-auto text-primary">HINT</strong>
@@ -132,7 +132,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-    
+
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -200,17 +200,17 @@
                                     <option value="THB" label="Thai baht">THB</option>
                                     <option value="TRY" label="Turkish lira">TRY</option>
                                     <option value="USD" label="United States dollar">USD</option>
-                                </select>                      
-                              </div>
+                                </select>
+                            </div>
                         </div>
-    
+
                         <div class="ena">
                             <label for="datum">Date</label><br>
-                            <input type="date" id="inputDate15" name="date" onfocusout="dateCheck2(this)"class="form-control" value="{{data.year}}-{{data.month}}-{{data.day}}"required="required">
+                            <input type="date" id="inputDate15" name="date" onfocusout="dateCheck2(this)" class="form-control" value="{{data.year}}-{{data.month}}-{{data.day}}" required="required">
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit"  onclick="disableButton()" class="btn btn-primary">Add</button>
+                        <button type="submit" onclick="disableButton()" class="btn btn-primary">Add</button>
                     </div>
                 </form>
             </div>
@@ -222,20 +222,19 @@
 
     <div class="container" id="cards-section">
         <div class="row">
-            <div *ngFor="let item of data.card" class="col-xl-3 col-lg-4 col-md-12 col-sm-12 aos-init aos-animate"id="card{{item.id}}" data-aos="flip-down" data-aos-duration="500" style="margin: 0 auto">
+            <div *ngFor="let item of data.card" class="col-xl-3 col-lg-4 col-md-12 col-sm-12 aos-init aos-animate" id="card{{item.id}}" data-aos="flip-down" data-aos-duration="500" style="margin: 0 auto">
                 <card [id]="item.id" [color]="item.color" [icon]="item.icon" [count]="item.count" [title]="item.title" [comment]="item.comment"></card>
             </div>
             <div id="envelopeSectionTag"></div>
         </div>
-        
     </div>
 
     <div class="container" id="main-section">
         <div class="row">
             <div class="col-3 col-sm-4 col-md-4 col-lg-5 col-xl-5 puscica-leva">
                 <form action="/envelopes" method="GET">
-                <input type="hidden" name="monthMinus" value="{{data.setMonthNumber}}"/> 
-                <button class="arrowButton" type="submit"><i class="arrow left"></i></button>
+                    <input type="hidden" name="monthMinus" value="{{data.setMonthNumber}}" />
+                    <button class="arrowButton" type="submit"><i class="arrow left"></i></button>
                 </form>
             </div>
             <div class="col-6 col-sm-4 col-md-4 col-lg-2 col-xl-2 mesec">
@@ -243,17 +242,16 @@
             </div>
             <div class="col-3 col-sm-4 col-md-4 col-lg-5 col-xl-5 puscica-desna">
                 <form action="/envelopes" method="GET">
-                <input type="hidden" name="monthPlus" value="{{data.setMonthNumber}}"/> 
-                <button class="arrowButton" type="submit"><i  class="arrow right"></i></button>
+                    <input type="hidden" name="monthPlus" value="{{data.setMonthNumber}}" />
+                    <button class="arrowButton" type="submit"><i  class="arrow right"></i></button>
                 </form>
-                
+
             </div>
         </div>
-    
+
         <div class="row">
             <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                <button type="button" class="btn btn-success" style="float:left;" data-toggle="modal" href="#addExpenseForm"
-                    role="button" aria-expanded="false" aria-controls="about">
+                <button type="button" class="btn btn-success" style="float:left;" data-toggle="modal" href="#addExpenseForm" role="button" aria-expanded="false" aria-controls="about">
                     Add Expense
                     <fa-icon [icon]="faPlusSquare"></fa-icon>
                 </button>
