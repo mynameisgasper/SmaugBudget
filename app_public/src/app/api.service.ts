@@ -33,7 +33,7 @@ export class ApiService {
     return this.http.get(url, {params: params}).toPromise().then(response => callback(response)).catch(this.parseError);
   }
 
-  public register(firstname: string, lastname: string, email1: string, email2: string, password1: string, password2: string, callback) {
+  public register(firstname: string, lastname: string, email1: string, email2: string, password1: string, password2: string, callback, error) {
     const url: string = `${this.apiUrl}/register`;
 
     const body = {
@@ -45,14 +45,14 @@ export class ApiService {
       'password2up': password2,
     }
 
-    return this.http.post(url, body).toPromise().then(response => callback(response)).catch(this.parseError);
+    return this.http.post(url, body).toPromise().then(response => callback(response)).catch(err => error(err));
   }
 
   public confirm(urlCode: string, code: string, callback, error) {
     const url: string = `${this.apiUrl}/confirm/${urlCode}/${code}`;
     const body = {}
 
-    return this.http.post(url, body).toPromise().then(response => callback(response)).catch(error);
+    return this.http.post(url, body).toPromise().then(response => callback(response)).catch(err => error(err));
 
   }
 
