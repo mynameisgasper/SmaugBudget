@@ -21,6 +21,23 @@ function disableButton2(id) {
     }
 }
 
+function disableButtonEditBill(field) {
+    id = field.id;
+    var amountClass = '.billEditAmountToast' + id;
+    var nameClass = '.billEditNameToast' + id;
+    var dateClass = '.billEditDateToast' + id;
+    var amount1 = amountEditBill(document.getElementById(amountClass));
+    var check1 = checkNameEditBill(document.getElementById(nameClass));
+    var date1 = dateCheckEditBill(document.getElementById(dateClass));
+    console.log(amount1 + " " + check1 + " " + date1);
+    if (amount1 == 0 || check1 == 0 || date1 == 0) {
+        field.disabled = true;
+    } else {
+        field.disabled = false;
+    }
+
+}
+
 function check(field) {
 
     //var field = document.getElementById("PayeeModal");
@@ -162,7 +179,6 @@ function dateCheckAddBill(field) {
 }
 
 function dateCheckEditBill(field) {
-    console.log(field);
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
     var mm = String(today.getMonth() + 1).padStart(2, '0');
