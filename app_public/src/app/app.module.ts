@@ -108,7 +108,12 @@ import { BillTableComponent } from './bill-table/bill-table.component';
         component: BillsComponent
       }
       
-    ])
+    ],
+    {
+      onSameUrlNavigation: 'reload',
+      anchorScrolling: 'enabled',
+      enableTracing: false
+    })
   ],
   exports: [],
   providers: [],

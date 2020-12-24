@@ -30,7 +30,7 @@
           <a class="nav-link" href="#aboutUs">ABOUT US</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" a href="" data-toggle="modal" data-target="#login">SIGN IN</a>
+          <a class="nav-link" a href="#login" data-toggle="modal" data-target="#login">SIGN IN</a>
         </li>
       </ul>
 
@@ -41,7 +41,7 @@
 </div>
 </header>
 <!----- Sign in modal ----->
-<div id="login" class="modal fade">
+<div id="login" #login class="modal fade">
   <div class="modal-dialog modal-login">
     <div class="modal-content">
       <div class="modal-header">
@@ -65,8 +65,8 @@
         </form>
       </div>
       <div class="modal-footer">
-        <a href="#" class="a1" data-toggle="modal" data-target="#forgottenPasswordForm" data-dismiss="modal">Forgot Password?</a>
-        <a href="#" class="a2" data-toggle="modal" data-target="#registration" data-dismiss="modal">Not a member?</a>
+        <a href="#forgottenPasswordForm" class="a1" data-toggle="modal" data-target="#forgottenPasswordForm" data-dismiss="modal">Forgot Password?</a>
+        <a href="#registration" class="a2" data-toggle="modal" data-target="#registration" data-dismiss="modal">Not a member?</a>
       </div>
     </div>
   </div>
@@ -74,7 +74,7 @@
 <!----- End sign in modal ----->
 
 <!----- Sign up modal ----->
-<div id="registration"  class="modal fade">
+<div id="registration" #registration class="modal fade">
   <div class="position-absolute w-100 p-4 d-flex flex-column align-items-end">
       <div class="w-25">
           <div class="toast ml-auto tt1" role="alert" data-delay="1000" data-autohide="false">
@@ -171,7 +171,7 @@
           </div>
       </div>
       <div class="modal-footer" style="padding: 10px;">
-        <a href="" style="font-family: 'Open Sans'; color: #999;" data-toggle="modal" data-target="#login" data-dismiss="modal">Already a member?</a>
+        <a href="login" style="font-family: 'Open Sans'; color: #999;" data-toggle="modal" data-target="#login" data-dismiss="modal">Already a member?</a>
       </div>
     </div>
   </div>
@@ -199,7 +199,7 @@
         </form>
       </div>
       <div class="modal-footer" style="padding: 10px;">
-        <a href="" style="font-family: 'Open Sans'; color: #999;" data-toggle="modal" data-target="#login" data-dismiss="modal">Back?</a>
+        <a href="#login" style="font-family: 'Open Sans'; color: #999;" data-toggle="modal" data-target="#login" data-dismiss="modal">Back?</a>
       </div>
     </div>
   </div>
@@ -216,7 +216,7 @@
       <h1 class="display-7">Saving money made simple,<br> for you.</h1>
       <p class="lead">Join now and experience your finances in a completely new way.</p>
       <p class="lead">
-        <a class="btn btn-primary btn-lg gumbek" href="#" role="button" data-toggle="modal" data-target="#registration">Sign up</a>
+        <a class="btn btn-primary btn-lg gumbek" href="#registration" role="button" data-toggle="modal" data-target="#registration">Sign up</a>
       </p>
     </div>
   </div>

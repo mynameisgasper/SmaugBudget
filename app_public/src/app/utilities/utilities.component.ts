@@ -17,6 +17,7 @@ export class UtilitiesComponent implements OnInit {
 
   constructor(
     private api: ApiService,
+    private pit: ActivatedRoute
     ) {}
 
   ngOnInit(): void {
@@ -27,11 +28,7 @@ export class UtilitiesComponent implements OnInit {
 
         this.output.nativeElement.value = rez.value
     });
-    /*
-    this.service.getData()
-            .subscribe(data => {
-                console.log('data', data);
-            });*/
+    
   }
 
   data = {

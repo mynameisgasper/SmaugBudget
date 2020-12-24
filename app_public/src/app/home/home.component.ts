@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Inject, OnInit, ViewEncapsulation, ElementRef, ViewChild } from '@angular/core';
 import { DOCUMENT } from '@angular/common'
 import { Router } from "@angular/router"
 import { ApiService } from '../api.service'
@@ -13,8 +13,26 @@ export class HomeComponent implements OnInit {
 
   constructor(private api: ApiService, private router: Router, @Inject(DOCUMENT) private document: HTMLDocument) { }
 
+  
+    @ViewChild('registration') registration: any;
+  
+    @ViewChild('login') login: any;
+
   ngOnInit(): void {
   }
+
+  ngAfterViewInit(): void {
+    if(window.location.href.indexOf('#registration') != -1) {
+      this.registration.open()
+      //document.getElementById("registration").showModal();
+      console.log(this.registration)
+    }
+
+    else if(window.location.href.indexOf('#login') != -1) {
+      //this.login.open()
+    }
+  }
+
 
   register(firstname: string, lastname: string, email1: string, email2: string, password1: string, password2: string): void {
     if (firstname && lastname && email1 && email1 === email2 && password1 && password1 === password2) {

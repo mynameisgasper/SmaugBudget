@@ -14,8 +14,8 @@ function hexToRgb(hex) {
 
 function disableButton() {
     var amount1 = amount2(document.getElementById("Amount2"));
-    var name1 = nameAdd2(document.getElementById("Payee25"));
-    var date1 = dateCheck2(document.getElementById("inputDate15"));
+    var name1 = nameAddEnvelopes2(document.getElementById("Payee25"));
+    var date1 = dateCheckEnvelopes2(document.getElementById("inputDate15"));
 
 
     if (amount1 == 0 || name1 == 0 || date1 == 0) {
@@ -102,11 +102,11 @@ function amount5(field, id) {
     //črkev male,velike,številke ne veljajo števila kot so .73, 
     if (!field.value.match(regex)) {
         field.style.setProperty("border-color", "red", "important");
-        $('.tt8').toast('show')
+        $('.tt3').toast('show')
         return 0;
     } else {
         field.style.borderColor = "#ced4da";
-        $('.tt8').toast('hide')
+        $('.tt3').toast('hide')
         return 1;
     }
 }
@@ -132,7 +132,7 @@ function nameAdd(field) {
 
 }
 
-function dateCheck2(field) {
+function dateCheckEnvelopes2(field) {
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
     var mm = String(today.getMonth() + 1).padStart(2, '0');
@@ -173,7 +173,7 @@ function dateCheck2(field) {
 }
 
 
-function nameAdd2(field) {
+function nameAddEnvelopes2(field) {
 
     //var field = document.getElementById("PayeeModal");
     var regex = new RegExp("^[ A-Za-z0-9_@./#&+-: ]{1,16}$");
