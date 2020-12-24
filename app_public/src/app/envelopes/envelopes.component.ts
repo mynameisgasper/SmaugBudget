@@ -80,11 +80,11 @@ export class EnvelopesComponent implements OnInit {
     //črkev male,velike,številke ne veljajo števila kot so .73, 
     if (!field.value.match(regex)) {
         field.style.setProperty("border-color", "red", "important");
-        $('.tt8').toast('show')
+        $('.tt3').toast('show')
         return 0;
     } else {
         field.style.borderColor = "#ced4da";
-        $('.tt8').toast('hide')
+        $('.tt3').toast('hide')
         return 1;
     }
   }
@@ -127,6 +127,30 @@ export class EnvelopesComponent implements OnInit {
         $('.tt4').toast('show');
         field.style.setProperty("border-color", "red", "important");
         return 0;
+    }
+  }
+
+  buttonAddEnvelopes(): void {
+    var amount = this.amountAddEnvelopes();
+
+    if (amount == 0) {
+        //DO NOTHING
+    } else {
+        //POST REQUEST - TO BE ADDED
+    }
+}
+
+
+  buttonExpenseEnvelopes(): void {
+    var amount = this.amountExpenseEnvelopes();
+    var name = this.nameExpenseEnvelopes();
+    var date = this.dateExpenseEnvelopes();
+
+
+    if (amount == 0 || name == 0 || date == 0) {
+        //DO NOTHING
+    } else {
+        //POST REQUEST - TO BE ADDED
     }
   }
 

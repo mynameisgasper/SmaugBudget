@@ -158,7 +158,7 @@
                                 <div class="input-group-prepend">
                                     <span id="currencyPrepend" class="input-group-text">{{data.currency}}</span>
                                 </div>
-                                <input type="number" #amountExpense class="form-control" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" onfocusout="amount5(this)" id="Amount2" name="inputAmount" placeholder="0.00" step="any">
+                                <input type="number" #amountExpense class="form-control" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" (focusout)="amountExpenseEnvelopes()" id="Amount2" name="inputAmount" placeholder="0.00" step="any">
                             </div>
                         </div>
                         <div class="ena"><label for="inputAmount">Currency</label><br />
@@ -206,7 +206,7 @@
 
                         <div class="ena">
                             <label for="datum">Date</label><br>
-                            <input type="date" #dateExpense id="inputDate15" name="date" onfocusout="dateCheckEnvelopes2(this)" class="form-control" value="{{data.year}}-{{data.month}}-{{data.day}}" required="required">
+                            <input type="date" #dateExpense id="inputDate15" name="date" (focusout)="dateExpenseEnvelopes()" class="form-control" value="{{data.year}}-{{data.month}}-{{data.day}}" required="required">
                         </div>
                     </div>
                     <div class="modal-footer">

@@ -54,6 +54,16 @@ export class EnvelopesEditModalComponent implements OnInit {
         $(field.id).toast('hide')
         return 1;
     }
+  }
+
+  buttonEditEnvelopes(): void{
+    var amount = this.amountEditEnvelopes();
+
+    if (amount == 0) {
+        //DO NOTHING
+    } else {
+        //POST REQUEST - TO BE ADDED
+    }
 }
 
 }
