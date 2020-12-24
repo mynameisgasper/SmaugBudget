@@ -101,12 +101,12 @@ export class BillsComponent implements OnInit {
             "icon": "faPaperclip"
         },
         {
-            "id": 2,
+            "id": 21,
             "title": "Bills This Week",
             "color": "bg-warning",
             "count": 1,
             "icon": "faCalendar",
-            "comment": "Closest bill:nTelemach - 12/30"
+            "comment": "Closest bill: Telemach - 12/30"
         }
     ],
     "bill": [{

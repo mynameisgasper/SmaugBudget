@@ -43,19 +43,19 @@ export class EnvelopesComponent implements OnInit {
       "icon":"faEnvelope",
       "count":10
     },{
-      "id":2,
+      "id":21,
       "title":"Almost Empty",
       "color":"bg-warning",
       "count":0,
       "icon":"faExclamationTriangle",
-      "comment":""
+      "comment":"No almost empty envelopes!"
     },{
-      "id":3,
+      "id":31,
       "title":"Empty",
       "color":"bg-danger",
       "count":0,
       "icon":"faRadiation",
-      "comment":""
+      "comment":"No empty envelopes!"
     }],
     "setMonth":"DEC",
     "currentMonth":"DEC",

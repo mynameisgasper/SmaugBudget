@@ -87,7 +87,7 @@ export class GoalsComponent implements OnInit {
       "count":2,
       "icon":"faBullseye"
     },{
-      "id":2,
+      "id":21,
       "title":"Goals Completed",
       "color":"green-panel",
       "count":1,
