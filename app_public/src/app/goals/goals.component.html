@@ -62,10 +62,11 @@
                     <input type="hidden" name="formType" value="addGoal">
                     <div class="modal-body">
                         <label for="inputGoal">What's your goal?</label>
-                        <input type="text" class="form-control" id="Goal" name="goal" placeholder="e.g. new car" required="required" onfocusout=nameAddGoals(this)>
+                        <input #nameGoal type="text" class="form-control" id="Goal" name="goal" placeholder="e.g. new car" required="required" (focusout)="nameAddGoals()">
                         <div id="txt1"></div>
+
                         <label for="inputCategory">Choose a Category</label>
-                        <select id="inputCategory" name="inputCategory" onfocusout="categoryCheckAddGoal(this)" class="form-control" required="required">
+                        <select #categoryGoal id="inputCategory" name="inputCategory" (focusout)="categoryCheckAddGoal()" class="form-control" required="required">
                     <option selected disabled>Select Category</option>
                     <option *ngFor="let cat of data.categories" id="category{{cat._id}}">{{cat.category}}</option>
                 </select>
@@ -77,12 +78,12 @@
                             <div class="input-group-prepend" style="max-height: 38px;">
                                 <span class="input-group-text">{{data.currency}}</span>
                             </div>
-                            <input type="number" class="form-control" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" onfocusout="amountGoals(this)" id="Amount" name="amount" placeholder="e.g. 1500" step="any" required="required">
+                            <input #amountGoal type="number" class="form-control" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" (focusout)="amountGoals()" id="Amount" name="amount" placeholder="e.g. 1500" step="any" required="required">
                             <div id="amm"></div>
                         </div>
 
                         <label for="inputDate">Planned Date</label>
-                        <input class="form-control" type="date" placeholder="2020-01-01" id="inputDateAddGoal" name="inputDateAddGoal" onfocusout="dateCheckAddGoal(this);" required="required">
+                        <input #dateGoal class="form-control" type="date" placeholder="2020-01-01" id="inputDateAddGoal" name="inputDateAddGoal" (focusout)="dateCheckAddGoal()" required="required">
 
 
                     </div>
@@ -133,7 +134,7 @@
                                 <div class="input-group-prepend" style="max-height: 38px;">
                                     <span class="input-group-text">{{data.currency}}</span>
                                 </div>
-                                <input type="number" class="form-control" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" onfocusout="amountGoalsAddMoney(this)" id="Amount2" name="inputAmount" placeholder="0.00" step="any">
+                                <input #addAmount type="number" class="form-control" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" (focusout)="amountGoalsAddMoney()" id="Amount2" name="inputAmount" placeholder="0.00" step="any">
                             </div>
                         </div>
                     </div>
@@ -173,7 +174,7 @@
                 </button>
             </div>
         </div>
-        <app-goals-progress-bar [data]="data"></app-goals-progress-bar>
+        <app-goals-progress-bar *ngFor="let item of data.goal;" [item]="item" [currency]="data.currency" [category]="data.categories"></app-goals-progress-bar>
     </div>
 
     <app-footer></app-footer>
