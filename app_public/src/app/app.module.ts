@@ -30,11 +30,8 @@ import { AccountComponent } from './account/account.component';
 import { ConfirmationComponent } from './confirmation/confirmation.component';
 import { BillsComponent } from './bills/bills.component';
 import { BillTableComponent } from './bill-table/bill-table.component';
-<<<<<<< HEAD
 import { UtilitiesMemberRowComponent } from './utilities-member-row/utilities-member-row.component';
-=======
 import { LoginGuardService } from './login-guard.service';
->>>>>>> 3d792cf7551768488d7e474d469c11f3a801d308
 
 @NgModule({
   declarations: [
