@@ -100,8 +100,7 @@ function login(requestBody, res) {
                         user.passwordSalt = null;
 
                         var response = {
-                            token: user.generateJwt(),
-                            _id: user.id
+                            token: user.generateJwt()
                         }
                         res.status(200).json(response);
                     } else {
@@ -200,9 +199,9 @@ function confirm(req, res) {
     }
 }
 
-function changeIncome(requestBody, res, session) {
-    var day = requestBody.date;
-    var paycheck = requestBody.amount;
+function changeIncome(req, res, session) {
+    var day = req.body.date;
+    var paycheck = req.body.amount;
 
     var regex = new RegExp("^[0-9]+(\.[0-9]{1,2})?$");
     var income = regex.test(paycheck);
@@ -486,7 +485,7 @@ module.exports = {
         confirm(req, res);
     },
     changeIncome: function(req, res) {
-        changeIncome(req.body, res, req.session);
+        changeIncome(req, res, req.session);
     },
     postImg,
     uploadImg,

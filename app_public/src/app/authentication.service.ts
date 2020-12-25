@@ -13,11 +13,13 @@ export class AuthenticationService {
   public userId: string = localStorage.getItem('id');
   private apiUrl = 'http://localhost:8080/api';
 
-  setLoggedIn(token: string, id: string) {
+  setLoggedIn(token: string) {
+    const decodedToken = jwt_decode(token);
+
     this.userLoggedIn = token;
-    this.userId = id;
+    this.userId = decodedToken['_id'];
     localStorage.setItem('token', token);
-    localStorage.setItem('id', id);
+    localStorage.setItem('id', decodedToken['_id']);
   }
 
   getLoggedIn(): boolean {
@@ -35,6 +37,7 @@ export class AuthenticationService {
   isJwsTokenValid(token: string): boolean {
     const currentSeconds = new Date().getTime() / 1000;
     const decodedToken = jwt_decode(token);
+
     return (decodedToken['exp'] >= currentSeconds) && (decodedToken['iat'] <= currentSeconds);
   }
 
