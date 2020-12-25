@@ -117,7 +117,7 @@ export class GoalsProgressComponent implements OnInit {
     }
   }
 
-  buttonAddGoal(): void {
+  buttonEditGoal(): void {
     var name = this.nameEditGoal();
     var amount = this.amountEditGoal();
     var date = this.dateCheckEdit();

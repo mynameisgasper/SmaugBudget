@@ -38,6 +38,7 @@ export class UtilitiesEditModalComponent implements OnInit {
     //decimalna števila z največj 2ma decimalnima mestoma ločilo je pika, prva mora biti številka!
     //črkev male,velike,številke
     if (!regex.test(field.value)) {
+        console.log(field);
         field.style.setProperty("border-color", "red", "important");
         $('.tt1').toast('show')
         return 0;
