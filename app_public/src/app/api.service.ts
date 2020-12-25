@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Converter } from './converter';
+import { AuthenticationService } from './authentication.service';
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private authorization: AuthenticationService) { }
 
   private apiUrl = 'http://localhost:8080/api';
   private response: any;
@@ -33,12 +34,18 @@ export class ApiService {
     return this.http.get(url, {params: params}).toPromise().then(response => callback(response)).catch(this.parseError);
   }
 
-  public confirm(urlCode: string, code: string, callback, error) {
-    const url: string = `${this.apiUrl}/confirm/${urlCode}/${code}`;
-    const body = {}
+  public getUser(callback, error): Promise<any> {
+    if (this.authorization.getLoggedIn()) {
+      const url: string = `${this.apiUrl}/getUser`;  
+      const options = {
+        headers: new HttpHeaders().set('Authorization', this.authorization.generateCompleteJwt())
+      }
 
-    return this.http.post(url, body).toPromise().then(response => callback(response)).catch(err => error(err));
-
+      return this.http.get(url, options).toPromise().then(response => callback(response)).catch(err => error(err));
+    }
+    else {
+      error('Not logged in');
+    }
   }
 
   private parseError(error: any): Promise<any> {

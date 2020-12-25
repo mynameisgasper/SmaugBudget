@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { DOCUMENT } from '@angular/common'
-import { ApiService } from '../api.service';
+import { AuthenticationService } from '../authentication.service';
 
 @Component({
   selector: 'app-confirmation',
@@ -13,7 +13,7 @@ export class ConfirmationComponent implements OnInit {
   url: string;
   code: string;
 
-  constructor(private route: ActivatedRoute, private router: Router, private api: ApiService, @Inject(DOCUMENT) private document: HTMLDocument) { }
+  constructor(private route: ActivatedRoute, private router: Router, private api: AuthenticationService, @Inject(DOCUMENT) private document: HTMLDocument) { }
 
   ngOnInit(): void {
     this.url = this.route.snapshot.paramMap.get('url');

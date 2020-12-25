@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation, Renderer2, ElementRef } from '@angular/core';
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
+import { ApiService } from '../api.service';
 declare var $:any;
 
 @Component({
@@ -15,9 +16,14 @@ export class DashboardComponent implements OnInit {
   @ViewChild('amountDashboard') amount: ElementRef;
   @ViewChild('dateDashboard') date: ElementRef;
 
-  constructor(private renderer: Renderer2, private elementRef: ElementRef) { }
+  constructor(private renderer: Renderer2, private elementRef: ElementRef, private api: ApiService) { }
 
   ngOnInit(): void {
+    this.api.getUser(function(result) {
+      console.log(result);
+    }, function(error) {
+      console.log(error);
+    })
   }
 
   amountDashboard1(): number {

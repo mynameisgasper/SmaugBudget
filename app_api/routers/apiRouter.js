@@ -47,7 +47,7 @@ router.post('/changePassword', authentication, (req, res) => {
     user.changePassword(req, res);
 });
 
-router.post('/getUser/', authentication, (req, res) => {
+router.get('/getUser', authentication, (req, res) => {
     user.retrieveUser(req, res);
 });
 
@@ -59,7 +59,8 @@ router.all('/confirm/:urlCode/:code', (req, res) => {
     user.confirm(req, res);
 });
 
-router.post('/changeIncome', authentication, (req, res) => {
+router.post('/changeIncome', authentication, (req, res, t) => {
+    console.log(t);
     user.changeIncome(req, res);
 });
 

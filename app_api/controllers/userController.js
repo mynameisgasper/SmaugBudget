@@ -7,6 +7,7 @@ const fs = require('fs');
 const path = require("path");
 const hasher = require('./hasher');
 const passport = require('passport');
+const jwt_decode = require('jwt-decode');
 
 function register(req, res) {
     try {
@@ -116,23 +117,33 @@ function login(requestBody, res) {
     }
 }
 
-function retrieveUser(requestBody, res) {
+function retrieveUser(req, res) {
     try {
-        var id = requestBody.id;
+        const authorization = req.headers.authorization;
+        if (authorization) {
+            const token = authorization.split(' ')[1];
+            const decodedToken = jwt_decode(token);
 
-        User.findOne({ '_id': id }, function(err, user) {
-            if (err) {
-                res.sendStatus(500);
-            } else {
-                if (user) {
-                    user.password = null;
-                    user.passwordSalt = null;
-                    res.status(200).json(user);
+            User.findById(decodedToken._id, function(err, user) {
+                if (err) {
+                    res.sendStatus(500);
                 } else {
-                    res.sendStatus(404);
+                    if (user) {
+                        user.password = null;
+                        user.passwordSalt = null;
+                        res.status(200).json(user);
+                    } else {
+                        res.sendStatus(404);
+                    }
                 }
+            });
+        }
+        else {
+            const response = {
+                status: 'Bad request'
             }
-        });
+            res.status(400).json(response);
+        }
     } catch (ex) {
         res.sendStatus(500);
     }
@@ -334,7 +345,7 @@ function getPfp(req, res) {
                         res.status(200).sendFile(path.resolve(user.profilePic));
                     }
                 } else {
-                    res.sendStatus(404);
+                    res.status(404).sendFile(path.resolve("public/images/Default_pfp.png"));
                 }
             }
         });
@@ -476,7 +487,7 @@ module.exports = {
         changePassword(req, res);
     },
     retrieveUser: function(req, res) {
-        retrieveUser(req.body, res, req.session);
+        retrieveUser(req, res, req.session);
     },
     retrieveUserEmail: function(req, res) {
         retrieveUserEmail(req.body, res, req.session);

@@ -34,6 +34,7 @@
         "hbs": "*",
         "jsonwebtoken": "^8.5.1",
         "jssha": "^3.1.2",
+        "jwt-decode": "^3.1.2",
         "mongodb": "*",
         "mongoose": "*",
         "multer": "^1.4.2",

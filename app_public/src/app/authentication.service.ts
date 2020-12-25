@@ -23,7 +23,7 @@ export class AuthenticationService {
   }
 
   getLoggedIn(): boolean {
-    if (this.userLoggedIn !== null && this.isJwsTokenValid(this.userLoggedIn)) return true;
+    if (this.userLoggedIn !== null && this.isJwtTokenValid(this.userLoggedIn)) return true;
     else return false;
   }
 
@@ -34,11 +34,15 @@ export class AuthenticationService {
     localStorage.removeItem('id');
   }
 
-  isJwsTokenValid(token: string): boolean {
+  isJwtTokenValid(token: string): boolean {
     const currentSeconds = new Date().getTime() / 1000;
     const decodedToken = jwt_decode(token);
 
     return (decodedToken['exp'] >= currentSeconds) && (decodedToken['iat'] <= currentSeconds);
+  }
+
+  generateCompleteJwt(): string {
+    return `Bearer ${this.userLoggedIn}`;
   }
 
   public register(firstname: string, lastname: string, email1: string, email2: string, password1: string, password2: string, callback, error) {
