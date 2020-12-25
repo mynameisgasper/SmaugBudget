@@ -100,7 +100,8 @@ function login(requestBody, res) {
                         user.passwordSalt = null;
 
                         var response = {
-                            token: user.generateJwt()
+                            token: user.generateJwt(),
+                            _id: user.id
                         }
                         res.status(200).json(response);
                     } else {
