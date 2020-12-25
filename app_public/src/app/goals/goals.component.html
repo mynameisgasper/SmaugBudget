@@ -58,7 +58,7 @@
                 <span aria-hidden="true">&times;</span>
             </button>
                 </div>
-                <form name="signup" method="post" action="/goals" onsubmit="return disableButton()">
+                <form name="addGoal">
                     <input type="hidden" name="formType" value="addGoal">
                     <div class="modal-body">
                         <label for="inputGoal">What's your goal?</label>
@@ -88,7 +88,7 @@
 
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" onclick="disableButton()" class="btn btn-primary">Add Goal</button>
+                        <button onclick="disableButton()" class="btn btn-primary">Add Goal</button>
                     </div>
                 </form>
             </div>
@@ -119,7 +119,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form name="addExpense" method="post" action="/goals" onsubmit="return disableButton4()">
+                <form name="addExpense">
                     <input type="hidden" name="formType" value="addToGoalWithCategory">
                     <div class="modal-body">
                         <div class="ena"><label for="inputGoal">Goal</label><br />
@@ -134,12 +134,12 @@
                                 <div class="input-group-prepend" style="max-height: 38px;">
                                     <span class="input-group-text">{{data.currency}}</span>
                                 </div>
-                                <input #addAmount type="number" class="form-control" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" (focusout)="amountGoalsAddMoney()" id="Amount2" name="inputAmount" placeholder="0.00" step="any">
+                                <input #addAmount type="number" class="form-control" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" (focusout)="amountGoalsAddMoney()" id="Amount2" name="inputAmount" placeholder="0.00" step="any" required>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" onclick="disableButton4()" class="btn btn-primary">Add</button>
+                        <button onclick="disableButton4()" class="btn btn-primary">Add</button>
                     </div>
                 </form>
             </div>

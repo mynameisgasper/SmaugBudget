@@ -85,32 +85,34 @@
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <input type="hidden" name="formType" value="editGoal">
-                <input type="hidden" name="id" value="{{item._id}}">
+            <form name="editGoal">
                 <div class="modal-body">
-                    <label for="inputGoal">What's your goal?</label>
-                    <input #editNameGoal type="text" class="form-control" id=".toastEditName{{item._id}}" name="goal" value="{{item.title}}" required="required" (focusout)="nameEditGoal()">
-                    <label for="inputCategory">Choose a Category</label>
-                    <select id="inputCategory" name="inputCategory" class="form-control" required="required">
-                        <option selected disabled>{{item.category.name}}</option>
-                        <option *ngFor="let cat of category" id="category{{cat._id}}">{{cat.category}}</option>
-                    </select>
-                    <br>
-                    <label for="inputAmount">How much do you want to save?</label>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend" style="max-height: 38px;">
-                            <span class="input-group-text">{{currency}}</span>
+                    <input type="hidden" name="formType" value="editGoal">
+                    <input type="hidden" name="id" value="{{item._id}}">
+                    <div class="modal-body">
+                        <label for="inputGoal">What's your goal?</label>
+                        <input #editNameGoal type="text" class="form-control" id=".toastEditName{{item._id}}" name="goal" value="{{item.title}}" required="required" (focusout)="nameEditGoal()">
+                        <label for="inputCategory">Choose a Category</label>
+                        <select id="inputCategory" name="inputCategory" class="form-control" required="required">
+                            <option selected disabled>{{item.category.name}}</option>
+                            <option *ngFor="let cat of category" id="category{{cat._id}}">{{cat.category}}</option>
+                        </select>
+                        <br>
+                        <label for="inputAmount">How much do you want to save?</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend" style="max-height: 38px;">
+                                <span class="input-group-text">{{currency}}</span>
+                            </div>
+                            <input #editAmountGoal type="number" class="form-control" id=".toastEditAmount{{item._id}}" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" name="Amount3" placeholder="{{item.target}}" step="any" required="required" (focusout)="amountEditGoal()">
                         </div>
-                        <input #editAmountGoal type="number" class="form-control" id=".toastEditAmount{{item._id}}" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" name="Amount3" placeholder="{{item.target}}" step="any" required="required" (focusout)="amountEditGoal()">
+                        <label for="inputDate">Planned Date</label>
+                        <input #editDateGoal class="form-control" type="date" value="{{item.year}}-{{item.month}}-{{item.day}}" id=".toastEditDate{{item._id}}" name="inputDate" required="required" (focusout)="dateCheckEdit()">
                     </div>
-                    <label for="inputDate">Planned Date</label>
-                    <input #editDateGoal class="form-control" type="date" value="{{item.year}}-{{item.month}}-{{item.day}}" id=".toastEditDate{{item._id}}" name="inputDate" required="required" (focusout)="dateCheckEdit()">
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-primary">Save Changes</button>
-            </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary">Save Changes</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

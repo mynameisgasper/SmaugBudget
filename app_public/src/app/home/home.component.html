@@ -81,7 +81,7 @@
                   </button>
               </div>
               <div class="toast-body">
-                Name may only contain letters A-Z.
+                Name can't be empty and may only contain letters A-Z.
               </div>
           </div>
           <div class="toast ml-auto tt2" role="alert" data-delay="1000" data-autohide="false">
@@ -92,7 +92,7 @@
                   </button>
               </div>
               <div class="toast-body">
-                Surname may only contain letters A-Z.
+                Surname can't be empty and may only contain letters A-Z.
               </div>
           </div>
           <div class="toast ml-auto tt5" role="alert" data-delay="1000" data-autohide="false">
@@ -103,7 +103,7 @@
                   </button>
               </div>
               <div class="toast-body">
-                E-mails don't match!
+                E-mails don't match or are empty!
               </div>
           </div>
           <div class="toast ml-auto tt4" role="alert" data-delay="1000" data-autohide="false">
@@ -139,7 +139,7 @@
       </div>
       <div class="modal-body">
           <div class="form-group">
-            <input #firstname type="text" class="form-control" id="nameup" name="nameup" placeholder="Name" (focusout)="firstNameIndex()" required="required">	
+            <input #firstname type="text" class="form-control" id="nameup" name="nameup" placeholder="Name" (focusout)="firstNameIndex()">	
           </div>
           <div class="form-group">
             <input #lastname type="text" class="form-control" id="surnameup" name="surnameup" placeholder="Surname" (focusout)="lastNameIndex()" required="required">	

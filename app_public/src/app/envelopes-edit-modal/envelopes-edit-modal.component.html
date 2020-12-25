@@ -23,7 +23,7 @@
                 </button>
             </div>
             <!--- ADD FORM --->
-            <form name="addEnvelope" method="post" action="/envelopes">
+            <form name="addEnvelope">
                 <div class="modal-body">
                     <div class="ena"><label for="inputAmount">New Budget</label>
                         <div class="input-group mb-3">
@@ -32,13 +32,13 @@
                             </div>
                             <input type="hidden" value="{{Envelope._id}}" name="id">
                             <input type="hidden" name="formType" value="editEnvelope" />
-                            <input type="number" #amountEdit id=".amountEditEnvelopes{{Envelope._id}}" name="inputAmount" class="form-control" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" (focusout)="amountEditEnvelopes()" placeholder="0.00" step="any">
+                            <input type="number" #amountEdit id=".amountEditEnvelopes{{Envelope._id}}" name="inputAmount" class="form-control" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" (focusout)="amountEditEnvelopes()" placeholder="0.00" step="any" required="required">
                         </div>
                         <div id="vnos{{Envelope._id}}"></div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" id="{{Envelope._id}}" onclick="disableButtonEditEnvelopes3(this)" class="btn btn-primary">Add</button>
+                    <button id="{{Envelope._id}}" (click)="buttonEditEnvelopes()" class="btn btn-primary">Add</button>
                 </div>
             </form>
             <!--- DELETE FORM --->
