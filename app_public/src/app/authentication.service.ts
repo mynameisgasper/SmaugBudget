@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import jwt_decode from "jwt-decode";
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +18,14 @@ export class AuthenticationService {
   }
 
   getLoggedIn(): boolean {
-    if (this.userLoggedIn !== null) return true;
+    if (this.userLoggedIn !== null && this.isJwsTokenValid(this.userLoggedIn)) return true;
     else return false;
+  }
+
+  isJwsTokenValid(token: string): boolean {
+    const currentSeconds = new Date().getTime() / 1000;
+    const decodedToken = jwt_decode(token);
+    return (decodedToken['exp'] >= currentSeconds) && (decodedToken['iat'] <= currentSeconds);
   }
 
   public register(firstname: string, lastname: string, email1: string, email2: string, password1: string, password2: string, callback, error) {
