@@ -138,7 +138,32 @@ export class GoalsComponent implements OnInit {
         $('.toastAddMoneyForm').toast('hide');
         return 1;
     }
-}
+  }
+
+  buttonAddGoal(): void {
+    var name = this.nameAddGoals();
+    var category = this.categoryCheckAddGoal();
+    var amount = this.amountGoals();
+    var date = this.dateCheckAddGoal();
+    
+    if (name == 0 || category == 0 || amount == 0 || date == 0 ) {
+        //DO NOTHING
+    } else {
+        //POST REQUEST - TO BE ADDED
+    }
+  }
+
+  buttonGoalsAddMoney(): void {
+    var amount = this.amountGoalsAddMoney();
+
+    
+    if (amount == 0) {
+        //DO NOTHING
+    } else {
+        //POST REQUEST - TO BE ADDED
+    }
+  }
+
 
   data = {
     "fileName":"goals",

@@ -116,4 +116,17 @@ export class GoalsProgressComponent implements OnInit {
         return 0;
     }
   }
+
+  buttonAddGoal(): void {
+    var name = this.nameEditGoal();
+    var amount = this.amountEditGoal();
+    var date = this.dateCheckEdit();
+    
+    if (name == 0 || amount == 0 || date == 0 ) {
+        //DO NOTHING
+    } else {
+        //POST REQUEST - TO BE ADDED
+    }
+  }
+
 }
