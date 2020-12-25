@@ -8,7 +8,18 @@ export class AuthenticationService {
 
   constructor(private http: HttpClient) { }
 
+  public userLoggedIn: string = localStorage.getItem('token');
   private apiUrl = 'http://localhost:8080/api';
+
+  setLoggedIn(token: string) {
+    this.userLoggedIn = token;
+    localStorage.setItem('token', token);
+  }
+
+  getLoggedIn(): boolean {
+    if (this.userLoggedIn !== null) return true;
+    else return false;
+  }
 
   public register(firstname: string, lastname: string, email1: string, email2: string, password1: string, password2: string, callback, error) {
     const url: string = `${this.apiUrl}/register`;

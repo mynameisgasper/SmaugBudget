@@ -30,6 +30,7 @@ import { AccountComponent } from './account/account.component';
 import { ConfirmationComponent } from './confirmation/confirmation.component';
 import { BillsComponent } from './bills/bills.component';
 import { BillTableComponent } from './bill-table/bill-table.component';
+import { LoginGuardService } from './login-guard.service';
 
 @NgModule({
   declarations: [
@@ -73,43 +74,50 @@ import { BillTableComponent } from './bill-table/bill-table.component';
       },
       {
         path: 'dashboard',
-        component: DashboardComponent
+        component: DashboardComponent, 
+        canActivate:[LoginGuardService]
       },
       {
         path: 'envelopes',
-        component: EnvelopesComponent
+        component: EnvelopesComponent, 
+        canActivate:[LoginGuardService]
       },
       {
         path: 'goals',
-        component: GoalsComponent
+        component: GoalsComponent, 
+        canActivate:[LoginGuardService]
       },
       {
         path: 'utilities',
-        component: UtilitiesComponent
+        component: UtilitiesComponent, 
+        canActivate:[LoginGuardService]
       },
       {
         path: 'history',
-        component: HistoryComponent
+        component: HistoryComponent, 
+        canActivate:[LoginGuardService]
       },
       {
         path: 'account',
-        component: AccountComponent
+        component: AccountComponent, 
+        canActivate:[LoginGuardService]
       },
       {
         path: 'confirm/:url',
-        component: ConfirmationComponent
+        component: ConfirmationComponent, 
+        canActivate:[LoginGuardService]
       },
       {
         path: 'confirm/:url/:code',
-        component: ConfirmationComponent
+        component: ConfirmationComponent, 
+        canActivate:[LoginGuardService]
       },
       {
         path: 'bills',
-        component: BillsComponent
+        component: BillsComponent, 
+        canActivate:[LoginGuardService]
       }
-      
-    ],
-    {
+    ], {
       onSameUrlNavigation: 'reload',
       anchorScrolling: 'enabled',
       enableTracing: false
