@@ -96,7 +96,7 @@ export class HomeComponent implements OnInit {
         catch {}
 
         console.log(result);
-        this.api.setLoggedIn(result.token);
+        this.api.setLoggedIn(result.token, result._id);
         this.router.navigate(['/dashboard']);
       }, (error) => {
         this.api.userLoggedIn = null;

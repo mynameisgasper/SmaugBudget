@@ -10,11 +10,14 @@ export class AuthenticationService {
   constructor(private http: HttpClient) { }
 
   public userLoggedIn: string = localStorage.getItem('token');
+  public userId: string = localStorage.getItem('id');
   private apiUrl = 'http://localhost:8080/api';
 
-  setLoggedIn(token: string) {
+  setLoggedIn(token: string, id: string) {
     this.userLoggedIn = token;
+    this.userId = id;
     localStorage.setItem('token', token);
+    localStorage.setItem('id', id);
   }
 
   getLoggedIn(): boolean {
@@ -50,7 +53,6 @@ export class AuthenticationService {
       'email': email,
       'password': password,
     }
-    console.log("acwadawda " + callback)
     return this.http.post(url, body).toPromise().then(response => callback(response)).catch(err => error(err));
   }
 
