@@ -45,7 +45,7 @@ connectionsSchema.add({
     envelopes: [envelopesSchema]
 });
 
-userSchema.method('generateJwt', () => {
+userSchema.methods.generateJwt = function() {
     const expirationTime = new Date();
     expirationTime.setDate(expirationTime.getDate() + 7);
   
@@ -56,7 +56,7 @@ userSchema.method('generateJwt', () => {
       lastname: this.lastname,
       exp: parseInt(expirationTime.getTime() / 1000, 10)
     }, process.env.JWT_PASS || 'jwtsigntoken1!');
-});
+}
 
 mongoose.model('Connections', connectionsSchema, 'Connections');
 mongoose.model('User', userSchema, 'User');
