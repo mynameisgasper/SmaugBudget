@@ -54,6 +54,7 @@ userSchema.methods.generateJwt = function() {
       email: this.email,
       firstname: this.firstname,
       lastname: this.lastname,
+      accessLevel: this.accessLevel,
       exp: parseInt(expirationTime.getTime() / 1000, 10)
     }, process.env.JWT_PASS || 'jwtsigntoken1!');
 }

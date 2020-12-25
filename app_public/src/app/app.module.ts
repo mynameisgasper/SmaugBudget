@@ -106,8 +106,7 @@ import { LoginGuardService } from './login-guard.service';
       },
       {
         path: 'confirm/:url',
-        component: ConfirmationComponent, 
-        canActivate:[LoginGuardService]
+        component: ConfirmationComponent
       },
       {
         path: 'confirm/:url/:code',

@@ -11,10 +11,13 @@ export class AuthenticationService {
 
   public userLoggedIn: string = localStorage.getItem('token');
   public userId: string = localStorage.getItem('id');
+
+  private accessLevel: number
   private apiUrl = 'http://localhost:8080/api';
 
   setLoggedIn(token: string) {
     const decodedToken = jwt_decode(token);
+    this.accessLevel = decodedToken['accessLevel'];
 
     this.userLoggedIn = token;
     this.userId = decodedToken['_id'];
@@ -37,12 +40,16 @@ export class AuthenticationService {
   isJwtTokenValid(token: string): boolean {
     const currentSeconds = new Date().getTime() / 1000;
     const decodedToken = jwt_decode(token);
-
+    
     return (decodedToken['exp'] >= currentSeconds) && (decodedToken['iat'] <= currentSeconds);
   }
 
   generateCompleteJwt(): string {
     return `Bearer ${this.userLoggedIn}`;
+  }
+
+  getAccessLevel(): number {
+    return this.accessLevel;
   }
 
   public register(firstname: string, lastname: string, email1: string, email2: string, password1: string, password2: string, callback, error) {

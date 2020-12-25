@@ -71,7 +71,7 @@ export class HomeComponent implements OnInit {
         }
         catch {}
         
-        this.router.navigate(['/confirm', response.urlCode]);
+        this.router.navigate(['confirm', response.urlCode]);
       }, (error) => {
         console.log(error);
       });

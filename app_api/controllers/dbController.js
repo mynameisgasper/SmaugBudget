@@ -196,16 +196,16 @@ function createDummyAccounts(requestBody, res) {
             connection.save();
         }
 
-        let user = new User({
-            firstname: "Basic",
+        let userBronze = new User({
+            firstname: "Bronze",
             lastname: "User",
-            email: "basic@smaug.com",
-            password: "fef39973b671dcfc50b3318d3d8c911ad34672a2482f7b331b8099c1af8b9279bb2bde1708551f52e9356b573e4923194895cd77d7557996df758599b94b721c",
-            passwordSalt: "tempSalt",
+            email: "bronze@smaug.com",
+            password: "$2a$10$3fD2JXL3.y45.XZyOCGZP.DhUIosphXrYOdWCZApERT.rtP.G3X6W",
+            passwordSalt: "$2a$10$3fD2JXL3.y45.XZyOCGZP.",
             paycheck: 1100,
             paycheckLastMonth: 1500,
             paycheckDate: 18,
-            isPremium: 0,
+            accessLevel: 0,
             language: "English",
             categories: categoriesArray,
             envelopes: envelopesArray,
@@ -214,18 +214,36 @@ function createDummyAccounts(requestBody, res) {
             goals: goalsArray,
             friendgroups: friendGroupsArray,
             connections: connectionArray
-
         });
-        let userPremium = new User({
-            firstname: "Premium",
+        let userSilver = new User({
+            firstname: "Silver",
             lastname: "User",
-            email: "premium@smaug.com",
-            password: "7079675d6a49115d18d5f00b1a9be5ae73d0225f5ee8100807e4248846ee50803c130536ce8fc3223b0a22af390b67a013589bdc9e95ac0990ce6eac83de3526",
-            passwordSalt: "tempSalt",
+            email: "silver@smaug.com",
+            password: "$2a$10$l/8Qmu7hqkGrmdJf1oEmLenyP11lB5P6/YV27DBYI6Qjj/4mX/F3m",
+            passwordSalt: "$2a$10$l/8Qmu7hqkGrmdJf1oEmLe",
+            paycheck: 1100,
+            paycheckLastMonth: 1500,
+            paycheckDate: 18,
+            accessLevel: 1,
+            language: "English",
+            categories: categoriesArray,
+            envelopes: envelopesArray,
+            expense: expensesArray,
+            bills: billsArray,
+            goals: goalsArray,
+            friendgroups: friendGroupsArray,
+            connections: connectionArray
+        });
+        let userGold = new User({
+            firstname: "Gold",
+            lastname: "User",
+            email: "gold@smaug.com",
+            password: "$2a$10$wB/vyQL5sOFvfqSb.012I.lgopnxXB1RTLAExqoAt.4FOcmXR0lUG",
+            passwordSalt: "$2a$10$wB/vyQL5sOFvfqSb.012I.",
             paycheck: 1500,
             paycheckLastMonth: 1500,
             paycheckDate: 18,
-            isPremium: 2,
+            accessLevel: 2,
             language: "English",
             categories: categoriesArray,
             envelopes: envelopesArray,
@@ -236,8 +254,9 @@ function createDummyAccounts(requestBody, res) {
             connections: connectionArray
 
         });
-        user.save();
-        userPremium.save();
+        userBronze.save();
+        userSilver.save();
+        userGold.save();
         res.status(200).json();
     } catch (ex) {
         console.log(ex);

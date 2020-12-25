@@ -135,7 +135,7 @@ router.post('/deleteGoal', authentication, (req, res) => {
 });
 
 
-router.post('/removeAllDbData', authentication, (req, res) => {
+router.post('/removeAllDbData', (req, res) => {
     dbController.removeAllDbData(req, res);
 });
 
