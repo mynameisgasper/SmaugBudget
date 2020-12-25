@@ -141,8 +141,7 @@ export class HomeComponent implements OnInit {
   emailIndex() {
     var email1 = this.email1.nativeElement;
     var email2 = this.email2.nativeElement;
-    if (!this.validateForm(email1) || !this.validateForm(email2)){
-      console.log("HAhA")
+    if (!this.validateForm(email1.value) || !this.validateForm(email2.value)){
       email1.style.borderColor = "red";
       email2.style.borderColor = "red";
       $('.tt5').toast('show')
@@ -225,8 +224,11 @@ export class HomeComponent implements OnInit {
     }
 
     validateForm(field: string): number {
-      if (field == "") {
+
+      if (!field) {
+         console.log()
         return 0;
       }
+      return 1;
     }
 }

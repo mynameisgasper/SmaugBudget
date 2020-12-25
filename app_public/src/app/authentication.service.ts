@@ -17,8 +17,19 @@ export class AuthenticationService {
     localStorage.setItem('token', token);
   }
 
+  public jePrijavljen(): boolean {
+    const zeton: string = this.userLoggedIn;
+    if (zeton) {
+      const koristnaVsebina = JSON.parse(atob(zeton.split('.')[1]));
+      console.log(koristnaVsebina);
+      return koristnaVsebina.datumPoteka > (Date.now() / 1000);
+    } else {
+      return false;
+    }
+  }
+
   getLoggedIn(): boolean {
-    if (this.userLoggedIn !== null && this.isJwsTokenValid(this.userLoggedIn)) return true;
+    if (this.userLoggedIn !== null && this.jePrijavljen()) return true;
     else return false;
   }
 
