@@ -87,18 +87,18 @@
                 <span aria-hidden="true">&times;</span>
                 </button>
                 </div>
-                <form name="signup" method="post" onsubmit="return disableButton()">
+                <form name="addBill">
                     <input type="hidden" name="formType" value="addBill">
                     <div class="modal-body">
                         <div class="ena"><label for="inputGoal">Category</label><br/>
-                            <select id="inputCategory" name="inputCategory" class="form-control" required>
-                        <option value="" selected disabled>Select Category</option>
-                        <option *ngFor="let item of data.categories" id="{{item._id}}" value="{{item._id}}" name="category">{{item.name}}</option>
-                    </select>
+                        <select id="inputCategory" name="inputCategory" class="form-control" required>
+                            <option value="" selected disabled>Select Category</option>
+                            <option *ngFor="let item of data.categories" id="{{item._id}}" value="{{item._id}}" name="category">{{item.name}}</option>
+                        </select>
                         </div>
                         <div class="checker">
                             <label for="Payee">Payee</label><br/>
-                            <input type="text" #nameAdd id="Payee" name="Payee" class="form-control" (focusout)="nameAddBills()" placeholder="e.g. Elektro Ljubljana d.d." required="required">
+                            <input type="text" #nameAdd id="Payee" name="Payee" class="form-control" (focusout)="nameAddBills()" placeholder="e.g. Elektro Ljubljana d.d." required>
                         </div>
                         <div id="alerts"></div>
                         <div class="ena">

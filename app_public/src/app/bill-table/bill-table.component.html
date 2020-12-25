@@ -67,49 +67,51 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <input type="hidden" value="editBill" name="formType" />
-            <input type="hidden" value="{{data._id}}" name="billId" />
-            <div class="modal-body">
-                <div class="ena">
-                    <label for="Category">Category</label><br>
-                    <select id="inputCategory{{data._id}}" name="inputCategory" class="form-control">
-                            <option selected>{{data.category}}</option>
-                            <option *ngFor ="let category of Categories" id="categoryName{{category._id}}">{{category.name}}</option>
-                    </select>
-                </div>
-                <div class="ena">
-                    <label for="Payee">Payee</label><br>
-                    <input type="text" #nameEdit id=".billEditNameToast{{data._id}}" name="Payee2" (focusout)="nameEditBills()" class="form-control" value="{{data.recipient}}" required="required">
-                    <div id="alarm{{data._id}}"></div>
-                </div>
-
-                <div class="ena">
-                    <label for="Amount">Amount</label><br>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">{{Currency}}</span>
-                        </div>
-                        <input type="number" #amountEdit id=".billEditAmountToast{{data._id}}" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" name="Amount2" (focusout)="amountEditBills()" class="form-control" value="{{data.value}}" step="any" required="required">
+            <form name="editBill">
+                <input type="hidden" value="editBill" name="formType" />
+                <input type="hidden" value="{{data._id}}" name="billId" />
+                <div class="modal-body">
+                    <div class="ena">
+                        <label for="Category">Category</label><br>
+                        <select id="inputCategory{{data._id}}" name="inputCategory" class="form-control">
+                                <option selected>{{data.category}}</option>
+                                <option *ngFor ="let category of Categories" id="categoryName{{category._id}}">{{category.name}}</option>
+                        </select>
                     </div>
-                    <div id="amm{{data._id}}"></div>
+                    <div class="ena">
+                        <label for="Payee">Payee</label><br>
+                        <input type="text" #nameEdit id=".billEditNameToast{{data._id}}" name="Payee2" (focusout)="nameEditBills()" class="form-control" value="{{data.recipient}}" required="required">
+                        <div id="alarm{{data._id}}"></div>
+                    </div>
+
+                    <div class="ena">
+                        <label for="Amount">Amount</label><br>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">{{Currency}}</span>
+                            </div>
+                            <input type="number" #amountEdit id=".billEditAmountToast{{data._id}}" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" name="Amount2" (focusout)="amountEditBills()" class="form-control" value="{{data.value}}" step="any" required="required">
+                        </div>
+                        <div id="amm{{data._id}}"></div>
+                    </div>
+                    <div class="ena">
+                        <label for="date">Date due</label><br>
+                        <input class="form-control" #dateEdit type="date" value="{{data.year}}-{{data.month}}-{{data.day}}" id=".billEditDateToast{{data._id}}" name="inputDate" (focusout)="dateEditBills()" required="required">
+                    </div>
+                    <div class="ena">
+                        <b>How often?</b><br>
+                        <input type="radio" name="radio" value="once" required>
+                        <label for="once">Once</label><br/>
+                        <input type="radio" name="radio" value="monthly">
+                        <label for="monthly">Monthly</label><br/>
+                        <input type="radio" name="radio" value="yearly">
+                        <label for="yearly">Yearly</label><br/>
+                    </div>
                 </div>
-                <div class="ena">
-                    <label for="date">Date due</label><br>
-                    <input class="form-control" #dateEdit type="date" value="{{data.year}}-{{data.month}}-{{data.day}}" id=".billEditDateToast{{data._id}}" name="inputDate" (focusout)="dateEditBills()" required="required">
+                <div class="modal-footer">
+                    <button class="btn btn-primary" id="{{data._id}}" (click)="buttonEditBills()">Save Changes</button>
                 </div>
-                <div class="ena">
-                    <b>How often?</b><br>
-                    <input type="radio" name="radio" value="once" required>
-                    <label for="once">Once</label><br/>
-                    <input type="radio" name="radio" value="monthly">
-                    <label for="monthly">Monthly</label><br/>
-                    <input type="radio" name="radio" value="yearly">
-                    <label for="yearly">Yearly</label><br/>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-primary" id="{{data._id}}" (click)="buttonEditBills()">Save Changes</button>
-            </div>
+            </form>
         </div>
     </div>
 </div>
