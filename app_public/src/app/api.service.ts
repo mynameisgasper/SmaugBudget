@@ -55,7 +55,7 @@ export class ApiService {
       'email': email,
       'password': password,
     }
-
+    console.log(this.response);
     return this.http.post(url, body).toPromise().then(response => callback(response)).catch(err => error(err));
   }
 
