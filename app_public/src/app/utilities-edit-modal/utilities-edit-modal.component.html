@@ -34,34 +34,29 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <div class="row">
-                    <table class="table" id="table{{Friend.id}}">
-                        <thead>
-                        <tr>
-                            <th scope="col">Name</th>
-                            <th scope="col">Price</th>
-                            <th scope="col">Paid</th>
-                            <th scope="col">Balance</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let member of Friend.groupMember">
-                                <td>{{member.name}}</td>
-                                <td><input type="number" #price (focusout)="valueGroupsUtilities()" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" id=".price{{member.id}}" name="price{{member.id}}" class="form-control"  placeholder="Bill amount" step="any" required="required"></td>
-                                <td><input type="number" #paid (focusout)="valueGroupsUtilities2()" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" id=".price{{member.id}}" name="paid{{member.id}}" class="form-control"  placeholder="Money paid"step="any" required="required"></td>
-                                <td>{{member.amount}}</td>
+            <form name="groups">
+                <div class="modal-body">
+                    <div class="row">
+                        <table class="table" id="table{{Friend.id}}">
+                            <thead>
+                            <tr>
+                                <th scope="col">Name</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Paid</th>
+                                <th scope="col">Balance</th>
                             </tr>
-                            <div id="amm"></div>
-                            <div id="bmm"></div>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                <tr [app-utilities-member-row] *ngFor="let member of Friend.groupMember" [member]="member"></tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="submit" id=".sum{{Friend.id}}" onclick="disableButton('idtlenotprosm')" class="btn btn-primary">Save changes</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
+                <div class="modal-footer">
+                    <button id=".sum{{Friend.id}}" (click)="disableButtonMember()" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

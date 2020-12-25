@@ -30,6 +30,7 @@ import { AccountComponent } from './account/account.component';
 import { ConfirmationComponent } from './confirmation/confirmation.component';
 import { BillsComponent } from './bills/bills.component';
 import { BillTableComponent } from './bill-table/bill-table.component';
+import { UtilitiesMemberRowComponent } from './utilities-member-row/utilities-member-row.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { BillTableComponent } from './bill-table/bill-table.component';
     AccountComponent,
     BillsComponent,
     BillTableComponent,
+    UtilitiesMemberRowComponent,
   ],
   imports: [
     BrowserModule,
