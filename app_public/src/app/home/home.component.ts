@@ -2,6 +2,7 @@ import { Component, Inject, OnInit, ViewEncapsulation, ElementRef, ViewChild, Re
 import { DOCUMENT } from '@angular/common'
 import { Router } from "@angular/router"
 import { ApiService } from '../api.service'
+import { AuthenticationService } from '../authentication.service';
 declare var $:any;
 
 @Component({
@@ -13,7 +14,7 @@ declare var $:any;
 export class HomeComponent implements OnInit {
 
   constructor(
-    private api: ApiService,
+    private api: AuthenticationService,
     private router: Router,
     private renderer: Renderer2,
     private elementRef: ElementRef,
@@ -88,11 +89,13 @@ export class HomeComponent implements OnInit {
         try {
           var elementList = this.document.querySelectorAll('.modal-open');
           for (let i = 0; i < elementList.length; i++) {
-            document.removeChild(elementList[i])
+            elementList[i].removeAttribute('class');
+            elementList[i].removeAttribute('style');
           }
         }
         catch {}
 
+        console.log(result);
         this.router.navigate(['/dashboard']);
       }, (error) => {
         console.log(error);
