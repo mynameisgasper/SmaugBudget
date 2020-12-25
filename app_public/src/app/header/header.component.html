@@ -50,7 +50,7 @@
                 <a class="dropdown-item" onclick="toggleDarkMode();loadGraphs();" id="appearanceDark" style="display: none;"><fa-icon [icon]="faAdjust"></fa-icon> Appearance: Dark</a>
                 <a class="dropdown-item" onclick="toggleDarkMode();loadGraphs();" id="appearanceLight"><fa-icon [icon]="faAdjust"></fa-icon> Appearance: Light</a>
                 <hr>
-                <a class="dropdown-item" routerLink=""><fa-icon [icon]="faSignOutAlt"></fa-icon> Logout</a>
+                <a class="dropdown-item" (click)="logout()"><fa-icon [icon]="faSignOutAlt"></fa-icon> Logout</a>
             </div>
             </li>
         </ul>

@@ -25,6 +25,13 @@ export class AuthenticationService {
     else return false;
   }
 
+  logout(): void {
+    this.userLoggedIn = null;
+    this.userId = null;
+    localStorage.removeItem('token');
+    localStorage.removeItem('id');
+  }
+
   isJwsTokenValid(token: string): boolean {
     const currentSeconds = new Date().getTime() / 1000;
     const decodedToken = jwt_decode(token);

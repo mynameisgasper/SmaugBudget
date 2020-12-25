@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { faCog, faAdjust, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { AuthenticationService } from '../authentication.service';
 
 @Component({
   selector: 'app-header',
@@ -15,9 +17,13 @@ export class HeaderComponent implements OnInit {
   faAdjust = faAdjust;
   faSignOutAlt = faSignOutAlt;
 
-  constructor() { }
+  constructor(private router: Router, private auth: AuthenticationService,) { }
 
   ngOnInit(): void {
   }
 
+  logout(): void {
+    this.auth.logout();
+    this.router.navigate(['']);
+  }
 }

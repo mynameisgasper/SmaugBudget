@@ -33,6 +33,9 @@ export class HomeComponent implements OnInit {
 
 
   ngOnInit(): void {
+    if (this.api.getLoggedIn()) {
+      this.router.navigate(['dashboard']);
+    }
   }
 
   ngAfterViewInit(): void {
@@ -97,7 +100,7 @@ export class HomeComponent implements OnInit {
 
         console.log(result);
         this.api.setLoggedIn(result.token, result._id);
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['dashboard']);
       }, (error) => {
         this.api.userLoggedIn = null;
         console.log(error);
