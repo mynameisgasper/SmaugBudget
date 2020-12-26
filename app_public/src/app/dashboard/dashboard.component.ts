@@ -17,6 +17,8 @@ export class DashboardComponent implements OnInit {
   @ViewChild('dateDashboard') date: ElementRef;
 
   pencilIcon = faPencilAlt;
+  message = "Welcome to dashboard!";
+  welcomeMessage = "A simple overview of your spending.";
   cards: Card[];
   alerts: Alert[];
   analytics: Array<Object>;
@@ -395,90 +397,5 @@ export class DashboardComponent implements OnInit {
     monthArray[11] = 'DEC';
 
     return monthArray[month];
-  }
-
-  data = {
-    "fileName":"dashboard",
-    "graph":{
-      "used":true,
-      "name":"DashboardChart"
-    },
-    "message":"Welcome to dashboard!",
-    "welcomeMessage":"A simple overview of your spending.",
-    "alertSection":"Alert Section",
-    "overview":"Last month overview",
-    "incomeRow":"Income",
-    "expensesRow":"Expenses",
-    "balanceRow":"Balance",
-    "analyticsField":"Analytics",
-    "incomeModalTitle":"Update your Income",
-    "incomeModalPlaceholderIncome":"Enter your income",
-    "incomeModalPlaceholderDate":"Day in month you receive paycheck",
-    "incomeModalSaveButton":"Save Changes",
-    "incomeModalCloseButton":"Close",
-    "logout":"Logout",
-    "DASHBOARD":"DASHBOARD",
-    "ENVELOPES":"ENVELOPES",
-    "GOALS":"GOALS",
-    "BILLS":"BILLS",
-    "HISTORY":"HISTORY",
-    "UTILITIES":"UTILITIES",
-    "user":"User",
-    "settings":"Settings",
-    "appearance":"Appearance",
-    "light":"Light",
-    "dark":"Dark",
-    "noData":"No data",
-    "card":[
-    {
-      "id":1,
-      "title":"Budget Left",
-      "color":"bg-primary",
-      "count":435,
-      "icon":"faUniversity",
-      "comment":""
-    },
-    {
-      "id":2,
-      "title":"Expenses Left",
-      "color":"bg-primary",
-      "count":376,
-      "icon":"faCoins",
-      "comment":""
-    },
-    {
-      "id":3,
-      "title":"Savings",
-      "color":"bg-primary",
-      "count":59,
-      "icon":"faPiggyBank",
-      "comment":""
-    }],
-    "analytics":[
-    {
-      "rowName":"Most money spent on",
-      "color":"rgb(50, 168, 156)",
-      "category":"Car"
-    },
-    {
-      "rowName":"Most times purchased",
-      "color":"rgb(50, 168, 156)",
-      "category":"Car"
-    }],
-    "incomeLastMonth":1500,
-    "expensesLastMonth":310,
-    "alert":[
-    {
-      "type":"alert-success",
-      "name":"GOALS",
-      "text":"1 goal completed"
-    }],
-    "alertLength":1,
-    "id":"5fc600b4507a6800112af56e",
-    "currency":"EUR",
-    "chartData": [310],
-    "chartColors": [{backgroundColor: ['rgb(50, 168, 156)']}],
-    "chartLabels": ["Car"],
-    "chartType": "doughnut"
   }
 }
