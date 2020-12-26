@@ -210,26 +210,55 @@ function confirm(req, res) {
     }
 }
 
-function changeIncome(req, res, session) {
-    var day = req.body.date;
-    var paycheck = req.body.amount;
+function changeIncome(req, res) {
+    try {
+        const authorization = req.headers.authorization;
+        if (authorization) {
+            const token = authorization.split(' ')[1];
+            const decodedToken = jwt_decode(token);
 
-    var regex = new RegExp("^[0-9]+(\.[0-9]{1,2})?$");
-    var income = regex.test(paycheck);
+            var day = req.body.date;
+            var paycheck = req.body.amount;
 
-    if (income && day > 0 && day < 29) {
-        User.findOne({ 'email': session.user.email }, function name(err, user) {
-            if (err || user == null) {
-                res.sendStatus(404);
+            var regex = new RegExp("^[0-9]+(\.[0-9]{1,2})?$");
+            var income = regex.test(paycheck);
+
+            if (income && day > 0 && day < 29) {
+                User.findById(decodedToken._id, function name(err, user) {
+                    if (err || user == null) {
+                        const response = {
+                            status: 'Not found'
+                        }
+                        res.status(404).json(response);
+                    } else {
+                        user.paycheck = paycheck,
+                        user.paycheckDate = day
+                        user.save();
+
+                        const response = {
+                            status: 'Success'
+                        }
+                        res.status(200).json(response);
+                    }
+                });
             } else {
-                user.paycheck = paycheck,
-                    user.paycheckDate = day
-                user.save();
-                res.sendStatus(200);
+                const response = {
+                    status: 'Bad request'
+                }
+                res.status(400).json(response);
             }
-        });
-    } else {
-        res.sendStatus(400);
+        }
+        else {
+            const response = {
+                status: 'Unauthorized'
+            }
+            res.status(401).json(response);
+        }
+    } catch (ex) {
+        const response = {
+            status: 'Server error'
+        }
+        res.status(500).json(response);
     }
 }
 
@@ -496,7 +525,7 @@ module.exports = {
         confirm(req, res);
     },
     changeIncome: function(req, res) {
-        changeIncome(req, res, req.session);
+        changeIncome(req, res);
     },
     postImg,
     uploadImg,

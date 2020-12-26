@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { ChartsModule } from 'ng2-charts';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { HomeComponent } from './home/home.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -67,6 +68,7 @@ import { SilverGuardService } from './silver-guard.service';
     HttpClientModule,
     ChartsModule,
     FontAwesomeModule,
+    ModalModule.forRoot(),
     RouterModule.forRoot([
       {
         path: '',

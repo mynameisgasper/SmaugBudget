@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild, ViewEncapsulation, Renderer2, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation, Renderer2, ElementRef, TemplateRef } from '@angular/core';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { Alert } from '../alert';
 import { ApiService } from '../api.service';
@@ -15,6 +16,8 @@ export class DashboardComponent implements OnInit {
 
   @ViewChild('amountDashboard') amount: ElementRef;
   @ViewChild('dateDashboard') date: ElementRef;
+
+  modalRef: BsModalRef;
 
   pencilIcon = faPencilAlt;
   message = "Welcome to dashboard!";
@@ -40,7 +43,7 @@ export class DashboardComponent implements OnInit {
   chartColors: Array<Object> = [];
   chartLabels: Array<String> = [];
 
-  constructor(private api: ApiService) { }
+  constructor(private api: ApiService, private modalService: BsModalService) { }
 
   ngOnInit(): void {
     this.api.getUser().then(result => {
@@ -53,45 +56,48 @@ export class DashboardComponent implements OnInit {
     }).catch(error => console.log(error));
   }
 
-  amountDashboard1(): number {
-    const field = this.amount.nativeElement;
+  amountDashboard1(ammountField: any): number {
     var regex = new RegExp("^[0-9]+(\.[0-9]{1,2})?$");
     //decimalna števila z največj 2ma decimalnima mestoma ločilo je pika!
     //črkev male,velike,številke ne veljajo števila kot so .73, 
-    if(!regex.test(field.value)){
-      field.style.setProperty("border-color", "red", "important");
+    if(!regex.test(ammountField.value)){
+      ammountField.style.setProperty("border-color", "red", "important");
       $('.tt1').toast('show');
       return 0;
     } 
     else {
-      field.style.borderColor = "#ced4da";
+      ammountField.style.borderColor = "#ced4da";
       $('.tt1').toast('hide');
       return 1;
     }
   }
 
-  dateDashboard1(): number {
-    const field = this.date.nativeElement;
-    if (field.value < 1 || field.value > 28) {
-      field.style.setProperty("border-color", "red", "important");
+  dateDashboard1(dateField: any): number {
+    if (dateField.value < 1 || dateField.value > 28) {
+      dateField.style.setProperty("border-color", "red", "important");
       $('.tt2').toast('show');
       return 0;
     } 
     else {
-      field.style.borderColor = "#ced4da";
+      dateField.style.borderColor = "#ced4da";
       $('.tt2').toast('hide');
       return 1;
     }
   }
 
-  buttonDashboard(): void{
-    var amount = this.amountDashboard1()
-    var date = this.dateDashboard1();
+  buttonDashboard(ammountField: any, dateField: any, template: TemplateRef<any>): void {
+    var amount = this.amountDashboard1(ammountField)
+    var date = this.dateDashboard1(dateField);
     if (amount == 0 || date == 0) {
       //DO NOTHING
     } 
     else {
       //POST REQUEST - TO BE ADDED
+      this.api.changeIncome(ammountField.value, dateField.value).then(result => {
+        this.modalRef.hide();
+      }).catch(error => {
+        console.log(error);
+      });
     }
   }
 
@@ -397,5 +403,13 @@ export class DashboardComponent implements OnInit {
     monthArray[11] = 'DEC';
 
     return monthArray[month];
+  }
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
+  }
+
+  closeModal(){
+    this.modalRef.hide();
   }
 }

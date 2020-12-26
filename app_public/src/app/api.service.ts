@@ -52,6 +52,20 @@ export class ApiService {
     return this.http.post(url, body, options).toPromise().then(response => response).catch(err => this.parseError(err));
   }
 
+  public changeIncome(amount: number, day: number): Promise<Converter> {
+    const url: string = `${this.apiUrl}/changeIncome`;
+
+    const options = {
+      headers: new HttpHeaders().set('Authorization', this.authorization.generateCompleteJwt()),
+    }
+    const body: object = {
+      amount: amount,
+      date: day
+    }
+
+    return this.http.post(url, body, options).toPromise().then(response => response).catch(err => this.parseError(err));
+  }
+
   public getUser(): Promise<any> {
     if (this.authorization.getLoggedIn()) {
       const url: string = `${this.apiUrl}/getUser`;  

@@ -59,8 +59,7 @@ router.all('/confirm/:urlCode/:code', (req, res) => {
     user.confirm(req, res);
 });
 
-router.post('/changeIncome', authentication, (req, res, t) => {
-    console.log(t);
+router.post('/changeIncome', authentication, (req, res) => {
     user.changeIncome(req, res);
 });
 
