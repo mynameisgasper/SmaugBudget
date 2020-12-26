@@ -21,8 +21,8 @@
     <!----- Cards section ----->
     <div class="container" id="cards-section">
         <div class="row">
-           <div *ngFor="let item of data.card" class="col-xl-3 col-lg-4 col-md-12 col-sm-12 aos-init aos-animate"id="card{{item.id}}" data-aos="flip-down" data-aos-duration="500" style="margin: 0 auto">
-                <card [id]="item.id" [color]="item.color" [icon]="item.icon" [count]="item.count" [title]="item.title" [comment]="item.comment"></card>
+           <div *ngFor="let card of cards" class="col-xl-3 col-lg-4 col-md-12 col-sm-12 aos-init aos-animate"id="card{{card.id}}" data-aos="flip-down" data-aos-duration="500" style="margin: 0 auto">
+                <card [card]="card"></card>
             </div>
         </div>
     </div>

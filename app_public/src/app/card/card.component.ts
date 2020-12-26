@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { IconDefinition, faBug, faUniversity, faCoins, faPiggyBank, faEnvelope, faExclamationTriangle, faRadiation, faBullseye, faCheckCircle, faCalendar, faPaperclip } from '@fortawesome/free-solid-svg-icons';
+import { Card } from '../card';
 
 @Component({
   selector: 'card',
@@ -8,6 +9,9 @@ import { IconDefinition, faBug, faUniversity, faCoins, faPiggyBank, faEnvelope, 
   styleUrls: ['./card.component.css']
 })
 export class CardComponent implements OnInit {
+
+  @Input()
+  card: Card
 
   @Input()
   id: number;
@@ -41,7 +45,7 @@ export class CardComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.ic = this.translateIcon(this.icon);
+    this.ic = this.translateIcon((this.card ? this.card.icon : this.icon));
   }
 
 }
