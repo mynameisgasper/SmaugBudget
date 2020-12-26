@@ -114,12 +114,58 @@ export class BillsComponent implements OnInit {
   }
 
   generateCards(bills) {
+    const nearBills = this.getBillsInTheNext7Days(bills);
 
     return [
-      new Card(1, 'bg-primary', 'faPaperclip', 2, 'Bills Total', null),
-      new Card(21, 'bg-warning', 'faCalendar', 1, 'Bills This Week', 'Closest bill: Telemach - 12/30'),
+      new Card(1, 'bg-primary', 'faPaperclip', bills.length, 'Bills Total', null),
+      new Card(21, 'bg-warning', 'faCalendar', nearBills.length, 'Bills This Week', this.generateComment(nearBills)),
     ];
   }
+
+    getBillsInTheNext7Days(bills) {
+        const currentTime = new Date();
+        var billsArray = [];
+
+        for (var bill of bills) {
+            const billDate = new Date(Date.parse(bill.date)).getTime();
+            const diff = (billDate - currentTime.getTime()) / 86400000;
+
+            if (diff < 7) {
+                billsArray.push(bill);
+            }
+        }
+        return billsArray;
+    }
+
+    generateComment(bills) {
+        var comment = '';
+
+        var bill = this.findClosestBill(bills);
+        if (!bill) return comment;
+        const billDate = new Date(Date.parse(bill.date));
+        const dtfUK = new Intl.DateTimeFormat('UK', { month: '2-digit', day: '2-digit' });
+        comment = "Closest bill:\n" + bill.recipient + " - " + dtfUK.format(billDate);
+
+        return comment;
+    }
+
+    findClosestBill(bills) {
+        var nearestBill = null;
+        const currentTime = new Date();
+    
+        var minDiff = null
+        for (var bill of bills) {
+            const billDate = new Date(Date.parse(bill.date)).getTime();
+            const diff = (billDate - currentTime.getTime());
+    
+            if (!minDiff || diff < minDiff) {
+                minDiff = diff;
+                nearestBill = bill;
+            }
+        }
+    
+        return nearestBill
+    }
 
   data = {
     "bills": true,
