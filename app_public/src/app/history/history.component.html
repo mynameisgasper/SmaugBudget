@@ -2,7 +2,7 @@
         <!--- WELCOME SECTION --->
     <app-header [component]="'history'"></app-header>
 
-    <app-welcome [message]="data.message" [welcomeMessage]="data.welcomeMessage"></app-welcome>
+    <app-welcome [message]="pageData.message" [welcomeMessage]="pageData.welcomeMessage"></app-welcome>
 
     <div class="container" id="cards-section">
         <div class="row" style="margin-bottom: 3%;">
@@ -24,20 +24,20 @@
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-10 col-xl-8 goal-col" style="margin: 0 auto">
                 <canvas id="doughnut-canvas" baseChart
-                    [data]="data.chartData1"
-                    [colors]="data.chartColors1"
-                    [labels]="data.chartLabels1"
-                    [chartType]="data.chartType1">
+                    [data]="pageData.chartData1"
+                    [colors]="pageData.chartColors1"
+                    [labels]="pageData.chartLabels1"
+                    [chartType]="pageData.chartType1">
                 </canvas>
                 
             </div>
             <div class="col-sm-12 col-md-12 col-lg-10 col-xl-8 goal-col" style="margin: 0 auto; margin-top:5%;">
                 
                 <canvas id="line-canvas" baseChart
-                    [data]="data.chartData2"
-                    [colors]="data.chartColors2"
-                    [labels]="data.chartLabels2"
-                    [chartType]="data.chartType2">
+                    [data]="pageData.chartData2"
+                    [colors]="pageData.chartColors2"
+                    [labels]="pageData.chartLabels2"
+                    [chartType]="pageData.chartType2">
                 </canvas>
             </div>
         </div>
@@ -64,7 +64,7 @@
                 <div class="table-responsive" data-aos="fade-up" data-aos-duration="500">
                     <table class="table" id="table">
                         <tbody>
-                            <tr [history-table-row] *ngFor="let item of data.expense" [Expense]='item' [Currency]='data.currency' [Categories]='data.categories'></tr>
+                            <tr [history-table-row] *ngFor="let item of expenses" [Expense]='item' [Currency]='currency' [Categories]='categories'></tr>
                         </tbody>
                     </table>
                 </div>
