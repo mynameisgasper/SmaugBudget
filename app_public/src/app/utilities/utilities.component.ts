@@ -3,6 +3,7 @@ import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 import { ApiService } from '../api.service';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
+import { NgForm } from '@angular/forms';
 declare var $:any;
 
 @Component({
@@ -17,6 +18,8 @@ export class UtilitiesComponent implements OnInit {
 
     faPlusSquare = faPlusSquare;
     resultValue: number;
+
+    groupMembers: Array<Object> = [{value: 1}]
 
     constructor(
         private api: ApiService,
@@ -150,16 +153,17 @@ export class UtilitiesComponent implements OnInit {
     }
 
 
-    addGroupMember() {
+    addGroupMember(groupName: string) {
         if (this.counter >= 10) {
             alert("Only 10 members allowed");
         } else {
             this.counter++;
-            var form = document.getElementById('inputMemberBody');
-            var input = '<input type="text" onfocusout="checkName(this)" style="margin-top:4%" class="form-control" id="inputMember' + this.counter + '" placeholder="Member ' + this.counter + ' " name="inputMember' + this.counter + '"></input>';
-            form.innerHTML = form.innerHTML + input;
-            this.counter1.nativeElement.value = this.counter;
+            this.groupMembers.push({value: this.counter});
         }
+    }
+
+    createGroup(f: NgForm) {
+        console.log(f);
     }
 
 }

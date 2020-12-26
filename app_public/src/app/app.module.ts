@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule }   from '@angular/forms';
 
 import { ChartsModule } from 'ng2-charts';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
@@ -66,6 +67,7 @@ import { SilverGuardService } from './silver-guard.service';
   imports: [
     BrowserModule,
     HttpClientModule,
+    FormsModule,
     ChartsModule,
     FontAwesomeModule,
     ModalModule.forRoot(),

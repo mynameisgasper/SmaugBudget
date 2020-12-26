@@ -138,7 +138,7 @@
     </div>
     <!-- showGroup -->
     <app-utilities-edit-modal *ngFor="let item of groups" [Friend]='item'></app-utilities-edit-modal>
-    
+
     <div class="modal fade" id="addGroupModal" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
         <div class="position-absolute w-100 p-4 d-flex flex-column align-items-end">
             <div class="w-25 toastek">
@@ -172,30 +172,26 @@
         </div>
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form name="addGroup" method="post" action="/utility" onsubmit="return disableButton2()">
-                    <input type="hidden" value="addGroup" name="formType">
-                    <input type="hidden" #counter value="1" name="counter" id="counter">
-                    <div class="modal-body" id="inputMemberBody">  
-                    <label for="inputGroupName">Input group name</label>
-                    <input type="text" #groupName class="form-control" placeholder="Group Name" name="inputGroupName" id="inputGroupName" (focusout)="addGroupUtilities()" required="required"><br/>
-                    <label for="inputGroupName">Add Members</label>
-                    <input type="text" #memberName class="form-control" placeholder="Member 1" name="inputMember1" id="inputMember1" style="margin-top:1%" onfocusout="checkName(this)">
-                    </div>
+                <form #f="ngForm" (ngSubmit)="createGroup(f)">
+                    <div class="modal-body" id="inputMemberBody">
+                            <label for="inputGroupName">Input group name</label>
+                            <input type="text" #groupName ngModel class="form-control" placeholder="Group Name" name="inputGroupName" id="inputGroupName" (focusout)="addGroupUtilities()" required="required"><br/>
+                            <label for="inputGroupName">Add Members</label>
+                            <div *ngFor="let member of groupMembers">
+                                <input type="text" ngModel #memberName class="form-control" placeholder="Member {{member.value}}" name="inputMember{{member.value}}" id="inputMember{{member.value}}" style="margin-top:1%" onfocusout="checkName(this)">
+                            </div>                    
+                        </div>
                     <div class="modal-footer">
-                    <button type="submit" onclick="disableButton2()" class="btn btn-primary">Add Group</button>
-                    <button type="button" id="addGroupMember" class="btn btn-primary" (click)="addGroupMember();"> 
-                        <fa-icon [icon]="faPlusSquare"></fa-icon>
-                    </button>
+                        <button type="submit" class="btn btn-primary">Add Group</button>
+                        <button type="button" id="addGroupMember" class="btn btn-primary" (click)="addGroupMember(groupName.value);"> 
+                            <fa-icon [icon]="faPlusSquare"></fa-icon>
+                        </button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+
     
     <app-footer></app-footer>
 </main> 
