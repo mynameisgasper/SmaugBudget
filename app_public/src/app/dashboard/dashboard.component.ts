@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation, Renderer2, ElementRef } from '@angular/core';
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { ApiService } from '../api.service';
+import { Card } from '../card';
 declare var $:any;
 
 @Component({
@@ -15,12 +16,15 @@ export class DashboardComponent implements OnInit {
   @ViewChild('dateDashboard') date: ElementRef;
 
   pencilIcon = faPencilAlt;
+  cards: Card[]
 
   constructor(private renderer: Renderer2, private elementRef: ElementRef, private api: ApiService) { }
 
   ngOnInit(): void {
     this.api.getUser().then(result => {
       console.log(result);
+      this.cards = this.generateCards(result.bills, result.expense, result.paycheck, result.paycheckDate);
+      console.log(this.cards);
     }).catch(error => console.log(error));
   }
 
@@ -64,6 +68,79 @@ export class DashboardComponent implements OnInit {
     else {
       //POST REQUEST - TO BE ADDED
     }
+  }
+
+  generateCards(bills, expenses, paycheck, paycheckDate) {
+    var billsUntilPaycheck = this.getBillsUntilPaycheck(bills, paycheckDate);
+    var expensesSincePaycheck = this.getExpensesSincePaycheck(expenses, paycheckDate);
+
+    var totalCost = this.getTotalCost(this.getExpensesAndBills(expensesSincePaycheck, billsUntilPaycheck));
+    var totalBills = this.getTotalCost(billsUntilPaycheck);
+    var budgetLeft = paycheck - totalCost;
+    return [
+        new Card(1, 'bg-primary', 'faUniversity', (isNaN(budgetLeft) ? 0 : budgetLeft), 'Budget Left', null),
+        new Card(2, 'bg-primary', 'faCoins', totalBills, 'Expenses Left', null),
+        new Card(3, 'bg-primary', 'faPiggyBank', (isNaN(budgetLeft - totalBills) ? 0 : budgetLeft - totalBills), 'Savings', null),
+    ];
+}
+
+  getBillsUntilPaycheck(bills, paycheckDate) {
+    try {
+        var billsUntilPaycheck = [];
+
+        const today = new Date();
+        const todayMonth = today.getMonth();
+        today.setMonth(today.getMonth() + 1);
+        const nextMonth = today.getMonth();
+        for (var bill of bills) {
+            const billDate = new Date(bill.date);
+            const billDay = billDate.getDate();
+            const billMonth = billDate.getMonth();
+            if ((billMonth == todayMonth && billDay > paycheckDate) || (billMonth == nextMonth && billDay <= paycheckDate)) {
+                billsUntilPaycheck.push(bill);
+            }
+        }
+
+        return billsUntilPaycheck;
+    } catch {
+        return [];
+    }
+  }
+
+  getExpensesSincePaycheck(expenses, paycheckDate) {
+    try {
+        var expensesSincePaycheck = [];
+
+        const today = new Date();
+        const todayMonth = today.getMonth();
+        today.setMonth(today.getMonth() - 1);
+        const previousMonth = today.getMonth();
+        for (var expense of expenses) {
+            const expenseDate = new Date(expense.date);
+            const expenseDay = expenseDate.getDate();
+            const expenseMonth = expenseDate.getMonth();
+            if ((expenseMonth == todayMonth && expenseDay <= paycheckDate) || (expenseMonth == previousMonth && expenseDay > paycheckDate)) {
+                expensesSincePaycheck.push(expense);
+            }
+        }
+
+        return expensesSincePaycheck;
+    } catch {
+        return [];
+    }
+  }
+
+  getExpensesAndBills(expenses, bills) {
+    return expenses.concat(bills);
+  }
+
+  getTotalCost(bills) {
+    var sum = 0;
+    for (var bill of bills) {
+        sum += bill.value;
+    }
+
+    return sum;
   }
 
   data = {
