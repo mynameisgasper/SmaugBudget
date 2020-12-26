@@ -29,11 +29,9 @@ export class UtilitiesComponent implements OnInit {
   }
 
   converter(currency1: string, currency2: string, value: number): void {
-    this.api.converter(currency1, currency2, value, (rez) =>{
-
-        this.output.nativeElement.value = rez.value
-    });
-    
+    this.api.converter(currency1, currency2, value).then(result => {
+        this.output.nativeElement.value = result.value
+    }).catch(error => console.log(error));;
   }
 
   addGroupUtilities(): number{

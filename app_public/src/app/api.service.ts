@@ -24,14 +24,15 @@ export class ApiService {
     return this.http.post(url, body).toPromise().then(response => this.response).catch(this.parseError);
   }
 
-  public converter(currency1: string, currency2: string, value: number, callback): Promise<Converter> {
+  public converter(currency1: string, currency2: string, value: number): Promise<Converter> {
     const url: string = `${this.apiUrl}/converter`;
-    let params = new HttpParams();
-    params = params.append('curr1', currency1);
-    params = params.append('curr2', currency2);
-    params = params.append('amm1' , value.toString());
 
-    return this.http.get(url, {params: params}).toPromise().then(response => callback(response)).catch(this.parseError);
+    const options = {
+      headers: new HttpHeaders().set('Authorization', this.authorization.generateCompleteJwt()),
+      params: new HttpParams().append('curr1', currency1).append('curr2', currency2).append('amm1' , value.toString())
+    }
+
+    return this.http.get(url, options).toPromise().then(response => response).catch(err => this.parseError(err));
   }
 
   public getUser(): Promise<any> {
