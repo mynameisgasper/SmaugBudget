@@ -3,6 +3,8 @@ import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 import { ApiService } from '../api.service';
 import { Card } from '../card';
 import { Goal } from '../goal';
+import { Router } from "@angular/router"
+import { DatePipe } from '@angular/common';
 declare var $:any;
 
 @Component({
@@ -12,7 +14,9 @@ declare var $:any;
 })
 export class GoalsComponent implements OnInit {
 
-  constructor(private api: ApiService) { }
+  constructor(
+    private api: ApiService,
+    private router: Router) { }
 
   cards: Card[]
   goals: Goal[]
@@ -150,7 +154,7 @@ export class GoalsComponent implements OnInit {
     }
   }
 
-  buttonAddGoal(): void {
+  buttonAddGoal(nameValue: string, categoryValue: string, amountValue: number, dateValue: Date): void {
     var name = this.nameAddGoals();
     var category = this.categoryCheckAddGoal();
     var amount = this.amountGoals();
@@ -159,7 +163,7 @@ export class GoalsComponent implements OnInit {
     if (name == 0 || category == 0 || amount == 0 || date == 0 ) {
         //DO NOTHING
     } else {
-        //POST REQUEST - TO BE ADDED
+      this.addGoal(nameValue, categoryValue, amountValue, dateValue);
     }
   }
 
@@ -227,8 +231,6 @@ export class GoalsComponent implements OnInit {
       if (targetLeft <= 0)
           color = "#00cf1d"
 
-        console.log(goalsArray);
-
       goalsArray.push(new Goal(goal._id, goal.title, progress , goal.target, targetLeft, color, monthlyTarget, goal.category.name, date[0], date[1], date[2]));
     }
   
@@ -251,8 +253,31 @@ export class GoalsComponent implements OnInit {
         return targetLeft;
     else
         return Math.ceil(targetLeft / diffDays);
+  }
 
-}
+  addGoal(name, category, amount, date){
+    this.api.addGoal(name, category, amount, date).then((response) => {
+      this.parseAddGoalResponse(response);
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
+
+  parseAddGoalResponse(goal){
+    console.log(goal)
+    var date = goal.date.split("-");
+    date[2] = date[2].substring(0, 2);
+
+    var progress = Math.ceil(goal.saved / goal.target * 100);
+    var targetLeft = goal.target - goal.saved;
+    var monthlyTarget = this.calculateDailyTarget(goal.date, targetLeft);
+    
+    var color = "#2f7cfe";
+    if (targetLeft <= 0)
+        color = "#00cf1d"
+
+    this.goals.push(new Goal(goal._id, goal.title, progress , goal.target, targetLeft, color, monthlyTarget, goal.category.name, date[0], date[1], date[2]));
+  }
 
 
   data = {

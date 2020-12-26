@@ -5,29 +5,38 @@ const Goal = mongoose.model('Goals');
 const User = mongoose.model('User');
 const Categories = mongoose.model('Categories');
 const Expenses = mongoose.model('Expense');
+const jwt_decode = require('jwt-decode');
 
-function addGoal(requestBody, res) {
+function addGoal(req, res) {
     try {
-        var title = requestBody.title;
-        var target = requestBody.target;
-        var date = requestBody.date;
-        var categoryName = requestBody.category;
-        var userId = requestBody.id;
+        const authorization = req.headers.authorization;
+        var title = req.body.name;
+        var target = req.body.amount;
+        var date = req.body.date;
+        var categoryName = req.body.category;
 
         //validate date, title and target
         dateOk = checkDate(date);
         const titleTest = checkTitle(title);
         const targetTest = checkTarget(target);
 
-        if (titleTest && targetTest && dateOk) {
-            User.findById(userId, function(error, user) {
+        if (authorization && titleTest && targetTest && dateOk) {
+            const token = authorization.split(' ')[1];
+            const decodedToken = jwt_decode(token);
+            User.findById(decodedToken._id, function(error, user) {
                 if (error) {
+                    const response = {
+                        status: 'Error'
+                    }
                     console.log(error);
-                    res.sendStatus(500);
+                    res.status(500).json(response);
                 } else {
                     for (var i = 0; i < user.goals.length; i++) {
                         if (user.goals[i].title == title) {
-                            res.sendStatus(304);
+                            const response = {
+                                status: 'Goal already exists'
+                            }
+                            res.status(304).json(response);
                             return;
                         }
                     }
@@ -42,7 +51,10 @@ function addGoal(requestBody, res) {
                     }
 
                     if (category == null) {
-                        res.sendStatus(400);
+                        const response = {
+                            status: 'Invalid category'
+                        }
+                        res.status(400).json(response);
                         return;
                     }
 
@@ -58,22 +70,31 @@ function addGoal(requestBody, res) {
                     goal.save(function callback(err) {
                         if (err) {
                             console.log(err);
-                            res.sendStatus(500);
+                            const response = {
+                                status: 'Error'
+                            }
+                            res.status(500).json(response);
                         } else {
                             user.categories.push(category);
                             user.goals.push(goal);
                             user.save();
-                            res.status(200).json(user);
+                            res.status(200).json(goal);
                         }
                     });
                 }
             });
         } else {
-            res.sendStatus(400);
+            const response = {
+                status: 'Bad request'
+            }
+            res.status(400).json(response);
         }
     } catch (ex) {
         console.log(ex);
-        res.sendStatus(500);
+        const response = {
+            status: 'Error'
+        }
+        res.status(500).json(response);
     }
 }
 
@@ -297,7 +318,7 @@ function checkTarget(target) {
 
 module.exports = {
     addGoal: function(req, res) {
-        addGoal(req.body, res);
+        addGoal(req, res);
     },
     editGoal: function(req, res) {
         editGoal(req.body, res);

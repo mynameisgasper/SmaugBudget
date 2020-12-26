@@ -58,7 +58,6 @@
                 <span aria-hidden="true">&times;</span>
             </button>
                 </div>
-                <form name="addGoal">
                     <input type="hidden" name="formType" value="addGoal">
                     <div class="modal-body">
                         <label for="inputGoal">What's your goal?</label>
@@ -88,9 +87,9 @@
 
                     </div>
                     <div class="modal-footer">
-                        <button (click)="buttonAddGoal()" class="btn btn-primary">Add Goal</button>
+                        <button (click)="buttonAddGoal(nameGoal.value, categoryGoal.value, amountGoal.value, dateGoal.value)" class="btn btn-primary">Add Goal</button>
                     </div>
-                </form>
+                
             </div>
         </div>
     </div>
