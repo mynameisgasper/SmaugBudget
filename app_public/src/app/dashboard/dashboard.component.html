@@ -70,7 +70,7 @@
                     </div>
 
                     <!----- Analytics section ----->
-                    <div *ngIf="data.analytics" class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <div *ngIf="analytics" class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                         <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                             <h4 style="text-align: center; padding-top: 35px; padding-bottom: 10px;">{{ data.analyticsField }}</h4>
                         </div>
@@ -78,9 +78,9 @@
                             
                             <table class="table table-borderless table-hover tabela">
                                 <tbody class="analytics-table">
-                                    <tr *ngFor="let item of data.analytics">
-                                        <th>{{item.rowName}}</th>
-                                        <td [ngStyle]="{'background-color':item.color}" style="text-align:center;" >{{item.category}}</td>
+                                    <tr *ngFor="let analytic of analytics">
+                                        <th>{{analytic.rowName}}</th>
+                                        <td [ngStyle]="{'background-color':analytic.color}" style="text-align:center;" >{{analytic.category}}</td>
                                     </tr>                                    
                                 </tbody>
                             </table>

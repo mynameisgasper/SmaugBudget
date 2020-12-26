@@ -19,14 +19,15 @@ export class DashboardComponent implements OnInit {
   pencilIcon = faPencilAlt;
   cards: Card[]
   alerts: Alert[]
+  analytics: Array<Object>
 
-  constructor(private renderer: Renderer2, private elementRef: ElementRef, private api: ApiService) { }
+  constructor(private api: ApiService) { }
 
   ngOnInit(): void {
     this.api.getUser().then(result => {
-      console.log(result);
       this.cards = this.generateCards(result.bills, result.expense, result.paycheck, result.paycheckDate);
       this.alerts = this.generateAlerts(result.envelopes, result.bills, result.goals);
+      this.analytics = this.generateAnalyitcs(result.expense, result.paycheckDate)
     }).catch(error => console.log(error));
   }
 
@@ -242,6 +243,106 @@ export class DashboardComponent implements OnInit {
     }
 
     return completed;
+  }
+
+  generateAnalyitcs(expenses, paycheckDate) {
+    var lastMonthExpenses = this.getLastMonthExpenses(expenses, paycheckDate);
+    var analyzeExpenses = this.getExpenseAnalysis(lastMonthExpenses);
+    var mostMoneySpentOn = this.getMostMoneySpentOn(analyzeExpenses);
+    var mostTimesPurchased = this.getMostTimesPurchased(analyzeExpenses);
+
+    if (mostMoneySpentOn && mostTimesPurchased) {
+        return [{
+                rowName: 'Most money spent on',
+                color: mostMoneySpentOn.color,
+                category: mostMoneySpentOn.name
+            },
+            {
+                rowName: 'Most times purchased',
+                color: mostTimesPurchased.color,
+                category: mostTimesPurchased.name
+            }
+        ];
+    } else {
+        return [];
+    }
+  }
+
+  getLastMonthExpenses(expenses, paycheckDate) {
+    var lastMonthExpenses = [];
+
+    const today = new Date();
+    today.setMonth(today.getMonth() - 1);
+    const previousMonth = today.getMonth();
+    today.setMonth(today.getMonth() - 2);
+    const prepreviousMonth = today.getMonth();
+    for (var expense of expenses) {
+        const expenseDate = new Date(expense.date);
+        const expenseDay = expenseDate.getDate();
+        const expenseMonth = expenseDate.getMonth();
+
+        if (today > paycheckDate) {
+            if ((expenseMonth == previousMonth + 1 && expenseDay <= paycheckDate) || (expenseMonth == prepreviousMonth && expenseDay > paycheckDate)) {
+                lastMonthExpenses.push(expense);
+            }
+        } else {
+            if ((expenseMonth == previousMonth && expenseDay <= paycheckDate) || (expenseMonth == prepreviousMonth && expenseDay > paycheckDate)) {
+                lastMonthExpenses.push(expense);
+            }
+        }
+    }
+
+    return lastMonthExpenses;
+  }
+
+  getExpenseAnalysis(expenses) {
+    var categories = new Map();
+
+    for (var expense of expenses) {
+        if (categories.get(expense.category.name)) {
+            categories.get(expense.category.name).sum += parseInt(expense.value);
+            categories.get(expense.category.name).count += 1;
+            categories.get(expense.category.name).color = expense.category.color;
+        } else {
+            categories.set(expense.category.name, {});
+            categories.get(expense.category.name).name = expense.category.name
+            categories.get(expense.category.name).sum = parseInt(expense.value);
+            categories.get(expense.category.name).count = 1;
+            categories.get(expense.category.name).color = expense.category.color;
+        }
+    }
+
+    return categories;
+  }
+
+  getMostMoneySpentOn(expenseAnalitics) {
+    var selectedAnalitic = null;
+
+    let keys = Array.from(expenseAnalitics.keys());
+    for (let key of keys) {
+        if (selectedAnalitic == null || expenseAnalitics.get(key).sum > selectedAnalitic.sum) {
+            selectedAnalitic = expenseAnalitics.get(key);
+        }
+    }
+
+    if (selectedAnalitic) {
+        return selectedAnalitic;
+    }
+  }
+
+  getMostTimesPurchased(expenseAnalitics) {
+    var selectedAnalitic = null;
+
+    let keys = Array.from(expenseAnalitics.keys());
+    for (let key of keys) {
+        if (selectedAnalitic == null || expenseAnalitics.get(key).count > selectedAnalitic.count) {
+            selectedAnalitic = expenseAnalitics.get(key);
+        }
+    }
+
+    if (selectedAnalitic) {
+        return selectedAnalitic;
+    }
   }
 
   getCurrentMonth(month) {
