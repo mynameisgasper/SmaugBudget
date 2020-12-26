@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, Inject } from '@angular/core';
 import { ApiService } from '../api.service';
+import { DOCUMENT } from '@angular/common'
+import { element } from 'protractor';
+import { ChartDataSets } from 'chart.js';
+import { Color } from 'ng2-charts';
 
 @Component({
   selector: 'app-history',
@@ -13,10 +17,35 @@ export class HistoryComponent implements OnInit {
   public currency: string;
   public expenses: {};
 
-  constructor(private api: ApiService) { }
+  constructor(
+    private api: ApiService,
+    @Inject(DOCUMENT) private document: HTMLDocument
+    ) { }
+
+  @ViewChild('color') color: ElementRef;
 
   ngOnInit(): void {
+    
     this.api.getUser().then(result => {
+
+      this.categories = result.categories;
+      this.expenses = this.generateExpenses(result.expense);
+      this.currency = result.defaultCurrency;
+
+      //data za tabele
+      const parsedTable = this.parseTable(this.expenses);
+      document.querySelector(".totaltext").innerHTML = "<h5>Total spent: " + parsedTable.sum.toFixed(2); + "€</h5>";
+      const pieChart = this.groupByCategories(parsedTable);
+      const lineChartData = this.makeDataForGraph(this.filterByCategory(this.expenses))
+      /*"chartData1": this.makeDataArray1(pieChart),
+        "chartColors1": this.makeColorArray1(pieChart),
+        "chartLabels1": this.makeLabelArray1(pieChart), 
+        "chartType1": "doughnut",
+        "chartData2": this.generateDatasets(lineChartData),
+        "chartColors2": this.getColors(lineChartData),
+        "chartLabels2": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        "chartType2": "line"*/
+      
       this.pageData = {
         "fileName": "history",
         "graph":{
@@ -44,16 +73,103 @@ export class HistoryComponent implements OnInit {
         "chartColors1": [{backgroundColor: ['rgb(50, 168, 156)']}],
         "chartLabels1": ["Car"],
         "chartType1": "doughnut",
-        "chartData2": [310],
-        "chartColors2": [{backgroundColor: ['rgb(50, 168, 156)']}],
-        "chartLabels2": ["Car"],
+        "chartData2":this.generateDatasets(lineChartData),
+        "chartColors2": this.getColors(lineChartData),
+        "chartLabels2": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
         "chartType2": "line"
+        
       }
-      this.categories = result.categories;
-      this.expenses = this.generateExpenses(result.expense);
-      this.currency = result.defaultCurrency;
-      console.log(this.expenses);
     }).catch(error => console.log(error));
+  }
+
+  parseTable(rows) {
+    const parsedTable = {
+        sum: 0,
+        data: []
+    };
+
+    for (let row of rows) {
+
+      parsedTable.data.push({
+          id: row.id,
+          year: row.year,
+          month: row.month,
+          day: row.day,
+          category: row.category,
+          receiver: row.receiver,
+          currency: row.currency,
+          value: row.value,
+          color: row.color,
+      });
+      parsedTable.sum += row.value;
+    }
+    return parsedTable;
+  }
+
+  filterByCategory(table) {
+      var categories = new Map();
+      for (var expense of table) {
+          if (!categories.get(expense.category)) {
+              categories.set(expense.category, []);
+          }
+          categories.get(expense.category).push(expense);
+          categories.get(expense.category).color = expense.color;
+      }
+      return categories;
+  }
+
+  filterByMonth(expenses) {
+      var month = new Map();
+      for (var expense of expenses) {
+          if (!month.get(expense.month)) {
+              month.set(expense.month, {});
+              month.get(expense.month).sum = 0;
+          }
+
+          month.get(expense.month).sum += expense.value;
+      }
+      return month;
+  }
+
+  makeDataForGraph(category) {
+
+      var month = new Map();
+      let keys = Array.from(category.keys());
+      for (let name of keys) {
+          month.set(name, this.filterByMonth(category.get(name)));
+          month.get(name).color = category.get(name).color;
+      }
+
+      return month;
+  }
+
+  convertMonthsToName(month) {
+    switch (month) {
+        case 'JAN':
+            return "January";
+        case 'FEB':
+            return "February";
+        case 'MAR':
+            return "March";
+        case 'APR':
+            return "April";
+        case 'MAY':
+            return "May";
+        case 'JUN':
+            return "June";
+        case 'JUL':
+            return "July";
+        case 'AUG':
+            return "August";
+        case 'SEP':
+            return "September";
+        case 'OCT':
+            return "October";
+        case 'NOV':
+            return "November";
+        case 'DEC':
+            return "December";
+    }
   }
  
   generateExpenses(expense) {
@@ -127,6 +243,95 @@ export class HistoryComponent implements OnInit {
         return -1;
     }
     return 0;
-}
+  }
 
+  groupByCategories(parsedTable) {
+    const groups = [];
+    for (let entry of parsedTable.data) {
+        const group = this.findGroupByCategory(groups, entry.category);
+        if (group != null) {
+            group.sum += parseInt(entry.value);
+        } else {
+            groups.push({
+                name: entry.category,
+                sum: entry.value,
+                color: entry.color,
+            });
+        }
+    }
+
+    return groups;
+  }
+
+  findGroupByCategory(groups, category) {
+    for (let group of groups) {
+        if (group.name == category) return group;
+    }
+
+    return null;
+  }
+
+  makeDataArray1(array) {
+    const returnTable = [array.length];
+    for (let i = 0; i < array.length; i++) {
+      returnTable[i] = array[i].sum;
+    }
+    return returnTable;
+  }/*
+
+  makeColorArray1(array) {
+    const returnTable = [];
+    for (let i = 0; i < array.length; i++) {
+      returnTable.push([array[i].color]);
+    }
+    let barva = {
+      backgroundColor: returnTable
+    }
+    return barva;
+  }
+
+  makeLabelArray1(array) {
+    const returnTable = [array.length];
+    for (let i = 0; i < array.length; i++) {
+      returnTable[i] = array[i].name;
+    }
+    return returnTable;
+  }*/
+
+  generateDatasets(map) {
+    var datasets: ChartDataSets[] = [];
+    let keys = Array.from(map.keys());
+    for (let i of keys) {
+      datasets.push(this.generateDataset(map.get(i),i));
+    }
+    return datasets;
+  }
+
+  generateDataset(data,category): Object {
+    var podatki = this.getData(data);
+    return {data: podatki, label: category};
+  }
+
+  getData(data): Array<number> {
+    const arr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    let keys = Array.from(data.keys());
+    for (let i of keys) {
+      var y: number = +i;
+      arr[y-1]=(data.get(i).sum);
+    }
+    return arr;
+  }
+
+  getColors(data): Color[] {
+    const arr: Color[] = [];
+    let keys = Array.from(data.keys());
+    for (let i of keys) {
+      a=data.get(i).color;
+      var a = {
+        backgroundColor: data.get(i).color
+      }
+      arr.push(a);
+    }
+    return arr;
+  }
 }
