@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Alert } from '../alert';
 
 @Component({
   selector: 'alert',
@@ -6,6 +7,9 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./alert.component.css']
 })
 export class AlertComponent implements OnInit {
+
+  @Input()
+  alert: Alert
 
   @Input()
   type: string;

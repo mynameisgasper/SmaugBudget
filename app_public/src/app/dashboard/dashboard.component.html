@@ -33,8 +33,8 @@
                 <h2>{{ data.alertSection }}</h2>
             </div>
         </div>
-        <div class="row" *ngFor="let item of data.alert" class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-            <alert [type]="item.type" [name]="item.name" [text]="item.text"></alert>
+        <div class="row" *ngFor="let alert of alerts" class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <alert [alert]="alert"></alert>
         </div>
     </div>
 

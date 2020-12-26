@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation, Renderer2, ElementRef } from '@angular/core';
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
+import { Alert } from '../alert';
 import { ApiService } from '../api.service';
 import { Card } from '../card';
 declare var $:any;
@@ -17,6 +18,7 @@ export class DashboardComponent implements OnInit {
 
   pencilIcon = faPencilAlt;
   cards: Card[]
+  alerts: Alert[]
 
   constructor(private renderer: Renderer2, private elementRef: ElementRef, private api: ApiService) { }
 
@@ -24,7 +26,7 @@ export class DashboardComponent implements OnInit {
     this.api.getUser().then(result => {
       console.log(result);
       this.cards = this.generateCards(result.bills, result.expense, result.paycheck, result.paycheckDate);
-      console.log(this.cards);
+      this.alerts = this.generateAlerts(result.envelopes, result.bills, result.goals);
     }).catch(error => console.log(error));
   }
 
@@ -141,6 +143,123 @@ export class DashboardComponent implements OnInit {
     }
 
     return sum;
+  }
+
+  generateAlerts(envelopes, bills, goals) {
+    var alertArray = [];
+    for (var el1 of this.generateEnvelopeAlerts(envelopes)) {
+        alertArray.push(el1);
+    }
+    for (var el2 of this.generateBillsAlerts(bills)) {
+        alertArray.push(el2);
+    }
+    for (var el3 of this.generateGoalsAlerts(goals)) {
+        alertArray.push(el3);
+    }
+
+    return alertArray;
+  }
+  
+  generateEnvelopeAlerts(envelopes) {
+    var envelopesAlerts = [];
+
+    var date = new Date();
+    var month = this.getCurrentMonth(date.getMonth());
+    var totalAlmostEmptyEnvelopes = this.getTotalAlmostEmptyEnvelopes(envelopes, month);
+    var totalEmptyEnvelopes = this.getTotalEmptyEnvelopes(envelopes, month);
+
+    if (totalAlmostEmptyEnvelopes > 0) {
+      envelopesAlerts.push(new Alert('alert-warning', 'ENVELOPES', totalAlmostEmptyEnvelopes + ' almost empty'));
+    }
+    if (totalEmptyEnvelopes > 0) {
+        envelopesAlerts.push(new Alert('alert-danger', 'ENVELOPES', totalEmptyEnvelopes + ' empty'));
+    }
+
+    return envelopesAlerts;
+  }
+
+  generateBillsAlerts(bills) {
+    var billsAlerts = [];
+
+    const nearBills = this.getBillsInTheNext7Days(bills);
+    if (nearBills.length > 0) {
+      billsAlerts.push(new Alert('alert-warning', 'BILLS', nearBills.length + ' bill to pay this week'));
+    }
+    return billsAlerts;
+  }
+
+  generateGoalsAlerts(goals) {
+    var count = this.goalsCompleted(goals);
+    if (count) {
+        return [new Alert('alert-success', 'GOALS', count + ' goal completed')];
+    } else {
+        return [];
+    }
+  }
+
+  getTotalAlmostEmptyEnvelopes(envelopes, month) {
+    var counter = 0;
+    for (var i = 0; i < envelopes.length; i++) {
+        if (envelopes[i].progress < 100 && envelopes[i].progress > 74 && envelopes[i].month === month) {
+            counter++;
+        }
+    }
+    return counter;
+  }
+
+  getTotalEmptyEnvelopes(envelopes, month) {
+      var counter = 0;
+      for (var i = 0; i < envelopes.length; i++) {
+          if (envelopes[i].progress >= 100 && envelopes[i].month === month) {
+              counter++;
+          }
+      }
+      return counter;
+  }
+
+  getBillsInTheNext7Days(bills) {
+      const currentTime = new Date();
+      var billsArray = [];
+
+      for (var bill of bills) {
+          const billDate = new Date(Date.parse(bill.date)).getTime();
+          const diff = (billDate - currentTime.getTime()) / 86400000;
+
+          if (diff < 7) {
+              billsArray.push(bill);
+          }
+      }
+      return billsArray;
+  }
+
+  goalsCompleted(goals) {
+    var completed = 0;
+
+    for (var i = 0; i < goals.length; i++) {
+        if (goals[i].saved >= goals[i].target) {
+            completed++;
+        }
+    }
+
+    return completed;
+  }
+
+  getCurrentMonth(month) {
+    var monthArray = new Array();
+    monthArray[0] = "JAN";
+    monthArray[1] = "FEB";
+    monthArray[2] = "MAR";
+    monthArray[3] = "APR";
+    monthArray[4] = "MAY";
+    monthArray[5] = "JUN";
+    monthArray[6] = "JUL";
+    monthArray[7] = "AUG";
+    monthArray[8] = "SEP";
+    monthArray[9] = "OCT";
+    monthArray[10] = 'NOV';
+    monthArray[11] = 'DEC';
+
+    return monthArray[month];
   }
 
   data = {

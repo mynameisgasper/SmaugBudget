@@ -1,5 +1,5 @@
 <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-    <div class="alert {{type}}" role="alert">
-        <b>{{name}}: </b> {{text}}!       
+    <div class="alert {{(alert ? alert.type : type)}}" role="alert">
+        <b>{{(alert ? alert.name : name)}}: </b> {{(alert ? alert.text : text)}}!       
     </div>
 </div>
