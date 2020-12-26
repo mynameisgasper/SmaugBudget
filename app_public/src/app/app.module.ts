@@ -32,6 +32,8 @@ import { BillsComponent } from './bills/bills.component';
 import { BillTableComponent } from './bill-table/bill-table.component';
 import { UtilitiesMemberRowComponent } from './utilities-member-row/utilities-member-row.component';
 import { LoginGuardService } from './login-guard.service';
+import { GoldGuardService } from './gold-guard.service';
+import { SilverGuardService } from './silver-guard.service';
 
 @NgModule({
   declarations: [
@@ -92,12 +94,12 @@ import { LoginGuardService } from './login-guard.service';
       {
         path: 'utilities',
         component: UtilitiesComponent, 
-        canActivate:[LoginGuardService]
+        canActivate:[GoldGuardService]
       },
       {
         path: 'history',
         component: HistoryComponent, 
-        canActivate:[LoginGuardService]
+        canActivate:[SilverGuardService]
       },
       {
         path: 'account',
