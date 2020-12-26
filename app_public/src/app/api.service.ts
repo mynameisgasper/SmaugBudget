@@ -35,6 +35,23 @@ export class ApiService {
     return this.http.get(url, options).toPromise().then(response => response).catch(err => this.parseError(err));
   }
 
+  public editExpense(id: string, category: string, name: string, amount: number, date: number): Promise<Converter> {
+    const url: string = `${this.apiUrl}/editExpense`;
+
+    const options = {
+      headers: new HttpHeaders().set('Authorization', this.authorization.generateCompleteJwt()),
+    }
+    const body: object = {
+      expId: id,
+      expCategory: category,
+      payee: name,
+      amount: amount,
+      date: date
+    }
+
+    return this.http.post(url, body, options).toPromise().then(response => response).catch(err => this.parseError(err));
+  }
+
   public getUser(): Promise<any> {
     if (this.authorization.getLoggedIn()) {
       const url: string = `${this.apiUrl}/getUser`;  

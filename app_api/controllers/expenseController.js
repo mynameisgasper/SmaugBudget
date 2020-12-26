@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const Expense = mongoose.model('Expense');
 const User = mongoose.model('User');
 const Categories = mongoose.model('Categories');
+const jwt_decode = require('jwt-decode');
 
 function getLastMonthExpenses(requestBody, res) {
     try {
@@ -28,50 +29,65 @@ function getLastMonthExpenses(requestBody, res) {
     }
 }
 
-function editExpense(requestBody, res) {
+function editExpense(req, res) {
     try {
-        var id = requestBody.expId;
-        var inputCategory = requestBody.expCategory;
-        var recipient = requestBody.payee;
-        var amount = requestBody.amount;
-        var date = requestBody.date;
-        var userId = requestBody.id;
 
-        //validate date, recipient and amount
-        var dateOk = checkDate(date);
-        const recipientTest = checkRecipient(recipient);
-        const amountTest = checkAmount(amount);
+        const authorization = req.headers.authorization;
+        if (authorization) {
 
-        if (recipientTest && amountTest && dateOk) {
-            User.findById(userId, function(err, user) {
-                if (err) {
-                    console.log(err);
-                    res.sendStatus(500);
-                } else {
-                    var category = null;
-                    for (var i = 0; i < user.expense.length; i++) {
-                        if (user.expense[i]._id == id) {
-                            user.expense[i].recipient = recipient;
-                            user.expense[i].value = amount;
-                            user.expense[i].date = date;
+            const token = authorization.split(' ')[1];
+            const decodedToken = jwt_decode(token);
 
-                            for (var j = 0; j < user.categories.length; j++) {
-                                if (user.categories[j].name == inputCategory) {
-                                    category = user.categories[j];
-                                    user.expense[i].category = user.categories[j];
-                                    break;
+            var id = req.body.expId;
+            var inputCategory = req.body.expCategory;
+            var recipient = req.body.payee;
+            var amount = req.body.amount;
+            var date = req.body.date;
+            var userId = decodedToken._id;
+
+            //validate date, recipient and amount
+            var dateOk = checkDate(date);
+            const recipientTest = checkRecipient(recipient);
+            const amountTest = checkAmount(amount);
+
+            if (recipientTest && amountTest && dateOk) {
+                User.findById(userId, function(err, user) {
+                    if (err) {
+                        console.log(err);
+                        res.sendStatus(500);
+                    } else {
+                        var category = null;
+                        for (var i = 0; i < user.expense.length; i++) {
+                            if (user.expense[i]._id == id) {
+                                user.expense[i].recipient = recipient;
+                                user.expense[i].value = amount;
+                                user.expense[i].date = date;
+
+                                for (var j = 0; j < user.categories.length; j++) {
+                                    if (user.categories[j].name == inputCategory) {
+                                        category = user.categories[j];
+                                        user.expense[i].category = user.categories[j];
+                                        break;
+                                    }
                                 }
+                                user.save();
+                                break;
                             }
-                            user.save();
-                            break;
                         }
+                        res.status(200).json(user);
                     }
-                    res.status(200).json(user);
-                }
-            });
+                });
+            } else {
+                res.sendStatus(400);
+            }
+
         } else {
-            res.sendStatus(400);
+            const response = {
+                status: 'Unauthorized'
+            }
+            res.status(401).json(response);
         }
+
     } catch (ex) {
         console.log(ex);
         res.sendStatus(500);
@@ -188,7 +204,7 @@ function buildArrayFromMap(expenses) {
 
 module.exports = {
     editExpense: function(req, res) {
-        editExpense(req.body, res);
+        editExpense(req, res);
     },
     getLastMonthExpenses: function(req, res) {
         getLastMonthExpenses(req.body, res);

@@ -140,9 +140,9 @@ function retrieveUser(req, res) {
         }
         else {
             const response = {
-                status: 'Bad request'
+                status: 'Unauthorized'
             }
-            res.status(400).json(response);
+            res.status(401).json(response);
         }
     } catch (ex) {
         res.sendStatus(500);

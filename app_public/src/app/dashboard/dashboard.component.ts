@@ -28,6 +28,15 @@ export class DashboardComponent implements OnInit {
   balanceRow = "Balance";
   expensesLastMonth: any;
   analyticsField = "Analytics";
+  noData = "No data";
+  incomeModalTitle = "Update your Income";
+  incomeModalPlaceholderIncome = "Enter your income";
+  incomeModalPlaceholderDate = "Day in month you receive paycheck";
+  incomeModalSaveButton = "Save Changes";
+  incomeModalCloseButton = "Close";
+  chartData: Array<Number> = [];
+  chartColors: Array<Object> = [];
+  chartLabels: Array<String> = [];
 
   constructor(private api: ApiService) { }
 
@@ -82,6 +91,18 @@ export class DashboardComponent implements OnInit {
     else {
       //POST REQUEST - TO BE ADDED
     }
+  }
+
+  generateGraphs(expenses): void {
+    var colors: Array<String> = []
+
+    for (let expense of expenses) {
+      this.chartData.push(expense.value);
+      colors.push(expense.category.color);
+      this.chartLabels.push(expense.category.name);
+    }
+
+    this.chartColors = [{ backgroundColor: colors }];
   }
 
   generateCards(bills, expenses, paycheck, paycheckDate) {
@@ -261,6 +282,8 @@ export class DashboardComponent implements OnInit {
     var analyzeExpenses = this.getExpenseAnalysis(lastMonthExpenses);
     var mostMoneySpentOn = this.getMostMoneySpentOn(analyzeExpenses);
     var mostTimesPurchased = this.getMostTimesPurchased(analyzeExpenses);
+
+    this.generateGraphs(lastMonthExpenses);
 
     if (mostMoneySpentOn && mostTimesPurchased) {
         return [{
