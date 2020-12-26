@@ -34,17 +34,17 @@ export class ApiService {
     return this.http.get(url, {params: params}).toPromise().then(response => callback(response)).catch(this.parseError);
   }
 
-  public getUser(callback, error): Promise<any> {
+  public getUser(): Promise<any> {
     if (this.authorization.getLoggedIn()) {
       const url: string = `${this.apiUrl}/getUser`;  
       const options = {
         headers: new HttpHeaders().set('Authorization', this.authorization.generateCompleteJwt())
       }
 
-      return this.http.get(url, options).toPromise().then(response => callback(response)).catch(err => error(err));
+      return this.http.get(url, options).toPromise().then(response => response).catch(err => this.parseError(err));
     }
     else {
-      error('Not logged in');
+      this.parseError('Error');
     }
   }
 

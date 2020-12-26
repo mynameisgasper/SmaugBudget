@@ -11,19 +11,17 @@ declare var $:any;
 })
 export class DashboardComponent implements OnInit {
 
-  pencilIcon = faPencilAlt;
-
   @ViewChild('amountDashboard') amount: ElementRef;
   @ViewChild('dateDashboard') date: ElementRef;
+
+  pencilIcon = faPencilAlt;
 
   constructor(private renderer: Renderer2, private elementRef: ElementRef, private api: ApiService) { }
 
   ngOnInit(): void {
-    this.api.getUser(function(result) {
+    this.api.getUser().then(result => {
       console.log(result);
-    }, function(error) {
-      console.log(error);
-    })
+    }).catch(error => console.log(error));
   }
 
   amountDashboard1(): number {
@@ -67,8 +65,6 @@ export class DashboardComponent implements OnInit {
       //POST REQUEST - TO BE ADDED
     }
   }
-
-
 
   data = {
     "fileName":"dashboard",
