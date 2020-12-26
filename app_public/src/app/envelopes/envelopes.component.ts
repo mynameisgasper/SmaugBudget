@@ -1,5 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
+import { ApiService } from '../api.service';
+import { Card } from '../card';
 declare var $:any;
 
 @Component({
@@ -9,9 +11,14 @@ declare var $:any;
 })
 export class EnvelopesComponent implements OnInit {
 
-  constructor() { }
+  constructor(private api: ApiService) { }
+  cards: Card[]
 
   ngOnInit(): void {
+    this.api.getUser().then(result => {
+      this.cards = this.generateCards(result.envelopes);
+      console.log(this.cards);
+    }).catch(error => console.log(error));
   }
 
   @ViewChild('categoryAdd') categoryAdd: ElementRef;
@@ -140,7 +147,6 @@ export class EnvelopesComponent implements OnInit {
     }
 }
 
-
   buttonExpenseEnvelopes(): void {
     var amount = this.amountExpenseEnvelopes();
     var name = this.nameExpenseEnvelopes();
@@ -152,6 +158,15 @@ export class EnvelopesComponent implements OnInit {
     } else {
         //POST REQUEST - TO BE ADDED
     }
+  }
+
+  generateCards(envelopes) {
+
+    return [
+      new Card(1, 'bg-primary', 'faEnvelope', 2, 'Envelopes Total', null),
+      new Card(21, 'bg-warning', 'faExclamationTriangle', 1, 'Almost Empty', 'No almost empty envelopes!'),
+      new Card(31, 'bg-danger', 'faRadiation', 1, 'Empty', 'No empty envelopes!'),
+    ];
   }
 
   data = {

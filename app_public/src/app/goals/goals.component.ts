@@ -178,7 +178,7 @@ export class GoalsComponent implements OnInit {
 
     return [
       new Card(1, 'bg-primary', 'faBullseye', totalGoals, 'Goals Total', null),
-      new Card(21, 'bg-primary', 'faCheckCircle', completedGoals, 'Goals Completed', comment),
+      new Card(21, 'green-panel', 'faCheckCircle', completedGoals, 'Goals Completed', comment),
     ];
   }
 
