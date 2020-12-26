@@ -52,7 +52,7 @@ export class AuthenticationService {
     return this.accessLevel;
   }
 
-  public register(firstname: string, lastname: string, email1: string, email2: string, password1: string, password2: string, callback, error) {
+  public register(firstname: string, lastname: string, email1: string, email2: string, password1: string, password2: string) {
     const url: string = `${this.apiUrl}/register`;
 
     const body = {
@@ -64,17 +64,17 @@ export class AuthenticationService {
       'password2up': password2,
     }
 
-    return this.http.post(url, body).toPromise().then(response => callback(response)).catch(err => error(err));
+    return this.http.post(url, body).toPromise().then(response => response).catch(err => err);
   }
 
-  public login(email: string, password: string, callback, error) {
+  public login(email: string, password: string) {
     const url: string = `${this.apiUrl}/login`;
 
     const body = {
       'email': email,
       'password': password,
     }
-    return this.http.post(url, body).toPromise().then(response => callback(response)).catch(err => error(err));
+    return this.http.post(url, body).toPromise().then(response => response).catch(err => err);
   }
 
   public confirm(urlCode: string, code: string, callback, error) {

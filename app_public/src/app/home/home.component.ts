@@ -53,7 +53,7 @@ export class HomeComponent implements OnInit {
 
   register(firstname: string, lastname: string, email1: string, email2: string, password1: string, password2: string): void {
     if (firstname && lastname && email1 && email1 === email2 && password1 && password1 === password2) {
-      this.api.register(firstname, lastname, email1, email2, password1, password2, (response) => {
+      this.api.register(firstname, lastname, email1, email2, password1, password2).then((response) => {
         
         try {
           var elementList = this.document.querySelectorAll('.modal-backdrop');
@@ -72,7 +72,7 @@ export class HomeComponent implements OnInit {
         catch {}
         
         this.router.navigate(['confirm', response.urlCode]);
-      }, (error) => {
+      }).catch((error) => {
         console.log(error);
       });
     }
@@ -80,27 +80,32 @@ export class HomeComponent implements OnInit {
 
   loginUser(email: string, password: string): void {
     if (email && password) {
-      this.api.login(email, password, (result) => {
-        try {
-          var elementList = this.document.querySelectorAll('.modal-backdrop');
-          for (let i = 0; i < elementList.length; i++) {
-            elementList[i].removeAttribute('class');
-          }
+      this.api.login(email, password).then((result) => {
+        if (result.status && result.status != 200) {
+          //Wrong password
         }
-        catch {}
-        
-        try {
-          var elementList = this.document.querySelectorAll('.modal-open');
-          for (let i = 0; i < elementList.length; i++) {
-            elementList[i].removeAttribute('class');
-            elementList[i].removeAttribute('style');
+        else {
+          try {
+            var elementList = this.document.querySelectorAll('.modal-backdrop');
+            for (let i = 0; i < elementList.length; i++) {
+              elementList[i].removeAttribute('class');
+            }
           }
+          catch {}
+          
+          try {
+            var elementList = this.document.querySelectorAll('.modal-open');
+            for (let i = 0; i < elementList.length; i++) {
+              elementList[i].removeAttribute('class');
+              elementList[i].removeAttribute('style');
+            }
+          }
+          catch {}
+  
+          this.api.setLoggedIn(result.token);
+          this.router.navigate(['dashboard']);
         }
-        catch {}
-
-        this.api.setLoggedIn(result.token);
-        this.router.navigate(['dashboard']);
-      }, (error) => {
+      }).catch((error) => {
         this.api.userLoggedIn = null;
         console.log(error);
       })
