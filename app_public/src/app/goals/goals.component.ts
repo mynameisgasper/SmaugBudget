@@ -1,5 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
+import { ApiService } from '../api.service';
+import { Card } from '../card';
 declare var $:any;
 
 @Component({
@@ -9,11 +11,9 @@ declare var $:any;
 })
 export class GoalsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private elementRef: ElementRef, private api: ApiService) { }
 
-  ngOnInit(): void {
-  }
-
+  cards: Card[]
   faPlusSquare = faPlusSquare;
 
   @ViewChild('nameGoal') nameGoal: ElementRef;
@@ -21,6 +21,13 @@ export class GoalsComponent implements OnInit {
   @ViewChild('amountGoal') amountGoal: ElementRef;
   @ViewChild('dateGoal') dateGoal: ElementRef;
   @ViewChild('addAmount') addAmount: ElementRef;
+
+  ngOnInit(): void {
+    this.api.getUser().then(result => {
+      this.cards = this.generateCards(result.goals);
+      console.log(this.cards);
+    }).catch(error => console.log(error));
+  }
 
   hasTargetLeft(value: Number): Boolean {
     return value > 0;
@@ -162,6 +169,45 @@ export class GoalsComponent implements OnInit {
     } else {
         //POST REQUEST - TO BE ADDED
     }
+  }
+
+  generateCards(goals) {
+    var totalGoals = goals.length;
+    var completedGoals = this.getCompletedGoals(goals);
+    var comment = this.generateComment(goals, completedGoals);
+
+    return [
+      new Card(1, 'bg-primary', 'faBullseye', totalGoals, 'Goals Total', null),
+      new Card(21, 'bg-primary', 'faCheckCircle', completedGoals, 'Goals Completed', comment),
+    ];
+  }
+
+  getCompletedGoals(goals){
+    var count = 0;
+    for (var goal of goals) {
+      if(goal.target == goal.saved)
+        count++;
+    }
+
+    return count;
+  }
+
+  generateComment(goals, completedGoals){
+    var comment = "";
+    if(completedGoals == 0)
+      comment = "No goals completed.";
+    else if (completedGoals > 2)
+      comment = "Multiple goals completed!";
+    else{
+      for (var goal of goals) {
+        if(goal.target == goal.saved)
+          comment += goal.title + ", ";
+      }
+      comment = comment.substring(0, comment.length - 2);
+      comment += " completed!"
+    }
+    
+    return comment;
   }
 
 

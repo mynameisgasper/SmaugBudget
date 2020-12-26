@@ -4,6 +4,6 @@
     <p class="count-numbers">{{(card ? card.count : count)}}</p>
     <p class="count-name">{{(card ? card.title : title)}}</p></span>
     <p id="card{{(card ? card.id : id)}}-after" class="text">
-        <span id="comments{{(card ? card.id : id)}}">{{comment}}</span>
+        <span id="comments{{(card ? card.id : id)}}">{{card.comment}}</span>
     </p>
 </div>
