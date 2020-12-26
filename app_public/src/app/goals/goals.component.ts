@@ -11,7 +11,7 @@ declare var $:any;
 })
 export class GoalsComponent implements OnInit {
 
-  constructor(private elementRef: ElementRef, private api: ApiService) { }
+  constructor(private api: ApiService) { }
 
   cards: Card[]
   faPlusSquare = faPlusSquare;

@@ -1,5 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChild} from '@angular/core';
 import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
+import { ApiService } from '../api.service';
+import { Card } from '../card';
 declare var $:any;
 
 @Component({
@@ -9,9 +11,15 @@ declare var $:any;
 })
 export class BillsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private api: ApiService) { }
+
+  cards: Card[]
 
   ngOnInit(): void {
+    this.api.getUser().then(result => {
+        this.cards = this.generateCards(result.bills);
+        console.log(this.cards);
+      }).catch(error => console.log(error));
   }
 
   @ViewChild('nameAdd') nameAdd: ElementRef;
@@ -103,6 +111,14 @@ export class BillsComponent implements OnInit {
     } else {
         return true;
     }
+  }
+
+  generateCards(bills) {
+
+    return [
+      new Card(1, 'bg-primary', 'faPaperclip', 2, 'Bills Total', null),
+      new Card(21, 'bg-warning', 'faCalendar', 1, 'Bills This Week', 'Closest bill: Telemach - 12/30'),
+    ];
   }
 
   data = {
