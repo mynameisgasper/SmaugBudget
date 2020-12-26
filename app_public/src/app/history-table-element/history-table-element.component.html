@@ -57,39 +57,37 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form name="editHistory">
-                <input type="hidden" name="id" value="{{Expense.id}}">
-                <div class="modal-body">
-                    <div class="ena"><label for="inputGoal">Category</label>
-                        <select name="kategorija" id="inputCategory{{Expense.id}}" class="form-control">
-                            <option selected>{{Expense.category}}</option>
-                            <option *ngFor ="let category of Categories" id="categoryName{{category.id}}">{{category.name}}</option>
-                        </select>
-                    </div>
-                    <div class="ena">
-                        <label for="Payee">Recipient</label><br>
-                        <input type="text" #name id=".historyName{{Expense.id}}" name="prejemnik" class="form-control" placeholder="e.g. Elektro Ljubljana d.d." (focusout)="nameEditHistory()" value="{{Expense.recipient}}"required="required">
-                        <div id="{{Expense.id}}txt"></div>
-                    </div>
-                    <div class="ena">
-                        <label for="Amount">Amount</label><br>
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">{{Currency}}</span>
-                                </div>
-                        <input type="number" #amount id=".historyNumber{{Expense.id}}" name="vsota" class="form-control" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" (focusout)="amountEditHistory()" placeholder="e.g. $150.30" value="{{Expense.value}}" step="any"required="required">
-                        <div id="{{Expense.id}}amm"></div>
-                        </div>
-                    </div>
-                    <div class="ena">
-                        <label for="datum">Date</label><br>
-                        <input type="date" #date id=".historyDate{{Expense.id}}" name="datumcek" (focusout)="dateEditHistory()"class="form-control" value="{{Expense.year}}-{{Expense.month}}-{{Expense.day}}"required="required">
+            <input #id type="hidden" name="id" value="{{Expense.id}}">
+            <div class="modal-body">
+                <div class="ena"><label for="inputGoal">Category</label>
+                    <select #category name="kategorija" id="inputCategory{{Expense.id}}" class="form-control">
+                        <option selected>{{Expense.category}}</option>
+                        <option *ngFor ="let category of Categories" id="categoryName{{category.id}}">{{category.name}}</option>
+                    </select>
+                </div>
+                <div class="ena">
+                    <label for="Payee">Recipient</label><br>
+                    <input type="text" #name id=".historyName{{Expense.id}}" name="prejemnik" class="form-control" placeholder="e.g. Elektro Ljubljana d.d." (focusout)="nameEditHistory()" value="{{Expense.recipient}}"required="required">
+                    <div id="{{Expense.id}}txt"></div>
+                </div>
+                <div class="ena">
+                    <label for="Amount">Amount</label><br>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">{{Currency}}</span>
+                            </div>
+                    <input type="number" #amount id=".historyNumber{{Expense.id}}" name="vsota" class="form-control" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" (focusout)="amountEditHistory()" placeholder="e.g. $150.30" value="{{Expense.value}}" step="any"required="required">
+                    <div id="{{Expense.id}}amm"></div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                <div class="ena">
+                    <label for="datum">Date</label><br>
+                    <input type="date" #date id=".historyDate{{Expense.id}}" name="datumcek" (focusout)="dateEditHistory()"class="form-control" value="{{Expense.year}}-{{Expense.month}}-{{Expense.day}}"required="required">
                 </div>
-            </form>
+            </div>
+            <div class="modal-footer">
+                <button id="buttonEditExpense" (click)="buttonEditHistory()" class="btn btn-primary">Save Changes</button>
+            </div>
         </div>
     </div>
 </div>

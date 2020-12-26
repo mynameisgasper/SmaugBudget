@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, ElementRef, ViewChild, Renderer2 } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
+import { ApiService } from '../api.service';
 declare var $:any;
 
 @Component({
@@ -38,14 +40,37 @@ export class HistoryTableElementComponent implements OnInit {
 
   constructor(
     private renderer: Renderer2,
-    private elementRef: ElementRef
+    private api: ApiService,
   ) { }
 
+  @ViewChild('id') id: ElementRef;
+  @ViewChild('category') category: ElementRef;
   @ViewChild('name') name: ElementRef;
   @ViewChild('amount') amount: ElementRef;
   @ViewChild('date') date: ElementRef;
 
   ngOnInit(): void {
+  }
+
+  editExpense(): void {
+      this.api.editExpense(
+        this.id.nativeElement.value,
+        this.category.nativeElement.value,
+        this.name.nativeElement.value,
+        this.amount.nativeElement.value,
+        this.date.nativeElement.value
+      ).then(result => {      
+      }).catch(error => console.log(error));
+      this.Expense.category = this.category.nativeElement.value;
+      this.Expense.id = this.id.nativeElement.value;
+      this.Expense.category = this.category.nativeElement.value;
+      this.Expense.recipient = this.name.nativeElement.value;
+      this.Expense.value = this.amount.nativeElement.value;
+      //this.Expense.date = this.date.nativeElement.value
+      let dateArr = this.parseDate(this.date.nativeElement.value);
+      this.Expense.day = dateArr[0];
+      this.Expense.month = dateArr[1];
+      this.Expense.year = dateArr[2];
   }
 
   nameEditHistory(): number {
@@ -120,14 +145,21 @@ export class HistoryTableElementComponent implements OnInit {
     }
   }
 
+  parseDate(date): Array<string> {
+    let array = date.split('-');
+    return array
+  }
+
   buttonEditHistory(): void {
     var name = this.nameEditHistory();
     var amount = this.amountEditHistory();
     var date = this.dateEditHistory();
     if (amount == 0 || name == 0 || date == 0) {
+      
       //DO NOTHING
     } else {
-      //SEND POST REQUEST
+      this.renderer.setAttribute(document.getElementById("buttonEditExpense"), 'data-dismiss', 'modal');
+      this.editExpense();
     }
   }
 }
