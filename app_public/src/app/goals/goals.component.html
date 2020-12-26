@@ -70,26 +70,25 @@
                     <option *ngFor="let cat of data.categories" id="category{{cat._id}}">{{cat.category}}</option>
                 </select>
 
-                        <br />
+                    <br />
 
-                        <label for="inputAmount">How much do you want to save?</label>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend" style="max-height: 38px;">
-                                <span class="input-group-text">{{data.currency}}</span>
-                            </div>
-                            <input #amountGoal type="number" class="form-control" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" (focusout)="amountGoals()" id="Amount" name="amount" placeholder="e.g. 1500" step="any" required="required">
-                            <div id="amm"></div>
+                    <label for="inputAmount">How much do you want to save?</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend" style="max-height: 38px;">
+                            <span class="input-group-text">{{data.currency}}</span>
                         </div>
-
-                        <label for="inputDate">Planned Date</label>
-                        <input #dateGoal class="form-control" type="date" placeholder="2020-01-01" id="inputDateAddGoal" name="inputDateAddGoal" (focusout)="dateCheckAddGoal()" required="required">
-
-
+                        <input #amountGoal type="number" class="form-control" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" (focusout)="amountGoals()" id="Amount" name="amount" placeholder="e.g. 1500" step="any" required="required">
+                        <div id="amm"></div>
                     </div>
-                    <div class="modal-footer">
-                        <button (click)="buttonAddGoal(nameGoal.value, categoryGoal.value, amountGoal.value, dateGoal.value)" class="btn btn-primary">Add Goal</button>
-                    </div>
-                
+
+                    <label for="inputDate">Planned Date</label>
+                    <input #dateGoal class="form-control" type="date" placeholder="2020-01-01" id="inputDateAddGoal" name="inputDateAddGoal" (focusout)="dateCheckAddGoal()" required="required">
+
+
+                </div>
+                <div class="modal-footer">
+                    <button (click)="buttonAddGoal(nameGoal.value, categoryGoal.value, amountGoal.value, dateGoal.value)" id="buttonAddGoal" class="btn btn-primary">Add Goal</button>
+                </div>
             </div>
         </div>
     </div>
@@ -124,7 +123,7 @@
                         <div class="ena"><label for="inputGoal">Goal</label><br />
                             <select id="selectMoney" name="inputCategory" class="form-control">
                                 <ng-container *ngFor="let item of data.goal">
-                                    <option *ngIf="hasTargetLeft(item.targetLeft)" id="category{{item._id}}">{{item.title}}</option>
+                                    <option #categoryGoal *ngIf="hasTargetLeft(item.targetLeft)" id="category{{item._id}}">{{item.title}}</option>
                                 </ng-container>
                             </select>
                         </div>
@@ -138,7 +137,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button (click)="buttonGoalsAddMoney()" class="btn btn-primary">Add</button>
+                        <button (click)="buttonGoalsAddMoney(nameGoal.value, categoryGoal.value)" class="btn btn-primary">Add</button>
                     </div>
                 </form>
             </div>

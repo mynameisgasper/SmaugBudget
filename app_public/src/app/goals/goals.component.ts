@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, Renderer2 } from '@angular/core';
 import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 import { ApiService } from '../api.service';
 import { Card } from '../card';
@@ -16,7 +16,8 @@ export class GoalsComponent implements OnInit {
 
   constructor(
     private api: ApiService,
-    private router: Router) { }
+    private router: Router,
+    private renderer: Renderer2,) { }
 
   cards: Card[]
   goals: Goal[]
@@ -163,11 +164,12 @@ export class GoalsComponent implements OnInit {
     if (name == 0 || category == 0 || amount == 0 || date == 0 ) {
         //DO NOTHING
     } else {
+      this.renderer.setAttribute(document.getElementById("buttonAddGoal"), 'data-dismiss', 'modal');
       this.addGoal(nameValue, categoryValue, amountValue, dateValue);
     }
   }
 
-  buttonGoalsAddMoney(): void {
+  buttonGoalsAddMoney(nameValue: string, categoryValue: string): void {
     var amount = this.amountGoalsAddMoney();
 
     
@@ -277,6 +279,14 @@ export class GoalsComponent implements OnInit {
         color = "#00cf1d"
 
     this.goals.push(new Goal(goal._id, goal.title, progress , goal.target, targetLeft, color, monthlyTarget, goal.category.name, date[0], date[1], date[2]));
+  }
+
+  addMoneyToGoal(name, category, amount, date){
+    this.api.addMoneyToGoal(name, category, amount, date).then((response) => {
+      this.parseAddGoalResponse(response);
+    }).catch((error) => {
+      console.log(error);
+    });
   }
 
 
