@@ -2,6 +2,7 @@ import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 import { ApiService } from '../api.service';
 import { Card } from '../card';
+import { Goal } from '../goal';
 declare var $:any;
 
 @Component({
@@ -14,6 +15,7 @@ export class GoalsComponent implements OnInit {
   constructor(private api: ApiService) { }
 
   cards: Card[]
+  goals: Goal[]
   faPlusSquare = faPlusSquare;
 
   @ViewChild('nameGoal') nameGoal: ElementRef;
@@ -25,7 +27,8 @@ export class GoalsComponent implements OnInit {
   ngOnInit(): void {
     this.api.getUser().then(result => {
       this.cards = this.generateCards(result.goals);
-      console.log(this.cards);
+      this.goals = this.generateGoals(result.goals);
+      console.log(this.goals);
     }).catch(error => console.log(error));
   }
 
@@ -209,6 +212,47 @@ export class GoalsComponent implements OnInit {
     
     return comment;
   }
+
+  generateGoals(goals) {
+    var goalsArray = [];
+    for(var goal of goals){
+      var date = goal.date.split("-");
+      date[2] = date[2].substring(0, 2);
+
+      var progress = Math.ceil(goal.saved / goal.target * 100);
+      var targetLeft = goal.target - goal.saved;
+      var monthlyTarget = this.calculateDailyTarget(goal.date, targetLeft);
+      
+      var color = "#2f7cfe";
+      if (targetLeft <= 0)
+          color = "#00cf1d"
+
+        console.log(goalsArray);
+
+      goalsArray.push(new Goal(goal._id, goal.title, progress , goal.target, targetLeft, color, monthlyTarget, goal.category.name, date[0], date[1], date[2]));
+    }
+  
+    return goalsArray;
+  }
+
+  calculateDailyTarget(date, targetLeft) {
+    var today = new Date();
+
+    var goalDate = date.split("-");
+    var y = parseInt(goalDate[0], 10)
+    var m = parseInt(goalDate[1], 10)
+    var d = parseInt(goalDate[2], 10)
+    var endDate = new Date(y, m - 1, d);
+
+    let diffTime = Math.abs(new Date(today).valueOf() - new Date(endDate).valueOf());
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+    if (diffDays < 1)
+        return targetLeft;
+    else
+        return Math.ceil(targetLeft / diffDays);
+
+}
 
 
   data = {

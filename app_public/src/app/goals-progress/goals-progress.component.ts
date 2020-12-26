@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, ElementRef, ViewChild} from '@angular/core';
 import { faMinusSquare, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
+import { Goal } from '../goal';
 declare var $:any;
 
 @Component({
@@ -12,13 +13,15 @@ export class GoalsProgressComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log("sd");
   }
 
   faMinusSquare = faMinusSquare;
   faPencilAlt = faPencilAlt
 
+ 
   @Input()
-    item:any
+    item:Goal
 
   @Input()
     currency:any 
@@ -26,8 +29,6 @@ export class GoalsProgressComponent implements OnInit {
   @Input()
     category:any  
   
-  
-
   @ViewChild('editNameGoal') editNameGoal: ElementRef;
   @ViewChild('editAmountGoal') editAmountGoal: ElementRef;
   @ViewChild('editDateGoal') editDateGoal: ElementRef;

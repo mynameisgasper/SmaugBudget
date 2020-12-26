@@ -94,7 +94,7 @@
                         <input #editNameGoal type="text" class="form-control" id=".toastEditName{{item._id}}" name="goal" value="{{item.title}}" required="required" (focusout)="nameEditGoal()">
                         <label for="inputCategory">Choose a Category</label>
                         <select id="inputCategory" name="inputCategory" class="form-control" required="required">
-                            <option selected disabled>{{item.category.name}}</option>
+                            <option selected disabled>{{item.categoryName}}</option>
                             <option *ngFor="let cat of category" id="category{{cat._id}}">{{cat.category}}</option>
                         </select>
                         <br>

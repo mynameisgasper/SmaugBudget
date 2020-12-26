@@ -174,7 +174,7 @@
                 </button>
             </div>
         </div>
-        <app-goals-progress-bar *ngFor="let item of data.goal;" [item]="item" [currency]="data.currency" [category]="data.categories"></app-goals-progress-bar>
+        <app-goals-progress-bar *ngFor="let goal of goals;" [item]="goal" [currency]="data.currency" [category]="data.categories"></app-goals-progress-bar>
     </div>
 
     <app-footer></app-footer>
