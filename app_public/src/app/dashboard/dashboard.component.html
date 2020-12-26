@@ -40,8 +40,7 @@
 
     <!----- Overview section ----->
     <div class="container" id="overview-section">
-        <input type="hidden" id="id" value="{{ data.id }}"/>
-        <h2 style="text-align: left; padding-bottom: 10px;">{{ data.overview }}</h2>
+        <h2 style="text-align: left; padding-bottom: 10px;">{{ overview }}</h2>
         <div class="row">
             <div class="col-xl-6 col-lg-6 left-col">
 
@@ -51,18 +50,18 @@
                         <table class="table table-borderless table-hover tabela-balance">
                             <tbody>
                                 <tr id="income-tr">
-                                    <th>{{ data.incomeRow }}</th>
-                                    <td>{{ data.incomeLastMonth }} {{ data.currency }}</td>
+                                    <th>{{ incomeRow }}</th>
+                                    <td>{{ incomeLastMonth }} {{ currency }}</td>
                                     <td style="padding: 0px; text-align: right;"><button type="button" class="btn p" data-toggle="modal" href="#changeIncome"><fa-icon [icon]="pencilIcon"></fa-icon></button></td>
                                 </tr>
                                 <tr id="expenses-tr">
-                                    <th>{{ data.expensesRow }}</th>
-                                    <td>{{ data.expensesLastMonth }} {{ data.currency }}</td>
+                                    <th>{{ expensesRow }}</th>
+                                    <td>{{ expensesLastMonth }} {{ currency }}</td>
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <th id="border-th">{{ data.balanceRow }}</th>
-                                    <td id="border-td">{{ data.incomeLastMonth - data.expensesLastMonth }} {{ data.currency }}</td>
+                                    <th id="border-th">{{ balanceRow }}</th>
+                                    <td id="border-td">{{ incomeLastMonth - expensesLastMonth }} {{ currency }}</td>
                                     <td id="border-td"></td>
                                 </tr>
                             </tbody>
@@ -72,7 +71,7 @@
                     <!----- Analytics section ----->
                     <div *ngIf="analytics" class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                         <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                            <h4 style="text-align: center; padding-top: 35px; padding-bottom: 10px;">{{ data.analyticsField }}</h4>
+                            <h4 style="text-align: center; padding-top: 35px; padding-bottom: 10px;">{{ analyticsField }}</h4>
                         </div>
                         <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 analytics-col" style="padding-bottom: 20px;">
                             

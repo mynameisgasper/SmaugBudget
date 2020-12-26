@@ -17,9 +17,17 @@ export class DashboardComponent implements OnInit {
   @ViewChild('dateDashboard') date: ElementRef;
 
   pencilIcon = faPencilAlt;
-  cards: Card[]
-  alerts: Alert[]
-  analytics: Array<Object>
+  cards: Card[];
+  alerts: Alert[];
+  analytics: Array<Object>;
+  overview = "Last month overview";
+  incomeRow = "Income";
+  currency: String;
+  incomeLastMonth: any;
+  expensesRow = "Expenses";
+  balanceRow = "Balance";
+  expensesLastMonth: any;
+  analyticsField = "Analytics";
 
   constructor(private api: ApiService) { }
 
@@ -28,6 +36,9 @@ export class DashboardComponent implements OnInit {
       this.cards = this.generateCards(result.bills, result.expense, result.paycheck, result.paycheckDate);
       this.alerts = this.generateAlerts(result.envelopes, result.bills, result.goals);
       this.analytics = this.generateAnalyitcs(result.expense, result.paycheckDate)
+      this.currency = result.defaultCurrency;
+      this.incomeLastMonth = result.paycheckLastMonth;
+      this.expensesLastMonth = this.getTotalCost(this.getLastMonthExpenses(result.expense, result.paycheckDate));
     }).catch(error => console.log(error));
   }
 
