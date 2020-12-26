@@ -68,9 +68,9 @@ export class HistoryTableElementComponent implements OnInit {
       this.Expense.value = this.amount.nativeElement.value;
       //this.Expense.date = this.date.nativeElement.value
       let dateArr = this.parseDate(this.date.nativeElement.value);
-      this.Expense.day = dateArr[0];
+      this.Expense.day = dateArr[2];
       this.Expense.month = dateArr[1];
-      this.Expense.year = dateArr[2];
+      this.Expense.year = dateArr[0];
   }
 
   nameEditHistory(): number {
@@ -159,7 +159,8 @@ export class HistoryTableElementComponent implements OnInit {
       //DO NOTHING
     } else {
       this.renderer.setAttribute(document.getElementById("buttonEditExpense"), 'data-dismiss', 'modal');
-      this.editExpense();
+      this.editExpense()
+      this.renderer.removeAttribute(document.getElementById("buttonEditExpense"), 'data-dismiss', 'modal');
     }
   }
 }
