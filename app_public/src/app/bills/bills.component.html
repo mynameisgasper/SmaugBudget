@@ -1,7 +1,7 @@
 <main>
     <app-header [component]="'bills'"></app-header>
 
-    <app-welcome [message]="data.message" [welcomeMessage]="data.welcomeMessage"></app-welcome>
+    <app-welcome [message]="pageData.message" [welcomeMessage]="pageData.welcomeMessage"></app-welcome>
 
     <div class="container" id="cards-section">
         <div class="row">
@@ -30,7 +30,7 @@
                         <thead class="headertop">
                         </thead>
                         <tbody>
-                            <tr app-bill-table *ngFor="let item of data.bill;" [data]="item" [Currency]='data.currency' [Categories]='data.categories'></tr>
+                            <tr app-bill-table *ngFor="let item of bills;" [data]="item" [Currency]='pageData.currency' [Categories]='categories'></tr>
                         </tbody>
                     </table>
                 </div>
@@ -93,7 +93,7 @@
                         <div class="ena"><label for="inputGoal">Category</label><br/>
                         <select id="inputCategory" name="inputCategory" class="form-control" required>
                             <option value="" selected disabled>Select Category</option>
-                            <option *ngFor="let item of data.categories" id="{{item._id}}" value="{{item._id}}" name="category">{{item.name}}</option>
+                            <option *ngFor="let item of categories" id="{{item._id}}" value="{{item._id}}" name="category">{{item.name}}</option>
                         </select>
                         </div>
                         <div class="checker">
@@ -105,7 +105,7 @@
                             <label for="Amount">Amount</label><br/>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text">{{data.currency}}</span>
+                                    <span class="input-group-text">{{pageData.currency}}</span>
                                 </div>
                                 <input type="number" #amountAdd onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" class="form-control" (focusout)="amountAddBills()" id="Amount" name="Amount" placeholder="e.g. 15" step="any" required="required">
                             </div>

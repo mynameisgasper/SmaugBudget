@@ -13,11 +13,40 @@ export class BillsComponent implements OnInit {
 
   constructor(private api: ApiService) { }
 
-  cards: Card[]
+  public cards: Card[]
+  public pageData: any;
+  public categories: any;
+  public bills: any;
 
   ngOnInit(): void {
     this.api.getUser().then(result => {
+
         this.cards = this.generateCards(result.bills);
+        this.categories = result.categories;
+        this.bills = this.generateBills(result.bills)
+        this.pageData = {
+            "bills": true,
+            "fileName": "bills",
+            "message": "Welcome to Bills!",
+            "welcomeMessage": "Here you can add recurring bills. Fill in the form, submit and it will be added to an envelope repeteadly!",
+            "logout": "Logout",
+            "DASHBOARD": "DASHBOARD",
+            "ENVELOPES": "ENVELOPES",
+            "GOALS": "GOALS",
+            "BILLS": "BILLS",
+            "HISTORY": "HISTORY",
+            "UTILITIES": "UTILITIES",
+            "user": "User",
+            "settings": "Settings",
+            "appearance": "Appearance",
+            "light": "Light",
+            "dark": "Dark",    
+            "currency": "EUR"
+        }
+        console.log(this.bills);
+        
+
+
         console.log(this.cards);
       }).catch(error => console.log(error));
   }
@@ -27,6 +56,78 @@ export class BillsComponent implements OnInit {
   @ViewChild('dateAdd') dateAdd: ElementRef;
 
   faPlusSquare = faPlusSquare;
+
+  generateBills(bills) {
+    var billsArray = []
+    for (var bill of bills) {
+        var date = bill.date.split('T')[0].split('-');
+
+        billsArray.push({
+            _id: bill._id,
+            year: date[0],
+            month: date[1],
+            monthName: this.translateMonth(date[1]),
+            day: date[2],
+            category: bill.category.name,
+            recipient: bill.recipient,
+            value: bill.value,
+            currency: bill.currency,
+            repeat: bill.repeating
+        });
+    }
+    billsArray.sort(this.compare)
+    return billsArray;
+  }
+
+  compare(a, b) { //1 menjava, -1 ni menjava
+    if (a.year < b.year) {
+        return 1;
+    } else if (a.year == b.year) {
+        if (a.month < b.month) {
+            return 1;
+        } else if (a.month == b.month) {
+            if (a.day < b.day) {
+                return 1;
+            } else {
+                return -1;
+            }
+        } else {
+            return -1;
+        }
+    } else {
+        return -1;
+    }
+    return 0;
+}
+
+  translateMonth(month) {
+    switch (month) {
+        case '01':
+            return "JAN";
+        case '02':
+            return "FEB";
+        case '03':
+            return "MAR";
+        case '04':
+            return "APR";
+        case '05':
+            return "MAY";
+        case '06':
+            return "JUN";
+        case '07':
+            return "JUL";
+        case '08':
+            return "AUG";
+        case '09':
+            return "SEP";
+        case '10':
+            return "OCT";
+        case '11':
+            return "NOV";
+        case '12':
+            return "DEC";
+    }
+  }
 
   nameAddBills(): number {
     const field = this.nameAdd.nativeElement;
