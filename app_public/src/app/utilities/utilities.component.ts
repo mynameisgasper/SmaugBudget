@@ -12,6 +12,9 @@ declare var $:any;
 })
 export class UtilitiesComponent implements OnInit {
 
+    public data: any;
+    public groups: any;
+
     faPlusSquare = faPlusSquare;
     resultValue: number;
 
@@ -25,6 +28,71 @@ export class UtilitiesComponent implements OnInit {
     @ViewChild('counter') counter1: ElementRef;
 
     ngOnInit(): void {
+        this.api.getUser().then(result => {
+            console.log(result);
+            this.data = {
+                "utility":true,
+                "fileName":"utilities",
+                "message":"Welcome to Utilites!",
+                "welcomeMessage":"Here you can find some useful gadgets.",
+                "logout":"Logout",
+                "DASHBOARD":"DASHBOARD",
+                "ENVELOPES":"ENVELOPES",
+                "GOALS":"GOALS",
+                "BILLS":"BILLS",
+                "HISTORY":"HISTORY",
+                "UTILITIES":"UTILITIES",
+                "user":"User",
+                "settings":"Settings",
+                "appearance":"Appearance",
+                "light":"Light",
+                "dark":"Dark"
+            }
+            this.groups = this.generateGroups(result.friendgroups,result._id);
+            console.log(this.groups);
+        }).catch(error => console.log(error));
+    }
+
+    generateGroups(groups, myId){
+        var groupsArray = [];
+    
+        for(var group of groups){
+            var memberArray = [];
+            var members = group.friends;
+            memberArray = this.insertMe(memberArray, myId, group.balance);
+            var nextToPay = 'Me';
+            var min = group.balance;
+            for(var member of members){
+                if(member.balance < min){
+                    nextToPay = member.name;
+                    min = member.balance;
+                }
+                memberArray.push({
+                    id: member._id,
+                    name: member.name,
+                    amount: member.balance
+                })
+            }
+            groupsArray.push({
+                id: group._id,
+                Group: group.name,
+                Next: nextToPay,
+                Balance: group.balance,
+                groupMember: memberArray
+            })
+        }
+        return groupsArray;
+    }
+
+
+    insertMe(memberArray, myId, myBalance){
+        memberArray.push({
+            id: myId,
+            name: 'Me',
+            amount: myBalance
+        });
+
+        return memberArray;
     }
 
     converter(currency1: string, currency2: string, value: number): void {
@@ -94,48 +162,4 @@ export class UtilitiesComponent implements OnInit {
         }
     }
 
-    data = {
-        "utility":true,
-        "fileName":"utilities",
-        "message":"Welcome to Utilites!",
-        "welcomeMessage":"Here you can find some useful gadgets.",
-        "logout":"Logout",
-        "DASHBOARD":"DASHBOARD",
-        "ENVELOPES":"ENVELOPES",
-        "GOALS":"GOALS",
-        "BILLS":"BILLS",
-        "HISTORY":"HISTORY",
-        "UTILITIES":"UTILITIES",
-        "user":"User",
-        "settings":"Settings",
-        "appearance":"Appearance",
-        "light":"Light",
-        "dark":"Dark",
-        "Friend":[{
-            "id":"5fc600b4507a6800112af245",
-            "Group":"FRI",
-            "Next":"Gasper",
-            "Balance":-2.5,
-            "groupMember":[{
-                "id":"5fc600b4507a6800112af56e",
-                "name":"Me",
-                "amount":-2.5
-            },{
-                "id":"5fc41a53856f8e02780b4b30",
-                "name":"Luka",
-                "amount":5.5
-            },{
-                "id":"5fc41a53856f8e02780b4b32",
-                "name":"Miha","amount":-1.5
-            },{
-                "id":"5fc41a53856f8e02780b4b34",
-                "name":"Gasper",
-                "amount":-4.5
-            },{
-                "id":"5fc41a53856f8e02780b4b36",
-                "name":"Tim",
-                "amount":3
-            }],
-        }]
-    }
 }

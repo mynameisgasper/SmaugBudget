@@ -23,7 +23,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                        <tr app-table-row class="clickable" *ngFor="let item of data.Friend" [Friend]='item' data-toggle="modal" [attr.data-target]="'#showGroup' +item.id"></tr>
+                        <tr app-table-row class="clickable" *ngFor="let item of groups" [Friend]='item' data-toggle="modal" [attr.data-target]="'#showGroup' +item.id"></tr>
                 </tbody>
             </table>
         </div>
@@ -137,7 +137,7 @@
         </div>
     </div>
     <!-- showGroup -->
-    <app-utilities-edit-modal *ngFor="let item of data.Friend" [Friend]='item'></app-utilities-edit-modal>
+    <app-utilities-edit-modal *ngFor="let item of groups" [Friend]='item'></app-utilities-edit-modal>
     
     <div class="modal fade" id="addGroupModal" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
         <div class="position-absolute w-100 p-4 d-flex flex-column align-items-end">
