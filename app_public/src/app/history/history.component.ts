@@ -37,14 +37,6 @@ export class HistoryComponent implements OnInit {
       document.querySelector(".totaltext").innerHTML = "<h5>Total spent: " + parsedTable.sum.toFixed(2); + "€</h5>";
       const pieChart = this.groupByCategories(parsedTable);
       const lineChartData = this.makeDataForGraph(this.filterByCategory(this.expenses))
-      /*"chartData1": this.makeDataArray1(pieChart),
-        "chartColors1": this.makeColorArray1(pieChart),
-        "chartLabels1": this.makeLabelArray1(pieChart), 
-        "chartType1": "doughnut",
-        "chartData2": this.generateDatasets(lineChartData),
-        "chartColors2": this.getColors(lineChartData),
-        "chartLabels2": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-        "chartType2": "line"*/
       
       this.pageData = {
         "fileName": "history",
@@ -69,9 +61,9 @@ export class HistoryComponent implements OnInit {
         "appearance":"Appearance",
         "light":"Light",
         "dark":"Dark",
-        "chartData1": [310],
-        "chartColors1": [{backgroundColor: ['rgb(50, 168, 156)']}],
-        "chartLabels1": ["Car"],
+        "chartData1": this.makeDataArray1(pieChart),
+        "chartColors1": this.makeColorArray1(pieChart),
+        "chartLabels1": this.makeLabelArray1(pieChart), 
         "chartType1": "doughnut",
         "chartData2":this.generateDatasets(lineChartData),
         "chartColors2": this.getColors(lineChartData),
@@ -277,9 +269,10 @@ export class HistoryComponent implements OnInit {
       returnTable[i] = array[i].sum;
     }
     return returnTable;
-  }/*
+  }
 
   makeColorArray1(array) {
+    const table = [];
     const returnTable = [];
     for (let i = 0; i < array.length; i++) {
       returnTable.push([array[i].color]);
@@ -287,16 +280,17 @@ export class HistoryComponent implements OnInit {
     let barva = {
       backgroundColor: returnTable
     }
-    return barva;
+    table[0] = barva;
+    return table;
   }
-
+  
   makeLabelArray1(array) {
     const returnTable = [array.length];
     for (let i = 0; i < array.length; i++) {
       returnTable[i] = array[i].name;
     }
     return returnTable;
-  }*/
+  }
 
   generateDatasets(map) {
     var datasets: ChartDataSets[] = [];
