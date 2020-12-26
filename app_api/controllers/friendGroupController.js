@@ -6,56 +6,68 @@ const { use } = require('../routers/apiRouter');
 const FriendGroup = mongoose.model('FriendGroup');
 const Friend = mongoose.model('Friend');
 const User = mongoose.model('User');
+const jwt_decode = require('jwt-decode');
 
-function addFriendGroup(requestBody, res){
+function addFriendGroup(req, res){
     try {
-        var name = requestBody.name;
-        var friends = JSON.parse(requestBody.friends);
-        var user_id = requestBody.user_id;
+        const authorization = req.headers.authorization;
+        if (authorization) {
+            const token = authorization.split(' ')[1];
+            const decodedToken = jwt_decode(token);
 
-        var check = true;
-        for(var i = 0; i < friends.length; i++){
-            const nameTest = checkName(name);
-            if(!nameTest){
-                check = false; 
-                break;
+            var name = req.body.name;
+            var friends = JSON.parse(req.body.friends);
+
+            var check = true;
+            for (var i = 0; i < friends.length; i++) {
+                const nameTest = checkName(name);
+                if (!nameTest) {
+                    check = false; 
+                    break;
+                }
+            }
+
+            if(check){
+                User.findById(decodedToken._id, function(error, user) {
+                    if (error) {
+                        console.log(error);
+                        res.sendStatus(500);
+                    } else {
+                        let friendGroup = new FriendGroup({
+                            name: name,
+                            balance: 0,
+                            friends: []
+                        });
+                        for(var i = 0; i < friends.length; i++){
+                            let newFriend = new Friend({
+                                name: friends[i],
+                                balance: 0
+                            });
+                            newFriend.save();
+                            friendGroup.friends.push(newFriend);
+                        }
+
+                        friendGroup.save(function callback(err) {
+                            if (err) {
+                                console.log(err);
+                                res.sendStatus(500);
+                            } else {
+                                user.friendgroups.push(friendGroup);
+                                user.save();
+                                res.status(200).json(friendGroup);
+                            }
+                        });
+                    }
+                });
+            } else {
+                res.sendStatus(400);
             }
         }
-
-        if(check){
-            User.findById(user_id, function(error, user) {
-                if (error) {
-                    console.log(error);
-                    res.sendStatus(500);
-                } else {
-                    let friendGroup = new FriendGroup({
-                        name: name,
-                        balance: 0,
-                        friends: []
-                    });
-                    for(var i = 0; i < friends.length; i++){
-                        let newFriend = new Friend({
-                            name: friends[i],
-                            balance: 0
-                        });
-                        newFriend.save();
-                        friendGroup.friends.push(newFriend);
-                    }
-
-                    friendGroup.save(function callback(err) {
-                        if (err) {
-                            console.log(err);
-                            res.sendStatus(500);
-                        } else {
-                            user.friendgroups.push(friendGroup);
-                            user.save();
-                            res.status(200).json(user);
-                        }
-                    });
-                }
-            });
-        } else {
-            res.sendStatus(400);
+        else {
+            const response = {
+                status: 'Unauthorized'
+            }
+            res.status(401).json(response);
         }
     }
     catch (ex) {
@@ -179,7 +191,7 @@ function checkValues(value) {
 
 module.exports = {
     addFriendGroup: function(req, res) {
-        addFriendGroup(req.body, res);
+        addFriendGroup(req, res);
     },
     calculateBalances: function(req, res) {
         calculateBalances(req.body, res);

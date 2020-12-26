@@ -163,7 +163,23 @@ export class UtilitiesComponent implements OnInit {
     }
 
     createGroup(f: NgForm) {
-        console.log(f.form.value);
-    }
+        const values = f.form.value;
+        var groupName: String;
+        var friends: Array<String> = [];
 
+        for (const [key, value] of Object.entries(values)) {
+            if (key === 'inputGroupName') {
+                groupName = values[key];
+            }
+            else {
+                friends.push(values[key])
+            }
+        }
+
+        this.api.addFriendGroup(groupName, friends).then(result => {
+            console.log(result);
+        }).catch(error => {
+            console.log(error);
+        });
+    }
 }
