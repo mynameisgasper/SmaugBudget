@@ -85,6 +85,25 @@ export class ApiService {
     }
   }
 
+  public addMoneyToGoal(name, category, amount, date): Promise<any> {
+    if (this.authorization.getLoggedIn()) {
+      const url: string = `${this.apiUrl}/addToGoalWithCategory`; 
+      const body = {
+        'name': name,
+        'category': category,
+        'amount': amount,
+        'date': date,
+      }
+      const options = {
+        headers: new HttpHeaders().set('Authorization', this.authorization.generateCompleteJwt())
+      }
+      return this.http.post(url, body, options).toPromise().then(response => response).catch(err => this.parseError(err));
+    }
+    else {
+      this.parseError('Error');
+    }
+  }
+
   private parseError(error: any): Promise<any> {
     console.error('An error has occured', error);
     return Promise.reject(error.message || error);
