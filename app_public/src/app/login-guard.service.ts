@@ -11,7 +11,7 @@ export class LoginGuardService implements CanActivate {
   constructor(private authService: AuthenticationService, private router: Router) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-    if (this.authService.getLoggedIn()) {
+    if (this.authService.getLoggedIn() && this.authService.getAccessLevel() >= 0) {
       return true;
     }
     else {

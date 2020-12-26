@@ -49,7 +49,13 @@ export class AuthenticationService {
   }
 
   getAccessLevel(): number {
-    return this.accessLevel;
+    if (this.isJwtTokenValid) {
+      const decodedToken = jwt_decode(this.userLoggedIn);
+      return decodedToken['accessLevel'];
+    }
+    else {
+      return -1;
+    }
   }
 
   public register(firstname: string, lastname: string, email1: string, email2: string, password1: string, password2: string) {

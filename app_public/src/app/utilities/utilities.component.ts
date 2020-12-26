@@ -163,7 +163,7 @@ export class UtilitiesComponent implements OnInit {
     }
 
     createGroup(f: NgForm) {
-        console.log(f);
+        console.log(f.form.value);
     }
 
 }
