@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, Renderer2 } from '@angular/core';
 import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 import { ApiService } from '../api.service';
 import { Card } from '../card';
@@ -11,7 +11,10 @@ declare var $:any;
 })
 export class EnvelopesComponent implements OnInit {
 
-  constructor(private api: ApiService) { }
+  constructor(
+    private api: ApiService,
+    private renderer: Renderer2) { }
+
   cards: Card[]
   public envelopes: any;
   public pageData: any;
@@ -45,22 +48,48 @@ export class EnvelopesComponent implements OnInit {
         "appearance":"Appearance",
         "light":"Light",
         "dark":"Dark",
-        "setMonthNumber": d.getMonth(),
+        "setMonthNumber": d.getMonth()+1,
         "setMonth": this.getCurrentMonth(d.getMonth()),
         "currentMonth": this.getCurrentMonth(d.getMonth()),
         "currency":"EUR",
       }
-      console.log(this.cards);
     }).catch(error => console.log(error));
   }
 
   @ViewChild('categoryAdd') categoryAdd: ElementRef;
   @ViewChild('amountAdd') amountAdd: ElementRef;
+  @ViewChild('categoryExpense') categoryExpense: ElementRef;
   @ViewChild('nameExpense') nameExpense: ElementRef;
   @ViewChild('amountExpense') amountExpense: ElementRef;
   @ViewChild('dateExpense') dateExpense: ElementRef;
 
   faPlusSquare = faPlusSquare;
+
+  addExpense() {
+          
+    let newSpent = 0;
+    let newProgress = 0;
+
+    for (let envelope of this.envelopes) {
+      let dateArr = this.dateExpense.nativeElement.value.split("-")
+
+      if (envelope.category.name === this.categoryExpense.nativeElement.value && dateArr[1] == this.pageData.setMonthNumber) {
+        console.log(envelope.category.name);
+        newSpent +=  parseFloat(parseFloat(this.amountExpense.nativeElement.value).toFixed(2));
+        envelope.spent = newSpent;
+        newProgress = Math.round(envelope.spent / envelope.budget * 100);
+        envelope.progress = newProgress;
+      }
+    }
+
+    this.api.addExpense(
+      this.amountExpense.nativeElement.value,
+      this.categoryExpense.nativeElement.value,
+      this.nameExpense.nativeElement.value,
+      this.dateExpense.nativeElement.value
+      ).then(result => { }).catch(error => console.log(error));
+
+  }
 
   nameAddEnvelopes(): number {
     const field = this.categoryAdd.nativeElement;
@@ -221,7 +250,7 @@ export class EnvelopesComponent implements OnInit {
     if (amount == 0) {
         //DO NOTHING
     } else {
-        //POST REQUEST - TO BE ADDED
+      //POST REQUEST - TO BE ADDED
     }
 }
 
@@ -234,7 +263,9 @@ export class EnvelopesComponent implements OnInit {
     if (amount == 0 || name == 0 || date == 0) {
         //DO NOTHING
     } else {
-        //POST REQUEST - TO BE ADDED
+      this.renderer.setAttribute(document.getElementById("buttonEditEnvelopes"), 'data-dismiss', 'modal');
+      this.addExpense()
+      this.renderer.removeAttribute(document.getElementById("buttonEditEnvelopes"), 'data-dismiss', 'modal');
     }
   }
 
