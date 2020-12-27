@@ -88,7 +88,7 @@ export class EnvelopesComponent implements OnInit {
       this.categoryExpense.nativeElement.value,
       this.nameExpense.nativeElement.value,
       this.dateExpense.nativeElement.value
-      ).then(result => { }).catch(error => console.log(error));
+    ).then(result => { }).catch(error => console.log(error));
       
   }
 
@@ -98,8 +98,8 @@ export class EnvelopesComponent implements OnInit {
       this.amountAdd.nativeElement.value,
       this.colorAdd.nativeElement.value,
       this.pageData.setMonthNumber-1
-      ).then(result => { }).catch(error => console.log(error));
-      this.router.navigate(['/envelopes'])
+    ).then(result => { }).catch(error => console.log(error));
+    this.router.navigate(['/envelopes'])
   }
 
   nameAddEnvelopes(): number {

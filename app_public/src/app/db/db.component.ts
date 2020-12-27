@@ -15,9 +15,11 @@ export class DbComponent implements OnInit {
 
   loadData(): void {
     this.api.loadData();
+    alert("Data loaded!")
   }
 
   deleteData(): void {
     this.api.deleteData();
+    alert("Data deleted!")
   }
 }
