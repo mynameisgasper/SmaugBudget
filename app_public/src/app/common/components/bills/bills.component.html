@@ -1,7 +1,7 @@
 <main>
     <app-header [component]="'bills'"></app-header>
 
-    <app-welcome [message]="pageData.message" [welcomeMessage]="pageData.welcomeMessage"></app-welcome>
+    <app-welcome [message]="message" [welcomeMessage]="welcomeMessage"></app-welcome>
 
     <div class="container" id="cards-section">
         <div class="row">
@@ -30,7 +30,7 @@
                         <thead class="headertop">
                         </thead>
                         <tbody>
-                            <tr app-bill-table *ngFor="let item of bills;" [data]="item" [Currency]='pageData.currency' [Categories]='categories'></tr>
+                            <tr app-bill-table *ngFor="let item of bills;" [data]="item" [Currency]='currency' [Categories]='categories'></tr>
                         </tbody>
                     </table>
                 </div>
@@ -105,7 +105,7 @@
                             <label for="Amount">Amount</label><br/>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text">{{pageData.currency}}</span>
+                                    <span class="input-group-text">{{currency}}</span>
                                 </div>
                                 <input type="number" #amountAdd onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" class="form-control" (focusout)="amountAddBills()" id="Amount" name="Amount" placeholder="e.g. 15" step="any" required="required">
                             </div>

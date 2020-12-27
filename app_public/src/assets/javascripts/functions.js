@@ -6,7 +6,3 @@ function hideWelcome() {
     document.querySelectorAll('#cards-section')[0].style.marginTop = 15 + 'vh';
     localStorage.setItem(page, "false");
 }
-
-Template.registerHelper("log", function(something) {
-    console.log(something);
-})

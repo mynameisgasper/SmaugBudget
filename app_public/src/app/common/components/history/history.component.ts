@@ -16,12 +16,41 @@ declare var $:any;
 })
 export class HistoryComponent implements OnInit {
 
-  public pageData: any;
-  public categories: Array<Object>;
+  public categories: Array<Object> = [];
   public currency: string;
-  public expenses: Array<Object>;
-  public page = 1;
-  public pageSize = 10;
+  public expenses: Array<Object> = [];
+  public page: number = 1;
+  public pageSize: number = 10;
+  fileName: string = "history";
+  graph: Object = {
+    "used": true,
+    "name": "HistoryChart"
+  };
+  dateRangePicker: Object = {
+    "used": true
+  };
+  message: string = "Welcome to History!";
+  welcomeMessage: string = "This is the best way to check your past spending by time and category.";
+  logout: string = "Logout";
+  DASHBOAR: string = "DASHBOARD,";
+  ENVELOPES: string = "ENVELOPES";
+  GOALS: string = "GOALS";
+  BILLS: string = "BILLS";
+  HISTORY: string = "HISTORY";
+  UTILITIES: string = "UTILITIES";
+  user: string = "User";
+  settings: string = "Settings";
+  appearance: string = "Appearance";
+  light: string = "Light";
+  dark: string = "Dark";
+  chartData1: Array<any> = [];
+  chartColors1: Array<any> = [];
+  chartLabels1: Array<any> = []; 
+  chartType1: string = "doughnut";
+  chartData2: Array<any> = [];
+  chartColors2: Array<any> = [];
+  chartLabels2: Array<string> = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  chartType2: string = "line";
 
   constructor(
     private api: ApiService,
@@ -31,7 +60,6 @@ export class HistoryComponent implements OnInit {
   @ViewChild('color') color: ElementRef;
 
   ngOnInit(): void {
-
     this.api.getUser().then(result => {
 
       this.categories = result.categories;
@@ -43,40 +71,12 @@ export class HistoryComponent implements OnInit {
       document.querySelector(".totaltext").innerHTML = "<h5>Total spent: " + parsedTable.sum.toFixed(2); + "€</h5>";
       const pieChart = this.groupByCategories(parsedTable);
       const lineChartData = this.makeDataForGraph(this.filterByCategory(this.expenses))
-      
-      this.pageData = {
-        "fileName": "history",
-        "graph":{
-          "used":true,
-          "name":"HistoryChart"
-        },
-        "dateRangePicker":{
-          "used":true
-        },
-        "message":"Welcome to History!",
-        "welcomeMessage":"This is the best way to check your past spending by time and category.",
-        "logout": "Logout",
-        "DASHBOARD":"DASHBOARD,",
-        "ENVELOPES":"ENVELOPES",
-        "GOALS":"GOALS",
-        "BILLS":"BILLS",
-        "HISTORY":"HISTORY",
-        "UTILITIES":"UTILITIES",
-        "user":"User",
-        "settings":"Settings",
-        "appearance":"Appearance",
-        "light":"Light",
-        "dark":"Dark",
-        "chartData1": this.makeDataArray1(pieChart),
-        "chartColors1": this.makeColorArray1(pieChart),
-        "chartLabels1": this.makeLabelArray1(pieChart), 
-        "chartType1": "doughnut",
-        "chartData2":this.generateDatasets(lineChartData),
-        "chartColors2": this.getColors(lineChartData),
-        "chartLabels2": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-        "chartType2": "line"
-        
-      }
+
+      this.chartData1 = this.makeDataArray1(pieChart);
+      this.chartColors1 = this.makeColorArray1(pieChart);
+      this.chartLabels1 = this.makeLabelArray1(pieChart);
+      this.chartData2 = this.generateDatasets(lineChartData);
+      this.chartColors2 = this.getColors(lineChartData);
     }).catch(error => console.log(error));
   }
 
@@ -269,7 +269,7 @@ export class HistoryComponent implements OnInit {
     return null;
   }
 
-  makeDataArray1(array) {
+  makeDataArray1(array): Array<any> {
     const returnTable = [array.length];
     for (let i = 0; i < array.length; i++) {
       returnTable[i] = array[i].sum;
