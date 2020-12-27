@@ -5,29 +5,37 @@ const Categories = mongoose.model('Categories');
 const Expense = mongoose.model('Expense');
 const jwt_decode = require('jwt-decode');
 
-function addBill(requestBody, res) {
+function addBill(req, res) {
     try {
-        var userId = requestBody.id;
-        var categoryId = requestBody.inputCategory;
-        var recipient = requestBody.Payee;
-        var amount = requestBody.Amount;
-        var date = requestBody.inputDateAddBill;
-        var radio = requestBody.rad;
+        const authorization = req.headers.authorization;
+        var categoryId = req.body.inputCategory;
+        var recipient = req.body.Payee;
+        var amount = req.body.Amount;
+        var date = req.body.inputDateAddBill;
+        var radio = req.body.rad;
 
         //validate date, recipient and amount
         var dateOk = checkDate(date);
         const recipientTest = checkRecipient(recipient);
         const amountTest = checkAmount(amount);
-        if (recipientTest && amountTest && dateOk) {
-            User.findById(userId, function(err, user) {
+        if (authorization && recipientTest && amountTest && dateOk) {
+            const token = authorization.split(' ')[1];
+            const decodedToken = jwt_decode(token);
+            User.findById(decodedToken._id, function(err, user) {
                 if (err) {
                     console.log(err);
-                    res.sendStatus(500);
+                    const response = {
+                        status: 'Error'
+                    }
+                    res.status(500).json(response);
                 } else {
                     Categories.findById(categoryId, function(err, category) {
                         if (err) {
                             console.log(err);
-                            res.sendStatus(500);
+                            const response = {
+                                status: 'Error'
+                            }
+                            res.status(500).json(response);
                         } else {
                             console.log(category);
                             let bill = new Bill({
@@ -42,17 +50,24 @@ function addBill(requestBody, res) {
                             user.bills.push(bill);
                             user.save();
 
-                            res.status(200).json(user);
+                            res.status(200).json(bill);
                         }
                     });
                 }
             });
-        } else {
-            res.sendStatus(400);
+        } 
+        else {
+            const response = {
+                status: 'Bad request'
+            }
+            res.status(400).json(response);
         }
     } catch (ex) {
         console.log(ex);
-        res.sendStatus(500);
+        const response = {
+            status: 'Error'
+        }
+        res.status(500).json(response);
     }
 }
 
@@ -327,10 +342,10 @@ function getMonthCode(month) {
 
 module.exports = {
     addBill: function(req, res) {
-        addBill(req.body, res);
+        addBill(req, res);
     },
     editBill: function(req, res) {
-        editBill(req.body, res);
+        editBill(req, res);
     },
     deleteBill: function(req, res) {
         deleteBill(req, res);

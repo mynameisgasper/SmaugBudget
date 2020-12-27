@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild} from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, Renderer2} from '@angular/core';
 import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 import { ApiService } from '../../services/api.service';
 import { Card } from '../../classes/card';
@@ -12,12 +12,13 @@ declare var $:any;
 })
 export class BillsComponent implements OnInit {
 
-    constructor(private api: ApiService) { }
+    constructor(
+        private api: ApiService,
+        private renderer: Renderer2) { }
 
     public cards: Card[]
     public pageData: any;
     public categories: any;
-    //public bills: any;
     bills: Bill[]
     fileName: string = "bills";
     message = "Welcome to Bills!";
@@ -198,15 +199,44 @@ export class BillsComponent implements OnInit {
         }
     }
 
-    buttonAddBills() {
+    buttonAddBills(categoryValue: string, payeeValue: string, amountValue: number, dateValue: Date, repeatValue: String) {
         var amount1 = this.amountAddBills();
         var check1 = this.nameAddBills();
         var date1 = this.dateAddBills();
         if (amount1 == 0 || check1 == 0 || date1 == 0) {
             return false;
         } else {
-            return true;
+            this.renderer.setAttribute(document.getElementById("buttonAddBill"), 'data-dismiss', 'modal');
+            this.addBill(categoryValue, payeeValue, amountValue, dateValue, repeatValue);
+            this.renderer.removeAttribute(document.getElementById("buttonAddBill"), 'data-dismiss', 'modal');
         }
+    }
+
+    addBill(category, payee, amount, date, repeat){
+        this.api.addBill(category, payee, amount, date, repeat).then((response) => {
+            this.afterAddBill(response);
+          }).catch((error) => {
+            console.log(error);
+          });
+    }
+
+    afterAddBill(bill){
+        var date = bill.date.split('T')[0].split('-');
+        var newBill: Bill = {
+            _id: bill._id, 
+            recipient: bill.recipient,
+            value: bill.value,
+            category: bill.category.name,
+            currency: bill.currency,
+            repeat: bill.repeating,
+            year: date[0],
+            month: date[1],
+            day: date[2],
+            monthName: this.translateMonth(date[1]),
+            date: bill.date
+        }
+        this.bills.push(newBill)
+        this.bills.sort(this.compare)
     }
 
     generateCards() {
