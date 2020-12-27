@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { faMinusSquare, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'app-envelopes-progress',
@@ -49,6 +50,8 @@ export class EnvelopesProgressComponent implements OnInit {
   faMinusSquare = faMinusSquare;
   faPencilAlt = faPencilAlt
 
+  constructor(private api: ApiService) { }
+
   isLow(value: Number): Boolean {
     return value < 85;
   }
@@ -61,23 +64,17 @@ export class EnvelopesProgressComponent implements OnInit {
     return value >= 100;
   }
 
-  constructor() { }
-
   ngOnInit(): void {
   }
 
   deleteEnvelope() {
-    console.log(this.envelope)
-    /*let id = this.envelope;
-    confirm("Are you sure you want to delete envelope " +name);
-    console.log(id);*/
-   /* this.api.deleteExpense(
-      this.amountExpense.nativeElement.value,
-      this.categoryExpense.nativeElement.value,
-      this.nameExpense.nativeElement.value,
-      this.dateExpense.nativeElement.value
-      ).then(result => { }).catch(error => console.log(error));*/
-
+    let name = this.envelope.category.name;
+    let decision = confirm("Are you sure you want to delete envelope " + name);
+    if (decision == true) {
+      console.log(this.envelope._id)
+      this.api.deleteEnvelope(
+        this.envelope._id
+      ).then(result => { }).catch(error => console.log(error));
+    }
   }
-
 }

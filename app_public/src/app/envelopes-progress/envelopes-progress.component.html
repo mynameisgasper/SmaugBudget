@@ -16,17 +16,17 @@
         <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 envelope-info">
             <p *ngIf="isLow(envelope.progress)" class="info">
                 <span>{{envelope.spent}} {{data.currency}}</span> of <span>{{envelope.budget}} {{data.currency}}</span>
-                <button type="submit" class="btn edit-btn" data-toggle="modal"><fa-icon [icon]="faMinusSquare"></fa-icon></button>    
+                <button type="button" (click)="deleteEnvelope()" class="btn edit-btn" data-toggle="modal"><fa-icon [icon]="faMinusSquare"></fa-icon></button>    
                 <button type="button" class="btn edit-btn" data-toggle="modal" [attr.data-target]="'#editForm' +envelope._id" role="button"><fa-icon [icon]="faPencilAlt"></fa-icon></button>
             </p>
             <p *ngIf="isMedium(envelope.progress)" class="info" style="color:#ff7b00">
                 <span>{{envelope.spent}} {{data.currency}}</span> of <span>{{envelope.budget}} {{data.currency}}</span>
-                <button type="submit" class="btn edit-btn" data-toggle="modal"><fa-icon [icon]="faMinusSquare"></fa-icon></button>    
+                <button type="button" (click)="deleteEnvelope()" class="btn edit-btn" data-toggle="modal"><fa-icon [icon]="faMinusSquare"></fa-icon></button>    
                 <button type="button" class="btn edit-btn" data-toggle="modal" [attr.data-target]="'#editForm' +envelope._id" role="button"><fa-icon [icon]="faPencilAlt"></fa-icon></button>
             </p>
             <p *ngIf="isHigh(envelope.progress)" class="info" style="color:red">
                 <span>{{envelope.spent}} {{data.currency}}</span> of <span>{{envelope.budget}} {{data.currency}}</span>
-                <button type="submit" class="btn edit-btn" data-toggle="modal"><fa-icon [icon]="faMinusSquare"></fa-icon></button>    
+                <button type="button" (click)="deleteEnvelope()" class="btn edit-btn" data-toggle="modal"><fa-icon [icon]="faMinusSquare"></fa-icon></button>    
                 <button type="button" class="btn edit-btn" data-toggle="modal" [attr.data-target]="'#editForm' +envelope._id" role="button"><fa-icon [icon]="faPencilAlt"></fa-icon></button>
             </p>
         </div>

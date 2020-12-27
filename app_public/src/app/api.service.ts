@@ -49,6 +49,19 @@ export class ApiService {
     return this.http.post(url, body, options).toPromise().then(response => response).catch(err => this.parseError(err));
   }
 
+  public deleteEnvelope(id: string): Promise<any> {
+    const url: string = `${this.apiUrl}/deleteEnvelope`;
+
+    const options = {
+      headers: new HttpHeaders().set('Authorization', this.authorization.generateCompleteJwt()),
+    }
+    const body: object = {
+      envelope_id: id
+    }
+
+    return this.http.post(url, body, options).toPromise().then(response => response).catch(err => this.parseError(err));
+  }
+
   public addExpense(amount: number, category: string, name: string, date: number): Promise<any> {
     const url: string = `${this.apiUrl}/addExpense`;
 

@@ -144,7 +144,7 @@ function editEnvelope(req, res) {
             var newBudget = req.body.inputAmount;
             var colorHexPicker = req.body.colorPicker
             var envelope_id = req.body.id;
-            var user_id = decodedToken._id;;
+            var user_id = decodedToken._id;
 
             var regex = new RegExp("^[0-9]+");
             const amountCorrect = regex.test(newBudget);
@@ -190,34 +190,43 @@ function editEnvelope(req, res) {
 /*
 ? Delete Envelope by ID
 */
-function deleteEnvelope(requestBody, res) {
+function deleteEnvelope(req, res) {
     try {
-        var envelope_id = requestBody.envelope_id;
-        var user_id = requestBody.user;
+        const authorization = req.headers.authorization;
+        if (authorization) {
+            const token = authorization.split(' ')[1];
+            const decodedToken = jwt_decode(token);
+            var envelope_id = req.body.envelope_id;
+            var user_id = decodedToken._id;
 
-        Envelopes.findByIdAndDelete(envelope_id, function(err, docs) {
-            if (err) {
-                console.log(err);
-            } else {}
-        });
+            Envelopes.findByIdAndDelete(envelope_id, function(err, docs) {
+                if (err) {
+                    console.log(err);
+                } else {}
+            });
 
-        User.findById(user_id, function(err, user) {
-            if (err) {
-                console.log(err);
-            } else {
-                for (var i = 0; i < user.envelopes.length; i++) {
-                    if (user.envelopes[i]._id == envelope_id) {
-                        user.envelopes.pull(envelope_id);
-                        user.save();
-                        res.status(200).json(user);
-                        return;
+            User.findById(user_id, function(err, user) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    for (var i = 0; i < user.envelopes.length; i++) {
+                        if (user.envelopes[i]._id == envelope_id) {
+                            user.envelopes.pull(envelope_id);
+                            user.save();
+                            res.status(200).json(user);
+                            return;
+                        }
                     }
+                    res.status(304);
+                    return;
                 }
-                res.status(304);
-                return;
+            });
+        } else {
+            const response = {
+                status: 'Unauthorized'
             }
-        });
-
+            res.status(401).json(response);
+        }
     } catch (ex) {
         console.log(ex);
         res.sendStatus(500);
@@ -554,6 +563,6 @@ module.exports = {
         editEnvelope(req, res);
     },
     deleteEnvelope: function(req, res) {
-        deleteEnvelope(req.body, res);
+        deleteEnvelope(req, res);
     }
 }
