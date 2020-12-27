@@ -231,7 +231,7 @@
                 <button class="arrowButton" (click)="decrementMonth()"><i class="arrow left"></i></button>
             </div>
             <div class="col-6 col-sm-4 col-md-4 col-lg-2 col-xl-2 mesec">
-                <h4>{{setMonth}}</h4>
+                <h4>{{setMonthNumber - 1 | monthNumberPipe}}</h4>
             </div>
             <div class="col-3 col-sm-4 col-md-4 col-lg-5 col-xl-5 puscica-desna">
                 <button class="arrowButton" (click)="incrementMonth()"><i  class="arrow right"></i></button>

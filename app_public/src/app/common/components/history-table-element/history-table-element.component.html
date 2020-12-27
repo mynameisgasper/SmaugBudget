@@ -1,6 +1,6 @@
 <td class="date align-middle" id="date{{Expense.id}}">
     <div class="text-muted" id="year{{Expense.id}}">{{Expense.year}}</div>
-    <div class="text-muted font-weight-bold" id="month{{Expense.id}}">{{Expense.monthName}}</div>
+    <div class="text-muted font-weight-bold" id="month{{Expense.id}}">{{Expense.month - 1 | monthNumberPipe}}</div>
     <div class="text-muted font-weight-bold" id="day{{Expense.id}}">{{Expense.day}}</div>
 </td>
 <td class="sredina" id="category{{Expense.id}}">{{Expense.category}}</td>
@@ -82,7 +82,7 @@
                 </div>
                 <div class="ena">
                     <label for="datum">Date</label><br>
-                    <input type="date" #date id=".historyDate{{Expense.id}}" name="datumcek" (focusout)="dateEditHistory()"class="form-control" value="{{Expense.year}}-{{Expense.month}}-{{Expense.day}}"required="required">
+                    <input type="date" #date id=".historyDate{{Expense.id}}" name="datumcek" (focusout)="dateEditHistory()"class="form-control" value="{{Expense.year}}-{{Expense.month}}-{{Expense.day}}" required="required">
                 </div>
             </div>
             <div class="modal-footer">

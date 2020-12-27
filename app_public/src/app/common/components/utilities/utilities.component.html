@@ -183,7 +183,7 @@
                             <input type="text" #groupName ngModel class="form-control" placeholder="Group Name" name="inputGroupName" id="inputGroupName" (focusout)="addGroupUtilities()" required="required"><br/>
                             <label for="inputGroupName">Add Members</label>
                             <div *ngFor="let member of groupMembers">
-                                <input type="text" ngModel #memberName class="form-control" placeholder="Member {{member.value}}" name="inputMember{{member.value}}" id="inputMember{{member.value}}" style="margin-top:1%" onfocusout="checkName(this)">
+                                <input type="text" ngModel #memberName class="form-control" placeholder="Member {{member.value}}" name="{{member.value | inputMemberPipe}}" id="{{member.value | inputMemberPipe}}" style="margin-top:1%" onfocusout="checkName(this)">
                             </div>                    
                         </div>
                     <div class="modal-footer">
