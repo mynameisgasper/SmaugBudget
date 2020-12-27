@@ -50,17 +50,18 @@
 
     <div class="container" id="cards-section">
         <div class="row">
-            <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
                 <h3>All expenses</h3>
 
             </div>
-            <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
-                <ngb-pagination *ngIf="expenses.length > 9" [(page)]="page" [pageSize]="pageSize" [maxSize]="5" [rotate]="true" [collectionSize]="expenses.length"></ngb-pagination>
-
-            </div>
-            <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 d-flex ">
                 <!-- Search form -->
                 <input class="form-control search" type="text" id="search" onkeydown="searchFunction()" placeholder="Search" aria-label="Search">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 d-flex justify-content-center">
+                <ngb-pagination *ngIf="expenses.length > 9" [(page)]="page" [pageSize]="pageSize" [maxSize]="5" [rotate]="true" [collectionSize]="expenses.length" (pageChange)="changePage(page)"></ngb-pagination>
             </div>
         </div>
         <div class="row">
