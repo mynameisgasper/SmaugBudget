@@ -1,4 +1,5 @@
 import { Component, OnInit, ElementRef, ViewChild, Renderer2 } from '@angular/core';
+import { Router } from '@angular/router';
 import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 import { ApiService } from '../api.service';
 import { Card } from '../card';
@@ -13,7 +14,8 @@ export class EnvelopesComponent implements OnInit {
 
   constructor(
     private api: ApiService,
-    private renderer: Renderer2) { }
+    private renderer: Renderer2,
+    private router: Router) { }
 
   cards: Card[]
   public envelopes: any;
@@ -87,7 +89,7 @@ export class EnvelopesComponent implements OnInit {
       this.nameExpense.nativeElement.value,
       this.dateExpense.nativeElement.value
       ).then(result => { }).catch(error => console.log(error));
-
+      
   }
 
   addEnvelope(): void {
@@ -97,6 +99,7 @@ export class EnvelopesComponent implements OnInit {
       this.colorAdd.nativeElement.value,
       this.pageData.setMonthNumber-1
       ).then(result => { }).catch(error => console.log(error));
+      this.router.navigate(['/envelopes'])
   }
 
   nameAddEnvelopes(): number {
