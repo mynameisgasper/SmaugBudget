@@ -35,6 +35,22 @@ export class ApiService {
     return this.http.get(url, options).toPromise().then(response => response).catch(err => this.parseError(err));
   }
 
+  public addEnvelope(category: string, amount: number, color: string, month: number): Promise<any> {
+    const url: string = `${this.apiUrl}/addEnvelope`;
+
+    const options = {
+      headers: new HttpHeaders().set('Authorization', this.authorization.generateCompleteJwt()),
+    }
+    const body: object = {
+      colorPicker: color,
+      categoryAddEnvelope: category,
+      inputAmount: amount,
+      month: month
+    }
+
+    return this.http.post(url, body, options).toPromise().then(response => response).catch(err => this.parseError(err));
+  }
+
   public editEnvelope(id: string, amount: number): Promise<any> {
     const url: string = `${this.apiUrl}/editEnvelope`;
 

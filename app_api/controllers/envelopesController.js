@@ -13,115 +13,126 @@ const jwt_decode = require('jwt-decode');
 ? Add Envelope Function
 ! Adds an envelope into DB. 
 */
-function addEnvelope(requestBody, res) {
+function addEnvelope(req, res) {
     try {
-        var colorHexPicker = requestBody.colorPicker;
-        var categoryName = requestBody.categoryAddEnvelope;
-        var amount = requestBody.inputAmount;
-        const colorCorrect = checkColorCode(colorHexPicker);
-        const colorDefault = checkDefaultColor(colorHexPicker);
-        var colorRGB = "";
-        var colorBackground = "";
-        if (colorCorrect) {
-            colorRGB = hexToRGB(colorHexPicker);
-            colorBackground = hexToRGB(colorHexPicker, 0.5);
-        }
+
+        const authorization = req.headers.authorization;
+        if (authorization) {
+            const token = authorization.split(' ')[1];
+            const decodedToken = jwt_decode(token);
+
+            var colorHexPicker = req.body.colorPicker;
+            var categoryName = req.body.categoryAddEnvelope;
+            var amount = req.body.inputAmount;
+            const colorCorrect = checkColorCode(colorHexPicker);
+            const colorDefault = checkDefaultColor(colorHexPicker);
+            var colorRGB = "";
+            var colorBackground = "";
+            if (colorCorrect) {
+                colorRGB = hexToRGB(colorHexPicker);
+                colorBackground = hexToRGB(colorHexPicker, 0.5);
+            }
 
 
-        var user_id = requestBody.id;
-        var curMonth = requestBody.month;
+            var user_id = decodedToken;
+            var curMonth = req.body.month;
+            var month = new Array();
+            month[0] = "JAN";
+            month[1] = "FEB";
+            month[2] = "MAR";
+            month[3] = "APR";
+            month[4] = "MAY";
+            month[5] = "JUN";
+            month[6] = "JUL";
+            month[7] = "AUG";
+            month[8] = "SEP";
+            month[9] = "OCT";
+            month[10] = "NOV";
+            month[11] = "DEC";
+            var currentMonth = month[curMonth];
 
-        var month = new Array();
-        month[0] = "JAN";
-        month[1] = "FEB";
-        month[2] = "MAR";
-        month[3] = "APR";
-        month[4] = "MAY";
-        month[5] = "JUN";
-        month[6] = "JUL";
-        month[7] = "AUG";
-        month[8] = "SEP";
-        month[9] = "OCT";
-        month[10] = "NOV";
-        month[11] = "DEC";
-        var currentMonth = month[curMonth];
-
-        var regex = new RegExp("^[0-9]+(\.[0-9]{1,2})?$");
-        const amountCorrect = regex.test(requestBody.inputAmount)
-        const titleCorrect = checkTitle(categoryName);
+            var regex = new RegExp("^[0-9]+(\.[0-9]{1,2})?$");
+            const amountCorrect = regex.test(req.body.inputAmount)
+            const titleCorrect = checkTitle(categoryName);
 
 
-        if (amountCorrect && titleCorrect && (colorCorrect || colorDefault)) {
-            //? Try to find current user
-            User.findById(user_id, function(error, user) {
-                if (error) {
-                    console.log(error);
-                } else {
-                    for (var i = 0; i < user.envelopes.length; i++) {
-
-                        if (user.envelopes[i].category.name.toUpperCase() === categoryName.toUpperCase()) {
-                            if (user.envelopes[i].month === currentMonth) {
-                                res.sendStatus(304);
-                                return;
-                            }
-                        }
-                    }
-
-                    //? Try to find the category, create it if it doesn't exist.
-                    var category = null;
-                    var categoryExists = false;
-                    for (var i = 0; i < user.categories.length; i++) {
-                        if (user.categories[i].name === categoryName) {
-                            category = user.categories[i];
-                            categoryExists = true;
-                            break;
-                        }
-                    }
-
-                    if (category == null) {
-                        let cat = new Categories({
-                            name: categoryName,
-                            color: colorRGB
-                        })
-                        cat.save();
-                        category = cat;
+            if (amountCorrect && titleCorrect && (colorCorrect || colorDefault)) {
+                //? Try to find current user
+                User.findById(user_id, function(error, user) {
+                    if (error) {
+                        console.log(error);
                     } else {
-                        if (colorDefault) {
-                            colorHexPicker = rgbToHex(category.color);
-                            colorRGB = category.color;
-                            colorBackground = hexToRGB(colorHexPicker, 0.5);
-                        }
-                    }
+                        for (var i = 0; i < user.envelopes.length; i++) {
 
-                    let envelope = new Envelopes({
-                        progress: 0,
-                        budget: amount,
-                        spent: 0,
-                        colorHex: colorHexPicker,
-                        color: colorRGB,
-                        bgColor: colorBackground,
-                        month: currentMonth,
-                        category: category,
-                    })
-                    envelope.save(function callback(err) {
-                        if (err) {
-                            console.log(err);
-                            res.sendStatus(500);
-                        } else {
-                            if (!categoryExists) {
-                                user.categories.push(category);
-
+                            if (user.envelopes[i].category.name.toUpperCase() === categoryName.toUpperCase()) {
+                                if (user.envelopes[i].month === currentMonth) {
+                                    res.sendStatus(304);
+                                    return;
+                                }
                             }
-                            user.envelopes.push(envelope);
-                            user.save();
-                            res.status(200).json(user);
                         }
 
-                    });
-                }
-            });
+                        //? Try to find the category, create it if it doesn't exist.
+                        var category = null;
+                        var categoryExists = false;
+                        for (var i = 0; i < user.categories.length; i++) {
+                            if (user.categories[i].name === categoryName) {
+                                category = user.categories[i];
+                                categoryExists = true;
+                                break;
+                            }
+                        }
+
+                        if (category == null) {
+                            let cat = new Categories({
+                                name: categoryName,
+                                color: colorRGB
+                            })
+                            cat.save();
+                            category = cat;
+                        } else {
+                            if (colorDefault) {
+                                colorHexPicker = rgbToHex(category.color);
+                                colorRGB = category.color;
+                                colorBackground = hexToRGB(colorHexPicker, 0.5);
+                            }
+                        }
+
+                        let envelope = new Envelopes({
+                            progress: 0,
+                            budget: amount,
+                            spent: 0,
+                            colorHex: colorHexPicker,
+                            color: colorRGB,
+                            bgColor: colorBackground,
+                            month: currentMonth,
+                            category: category,
+                        })
+                        envelope.save(function callback(err) {
+                            if (err) {
+                                console.log(err);
+                                res.sendStatus(500);
+                            } else {
+                                if (!categoryExists) {
+                                    user.categories.push(category);
+
+                                }
+                                user.envelopes.push(envelope);
+                                user.save();
+                                res.status(200).json(user);
+                            }
+
+                        });
+                    }
+                });
+            } else {
+                res.sendStatus(400);
+            }
         } else {
-            res.sendStatus(400);
+            const response = {
+                status: 'Unauthorized'
+            }
+            res.status(401).json(response);
         }
 
     } catch (ex) {
@@ -554,7 +565,7 @@ function checkDefaultColor(colorCode) {
 
 module.exports = {
     addEnvelope: function(req, res) {
-        addEnvelope(req.body, res);
+        addEnvelope(req, res);
     },
     addExpense: function(req, res) {
         addExpense(req, res);

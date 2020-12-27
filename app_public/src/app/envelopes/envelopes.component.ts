@@ -27,7 +27,6 @@ export class EnvelopesComponent implements OnInit {
 
       this.cards = this.generateCards(result.envelopes);
       this.envelopes = result.envelopes;
-      console.log(this.envelopes);
       this.categories = this.getCategories(result.categories);
       this.pageData = {
         "fileName":"envelopes",
@@ -58,6 +57,7 @@ export class EnvelopesComponent implements OnInit {
 
   @ViewChild('categoryAdd') categoryAdd: ElementRef;
   @ViewChild('amountAdd') amountAdd: ElementRef;
+  @ViewChild('colorAdd') colorAdd: ElementRef;
   @ViewChild('categoryExpense') categoryExpense: ElementRef;
   @ViewChild('nameExpense') nameExpense: ElementRef;
   @ViewChild('amountExpense') amountExpense: ElementRef;
@@ -65,7 +65,7 @@ export class EnvelopesComponent implements OnInit {
 
   faPlusSquare = faPlusSquare;
 
-  addExpense() {
+  addExpense(): void {
           
     let newSpent = 0;
     let newProgress = 0;
@@ -78,8 +78,6 @@ export class EnvelopesComponent implements OnInit {
         envelope.spent = newSpent;
         newProgress = Math.round(envelope.spent / envelope.budget * 100);
         envelope.progress = newProgress;
-        console.log(newProgress);
-        console.log(newSpent);
       }
     }
 
@@ -90,6 +88,15 @@ export class EnvelopesComponent implements OnInit {
       this.dateExpense.nativeElement.value
       ).then(result => { }).catch(error => console.log(error));
 
+  }
+
+  addEnvelope(): void {
+    this.api.addEnvelope(
+      this.categoryAdd.nativeElement.value,
+      this.amountAdd.nativeElement.value,
+      this.colorAdd.nativeElement.value,
+      this.pageData.setMonthNumber-1
+      ).then(result => { }).catch(error => console.log(error));
   }
 
   nameAddEnvelopes(): number {
@@ -251,7 +258,9 @@ export class EnvelopesComponent implements OnInit {
     if (amount == 0) {
         //DO NOTHING
     } else {
-      //POST REQUEST - TO BE ADDED
+      this.renderer.setAttribute(document.getElementById("buttonEditEnvelopes"), 'data-dismiss', 'modal');
+      this.addEnvelope()
+      this.renderer.removeAttribute(document.getElementById("buttonEditEnvelopes"), 'data-dismiss', 'modal');
     }
 }
 
