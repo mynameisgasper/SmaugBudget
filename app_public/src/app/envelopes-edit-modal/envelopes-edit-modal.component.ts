@@ -85,7 +85,7 @@ export class EnvelopesEditModalComponent implements OnInit {
 
     } else {
 
-      this.renderer.setAttribute(document.getElementById("buttonEditEnvelopes"), 'data-dismiss', 'modal');
+      this.renderer.setAttribute(document.getElementById("buttonEditEnvelopes" + this.Envelope._id), 'data-dismiss', 'modal');
       this.editEnvelopes()
       this.renderer.removeAttribute(document.getElementById("buttonEditEnvelopes"), 'data-dismiss', 'modal');
 

@@ -101,16 +101,19 @@ export class EnvelopesComponent implements OnInit {
         this.amountAdd.nativeElement.value,
         this.colorAdd.nativeElement.value,
         this.pageData.setMonthNumber-1
-      ).then(result => { }).catch(error => console.log(error));
+      ).then(result => {
+        this.categories.push(result.category);
+        this.envelopes.push(result.envelope);
+      }).catch(error => console.log(error));
     } else {
       this.api.addEnvelope(
         this.selectCategoryAdd.nativeElement.value,
         this.amountAdd.nativeElement.value,
         this.colorAdd.nativeElement.value,
         this.pageData.setMonthNumber-1
-      ).then(result => { }).catch(error => console.log(error));
+      ).then(result => this.envelopes.push(result.envelope)).catch(error => console.log(error));
+      this.router.navigate(['/envelopes'])
     }
-    this.router.navigate(['/envelopes'])
   }
 
   nameAddEnvelopes(): number {
@@ -272,9 +275,9 @@ export class EnvelopesComponent implements OnInit {
     if (amount == 0) {
         //DO NOTHING
     } else {
-      this.renderer.setAttribute(document.getElementById("buttonEditEnvelopes"), 'data-dismiss', 'modal');
+      this.renderer.setAttribute(document.getElementById("buttonAddEnvelopes"), 'data-dismiss', 'modal');
       this.addEnvelope()
-      this.renderer.removeAttribute(document.getElementById("buttonEditEnvelopes"), 'data-dismiss', 'modal');
+      this.renderer.removeAttribute(document.getElementById("buttonAddEnvelopes"), 'data-dismiss', 'modal');
     }
 }
 
@@ -287,9 +290,9 @@ export class EnvelopesComponent implements OnInit {
     if (amount == 0 || name == 0 || date == 0) {
         //DO NOTHING
     } else {
-      this.renderer.setAttribute(document.getElementById("buttonEditEnvelopes"), 'data-dismiss', 'modal');
+      this.renderer.setAttribute(document.getElementById("buttonAddExpense"), 'data-dismiss', 'modal');
       this.addExpense()
-      this.renderer.removeAttribute(document.getElementById("buttonEditEnvelopes"), 'data-dismiss', 'modal');
+      this.renderer.removeAttribute(document.getElementById("buttonAddExpense"), 'data-dismiss', 'modal');
     }
   }
 
