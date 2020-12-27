@@ -3,6 +3,7 @@ import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 import { ApiService } from '../../services/api.service';
 import { Card } from '../../classes/card';
 import { Goal } from '../../classes/goal';
+import { Category } from '../../classes/category';
 import { Router } from "@angular/router";
 import { DatePipe } from '@angular/common';
 declare var $:any;
@@ -20,6 +21,10 @@ export class GoalsComponent implements OnInit {
 
   cards: Card[]
   goals: Goal[]
+  categories: Category[];
+  currency: String;
+  message: String;
+  welcomeMessage: String;
   faPlusSquare = faPlusSquare;
 
   @ViewChild('nameGoal') nameGoal: ElementRef;
@@ -32,6 +37,10 @@ export class GoalsComponent implements OnInit {
     this.api.getUser().then(result => {
       this.goals = this.generateGoals(result.goals);
       this.cards = this.generateCards();
+      this.categories = this.generateCategories(result.categories);
+      this.currency = result.defaultCurrency;
+      this.message = "Welcome to Goals!";
+      this.welcomeMessage = "Here you can add saving goals you want to achieve. Click 'Add Goal', fill in the form, submit and you`re done!";
     }).catch(error => console.log(error));
   }
 
@@ -279,6 +288,7 @@ export class GoalsComponent implements OnInit {
 
     this.goals.push(new Goal(goal._id, goal.title, progress , goal.target, targetLeft, color, monthlyTarget, goal.category.name, date[0], date[1], date[2]));
     this.cards = this.generateCards();
+    console.log()
   }
 
   addMoneyToGoal(amount, title){
@@ -342,12 +352,18 @@ export class GoalsComponent implements OnInit {
     this.cards = this.generateCards();
   }
 
-  refreshGoals(){
-    this.goals = this.goals;
-  }
+  generateCategories(categories){
+    var categoriesArray = [];
+    for(var category of categories){
+      var newCategory: Category = {_id: category._id, name: category.name, color: category.color, basic: category.basic}
+      categoriesArray.push(newCategory);
+    }
   
+    return categoriesArray;
+  }
 
   data = {
+    //zaenkat pustim kr nwm ce se se kje rab 
     "fileName":"goals",
     "message":"Welcome to Goals!",
     "welcomeMessage":"Here you can add saving goals you want to achieve. Click 'Add Goal', fill in the form, submit and you`re done!",
@@ -367,39 +383,5 @@ export class GoalsComponent implements OnInit {
     "appearance":"Appearance",
     "light":"Light",
     "dark":"Dark",
-
-    "categories":[{
-      "_id":"5fc600b4507a6800112af1d5",
-      "category":"Car"
-    },{
-      "_id":"5fc600b4507a6800112af1d6",
-      "category":"Groceries"
-    },{
-      "_id":"5fc600b4507a6800112af1d7",
-      "category":"Leisure"
-    },{
-      "_id":"5fc600b4507a6800112af1d8",
-      "category":"Subscriptions"
-    },{
-      "_id":"5fc600b4507a6800112af1d9",
-      "category":"Travel"
-    },{
-      "_id":"5fc600b4507a6800112af1da",
-      "category":"Home"
-    },{
-      "_id":"5fc600b4507a6800112af1db",
-      "category":"Gifts"
-    },{
-      "_id":"5fc600b4507a6800112af1dc",
-      "category":"Shopping"
-    },{
-      "_id":"5fc600b4507a6800112af1dd",
-      "category":"Utilities"
-    },{
-      "_id":"5fc600b4507a6800112af1de",
-      "category":"Electronics"
-    }],
-    
-    "currency":"EUR"
   }
 }
