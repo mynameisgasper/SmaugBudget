@@ -4,6 +4,9 @@ import { DOCUMENT } from '@angular/common'
 import { element } from 'protractor';
 import { ChartDataSets } from 'chart.js';
 import { Color } from 'ng2-charts';
+import * as pdfMake from "pdfmake/build/pdfmake";
+import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+
 declare var $:any;
 
 @Component({
@@ -14,9 +17,9 @@ declare var $:any;
 export class HistoryComponent implements OnInit {
 
   public pageData: any;
-  public categories: {};
+  public categories: Array<Object>;
   public currency: string;
-  public expenses: {};
+  public expenses: Array<Object>;
 
   constructor(
     private api: ApiService,
@@ -328,5 +331,43 @@ export class HistoryComponent implements OnInit {
       arr.push(a);
     }
     return arr;
+  }
+
+  generatePdf() {
+    (<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
+    var docDefinition = {
+      content: [{ 
+        text: 'Expenses', 
+        style: 'header' 
+      }, {
+        layout: 'lightHorizontalLines', // optional
+        table: {
+          // headers are automatically repeated if the table spans over multiple pages
+          // you can declare how many rows should be treated as headers
+          headerRows: 1,
+          widths: [ '*', 'auto', 100, '*' ],
+  
+          body: [
+            [ 'Date', 'Category', 'Recipient', 'Value' ]
+          ]
+        }, 
+        margin: [ 0, 10, 0, 0 ]
+      }],
+      styles: {
+        header: {
+          fontSize: 22,
+          bold: true
+        },
+        body: {
+          fontSize: 16        
+        }
+      }
+    };
+    
+    for (let expense of this.expenses) {
+      docDefinition.content[1].table.body.push([`${expense['day']}-${expense['monthName']}-${expense['year']}`, expense['category'], expense['recipient'], `${expense['value']} ${expense['currency']}`]);
+    }
+
+    pdfMake.createPdf(docDefinition).open();    
   }
 }
