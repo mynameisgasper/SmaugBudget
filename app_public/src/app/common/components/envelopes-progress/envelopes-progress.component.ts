@@ -42,7 +42,6 @@ export class EnvelopesProgressComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.envelope);
   }
 
   deleteEnvelope() {
