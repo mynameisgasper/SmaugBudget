@@ -72,16 +72,21 @@ export class EnvelopesProgressComponent implements OnInit {
   }
 
   deleteEnvelope() {
+    
     let name = this.envelope.category.name;
     let decision = confirm("Are you sure you want to delete envelope " + name);
+
     if (decision == true) {
-      console.log(this.envelope._id)
+
       this.api.deleteEnvelope(
         this.envelope._id
       ).then(result => { }).catch(error => console.log(error));
+
       try {
+
         var element = this.document.getElementById(this.envelope._id);
         element.remove();
+
       }
       catch {}
     }

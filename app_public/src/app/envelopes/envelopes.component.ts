@@ -110,8 +110,7 @@ export class EnvelopesComponent implements OnInit {
         this.pageData.setMonthNumber-1
       ).then(result => { }).catch(error => console.log(error));
     }
-      this.router.navigate(['/envelopes'])
-    
+    this.router.navigate(['/envelopes'])
   }
 
   nameAddEnvelopes(): number {

@@ -323,7 +323,7 @@ export class HistoryComponent implements OnInit {
     for (let i of keys) {
       a=data.get(i).color;
       var a = {
-        backgroundColor: data.get(i).color
+        borderColor: data.get(i).color
       }
       arr.push(a);
     }
