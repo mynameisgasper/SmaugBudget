@@ -1,12 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule }   from '@angular/forms';
 
 import { ChartsModule } from 'ng2-charts';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 import { ModalModule } from 'ngx-bootstrap/modal';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { HomeComponent } from './common/components/home/home.component';
 import { DashboardComponent } from './common/components/dashboard/dashboard.component';
@@ -33,10 +33,7 @@ import { ConfirmationComponent } from './common/components/confirmation/confirma
 import { BillsComponent } from './common/components/bills/bills.component';
 import { BillTableComponent } from './common/components/bill-table/bill-table.component';
 import { UtilitiesMemberRowComponent } from './common/components/utilities-member-row/utilities-member-row.component';
-import { LoginGuardService } from './common/services/login-guard.service';
-import { GoldGuardService } from './common/services/gold-guard.service';
-import { SilverGuardService } from './common/services/silver-guard.service';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { RoutingModule } from './modules/routing/routing.module';
 
 @NgModule({
   declarations: [
@@ -54,6 +51,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     EnvelopesConProgressComponent,
     GoalsComponent,
     GoalsProgressComponent,
+    ConfirmationComponent,
     UtilitiesComponent,
     UtilityTableElementComponent,
     UtilitiesEditModalComponent,
@@ -68,69 +66,12 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
   imports: [
     BrowserModule,
     HttpClientModule,
+    RoutingModule,
     FormsModule,
     ChartsModule,
     FontAwesomeModule,
     ModalModule.forRoot(),
-    NgbModule,
-    RouterModule.forRoot([
-      {
-        path: '',
-        component: HomeComponent
-      },
-      {
-        path: 'db',
-        component: DbComponent
-      },
-      {
-        path: 'dashboard',
-        component: DashboardComponent, 
-        canActivate:[LoginGuardService]
-      },
-      {
-        path: 'envelopes',
-        component: EnvelopesComponent, 
-        canActivate:[LoginGuardService]
-      },
-      {
-        path: 'goals',
-        component: GoalsComponent, 
-        canActivate:[LoginGuardService]
-      },
-      {
-        path: 'utilities',
-        component: UtilitiesComponent, 
-        canActivate:[GoldGuardService]
-      },
-      {
-        path: 'history',
-        component: HistoryComponent, 
-        canActivate:[SilverGuardService]
-      },
-      {
-        path: 'account',
-        component: AccountComponent, 
-        canActivate:[LoginGuardService]
-      },
-      {
-        path: 'confirm/:url',
-        component: ConfirmationComponent
-      },
-      {
-        path: 'confirm/:url/:code',
-        component: ConfirmationComponent, 
-        canActivate:[LoginGuardService]
-      },
-      {
-        path: 'bills',
-        component: BillsComponent, 
-        canActivate:[LoginGuardService]
-      }
-    ], {
-      onSameUrlNavigation: 'reload',
-      anchorScrolling: 'enabled',
-      enableTracing: false
-    })
+    NgbModule
   ],
   exports: [],
   providers: [],
