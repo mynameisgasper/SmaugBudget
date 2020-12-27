@@ -55,9 +55,7 @@
                             <label for="chooseCategoryEnvelope">Category</label>
                             <select id="inputCategory" name="chooseCategoryEnvelope" class="form-control" onchange="checkCategory(this)" required>
                                 <option value="" selected>Select category</option>
-                                <div *ngFor="let item of categories;">
-                                    <option value="{{item.name}}" id="category{{item._id}}">{{item.name}}</option>
-                                </div>
+                                <option *ngFor="let item of categories;"value="{{item.name}}" id="category{{item._id}}">{{item.name}}</option>
                                 <option value="other">Make your own</option>
                             </select>
 
@@ -143,9 +141,7 @@
                         <div class="ena"><label for="inputGoal">Category</label><br />
                             <select id="inputCategory" name="inputCategory" class="form-control">
                                 <option selected>Choose a category</option>
-                                <div *ngFor="let item of categories;">
-                                    <option id="category{{item._id}}">{{item.name}}</option>
-                                </div>
+                                <option *ngFor="let item of categories;" id="category{{item._id}}">{{item.name}}</option>
                             </select>
                         </div>
                         <div class="ena">
