@@ -1,5 +1,6 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, Inject } from '@angular/core';
 import { faMinusSquare, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
+import { DOCUMENT } from '@angular/common'
 import { ApiService } from '../api.service';
 
 @Component({
@@ -50,7 +51,10 @@ export class EnvelopesProgressComponent implements OnInit {
   faMinusSquare = faMinusSquare;
   faPencilAlt = faPencilAlt
 
-  constructor(private api: ApiService) { }
+  constructor(
+    private api: ApiService,
+    @Inject(DOCUMENT) private document: HTMLDocument
+  ) { }
 
   isLow(value: Number): Boolean {
     return value < 85;
@@ -75,6 +79,11 @@ export class EnvelopesProgressComponent implements OnInit {
       this.api.deleteEnvelope(
         this.envelope._id
       ).then(result => { }).catch(error => console.log(error));
+      try {
+        var element = this.document.getElementById(this.envelope._id);
+        element.remove();
+      }
+      catch {}
     }
   }
 }
