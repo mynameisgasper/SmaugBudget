@@ -306,11 +306,13 @@ export class GoalsComponent implements OnInit {
     goalObject.color = color;
   }
 
-  afterDelete(id){
-    
+  afterDelete(goalId){
+    const index = this.goals.findIndex(goalObject => goalObject._id === goalId)
+    if (index > -1) {
+      this.goals.splice(index, 1);
+    }
+    this.cards = this.generateCards(this.goals);
   }
-
-
 
   data = {
     "fileName":"goals",
