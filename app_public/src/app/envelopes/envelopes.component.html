@@ -259,7 +259,9 @@
                 </button>
             </div>
         </div>
-        <app-envelopes-progress [data]="pageData" [envelopes]=envelopes></app-envelopes-progress>
+        <div *ngFor="let item of envelopes">
+            <app-envelopes-progress [data]="pageData" [envelope]=item></app-envelopes-progress>
+        </div>
         <app-envelopes-con-progress></app-envelopes-con-progress>
     </div>
 

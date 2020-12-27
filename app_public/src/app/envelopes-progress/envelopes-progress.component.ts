@@ -10,10 +10,41 @@ export class EnvelopesProgressComponent implements OnInit {
 
   @Input()
   data = {
-    "currency": "EUR",
+    "fileName":"",
+    "message":" to Envelopes!",
+    "welcomeMessage":"",
+    "logout":"",
+    "year":0,
+    "month":0,
+    "day":0,
+    "DASHBOARD":"",
+    "ENVELOPES":"",
+    "GOALS":"",
+    "BILLS":"",
+    "HISTORY":"",
+    "UTILITIES":"",
+    "user":"",
+    "settings":"",
+    "appearance":"",
+    "light":"",
+    "dark":"",
+    "setMonthNumber": 0,
+    "setMonth": "",
+    "currentMonth": "",
+    "currency":"",
   }
   @Input()
-  envelopes=[];
+  envelope={
+    bgColor: "",
+    budget: 0,
+    category: {_id: "", color: "", basic: true, name: ""},
+    color: "",
+    colorHex: "",
+    month: "",
+    progress: 0,
+    spent: 0,
+    _id: ""
+  };
 
   faMinusSquare = faMinusSquare;
   faPencilAlt = faPencilAlt
@@ -33,6 +64,20 @@ export class EnvelopesProgressComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  deleteEnvelope() {
+    console.log(this.envelope)
+    /*let id = this.envelope;
+    confirm("Are you sure you want to delete envelope " +name);
+    console.log(id);*/
+   /* this.api.deleteExpense(
+      this.amountExpense.nativeElement.value,
+      this.categoryExpense.nativeElement.value,
+      this.nameExpense.nativeElement.value,
+      this.dateExpense.nativeElement.value
+      ).then(result => { }).catch(error => console.log(error));*/
+
   }
 
 }

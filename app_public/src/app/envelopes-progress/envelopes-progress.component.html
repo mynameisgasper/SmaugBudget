@@ -1,36 +1,34 @@
 <div id="data">
-    <div *ngFor="let item of envelopes;">
-        <div *ngIf="item.month==data.setMonth" class="row progressRow" id="envelope{{_id}}">
-            <div class="col-sm-12 col-md-12 col-lg-3 col-xl-2">
-                <h3 *ngIf="isLow(item.progress)">{{item.category.name}}</h3>
-                <h3 *ngIf="isMedium(item.progress)" style="color:#ff7b00">{{item.category.name}}</h3>
-                <h3 *ngIf="isHigh(item.progress)" style="color:red">{{item.category.name}}</h3>
-            </div>
-            <div class="col-sm-12 col-md-12 col-lg-5 col-xl-6">
-                <div class="progress" style="background-color:{{item.bgColor}};">
-                    <div class="progress-bar"  role="progressbar" style="width:{{item.progress}}%; height:auto; background-color:{{item.color}}; border-color:{{item.color}};" aria-valuenow="{{item.progress}}" aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" data-placement="top">
-                        {{item.progress}}%
-                    </div>
+    <div *ngIf="envelope.month==data.setMonth" class="row progressRow" id="envelope{{_id}}">
+        <div class="col-sm-12 col-md-12 col-lg-3 col-xl-2">
+            <h3 *ngIf="isLow(envelope.progress)">{{envelope.category.name}}</h3>
+            <h3 *ngIf="isMedium(envelope.progress)" style="color:#ff7b00">{{envelope.category.name}}</h3>
+            <h3 *ngIf="isHigh(envelope.progress)" style="color:red">{{envelope.category.name}}</h3>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-5 col-xl-6">
+            <div class="progress" style="background-color:{{envelope.bgColor}};">
+                <div class="progress-bar"  role="progressbar" style="width:{{envelope.progress}}%; height:auto; background-color:{{envelope.color}}; border-color:{{envelope.color}};" aria-valuenow="{{envelope.progress}}" aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" data-placement="top">
+                    {{envelope.progress}}%
                 </div>
             </div>
-            
-            <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 envelope-info">
-                <p *ngIf="isLow(item.progress)" class="info">
-                    <span>{{item.spent}} {{data.currency}}</span> of <span>{{item.budget}} {{data.currency}}</span>
-                    <button type="submit" class="btn edit-btn" data-toggle="modal"><fa-icon [icon]="faMinusSquare"></fa-icon></button>    
-                    <button type="button" class="btn edit-btn" data-toggle="modal" [attr.data-target]="'#editForm' +item._id" role="button"><fa-icon [icon]="faPencilAlt"></fa-icon></button>
-                </p>
-                <p *ngIf="isMedium(item.progress)" class="info" style="color:#ff7b00">
-                    <span>{{item.spent}} {{data.currency}}</span> of <span>{{item.budget}} {{data.currency}}</span>
-                    <button type="submit" class="btn edit-btn" data-toggle="modal"><fa-icon [icon]="faMinusSquare"></fa-icon></button>    
-                    <button type="button" class="btn edit-btn" data-toggle="modal" [attr.data-target]="'#editForm' +item._id" role="button"><fa-icon [icon]="faPencilAlt"></fa-icon></button>
-                </p>
-                <p *ngIf="isHigh(item.progress)" class="info" style="color:red">
-                    <span>{{item.spent}} {{data.currency}}</span> of <span>{{item.budget}} {{data.currency}}</span>
-                    <button type="submit" class="btn edit-btn" data-toggle="modal"><fa-icon [icon]="faMinusSquare"></fa-icon></button>    
-                    <button type="button" class="btn edit-btn" data-toggle="modal" [attr.data-target]="'#editForm' +item._id" role="button"><fa-icon [icon]="faPencilAlt"></fa-icon></button>
-                </p>
-            </div>
+        </div>
+        
+        <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 envelope-info">
+            <p *ngIf="isLow(envelope.progress)" class="info">
+                <span>{{envelope.spent}} {{data.currency}}</span> of <span>{{envelope.budget}} {{data.currency}}</span>
+                <button type="submit" class="btn edit-btn" data-toggle="modal"><fa-icon [icon]="faMinusSquare"></fa-icon></button>    
+                <button type="button" class="btn edit-btn" data-toggle="modal" [attr.data-target]="'#editForm' +envelope._id" role="button"><fa-icon [icon]="faPencilAlt"></fa-icon></button>
+            </p>
+            <p *ngIf="isMedium(envelope.progress)" class="info" style="color:#ff7b00">
+                <span>{{envelope.spent}} {{data.currency}}</span> of <span>{{envelope.budget}} {{data.currency}}</span>
+                <button type="submit" class="btn edit-btn" data-toggle="modal"><fa-icon [icon]="faMinusSquare"></fa-icon></button>    
+                <button type="button" class="btn edit-btn" data-toggle="modal" [attr.data-target]="'#editForm' +envelope._id" role="button"><fa-icon [icon]="faPencilAlt"></fa-icon></button>
+            </p>
+            <p *ngIf="isHigh(envelope.progress)" class="info" style="color:red">
+                <span>{{envelope.spent}} {{data.currency}}</span> of <span>{{envelope.budget}} {{data.currency}}</span>
+                <button type="submit" class="btn edit-btn" data-toggle="modal"><fa-icon [icon]="faMinusSquare"></fa-icon></button>    
+                <button type="button" class="btn edit-btn" data-toggle="modal" [attr.data-target]="'#editForm' +envelope._id" role="button"><fa-icon [icon]="faPencilAlt"></fa-icon></button>
+            </p>
         </div>
     </div>
 </div>
