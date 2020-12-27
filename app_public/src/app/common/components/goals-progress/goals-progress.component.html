@@ -90,7 +90,7 @@
                         <label for="inputGoal">What's your goal?</label>
                         <input #editNameGoal type="text" class="form-control" id=".toastEditName{{item._id}}" name="goal" value="{{item.title}}" required="required" (focusout)="nameEditGoal()">
                         <label for="inputCategory">Choose a Category</label>
-                        <select id="inputCategory" name="inputCategory" class="form-control" required="required">
+                        <select #editCategoryGoal id="inputCategory" name="inputCategory" class="form-control" required="required">
                             <option selected disabled>{{item.categoryName}}</option>
                             <option *ngFor="let cat of category" id="category{{cat._id}}">{{cat.category}}</option>
                         </select>
@@ -100,14 +100,14 @@
                             <div class="input-group-prepend" style="max-height: 38px;">
                                 <span class="input-group-text">{{currency}}</span>
                             </div>
-                            <input #editAmountGoal type="number" class="form-control" id=".toastEditAmount{{item._id}}" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" name="Amount3" placeholder="{{item.target}}" step="any" required="required" (focusout)="amountEditGoal()">
+                            <input #editAmountGoal type="number" class="form-control" id=".toastEditAmount{{item._id}}" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" name="Amount3" value="{{item.target}}" step="any" required="required" (focusout)="amountEditGoal()">
                         </div>
                         <label for="inputDate">Planned Date</label>
                         <input #editDateGoal class="form-control" type="date" value="{{item.year}}-{{item.month}}-{{item.day}}" id=".toastEditDate{{item._id}}" name="inputDate" required="required" (focusout)="dateCheckEdit()">
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button (click)="buttonEditGoal()" class="btn btn-primary">Save Changes</button>
+                    <button (click)="buttonEditGoal(editNameGoal.value, editCategoryGoal.value, editAmountGoal.value, editDateGoal.value)" id="buttonEditGoal{{item._id}}" class="btn btn-primary">Save Changes</button>
                 </div>
             </form>
         </div>

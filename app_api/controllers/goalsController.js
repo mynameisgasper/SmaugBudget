@@ -98,25 +98,31 @@ function addGoal(req, res) {
     }
 }
 
-function editGoal(requestBody, res) {
+function editGoal(req, res) {
     try {
-        var newTitle = requestBody.title;
-        var newTarget = requestBody.target;
-        var newDate = requestBody.date;
-        var newCategory = requestBody.category;
-        var user_id = requestBody.user_id;
-        var goal_id = requestBody.goal_id;
+        const authorization = req.headers.authorization;
+
+        var newTitle = req.body.name;
+        var newTarget = req.body.amount;
+        var newDate = req.body.date;
+        var newCategory = req.body.category;
+        var goal_id = req.body.goal_id;
 
         //validate date, title and target
         dateOk = checkDate(newDate);
         const titleTest = checkTitle(newTitle);
         const targetTest = checkTarget(newTarget);
 
-        if (titleTest && targetTest && dateOk) {
-            User.findById(user_id, function(error, user) {
+        if (authorization && titleTest && targetTest && dateOk) {
+            const token = authorization.split(' ')[1];
+            const decodedToken = jwt_decode(token);
+            User.findById(decodedToken._id, function(error, user) {
                 if (error) {
                     console.log(error);
-                    res.sendStatus(500);
+                    const response = {
+                        status: 'Error'
+                    }
+                    res.status(500).json(response);
                 } else {
                     for (var i = 0; i < user.goals.length; i++) {
                         if (user.goals[i]._id == goal_id) {
@@ -139,18 +145,30 @@ function editGoal(requestBody, res) {
                         if (err) {
                             console.log(err);
                         } else {
-                            res.status(200).json(user);
+                            goal.title = newTitle;
+                            goal.target = newTarget;
+                            goal.date = newDate;
+                            goal.category.name = newCategory;
+                            goal.save();
+                            res.status(200).json(goal);
                         }
                     });
 
                 }
             });
         } else {
-            res.sendStatus(400);
+            const response = {
+                status: 'Bad request'
+            }
+            res.status(400).json(response);
+            
         }
     } catch (ex) {
         console.log(ex);
-        res.sendStatus(500);
+        const response = {
+            status: 'Error'
+        }
+        res.status(500).json(response);
     }
 }
 

@@ -31,7 +31,7 @@ export class GoalsComponent implements OnInit {
   ngOnInit(): void {
     this.api.getUser().then(result => {
       this.goals = this.generateGoals(result.goals);
-      this.cards = this.generateCards(this.goals);
+      this.cards = this.generateCards();
     }).catch(error => console.log(error));
   }
 
@@ -180,10 +180,10 @@ export class GoalsComponent implements OnInit {
     }
   }
 
-  generateCards(goals) {
-    var totalGoals = goals.length;
-    var completedGoals = this.getCompletedGoals(goals);
-    var comment = this.generateComment(goals, completedGoals);
+  generateCards() {
+    var totalGoals = this.goals.length;
+    var completedGoals = this.getCompletedGoals();
+    var comment = this.generateComment(completedGoals);
 
     return [
       new Card(1, 'bg-primary', 'faBullseye', totalGoals, 'Goals Total', null),
@@ -191,25 +191,25 @@ export class GoalsComponent implements OnInit {
     ];
   }
 
-  getCompletedGoals(goals){
+  getCompletedGoals(){
     var count = 0;
-    for (var goal of goals) {
-      if(goal.targetLeft == 0)
+    for (var goal of this.goals) {
+      if(goal.targetLeft <= 0)
         count++;
     }
 
     return count;
   }
 
-  generateComment(goals, completedGoals){
+  generateComment(completedGoals){
     var comment = "";
     if(completedGoals == 0)
       comment = "No goals completed.";
     else if (completedGoals > 2)
       comment = "Multiple goals completed!";
     else{
-      for (var goal of goals) {
-        if(goal.target == goal.saved)
+      for (var goal of this.goals) {
+        if(goal.targetLeft <= 0)
           comment += goal.title + ", ";
       }
       comment = comment.substring(0, comment.length - 2);
@@ -259,15 +259,13 @@ export class GoalsComponent implements OnInit {
 
   addGoal(name, category, amount, date){
     this.api.addGoal(name, category, amount, date).then((response) => {
-      this.parseAddGoalResponse(response);
-      this.cards = this.generateCards(this.goals);
+      this.afterAddGoal(response);
     }).catch((error) => {
       console.log(error);
     });
   }
 
-  parseAddGoalResponse(goal){
-    console.log(goal)
+  afterAddGoal(goal){
     var date = goal.date.split("-");
     date[2] = date[2].substring(0, 2);
 
@@ -280,18 +278,18 @@ export class GoalsComponent implements OnInit {
         color = "#00cf1d"
 
     this.goals.push(new Goal(goal._id, goal.title, progress , goal.target, targetLeft, color, monthlyTarget, goal.category.name, date[0], date[1], date[2]));
+    this.cards = this.generateCards();
   }
 
   addMoneyToGoal(amount, title){
     this.api.addMoneyToGoal(amount, title).then((response) => {
-      this.parseAddMoneyToGoalResponse(response);
-      this.cards = this.generateCards(this.goals);
+      this.afterAddMoneyToGoal(response);
     }).catch((error) => {
       console.log(error);
     });
   }
 
-  parseAddMoneyToGoalResponse(goal){
+  afterAddMoneyToGoal(goal){
     var goalObject = this.goals.find(goalObject => goalObject._id === goal._id)
     var progress = Math.ceil(goal.saved / goal.target * 100);
     var targetLeft = goal.target - goal.saved;
@@ -304,6 +302,8 @@ export class GoalsComponent implements OnInit {
     goalObject.progress = progress;
     goalObject.monthlyTarget = monthlyTarget;
     goalObject.color = color;
+
+    this.cards = this.generateCards();
   }
 
   afterDelete(goalId){
@@ -311,8 +311,41 @@ export class GoalsComponent implements OnInit {
     if (index > -1) {
       this.goals.splice(index, 1);
     }
-    this.cards = this.generateCards(this.goals);
+    this.cards = this.generateCards();
   }
+
+  afterEdit(goal){
+    var goalObject = this.goals.find(goalObject => goalObject._id === goal._id)
+    var date = goal.date.split("-");
+    date[2] = date[2].substring(0, 2);
+
+    var progress = Math.ceil(goal.saved / goal.target * 100);
+    var targetLeft = goal.target - goal.saved;
+    var monthlyTarget = this.calculateDailyTarget(goal.date, targetLeft);
+    
+    var color = "#2f7cfe";
+    if (targetLeft <= 0)
+        color = "#00cf1d";
+
+    goalObject._id = goal._id;
+    goalObject.title = goal.title
+    goalObject.progress = progress;
+    goalObject.target = goal.target;
+    goalObject.targetLeft = targetLeft;
+    goalObject.color = color;
+    goalObject.monthlyTarget = monthlyTarget;
+    goalObject.categoryName = goal.category.name;  
+    goalObject.year = date[0];
+    goalObject.month = date[1];
+    goalObject.day = date[2];
+
+    this.cards = this.generateCards();
+  }
+
+  refreshGoals(){
+    this.goals = this.goals;
+  }
+  
 
   data = {
     "fileName":"goals",
@@ -334,57 +367,6 @@ export class GoalsComponent implements OnInit {
     "appearance":"Appearance",
     "light":"Light",
     "dark":"Dark",
-
-    "goal":[{
-      "_id":"5fc600b4507a6800112af239",
-      "title":"Playstation 5",
-      "progress":0,
-      "target":450,
-      "targetLeft":450,
-      "color":"#2f7cfe",
-      "monthlyTarget":3,
-      "category":{
-        "_id":"5fc600b4507a6800112af23a",
-        "color":"rgb(191, 33, 194)",
-        "basic":true,
-        "name":"Electronics"
-      },
-      "year":"2021",
-      "month":"07",
-      "day":"01"
-    },{
-      "_id":"5fc600b4507a6800112af23b",
-      "title":"Headphones",
-      "progress":100,
-      "target":250,
-      "targetLeft":0,
-      "color":"#00cf1d",
-      "monthlyTarget":0,
-      "category":{
-        "_id":"5fc600b4507a6800112af23c",
-        "color":"rgb(40, 235, 79)",
-        "basic":true,
-        "name":"Electronics"
-      },
-      "year":"2021",
-      "month":"07",
-      "day":"28"
-    }],
-
-    "card":[{
-      "id":1,
-      "title":"Goals Total",
-      "color":"bg-primary",
-      "count":2,
-      "icon":"faBullseye"
-    },{
-      "id":21,
-      "title":"Goals Completed",
-      "color":"green-panel",
-      "count":1,
-      "icon":"faCheckCircle",
-      "comment":"Headphones completed!"
-    }],
 
     "categories":[{
       "_id":"5fc600b4507a6800112af1d5",

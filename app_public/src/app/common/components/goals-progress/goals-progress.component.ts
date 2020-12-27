@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ElementRef, ViewChild} from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ViewChild, Renderer2} from '@angular/core';
 import { faMinusSquare, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { Goal } from '../../classes/goal';
 import { ApiService } from '../../services/api.service';
@@ -15,6 +15,7 @@ export class GoalsProgressComponent implements OnInit {
   constructor(
     private api: ApiService,
     private goalsComponent: GoalsComponent,
+    private renderer: Renderer2
   ) { }
 
   ngOnInit(): void {
@@ -123,7 +124,7 @@ export class GoalsProgressComponent implements OnInit {
     }
   }
 
-  buttonEditGoal(): void {
+  buttonEditGoal(nameValue: string, categoryValue: string, amountValue: number, dateValue: Date): void {
     var name = this.nameEditGoal();
     var amount = this.amountEditGoal();
     var date = this.dateCheckEdit();
@@ -131,8 +132,18 @@ export class GoalsProgressComponent implements OnInit {
     if (name == 0 || amount == 0 || date == 0 ) {
         //DO NOTHING
     } else {
-        //POST REQUEST - TO BE ADDED
+      this.renderer.setAttribute(document.getElementById("buttonEditGoal"+ this.item._id), 'data-dismiss', 'modal');
+      this.editGoal(nameValue, categoryValue, amountValue, dateValue);
+      this.renderer.removeAttribute(document.getElementById("buttonEditGoal" + this.item._id), 'data-dismiss', 'modal');
     }
+  }
+
+  editGoal(name, category, amount, date){
+    this.api.editGoal(this.item._id, name, category, amount, date).then((response) => {
+      this.goalsComponent.afterEdit(response);
+    }).catch((error) => {
+      console.log(error);
+    });
   }
 
   buttonDeleteGoal(): void {
@@ -150,5 +161,4 @@ export class GoalsProgressComponent implements OnInit {
       console.log(error);
     });
   }
-
 }
