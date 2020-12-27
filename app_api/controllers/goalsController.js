@@ -154,20 +154,25 @@ function editGoal(requestBody, res) {
     }
 }
 
-function addToGoalWithCategory(requestBody, res) {
+function addToGoalWithCategory(req, res) {
     try {
-        var title = requestBody.title;
-        var amount = requestBody.amount;
-        var userId = requestBody.id;
+        const authorization = req.headers.authorization;
+        var title = req.body.title;
+        var amount = req.body.amount;
 
         //validate added amount
         const targetTest = checkTarget(amount);
 
-        if (targetTest) {
-            User.findById(userId, function(error, user) {
+        if (authorization && targetTest) {
+            const token = authorization.split(' ')[1];
+            const decodedToken = jwt_decode(token);
+            User.findById(decodedToken._id, function(error, user) {
                 if (error) {
                     console.log(error);
-                    res.sendStatus(500);
+                    const response = {
+                        status: 'Error'
+                    }
+                    res.send(500).json(response);
                 } else {
                     //? find the correct goal
                     var goal_id = null;
@@ -176,15 +181,15 @@ function addToGoalWithCategory(requestBody, res) {
                             goal_id = user.goals[i]._id;
                             var new_amount = parseInt(amount) + user.goals[i].saved;
                             if (new_amount > user.goals[i].target)
-                                amount = user.goals[i].target
+                            new_amount = user.goals[i].target
 
-                            user.goals[i].saved = amount;
+                            user.goals[i].saved = new_amount;
 
                             Goal.findById(goal_id, function(error, goal) {
                                 if (error) {
                                     console.log(error);
                                 } else {
-                                    goal.saved = amount;
+                                    goal.saved = new_amount;
                                     goal.save();
 
                                     var today = new Date();
@@ -200,12 +205,15 @@ function addToGoalWithCategory(requestBody, res) {
                                     expense.save(function callback(err) {
                                         if (err) {
                                             console.log(err);
-                                            res.sendStatus(500);
+                                            const response = {
+                                                status: 'Error'
+                                            }
+                                            res.status(500).json(response);
                                             return;
                                         } else {
                                             user.expense.push(expense);
                                             user.save();
-                                            res.status(200).json(user);
+                                            res.status(200).json(goal);
                                             return;
                                         }
                                     });
@@ -225,11 +233,17 @@ function addToGoalWithCategory(requestBody, res) {
                 }
             });
         } else {
-            res.sendStatus(400);
+            const response = {
+                status: 'Bad request'
+            }
+            res.status(400).json(response);
         }
     } catch (ex) {
         console.log(ex);
-        res.sendStatus(500);
+        const response = {
+            status: 'Error'
+        }
+        res.status(500).json(response);
     }
 }
 
@@ -324,7 +338,7 @@ module.exports = {
         editGoal(req.body, res);
     },
     addToGoalWithCategory: function(req, res) {
-        addToGoalWithCategory(req.body, res);
+        addToGoalWithCategory(req, res);
     },
     deleteGoal: function(req, res) {
         deleteGoal(req.body, res);

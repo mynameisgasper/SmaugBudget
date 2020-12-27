@@ -121,9 +121,9 @@
                     <input type="hidden" name="formType" value="addToGoalWithCategory">
                     <div class="modal-body">
                         <div class="ena"><label for="inputGoal">Goal</label><br />
-                            <select id="selectMoney" name="inputCategory" class="form-control">
-                                <ng-container *ngFor="let item of data.goal">
-                                    <option #categoryGoal *ngIf="hasTargetLeft(item.targetLeft)" id="category{{item._id}}">{{item.title}}</option>
+                            <select #titleGoal id="selectMoney" name="inputCategory" class="form-control">
+                                <ng-container *ngFor="let item of goals">
+                                    <option *ngIf="hasTargetLeft(item.targetLeft)" id="category{{item._id}}">{{item.title}}</option>
                                 </ng-container>
                             </select>
                         </div>
@@ -137,7 +137,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button (click)="buttonGoalsAddMoney(nameGoal.value, categoryGoal.value)" class="btn btn-primary">Add</button>
+                        <button (click)="buttonGoalsAddMoney(addAmount.value, titleGoal.value)" id="buttonAddMoneyToGoal" class="btn btn-primary">Add</button>
                     </div>
                 </form>
             </div>

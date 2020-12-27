@@ -31,8 +31,8 @@ export class GoalsComponent implements OnInit {
 
   ngOnInit(): void {
     this.api.getUser().then(result => {
-      this.cards = this.generateCards(result.goals);
       this.goals = this.generateGoals(result.goals);
+      this.cards = this.generateCards(this.goals);
       console.log(this.goals);
     }).catch(error => console.log(error));
   }
@@ -166,17 +166,19 @@ export class GoalsComponent implements OnInit {
     } else {
       this.renderer.setAttribute(document.getElementById("buttonAddGoal"), 'data-dismiss', 'modal');
       this.addGoal(nameValue, categoryValue, amountValue, dateValue);
+      this.renderer.removeAttribute(document.getElementById("buttonAddGoal"), 'data-dismiss', 'modal');
     }
   }
 
-  buttonGoalsAddMoney(nameValue: string, categoryValue: string): void {
+  buttonGoalsAddMoney(addAmount: string, titleGoal: string): void {
     var amount = this.amountGoalsAddMoney();
-
     
     if (amount == 0) {
         //DO NOTHING
     } else {
-        //POST REQUEST - TO BE ADDED
+      this.renderer.setAttribute(document.getElementById("buttonAddMoneyToGoal"), 'data-dismiss', 'modal');
+      this.addMoneyToGoal(addAmount, titleGoal);
+      this.renderer.removeAttribute(document.getElementById("buttonAddMoneyToGoal"), 'data-dismiss', 'modal');
     }
   }
 
@@ -194,7 +196,7 @@ export class GoalsComponent implements OnInit {
   getCompletedGoals(goals){
     var count = 0;
     for (var goal of goals) {
-      if(goal.target == goal.saved)
+      if(goal.targetLeft == 0)
         count++;
     }
 
@@ -260,6 +262,7 @@ export class GoalsComponent implements OnInit {
   addGoal(name, category, amount, date){
     this.api.addGoal(name, category, amount, date).then((response) => {
       this.parseAddGoalResponse(response);
+      this.cards = this.generateCards(this.goals);
     }).catch((error) => {
       console.log(error);
     });
@@ -281,13 +284,29 @@ export class GoalsComponent implements OnInit {
     this.goals.push(new Goal(goal._id, goal.title, progress , goal.target, targetLeft, color, monthlyTarget, goal.category.name, date[0], date[1], date[2]));
   }
 
-  addMoneyToGoal(name, category, amount, date){
-    this.api.addMoneyToGoal(name, category, amount, date).then((response) => {
-      this.parseAddGoalResponse(response);
+  addMoneyToGoal(amount, title){
+    this.api.addMoneyToGoal(amount, title).then((response) => {
+      this.parseAddMoneyToGoalResponse(response);
+      this.cards = this.generateCards(this.goals);
     }).catch((error) => {
       console.log(error);
     });
   }
+
+  parseAddMoneyToGoalResponse(goal){
+    var goalObject = this.goals.find(goalObject => goalObject._id === goal._id)
+    var progress = Math.ceil(goal.saved / goal.target * 100);
+    var targetLeft = goal.target - goal.saved;
+    var monthlyTarget = this.calculateDailyTarget(goal.date, targetLeft);
+    var color = "#2f7cfe";
+    if (targetLeft <= 0)
+        color = "#00cf1d"
+
+    goalObject.targetLeft = targetLeft;
+    goalObject.progress = progress;
+    goalObject.monthlyTarget = monthlyTarget;
+    goalObject.color = color;
+    }
 
 
   data = {

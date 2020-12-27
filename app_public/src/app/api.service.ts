@@ -158,14 +158,12 @@ export class ApiService {
     }
   }
 
-  public addMoneyToGoal(name, category, amount, date): Promise<any> {
+  public addMoneyToGoal(amount, title): Promise<any> {
     if (this.authorization.getLoggedIn()) {
       const url: string = `${this.apiUrl}/addToGoalWithCategory`; 
       const body = {
-        'name': name,
-        'category': category,
+        'title': title,
         'amount': amount,
-        'date': date,
       }
       const options = {
         headers: new HttpHeaders().set('Authorization', this.authorization.generateCompleteJwt())
