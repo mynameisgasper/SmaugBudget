@@ -27,7 +27,7 @@
         </div>
     </div>
 
-    <div class="container" id="cards-section" *ngIf="alerts.length != 0">
+    <div class="container" id="cards-section" *ngIf="alertsExist()">
         <div class="row">
             <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                 <h2>{{ alertSection }}</h2>

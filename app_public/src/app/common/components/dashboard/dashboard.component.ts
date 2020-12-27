@@ -23,9 +23,9 @@ export class DashboardComponent implements OnInit {
   pencilIcon = faPencilAlt;
   message = "Welcome to dashboard!";
   welcomeMessage = "A simple overview of your spending.";
-  cards: Card[];
-  alerts: Alert[];
-  analytics: Array<Object>;
+  cards: Card[] = [];
+  alerts: Alert[] = [];
+  analytics: Array<Object> = [];
   overview = "Last month overview";
   incomeRow = "Income";
   currency: String;
@@ -405,6 +405,10 @@ export class DashboardComponent implements OnInit {
     monthArray[11] = 'DEC';
 
     return monthArray[month];
+  }
+
+  alertsExist(): Boolean {
+    return this.alerts.length > 0;
   }
 
   openModal(template: TemplateRef<any>) {
