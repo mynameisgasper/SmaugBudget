@@ -6,6 +6,7 @@ const Expense = mongoose.model('Expense');
 const User = mongoose.model('User');
 const { currencySchema } = require('../models/currency');
 const Currency = mongoose.model('Currency');
+const jwt_decode = require('jwt-decode');
 
 
 /*
@@ -133,40 +134,51 @@ function addEnvelope(requestBody, res) {
 ? EDIT Envelope Function
 ! find the envelope and add an amount or/and change color 
 */
-function editEnvelope(requestBody, res) {
+function editEnvelope(req, res) {
     try {
-        var newBudget = requestBody.inputAmount;
-        var colorHexPicker = requestBody.colorPicker
-        var envelope_id = requestBody.id;
-        var user_id = requestBody.user;
+        const authorization = req.headers.authorization;
+        if (authorization) {
+            const token = authorization.split(' ')[1];
+            const decodedToken = jwt_decode(token);
 
-        var regex = new RegExp("^[0-9]+");
-        const amountCorrect = regex.test(newBudget);
+            var newBudget = req.body.inputAmount;
+            var colorHexPicker = req.body.colorPicker
+            var envelope_id = req.body.id;
+            var user_id = decodedToken._id;;
 
-        if (amountCorrect) {
-            User.findById(user_id, function(error, user) {
-                if (error) {
-                    console.log(error);
-                    res.sendStatus(500);
-                } else {
-                    for (var i = 0; i < user.envelopes.length; i++) {
-                        if (user.envelopes[i]._id == envelope_id) {
-                            user.envelopes[i].progress = Math.round((parseFloat(parseFloat(user.envelopes[i].spent) / parseFloat(newBudget))) * 100);
-                            user.envelopes[i].budget = newBudget;
-                            user.save();
-                            break;
+            var regex = new RegExp("^[0-9]+");
+            const amountCorrect = regex.test(newBudget);
+
+            if (amountCorrect) {
+                User.findById(user_id, function(error, user) {
+                    if (error) {
+                        console.log(error);
+                        res.sendStatus(500);
+                    } else {
+                        for (var i = 0; i < user.envelopes.length; i++) {
+                            if (user.envelopes[i]._id == envelope_id) {
+                                user.envelopes[i].progress = Math.round((parseFloat(parseFloat(user.envelopes[i].spent) / parseFloat(newBudget))) * 100);
+                                user.envelopes[i].budget = newBudget;
+                                user.save();
+                                break;
+                            }
                         }
-                    }
 
-                    Envelopes.findById(envelope_id, function(err, envelope) {
-                        envelope.budget = newBudget;
-                        envelope.progress = Math.round((parseFloat(parseFloat(envelope.spent) / parseFloat(newBudget))) * 100);
-                    });
-                    res.status(200).json(user);
-                }
-            });
+                        Envelopes.findById(envelope_id, function(err, envelope) {
+                            envelope.budget = newBudget;
+                            envelope.progress = Math.round((parseFloat(parseFloat(envelope.spent) / parseFloat(newBudget))) * 100);
+                        });
+                        res.status(200).json(user);
+                    }
+                });
+            } else {
+                res.sendStatus(400);
+            }
         } else {
-            res.sendStatus(400);
+            const response = {
+                status: 'Unauthorized'
+            }
+            res.status(401).json(response);
         }
 
     } catch (ex) {
@@ -527,7 +539,7 @@ module.exports = {
         addExpense(req.body, res);
     },
     editEnvelope: function(req, res) {
-        editEnvelope(req.body, res);
+        editEnvelope(req, res);
     },
     deleteEnvelope: function(req, res) {
         deleteEnvelope(req.body, res);
