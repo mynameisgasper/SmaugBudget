@@ -245,4 +245,10 @@ SPA aplikacija na eni strani
 
 ## 5. LP
 
-Varnostno zaščitena progresivna aplikacija
+### Opis razlike med vrstami uporabniki  
+  #### Uporabnike delimo na 3 nivoje - Bronze, Silver in Gold
+  
+- Bronze: Dostop do osnovnih strani: Dashboard, Envelopes, Goals, Bills in Settings
+- Silver : Dostop do osnovnih strani ter dodan dostop do History
+- Gold : Dostop do osnovnih strani ter History in Utilities
+  
