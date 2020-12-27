@@ -82,7 +82,7 @@ export class EnvelopesComponent implements OnInit {
       this.categoryExpense.nativeElement.value,
       this.nameExpense.nativeElement.value,
       this.dateExpense.nativeElement.value
-    ).then(result => { }).catch(error => console.log(error));
+    ).then(result => { this.cards = this.generateCards(this.envelopes) }).catch(error => console.log(error));
       
   }
 
@@ -289,12 +289,70 @@ export class EnvelopesComponent implements OnInit {
     }
   }
 
+  getThisMonthEnvelopes(envelopes: Array<Envelope>): Array<Envelope> {
+    var thisMonthEnvelopes: Array<Envelope> = [];
+    for (let envelope of envelopes) {
+      if (envelope.month === this.setMonth) {
+        thisMonthEnvelopes.push(envelope);
+      }
+    }
+    return thisMonthEnvelopes;
+  }
+
   generateCards(envelopes) {
+    const thisMonthEnvelopes = this.getThisMonthEnvelopes(envelopes);
+    const almostEmptyEnvelopes = this.getAlmostEmptyEnvelopes(thisMonthEnvelopes);
+    const emptyEnvelopes = this.getEmptyEnvelopes(thisMonthEnvelopes);
+    
 
     return [
-      new Card(1, 'bg-primary', 'faEnvelope', 2, 'Envelopes Total', null),
-      new Card(21, 'bg-warning', 'faExclamationTriangle', 1, 'Almost Empty', 'No almost empty envelopes!'),
-      new Card(31, 'bg-danger', 'faRadiation', 1, 'Empty', 'No empty envelopes!'),
+      new Card(1, 'bg-primary', 'faEnvelope', thisMonthEnvelopes.length, 'Envelopes Total', null),
+      new Card(21, 'bg-warning', 'faExclamationTriangle', almostEmptyEnvelopes.length, 'Almost Empty', this.generateAlmostEmptyMessage(almostEmptyEnvelopes)),
+      new Card(31, 'bg-danger', 'faRadiation', emptyEnvelopes.length, 'Empty', this.generateEmptyMessage(emptyEnvelopes)),
     ];
+  }
+
+  getAlmostEmptyEnvelopes(envelopes: Array<Envelope>): Array<Envelope> {
+    var almostEmptyEnvelopes: Array<Envelope> = [];
+    for (let envelope of envelopes) {
+      if (envelope.progress < 100 && envelope.progress >= 85) {
+        almostEmptyEnvelopes.push(envelope);
+      }
+    }
+    return almostEmptyEnvelopes;
+  }
+
+  getEmptyEnvelopes(envelopes: Array<Envelope>): Array<Envelope> {
+    var emptyEnvelopes: Array<Envelope> = [];
+    for (let envelope of envelopes) {
+      if (envelope.progress >= 100) {
+        emptyEnvelopes.push(envelope);
+      }
+    }
+    return emptyEnvelopes;
+  }
+
+  generateAlmostEmptyMessage(envelopes: Array<Envelope>): string {
+    if (envelopes.length < 1) {
+      return 'No almost empty envelopes!';
+    }
+    else if (envelopes.length == 1) {
+      return envelopes[0].category['name'] + ' almost empty!';
+    }
+    else {
+      return envelopes.length + ' envelopes almost empty!';
+    }
+  }
+
+  generateEmptyMessage(envelopes: Array<Envelope>): string {
+    if (envelopes.length < 1) {
+      return 'No empty envelopes!';
+    }
+    else if (envelopes.length == 1) {
+      return envelopes[0].category['name'] + ' empty!';
+    }
+    else {
+      return envelopes.length + ' envelopes empty!';
+    }
   }
 }
