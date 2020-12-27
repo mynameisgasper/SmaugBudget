@@ -13,10 +13,43 @@ export class EnvelopesComponent implements OnInit {
 
   constructor(private api: ApiService) { }
   cards: Card[]
+  public envelopes: any;
+  public pageData: any;
+  public categories: any;
 
   ngOnInit(): void {
     this.api.getUser().then(result => {
+
+      var d = new Date();
+
       this.cards = this.generateCards(result.envelopes);
+      this.envelopes = result.envelopes;
+      console.log(this.envelopes);
+      this.categories = this.getCategories(result.categories);
+      this.pageData = {
+        "fileName":"envelopes",
+        "message":"Welcome to Envelopes!",
+        "welcomeMessage":"This is the best way to track your monthly and weekly spending per category. Start by clicking 'Add Envelope'.",
+        "logout":"Logout",
+        "year":2020,
+        "month":12,
+        "day":21,
+        "DASHBOARD":"DASHBOARD",
+        "ENVELOPES":"ENVELOPES",
+        "GOALS":"GOALS",
+        "BILLS":"BILLS",
+        "HISTORY":"HISTORY",
+        "UTILITIES":"UTILITIES",
+        "user":"User",
+        "settings":"Settings",
+        "appearance":"Appearance",
+        "light":"Light",
+        "dark":"Dark",
+        "setMonthNumber": d.getMonth(),
+        "setMonth": this.getCurrentMonth(d.getMonth()),
+        "currentMonth": this.getCurrentMonth(d.getMonth()),
+        "currency":"EUR",
+      }
       console.log(this.cards);
     }).catch(error => console.log(error));
   }
@@ -48,6 +81,51 @@ export class EnvelopesComponent implements OnInit {
         return 1;
     }
   }
+
+  getCategories(categories) {
+    var category = [];
+    var j = 0;
+    for (var i = 0; i < categories.length; i++) {
+        if (this.uniqueCategory(category, categories[i])) {
+            category[j] = categories[i];
+            j++;
+        }
+
+    }
+
+    return category;
+  }
+
+  uniqueCategory(categories, category) {
+    if (categories == null) {
+        return true;
+    }
+    for (var i = 0; i < categories.length; i++) {
+        if (categories[i]._id === category._id) {
+            return false;
+        }
+    }
+    return true;
+  }
+
+  getCurrentMonth(month) {
+    var monthArray = new Array();
+    monthArray[0] = "JAN";
+    monthArray[1] = "FEB";
+    monthArray[2] = "MAR";
+    monthArray[3] = "APR";
+    monthArray[4] = "MAY";
+    monthArray[5] = "JUN";
+    monthArray[6] = "JUL";
+    monthArray[7] = "AUG";
+    monthArray[8] = "SEP";
+    monthArray[9] = "OCT";
+    monthArray[10] = 'NOV';
+    monthArray[11] = 'DEC';
+
+    return monthArray[month];
+  }
+
 
   amountAddEnvelopes(): number {
     const field = this.amountAdd.nativeElement;

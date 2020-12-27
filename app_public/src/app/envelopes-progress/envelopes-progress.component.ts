@@ -11,8 +11,9 @@ export class EnvelopesProgressComponent implements OnInit {
   @Input()
   data = {
     "currency": "EUR",
-    "envelope": {}
   }
+  @Input()
+  envelopes=[];
 
   faMinusSquare = faMinusSquare;
   faPencilAlt = faPencilAlt
