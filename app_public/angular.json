@@ -51,6 +51,7 @@
               "src/assets/stylesheets/main.css"
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/assets/stylesheets/fonts.css",
               "src/assets/stylesheets/main.css",
               "src/assets/webfonts/OpenSans-Bold.ttf",

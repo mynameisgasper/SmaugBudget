@@ -36,6 +36,7 @@ import { UtilitiesMemberRowComponent } from './utilities-member-row/utilities-me
 import { LoginGuardService } from './login-guard.service';
 import { GoldGuardService } from './gold-guard.service';
 import { SilverGuardService } from './silver-guard.service';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { SilverGuardService } from './silver-guard.service';
     ChartsModule,
     FontAwesomeModule,
     ModalModule.forRoot(),
+    NgbModule,
     RouterModule.forRoot([
       {
         path: '',

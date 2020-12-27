@@ -20,6 +20,8 @@ export class HistoryComponent implements OnInit {
   public categories: Array<Object>;
   public currency: string;
   public expenses: Array<Object>;
+  public page = 1;
+  public pageSize = 10;
 
   constructor(
     private api: ApiService,
@@ -29,13 +31,13 @@ export class HistoryComponent implements OnInit {
   @ViewChild('color') color: ElementRef;
 
   ngOnInit(): void {
-    
+
     this.api.getUser().then(result => {
 
       this.categories = result.categories;
       this.expenses = this.generateExpenses(result.expense);
       this.currency = result.defaultCurrency;
-
+      
       //data za tabele
       const parsedTable = this.parseTable(this.expenses);
       document.querySelector(".totaltext").innerHTML = "<h5>Total spent: " + parsedTable.sum.toFixed(2); + "€</h5>";
