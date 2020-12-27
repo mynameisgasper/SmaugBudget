@@ -53,7 +53,7 @@
                     <div class="modal-body">
                         <div class="ena">
                             <label for="chooseCategoryEnvelope">Category</label>
-                            <select id="inputCategory" name="chooseCategoryEnvelope" class="form-control" onchange="checkCategory(this)" required>
+                            <select #selectCategoryAdd id="inputCategory" name="chooseCategoryEnvelope" class="form-control" onchange="checkCategory(this)" required>
                                 <option value="" selected>Select category</option>
                                 <option *ngFor="let item of categories;"value="{{item.name}}" id="category{{item._id}}">{{item.name}}</option>
                                 <option value="other">Make your own</option>

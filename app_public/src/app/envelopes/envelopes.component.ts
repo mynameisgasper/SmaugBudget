@@ -57,6 +57,7 @@ export class EnvelopesComponent implements OnInit {
     }).catch(error => console.log(error));
   }
 
+  @ViewChild('selectCategoryAdd') selectCategoryAdd: ElementRef;
   @ViewChild('categoryAdd') categoryAdd: ElementRef;
   @ViewChild('amountAdd') amountAdd: ElementRef;
   @ViewChild('colorAdd') colorAdd: ElementRef;
@@ -93,13 +94,24 @@ export class EnvelopesComponent implements OnInit {
   }
 
   addEnvelope(): void {
-    this.api.addEnvelope(
-      this.categoryAdd.nativeElement.value,
-      this.amountAdd.nativeElement.value,
-      this.colorAdd.nativeElement.value,
-      this.pageData.setMonthNumber-1
-    ).then(result => { }).catch(error => console.log(error));
-    this.router.navigate(['/envelopes'])
+
+    if(this.selectCategoryAdd.nativeElement.value == "other") {
+      this.api.addEnvelope(
+        this.categoryAdd.nativeElement.value,
+        this.amountAdd.nativeElement.value,
+        this.colorAdd.nativeElement.value,
+        this.pageData.setMonthNumber-1
+      ).then(result => { }).catch(error => console.log(error));
+    } else {
+      this.api.addEnvelope(
+        this.selectCategoryAdd.nativeElement.value,
+        this.amountAdd.nativeElement.value,
+        this.colorAdd.nativeElement.value,
+        this.pageData.setMonthNumber-1
+      ).then(result => { }).catch(error => console.log(error));
+    }
+      this.router.navigate(['/envelopes'])
+    
   }
 
   nameAddEnvelopes(): number {
