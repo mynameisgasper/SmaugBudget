@@ -119,7 +119,11 @@ function addEnvelope(req, res) {
                                 }
                                 user.envelopes.push(envelope);
                                 user.save();
-                                res.status(200).json(user);
+                                const odgovor = {
+                                    category: category,
+                                    envelope: envelope
+                                }
+                                res.status(200).json(odgovor);
                             }
 
                         });
