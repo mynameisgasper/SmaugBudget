@@ -59,7 +59,6 @@
               "src/assets/webfonts/OpenSans-Regular.ttf"
             ],
             "scripts": [
-              "src/assets/javascripts/account.js",
               "src/assets/javascripts/bills.js",
               "src/assets/javascripts/confirmation.js",
               "src/assets/javascripts/DarkMode.js",
@@ -72,7 +71,9 @@
               "src/assets/javascripts/HistoryChart.js",
               "src/assets/javascripts/index.js",
               "src/assets/javascripts/passwordReset.js",
-              "src/assets/javascripts/utilities.js"
+              "src/assets/javascripts/utilities.js",
+              "src/assets/javascripts/Dictionary.js",
+              "src/assets/javascripts/globalFunctions.js"
             ]
           },
           "configurations": {

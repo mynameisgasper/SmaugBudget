@@ -214,12 +214,12 @@
             <form name="userPfp" id="userPfp" method="post" action="/api/uploadPfp">
             <div class="form-group">
                 <label for="addPfp">{{data.dragAndDropOr}}:</label>
-                <input type="file" name="image" class="form-control-file" id="addPfp" accept="image/*">
+                <input type="file" name="image" class="form-control-file" id="addPfp" (change)="readURL($event.target.files)" accept="image/*">
             </div>
             </form>
         </div>
         <div class="modal-footer">
-            <button type="button" id="submitPfp" class="btn btn-primary" disabled>{{data.saveChanges}}</button>
+            <button type="button" id="submitPfp" class="btn btn-primary" [disabled]="!this.hasUrl" (click)="uploadFileToActivity()">{{data.saveChanges}}</button>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">{{data.close}}</button>
         </div>
         </div>
