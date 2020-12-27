@@ -235,8 +235,10 @@ export class BillsComponent implements OnInit {
             monthName: this.translateMonth(date[1]),
             date: bill.date
         }
-        this.bills.push(newBill)
-        this.bills.sort(this.compare)
+        this.bills.push(newBill);
+        this.bills.sort(this.compare);
+
+        this.cards = this.generateCards();
     }
 
     generateCards() {
@@ -298,6 +300,26 @@ export class BillsComponent implements OnInit {
         if (index > -1) {
          this.bills.splice(index, 1);
         }
+        this.cards = this.generateCards();
+    }
+
+    afterEdit(bill){
+        var billObject = this.bills.find(billObject => billObject._id === bill._id)
+        console.log(billObject);
+        var date = bill.date.split('T')[0].split('-');
+
+        billObject._id = bill._id;
+        billObject.category = bill.category.name;
+        billObject.currency = bill.currency;
+        billObject.date = bill.date;
+        billObject.day = date[2];
+        billObject.month = date[1];
+        billObject.monthName = this.translateMonth(date[1]);
+        billObject.recipient = bill.recipient;
+        billObject.repeat = bill.repeating;
+        billObject.value = bill.value;
+        billObject.year = date[0];
+
         this.cards = this.generateCards();
     }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ElementRef, ViewChild  } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ViewChild, Renderer2 } from '@angular/core';
 import { faRProject } from '@fortawesome/free-brands-svg-icons';
 import { faMinusSquare, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { ApiService } from '../../services/api.service';
@@ -14,15 +14,16 @@ export class BillTableComponent implements OnInit {
 
   constructor(
     private api: ApiService,
-    private BillsComponent: BillsComponent
+    private BillsComponent: BillsComponent,
+    private renderer: Renderer2
   ) { }
 
   ngOnInit(): void {
   }
 
-  @ViewChild('nameEdit') nameEdit: ElementRef;
-  @ViewChild('amountEdit') amountEdit: ElementRef;
-  @ViewChild('dateEdit') dateEdit: ElementRef;
+  @ViewChild('editBillPayee') editBillPayee: ElementRef;
+  @ViewChild('editBillAmount') editBillAmount: ElementRef;
+  @ViewChild('editBillDate') editBillDate: ElementRef;
 
   faMinusSquare = faMinusSquare;
   faPencilAlt = faPencilAlt
@@ -53,7 +54,7 @@ export class BillTableComponent implements OnInit {
   }
 
   nameEditBills(): number {
-    const field = this.nameEdit.nativeElement;
+    const field = this.editBillPayee.nativeElement;
     var regex = new RegExp("^[ A-Za-z0-9_@./#&+-: ]{1,20}$");
     //črkev male,velike,številke
     if (!field.value.match(regex)) {
@@ -68,7 +69,7 @@ export class BillTableComponent implements OnInit {
   }
 
   amountEditBills(): number {
-    const field = this.amountEdit.nativeElement;
+    const field = this.editBillAmount.nativeElement;
     var regex = new RegExp("^[0-9]+(\.[0-9]{1,2})?$");
     //decimalna števila z največj 2ma decimalnima mestoma ločilo je pika!
     //črkev male,velike,številke ne veljajo števila kot so .73, 
@@ -84,7 +85,7 @@ export class BillTableComponent implements OnInit {
   }
 
   dateEditBills(): number {
-    const field = this.dateEdit.nativeElement;
+    const field = this.editBillDate.nativeElement;
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
     var mm = String(today.getMonth() + 1).padStart(2, '0');
@@ -124,16 +125,26 @@ export class BillTableComponent implements OnInit {
     }
   }
 
-  buttonEditBills() {
-
+  buttonEditBills(categoryValue: string, payeeValue: string, amountValue: number, dateValue: Date, repeatValue: String) {
     var amount1 = this.amountEditBills();
     var check1 = this.nameEditBills();
     var date1 = this.dateEditBills();
     if (amount1 == 0 || check1 == 0 || date1 == 0) {
       //DO NOTHING
     } else {
-      //POST REQUEST - TO BE ADDED
+      this.renderer.setAttribute(document.getElementById("buttonEditBill" + this.data._id), 'data-dismiss', 'modal');
+      this.editBill(categoryValue, payeeValue, amountValue, dateValue, repeatValue);
+      this.renderer.removeAttribute(document.getElementById("buttonEditBill" + this.data._id), 'data-dismiss', 'modal');
+      
     }
+  }
+
+  editBill(category, payee, amount, date, repeat){
+    this.api.editBill(this.data._id, category, payee, amount, date, repeat).then((response) => {
+      this.BillsComponent.afterEdit(response);
+    }).catch((error) => {
+      console.log(error);
+    });
   }
 
   buttonDeleteBill(): void {

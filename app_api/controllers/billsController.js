@@ -71,29 +71,35 @@ function addBill(req, res) {
     }
 }
 
-function editBill(requestBody, res) {
+function editBill(req, res) {
     try {
-        var billId = requestBody.billId;
-        var inputCategory = requestBody.inputCategory;
-        var recipient = requestBody.payee;
-        var amount = requestBody.amount;
-        var date = requestBody.date;
-        var repeat = requestBody.repeat;
-        var userId = requestBody.id;
+        const authorization = req.headers.authorization;
+        var billId = req.body.billId;
+        var inputCategory = req.body.inputCategory;
+        var recipient = req.body.payee;
+        var amount = req.body.amount;
+        var date = req.body.date;
+        var repeat = req.body.repeat;
 
         //validate date, recipient and amount
         var dateOk = checkDate(date);
         const recipientTest = checkRecipient(recipient);
         const amountTest = checkAmount(amount);
 
-        if (recipientTest && amountTest && dateOk) {
-            User.findById(userId, function(err, user) {
+        if (authorization && recipientTest && amountTest && dateOk) {
+            const token = authorization.split(' ')[1];
+            const decodedToken = jwt_decode(token);
+            User.findById(decodedToken._id, function(err, user) {
                 if (err) {
                     console.log(err);
-                    res.sendStatus(500);
+                    const response = {
+                        status: 'Error'
+                    }
+                    res.status(500).json(response);
                 } else {
                     var category = null;
-                    for (var i = 0; i < user.bills.length; i++) {
+                    var i = 0;
+                    for (; i < user.bills.length; i++) {
                         if (user.bills[i]._id == billId) {
                             user.bills[i].recipient = recipient;
                             user.bills[i].value = amount;
@@ -119,15 +125,21 @@ function editBill(requestBody, res) {
                         bill.date = date;
                         if (category != null) bill.category = category;
                     });
-                    res.status(200).json(user);
+                    res.status(200).json(user.bills[i]);
                 }
             });
         } else {
-            res.sendStatus(400);
+            const response = {
+                status: 'Error'
+            }
+            res.status(400).json(response);
         }
     } catch (ex) {
         console.log(ex);
-        res.sendStatus(500);
+        const response = {
+            status: 'Error'
+        }
+        res.status(500).json(response);
     }
 }
 

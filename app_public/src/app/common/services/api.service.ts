@@ -266,6 +266,28 @@ export class ApiService {
     }
   }
 
+  public editBill(billId, category, payee, amount, date, repeat): Promise<any> {
+    if (this.authorization.getLoggedIn()) {
+      console.log(category);
+      const url: string = `${this.apiUrl}/editBill`; 
+      const body = {
+        'billId': billId,
+        'inputCategory': category,
+        'payee': payee,
+        'amount': amount,
+        'date': date,
+        'repeat': repeat
+      }
+      const options = {
+        headers: new HttpHeaders().set('Authorization', this.authorization.generateCompleteJwt())
+      }
+      return this.http.post(url, body, options).toPromise().then(response => response).catch(err => this.parseError(err));
+    }
+    else {
+      this.parseError('Error');
+    }
+  }
+
   private parseError(error: any): Promise<any> {
     console.error('An error has occured', error);
     return Promise.reject(error.message || error);
