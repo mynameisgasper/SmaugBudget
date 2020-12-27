@@ -5,7 +5,11 @@ export class Bill {
     recipient: string;
     value: number;
     category: Category;
-    date: Date;
     currency: string;
-    repeating: string;
+    repeat: string;
+    year: string;
+    month: string;
+    day: string;
+    monthName: string;
+    date: Date;
 }

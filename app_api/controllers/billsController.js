@@ -3,6 +3,7 @@ const Bill = mongoose.model('Bills');
 const User = mongoose.model('User');
 const Categories = mongoose.model('Categories');
 const Expense = mongoose.model('Expense');
+const jwt_decode = require('jwt-decode');
 
 function addBill(requestBody, res) {
     try {
@@ -115,39 +116,52 @@ function editBill(requestBody, res) {
     }
 }
 
-function deleteBill(requestBody, res) {
+function deleteBill(req, res) {
     try {
-        var id_requested = requestBody.bill_id;
-        var user_id = requestBody.user_id;
+        const authorization = req.headers.authorization;
+        var id_requested = req.body.bill_id;
 
-        console.log(requestBody);
+        if (authorization && id_requested != undefined) {
+            const token = authorization.split(' ')[1];
+            const decodedToken = jwt_decode(token);
+            Bill.findByIdAndDelete(id_requested, function(err, bills) {
+                if (err) {
+                    console.log(err);
+                } else {}
+            });
 
-        Bill.findByIdAndDelete(id_requested, function(err, bills) {
-            if (err) {
-                console.log(err);
-            } else {}
-        });
-
-        User.findById(user_id, function(err, user) {
-            if (err) {
-                console.log(err);
-            } else {
-                for (var i = 0; i < user.bills.length; i++) {
-                    if (user.bills[i]._id == id_requested) {
-                        user.bills.pull(id_requested);
-                        user.save();
-                        res.status(200).json(user);
-                        return;
+            User.findById(decodedToken._id, function(err, user) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    for (var i = 0; i < user.bills.length; i++) {
+                        if (user.bills[i]._id == id_requested) {
+                            user.bills.pull(id_requested);
+                            user.save();
+                            res.status(200).json(user);
+                            return;
+                        }
                     }
+                    const response = {
+                        status: 'Error'
+                    }
+                    res.status(304).json(response)
+                    return;
                 }
-                res.status(304);
-                return;
+            });
+        }
+        else {
+            const response = {
+                status: 'Bad request'
             }
-        });
-
+            res.status(400).json(response);
+        }
     } catch (ex) {
         console.log(ex);
-        res.sendStatus(500);
+        const response = {
+            status: 'Error'
+        }
+        res.status(500).json(response);
     }
 }
 
@@ -319,7 +333,7 @@ module.exports = {
         editBill(req.body, res);
     },
     deleteBill: function(req, res) {
-        deleteBill(req.body, res);
+        deleteBill(req, res);
     },
     handleBills: function() {
         handleBills();

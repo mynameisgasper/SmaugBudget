@@ -1,5 +1,8 @@
 import { Component, OnInit, Input, ElementRef, ViewChild  } from '@angular/core';
+import { faRProject } from '@fortawesome/free-brands-svg-icons';
 import { faMinusSquare, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
+import { ApiService } from '../../services/api.service';
+import { BillsComponent } from '../bills/bills.component'
 declare var $:any;
 
 @Component({
@@ -9,7 +12,10 @@ declare var $:any;
 })
 export class BillTableComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private api: ApiService,
+    private BillsComponent: BillsComponent
+  ) { }
 
   ngOnInit(): void {
   }
@@ -20,6 +26,31 @@ export class BillTableComponent implements OnInit {
 
   faMinusSquare = faMinusSquare;
   faPencilAlt = faPencilAlt
+
+  @Input()
+  data = {
+    "_id": "",
+    "year": "",
+    "month": 0,
+    "monthName": "",
+    "day": "",
+    "category": "",
+    "recipient": "",
+    "value": 0,
+    "currency": "",
+    "repeat": ""
+  }
+
+  @Input()
+  Currency: string
+
+  @Input()
+  Categories = {
+    "color": "",
+    "basic": true,
+    "_id": "",
+    "name": ""
+  }
 
   nameEditBills(): number {
     const field = this.nameEdit.nativeElement;
@@ -105,31 +136,24 @@ export class BillTableComponent implements OnInit {
     }
   }
 
-
-  @Input()
-  data = {
-    "_id": "",
-    "year": "",
-    "month": 0,
-    "monthName": "",
-    "day": "",
-    "category": "",
-    "recipient": "",
-    "value": 0,
-    "currency": "",
-    "repeat": ""
+  buttonDeleteBill(): void {
+    if (!this.data._id) {
+        //DO NOTHING
+    } else {
+       this.deleteBill();
+    }
   }
 
-  @Input()
-  Currency: string
-
-  @Input()
-  Categories = {
-    "color": "",
-    "basic": true,
-    "_id": "",
-    "name": ""
+  deleteBill(){
+    this.api.deleteBill(this.data._id).then((response) => {
+      this.BillsComponent.afterDelete(this.data._id)
+    }).catch((error) => {
+      console.log(error);
+    });
   }
+
+
+  
 
   
   

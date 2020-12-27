@@ -12,13 +12,9 @@
     <button type="button" class="btn p" data-toggle="modal" [attr.data-target]="'#editForm' +data._id">
             <fa-icon [icon]="faPencilAlt"></fa-icon>
         </button>
-    <form name="deleteForm{{data._id}}" method="post" action="/bills">
-        <input type="hidden" value="deleteBill" name="formType">
-        <input type="hidden" value="{{data._id}}" name="id">
-        <button type="submit" class="btn edit-btn" data-toggle="modal">
+        <button type="submit" (click)="buttonDeleteBill()" class="btn edit-btn" data-toggle="modal">
                 <fa-icon [icon]="faMinusSquare"></fa-icon>
         </button>
-    </form>
 </td>
 
 <div class="modal fade billModal" id="editForm{{data._id}}" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">

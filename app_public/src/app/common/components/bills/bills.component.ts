@@ -2,6 +2,7 @@ import { Component, OnInit, ElementRef, ViewChild} from '@angular/core';
 import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 import { ApiService } from '../../services/api.service';
 import { Card } from '../../classes/card';
+import { Bill } from '../../classes/bill';
 declare var $:any;
 
 @Component({
@@ -16,7 +17,8 @@ export class BillsComponent implements OnInit {
     public cards: Card[]
     public pageData: any;
     public categories: any;
-    public bills: any;
+    //public bills: any;
+    bills: Bill[]
     fileName: string = "bills";
     message = "Welcome to Bills!";
     welcomeMessage = "Here you can add recurring bills. Fill in the form, submit and it will be added to an envelope repeteadly!";
@@ -36,10 +38,10 @@ export class BillsComponent implements OnInit {
 
     ngOnInit(): void {
         this.api.getUser().then(result => {
-
-            this.cards = this.generateCards(result.bills);
-            this.categories = result.categories;
             this.bills = this.generateBills(result.bills)
+            this.cards = this.generateCards();
+            this.categories = result.categories;
+            
         }).catch(error => console.log(error));
     }
 
@@ -53,19 +55,20 @@ export class BillsComponent implements OnInit {
         var billsArray = []
         for (var bill of bills) {
             var date = bill.date.split('T')[0].split('-');
-
-            billsArray.push({
-                _id: bill._id,
-                year: date[0],
-                month: date[1],
-                monthName: this.translateMonth(date[1]),
-                day: date[2],
-                category: bill.category.name,
+            var newBill: Bill = {
+                _id: bill._id, 
                 recipient: bill.recipient,
                 value: bill.value,
+                category: bill.category.name,
                 currency: bill.currency,
-                repeat: bill.repeating
-            });
+                repeat: bill.repeating,
+                year: date[0],
+                month: date[1],
+                day: date[2],
+                monthName: this.translateMonth(date[1]),
+                date: bill.date
+            }
+            billsArray.push(newBill);
         }
         billsArray.sort(this.compare)
         return billsArray;
@@ -206,59 +209,67 @@ export class BillsComponent implements OnInit {
         }
     }
 
-    generateCards(bills) {
-        const nearBills = this.getBillsInTheNext7Days(bills);
+    generateCards() {
+        const nearBills = this.getBillsInTheNext7Days();
 
         return [
-        new Card(1, 'bg-primary', 'faPaperclip', bills.length, 'Bills Total', null),
+        new Card(1, 'bg-primary', 'faPaperclip', this.bills.length, 'Bills Total', null),
         new Card(21, 'bg-warning', 'faCalendar', nearBills.length, 'Bills This Week', this.generateComment(nearBills)),
         ];
     }
 
-        getBillsInTheNext7Days(bills) {
-            const currentTime = new Date();
-            var billsArray = [];
+    getBillsInTheNext7Days() {
+        const currentTime = new Date();
+        var billsArray = [];
 
-            for (var bill of bills) {
-                const billDate = new Date(Date.parse(bill.date)).getTime();
-                const diff = (billDate - currentTime.getTime()) / 86400000;
+        for (var bill of this.bills) {
+            const billDate = new Date(bill.date).getTime();
+            const diff = (billDate - currentTime.getTime()) / 86400000;
 
-                if (diff < 7) {
-                    billsArray.push(bill);
-                }
+            if (diff < 7) {
+                billsArray.push(bill);
             }
-            return billsArray;
         }
+        return billsArray;
+    }
 
-        generateComment(bills) {
-            var comment = '';
+    generateComment(bills) {
+        var comment = '';
 
-            var bill = this.findClosestBill(bills);
-            if (!bill) return comment;
-            const billDate = new Date(Date.parse(bill.date));
-            const dtfUK = new Intl.DateTimeFormat('UK', { month: '2-digit', day: '2-digit' });
-            comment = "Closest bill:\n" + bill.recipient + " - " + dtfUK.format(billDate);
+        var bill = this.findClosestBill(bills);
+        if (!bill) return comment;
+        const billDate = new Date(Date.parse(bill.date));
+        const dtfUK = new Intl.DateTimeFormat('UK', { month: '2-digit', day: '2-digit' });
+        comment = "Closest bill:\n" + bill.recipient + " - " + dtfUK.format(billDate);
 
-            return comment;
-        }
+        return comment;
+    }
 
-        findClosestBill(bills) {
-            var nearestBill = null;
-            const currentTime = new Date();
-        
-            var minDiff = null
-            for (var bill of bills) {
-                const billDate = new Date(Date.parse(bill.date)).getTime();
-                const diff = (billDate - currentTime.getTime());
-        
-                if (!minDiff || diff < minDiff) {
-                    minDiff = diff;
-                    nearestBill = bill;
-                }
+    findClosestBill(bills) {
+        var nearestBill = null;
+        const currentTime = new Date();
+    
+        var minDiff = null
+        for (var bill of bills) {
+            const billDate = new Date(Date.parse(bill.date)).getTime();
+            const diff = (billDate - currentTime.getTime());
+    
+            if (!minDiff || diff < minDiff) {
+                minDiff = diff;
+                nearestBill = bill;
             }
-        
-            return nearestBill
         }
+    
+        return nearestBill
+    }
+
+    afterDelete(billId){
+        const index = this.bills.findIndex(billObject => billObject._id === billId)
+        if (index > -1) {
+         this.bills.splice(index, 1);
+        }
+        this.cards = this.generateCards();
+    }
 
     data = {
         "bills": true,
