@@ -49,7 +49,7 @@
                 </div>
                 <form name="addEnvelope">
                     <input type="hidden" value="addEnvelope" name="formType">
-                    <input type="hidden" value="{{pageData.setMonthNumber}}" name="setMonth">
+                    <input type="hidden" value="{{setMonthNumber}}" name="setMonth">
                     <div class="modal-body">
                         <div class="ena">
                             <label for="chooseCategoryEnvelope">Category</label>
@@ -66,7 +66,7 @@
                         <div class="ena"><label for="inputAmount">Amount</label><br />
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text">{{pageData.currency}}</span>
+                                    <span class="input-group-text">{{currency}}</span>
                                 </div>
                                 <input #amountAdd type="number" class="form-control" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" name="inputAmount" (focusout)="amountAddEnvelopes()" id="inputAmount" placeholder="0.00" step="any" required>
                             </div>
@@ -87,7 +87,7 @@
         </div>
     </div>
 
-    <app-envelopes-edit-modal *ngFor="let item of envelopes" [Envelope]='item' [Currency]='pageData.currency'></app-envelopes-edit-modal>
+    <app-envelopes-edit-modal *ngFor="let item of envelopes" [Envelope]='item' [Currency]='currency'></app-envelopes-edit-modal>
 
     <div class="modal fade" id="addExpenseForm" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
         <div class="position-absolute w-100 p-4 d-flex flex-column align-items-end">
@@ -152,7 +152,7 @@
                         <div class="ena"><label for="inputAmount">Amount</label><br />
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <span id="currencyPrepend" class="input-group-text">{{pageData.currency}}</span>
+                                    <span id="currencyPrepend" class="input-group-text">{{currency}}</span>
                                 </div>
                                 <input type="number" #amountExpense class="form-control" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" (focusout)="amountExpenseEnvelopes()" id="Amount2" name="inputAmount" placeholder="0.00" step="any" required>
                             </div>
@@ -202,7 +202,7 @@
 
                         <div class="ena">
                             <label for="datum">Date</label><br>
-                            <input type="date" #dateExpense id="inputDate15" name="date" (focusout)="dateExpenseEnvelopes()" class="form-control" value="{{pageData.year}}-{{pageData.month}}-{{pageData.day}}" required="required">
+                            <input type="date" #dateExpense id="inputDate15" name="date" (focusout)="dateExpenseEnvelopes()" class="form-control" value="{{year}}-{{month}}-{{day}}" required="required">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -214,7 +214,7 @@
     </div>
 
     <!----- Welcome section ----->
-    <app-welcome [message]="pageData.message" [welcomeMessage]="pageData.welcomeMessage"></app-welcome>
+    <app-welcome [message]="message" [welcomeMessage]="welcomeMessage"></app-welcome>
 
     <div class="container" id="cards-section">
         <div class="row">
@@ -229,16 +229,16 @@
         <div class="row">
             <div class="col-3 col-sm-4 col-md-4 col-lg-5 col-xl-5 puscica-leva">
                 <form action="/envelopes" method="GET">
-                    <input type="hidden" name="monthMinus" value="{{pageData.setMonthNumber}}" />
+                    <input type="hidden" name="monthMinus" value="{{setMonthNumber}}" />
                     <button class="arrowButton" type="submit"><i class="arrow left"></i></button>
                 </form>
             </div>
             <div class="col-6 col-sm-4 col-md-4 col-lg-2 col-xl-2 mesec">
-                <h4>{{pageData.setMonth}}</h4>
+                <h4>{{setMonth}}</h4>
             </div>
             <div class="col-3 col-sm-4 col-md-4 col-lg-5 col-xl-5 puscica-desna">
                 <form action="/envelopes" method="GET">
-                    <input type="hidden" name="monthPlus" value="{{pageData.setMonthNumber}}" />
+                    <input type="hidden" name="monthPlus" value="{{setMonthNumber}}" />
                     <button class="arrowButton" type="submit"><i  class="arrow right"></i></button>
                 </form>
 
@@ -259,7 +259,7 @@
                 </button>
             </div>
         </div>
-        <app-envelopes-progress *ngFor="let item of envelopes" [data]="pageData" [envelope]=item id="{{item._id}}"></app-envelopes-progress>
+        <app-envelopes-progress *ngFor="let item of envelopes" [envelope]="item" [month]="setMonth" [currency]="currency" id="{{item._id}}"></app-envelopes-progress>
         <app-envelopes-con-progress></app-envelopes-con-progress>
     </div>
 

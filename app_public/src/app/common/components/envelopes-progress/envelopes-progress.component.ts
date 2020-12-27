@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, Inject } from '@angular
 import { faMinusSquare, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { DOCUMENT } from '@angular/common'
 import { ApiService } from '../../services/api.service';
+import { Envelope } from '../../classes/envelope';
 
 @Component({
   selector: 'app-envelopes-progress',
@@ -11,42 +12,14 @@ import { ApiService } from '../../services/api.service';
 export class EnvelopesProgressComponent implements OnInit {
 
   @Input()
-  data = {
-    "fileName":"",
-    "message":" to Envelopes!",
-    "welcomeMessage":"",
-    "logout":"",
-    "year":0,
-    "month":0,
-    "day":0,
-    "DASHBOARD":"",
-    "ENVELOPES":"",
-    "GOALS":"",
-    "BILLS":"",
-    "HISTORY":"",
-    "UTILITIES":"",
-    "user":"",
-    "settings":"",
-    "appearance":"",
-    "light":"",
-    "dark":"",
-    "setMonthNumber": 0,
-    "setMonth": "",
-    "currentMonth": "",
-    "currency":"",
-  }
+  envelope: Envelope;
+
   @Input()
-  envelope={
-    bgColor: "",
-    budget: 0,
-    category: {_id: "", color: "", basic: true, name: ""},
-    color: "",
-    colorHex: "",
-    month: "",
-    progress: 0,
-    spent: 0,
-    _id: ""
-  };
+  month: string;
+
+  @Input()
+  currency: string;
+
 
   faMinusSquare = faMinusSquare;
   faPencilAlt = faPencilAlt
@@ -69,11 +42,12 @@ export class EnvelopesProgressComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.envelope);
   }
 
   deleteEnvelope() {
     
-    let name = this.envelope.category.name;
+    let name = this.envelope.category['name'];
     let decision = confirm("Are you sure you want to delete envelope " + name);
 
     if (decision == true) {

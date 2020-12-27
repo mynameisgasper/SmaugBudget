@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 import { ApiService } from '../../services/api.service';
 import { Card } from '../../classes/card';
+import { Envelope } from '../../classes/envelope';
 declare var $:any;
 
 @Component({
@@ -18,42 +19,35 @@ export class EnvelopesComponent implements OnInit {
     private router: Router) { }
 
   cards: Card[]
-  public envelopes: any;
-  public pageData: any;
+  public envelopes: Array<Envelope>;
   public categories: any;
+  fileName = "envelopes";
+  message = "Welcome to Envelopes!";
+  welcomeMessage = "This is the best way to track your monthly and weekly spending per category. Start by clicking 'Add Envelope'.";
+  logout = "Logout";
+  year = new Date().getFullYear();
+  month = new Date().getMonth() + 1;
+  day = new Date().getDate();
+  DASHBOARD = "DASHBOARD";
+  GOALS = "GOALS";
+  BILLS = "BILLS";
+  HISTORY = "HISTORY";
+  UTILITIES = "UTILITIES";
+  user = "User";
+  settings = "Settings";
+  appearance = "Appearance";
+  light = "Light";
+  dark = "Dark";
+  setMonthNumber = new Date().getMonth()+1;
+  setMonth = this.getCurrentMonth(new Date().getMonth());
+  currentMonth = this.getCurrentMonth(new Date().getMonth());
+  currency = "EUR";
 
   ngOnInit(): void {
     this.api.getUser().then(result => {
-
-      var d = new Date();
-
       this.cards = this.generateCards(result.envelopes);
       this.envelopes = result.envelopes;
       this.categories = this.getCategories(result.categories);
-      this.pageData = {
-        "fileName":"envelopes",
-        "message":"Welcome to Envelopes!",
-        "welcomeMessage":"This is the best way to track your monthly and weekly spending per category. Start by clicking 'Add Envelope'.",
-        "logout":"Logout",
-        "year":2020,
-        "month":12,
-        "day":21,
-        "DASHBOARD":"DASHBOARD",
-        "ENVELOPES":"ENVELOPES",
-        "GOALS":"GOALS",
-        "BILLS":"BILLS",
-        "HISTORY":"HISTORY",
-        "UTILITIES":"UTILITIES",
-        "user":"User",
-        "settings":"Settings",
-        "appearance":"Appearance",
-        "light":"Light",
-        "dark":"Dark",
-        "setMonthNumber": d.getMonth()+1,
-        "setMonth": this.getCurrentMonth(d.getMonth()),
-        "currentMonth": this.getCurrentMonth(d.getMonth()),
-        "currency":"EUR",
-      }
     }).catch(error => console.log(error));
   }
 
@@ -68,19 +62,18 @@ export class EnvelopesComponent implements OnInit {
 
   faPlusSquare = faPlusSquare;
 
-  addExpense(): void {
-          
+  addExpense(): void {     
     let newSpent = 0;
     let newProgress = 0;
 
     for (let envelope of this.envelopes) {
       let dateArr = this.dateExpense.nativeElement.value.split("-")
 
-      if (envelope.category.name === this.categoryExpense.nativeElement.value && dateArr[1] == this.pageData.setMonthNumber) {
-        newSpent =  parseFloat(parseFloat(this.amountExpense.nativeElement.value).toFixed(2)) + envelope.spent;
-        envelope.spent = newSpent;
-        newProgress = Math.round(envelope.spent / envelope.budget * 100);
-        envelope.progress = newProgress;
+      if (envelope['category']['name'] === this.categoryExpense.nativeElement.value && dateArr[1] == this.setMonthNumber) {
+        newSpent =  parseFloat(parseFloat(this.amountExpense.nativeElement.value).toFixed(2)) + envelope['spent'];
+        envelope['spent'] = newSpent;
+        newProgress = Math.round(envelope['spent'] / envelope['budget'] * 100);
+        envelope['progress'] = newProgress;
       }
     }
 
@@ -100,7 +93,7 @@ export class EnvelopesComponent implements OnInit {
         this.categoryAdd.nativeElement.value,
         this.amountAdd.nativeElement.value,
         this.colorAdd.nativeElement.value,
-        this.pageData.setMonthNumber-1
+        this.setMonthNumber - 1
       ).then(result => {
         this.categories.push(result.category);
         this.envelopes.push(result.envelope);
@@ -110,7 +103,7 @@ export class EnvelopesComponent implements OnInit {
         this.selectCategoryAdd.nativeElement.value,
         this.amountAdd.nativeElement.value,
         this.colorAdd.nativeElement.value,
-        this.pageData.setMonthNumber-1
+        this.setMonthNumber - 1
       ).then(result => this.envelopes.push(result.envelope)).catch(error => console.log(error));
       this.router.navigate(['/envelopes'])
     }
@@ -199,8 +192,8 @@ export class EnvelopesComponent implements OnInit {
 
   nameExpenseEnvelopes(): number {
     const field = this.nameExpense.nativeElement;
-    var regex = new RegExp("^[ A-Za-z0-9_@./#&+-: ]{1,16}$");
-    //uppercase, lowercase, številke, posebni znaki, dolžina od 1-16
+    var regex = new RegExp("^[ A-Za-z0-9_@./#&+-: ]{1,20}$");
+    //uppercase, lowercase, številke, posebni znaki, dolžina od 1-20
     if (!field.value.match(regex)) {
         field.style.setProperty("border-color", "red", "important");
         $('.tt2').toast('show')

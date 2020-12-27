@@ -1,3 +1,4 @@
+import { Envelope } from "./envelope";
 import { Goal } from "./goal";
 
 export class User {
@@ -14,7 +15,7 @@ export class User {
     language: string;
     defaultCurrency: string;
     connections: Array<Object>;
-    envelopes: Array<Object>;
+    envelopes: Array<Envelope>;
     goals: Array<Goal>;
     bills: Array<Object>;
     categories: Array<Object>;

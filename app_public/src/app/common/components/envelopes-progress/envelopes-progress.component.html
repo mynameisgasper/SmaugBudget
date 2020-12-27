@@ -1,5 +1,5 @@
 <div id="data">
-    <div *ngIf="envelope.month==data.setMonth" class="row progressRow" id="envelope{{_id}}">
+    <div *ngIf="envelope.month==month" class="row progressRow" id="envelope{{envelope._id}}">
         <div class="col-sm-12 col-md-12 col-lg-3 col-xl-2">
             <h3 *ngIf="isLow(envelope.progress)">{{envelope.category.name}}</h3>
             <h3 *ngIf="isMedium(envelope.progress)" style="color:#ff7b00">{{envelope.category.name}}</h3>
@@ -15,17 +15,17 @@
         
         <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 envelope-info">
             <p *ngIf="isLow(envelope.progress)" class="info">
-                <span>{{envelope.spent}} {{data.currency}}</span> of <span>{{envelope.budget}} {{data.currency}}</span>
+                <span>{{envelope.spent}} {{currency}}</span> of <span>{{envelope.budget}} {{currency}}</span>
                 <button type="button" (click)="deleteEnvelope()" class="btn edit-btn" data-toggle="modal"><fa-icon [icon]="faMinusSquare"></fa-icon></button>    
                 <button type="button" class="btn edit-btn" data-toggle="modal" [attr.data-target]="'#editForm' +envelope._id" role="button"><fa-icon [icon]="faPencilAlt"></fa-icon></button>
             </p>
             <p *ngIf="isMedium(envelope.progress)" class="info" style="color:#ff7b00">
-                <span>{{envelope.spent}} {{data.currency}}</span> of <span>{{envelope.budget}} {{data.currency}}</span>
+                <span>{{envelope.spent}} {{currency}}</span> of <span>{{envelope.budget}} {{currency}}</span>
                 <button type="button" (click)="deleteEnvelope()" class="btn edit-btn" data-toggle="modal"><fa-icon [icon]="faMinusSquare"></fa-icon></button>    
                 <button type="button" class="btn edit-btn" data-toggle="modal" [attr.data-target]="'#editForm' +envelope._id" role="button"><fa-icon [icon]="faPencilAlt"></fa-icon></button>
             </p>
             <p *ngIf="isHigh(envelope.progress)" class="info" style="color:red">
-                <span>{{envelope.spent}} {{data.currency}}</span> of <span>{{envelope.budget}} {{data.currency}}</span>
+                <span>{{envelope.spent}} {{currency}}</span> of <span>{{envelope.budget}} {{currency}}</span>
                 <button type="button" (click)="deleteEnvelope()" class="btn edit-btn" data-toggle="modal"><fa-icon [icon]="faMinusSquare"></fa-icon></button>    
                 <button type="button" class="btn edit-btn" data-toggle="modal" [attr.data-target]="'#editForm' +envelope._id" role="button"><fa-icon [icon]="faPencilAlt"></fa-icon></button>
             </p>
