@@ -1,6 +1,6 @@
 <div class="card-counter {{(card ? card.color : color)}}">
     <span id="replies{{(card ? card.id : id)}}">
-    <fa-icon [icon]="ic" class="icon" size="5x" style="opacity: 0.3;"></fa-icon>
+    <fa-icon [icon]="(card ? card.icon : icon) | iconTranslator" class="icon" size="5x" style="opacity: 0.3;"></fa-icon>
     <p class="count-numbers">{{(card ? card.count : count)}}</p>
     <p class="count-name">{{(card ? card.title : title)}}</p></span>
     <p id="card{{(card ? card.id : id)}}-after" class="text">

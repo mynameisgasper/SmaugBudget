@@ -36,6 +36,7 @@ import { UtilitiesMemberRowComponent } from './common/components/utilities-membe
 import { RoutingModule } from './modules/routing/routing.module';
 import { InputMemberPipe } from './common/pipes/input-member.pipe';
 import { TranslateMonthNumberPipe } from './common/pipes/month-number.pipe';
+import { IconTranslatorPipe } from './common/pipes/icon-translator.pipe';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { TranslateMonthNumberPipe } from './common/pipes/month-number.pipe';
     BillTableComponent,
     UtilitiesMemberRowComponent,
     InputMemberPipe,
-    TranslateMonthNumberPipe
+    TranslateMonthNumberPipe,
+    IconTranslatorPipe
   ],
   imports: [
     BrowserModule,
