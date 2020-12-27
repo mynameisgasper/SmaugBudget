@@ -247,19 +247,21 @@ function addToGoalWithCategory(req, res) {
     }
 }
 
-function deleteGoal(requestBody, res) {
+function deleteGoal(req, res) {
     try {
-        var goal_id = requestBody.goal_id;
-        var user_id = requestBody.user_id;
+        const authorization = req.headers.authorization;
+        var goal_id = req.body.goal_id;
 
-        if (goal_id != undefined) {
+        if (authorization && goal_id != undefined) {
+            const token = authorization.split(' ')[1];
+            const decodedToken = jwt_decode(token);
             Goal.findByIdAndDelete(goal_id, function(err, goal) {
                 if (err) {
                     console.log(err);
                 } else {}
             });
 
-            User.findById(user_id, function(err, user) {
+            User.findById(decodedToken._id, function(err, user) {
                 if (err) {
                     console.log(err);
                 } else {
@@ -271,16 +273,25 @@ function deleteGoal(requestBody, res) {
                             return;
                         }
                     }
-                    res.status(304);
+                    const response = {
+                        status: 'Error'
+                    }
+                    res.status(304).json(response);
                     return;
                 }
             });
         } else {
-            res.sendStatus(400);
+            const response = {
+                status: 'Bad request'
+            }
+            res.status(400).json(response);
         }
     } catch (ex) {
         console.log(ex);
-        res.sendStatus(500);
+        const response = {
+            status: 'Error'
+        }
+        res.status(500).json(response);
     }
 }
 
@@ -335,12 +346,12 @@ module.exports = {
         addGoal(req, res);
     },
     editGoal: function(req, res) {
-        editGoal(req.body, res);
+        editGoal(req, res);
     },
     addToGoalWithCategory: function(req, res) {
         addToGoalWithCategory(req, res);
     },
     deleteGoal: function(req, res) {
-        deleteGoal(req.body, res);
+        deleteGoal(req, res);
     }
 }

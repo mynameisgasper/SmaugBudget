@@ -21,10 +21,7 @@
             of {{item.target}} {{currency}} (
             <b>{{item.monthlyTarget}} {{currency}}</b>/day)
         </p>
-        <form name="deleteForm" method="post" action="/goals" style="display: inline; text-align: right;">
-            <input type="hidden" value="deleteGoal" name="formType">
-            <button type="submit" class="btn edit-btn" data-toggle="modal"><fa-icon [icon]="faMinusSquare"></fa-icon></button>
-        </form>
+        <button type="submit" (click)="buttonDeleteGoal()" class="btn edit-btn" data-toggle="modal"><fa-icon [icon]="faMinusSquare"></fa-icon></button>
         <button type="button" class="btn edit-btn" data-toggle="modal" [attr.data-target]="'#editForm' + item._id"><fa-icon [icon]="faPencilAlt"></fa-icon></button>
     </div>
 </div>

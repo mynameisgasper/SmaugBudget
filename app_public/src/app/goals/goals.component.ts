@@ -3,7 +3,7 @@ import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 import { ApiService } from '../api.service';
 import { Card } from '../card';
 import { Goal } from '../goal';
-import { Router } from "@angular/router"
+import { Router } from "@angular/router";
 import { DatePipe } from '@angular/common';
 declare var $:any;
 
@@ -16,7 +16,6 @@ export class GoalsComponent implements OnInit {
 
   constructor(
     private api: ApiService,
-    private router: Router,
     private renderer: Renderer2,) { }
 
   cards: Card[]
@@ -33,7 +32,6 @@ export class GoalsComponent implements OnInit {
     this.api.getUser().then(result => {
       this.goals = this.generateGoals(result.goals);
       this.cards = this.generateCards(this.goals);
-      console.log(this.goals);
     }).catch(error => console.log(error));
   }
 
@@ -306,7 +304,12 @@ export class GoalsComponent implements OnInit {
     goalObject.progress = progress;
     goalObject.monthlyTarget = monthlyTarget;
     goalObject.color = color;
-    }
+  }
+
+  afterDelete(id){
+    
+  }
+
 
 
   data = {

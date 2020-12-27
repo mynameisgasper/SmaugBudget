@@ -175,6 +175,22 @@ export class ApiService {
     }
   }
 
+  public deleteGoal(goalId): Promise<any> {
+    if (this.authorization.getLoggedIn()) {
+      const url: string = `${this.apiUrl}/deleteGoal`; 
+      const body = {
+        'goal_id': goalId,
+      }
+      const options = {
+        headers: new HttpHeaders().set('Authorization', this.authorization.generateCompleteJwt())
+      }
+      return this.http.post(url, body, options).toPromise().then(response => response).catch(err => this.parseError(err));
+    }
+    else {
+      this.parseError('Error');
+    }
+  }
+
   public addFriendGroup(groupName: String, groupMembers: Array<String>): Promise<any> {
     if (this.authorization.getLoggedIn()) {
       const url: string = `${this.apiUrl}/addFriendGroup`; 

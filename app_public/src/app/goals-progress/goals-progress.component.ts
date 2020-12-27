@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, ElementRef, ViewChild} from '@angular/core';
 import { faMinusSquare, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { Goal } from '../goal';
+import { ApiService } from '../api.service';
+import { GoalsComponent } from '../goals/goals.component';
 declare var $:any;
 
 @Component({
@@ -10,10 +12,13 @@ declare var $:any;
 })
 export class GoalsProgressComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private api: ApiService,
+    private goalsComponent: GoalsComponent,
+  ) { }
 
   ngOnInit(): void {
-    console.log("sd");
+    
   }
 
   faMinusSquare = faMinusSquare;
@@ -128,6 +133,22 @@ export class GoalsProgressComponent implements OnInit {
     } else {
         //POST REQUEST - TO BE ADDED
     }
+  }
+
+  buttonDeleteGoal(): void {
+    if (!this.item._id) {
+        //DO NOTHING
+    } else {
+       this.deleteGoal();
+    }
+  }
+
+  deleteGoal(){
+    this.api.deleteGoal(this.item._id).then((response) => {
+      this.goalsComponent.afterDelete(this.item._id)
+    }).catch((error) => {
+      console.log(error);
+    });
   }
 
 }
