@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { faPlusSquare, faTrashAlt, faCamera, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { ApiService } from '../api.service';
 
 declare var getTranslation: any;
 declare var setLanguage: any;
@@ -18,10 +19,24 @@ declare var setValueById: any;
 export class AccountComponent implements OnInit {
     yourHeadersConfig: HttpHeaders | { [header: string]: string | string[]; };
     httpClient: HttpClient;
+    firstName: any;
+    lastName: any;
+    email: any;
+    defaultCurrency: any;
+    defaultLanguage: any;
+    categories: any;
 
-  constructor() { }
+  constructor(private api: ApiService) { }
 
   ngOnInit(): void {
+    this.api.getUser().then(result => {
+        this.firstName = result.firstname;
+        this.lastName = result.lastname;
+        this.email = result.email;
+        this.defaultCurrency = result.defaultCurrency;
+        this.defaultLanguage = result.language;
+        this.categories = result.categories;
+      }).catch(error => console.log(error));
   }
   
   hasUrl = false;
@@ -31,25 +46,25 @@ export class AccountComponent implements OnInit {
   faPencilAlt = faPencilAlt;
 
   data = {
-      "HINT": "hint",
-      "nameHint": "nameHint",
-      "surnameHint": "surnameHint",
-      "title": "title",
-      "firstName": "firstName",
+      "HINT": getTranslation("HINT"),
+      "nameHint": getTranslation("nameHint"),
+      "surnameHint": getTranslation("surnameHint"),
+      "title": getTranslation("account_title"),
+      "firstName": getTranslation("firstName"),
       "data_firstName": "data_firstName",
-      "lastName": "lastName",
+      "lastName": getTranslation("lastName"),
       "data_lastName": "data_lastName",
-      "password": "password",
-      "changePassword": "changePassword",
-      "email": "email",
+      "password": getTranslation("password"),
+      "changePassword": getTranslation("changePassword"),
+      "email": getTranslation("email"),
       "data_email": "data_email",
-      "changeImage": "changeImage",
-      "saveChanges": "saveChanges",
-      "application": "application",
-      "darkMode": "darkMode",
-      "language": "language",
+      "changeImage": getTranslation("changeImage"),
+      "saveChanges": getTranslation("saveChanges"),
+      "application": getTranslation("application"),
+      "darkMode": getTranslation("darkMode"),
+      "language": getTranslation("language"),
       "selLanguage": "selLanguage",
-      "currency": "currency",
+      "currency": getTranslation("currency"),
       "data_defCurrency": "data_defCurrency",
       "data_currency": [
           {
@@ -57,7 +72,7 @@ export class AccountComponent implements OnInit {
               "name": "name"
           }
       ],
-      "categories": "categories",
+      "categories": getTranslation("categories"),
       "data_categories": [
           {
               "id": "id",
@@ -65,14 +80,14 @@ export class AccountComponent implements OnInit {
               "hexColor": "#fcba03"
           }
       ],
-      "passwordHint": "passwordHint",
-      "passwordNoMatch": "passwordNoMatch",
-      "oldPassword": "oldPassword",
-      "newPassword": "newPassword",
-      "confirmPassword": "confirmPassword",
-      "close": "close",
-      "changeProfilePicture": "changeProfilePicture",
-      "dragAndDropOr": "dragAndDropOr"
+      "passwordHint": getTranslation("passwordHint"),
+      "passwordNoMatch": getTranslation("passwordNoMatch"),
+      "oldPassword": getTranslation("oldPassword"),
+      "newPassword": getTranslation("newPassword"),
+      "confirmPassword": getTranslation("confirmPassword"),
+      "close": getTranslation("close"),
+      "changeProfilePicture": getTranslation("changeImage"),
+      "dragAndDropOr": getTranslation("dragAndDropOr")
   };
 
   changeLanguage(language: string) {

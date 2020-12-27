@@ -47,6 +47,7 @@ var slovenian = {
     "editConnection": "Uredi povezavo",
     "dragAndDropOr": "Povleci in spusti, ali",
     "selLanguage": "Slovenski",
+    "categories": "Kategorije",
 
 
     //DASHBOARD
@@ -203,6 +204,7 @@ var english = {
     "editConnection": "Edit connection",
     "dragAndDropOr": "Drag and drop or",
     "selLanguage": "English", 
+    "categories": "Categories",
 
 
     //DASHBOARD
@@ -324,10 +326,10 @@ function getTranslation (key)  {
             } 
             break;
         default:
-            //console.log(language + " language is not supported!");
+            console.log(language + " language is not supported!");
             return key;
     }
-    //console.log("No " + language + " translation for key: " + key);
+    console.log("No " + language + " translation for key: " + key);
     return key;
 }
     

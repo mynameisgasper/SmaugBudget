@@ -37,10 +37,10 @@
             <div class="row">
                 <input type="hidden" name="formType" value="changeName">
                 <label id="nameInputLbl" for="nameInput" class="col-sm-3 col-md-3 col-lg-2 col-xl-2">{{data.firstName}}:</label>
-                <input type="text" id="nameInput" name="firstName" placeholder="{{data.firstName}}" value="{{data.data_firstName}}" class="form-control col-sm-3 col-md-3 col-lg-3 col-xl-3" onfocusout="nameRegex()" required="required">
+                <input type="text" id="nameInput" name="firstName" placeholder="{{data.firstName}}" value="{{firstName}}" class="form-control col-sm-3 col-md-3 col-lg-3 col-xl-3" onfocusout="nameRegex()" required="required">
             
                 <label id="lastnameInputLbl" for="lastnameInput" class="col-sm-3 col-md-3 col-lg-4 col-xl-4">{{data.lastName}}:</label>
-                <input type="text" id="lastnameInput" name="lastName" placeholder="{{data.lastName}}" value="{{data.data_lastName}}" class="form-control col-sm-3 col-md-3 col-lg-3 col-xl-3" onfocusout="surnameRegex()" required="required">
+                <input type="text" id="lastnameInput" name="lastName" placeholder="{{data.lastName}}" value="{{lastName}}" class="form-control col-sm-3 col-md-3 col-lg-3 col-xl-3" onfocusout="surnameRegex()" required="required">
             </div>
             <div class="row">
                 <label id="passwordChangeLbl" for="passwordChange" class="col-sm-3 col-md-3 col-lg-2 col-xl-2">{{data.password}}:</label>
@@ -48,7 +48,7 @@
             </div>
             <div class="row">
                 <label id="emailInputLbl" for="emailInput" class="col-sm-3 col-md-3 col-lg-2 col-xl-2">{{data.email}}:</label>
-                <input type="email" id="emailInput" name="email" value="{{data.data_email}}"  class="form-control col-sm-9 col-md-9 col-lg-10 col-xl-10" disabled>
+                <input type="email" id="emailInput" name="email" value="{{email}}"  class="form-control col-sm-9 col-md-9 col-lg-10 col-xl-10" disabled>
             </div>
             </div>
             <div id="pfpImg" class="del-margin col-sm-12 col-md-3 col-lg-3 col-xl-3">
@@ -83,7 +83,7 @@
             <label id="languageChangeLbl" for="languageChange" class="col-5 col-sm-4 col-md-4 col-lg-4 col-xl-4">{{data.language}}:</label>
             <div class="dropdown col-sm-4 col-md-4 col-lg-4 col-xl-4">
             <button class="btn btn-secondary dropdown-toggle col-sm-12 col-md-12 col-lg-12 col-xl-12" type="button" id="languageChange" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                {{data.selLanguage}}
+                {{defaultLanguage}}
             </button>
             <div class="dropdown-menu" aria-labelledby="languageChange">
                 <a class="dropdown-item" onclick="changeLanguage('English')">English</a>
@@ -95,7 +95,7 @@
         <label id="currencyChangeLbl" for="currencyChange" class="col-5 col-sm-4 col-md-4 col-lg-4 col-xl-4">{{data.currency}}:</label>
         <div class="dropdown col-sm-4 col-md-4 col-lg-4 col-xl-4">
             <button class="btn btn-secondary dropdown-toggle col-sm-12 col-md-12 col-lg-12 col-xl-12" type="button" id="currencyChange" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            {{data.data_defCurrency}}
+            {{defaultCurrency}}
             </button>
             <div class="dropdown-menu dropdown-menu-right scrollable-menu" aria-labelledby="currencyChange">
             
@@ -109,25 +109,25 @@
 
     <div class="container" id="categoriesColor-container">
     <div id="categories-setting"  class="col-sm-12 col-md-12 col-lg-12 col-xl-12" >
-        <h2>Categories</h2>
-        <div *ngFor="let item of data.data_categories">
-            <form  name="editColor{{item.id}}" method="post" action="/account">
+        <h2>{{data.categories}}</h2>
+        <div *ngFor="let item of categories">
+            <form  name="editColor{{item._id}}" method="post" action="/account">
                 <div class="category-row col-5 col-sm-6 col-md-5 col-lg-4 col-xl-4">
-                <label for="color-picker{{item.id}}" style=" text-align:left;">{{item.name}}</label>
+                <label for="color-picker{{item._id}}" style=" text-align:left;">{{item.name}}</label>
                 </div>
                 <div class="category-row col-3 col-sm-5 col-md-5 col-lg-3 col-xl-3" style="text-align: center;">
-                    <input type="color" class="color-picker" name="colorPicker{{item.id}}" value="{{item.hexColor}}">
+                    <input type="color" class="color-picker" name="colorPicker{{item._id}}" value="{{item.color}}">
                 </div>
                 <div class="category-row col-3 col-sm-12 col-md-1 col-lg-4 col-xl-4" style="text-align: right;">
                 <button type="submit" class="btn btn-primary"><fa-icon [icon]="faPencilAlt"></fa-icon></button>
                 <button type="submit" [attr.form]="'deleteColor' + item.id" class="btn btn-danger"><fa-icon [icon]="faTrashAlt"></fa-icon></button>
-                <input type="hidden" name="id" value="{{item.id}}" />
+                <input type="hidden" name="id" value="{{item._id}}" />
                 <input type="hidden" name="formType" value="changeColorCategory" />
                 </div>
             </form>
-            <form id="deleteColor{{item.id}}" name="deleteColor{{item.id}}" method="post" action="/account" onsubmit="return confirm('Deleting category will remove all related envelopes and goals!');">
+            <form id="deleteColor{{item._id}}" name="deleteColor{{item._id}}" method="post" action="/account" onsubmit="return confirm('Deleting category will remove all related envelopes and goals!');">
                 <input type="hidden" name="formType" value="deleteCategory">
-                <input type="hidden" name="id" value="{{item.id}}">
+                <input type="hidden" name="id" value="{{item._id}}">
             </form>
         </div>
         
@@ -213,7 +213,6 @@
         <div class="modal-body">
             <form name="userPfp" id="userPfp" method="post" action="/api/uploadPfp">
             <div class="form-group">
-                <label for="addPfp">{{data.dragAndDropOr}}:</label>
                 <input type="file" name="image" class="form-control-file" id="addPfp" (change)="readURL($event.target.files)" accept="image/*">
             </div>
             </form>
