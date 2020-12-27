@@ -4,6 +4,7 @@ import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { Alert } from '../../classes/alert';
 import { ApiService } from '../../services/api.service';
 import { Card } from '../../classes/card';
+import { User } from '../../classes/user';
 declare var $:any;
 
 @Component({
@@ -47,12 +48,13 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.api.getUser().then(result => {
-      this.cards = this.generateCards(result.bills, result.expense, result.paycheck, result.paycheckDate);
-      this.alerts = this.generateAlerts(result.envelopes, result.bills, result.goals);
+      const user: User = result;
+      this.cards = this.generateCards(user.bills, user.expense, user.paycheck, user.paycheckDate);
+      this.alerts = this.generateAlerts(user.envelopes, user.bills, user.goals);
       this.analytics = this.generateAnalyitcs(result.expense, result.paycheckDate)
-      this.currency = result.defaultCurrency;
-      this.incomeLastMonth = result.paycheckLastMonth;
-      this.expensesLastMonth = this.getTotalCost(this.getLastMonthExpenses(result.expense, result.paycheckDate));
+      this.currency = user.defaultCurrency;
+      this.incomeLastMonth = user.paycheckLastMonth;
+      this.expensesLastMonth = this.getTotalCost(this.getLastMonthExpenses(user.expense, user.paycheckDate));
     }).catch(error => console.log(error));
   }
 

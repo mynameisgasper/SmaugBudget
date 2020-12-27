@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Converter } from '../classes/converter';
 import { AuthenticationService } from './authentication.service';
+import { User } from '../classes/user';
 @Injectable({
   providedIn: 'root'
 })
@@ -125,7 +126,7 @@ export class ApiService {
     return this.http.post(url, body, options).toPromise().then(response => response).catch(err => this.parseError(err));
   }
 
-  public getUser(): Promise<any> {
+  public getUser(): Promise<User> {
     if (this.authorization.getLoggedIn()) {
       const url: string = `${this.apiUrl}/getUser`;  
       const options = {

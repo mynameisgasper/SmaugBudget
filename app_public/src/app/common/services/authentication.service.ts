@@ -58,7 +58,7 @@ export class AuthenticationService {
     }
   }
 
-  public register(firstname: string, lastname: string, email1: string, email2: string, password1: string, password2: string) {
+  public async register(firstname: string, lastname: string, email1: string, email2: string, password1: string, password2: string) {
     const url: string = `${this.apiUrl}/register`;
 
     const body = {
@@ -70,24 +70,39 @@ export class AuthenticationService {
       'password2up': password2,
     }
 
-    return this.http.post(url, body).toPromise().then(response => response).catch(err => err);
+    try {
+      const response = await this.http.post(url, body).toPromise();
+      return response;
+    } catch (err) {
+      return err;
+    }
   }
 
-  public login(email: string, password: string) {
+  public async login(email: string, password: string) {
     const url: string = `${this.apiUrl}/login`;
 
     const body = {
       'email': email,
       'password': password,
     }
-    return this.http.post(url, body).toPromise().then(response => response).catch(err => err);
+    try {
+      const response = await this.http.post(url, body).toPromise();
+      return response;
+    } catch (err) {
+      return err;
+    }
   }
 
-  public confirm(urlCode: string, code: string, callback, error) {
+  public async confirm(urlCode: string, code: string, callback, error) {
     const url: string = `${this.apiUrl}/confirm/${urlCode}/${code}`;
     const body = {}
 
-    return this.http.post(url, body).toPromise().then(response => callback(response)).catch(err => error(err));
+    try {
+      const response = await this.http.post(url, body).toPromise();
+      return callback(response);
+    } catch (err) {
+      return error(err);
+    }
 
   }
 }
