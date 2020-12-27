@@ -55,6 +55,8 @@ export class DashboardComponent implements OnInit {
       this.currency = user.defaultCurrency;
       this.incomeLastMonth = user.paycheckLastMonth;
       this.expensesLastMonth = this.getTotalCost(this.getLastMonthExpenses(user.expense, user.paycheckDate));
+
+      console.log(user);
     }).catch(error => console.log(error));
   }
 

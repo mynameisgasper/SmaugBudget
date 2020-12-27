@@ -1,4 +1,8 @@
+import { Bill } from "./bill";
+import { Category } from "./category";
 import { Envelope } from "./envelope";
+import { Expense } from "./expense";
+import { FriendGroup } from "./friendGroup";
 import { Goal } from "./goal";
 
 export class User {
@@ -14,11 +18,10 @@ export class User {
     profilePic: string;
     language: string;
     defaultCurrency: string;
-    connections: Array<Object>;
     envelopes: Array<Envelope>;
     goals: Array<Goal>;
-    bills: Array<Object>;
-    categories: Array<Object>;
-    expense: Array<Object>;
-    friendgroups: Array<Object>;
+    bills: Array<Bill>;
+    categories: Array<Category>;
+    expense: Array<Expense>;
+    friendgroups: Array<FriendGroup>;
 }
