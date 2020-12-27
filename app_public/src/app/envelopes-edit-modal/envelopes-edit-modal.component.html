@@ -23,22 +23,24 @@
                 </button>
             </div>
             <!--- ADD FORM --->
-            <div class="modal-body">
-                <div class="ena"><label for="inputAmount">New Budget</label>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">{{Currency}}</span>
+            <form name="editEnvelope">
+                <div class="modal-body">
+                    <div class="ena"><label for="inputAmount">New Budget</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">{{Currency}}</span>
+                            </div>
+                            <input type="hidden" value="{{Envelope._id}}" name="id">
+                            <input type="hidden" name="formType" value="editEnvelope" />
+                            <input type="number" #amountEdit id=".amountEditEnvelopes{{Envelope._id}}" name="inputAmount" class="form-control" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" (focusout)="amountEditEnvelopes()" placeholder="0.00" step="any" required="required">
                         </div>
-                        <input type="hidden" value="{{Envelope._id}}" name="id">
-                        <input type="hidden" name="formType" value="editEnvelope" />
-                        <input type="number" #amountEdit id=".amountEditEnvelopes{{Envelope._id}}" name="inputAmount" class="form-control" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" (focusout)="amountEditEnvelopes()" placeholder="0.00" step="any" required="required">
+                        <div id="vnos{{Envelope._id}}"></div>
                     </div>
-                    <div id="vnos{{Envelope._id}}"></div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button id="buttonEditEnvelopes" (click)="buttonEditEnvelopes()" class="btn btn-primary">Add</button>
-            </div>
+                <div class="modal-footer">
+                    <button id="buttonEditEnvelopes" (click)="buttonEditEnvelopes()" class="btn btn-primary">Add</button>
+                </div>
+            </form>
             <!--- DELETE FORM --->
         </div>
     </div>

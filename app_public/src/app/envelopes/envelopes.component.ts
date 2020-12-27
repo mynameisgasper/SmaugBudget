@@ -74,10 +74,12 @@ export class EnvelopesComponent implements OnInit {
       let dateArr = this.dateExpense.nativeElement.value.split("-")
 
       if (envelope.category.name === this.categoryExpense.nativeElement.value && dateArr[1] == this.pageData.setMonthNumber) {
-        newSpent +=  parseFloat(parseFloat(this.amountExpense.nativeElement.value).toFixed(2));
+        newSpent =  parseFloat(parseFloat(this.amountExpense.nativeElement.value).toFixed(2)) + envelope.spent;
         envelope.spent = newSpent;
         newProgress = Math.round(envelope.spent / envelope.budget * 100);
         envelope.progress = newProgress;
+        console.log(newProgress);
+        console.log(newSpent);
       }
     }
 
