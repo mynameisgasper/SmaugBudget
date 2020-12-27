@@ -1,5 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, Inject } from '@angular/core';
 import { faMinusSquare, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
+import { DOCUMENT } from '@angular/common'
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'app-envelopes-progress',
@@ -10,13 +12,49 @@ export class EnvelopesProgressComponent implements OnInit {
 
   @Input()
   data = {
-    "currency": "EUR",
+    "fileName":"",
+    "message":" to Envelopes!",
+    "welcomeMessage":"",
+    "logout":"",
+    "year":0,
+    "month":0,
+    "day":0,
+    "DASHBOARD":"",
+    "ENVELOPES":"",
+    "GOALS":"",
+    "BILLS":"",
+    "HISTORY":"",
+    "UTILITIES":"",
+    "user":"",
+    "settings":"",
+    "appearance":"",
+    "light":"",
+    "dark":"",
+    "setMonthNumber": 0,
+    "setMonth": "",
+    "currentMonth": "",
+    "currency":"",
   }
   @Input()
-  envelopes=[];
+  envelope={
+    bgColor: "",
+    budget: 0,
+    category: {_id: "", color: "", basic: true, name: ""},
+    color: "",
+    colorHex: "",
+    month: "",
+    progress: 0,
+    spent: 0,
+    _id: ""
+  };
 
   faMinusSquare = faMinusSquare;
   faPencilAlt = faPencilAlt
+
+  constructor(
+    private api: ApiService,
+    @Inject(DOCUMENT) private document: HTMLDocument
+  ) { }
 
   isLow(value: Number): Boolean {
     return value < 85;
@@ -30,9 +68,22 @@ export class EnvelopesProgressComponent implements OnInit {
     return value >= 100;
   }
 
-  constructor() { }
-
   ngOnInit(): void {
   }
 
+  deleteEnvelope() {
+    let name = this.envelope.category.name;
+    let decision = confirm("Are you sure you want to delete envelope " + name);
+    if (decision == true) {
+      console.log(this.envelope._id)
+      this.api.deleteEnvelope(
+        this.envelope._id
+      ).then(result => { }).catch(error => console.log(error));
+      try {
+        var element = this.document.getElementById(this.envelope._id);
+        element.remove();
+      }
+      catch {}
+    }
+  }
 }

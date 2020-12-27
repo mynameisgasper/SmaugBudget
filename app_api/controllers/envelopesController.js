@@ -6,6 +6,7 @@ const Expense = mongoose.model('Expense');
 const User = mongoose.model('User');
 const { currencySchema } = require('../models/currency');
 const Currency = mongoose.model('Currency');
+const jwt_decode = require('jwt-decode');
 
 
 /*
@@ -133,40 +134,51 @@ function addEnvelope(requestBody, res) {
 ? EDIT Envelope Function
 ! find the envelope and add an amount or/and change color 
 */
-function editEnvelope(requestBody, res) {
+function editEnvelope(req, res) {
     try {
-        var newBudget = requestBody.inputAmount;
-        var colorHexPicker = requestBody.colorPicker
-        var envelope_id = requestBody.id;
-        var user_id = requestBody.user;
+        const authorization = req.headers.authorization;
+        if (authorization) {
+            const token = authorization.split(' ')[1];
+            const decodedToken = jwt_decode(token);
 
-        var regex = new RegExp("^[0-9]+");
-        const amountCorrect = regex.test(newBudget);
+            var newBudget = req.body.inputAmount;
+            var colorHexPicker = req.body.colorPicker
+            var envelope_id = req.body.id;
+            var user_id = decodedToken._id;
 
-        if (amountCorrect) {
-            User.findById(user_id, function(error, user) {
-                if (error) {
-                    console.log(error);
-                    res.sendStatus(500);
-                } else {
-                    for (var i = 0; i < user.envelopes.length; i++) {
-                        if (user.envelopes[i]._id == envelope_id) {
-                            user.envelopes[i].progress = Math.round((parseFloat(parseFloat(user.envelopes[i].spent) / parseFloat(newBudget))) * 100);
-                            user.envelopes[i].budget = newBudget;
-                            user.save();
-                            break;
+            var regex = new RegExp("^[0-9]+");
+            const amountCorrect = regex.test(newBudget);
+
+            if (amountCorrect) {
+                User.findById(user_id, function(error, user) {
+                    if (error) {
+                        console.log(error);
+                        res.sendStatus(500);
+                    } else {
+                        for (var i = 0; i < user.envelopes.length; i++) {
+                            if (user.envelopes[i]._id == envelope_id) {
+                                user.envelopes[i].progress = Math.round((parseFloat(parseFloat(user.envelopes[i].spent) / parseFloat(newBudget))) * 100);
+                                user.envelopes[i].budget = newBudget;
+                                user.save();
+                                break;
+                            }
                         }
-                    }
 
-                    Envelopes.findById(envelope_id, function(err, envelope) {
-                        envelope.budget = newBudget;
-                        envelope.progress = Math.round((parseFloat(parseFloat(envelope.spent) / parseFloat(newBudget))) * 100);
-                    });
-                    res.status(200).json(user);
-                }
-            });
+                        Envelopes.findById(envelope_id, function(err, envelope) {
+                            envelope.budget = newBudget;
+                            envelope.progress = Math.round((parseFloat(parseFloat(envelope.spent) / parseFloat(newBudget))) * 100);
+                        });
+                        res.status(200).json(user);
+                    }
+                });
+            } else {
+                res.sendStatus(400);
+            }
         } else {
-            res.sendStatus(400);
+            const response = {
+                status: 'Unauthorized'
+            }
+            res.status(401).json(response);
         }
 
     } catch (ex) {
@@ -178,34 +190,43 @@ function editEnvelope(requestBody, res) {
 /*
 ? Delete Envelope by ID
 */
-function deleteEnvelope(requestBody, res) {
+function deleteEnvelope(req, res) {
     try {
-        var envelope_id = requestBody.envelope_id;
-        var user_id = requestBody.user;
+        const authorization = req.headers.authorization;
+        if (authorization) {
+            const token = authorization.split(' ')[1];
+            const decodedToken = jwt_decode(token);
+            var envelope_id = req.body.envelope_id;
+            var user_id = decodedToken._id;
 
-        Envelopes.findByIdAndDelete(envelope_id, function(err, docs) {
-            if (err) {
-                console.log(err);
-            } else {}
-        });
+            Envelopes.findByIdAndDelete(envelope_id, function(err, docs) {
+                if (err) {
+                    console.log(err);
+                } else {}
+            });
 
-        User.findById(user_id, function(err, user) {
-            if (err) {
-                console.log(err);
-            } else {
-                for (var i = 0; i < user.envelopes.length; i++) {
-                    if (user.envelopes[i]._id == envelope_id) {
-                        user.envelopes.pull(envelope_id);
-                        user.save();
-                        res.status(200).json(user);
-                        return;
+            User.findById(user_id, function(err, user) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    for (var i = 0; i < user.envelopes.length; i++) {
+                        if (user.envelopes[i]._id == envelope_id) {
+                            user.envelopes.pull(envelope_id);
+                            user.save();
+                            res.status(200).json(user);
+                            return;
+                        }
                     }
+                    res.status(304);
+                    return;
                 }
-                res.status(304);
-                return;
+            });
+        } else {
+            const response = {
+                status: 'Unauthorized'
             }
-        });
-
+            res.status(401).json(response);
+        }
     } catch (ex) {
         console.log(ex);
         res.sendStatus(500);
@@ -218,131 +239,143 @@ function deleteEnvelope(requestBody, res) {
 ! find the envelope and add an amount or/and change color 
 * If there is no matching envelope, just create expense.
 */
-function addExpense(requestBody, res) {
+function addExpense(req, res) {
     try {
-        var amountAdded = parseFloat(requestBody.inputAmount);
-        var categoryName = requestBody.category;
-        var recipient = requestBody.recipient;
-        var date = requestBody.date;
-        var user_id = requestBody.user;
-        //TODO Implement Currency
-        var currency = requestBody.inputCurrency;
 
-        var inputDate = date.split("-");
-        var regex = new RegExp("^[0-9]+(\.[0-9]{1,2})?$");
-        const amountCorrect = regex.test(requestBody.inputAmount)
-        const recipientCorrect = checkRecipient(recipient);
-        const dateBool = checkDatePast(inputDate);
+        const authorization = req.headers.authorization;
+        if (authorization) {
+            const token = authorization.split(' ')[1];
+            const decodedToken = jwt_decode(token);
 
-        if (amountCorrect && dateBool && recipientCorrect) {
-            User.findById(user_id, function(error, user) {
-                if (error) {
-                    res.sendStatus(500);
-                } else {
-                    var envelopeExists = false;
+            var amountAdded = parseFloat(req.body.inputAmount);
+            var categoryName = req.body.category;
+            var recipient = req.body.recipient;
+            var date = req.body.date;
+            var user_id = decodedToken._id;
+            //TODO Implement Currency
+            var currency = req.body.inputCurrency;
 
-                    const promise = new Promise((resolution, rejection) => {
-                        if (!(currency === user.defaultCurrency)) {
-                            Currency.findOne({ 'currency': currency }, function(error, currencyFrom) {
-                                if (error) {
-                                    //alert("Currency converter unavailable, user your default currency");
-                                    res.sendStatus(500);
-                                } else {
-                                    if (currencyFrom) {
-                                        Currency.findOne({ 'currency': user.defaultCurrency }, function(error, currencyTo) {
-                                            if (error) {
-                                                //alert("Currency converter unavailable, user your default currency");
-                                                res.sendStatus(500);
-                                            } else {
-                                                if (currencyTo) {
-                                                    amountAdded = (amountAdded / currencyFrom.value) * currencyTo.value;
-                                                    console.log(typeof amountAdded);
-                                                    resolution(amountAdded);
-                                                }
-                                            }
-                                        });
-                                    }
-                                }
-                            });
-                        } else {
-                            resolution(amountAdded);
-                        }
-                        resolution(amountAdded);
-                    });
+            var inputDate = date.split("-");
+            var regex = new RegExp("^[0-9]+(\.[0-9]{1,2})?$");
+            const amountCorrect = regex.test(req.body.inputAmount)
+            const recipientCorrect = checkRecipient(recipient);
+            const dateBool = checkDatePast(inputDate);
 
-                    promise.then((amountAdded) => {
-                        for (var i = 0; i < user.envelopes.length; i++) {
-                            if (user.envelopes[i].category.name === categoryName && inputDate[1] == getMonthNumber(user.envelopes[i].month)) {
-                                envelopeExists = true;
-                                user.envelopes[i].spent += parseFloat(parseFloat(amountAdded).toFixed(2));
-                                user.envelopes[i].progress = Math.round((parseFloat(parseFloat(user.envelopes[i].spent) / parseFloat(user.envelopes[i].budget))) * 100);
-                                Envelopes.findById(user.envelopes[i]._id, function(error, envelope) {
+            if (amountCorrect && dateBool && recipientCorrect) {
+                User.findById(user_id, function(error, user) {
+                    if (error) {
+                        res.sendStatus(500);
+                    } else {
+                        var envelopeExists = false;
+
+                        const promise = new Promise((resolution, rejection) => {
+                            if (!(currency === user.defaultCurrency)) {
+                                Currency.findOne({ 'currency': currency }, function(error, currencyFrom) {
                                     if (error) {
-                                        console.log(error);
+                                        //alert("Currency converter unavailable, user your default currency");
+                                        res.sendStatus(500);
                                     } else {
-                                        if (envelope) {
-                                            envelope.spent = user.envelopes[i - 1].spent;
-                                            envelope.progress = user.envelopes[i - 1].progress;
-                                            envelope.save();
-
-                                            let expense = new Expense({
-                                                date: date,
-                                                category: envelope.category,
-                                                recipient: recipient,
-                                                value: parseFloat(amountAdded).toFixed(2),
-                                                currency: user.defaultCurrency
-                                            });
-
-
-                                            expense.save(function callback(err) {
-                                                if (err) {
-                                                    console.log(err);
+                                        if (currencyFrom) {
+                                            Currency.findOne({ 'currency': user.defaultCurrency }, function(error, currencyTo) {
+                                                if (error) {
+                                                    //alert("Currency converter unavailable, user your default currency");
                                                     res.sendStatus(500);
-                                                    return;
                                                 } else {
-                                                    user.expense.push(expense);
-                                                    user.save();
-                                                    res.status(200).json(user);
-                                                    return;
+                                                    if (currencyTo) {
+                                                        amountAdded = (amountAdded / currencyFrom.value) * currencyTo.value;
+                                                        console.log(typeof amountAdded);
+                                                        resolution(amountAdded);
+                                                    }
                                                 }
                                             });
                                         }
                                     }
                                 });
+                            } else {
+                                resolution(amountAdded);
                             }
-                        }
+                            resolution(amountAdded);
+                        });
 
-                        if (!envelopeExists) {
-                            Categories.findOne({ name: categoryName }, function(error, category) {
-                                if (error) {
-                                    console.log(error);
-                                } else {
-                                    let expense = new Expense({
-                                        date: date,
-                                        category: category,
-                                        recipient: recipient,
-                                        value: parseFloat(amountAdded).toFixed(2),
-                                        currency: currency
-                                    });
-                                    expense.save(function callback(err) {
-                                        if (err) {
-                                            console.log(err);
-                                            res.sendStatus(500);
-                                            return;
+                        promise.then((amountAdded) => {
+                            for (var i = 0; i < user.envelopes.length; i++) {
+                                if (user.envelopes[i].category.name === categoryName && inputDate[1] == getMonthNumber(user.envelopes[i].month)) {
+                                    envelopeExists = true;
+                                    user.envelopes[i].spent += parseFloat(parseFloat(amountAdded).toFixed(2));
+                                    user.envelopes[i].progress = Math.round((parseFloat(parseFloat(user.envelopes[i].spent) / parseFloat(user.envelopes[i].budget))) * 100);
+                                    Envelopes.findById(user.envelopes[i]._id, function(error, envelope) {
+                                        if (error) {
+                                            console.log(error);
                                         } else {
-                                            user.expense.push(expense);
-                                            user.save();
-                                            res.status(200).json(user);
-                                            return;
+                                            if (envelope) {
+                                                envelope.spent = user.envelopes[i - 1].spent;
+                                                envelope.progress = user.envelopes[i - 1].progress;
+                                                envelope.save();
+
+                                                let expense = new Expense({
+                                                    date: date,
+                                                    category: envelope.category,
+                                                    recipient: recipient,
+                                                    value: parseFloat(amountAdded).toFixed(2),
+                                                    currency: user.defaultCurrency
+                                                });
+
+
+                                                expense.save(function callback(err) {
+                                                    if (err) {
+                                                        console.log(err);
+                                                        res.sendStatus(500);
+                                                        return;
+                                                    } else {
+                                                        user.expense.push(expense);
+                                                        user.save();
+                                                        res.status(200).json(user);
+                                                        return;
+                                                    }
+                                                });
+                                            }
                                         }
                                     });
                                 }
-                            });
-                        }
-                    });
+                            }
 
-                }
-            });
+                            if (!envelopeExists) {
+                                Categories.findOne({ name: categoryName }, function(error, category) {
+                                    if (error) {
+                                        console.log(error);
+                                    } else {
+                                        let expense = new Expense({
+                                            date: date,
+                                            category: category,
+                                            recipient: recipient,
+                                            value: parseFloat(amountAdded).toFixed(2),
+                                            currency: currency
+                                        });
+                                        expense.save(function callback(err) {
+                                            if (err) {
+                                                console.log(err);
+                                                res.sendStatus(500);
+                                                return;
+                                            } else {
+                                                user.expense.push(expense);
+                                                user.save();
+                                                res.status(200).json(user);
+                                                return;
+                                            }
+                                        });
+                                    }
+                                });
+                            }
+                        });
+
+                    }
+                });
+            }
+        } else {
+            const response = {
+                status: 'Unauthorized'
+            }
+            res.status(401).json(response);
         }
 
     } catch (ex) {
@@ -524,12 +557,12 @@ module.exports = {
         addEnvelope(req.body, res);
     },
     addExpense: function(req, res) {
-        addExpense(req.body, res);
+        addExpense(req, res);
     },
     editEnvelope: function(req, res) {
-        editEnvelope(req.body, res);
+        editEnvelope(req, res);
     },
     deleteEnvelope: function(req, res) {
-        deleteEnvelope(req.body, res);
+        deleteEnvelope(req, res);
     }
 }

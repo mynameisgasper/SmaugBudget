@@ -35,7 +35,50 @@ export class ApiService {
     return this.http.get(url, options).toPromise().then(response => response).catch(err => this.parseError(err));
   }
 
-  public editExpense(id: string, category: string, name: string, amount: number, date: number): Promise<Converter> {
+  public editEnvelope(id: string, amount: number): Promise<any> {
+    const url: string = `${this.apiUrl}/editEnvelope`;
+
+    const options = {
+      headers: new HttpHeaders().set('Authorization', this.authorization.generateCompleteJwt()),
+    }
+    const body: object = {
+      id: id,
+      inputAmount: amount,
+    }
+
+    return this.http.post(url, body, options).toPromise().then(response => response).catch(err => this.parseError(err));
+  }
+
+  public deleteEnvelope(id: string): Promise<any> {
+    const url: string = `${this.apiUrl}/deleteEnvelope`;
+
+    const options = {
+      headers: new HttpHeaders().set('Authorization', this.authorization.generateCompleteJwt()),
+    }
+    const body: object = {
+      envelope_id: id
+    }
+
+    return this.http.post(url, body, options).toPromise().then(response => response).catch(err => this.parseError(err));
+  }
+
+  public addExpense(amount: number, category: string, name: string, date: number): Promise<any> {
+    const url: string = `${this.apiUrl}/addExpense`;
+
+    const options = {
+      headers: new HttpHeaders().set('Authorization', this.authorization.generateCompleteJwt()),
+    }
+    const body: object = {
+      inputAmount: amount,
+      category: category,
+      recipient: name,
+      date: date
+    }
+
+    return this.http.post(url, body, options).toPromise().then(response => response).catch(err => this.parseError(err));
+  }
+
+  public editExpense(id: string, category: string, name: string, amount: number, date: number): Promise<any> {
     const url: string = `${this.apiUrl}/editExpense`;
 
     const options = {
@@ -52,7 +95,7 @@ export class ApiService {
     return this.http.post(url, body, options).toPromise().then(response => response).catch(err => this.parseError(err));
   }
 
-  public changeIncome(amount: number, day: number): Promise<Converter> {
+  public changeIncome(amount: number, day: number): Promise<any> {
     const url: string = `${this.apiUrl}/changeIncome`;
 
     const options = {

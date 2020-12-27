@@ -1,4 +1,5 @@
-import { Component, OnInit, Input, ElementRef, ViewChild  } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ViewChild, Renderer2 } from '@angular/core';
+import { ApiService } from '../api.service';
 declare var $:any;
 
 @Component({
@@ -32,11 +33,23 @@ export class EnvelopesEditModalComponent implements OnInit {
   @Input()
   Currency: string
 
-  constructor() { }
+  constructor(
+    private renderer: Renderer2,
+    private api: ApiService
+    ) { }
 
   @ViewChild('amountEdit') amountEdit: ElementRef;
 
   ngOnInit(): void {
+  }
+
+  editEnvelopes() {
+    this.api.editEnvelope(
+      this.Envelope._id,
+      this.amountEdit.nativeElement.value
+      ).then(result => { }).catch(error => console.log(error));
+
+    this.Envelope.budget = this.amountEdit.nativeElement.value;
   }
 
   amountEditEnvelopes() {
@@ -62,7 +75,9 @@ export class EnvelopesEditModalComponent implements OnInit {
     if (amount == 0) {
         //DO NOTHING
     } else {
-        //POST REQUEST - TO BE ADDED
+      this.renderer.setAttribute(document.getElementById("buttonEditEnvelopes"), 'data-dismiss', 'modal');
+      this.editEnvelopes()
+      this.renderer.removeAttribute(document.getElementById("buttonEditEnvelopes"), 'data-dismiss', 'modal');
     }
   }
 }
