@@ -110,7 +110,7 @@ export class BillTableComponent implements OnInit {
   data = {
     "_id": "",
     "year": "",
-    "month": "",
+    "month": 0,
     "monthName": "",
     "day": "",
     "category": "",

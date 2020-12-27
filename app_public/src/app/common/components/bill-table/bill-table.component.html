@@ -1,6 +1,6 @@
 <td class="date align-middle">
     <div class="text-muted">{{data.year}}</div>
-    <div class="text-muted font-weight-bold">{{data.monthName}}</div>
+    <div class="text-muted font-weight-bold">{{data.month - 1 | monthNumberPipe}}</div>
     <div class="text-muted font-weight-bold">{{data.day}}</div>
 </td>
 <td class="align-middle">{{data.category}}</td>
