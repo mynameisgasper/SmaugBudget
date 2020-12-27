@@ -228,20 +228,13 @@
     <div class="container" id="main-section">
         <div class="row">
             <div class="col-3 col-sm-4 col-md-4 col-lg-5 col-xl-5 puscica-leva">
-                <form action="/envelopes" method="GET">
-                    <input type="hidden" name="monthMinus" value="{{setMonthNumber}}" />
-                    <button class="arrowButton" type="submit"><i class="arrow left"></i></button>
-                </form>
+                <button class="arrowButton" (click)="decrementMonth()"><i class="arrow left"></i></button>
             </div>
             <div class="col-6 col-sm-4 col-md-4 col-lg-2 col-xl-2 mesec">
                 <h4>{{setMonth}}</h4>
             </div>
             <div class="col-3 col-sm-4 col-md-4 col-lg-5 col-xl-5 puscica-desna">
-                <form action="/envelopes" method="GET">
-                    <input type="hidden" name="monthPlus" value="{{setMonthNumber}}" />
-                    <button class="arrowButton" type="submit"><i  class="arrow right"></i></button>
-                </form>
-
+                <button class="arrowButton" (click)="incrementMonth()"><i  class="arrow right"></i></button>
             </div>
         </div>
 

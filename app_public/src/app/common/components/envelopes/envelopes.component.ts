@@ -38,7 +38,7 @@ export class EnvelopesComponent implements OnInit {
   appearance = "Appearance";
   light = "Light";
   dark = "Dark";
-  setMonthNumber = new Date().getMonth()+1;
+  setMonthNumber = new Date().getMonth() + 1;
   setMonth = this.getCurrentMonth(new Date().getMonth());
   currentMonth = this.getCurrentMonth(new Date().getMonth());
   currency = "EUR";
@@ -354,5 +354,17 @@ export class EnvelopesComponent implements OnInit {
     else {
       return envelopes.length + ' envelopes empty!';
     }
+  }
+
+  incrementMonth() {
+    if (this.setMonthNumber == 12) this.setMonthNumber = 1;
+    else this.setMonthNumber++;
+    this.setMonth = this.getCurrentMonth(this.setMonthNumber - 1);
+  }
+
+  decrementMonth() {
+    if (this.setMonthNumber == 1) this.setMonthNumber = 12;
+    else this.setMonthNumber--;
+    this.setMonth = this.getCurrentMonth(this.setMonthNumber - 1);
   }
 }
