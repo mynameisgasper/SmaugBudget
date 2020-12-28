@@ -29,13 +29,28 @@ var swaggerOptions = {
       },
       servers: [
         { url: "http://localhost:8080/api" },
-        { url: "https://edugeocache-sp-2020-2021.herokuapp.com/api" }
+        { url: "https://smaugbudget.herokuapp.com/api" }
       ]
     },
     apis: [
-      "./app_api/models/lokacije.js",
-      "./app_api/models/uporabniki.js", 
-      "./app_api/routes/index.js"
+      "./app_api/models/bills.js",
+      "./app_api/models/categories.js",
+      "./app_api/models/currency.js",
+      "./app_api/models/envelopes.js",
+      "./app_api/models/expense.js",
+      "./app_api/models/friend.js",
+      "./app_api/models/friendGroup.js",
+      "./app_api/models/goals.js",
+      "./app_api/models/user.js",
+      "./app_api/controllers/billsController.js",
+      "./app_api/controllers/categoryController.js",
+      "./app_api/controllers/currencyController.js",
+      "./app_api/controllers/dbController.js",
+      "./app_api/controllers/evelopesController.js",
+      "./app_api/controllers/expenseController.js",
+      "./app_api/controllers/friendGroupController.js",
+      "./app_api/controllers/goalsController.js",
+      "./app_api/controllers/userController.js"
     ]
   };
   const swaggerDocument = swaggerJsdoc(swaggerOptions);
