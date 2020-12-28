@@ -18,6 +18,12 @@ export class BillTableComponent implements OnInit {
     private renderer: Renderer2
   ) { }
 
+  hasDeleteMessage: boolean = false;
+  deleteMessage: string = "";
+  
+  hasEditMessage: boolean = false;
+  editMessage: string = "";
+
   ngOnInit(): void {
   }
 
@@ -132,18 +138,22 @@ export class BillTableComponent implements OnInit {
     if (amount1 == 0 || check1 == 0 || date1 == 0) {
       //DO NOTHING
     } else {
-      this.renderer.setAttribute(document.getElementById("buttonEditBill" + this.data._id), 'data-dismiss', 'modal');
       this.editBill(categoryValue, payeeValue, amountValue, dateValue, repeatValue);
-      this.renderer.removeAttribute(document.getElementById("buttonEditBill" + this.data._id), 'data-dismiss', 'modal');
       
     }
   }
 
   editBill(category, payee, amount, date, repeat){
+    this.hasEditMessage = true;
+    this.editMessage = "Saving bill";
+
     this.api.editBill(this.data._id, category, payee, amount, date, repeat).then((response) => {
+      this.renderer.setAttribute(document.getElementById("buttonEditBill" + this.data._id), 'data-dismiss', 'modal');
       this.BillsComponent.afterEdit(response);
+      this.renderer.removeAttribute(document.getElementById("buttonEditBill" + this.data._id), 'data-dismiss', 'modal');
+      this.hasEditMessage = false;
     }).catch((error) => {
-      console.log(error);
+      this.editMessage = "Failed to save";
     });
   }
 
@@ -156,10 +166,14 @@ export class BillTableComponent implements OnInit {
   }
 
   deleteBill(){
+    this.hasDeleteMessage = true;
+    this.deleteMessage = "Deleting bill";
+
     this.api.deleteBill(this.data._id).then((response) => {
       this.BillsComponent.afterDelete(this.data._id)
+      this.hasDeleteMessage = false;
     }).catch((error) => {
-      console.log(error);
+      this.deleteMessage = "Failed to delete!"
     });
   }
 

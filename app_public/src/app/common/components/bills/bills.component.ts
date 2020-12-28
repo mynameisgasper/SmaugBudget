@@ -3,6 +3,8 @@ import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 import { ApiService } from '../../services/api.service';
 import { Card } from '../../classes/card';
 import { Bill } from '../../classes/bill';
+import { Router } from '@angular/router';
+import { AuthenticationService } from '../../services/authentication.service';
 declare var $:any;
 
 @Component({
@@ -14,7 +16,9 @@ export class BillsComponent implements OnInit {
 
     constructor(
         private api: ApiService,
-        private renderer: Renderer2
+        private renderer: Renderer2,
+        private router: Router, 
+        private authentication: AuthenticationService    
     ) { }
 
     public cards: Card[]
@@ -38,13 +42,19 @@ export class BillsComponent implements OnInit {
     dark = "Dark";    
     currency: string;
 
+    hasAddMessage: boolean = false;
+    addMessage: string = "";
+
     ngOnInit(): void {
         this.api.getUser().then(result => {
             this.bills = this.generateBills(result.bills)
             this.cards = this.generateCards();
             this.categories = result.categories;
             this.currency = result.defaultCurrency;  
-        }).catch(error => console.log(error));
+        }).catch(error => {
+            this.authentication.logout();
+            this.router.navigate(['']);      
+        });
     }
 
     @ViewChild('nameAdd') nameAdd: ElementRef;
@@ -207,18 +217,22 @@ export class BillsComponent implements OnInit {
         if (amount1 == 0 || check1 == 0 || date1 == 0) {
             return false;
         } else {
-            this.renderer.setAttribute(document.getElementById("buttonAddBill"), 'data-dismiss', 'modal');
             this.addBill(categoryValue, payeeValue, amountValue, dateValue, repeatValue);
-            this.renderer.removeAttribute(document.getElementById("buttonAddBill"), 'data-dismiss', 'modal');
         }
     }
 
     addBill(category, payee, amount, date, repeat){
+        this.hasAddMessage = true;
+        this.addMessage = "Saving bill";
+
         this.api.addBill(category, payee, amount, date, repeat).then((response) => {
+            this.renderer.setAttribute(document.getElementById("buttonAddBill"), 'data-dismiss', 'modal');
             this.afterAddBill(response);
-          }).catch((error) => {
-            console.log(error);
-          });
+            this.renderer.removeAttribute(document.getElementById("buttonAddBill"), 'data-dismiss', 'modal');
+            this.hasAddMessage = false;
+        }).catch((error) => {
+            this.addMessage = "Failed to save!";
+        });
     }
 
     afterAddBill(bill){
