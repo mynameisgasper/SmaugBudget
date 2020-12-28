@@ -223,8 +223,6 @@ function getExpenses(req, res) {
                 
                 if (user) {
                     const allExpenses = user.expense;
-                    const length = user.expense.length;
-
                     const orderedExpenses = allExpenses.sort((a, b) => b.date - a.date);
 
                     var filteredExpenses = [];
@@ -239,6 +237,9 @@ function getExpenses(req, res) {
                         filteredExpenses = orderedExpenses;
                     }
                     
+                    const length = filteredExpenses.length;
+
+
                     var paginatedExpenses = [];
                     if (!limit || limit == 0) {
                         if (!offset || offset == 0) {

@@ -56,12 +56,12 @@
             </div>
             <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 d-flex ">
                 <!-- Search form -->
-                <input class="form-control search" type="text" id="search" onkeydown="searchFunction()" placeholder="Search" aria-label="Search">
+                <input #filter class="form-control search" type="text" id="filter" (keyup)="setFilter(filter.value)" placeholder="Search" aria-label="Search">
             </div>
         </div>
         <div class="row">
             <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 d-flex justify-content-center">
-                <ngb-pagination *ngIf="expenses.length > 9" [(page)]="page" [pageSize]="pageSize" [maxSize]="5" [rotate]="true" [collectionSize]="expenses.length" (pageChange)="changePage(page)"></ngb-pagination>
+                <ngb-pagination *ngIf="expenseCount > 9" [(page)]="page" [pageSize]="pageSize" [maxSize]="5" [rotate]="true" [collectionSize]="expenseCount" (pageChange)="changePage(page)"></ngb-pagination>
             </div>
         </div>
         <div class="row">
@@ -74,18 +74,7 @@
                     </table>
                 </div>
                 <div class="row">
-                    <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                        <form method="POST" action="/pdf" id="pdf" name="pdf">
-                            <!--{{{#each expense}}
-                            <input type="hidden" name="date{{id}}" value="{{year}}-{{month}}-{{day}}"/>
-                            <input type="hidden" name="category{{id}}" value="{{category}}"/>
-                            <input type="hidden" name="recipient{{id}}" value="{{recipient}}"/>
-                            <input type="hidden" name="value{{id}}" value="{{value}}"/>
-                            <input type="hidden" name="currency{{id}}" value="{{currency}}"/>
-                            {{/each}}-->
-                        </form>
-                    </div>
-                    <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                     <a type="button" style="float: right;" class="btn btn-primary" (click)="generatePdf()">Export to PDF <i class="far fa-file-pdf"></i></a>
                     </div>
                 </div>

@@ -57,6 +57,7 @@ export class HistoryComponent implements OnInit {
   expenseCount: number = 0;
   page: number = 1;
   pageSize: number = 10
+  filter: string = '';
 
   constructor(
     private api: ApiService,
@@ -395,11 +396,18 @@ export class HistoryComponent implements OnInit {
   changePage(page: number) {
     this.page = page;
     
-    this.api.getExpense('', this.pageSize, (page - 1) * this.pageSize).then(result => {
+    if (!this.filter) this.filter = '';
+    this.api.getExpense(this.filter, this.pageSize, (page - 1) * this.pageSize).then(result => {
       this.paginatedExpenses = result['expenses'];
+      this.expenseCount = result['length'];
     }).catch(error => {
       this.authentication.logout();
       this.router.navigate(['']);
     });
+  }
+
+  setFilter(filter: string) {
+    this.filter = filter;
+    this.changePage(this.page);
   }
 }
