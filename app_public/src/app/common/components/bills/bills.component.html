@@ -126,6 +126,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
+                        <p *ngIf="hasAddMessage"><b>{{addMessage}}</b></p>
                         <button (click)="buttonAddBills(addBillCategory.value, addBillPayee.value, addBillAmount.value, addBillDate.value, (billRepeat1.checked ? billRepeat1.value : billRepeat2.checked ? billRepeat2.value : 'yearly'))" class="btn btn-primary" id="buttonAddBill">Add Bill</button>
                     </div>
                 </form>

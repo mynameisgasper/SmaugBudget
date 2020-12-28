@@ -138,19 +138,21 @@ function calculateBalances(requestBody, res){
     }
 }
 
-function deleteFriendGroup(requestBody, res){
+function deleteFriendGroup(req, res){
     try {
-        var group_id = requestBody.group_id;
-        var user_id = requestBody.user_id;
+        const authorization = req.headers.authorization;
+        var group_id = req.body.group_id;
 
-        if(group_id != undefined) {
+        if(authorization && group_id != undefined) {
+            const token = authorization.split(' ')[1];
+            const decodedToken = jwt_decode(token);
             FriendGroup.findByIdAndDelete(group_id, function(err, group) {
                 if (err) {
                     console.log(err);
                 } else {}
             });
 
-            User.findById(user_id, function(err, user) {
+            User.findById(decodedToken._id, function(err, user) {
                 if (err) {
                     console.log(err);
                 } else {
@@ -159,15 +161,24 @@ function deleteFriendGroup(requestBody, res){
                     res.status(200).json(user);
                     return;
                 }
-                res.status(304);
+                const response = {
+                    status: 'Error'
+                }
+                res.status(304).json(response);
                  return;
             });
         } else {
-            res.sendStatus(400);
+            const response = {
+                status: 'Bad request'
+            }
+            res.status(400).json(response);
         }
     } catch (ex) {
         console.log(ex);
-        res.sendStatus(500);
+        const response = {
+            status: 'Error'
+        }
+        res.status(500).json(response);
     }
 
 
@@ -197,6 +208,6 @@ module.exports = {
         calculateBalances(req.body, res);
     },
     deleteFriendGroup: function(req, res) {
-        deleteFriendGroup(req.body, res);
+        deleteFriendGroup(req, res);
     }
 }

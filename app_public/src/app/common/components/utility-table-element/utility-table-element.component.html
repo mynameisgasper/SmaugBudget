@@ -1,12 +1,9 @@
 <!--<div *ngFor="let item of Friend;" class="clickable" data-toggle="modal" data-target="#showGroup{{item.id}}">-->
-    <td id="group">{{Friend.Group}}</td>
-    <td id="next">{{Friend.Next}}</td>
-    <td id="balance">{{Friend.Balance}}</td>
+    <td id="group">{{group.Group}}</td>
+    <td id="next">{{group.Next}}</td>
+    <td id="balance">{{group.Balance}}</td>
     <td id="delete">
-        <form name="deleteForm{{Friend.id}}" method="post" action="/utility" style="display: inline">
-            <input type="hidden" value="deleteFriendGroup" name="formType">
-            <input type="hidden" value="{{Friend.id}}" name="id">
-            <button type="submit" class="btn edit-btn" data-toggle="modal"><fa-icon [icon]="faMinusSquare"></fa-icon></button>
-        </form>
+        <button type="button" class="btn edit-btn" data-toggle="modal" [attr.data-target]="'#showGroup' +group.id"><fa-icon [icon]="faPencilAlt"></fa-icon></button>
+        <button (click)="deleteGroup()" class="btn edit-btn" data-toggle="modal"><fa-icon [icon]="faMinusSquare"></fa-icon></button>
     </td>
 <!--</div>-->

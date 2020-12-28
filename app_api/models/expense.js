@@ -7,6 +7,7 @@ const { categorySchema } = require('./categories')
  *  schemas:
  *   getExpense:
  *    type: object
+ *    description: Vsi podatki o stroških
  *    properties:
  *     id:
  *      type: string
@@ -28,6 +29,7 @@ const { categorySchema } = require('./categories')
  *     - date
  *   addExpense:
  *    type: object
+ *    description: Podatki za dodajanje stroška
  *    properties:
  *     recipient:
  *      type: string
@@ -44,6 +46,7 @@ const { categorySchema } = require('./categories')
  *     - date
  *   editExpense:
  *    type: object
+ *    description: Podatki za urejanje stroška
  *    properties:
  *     id:
  *      type: string

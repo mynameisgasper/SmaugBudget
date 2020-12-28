@@ -81,6 +81,7 @@
                     <input #dateGoal class="form-control" type="date" placeholder="2020-01-01" id="inputDateAddGoal" name="inputDateAddGoal" (focusout)="dateCheckAddGoal()" required="required">
                 </div>
                 <div class="modal-footer">
+                    <p *ngIf="hasGoalMessage"><b>{{goalMessage}}</b></p>
                     <button (click)="buttonAddGoal(nameGoal.value, categoryGoal.value, amountGoal.value, dateGoal.value)" id="buttonAddGoal" class="btn btn-primary">Add Goal</button>
                 </div>
             </div>
@@ -131,6 +132,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
+                        <p *ngIf="hasExpenseMessage"><b>{{expenseMessage}}</b></p>
                         <button (click)="buttonGoalsAddMoney(addAmount.value, titleGoal.value)" id="buttonAddMoneyToGoal" class="btn btn-primary">Add</button>
                     </div>
                 </form>

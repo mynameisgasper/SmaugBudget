@@ -9,6 +9,7 @@ const friendGroupSchema = new mongoose.Schema();
  *  schemas:
  *   getFriendGroup:
  *    type: object
+ *    description: Vsi podatki o skupini
  *    properties:
  *     name:
  *      type: string
@@ -20,6 +21,27 @@ const friendGroupSchema = new mongoose.Schema();
  *    required:
  *     - name
  *     - balance
+ *     - friends
+ *   addFriendGroup:
+ *    type: object
+ *    description: Podatki za kreiranje nove skupine
+ *    properties:
+ *     name:
+ *      type: string
+ *     friends:
+ *      type: object
+ *      $ref: "#/components/schemas/Friend"
+ *    required:
+ *     - name
+ *     - friends
+ *   deleteFriendGroup:
+ *    type: object
+ *    description: Podatki za brisanje skupine
+ *    properties:
+ *     id:
+ *      type: string
+ *    required:
+ *     - id
  */
 
 friendGroupSchema.add({

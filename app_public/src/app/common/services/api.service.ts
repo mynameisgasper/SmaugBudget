@@ -362,6 +362,21 @@ export class ApiService {
       this.parseError('Error');
     }
   }
+  public deleteGroup(friendGroupId): Promise<any> {
+    if (this.authorization.getLoggedIn()) {
+      const url: string = `${this.apiUrl}/deleteFriendGroup`; 
+      const body = {
+        'group_id': friendGroupId,
+      }
+      const options = {
+        headers: new HttpHeaders().set('Authorization', this.authorization.generateCompleteJwt())
+      }
+      return this.http.post(url, body, options).toPromise().then(response => response).catch(err => this.parseError(err));
+    }
+    else {
+      this.parseError('Error');
+    }
+  }
 
   private parseError(error: any): Promise<any> {
     console.error('An error has occured', error);

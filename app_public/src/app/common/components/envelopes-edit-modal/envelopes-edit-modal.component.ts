@@ -58,6 +58,7 @@ export class EnvelopesEditModalComponent implements OnInit {
         this.renderer.setAttribute(document.getElementById("buttonEditEnvelopes" + this.Envelope._id), 'data-dismiss', 'modal');
         this.Envelope.budget = this.amountEdit.nativeElement.value;
         this.renderer.removeAttribute(document.getElementById("buttonEditEnvelopes"), 'data-dismiss', 'modal');
+        this.hasEditEnvelopeMessage = false;
        }).catch(error => {
         this.editEnvelopeMessage = "Failed saving changes!";    
        });

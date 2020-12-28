@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
  *  schemas:
  *   Categories:
  *    type: object
+ *    description: Vsi podatki o kategoriji
  *    properties:
  *     name:
  *      type: string
@@ -32,3 +33,20 @@ mongoose.model('Categories', categorySchema, 'Categories');
 module.exports = {
     categorySchema: categorySchema
 }
+/*
+ CategoryName:
+  type: object
+  description: Ime kategorije
+  properties:
+   name:
+    type: string
+   required:
+    - name
+  CategoryId:
+   type: object
+   description: Id kategorije
+   properties:
+    id:
+     type: string    
+     required:
+    - id*/

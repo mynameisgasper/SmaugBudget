@@ -108,6 +108,7 @@ export class DashboardComponent implements OnInit {
 
       this.api.changeIncome(ammountField.value, dateField.value).then(result => {
         this.modalRef.hide();
+        this.hasChangeIncomeMessage = false;
       }).catch(error => {
         console.log(error);
         this.changeIncomeMessage = "Saving failed!"
