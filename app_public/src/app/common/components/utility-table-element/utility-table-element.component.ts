@@ -1,5 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { faMinusSquare } from '@fortawesome/free-solid-svg-icons';
+import { faMinusSquare, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
+import { FriendGroup } from '../../classes/friendGroup'
+import { ApiService } from '../../services/api.service';
+import { UtilitiesComponent } from '../utilities/utilities.component'
 
 @Component({
   selector: 'tr [app-table-row]',
@@ -9,23 +12,35 @@ import { faMinusSquare } from '@fortawesome/free-solid-svg-icons';
 export class UtilityTableElementComponent implements OnInit {
 
   faMinusSquare = faMinusSquare;
+  faPencilAlt = faPencilAlt
+
+  constructor(
+    private api: ApiService,
+    private UtilitiesComponent: UtilitiesComponent
+  ) { }
 
   @Input()
-  Friend = {
-    "id":"",
-    "Group":"",
-    "Next":"",
-    "Balance":0,
-    "groupMember":[{
-        "id":"",
-        "name":"",
-        "amount":0
-    }]
-  }
-
-  constructor() { }
+    group: FriendGroup;
 
   ngOnInit(): void {
+    console.log(this.group);
+  }
+
+  buttonDeleteGroup(){
+      if (!this.group.id) {
+        //DO NOTHING
+    } else {
+      this.deleteGroup();
+    }
+  }
+
+  deleteGroup(){
+    console.log("asd")
+    this.api.deleteGroup(this.group.id).then((response) => {
+      this.UtilitiesComponent.afterDelete(this.group.id);
+    }).catch((error) => {
+      console.log(error);
+    });
   }
 
 }

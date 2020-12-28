@@ -24,7 +24,6 @@ export class GoalsProgressComponent implements OnInit {
 
   faMinusSquare = faMinusSquare;
   faPencilAlt = faPencilAlt
-
  
   @Input()
     item:Goal
@@ -158,9 +157,9 @@ export class GoalsProgressComponent implements OnInit {
 
   buttonDeleteGoal(): void {
     if (!this.item._id) {
-        //DO NOTHING
+      //DO NOTHING
     } else {
-       this.deleteGoal();
+     this.deleteGoal();
     }
   }
 

@@ -66,7 +66,6 @@ export class UtilitiesComponent implements OnInit {
             }
             this.userId = result._id;
             this.groups = this.generateGroups(result.friendgroups);
-            console.log(this.groups);
         }).catch(error => {
             this.authentication.logout();
             this.router.navigate(['']);
@@ -105,7 +104,6 @@ export class UtilitiesComponent implements OnInit {
         }
         return groupsArray;
     }
-
 
     insertMe(memberArray, myBalance){
         var me: Friend = {
@@ -239,5 +237,12 @@ export class UtilitiesComponent implements OnInit {
             groupMember: memberArray 
         }
         this.groups.push(newGroup);
+    }
+
+    afterDelete(friendGroupId){
+        const index = this.groups.findIndex(groupObject => groupObject.id === friendGroupId)
+        if (index > -1) {
+            this.groups.splice(index, 1);
+        }
     }
 }
