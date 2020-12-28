@@ -29,6 +29,7 @@ export class AccountComponent implements OnInit {
     defaultCurrency: any;
     defaultLanguage: any;
     categories: any;
+    uID: any;
 
     constructor(
         private api: ApiService,
@@ -41,6 +42,7 @@ export class AccountComponent implements OnInit {
 
   ngOnInit(): void {
     this.api.getUser().then(result => {
+        this.uID = result._id;
         this.firstName = result.firstname;
         this.lastName = result.lastname;
         this.email = result.email;
@@ -68,6 +70,9 @@ export class AccountComponent implements OnInit {
 
   hasChangeUserMessage: boolean = false;
   changeUserMessage: string = "";
+
+  hasChangeColorMessage: boolean = false;
+  changeColorMessage: string = "";
 
   data = {
       "HINT": getTranslation("HINT"),
@@ -188,6 +193,15 @@ export class AccountComponent implements OnInit {
         
       }).catch((error) => {
         this.changeLanguageMessage = 'Failed to save!';
+      });
+}
+
+changeColor(category_id: string) {
+    this.api.changeColor(category_id, getValueById("color" + category_id), this.uID).then((response) => {
+        
+        
+      }).catch((error) => {
+        this.changeColorMessage = 'Failed to save!';
       });
 }
 

@@ -122,10 +122,10 @@
                 <label for="color-picker{{item._id}}" style=" text-align:left;">{{item.name}}</label>
                 </div>
                 <div class="category-row col-3 col-sm-5 col-md-5 col-lg-3 col-xl-3" style="text-align: center;">
-                    <input type="color" class="color-picker" name="colorPicker{{item._id}}" value="{{item.color}}">
+                    <input type="color" id="color{{item._id}}" class="color-picker" name="colorPicker{{item._id}}" value="{{item.color}}">
                 </div>
                 <div class="category-row col-3 col-sm-12 col-md-1 col-lg-4 col-xl-4" style="text-align: right;">
-                <button type="submit" class="btn btn-primary"><fa-icon [icon]="faPencilAlt"></fa-icon></button>
+                <button type="submit" class="btn btn-primary" (click)="changeColor(item._id)"><fa-icon [icon]="faPencilAlt"></fa-icon></button>
                 <button type="submit" [attr.form]="'deleteColor' + item.id" class="btn btn-danger"><fa-icon [icon]="faTrashAlt"></fa-icon></button>
                 <input type="hidden" name="id" value="{{item._id}}" />
                 <input type="hidden" name="formType" value="changeColorCategory" />
