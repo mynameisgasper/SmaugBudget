@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
  *  schemas:
  *   Categories:
  *    type: object
+ *    description: Vsi podatki o kategoriji
  *    properties:
  *     name:
  *      type: string

@@ -9,6 +9,7 @@ const { categorySchema } = require('./categories')
  *  schemas:
  *   Bill:
  *    type: object
+ *    description: Vsi podatki o računu
  *    properties:
  *     id:
  *      type: string
@@ -32,6 +33,7 @@ const { categorySchema } = require('./categories')
  *     - repeating
  *   addBill:
  *    type: object
+ *    description: Vsi podatki za kreiranje novega računa
  *    properties:
  *     recipient:
  *      type: string
@@ -51,6 +53,7 @@ const { categorySchema } = require('./categories')
  *     - repeating
  *   editBill:
  *    type: object
+ *    description: Vsi podatki za urejanje računa
  *    properties:
  *     id:
  *      type: string
@@ -73,6 +76,7 @@ const { categorySchema } = require('./categories')
  *     - repeating
  *   deleteBill:
  *    type: object
+ *    description: Vsi podatki za brisanje računa
  *    properties:
  *     id:
  *      type: string

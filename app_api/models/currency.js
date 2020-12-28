@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
  *  schemas:
  *   Currency:
  *    type: object
+ *    description: Vsi podatki o za valuti
  *    properties:
  *     currency:
  *      type: string
