@@ -80,6 +80,7 @@
 
                     </div>
                     <div class="modal-footer">
+                        <p *ngIf="hasAddEnvelopeMessage"><b>{{addEnvelopeMessage}}</b></p>
                         <button id="buttonAddEnvelopes" (click)="buttonAddEnvelopes()" class="btn btn-primary">Add</button>
                     </div>
                 </form>
@@ -206,6 +207,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
+                        <p *ngIf="hasAddExpenseMessage"><b>{{addExpenseMessage}}</b></p>
                         <button id="buttonAddExpense" (click)="buttonExpenseEnvelopes()" class="btn btn-primary">Add</button>
                     </div>
                 </form>

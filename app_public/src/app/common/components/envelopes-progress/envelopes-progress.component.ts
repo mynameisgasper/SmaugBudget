@@ -24,6 +24,9 @@ export class EnvelopesProgressComponent implements OnInit {
   faMinusSquare = faMinusSquare;
   faPencilAlt = faPencilAlt
 
+  hasDeleteMessage: boolean = false;
+  deleteMessage: string = ""
+
   constructor(
     private api: ApiService,
     @Inject(DOCUMENT) private document: HTMLDocument
@@ -50,18 +53,17 @@ export class EnvelopesProgressComponent implements OnInit {
     let decision = confirm("Are you sure you want to delete envelope " + name);
 
     if (decision == true) {
+      this.hasDeleteMessage = true;
+      this.deleteMessage = "Deleting envelope";
 
       this.api.deleteEnvelope(
         this.envelope._id
-      ).then(result => { }).catch(error => console.log(error));
-
-      try {
-
+      ).then(result => {
         var element = this.document.getElementById(this.envelope._id);
         element.remove();
-
-      }
-      catch {}
+      }).catch(error => {
+        this.deleteMessage = "Failed deleting envelope!";
+      });
     }
   }
 }

@@ -6,6 +6,8 @@ import { ChartDataSets } from 'chart.js';
 import { Color } from 'ng2-charts';
 import * as pdfMake from "pdfmake/build/pdfmake";
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+import { Router } from '@angular/router';
+import { AuthenticationService } from '../../services/authentication.service';
 
 declare var $:any;
 
@@ -54,7 +56,9 @@ export class HistoryComponent implements OnInit {
 
   constructor(
     private api: ApiService,
-    @Inject(DOCUMENT) private document: HTMLDocument
+    @Inject(DOCUMENT) private document: HTMLDocument,
+    private router: Router, 
+    private authentication: AuthenticationService
     ) { }
 
   @ViewChild('color') color: ElementRef;
@@ -77,7 +81,10 @@ export class HistoryComponent implements OnInit {
       this.chartLabels1 = this.makeLabelArray1(pieChart);
       this.chartData2 = this.generateDatasets(lineChartData);
       this.chartColors2 = this.getColors(lineChartData);
-    }).catch(error => console.log(error));
+    }).catch(error => {
+      this.authentication.logout();
+      this.router.navigate(['']);
+    });
   }
 
   parseTable(rows) {

@@ -33,6 +33,9 @@ export class EnvelopesEditModalComponent implements OnInit {
   @Input()
   Currency: string
 
+  hasEditEnvelopeMessage: boolean = false;
+  editEnvelopeMessage: string = "";
+
   constructor(
     private renderer: Renderer2,
     private api: ApiService
@@ -44,13 +47,20 @@ export class EnvelopesEditModalComponent implements OnInit {
   }
 
   editEnvelopes() {
+    this.hasEditEnvelopeMessage = true;
+    this.editEnvelopeMessage = "Saving changes";    
+
     this.api.editEnvelope(
       
       this.Envelope._id,
       this.amountEdit.nativeElement.value
-      ).then(result => { }).catch(error => console.log(error));
-
-    this.Envelope.budget = this.amountEdit.nativeElement.value;
+      ).then(result => {
+        this.renderer.setAttribute(document.getElementById("buttonEditEnvelopes" + this.Envelope._id), 'data-dismiss', 'modal');
+        this.Envelope.budget = this.amountEdit.nativeElement.value;
+        this.renderer.removeAttribute(document.getElementById("buttonEditEnvelopes"), 'data-dismiss', 'modal');
+       }).catch(error => {
+        this.editEnvelopeMessage = "Failed saving changes!";    
+       });
   }
 
   amountEditEnvelopes() {
@@ -84,11 +94,7 @@ export class EnvelopesEditModalComponent implements OnInit {
         //DO NOTHING
 
     } else {
-
-      this.renderer.setAttribute(document.getElementById("buttonEditEnvelopes" + this.Envelope._id), 'data-dismiss', 'modal');
       this.editEnvelopes()
-      this.renderer.removeAttribute(document.getElementById("buttonEditEnvelopes"), 'data-dismiss', 'modal');
-
     }
   }
 }
