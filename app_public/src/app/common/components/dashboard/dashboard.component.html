@@ -145,6 +145,7 @@
                         <div id="dat"></div>
                     </div>
                     <div class="modal-footer">
+                        <p *ngIf="hasChangeIncomeMessage"><b>{{ changeIncomeMessage }}</b></p>
                         <button type="button" (click)="buttonDashboard(amountDashboard, dateDashboard, changeIncome)" class="btn btn-primary">{{ incomeModalSaveButton }}</button>
                         <button type="button" (click)="closeModal()" class="btn btn-secondary">{{ incomeModalCloseButton }}</button>
                     </div>

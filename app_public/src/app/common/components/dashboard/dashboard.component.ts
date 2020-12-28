@@ -5,6 +5,8 @@ import { Alert } from '../../classes/alert';
 import { ApiService } from '../../services/api.service';
 import { Card } from '../../classes/card';
 import { User } from '../../classes/user';
+import { AuthenticationService } from '../../services/authentication.service';
+import { Router } from '@angular/router';
 declare var $:any;
 
 @Component({
@@ -44,7 +46,10 @@ export class DashboardComponent implements OnInit {
   chartColors: Array<Object> = [];
   chartLabels: Array<String> = [];
 
-  constructor(private api: ApiService, private modalService: BsModalService) { }
+  hasChangeIncomeMessage: boolean = false;
+  changeIncomeMessage: string = ""
+
+  constructor(private router: Router, private api: ApiService, private authentication: AuthenticationService, private modalService: BsModalService) { }
 
   ngOnInit(): void {
     this.api.getUser().then(result => {
@@ -55,9 +60,10 @@ export class DashboardComponent implements OnInit {
       this.currency = user.defaultCurrency;
       this.incomeLastMonth = user.paycheckLastMonth;
       this.expensesLastMonth = this.getTotalCost(this.getLastMonthExpenses(user.expense, user.paycheckDate));
-
-      console.log(user);
-    }).catch(error => console.log(error));
+    }).catch(error => {
+      this.authentication.logout();
+      this.router.navigate(['']);
+    });
   }
 
   amountDashboard1(ammountField: any): number {
@@ -97,10 +103,14 @@ export class DashboardComponent implements OnInit {
     } 
     else {
       //POST REQUEST - TO BE ADDED
+      this.hasChangeIncomeMessage = true;
+      this.changeIncomeMessage = "Saving income"
+
       this.api.changeIncome(ammountField.value, dateField.value).then(result => {
         this.modalRef.hide();
       }).catch(error => {
         console.log(error);
+        this.changeIncomeMessage = "Saving failed!"
       });
     }
   }
