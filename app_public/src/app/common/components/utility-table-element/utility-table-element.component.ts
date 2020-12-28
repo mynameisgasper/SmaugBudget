@@ -13,6 +13,8 @@ export class UtilityTableElementComponent implements OnInit {
 
   faMinusSquare = faMinusSquare;
   faPencilAlt = faPencilAlt
+  hasDeleteGroupMessage: boolean = false;
+    DeleteGroupMessage: string = "";
 
   constructor(
     private api: ApiService,
@@ -35,11 +37,14 @@ export class UtilityTableElementComponent implements OnInit {
   }
 
   deleteGroup(){
-    console.log("asd")
+    this.hasDeleteGroupMessage = true;
+    this.DeleteGroupMessage = "Deleting group";
+
     this.api.deleteGroup(this.group.id).then((response) => {
       this.UtilitiesComponent.afterDelete(this.group.id);
+      this.hasDeleteGroupMessage = false;
     }).catch((error) => {
-      console.log(error);
+      this.DeleteGroupMessage = "Failed to delete group!";
     });
   }
 
