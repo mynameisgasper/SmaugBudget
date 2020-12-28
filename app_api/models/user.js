@@ -77,7 +77,7 @@ const { friendGroupSchema } = require('./friendGroup');
  *     - envelopes
  *     - expense
  *     - goals
- *   UporabnikPrijava:
+ *   UserLogin:
  *    type: object
  *    description: Podatki uporabnika za prijavo
  *    properties:
@@ -92,7 +92,7 @@ const { friendGroupSchema } = require('./friendGroup');
  *    required:
  *     - email
  *     - password
- *   UporabnikRegistracija:
+ *   UserRegistration:
  *    type: object
  *    description: Podatki uporabnika za registracijo
  *    properties:
@@ -117,6 +117,15 @@ const { friendGroupSchema } = require('./friendGroup');
  *     - lastname
  *     - email
  *     - password
+ *   AuthenticationAnswer:
+ *    type: object
+ *    description: Rezultat uspešne avtentikacije uporabnika
+ *    properties:
+ *     token:
+ *      type: string
+ *      description: JWT token
+ *     required:
+ *     - token
  *   ChangeIncome:
  *    type: object
  *    description: Podatki za spremembo uporabnikove plače
@@ -128,6 +137,14 @@ const { friendGroupSchema } = require('./friendGroup');
  *    required:
  *     - paycheck
  *     - paycheckDate
+ *   Error:
+ *    type: object
+ *    description: Podrobnosti napake
+ *    properties:
+ *     sporočilo:
+ *      type: string
+ *    required:
+ *     - sporočilo
  */
 
 const userSchema = new mongoose.Schema();

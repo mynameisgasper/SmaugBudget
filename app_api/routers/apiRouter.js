@@ -20,11 +20,70 @@ const authentication = jwt({
     userProperty: 'payload',
     algorithms: ['HS256']
   });
+
+/**
+ * Kategorije dostopnih točk
+ * @swagger
+ * tags:
+ *  - name: Uporabnik
+ *    description: Obvladovanje podatkov uporabnika
+ *  - name: Avtentikacija
+ *    description: Obvladovanje uporabnikov
+ *  - name: Glavne funkcionalnosti
+ *    description: Obvladovanje podatkov uporabnika pri glavnih funkcionalnostih
+ */
+
+/**
+ * Varnostna shema dostopa
+ * @swagger
+ * components:
+ *  securitySchemes:
+ *   jwt:
+ *    type: http
+ *    scheme: bearer
+ *    in: header
+ *    bearerFormat: JWT
+ */
+
+ 
   
 
 router.all('/', (req, res) => {
     res.sendStatus(404);
 });
+
+/**
+ * @swagger
+ *   /registracija:
+ *     post:
+ *       summary: Registracija novega uporabnika
+ *       description: Registracija **novega uporabnika** s podatki o imenu, elektronskem naslovu in geslu.
+ *       tags: [Avtentikacija]
+ *       requestBody:
+ *         description: Podatki za registracijo
+ *         required: true
+ *         content:
+ *           application/x-www-form-urlencoded:
+ *             schema:
+ *               $ref: "#/components/schemas/UserRegistration"
+ *       responses:
+ *         "200":
+ *           description: Uspešna registracija uporabnika z JWT žetonom v rezultatu.
+ *           content:
+ *             application/json:
+ *               schema:
+ *                 $ref: "#/components/schemas/AuthenticationAnswer"
+ *         "400":
+ *           description: Napaka zahteve, pri registraciji so obvezni ime, elektronski naslov in geslo.
+ *           content:
+ *             application/json:
+ *               schema:
+ *                 $ref: "#/components/schemas/Error"
+ *             example:
+ *               sporočilo: Zahtevani so vsi podatki.
+ *         "500":
+ *           description: Napaka na strežniku pri registraciji uporabnika.
+ */
 
 router.post('/register', (req, res) => {
     user.register(req, res);
