@@ -206,18 +206,14 @@ readURL(input: FileList) {
 }
 
 uploadFileToActivity() {
-    this.postFile(this.fileToUpload);
-  }
-
-postFile(fileToUpload: File) {
-    /*
-    const endpoint = 'your-destination-url';
-    const formData: FormData = new FormData();
-    formData.append('fileKey', fileToUpload, fileToUpload.name);
-    return this.httpClient
-      .post(endpoint, formData, { headers: this.yourHeadersConfig })
-      .pipe(map(() => { return true; }));*/
+    this.api.postFile(getValueById("emailInput"), this.fileToUpload).then((response) => {
+        console.log(response);
+        
+      }).catch((error) => {
+        console.log(error);
+      });
 }
+
 
 disableButton() {
     var name = this.nameRegex();

@@ -334,7 +334,7 @@ const uploadImg = multer({ storage: storage }).single('image');
 
 function postImg(req, res) {
     try {
-        User.findOne({ 'email': req.session.user.email }, function(err, user) {
+        User.findOne({ 'email': req.body.email }, function(err, user) {
             if (err) {
                 console.log(err);
             } else {
@@ -348,9 +348,13 @@ function postImg(req, res) {
                             }
                         });
                     }
-                    user.profilePic = req.file.path;
-                    user.save();
-                    res.status(200).json(req.file.path);
+                    if (req.file) {
+                        user.profilePic = req.file.path;
+                        user.save();
+                        res.status(200).json(req.file.path);
+                    } else {
+                        res.sendStatus(500);
+                    }
                 } else {
                     res.sendStatus(404);
                 }
