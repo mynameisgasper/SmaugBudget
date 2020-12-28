@@ -1,11 +1,12 @@
 import { Component, OnInit, ElementRef, ViewChild, Renderer2} from '@angular/core';
 import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 import { ApiService } from '../../services/api.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { NgForm } from '@angular/forms';
 import { FriendGroup } from '../../classes/friendGroup'
 import { Friend } from '../../classes/friend'
+import { AuthenticationService } from '../../services/authentication.service';
 declare var $:any;
 
 @Component({
@@ -24,10 +25,18 @@ export class UtilitiesComponent implements OnInit {
 
     groupMembers: Array<Object> = [{value: 1}]
 
+    hasConverterMessage: boolean = false;
+    converterMessage: string = "";
+
+    hasCreateGroupMessage: boolean = false;
+    createGroupMessage: string = "";
+
     constructor(
         private api: ApiService,
         private pit: ActivatedRoute,
-        private renderer: Renderer2
+        private renderer: Renderer2,
+        private router: Router, 
+        private authentication: AuthenticationService
     ) {}
 
     @ViewChild('groupName') groupName: ElementRef;
@@ -58,7 +67,10 @@ export class UtilitiesComponent implements OnInit {
             this.userId = result._id;
             this.groups = this.generateGroups(result.friendgroups);
             console.log(this.groups);
-        }).catch(error => console.log(error));
+        }).catch(error => {
+            this.authentication.logout();
+            this.router.navigate(['']);
+        });
     }
 
     generateGroups(groups){
@@ -108,8 +120,12 @@ export class UtilitiesComponent implements OnInit {
 
     converter(currency1: string, currency2: string, value: number): void {
         this.api.converter(currency1, currency2, value).then(result => {
+            this.hasConverterMessage = false;
             this.resultValue = result.value;
-        }).catch(error => console.log(error));
+        }).catch(error => {
+            this.hasConverterMessage = true;
+            this.converterMessage = "Error converting currencies!";
+        });
     }
 
     addGroupUtilities(): number{
@@ -184,11 +200,15 @@ export class UtilitiesComponent implements OnInit {
             }
         }
 
+        this.hasCreateGroupMessage = true;
+        this.createGroupMessage = "Saving group";
+
         this.renderer.setAttribute(document.getElementById("addGroup"), 'data-dismiss', 'modal');
         this.api.addFriendGroup(groupName, friends).then(result => {
+            this.hasCreateGroupMessage = false;
             this.afterAddFriedGroup(result);
         }).catch(error => {
-            console.log(error);
+            this.createGroupMessage = "Failed to save!";
         });
         this.renderer.removeAttribute(document.getElementById("addGroup"), 'data-dismiss', 'modal');
     }
