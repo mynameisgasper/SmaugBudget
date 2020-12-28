@@ -367,21 +367,26 @@ function postImg(req, res) {
 
 function getPfp(req, res) {
     try {
-        User.findOne({ 'email': req.session.user.email }, function(err, user) {
-            if (err) {
-                console.log(err);
-            } else {
-                if (user) {
-                    if (user.profilePic == null) {
-                        res.status(404).sendFile(path.resolve("public/images/Default_pfp.png"));
-                    } else {
-                        res.status(200).sendFile(path.resolve(user.profilePic));
-                    }
+        const authorization = req.headers.authorization;
+        if (authorization) {
+            const token = authorization.split(' ')[1];
+            const decodedToken = jwt_decode(token);
+            User.findById(decodedToken._id, function(err, user) {
+                if (err) {
+                    console.log(err);
                 } else {
-                    res.status(404).sendFile(path.resolve("public/images/Default_pfp.png"));
+                    if (user) {
+                        if (user.profilePic == null) {
+                            res.status(200).sendFile(path.resolve("public/images/Default_pfp.png"));
+                        } else {
+                            res.status(200).sendFile(path.resolve(user.profilePic));
+                        }
+                    } else {
+                        res.status(404).sendFile(path.resolve("public/images/Default_pfp.png"));
+                    }
                 }
-            }
-        });
+            });
+        }
     } catch (ex) {
         res.sendStatus(500);
     }

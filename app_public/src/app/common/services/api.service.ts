@@ -392,6 +392,17 @@ export class ApiService {
     return this.http.post(url, body, options).toPromise().then(response => response).catch(err => this.parseError(err));
   }
 
+  public getPfp(email: string) : Promise<any> {
+    const url: string = `${this.apiUrl}/getPfp`;
+
+    const options = {
+      headers: new HttpHeaders().set('Authorization', this.authorization.generateCompleteJwt()),
+      responseType: 'blob' as 'json',
+    }
+
+    return this.http.get(url, options).toPromise().then(response => response).catch(err => this.parseError(err));
+  }
+
   public deleteGroup(friendGroupId): Promise<any> {
     if (this.authorization.getLoggedIn()) {
       const url: string = `${this.apiUrl}/deleteFriendGroup`; 

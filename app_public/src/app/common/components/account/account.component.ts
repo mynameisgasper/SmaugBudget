@@ -30,6 +30,9 @@ export class AccountComponent implements OnInit {
     defaultLanguage: any;
     categories: any;
     uID: any;
+    pfpImg: any;
+    name: string;
+    imageToShow: any;
 
     constructor(
         private api: ApiService,
@@ -38,7 +41,8 @@ export class AccountComponent implements OnInit {
         private renderer: Renderer2,
         private elementRef: ElementRef,
         @Inject(DOCUMENT) private document: HTMLDocument
-    ) { }
+    ) { 
+    }
 
   ngOnInit(): void {
     this.api.getUser().then(result => {
@@ -50,6 +54,7 @@ export class AccountComponent implements OnInit {
         this.defaultLanguage = result.language;
         this.categories = this.fixRGBValues(result.categories);
         this.refreshLanguage(result.language);
+        this.pfpImg = this.getImage();
       }).catch(error => {
         this.authentication.logout();
         this.router.navigate(['']);  
@@ -190,6 +195,25 @@ export class AccountComponent implements OnInit {
     
     this.api.setLanguage(getValueById("emailInput"), language).then((response) => {
         this.refreshLanguage(response.language);
+        
+      }).catch((error) => {
+        this.changeLanguageMessage = 'Failed to save!';
+      });
+}
+
+getImage() {
+    this.api.getPfp(this.email).then((image) => {
+        let reader = new FileReader();
+        reader.addEventListener("load",
+        () => {
+            this.imageToShow = reader.result;
+        },
+        false);
+
+        if (image) {
+        if (image.type !== "application/pdf")
+            reader.readAsDataURL(image);
+        }
         
       }).catch((error) => {
         this.changeLanguageMessage = 'Failed to save!';
