@@ -31,7 +31,10 @@ function addFriendGroup(req, res){
                 User.findById(decodedToken._id, function(error, user) {
                     if (error) {
                         console.log(error);
-                        res.sendStatus(500);
+                        const response = {
+                            status: 'Error'
+                        }
+                        res.status(500).json(response);
                     } else {
                         let friendGroup = new FriendGroup({
                             name: name,
@@ -50,7 +53,10 @@ function addFriendGroup(req, res){
                         friendGroup.save(function callback(err) {
                             if (err) {
                                 console.log(err);
-                                res.sendStatus(500);
+                                const response = {
+                                    status: 'Error'
+                                }
+                                res.status(500).json(response);
                             } else {
                                 user.friendgroups.push(friendGroup);
                                 user.save();
@@ -60,7 +66,10 @@ function addFriendGroup(req, res){
                     }
                 });
             } else {
-                res.sendStatus(400);
+                const response = {
+                    status: 'Error'
+                }
+                res.status(400).json(response);
             }
         }
         else {
@@ -72,15 +81,18 @@ function addFriendGroup(req, res){
     }
     catch (ex) {
         console.log(ex);
-        res.sendStatus(500);
+        const response = {
+            status: 'Error'
+        }
+        res.status(500).json(response);
     }
 }
 
-function calculateBalances(requestBody, res){
+function calculateBalances(req, res){
     try {
-        var group_id = requestBody.group_id;
-        var user_id = requestBody.user_id;
-        var friends = JSON.parse(requestBody.friends);
+        const authorization = req.headers.authorization;
+        var group_id = req.body.group_id;
+        var friends = JSON.parse(req.body.friends);
 
         var check = true;
         var sumPrice = 0;
@@ -98,16 +110,24 @@ function calculateBalances(requestBody, res){
             }
         }
 
-       if(check && sumPrice == sumPaid){
-           User.findById(user_id, function(error, user) {
+       if(authorization && check && sumPrice == sumPaid){
+            const token = authorization.split(' ')[1];
+            const decodedToken = jwt_decode(token);
+            User.findById(decodedToken._id, function(error, user) {
                 if (error) {
                     console.log(error);
-                    res.sendStatus(500);
+                    const response = {
+                        status: 'Error'
+                    }
+                    res.status(500).json(response);
                 } else {
                     FriendGroup.findById(group_id, function(error, group){
                         if (error) {
                             console.log(error);
-                            res.sendStatus(500);
+                            const response = {
+                                status: 'Error'
+                            }
+                            res.status(500).json(response);
                         } else {
                             for(var i = 0; i < group.friends.length; i++){
                                 var newBalance = group.friends[i].balance + (friends[i + 1][1] - friends[i + 1][0]);
@@ -129,12 +149,18 @@ function calculateBalances(requestBody, res){
                 }
             });
         } else {
-            res.sendStatus(400);
+            const response = {
+                status: 'Error'
+            }
+            res.status(400).json(response);
         }
     }
     catch (ex) {
         console.log(ex);
-        res.sendStatus(500);
+        const response = {
+            status: 'Error'
+        }
+        res.status(500).json(response);
     }
 }
 
@@ -205,7 +231,7 @@ module.exports = {
         addFriendGroup(req, res);
     },
     calculateBalances: function(req, res) {
-        calculateBalances(req.body, res);
+        calculateBalances(req, res);
     },
     deleteFriendGroup: function(req, res) {
         deleteFriendGroup(req, res);

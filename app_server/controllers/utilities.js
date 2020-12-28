@@ -159,7 +159,6 @@ function calculateBalances(req, res, session) {
                 var paid = "paid" + session.user.friendgroups[i].friends[j]._id
                 friends[j + 1][0] = req.body[price];
                 friends[j + 1][1] = req.body[paid];
-
             }
             break;
         }

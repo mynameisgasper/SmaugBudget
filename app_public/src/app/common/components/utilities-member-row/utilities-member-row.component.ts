@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, ElementRef, ViewChild, } from '@angular/core';
+import { UtilitiesEditModalComponent } from '../utilities-edit-modal/utilities-edit-modal.component'
 declare var $:any;
 
 @Component({
@@ -8,7 +9,9 @@ declare var $:any;
 })
 export class UtilitiesMemberRowComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private UtilitiesEditModalComponent: UtilitiesEditModalComponent
+  ) { }
 
   ngOnInit(): void {
   }
@@ -21,12 +24,10 @@ export class UtilitiesMemberRowComponent implements OnInit {
 
     valueGroupsUtilities(): number {
       const field = this.price.nativeElement;
-      console.log(field);
       var regex = new RegExp("^[0-9]+(\.[0-9]{1,2})?$");
       //decimalna števila z največj 2ma decimalnima mestoma ločilo je pika, prva mora biti številka!
       //črkev male,velike,številke
       if (!regex.test(field.value)) {
-          console.log(field);
           field.style.setProperty("border-color", "red", "important");
           $('.tt1').toast('show')
           return 0;
@@ -39,7 +40,6 @@ export class UtilitiesMemberRowComponent implements OnInit {
   
     valueGroupsUtilities2(): number {
       const field = this.paid.nativeElement;
-      console.log(field);
       var regex = new RegExp("^[0-9]+(\.[0-9]{1,2})?$");
       //decimalna števila z največj 2ma decimalnima mestoma ločilo je pika, prva mora biti številka!
       //črkev male,velike,številke
