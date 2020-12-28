@@ -335,8 +335,10 @@ function getTranslation (key)  {
     
 function setLanguage (lang) {
     language = lang;
+    localStorage.setItem("language", lang);
 }
     
 function getLanguage () {
+    localStorage.getItem("language", lang);
     return language
 }

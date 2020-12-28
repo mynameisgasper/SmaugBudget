@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewEncapsulation, ElementRef, ViewChild, Renderer2, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { faPlusSquare, faTrashAlt, faCamera, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
@@ -21,8 +20,6 @@ declare var setInnerTextById: any;
   styleUrls: ['./account.component.css']
 })
 export class AccountComponent implements OnInit {
-    yourHeadersConfig: HttpHeaders | { [header: string]: string | string[]; };
-    httpClient: HttpClient;
     firstName: any;
     lastName: any;
     email: any;
@@ -45,6 +42,7 @@ export class AccountComponent implements OnInit {
         this.defaultCurrency = result.defaultCurrency;
         this.defaultLanguage = result.language;
         this.categories = result.categories;
+        this.refreshLanguage(result.language);
       }).catch(error => console.log(error));
   }
   
@@ -99,11 +97,8 @@ export class AccountComponent implements OnInit {
       "dragAndDropOr": getTranslation("dragAndDropOr")
   };
 
-  changeLanguage(language: string) {
-    setInnerTextById("languageChange", language);
-    
-    this.api.setLanguage(getValueById("emailInput"), language).then((response) => {
-        setLanguage(response.language);
+  refreshLanguage(language: string) {
+    setLanguage(language);
         
         this.data.HINT = getTranslation("HINT");
         this.data.nameHint = getTranslation("nameHint");
@@ -129,6 +124,13 @@ export class AccountComponent implements OnInit {
         this.data.close = getTranslation("close");
         this.data.changeProfilePicture = getTranslation("changeImage");
         this.data.dragAndDropOr = getTranslation("dragAndDropOr");
+  }
+
+  changeLanguage(language: string) {
+    setInnerTextById("languageChange", language);
+    
+    this.api.setLanguage(getValueById("emailInput"), language).then((response) => {
+        this.refreshLanguage(response.language);
         
       }).catch((error) => {
         console.log(error);
@@ -180,20 +182,17 @@ readURL(input: FileList) {
 }
 
 uploadFileToActivity() {
-    this.postFile(this.fileToUpload).subscribe(data => {
-      // do something, if upload success
-      }, error => {
-        console.log(error);
-      });
+    this.postFile(this.fileToUpload);
   }
 
-postFile(fileToUpload: File): Observable<boolean> {
+postFile(fileToUpload: File) {
+    /*
     const endpoint = 'your-destination-url';
     const formData: FormData = new FormData();
     formData.append('fileKey', fileToUpload, fileToUpload.name);
     return this.httpClient
       .post(endpoint, formData, { headers: this.yourHeadersConfig })
-      .pipe(map(() => { return true; }));
+      .pipe(map(() => { return true; }));*/
 }
 
 disableButton() {

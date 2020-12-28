@@ -1,6 +1,6 @@
 //Dependencies
 var dictionary = require('./Dictionary');
-var connections = require('../../app_api/models/connections.json');
+//var connections = require('../../app_api/models/connections.json');
 var Client = require('node-rest-client').Client;
 
 var data = {
@@ -9,7 +9,7 @@ var data = {
     data_firstName: "",
     data_lastName: "",
     data_email: "",
-    data_connections: connections,
+    //data_connections: connections,
     data_envelopes: [],
     data_currency: []
 }

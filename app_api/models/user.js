@@ -59,7 +59,7 @@ const { friendGroupSchema } = require('./friendGroup');
  */
 
 const userSchema = new mongoose.Schema();
-const connectionsSchema = new mongoose.Schema();
+//const connectionsSchema = new mongoose.Schema();
 
 userSchema.add({
     firstname: { type: String, required: true },
@@ -78,7 +78,7 @@ userSchema.add({
     profilePic: { type: String, required: false },
     language: { type: String, required: true, default: 'English' },
     defaultCurrency: { type: String, required: true, default: 'EUR' },
-    connections: [connectionsSchema],
+    //connections: [connectionsSchema],
     envelopes: [envelopesSchema],
     goals: [goalsSchema],
     bills: [billsSchema],
@@ -86,7 +86,7 @@ userSchema.add({
     expense: [expenseSchema],
     friendgroups: [friendGroupSchema]
 });
-
+/*
 connectionsSchema.add({
     name: { type: String, required: true },
     guestName: { type: String, required: true },
@@ -95,7 +95,7 @@ connectionsSchema.add({
     hostUser: { type: userSchema, required: true },
     envelopes: [envelopesSchema]
 });
-
+*/
 userSchema.methods.generateJwt = function() {
     const expirationTime = new Date();
     expirationTime.setDate(expirationTime.getDate() + 7);
@@ -110,10 +110,10 @@ userSchema.methods.generateJwt = function() {
     }, process.env.JWT_PASS || 'jwtsigntoken1!');
 }
 
-mongoose.model('Connections', connectionsSchema, 'Connections');
+//mongoose.model('Connections', connectionsSchema, 'Connections');
 mongoose.model('User', userSchema, 'User');
 
 module.exports = {
-    userSchema: userSchema,
-    connectionsSchema: connectionsSchema
+    userSchema: userSchema
+    //connectionsSchema: connectionsSchema
 }

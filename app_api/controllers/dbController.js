@@ -8,7 +8,7 @@ const Goals = mongoose.model('Goals');
 const User = mongoose.model('User');
 const FriendGroup = mongoose.model('FriendGroup');
 const Friend = mongoose.model('Friend');
-const Connections = mongoose.model('Connections');
+//const Connections = mongoose.model('Connections');
 const podatki = require('../models/testni-podatki.json');
 /*
 ? Remove all data currently in DB
@@ -72,14 +72,14 @@ function removeAllDbData(requestBody, res) {
             console.log(error);
             res.sendStatus(500);
         });
-
+/*
         Connections.deleteMany({}).then(function() {
             console.log("Deleted all connections data");
         }).catch(function(error) {
             console.log(error);
             res.sendStatus(500);
         })
-
+*/
 
 
         res.status(204).json();
@@ -98,7 +98,7 @@ function createDummyAccounts(requestBody, res) {
         var goalsArray = [];
         var friendsArray = [];
         var friendGroupsArray = [];
-        var connectionArray = [];
+        //var connectionArray = [];
 
         for (var i = 0; i < podatki.categories.length; i++) {
             let category = new Categories({
@@ -182,7 +182,7 @@ function createDummyAccounts(requestBody, res) {
             friendGroupsArray[i] = friendGroup;
             friendGroup.save();
         }
-
+        /*
         for (var i = 0; i < podatki.connections.length; i++) {
             let connection = new Connections({
                 name: podatki.connections[i].name,
@@ -195,7 +195,7 @@ function createDummyAccounts(requestBody, res) {
             connectionArray[i] = connection;
             connection.save();
         }
-
+*/
         let userBronze = new User({
             firstname: "Bronze",
             lastname: "User",
@@ -212,8 +212,8 @@ function createDummyAccounts(requestBody, res) {
             expense: expensesArray,
             bills: billsArray,
             goals: goalsArray,
-            friendgroups: friendGroupsArray,
-            connections: connectionArray
+            friendgroups: friendGroupsArray
+            //connections: connectionArray
         });
         let userSilver = new User({
             firstname: "Silver",
@@ -231,8 +231,8 @@ function createDummyAccounts(requestBody, res) {
             expense: expensesArray,
             bills: billsArray,
             goals: goalsArray,
-            friendgroups: friendGroupsArray,
-            connections: connectionArray
+            friendgroups: friendGroupsArray
+            //connections: connectionArray
         });
         let userGold = new User({
             firstname: "Gold",
@@ -250,8 +250,8 @@ function createDummyAccounts(requestBody, res) {
             expense: expensesArray,
             bills: billsArray,
             goals: goalsArray,
-            friendgroups: friendGroupsArray,
-            connections: connectionArray
+            friendgroups: friendGroupsArray
+            //connections: connectionArray
 
         });
         userBronze.save();

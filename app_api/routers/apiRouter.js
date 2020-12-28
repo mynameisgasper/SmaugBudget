@@ -4,7 +4,7 @@ var envelopes = require('../controllers/envelopesController');
 var goals = require('../controllers/goalsController');
 var history = require('../controllers/expenseController');
 var dbController = require('../controllers/dbController');
-var connections = require('../controllers/connectionsController');
+//var connections = require('../futureStuff/connectionsController');
 var categories = require('../controllers/categoryController');
 var friendGroup = require('../controllers/friendGroupController');
 const jwt = require('express-jwt');
@@ -136,7 +136,7 @@ router.post('/deleteGoal', authentication, (req, res) => {
 router.post('/removeAllDbData', (req, res) => {
     dbController.removeAllDbData(req, res);
 });
-
+/*
 router.get('/getNewUsers', authentication, (req, res) => {
     connections.getNewUsers(req, res);
 });
@@ -152,7 +152,7 @@ router.post('/addConnection', authentication, (req, res) => {
 router.get('/getEnvelopesForDropdown', authentication, (req, res) => {
     connections.getEnvelopesForDropdown(req, res);
 });
-
+*/
 router.post('/createDummyAccounts', (req, res) => {
     dbController.createDummyAccounts(req, res);
 });
@@ -168,7 +168,7 @@ router.post('/changeColorCategory', authentication, (req, res) => {
 router.post('/deleteCategory', authentication, (req, res) => {
     categories.deleteCategory(req, res);
 });
-
+/*
 router.post('/toggleVisible', authentication, (req, res) => {
     connections.toggleVisible(req, res);
 });
@@ -176,7 +176,7 @@ router.post('/toggleVisible', authentication, (req, res) => {
 router.post('/removeConnection', authentication, (req, res) => {
     connections.removeConnection(req, res);
 })
-
+*/
 router.post('/addFriendGroup', authentication, (req, res) => {
     friendGroup.addFriendGroup(req, res);
 })
