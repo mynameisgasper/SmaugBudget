@@ -47,10 +47,16 @@
                             </tr>
                             </thead>
                             <tbody>
+                                <tr>
+                                    <td>Me</td>
+                                    <td><input type="number" #price (focusout)="formCalculateBalances(f)" ngModel onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" id=".price" name="price" class="form-control price"  placeholder="Bill amount" step="any" required></td>
+                                    <td><input type="number" #paid  (focusout)="formCalculateBalances(f)" ngModel onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" id=".paid" name="paid" class="form-control paid"  placeholder="Money paid" step="any" required></td>
+                                    <td>{{group.Balance}}</td>
+                                </tr>
                                 <tr *ngFor="let member of group.groupMember" >
                                     <td>{{member.name}}</td>
-                                    <td><input type="number" #price ngModel onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" id=".price{{member.id}}" name="price{{member.id}}" class="form-control"  placeholder="Bill amount" step="any" required></td>
-                                    <td><input type="number" #paid  ngModel onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" id=".paid{{member.id}}" name="paid{{member.id}}" class="form-control"  placeholder="Money paid" step="any" required></td>
+                                    <td><input type="number"  (focusout)="formCalculateBalances(f)" ngModel onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" id=".price{{member.id}}" name="price{{member.id}}" class="form-control price"  placeholder="Bill amount" step="any" required></td>
+                                    <td><input type="number"   (focusout)="formCalculateBalances(f)" ngModel onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" id=".paid{{member.id}}" name="paid{{member.id}}" class="form-control paid"  placeholder="Money paid" step="any" required></td>
                                     <td>{{member.amount}}</td>
                                 </tr>
                             </tbody>
@@ -58,7 +64,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" id=".sum{{group.id}}"  class="btn btn-primary">Save changes</button>
+                    <button type="submit" id="sum{{group.id}}"  class="btn btn-primary">Save changes</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </form>

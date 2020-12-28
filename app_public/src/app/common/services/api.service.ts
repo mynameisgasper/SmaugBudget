@@ -410,7 +410,6 @@ export class ApiService {
 
   public calculateBalances(pricePaidArrayStringified, group_id): Promise<any> {
     if (this.authorization.getLoggedIn()) {
-      console.log(pricePaidArrayStringified);
       const url: string = `${this.apiUrl}/calculateBalances`; 
       const body = {
         'friends': pricePaidArrayStringified,

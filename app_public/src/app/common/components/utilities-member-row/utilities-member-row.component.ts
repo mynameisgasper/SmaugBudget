@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ElementRef, ViewChild, } from '@angular/core';
-import { UtilitiesEditModalComponent } from '../utilities-edit-modal/utilities-edit-modal.component'
+
 declare var $:any;
 
 @Component({
@@ -10,7 +10,6 @@ declare var $:any;
 export class UtilitiesMemberRowComponent implements OnInit {
 
   constructor(
-    private UtilitiesEditModalComponent: UtilitiesEditModalComponent
   ) { }
 
   ngOnInit(): void {

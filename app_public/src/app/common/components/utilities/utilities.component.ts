@@ -78,7 +78,7 @@ export class UtilitiesComponent implements OnInit {
         for(var group of groups){
             var memberArray = [];
             var members = group.friends;
-            memberArray = this.insertMe(memberArray,group.balance);
+            //memberArray = this.insertMe(memberArray,group.balance);
             var nextToPay = 'Me';
             var min = group.balance;
             for(var member of members){
@@ -244,5 +244,28 @@ export class UtilitiesComponent implements OnInit {
         if (index > -1) {
             this.groups.splice(index, 1);
         }
+    }
+
+    afterCalculatingBalances(group){
+        var groupObject = this.groups.find(groupObject => groupObject.id === group._id)
+        groupObject.Balance = group.balance;
+        var min = group.balance;
+        var next = 'Me';
+        for(var memberMongo of group.friends){
+            for(var memberClass of groupObject.groupMember){
+                if(memberMongo.name == memberClass.name){
+                    memberClass.amount = memberMongo.balance;
+                }
+            }
+            console.log("a" + memberMongo.amount + " " + min);
+            if(memberMongo.balance < min){
+                console.log(memberMongo.ba + " " + min);
+                min = memberMongo.amount;
+                next = memberMongo.name;
+            }
+        }
+        console.log(next);
+        groupObject.Next = next;
+        console.log(groupObject);
     }
 }

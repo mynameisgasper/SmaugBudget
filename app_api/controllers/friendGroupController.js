@@ -143,7 +143,7 @@ function calculateBalances(req, res){
                                     break;
                                 }
                             }
-                            res.status(200).json(user);
+                            res.status(200).json(group);
                         }
                     });
                 }

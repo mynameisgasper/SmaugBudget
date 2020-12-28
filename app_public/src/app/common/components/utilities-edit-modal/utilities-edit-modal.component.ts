@@ -1,8 +1,8 @@
-import { Component, OnInit, Input, ElementRef, ViewChild, Renderer2 } from '@angular/core';
-import { UtilitiesMemberRowComponent } from '../utilities-member-row/utilities-member-row.component'
+import { Component, OnInit, Input, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { FriendGroup } from '../../classes/friendGroup'
 import { NgForm } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
+import { UtilitiesComponent } from '../utilities/utilities.component'
 declare var $:any;
 
 @Component({
@@ -17,33 +17,21 @@ export class UtilitiesEditModalComponent implements OnInit {
 
     pricePaidArray: number[][] = [];
     index: 0;
-
- /* Friend = {
-    "id":"",
-    "Group":"",
-    "Next":"",
-    "Balance":0,
-    "groupMember":[{
-        "id":"",
-        "name":"",
-        "amount":0
-    }]
-  }*/
   
-
   constructor(
     private renderer: Renderer2,
     private elementRef: ElementRef,
     private api: ApiService,
+    private UtilitiesComponent: UtilitiesComponent
     ){ }
-
-    @ViewChild(UtilitiesMemberRowComponent) memberRow;
 
   ngOnInit(): void {
   }
 
   @ViewChild('price') price: ElementRef;
   @ViewChild('paid') paid: ElementRef;
+
+
 
   valueGroupsUtilities(): number {
     const field = this.price.nativeElement;
@@ -77,14 +65,56 @@ export class UtilitiesEditModalComponent implements OnInit {
     }
   }
 
-  disableButtonMember(): void {
+  priceFieldCheckMembers(memberId, value): number {
+    const field = document.getElementById(".price" + memberId);
+    var regex = new RegExp("^[0-9]+(\.[0-9]{1,2})?$");
+    //decimalna števila z največj 2ma decimalnima mestoma ločilo je pika, prva mora biti številka!
+    //črkev male,velike,številke
+    if (!regex.test(value)) {
+        field.style.setProperty("border-color", "red", "important");
+        $('.tt1').toast('show')
+        return 0;
+    } else {
+        field.style.borderColor = "#ced4da";
+        $('.tt1').toast('hide')
+        return 1;
+    }
+  }
+
+  paidFieldCheckMembers(memberId, value): number {
+    const field = document.getElementById(".paid" + memberId);
+    var regex = new RegExp("^[0-9]+(\.[0-9]{1,2})?$");
+    //decimalna števila z največj 2ma decimalnima mestoma ločilo je pika, prva mora biti številka!
+    //črkev male,velike,številke
+    if (!regex.test(value)) {
+        field.style.setProperty("border-color", "red", "important");
+        $('.tt1').toast('show')
+        return 0;
+    } else {
+        field.style.borderColor = "#ced4da";
+        $('.tt1').toast('hide')
+        return 1;
+    }
+  }
+
+  disableButtonMember(pricePaidArray): void {
     var price = this.valueGroupsUtilities();
     var paid = this.valueGroupsUtilities2();
+    
+    var index = 1;
+    for(var member of this.group.groupMember){
+      var memberId = member.id;
+      price = this.priceFieldCheckMembers(memberId, pricePaidArray[index][0]);
+      paid = this.paidFieldCheckMembers(memberId, pricePaidArray[index][1]);
+      index++;
+    }
 
     if (price == 0 || paid == 0 ) {
         //DO NOTHING
     } else {
-        //POST REQUEST - TO BE ADDED
+      this.renderer.setAttribute(document.getElementById("sum" + this.group.id), 'data-dismiss', 'modal');
+      this.calculateBalances(pricePaidArray)
+      this.renderer.removeAttribute(document.getElementById("sum" + this.group.id), 'data-dismiss', 'modal');
     }
   }
   
@@ -115,18 +145,21 @@ export class UtilitiesEditModalComponent implements OnInit {
       }
       kjeSm++;    
     }
-    this.calculateBalances(pricePaidArray)
+
+    this.disableButtonMember(pricePaidArray);
   }
 
   calculateBalances(pricePaidArray){
+    console.log(document.getElementById("sum" + this.group.id))
+    
     this.api.calculateBalances(JSON.stringify(pricePaidArray), this.group.id).then((response) => {
-      //this.renderer.setAttribute(document.getElementById("buttonAddGoal"), 'data-dismiss', 'modal');
-      //this.afterAddGoal(response);
-      //this.renderer.removeAttribute(document.getElementById("buttonAddGoal"), 'data-dismiss', 'modal');
+      this.UtilitiesComponent.afterCalculatingBalances(response);
+      
       //this.hasGoalMessage = false;
     }).catch((error) => {
       //this.goalMessage = "Failed to save goal!";
     });
+    
     /*this.hasGoalMessage = true;
     this.goalMessage = "Saving goal";
 
