@@ -1,9 +1,11 @@
 <!--<div *ngFor="let item of Friend;" class="clickable" data-toggle="modal" data-target="#showGroup{{item.id}}">-->
     <td id="group">{{group.Group}}</td>
     <td id="next">{{group.Next}}</td>
-    <td id="balance">{{group.Balance}}<ng *ngIf="hasDeleteGroupMessage" style="text-align: right;"><b>{{DeleteGroupMessage}}</b></ng></td>
+    <td id="balance">
+        <div style="float:left;width:40%;">{{group.Balance}}</div>
+        <div style="float:right;width:60%;"><ng *ngIf="hasDeleteGroupMessage" style="text-align: right;"><b>{{DeleteGroupMessage}}</b></ng></div>
+    </td>
     <td id="delete">
-        
         <button type="button" class="btn edit-btn" data-toggle="modal" [attr.data-target]="'#showGroup' +group.id"><fa-icon [icon]="faPencilAlt"></fa-icon></button>
         <button (click)="deleteGroup()" class="btn edit-btn" data-toggle="modal"><fa-icon [icon]="faMinusSquare"></fa-icon></button>
     </td>
