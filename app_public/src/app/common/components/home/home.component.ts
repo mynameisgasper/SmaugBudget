@@ -1,7 +1,6 @@
 import { Component, Inject, OnInit, ViewEncapsulation, ElementRef, ViewChild, Renderer2 } from '@angular/core';
 import { DOCUMENT } from '@angular/common'
 import { Router } from "@angular/router"
-import { ApiService } from '../../services/api.service'
 import { AuthenticationService } from '../../services/authentication.service';
 declare var $:any;
 
@@ -12,6 +11,13 @@ declare var $:any;
   encapsulation: ViewEncapsulation.Emulated
 })
 export class HomeComponent implements OnInit {
+
+  hasRegistrationMessage: boolean = false;
+  registrationMessage: string = "";
+
+  hasLoginMessage: boolean = false;
+  loginMessage: string = "";
+
 
   constructor(
     private api: AuthenticationService,
@@ -53,8 +59,10 @@ export class HomeComponent implements OnInit {
 
   register(firstname: string, lastname: string, email1: string, email2: string, password1: string, password2: string): void {
     if (firstname && lastname && email1 && email1 === email2 && password1 && password1 === password2) {
+      this.hasRegistrationMessage = true;
+      this.registrationMessage = "Registration in progress";
+
       this.api.register(firstname, lastname, email1, email2, password1, password2).then((response) => {
-        
         try {
           var elementList = this.document.querySelectorAll('.modal-backdrop');
           for (let i = 0; i < elementList.length; i++) {
@@ -73,6 +81,7 @@ export class HomeComponent implements OnInit {
         
         this.router.navigate(['confirm', response.urlCode]);
       }).catch((error) => {
+        this.registrationMessage = "Registration failed!";
         console.log(error);
       });
     }
@@ -80,8 +89,12 @@ export class HomeComponent implements OnInit {
 
   loginUser(email: string, password: string): void {
     if (email && password) {
+      this.hasLoginMessage = true;
+      this.loginMessage = "Login in progress";
+
       this.api.login(email, password).then((result) => {
         if (result.status && result.status != 200) {
+          this.loginMessage = "Login failed!";
           //Wrong password
         }
         else {
@@ -107,6 +120,7 @@ export class HomeComponent implements OnInit {
         }
       }).catch((error) => {
         this.api.userLoggedIn = null;
+        this.loginMessage = "Login failed!";
         console.log(error);
       })
     }

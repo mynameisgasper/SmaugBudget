@@ -57,6 +57,7 @@
           <input #loginPassword type="password" class="form-control" id="passwordin" placeholder="Password" required>
         </div>        
         <div class="form-button">
+          <p *ngIf="hasLoginMessage" style="display: flex;justify-content: center;"><b>{{loginMessage}}</b></p>
           <input class="btn btn-primary singbut btn-lg btn-block login-btn" (click)="loginUser(loginEmail.value, loginPassword.value)" type="button" value="Login"/>
         </div>
       </div>
@@ -157,6 +158,7 @@
             <input #password2 type="password" class="form-control" id="password2up" placeholder="Confirm Password" (focusout)="passwordIndex()" required="required">
           </div>
           <div class="form-button">
+            <p *ngIf="hasRegistrationMessage" style="display: flex;justify-content: center;"><b>{{registrationMessage}}</b></p>
             <input href="dashboard" id="buttonid" class="btn btn-primary singbut btn-lg btn-block login-btn" type="button" (click)="buttonSignupIndex(firstname.value, lastname.value, email1.value, email2.value, password1.value, password2.value); " value="Create Account" />
           </div>
       </div>
