@@ -117,10 +117,17 @@ const { friendGroupSchema } = require('./friendGroup');
  *     - lastname
  *     - email
  *     - password
- *   PridobiUpPodatke:
+ *   ChangeIncome:
  *    type: object
- *    description: Pridobi podatke za prikaz
- *    
+ *    description: Podatki za spremembo uporabnikove plače
+ *    properties:
+ *     paycheck:
+ *      type: number
+ *     paycheckDate:
+ *      type: number
+ *    required:
+ *     - paycheck
+ *     - paycheckDate
  */
 
 const userSchema = new mongoose.Schema();
