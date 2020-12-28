@@ -379,4 +379,8 @@ export class HistoryComponent implements OnInit {
 
     pdfMake.createPdf(docDefinition).open();    
   }
+
+  changePage(page: number) {
+    console.log(page);
+  }
 }

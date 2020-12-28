@@ -151,6 +151,10 @@ router.post('/addExpense', authentication, (req, res) => {
     envelopes.addExpense(req, res);
 });
 
+router.get('/getExpenses', authentication, (req, res) => {
+    history.getExpenses(req, res);
+});
+
 router.post('/getLastMonthExpenses', authentication, (req, res) => {
     history.getLastMonthExpenses(req, res);
 });

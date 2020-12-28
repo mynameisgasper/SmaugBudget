@@ -3,6 +3,7 @@ const Expense = mongoose.model('Expense');
 const User = mongoose.model('User');
 const Categories = mongoose.model('Categories');
 const jwt_decode = require('jwt-decode');
+const expense = require('../models/expense');
 
 function getLastMonthExpenses(requestBody, res) {
     try {
@@ -200,11 +201,87 @@ function buildArrayFromMap(expenses) {
     return expenseArray;
 }
 
+function getExpenses(req, res) {
+    try {
+        const authorization = req.headers.authorization;
+        if (authorization) {
+            const token = authorization.split(' ')[1];
+            const decodedToken = jwt_decode(token);
+    
+            const userId = decodedToken._id;
+            const filter = req.query.filter;
+            const limit = parseInt(req.query.limit);
+            const offset = parseInt(req.query.offset);
+            
+            User.findById(userId, (err, user) => {
+                if (err) {
+                    const response = {
+                        status: "Server error"
+                    };
+                    res.status(500).json(response);
+                }
+                
+                const allExpenses = user.expense;
+                const length = user.expense.length;
 
+                var filteredExpenses = [];
+                if (filter) {
+                    for (e of allExpenses) {
+                        if (e.recipient.toUpperCase().includes(filter.toUpperCase()) || e.category.name.toUpperCase().includes(filter.toUpperCase())) {
+                            filteredExpenses.push(e);
+                        }
+                    }
+                }
+                else {
+                    filteredExpenses = allExpenses;
+                }
+                
+                var paginatedExpenses = [];
+                if (!limit || limit == 0) {
+                    if (!offset || offset == 0) {
+                        paginatedExpenses = filteredExpenses;
+                    }
+                    else {
+                        for (var i = offset; i < filteredExpenses.length; i++) {
+                            paginatedExpenses.push(filteredExpenses[i]);
+                        }
+                    }
+                }
+                else {
+                    if (!offset || offset == 0) {
+                        for (var i = 0; (i < limit) && (i < filteredExpenses.length); i++) {
+                            paginatedExpenses.push(filteredExpenses[i]);
+                        }
+                    }
+                    else {
+                        for (var i = offset; (i < offset + limit) && (i < filteredExpenses.length); i++) {
+                            paginatedExpenses.push(filteredExpenses[i]);
+                        }
+                    }
+                }
+                
+                const response = {
+                    length: length,
+                    filter: filter,
+                    expenses: paginatedExpenses
+                };
+                res.status(200).json(response);
+            });
+        }
+    } catch (exception) {
+        const response = {
+            status: "Server error"
+        };
+        res.status(500).json(response);
+    }
+}
 
 module.exports = {
     editExpense: function(req, res) {
         editExpense(req, res);
+    },
+    getExpenses: function(req, res) {
+        getExpenses(req, res);
     },
     getLastMonthExpenses: function(req, res) {
         getLastMonthExpenses(req.body, res);
