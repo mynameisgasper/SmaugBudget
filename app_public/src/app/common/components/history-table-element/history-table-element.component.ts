@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, ElementRef, ViewChild, Renderer2 } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
+import { Expense } from '../../classes/expense';
 import { ApiService } from '../../services/api.service';
 declare var $:any;
 
@@ -14,21 +15,10 @@ export class HistoryTableElementComponent implements OnInit {
   faPencilAlt = faPencilAlt
 
   @Input()
-  Expense = {
-    "id":"",
-    "year":"",
-    "month":"",
-    "monthName":"",
-    "day":"",
-    "category":"",
-    "recipient":"",
-    "value":0,
-    "currency":"",
-    "color":""
-  }
+  Expense: Expense;
 
   @Input()
-  Currency: string
+  Currency: string;
 
   @Input()
   Categories =   {
@@ -37,6 +27,10 @@ export class HistoryTableElementComponent implements OnInit {
     "_id":"",
     "name":""
   }
+
+  year: number = 2020;
+  month: number = 1;
+  day: number = 1;
 
   constructor(
     private renderer: Renderer2,
@@ -50,6 +44,10 @@ export class HistoryTableElementComponent implements OnInit {
   @ViewChild('date') date: ElementRef;
 
   ngOnInit(): void {
+    const date: Date = new Date(this.Expense.date);
+    this.day = date.getDate();
+    this.month = date.getMonth();
+    this.year = date.getFullYear();
   }
 
   editExpense(): void {
@@ -62,15 +60,15 @@ export class HistoryTableElementComponent implements OnInit {
       ).then(result => {      
       }).catch(error => console.log(error));
       this.Expense.category = this.category.nativeElement.value;
-      this.Expense.id = this.id.nativeElement.value;
+      this.Expense._id = this.id.nativeElement.value;
       this.Expense.category = this.category.nativeElement.value;
       this.Expense.recipient = this.name.nativeElement.value;
       this.Expense.value = this.amount.nativeElement.value;
       //this.Expense.date = this.date.nativeElement.value
       let dateArr = this.parseDate(this.date.nativeElement.value);
-      this.Expense.day = dateArr[2];
-      this.Expense.month = dateArr[1];
-      this.Expense.year = dateArr[0];
+      this.day = parseInt(dateArr[2]);
+      this.month = parseInt(dateArr[1]);
+      this.year = parseInt(dateArr[0]);
   }
 
   nameEditHistory(): number {

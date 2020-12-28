@@ -1,21 +1,21 @@
-<td class="date align-middle" id="date{{Expense.id}}">
-    <div class="text-muted" id="year{{Expense.id}}">{{Expense.year}}</div>
-    <div class="text-muted font-weight-bold" id="month{{Expense.id}}">{{Expense.monthName}}</div>
-    <div class="text-muted font-weight-bold" id="day{{Expense.id}}">{{Expense.day}}</div>
+<td class="date align-middle" id="date{{Expense._id}}">
+    <div class="text-muted" id="year{{Expense._id}}">{{year}}</div>
+    <div class="text-muted font-weight-bold" id="month{{Expense._id}}">{{month | monthNumberPipe}}</div>
+    <div class="text-muted font-weight-bold" id="day{{Expense._id}}">{{day | doubleDigit}}</div>
 </td>
-<td class="sredina" id="category{{Expense.id}}">{{Expense.category}}</td>
-<td class="sredina" id="receiver{{Expense.id}}">{{Expense.recipient}}</td>
-<td class="cena align-middle" id="value{{Expense.id}}">
-    <span id="price{{Expense.id}}">{{Expense.value}} </span><span id="currency{{Expense.id}}"> {{Expense.currency}}</span>
-    <input type="hidden" id="color{{Expense.id}}" value="{{Expense.color}}">
+<td class="sredina" id="category{{Expense._id}}">{{Expense.category.name}}</td>
+<td class="sredina" id="receiver{{Expense._id}}">{{Expense.recipient}}</td>
+<td class="cena align-middle" id="value{{Expense._id}}">
+    <span id="price{{Expense._id}}">{{Expense.value}} </span><span id="currency{{Expense._id}}"> {{Expense.currency}}</span>
+    <input type="hidden" id="color{{Expense._id}}" value="{{Expense.category.color}}">
 </td>
 <td class="zadnji align-middle">
-    <button type="button" class="btn p" data-toggle="modal" [attr.data-target]="'#editForm' + Expense.id"><fa-icon [icon]="faPencilAlt"></fa-icon></button>
+    <button type="button" class="btn p" data-toggle="modal" [attr.data-target]="'#editForm' + Expense._id"><fa-icon [icon]="faPencilAlt"></fa-icon></button>
 </td>
-<div class="modal fade expensesModal" id="editForm{{Expense.id}}" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
+<div class="modal fade expensesModal" id="editForm{{Expense._id}}" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
     <div class="position-absolute w-100 p-4 d-flex flex-column align-items-end">
         <div class="w-25 toastek">
-            <div class="toast ml-auto historyName{{Expense.id}}" role="alert" data-delay="3000" data-autohide="false">
+            <div class="toast ml-auto historyName{{Expense._id}}" role="alert" data-delay="3000" data-autohide="false">
                 <div class="toast-header">
                     <strong class="mr-auto text-primary">HINT</strong>
                     <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
@@ -26,7 +26,7 @@
                     Input may only contain letters, numbers and some special characters (_@./#&+-: and whitespace). Length allowed: 1-20
                 </div>
             </div>
-            <div class="toast ml-auto historyNumber{{Expense.id}}" role="alert" data-delay="1000" data-autohide="false">
+            <div class="toast ml-auto historyNumber{{Expense._id}}" role="alert" data-delay="1000" data-autohide="false">
                 <div class="toast-header">
                     <strong class="mr-auto text-primary">HINT</strong>
                     <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
@@ -37,7 +37,7 @@
                     Input may only contain decimal numbers separated by .  with max 2 decimal places.
                 </div>
             </div> 
-            <div class="toast ml-auto historyDate{{Expense.id}}" id="date-hint" role="alert" data-delay="3000" data-autohide="false">
+            <div class="toast ml-auto historyDate{{Expense._id}}" id="date-hint" role="alert" data-delay="3000" data-autohide="false">
                 <div class="toast-header">
                     <strong class="mr-auto text-primary">HINT</strong>
                     <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
@@ -57,18 +57,18 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <input #id type="hidden" name="id" value="{{Expense.id}}">
+            <input #id type="hidden" name="id" value="{{Expense._id}}">
             <div class="modal-body">
                 <div class="ena"><label for="inputGoal">Category</label>
-                    <select #category name="kategorija" id="inputCategory{{Expense.id}}" class="form-control">
-                        <option selected>{{Expense.category}}</option>
-                        <option *ngFor ="let category of Categories" id="categoryName{{category.id}}">{{category.name}}</option>
+                    <select #category name="kategorija" id="inputCategory{{Expense._id}}" class="form-control">
+                        <option selected>{{Expense.category.name}}</option>
+                        <option *ngFor ="let category of Categories" id="categoryName{{category._id}}">{{category.name}}</option>
                     </select>
                 </div>
                 <div class="ena">
                     <label for="Payee">Recipient</label><br>
-                    <input type="text" #name id=".historyName{{Expense.id}}" name="prejemnik" class="form-control" placeholder="e.g. Elektro Ljubljana d.d." (focusout)="nameEditHistory()" value="{{Expense.recipient}}"required="required">
-                    <div id="{{Expense.id}}txt"></div>
+                    <input type="text" #name id=".historyName{{Expense._id}}" name="prejemnik" class="form-control" placeholder="e.g. Elektro Ljubljana d.d." (focusout)="nameEditHistory()" value="{{Expense.recipient}}"required="required">
+                    <div id="{{Expense._id}}txt"></div>
                 </div>
                 <div class="ena">
                     <label for="Amount">Amount</label><br>
@@ -76,13 +76,13 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">{{Currency}}</span>
                             </div>
-                    <input type="number" #amount id=".historyNumber{{Expense.id}}" name="vsota" class="form-control" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" (focusout)="amountEditHistory()" placeholder="e.g. $150.30" value="{{Expense.value}}" step="any"required="required">
-                    <div id="{{Expense.id}}amm"></div>
+                    <input type="number" #amount id=".historyNumber{{Expense._id}}" name="vsota" class="form-control" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" (focusout)="amountEditHistory()" placeholder="e.g. $150.30" value="{{Expense.value}}" step="any"required="required">
+                    <div id="{{Expense._id}}amm"></div>
                     </div>
                 </div>
                 <div class="ena">
                     <label for="datum">Date</label><br>
-                    <input type="date" #date id=".historyDate{{Expense.id}}" name="datumcek" (focusout)="dateEditHistory()"class="form-control" value="{{Expense.year}}-{{Expense.month}}-{{Expense.day}}" required="required">
+                    <input type="date" #date id=".historyDate{{Expense._id}}" name="datumcek" (focusout)="dateEditHistory()"class="form-control" value="{{year}}-{{month + 1}}-{{day}}" required="required">
                 </div>
             </div>
             <div class="modal-footer">

@@ -69,7 +69,7 @@
                 <div class="table-responsive" data-aos="fade-up" data-aos-duration="500">
                     <table class="table" id="table">
                         <tbody>
-                            <tr [history-table-row] *ngFor="let item of expenses | slice: (page-1) * pageSize : page * pageSize" [Expense]='item' [Currency]='currency' [Categories]='categories'></tr>
+                            <tr [history-table-row] *ngFor="let item of paginatedExpenses" [Expense]='item' [Currency]='currency' [Categories]='categories'></tr>
                         </tbody>
                     </table>
                 </div>

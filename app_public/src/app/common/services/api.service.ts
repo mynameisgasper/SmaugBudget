@@ -140,6 +140,20 @@ export class ApiService {
     }
   }
 
+  public getExpense(filter?: string, limit?: number, offset?: number): Promise<Object> {
+    if (this.authorization.getLoggedIn()) {
+      const url: string = `${this.apiUrl}/getExpenses?filter=${filter}&limit=${limit}&offset=${offset}`;  
+      const options = {
+        headers: new HttpHeaders().set('Authorization', this.authorization.generateCompleteJwt())
+      }
+
+      return this.http.get(url, options).toPromise().then(response => response).catch(err => this.parseError(err));
+    }
+    else {
+      this.parseError('Error');
+    }
+  }
+
   public addGoal(name, category, amount, date): Promise<any> {
     if (this.authorization.getLoggedIn()) {
       const url: string = `${this.apiUrl}/addGoal`; 

@@ -8,6 +8,7 @@ import * as pdfMake from "pdfmake/build/pdfmake";
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication.service';
+import { Expense } from '../../classes/expense';
 
 declare var $:any;
 
@@ -21,8 +22,6 @@ export class HistoryComponent implements OnInit {
   public categories: Array<Object> = [];
   public currency: string;
   public expenses: Array<Object> = [];
-  public page: number = 1;
-  public pageSize: number = 10;
   fileName: string = "history";
   graph: Object = {
     "used": true,
@@ -54,6 +53,11 @@ export class HistoryComponent implements OnInit {
   chartLabels2: Array<string> = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
   chartType2: string = "line";
 
+  paginatedExpenses: Array<Expense> = [];
+  expenseCount: number = 0;
+  page: number = 1;
+  pageSize: number = 10
+
   constructor(
     private api: ApiService,
     @Inject(DOCUMENT) private document: HTMLDocument,
@@ -81,6 +85,14 @@ export class HistoryComponent implements OnInit {
       this.chartLabels1 = this.makeLabelArray1(pieChart);
       this.chartData2 = this.generateDatasets(lineChartData);
       this.chartColors2 = this.getColors(lineChartData);
+    }).catch(error => {
+      this.authentication.logout();
+      this.router.navigate(['']);
+    });
+
+    this.api.getExpense('', this.pageSize, (this.page - 1) * this.pageSize).then(result => {
+      this.expenseCount = result['length'];
+      this.paginatedExpenses = result['expenses'];
     }).catch(error => {
       this.authentication.logout();
       this.router.navigate(['']);
@@ -381,6 +393,13 @@ export class HistoryComponent implements OnInit {
   }
 
   changePage(page: number) {
-    console.log(page);
+    this.page = page;
+    
+    this.api.getExpense('', this.pageSize, (page - 1) * this.pageSize).then(result => {
+      this.paginatedExpenses = result['expenses'];
+    }).catch(error => {
+      this.authentication.logout();
+      this.router.navigate(['']);
+    });
   }
 }
