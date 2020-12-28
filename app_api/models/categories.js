@@ -1,5 +1,26 @@
 const mongoose = require('mongoose');
+
+/**
+ * @swagger
+ * components:
+ *  schemas:
+ *   Categories:
+ *    type: object
+ *    properties:
+ *     name:
+ *      type: string
+ *     color:
+ *      type: string
+ *     basic:
+ *      type: boolean
+ *    required:
+ *     - name
+ *     - color
+ *     - basic
+ */
+
 const categorySchema = new mongoose.Schema();
+
 categorySchema.add({
     name: { type: String, required: true },
     color: { type: String, required: true, default: 'rgb(47, 201, 30)' },

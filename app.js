@@ -9,6 +9,36 @@ const session = require('express-session');
 require('dotenv').config();
 var passport = require('passport');
 require('./app_api/config/passport');
+var swaggerJsdoc = require('swagger-jsdoc');
+var swaggerUi = require('swagger-ui-express');
+
+var swaggerOptions = {
+    swaggerDefinition: {
+      openapi: "3.0.0",
+      info: {
+        title: "SmaugBudget",
+        version: "1.0.0",
+        description: "SmaugBudget REST API"
+      },
+      license: {
+        name: "GNU LGPLv3",
+        url: "https://choosealicense.com/licenses/lgpl-3.0"
+      },
+      contact: {
+        name: "Gasper Stepec"
+      },
+      servers: [
+        { url: "http://localhost:8080/api" },
+        { url: "https://edugeocache-sp-2020-2021.herokuapp.com/api" }
+      ]
+    },
+    apis: [
+      "./app_api/models/lokacije.js",
+      "./app_api/models/uporabniki.js", 
+      "./app_api/routes/index.js"
+    ]
+  };
+  const swaggerDocument = swaggerJsdoc(swaggerOptions);
 
 var app = express();
 
@@ -69,6 +99,13 @@ app.use('/api', apiRouter);
 //Path was not recognized, return 404
 app.all('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'app_public', 'build', 'index.html'));
+});
+
+//OpenAPI
+
+apiRouter.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+apiRouter.get("/swagger.json", (req, res) => {
+  res.status(200).json(swaggerDocument);
 });
 
 module.exports = {

@@ -1,4 +1,21 @@
 const mongoose = require('mongoose');
+
+/**
+ * @swagger
+ * components:
+ *  schemas:
+ *   Currency:
+ *    type: object
+ *    properties:
+ *     currency:
+ *      type: string
+ *     value:
+ *      type: integer
+ *    required:
+ *     - currency
+ *     - value
+ */
+
 const currencySchema = new mongoose.Schema();
 
 currencySchema.add({

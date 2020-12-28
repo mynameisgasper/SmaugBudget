@@ -1,6 +1,46 @@
 const mongoose = require('mongoose');
 const { categorySchema } = require('./categories')
 
+/**
+ * @swagger
+ * components:
+ *  schemas:
+ *   addEnvelope:
+ *    type: object
+ *    properties:
+ *     category:
+ *      type: string
+ *     budget:
+ *      type: Number
+ *     color:
+ *      type: string
+ *     month:
+ *      type: string
+ *    required:
+ *     - category
+ *     - value
+ *     - budget
+ *     - color
+ *     - month
+ *   editEnvelope:
+ *    type: object
+ *    properties:
+ *     id:
+ *      type: string
+ *     budget:
+ *      type: Number
+ *    required:
+ *     - id
+ *     - budget
+ *   deleteEnvelope:
+ *    type: object
+ *    properties:
+ *     id:
+ *      type: string
+ *    required:
+ *     - id
+ */
+
 const envelopesSchema = new mongoose.Schema();
 envelopesSchema.add({
     progress: { type: Number, required: true },

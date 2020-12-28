@@ -22,7 +22,6 @@ const authentication = jwt({
   });
   
 
-//Index
 router.all('/', (req, res) => {
     res.sendStatus(404);
 });

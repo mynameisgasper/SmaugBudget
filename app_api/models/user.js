@@ -7,6 +7,57 @@ const { categorySchema } = require('./categories');
 const { expenseSchema } = require('./expense');
 const { friendGroupSchema } = require('./friendGroup');
 
+
+/**
+ * @swagger
+ * components:
+ *  schemas:
+ *   UporabnikPrijava:
+ *    type: object
+ *    description: Podatki uporabnika za prijavo
+ *    properties:
+ *     email:
+ *      type: string
+ *      description: elektronski naslov
+ *      example: smaug@gold.si
+ *     password:
+ *      type: string
+ *      format: password
+ *      example: SmaugPass1
+ *    required:
+ *     - email
+ *     - password
+ *   UporabnikRegistracija:
+ *    type: object
+ *    description: Podatki uporabnika za registracijo
+ *    properties:
+ *     firstname:
+ *      type: string
+ *      description: ime
+ *      example: Gasper
+ *     lastname:
+ *      type: string
+ *      description: priimek
+ *      example: Stepec
+ *     email:
+ *      type: string
+ *      description: elektronski naslov
+ *      example: smaug@gold.si
+ *     password:
+ *      type: string
+ *      format: password
+ *      example: SmaugPass1
+ *    required:
+ *     - firstname
+ *     - lastname
+ *     - email
+ *     - password
+ *   PridobiUpPodatke:
+ *    type: object
+ *    description: Pridobi podatke za prikaz
+ *    
+ */
+
 const userSchema = new mongoose.Schema();
 const connectionsSchema = new mongoose.Schema();
 

@@ -1,5 +1,21 @@
 const mongoose = require('mongoose');
 
+/**
+ * @swagger
+ * components:
+ *  schemas:
+ *   Friend:
+ *    type: object
+ *    properties:
+ *     name:
+ *      type: string
+ *     balance:
+ *      type: integer
+ *    required:
+ *     - name
+ *     - balance
+ */
+
 const friendSchema = new mongoose.Schema();
 
 friendSchema.add({
