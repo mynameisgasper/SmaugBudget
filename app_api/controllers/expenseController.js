@@ -225,16 +225,18 @@ function getExpenses(req, res) {
                     const allExpenses = user.expense;
                     const length = user.expense.length;
 
+                    const orderedExpenses = allExpenses.sort((a, b) => b.date - a.date);
+
                     var filteredExpenses = [];
                     if (filter) {
-                        for (e of allExpenses) {
+                        for (e of orderedExpenses) {
                             if (e.recipient.toUpperCase().includes(filter.toUpperCase()) || e.category.name.toUpperCase().includes(filter.toUpperCase())) {
                                 filteredExpenses.push(e);
                             }
                         }
                     }
                     else {
-                        filteredExpenses = allExpenses;
+                        filteredExpenses = orderedExpenses;
                     }
                     
                     var paginatedExpenses = [];
