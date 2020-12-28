@@ -4,6 +4,7 @@ import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 import { ApiService } from '../../services/api.service';
 import { Card } from '../../classes/card';
 import { Envelope } from '../../classes/envelope';
+import { AuthenticationService } from '../../services/authentication.service';
 declare var $:any;
 
 @Component({
@@ -16,7 +17,8 @@ export class EnvelopesComponent implements OnInit {
   constructor(
     private api: ApiService,
     private renderer: Renderer2,
-    private router: Router) { }
+    private router: Router, 
+    private authentication: AuthenticationService) { }
 
   cards: Card[]
   public envelopes: Array<Envelope>;
@@ -43,12 +45,21 @@ export class EnvelopesComponent implements OnInit {
   currentMonth = this.getCurrentMonth(new Date().getMonth());
   currency = "EUR";
 
+  hasAddEnvelopeMessage: boolean = false;
+  addEnvelopeMessage: string = ""; 
+
+  hasAddExpenseMessage: boolean = false;
+  addExpenseMessage: string = ""; 
+
   ngOnInit(): void {
     this.api.getUser().then(result => {
       this.cards = this.generateCards(result.envelopes);
       this.envelopes = result.envelopes;
       this.categories = this.getCategories(result.categories);
-    }).catch(error => console.log(error));
+    }).catch(error => {
+      this.authentication.logout();
+      this.router.navigate(['']);
+    });
   }
 
   @ViewChild('selectCategoryAdd') selectCategoryAdd: ElementRef;
@@ -77,12 +88,21 @@ export class EnvelopesComponent implements OnInit {
       }
     }
 
+    this.hasAddExpenseMessage = true;
+    this.addExpenseMessage = 'Saving expense';
+
     this.api.addExpense(
       this.amountExpense.nativeElement.value,
       this.categoryExpense.nativeElement.value,
       this.nameExpense.nativeElement.value,
       this.dateExpense.nativeElement.value
-    ).then(result => { this.cards = this.generateCards(this.envelopes) }).catch(error => console.log(error));
+    ).then(result => { 
+      this.renderer.setAttribute(document.getElementById("buttonAddExpense"), 'data-dismiss', 'modal');
+      this.cards = this.generateCards(this.envelopes);
+      this.renderer.removeAttribute(document.getElementById("buttonAddExpense"), 'data-dismiss', 'modal');
+    }).catch(error => {
+      this.addExpenseMessage = 'Failed saving exepse!';
+    });
       
   }
 
@@ -95,17 +115,38 @@ export class EnvelopesComponent implements OnInit {
         this.colorAdd.nativeElement.value,
         this.setMonthNumber - 1
       ).then(result => {
+        this.renderer.setAttribute(document.getElementById("buttonAddEnvelopes"), 'data-dismiss', 'modal');
         this.categories.push(result.category);
         this.envelopes.push(result.envelope);
-      }).catch(error => console.log(error));
+        this.renderer.removeAttribute(document.getElementById("buttonAddEnvelopes"), 'data-dismiss', 'modal');
+        this.router.navigate(['/envelopes']);
+      }).catch(error => {
+        if (error.includes('304 Not Modified')) {
+          this.addEnvelopeMessage = "Envelope already exists!";
+        }
+        else {
+          this.addEnvelopeMessage = "Failed saving envelope";
+        }
+      });
     } else {
       this.api.addEnvelope(
         this.selectCategoryAdd.nativeElement.value,
         this.amountAdd.nativeElement.value,
         this.colorAdd.nativeElement.value,
         this.setMonthNumber - 1
-      ).then(result => this.envelopes.push(result.envelope)).catch(error => console.log(error));
-      this.router.navigate(['/envelopes'])
+      ).then(result => {
+        this.renderer.setAttribute(document.getElementById("buttonAddEnvelopes"), 'data-dismiss', 'modal');
+        this.envelopes.push(result.envelope);
+        this.renderer.removeAttribute(document.getElementById("buttonAddEnvelopes"), 'data-dismiss', 'modal');
+        this.router.navigate(['/envelopes']);
+      }).catch(error => {
+        if (error.includes('304 Not Modified')) {
+          this.addEnvelopeMessage = "Envelope already exists!";
+        }
+        else {
+          this.addEnvelopeMessage = "Failed saving envelope";
+        }
+      });
     }
   }
 
@@ -268,9 +309,10 @@ export class EnvelopesComponent implements OnInit {
     if (amount == 0) {
         //DO NOTHING
     } else {
-      this.renderer.setAttribute(document.getElementById("buttonAddEnvelopes"), 'data-dismiss', 'modal');
+      this.hasAddEnvelopeMessage = true;
+      this.addEnvelopeMessage = "Saving envelope"; 
+
       this.addEnvelope()
-      this.renderer.removeAttribute(document.getElementById("buttonAddEnvelopes"), 'data-dismiss', 'modal');
     }
 }
 
@@ -283,9 +325,7 @@ export class EnvelopesComponent implements OnInit {
     if (amount == 0 || name == 0 || date == 0) {
         //DO NOTHING
     } else {
-      this.renderer.setAttribute(document.getElementById("buttonAddExpense"), 'data-dismiss', 'modal');
       this.addExpense()
-      this.renderer.removeAttribute(document.getElementById("buttonAddExpense"), 'data-dismiss', 'modal');
     }
   }
 

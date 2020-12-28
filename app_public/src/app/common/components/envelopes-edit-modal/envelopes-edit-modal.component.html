@@ -38,6 +38,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
+                    <p *ngIf="hasEditEnvelopeMessage"><b>{{editEnvelopeMessage}}</b></p>
                     <button id="buttonEditEnvelopes{{Envelope._id}}" (click)="buttonEditEnvelopes()" class="btn btn-primary">Add</button>
                 </div>
             </form>
