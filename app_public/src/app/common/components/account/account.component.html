@@ -62,7 +62,8 @@
         </div>
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-            <button type="submit" id="userInfoButton" (click)="disableButton()" class="btn btn-primary" style="float: right;">{{data.saveChanges}}</button>
+                <b *ngIf="hasChangeUserMessage">{{changeUserMessage}}</b>
+                <button type="submit" id="userInfoButton" (click)="disableButton()" class="btn btn-primary" style="float: right;">{{data.saveChanges}}</button>
             </div>
         </div>
         </form>
@@ -82,27 +83,32 @@
         <div class="row">
             <label id="languageChangeLbl" for="languageChange" class="col-5 col-sm-4 col-md-4 col-lg-4 col-xl-4">{{data.language}}:</label>
             <div class="dropdown col-sm-4 col-md-4 col-lg-4 col-xl-4">
-            <button class="btn btn-secondary dropdown-toggle col-sm-12 col-md-12 col-lg-12 col-xl-12" type="button" id="languageChange" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                {{defaultLanguage}}
-            </button>
-            <div class="dropdown-menu" aria-labelledby="languageChange">
-                <a class="dropdown-item" (click)="changeLanguage('English')">English</a>
-                <a class="dropdown-item" (click)="changeLanguage('Slovenski')">Slovenski</a>
+                <button class="btn btn-secondary dropdown-toggle col-sm-12 col-md-12 col-lg-12 col-xl-12" type="button" id="languageChange" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{defaultLanguage}}
+                </button>
+                <div class="dropdown-menu" aria-labelledby="languageChange">
+                    <a class="dropdown-item" (click)="changeLanguage('English')">English</a>
+                    <a class="dropdown-item" (click)="changeLanguage('Slovenski')">Slovenski</a>
+                </div>
             </div>
+            <div class="dropdown col-sm-4 col-md-4 col-lg-4 col-xl-4" *ngIf="hasChangeLanguageMessage">
+                <b>{{changeLanguageMessage}}</b>
             </div>
         </div>
         <div class="row">
-        <label id="currencyChangeLbl" for="currencyChange" class="col-5 col-sm-4 col-md-4 col-lg-4 col-xl-4">{{data.currency}}:</label>
-        <div class="dropdown col-sm-4 col-md-4 col-lg-4 col-xl-4">
-            <button class="btn btn-secondary dropdown-toggle col-sm-12 col-md-12 col-lg-12 col-xl-12" type="button" id="currencyChange" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            {{defaultCurrency}}
-            </button>
-            <div class="dropdown-menu dropdown-menu-right scrollable-menu" aria-labelledby="currencyChange">
-            
-            <a *ngFor="let item of data.data_currency" class="dropdown-item" (click)="this.changeCurrency(item.key)">{{item.name}} ({{item.key}})</a>
-            
+            <label id="currencyChangeLbl" for="currencyChange" class="col-5 col-sm-4 col-md-4 col-lg-4 col-xl-4">{{data.currency}}:</label>
+            <div class="dropdown col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                <button class="btn btn-secondary dropdown-toggle col-sm-12 col-md-12 col-lg-12 col-xl-12" type="button" id="currencyChange" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{defaultCurrency}}
+                </button>
+                <div class="dropdown-menu dropdown-menu-right scrollable-menu" aria-labelledby="currencyChange">
+                    <a *ngFor="let item of data.data_currency" class="dropdown-item" (click)="this.changeCurrency(item.key)">{{item.name}} ({{item.key}})</a>
+                </div>
             </div>
-        </div>
+            <div class="dropdown col-sm-4 col-md-4 col-lg-4 col-xl-4" *ngIf="hasChangeCurrencyMessage">
+                <b>{{changeCurrencyMessage}}</b>
+            </div>
+
         </div>
     </div>
     </div>

@@ -4,6 +4,8 @@ import { faPlusSquare, faTrashAlt, faCamera, faPencilAlt } from '@fortawesome/fr
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { ApiService } from '../../services/api.service';
+import { Router } from '@angular/router';
+import { AuthenticationService } from '../../services/authentication.service';
 declare var $:any;
 
 declare var getTranslation: any;
@@ -29,6 +31,8 @@ export class AccountComponent implements OnInit {
 
     constructor(
         private api: ApiService,
+        private router: Router, 
+        private authentication: AuthenticationService,
         private renderer: Renderer2,
         private elementRef: ElementRef,
         @Inject(DOCUMENT) private document: HTMLDocument
@@ -43,7 +47,10 @@ export class AccountComponent implements OnInit {
         this.defaultLanguage = result.language;
         this.categories = result.categories;
         this.refreshLanguage(result.language);
-      }).catch(error => console.log(error));
+      }).catch(error => {
+        this.authentication.logout();
+        this.router.navigate(['']);  
+      });
   }
   
   hasUrl = false;
@@ -51,6 +58,15 @@ export class AccountComponent implements OnInit {
   faTrashAlt = faTrashAlt;
   faCamera = faCamera;
   faPencilAlt = faPencilAlt;
+
+  hasChangeLanguageMessage: boolean = false;
+  changeLanguageMessage: string = "";
+
+  hasChangeCurrencyMessage: boolean = false;
+  changeCurrencyMessage: string = "";
+
+  hasChangeUserMessage: boolean = false;
+  changeUserMessage: string = "";
 
   data = {
       "HINT": getTranslation("HINT"),
@@ -128,26 +144,34 @@ export class AccountComponent implements OnInit {
 
   changeLanguage(language: string) {
     setInnerTextById("languageChange", language);
+    this.hasChangeLanguageMessage = true;
+    this.changeLanguageMessage = 'Saving language';
     
     this.api.setLanguage(getValueById("emailInput"), language).then((response) => {
         this.refreshLanguage(response.language);
         
       }).catch((error) => {
-        console.log(error);
+        this.changeLanguageMessage = 'Failed to save!';
       });
 }
 
 changeCurrency(curr: string) {
     setInnerTextById("currencyChange", curr);
+    this.hasChangeCurrencyMessage = true;
+    this.changeCurrencyMessage = 'Saving currency';
     
     this.api.setDefaultCurrency(getValueById("emailInput"), curr).then((response) => {
         
       }).catch((error) => {
-        console.log(error);
+        this.changeCurrencyMessage = 'Failed to save!';
+
       });
 }
 
 updateUserInfo() {
+    this.hasChangeUserMessage = true;
+    this.changeUserMessage = "Saving user";
+
     this.api.updateUser(getValueById("emailInput"), getValueById("nameInput"), getValueById("lastnameInput")).then((response) => {
         try {
           var elementList = this.document.querySelectorAll('.modal-backdrop');
@@ -166,7 +190,7 @@ updateUserInfo() {
         catch {}
         
       }).catch((error) => {
-        console.log(error);
+        this.changeUserMessage = "Failed to save!";
       });
 }
 
