@@ -31,16 +31,16 @@
     
     <div id="accountBody"  class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
         <h2>{{data.title}}</h2>
-        <form name="userInfo" method="post" action="/account" onsubmit="return disableButton()">
+        <form name="userInfo">
         <div class="row">
             <div class="del-margin col-sm-12 col-md-9 col-lg-9 col-xl-9">
             <div class="row">
                 <input type="hidden" name="formType" value="changeName">
                 <label id="nameInputLbl" for="nameInput" class="col-sm-3 col-md-3 col-lg-2 col-xl-2">{{data.firstName}}:</label>
-                <input type="text" id="nameInput" name="firstName" placeholder="{{data.firstName}}" value="{{firstName}}" class="form-control col-sm-3 col-md-3 col-lg-3 col-xl-3" onfocusout="nameRegex()" required="required">
+                <input type="text" id="nameInput" name="firstName" placeholder="{{data.firstName}}" value="{{firstName}}" class="form-control col-sm-3 col-md-3 col-lg-3 col-xl-3" (focusout)="nameRegex()" required="required">
             
                 <label id="lastnameInputLbl" for="lastnameInput" class="col-sm-3 col-md-3 col-lg-4 col-xl-4">{{data.lastName}}:</label>
-                <input type="text" id="lastnameInput" name="lastName" placeholder="{{data.lastName}}" value="{{lastName}}" class="form-control col-sm-3 col-md-3 col-lg-3 col-xl-3" onfocusout="surnameRegex()" required="required">
+                <input type="text" id="lastnameInput" name="lastName" placeholder="{{data.lastName}}" value="{{lastName}}" class="form-control col-sm-3 col-md-3 col-lg-3 col-xl-3" (focusout)="surnameRegex()" required="required">
             </div>
             <div class="row">
                 <label id="passwordChangeLbl" for="passwordChange" class="col-sm-3 col-md-3 col-lg-2 col-xl-2">{{data.password}}:</label>
@@ -62,7 +62,7 @@
         </div>
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-            <button type="submit" id="userInfoButton" onclick="disableButton()" class="btn btn-primary" style="float: right;">{{data.saveChanges}}</button>
+            <button type="submit" id="userInfoButton" (click)="disableButton()" class="btn btn-primary" style="float: right;">{{data.saveChanges}}</button>
             </div>
         </div>
         </form>
@@ -86,8 +86,8 @@
                 {{defaultLanguage}}
             </button>
             <div class="dropdown-menu" aria-labelledby="languageChange">
-                <a class="dropdown-item" onclick="changeLanguage('English')">English</a>
-                <a class="dropdown-item" onclick="changeLanguage('Slovenski')">Slovenski</a>
+                <a class="dropdown-item" (click)="changeLanguage('English')">English</a>
+                <a class="dropdown-item" (click)="changeLanguage('Slovenski')">Slovenski</a>
             </div>
             </div>
         </div>

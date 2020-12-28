@@ -288,6 +288,61 @@ export class ApiService {
     }
   }
 
+  public updateUser(email, firstName, lastName): Promise<any> {
+    if (this.authorization.getLoggedIn()) {
+      console.log(email);
+      const url: string = `${this.apiUrl}/updateUser`; 
+      const body = {
+        'email': email,
+        'firstName': firstName,
+        'lastName': lastName
+      }
+      const options = {
+        headers: new HttpHeaders().set('Authorization', this.authorization.generateCompleteJwt())
+      }
+      return this.http.post(url, body, options).toPromise().then(response => response).catch(err => this.parseError(err));
+    }
+    else {
+      this.parseError('Error');
+    }
+  }
+
+  public setDefaultCurrency(email, currency): Promise<any> {
+    if (this.authorization.getLoggedIn()) {
+      console.log(email);
+      const url: string = `${this.apiUrl}/updateUser`; 
+      const body = {
+        'email': email,
+        'defaultCurrency': currency
+      }
+      const options = {
+        headers: new HttpHeaders().set('Authorization', this.authorization.generateCompleteJwt())
+      }
+      return this.http.post(url, body, options).toPromise().then(response => response).catch(err => this.parseError(err));
+    }
+    else {
+      this.parseError('Error');
+    }
+  }
+
+  public setLanguage(email, language): Promise<any> {
+    if (this.authorization.getLoggedIn()) {
+      console.log(email);
+      const url: string = `${this.apiUrl}/updateUser`; 
+      const body = {
+        'email': email,
+        'language': language
+      }
+      const options = {
+        headers: new HttpHeaders().set('Authorization', this.authorization.generateCompleteJwt())
+      }
+      return this.http.post(url, body, options).toPromise().then(response => response).catch(err => this.parseError(err));
+    }
+    else {
+      this.parseError('Error');
+    }
+  }
+
   private parseError(error: any): Promise<any> {
     console.error('An error has occured', error);
     return Promise.reject(error.message || error);

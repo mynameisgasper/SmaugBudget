@@ -1,15 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ElementRef, ViewChild, Renderer2, Inject } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { faPlusSquare, faTrashAlt, faCamera, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { ApiService } from '../../services/api.service';
+declare var $:any;
 
 declare var getTranslation: any;
 declare var setLanguage: any;
 declare var getLanguage: any;
 declare var getValueById: any;
 declare var setValueById: any;
+declare var getInnerTextById: any;
+declare var setInnerTextById: any;
 
 @Component({
   selector: 'app-account',
@@ -26,7 +30,12 @@ export class AccountComponent implements OnInit {
     defaultLanguage: any;
     categories: any;
 
-  constructor(private api: ApiService) { }
+    constructor(
+        private api: ApiService,
+        private renderer: Renderer2,
+        private elementRef: ElementRef,
+        @Inject(DOCUMENT) private document: HTMLDocument
+    ) { }
 
   ngOnInit(): void {
     this.api.getUser().then(result => {
@@ -91,36 +100,72 @@ export class AccountComponent implements OnInit {
   };
 
   changeLanguage(language: string) {
-    //$("#languageChange")[0].innerText = language;
-    var xhr  = new XMLHttpRequest();                       
-
-    xhr.onload = function() {
-        console.log(this.responseText); 
-        location.reload();
-    }
-
-    xhr.open("POST", "/account");      // open connection
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhr.send("formType=changeLanguage&language="+language);                     // send data
+    setInnerTextById("languageChange", language);
+    
+    this.api.setLanguage(getValueById("emailInput"), language).then((response) => {
+        setLanguage(response.language);
+        
+        this.data.HINT = getTranslation("HINT");
+        this.data.nameHint = getTranslation("nameHint");
+        this.data.surnameHint = getTranslation("surnameHint");
+        this.data.title = getTranslation("account_title");
+        this.data.firstName = getTranslation("firstName");
+        this.data.lastName = getTranslation("lastName");
+        this.data.password = getTranslation("password");
+        this.data.changePassword = getTranslation("changePassword");
+        this.data.email = getTranslation("email");
+        this.data.changeImage = getTranslation("changeImage");
+        this.data.saveChanges = getTranslation("saveChanges");
+        this.data.application = getTranslation("application");
+        this.data.darkMode = getTranslation("darkMode");
+        this.data.language = getTranslation("language");
+        this.data.currency = getTranslation("currency");
+        this.data.categories = getTranslation("categories");
+        this.data.passwordHint = getTranslation("passwordHint");
+        this.data.passwordNoMatch = getTranslation("passwordNoMatch");
+        this.data.oldPassword = getTranslation("oldPassword");
+        this.data.newPassword = getTranslation("newPassword");
+        this.data.confirmPassword = getTranslation("confirmPassword");
+        this.data.close = getTranslation("close");
+        this.data.changeProfilePicture = getTranslation("changeImage");
+        this.data.dragAndDropOr = getTranslation("dragAndDropOr");
+        
+      }).catch((error) => {
+        console.log(error);
+      });
 }
 
 changeCurrency(curr: string) {
-    //$("#currencyChange")[0].innerText = curr;
-    var xhr  = new XMLHttpRequest();                       
-
-    xhr.onload = function() {
-        console.log(this.responseText); 
-    }
-
-    xhr.open("POST", "/account");      // open connection
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhr.send("formType=changeCurrency&currency="+curr);                     // send data
+    setInnerTextById("currencyChange", curr);
+    
+    this.api.setDefaultCurrency(getValueById("emailInput"), curr).then((response) => {
+        
+      }).catch((error) => {
+        console.log(error);
+      });
 }
 
 updateUserInfo() {
-    var forms = document.forms["userInfo"];
-    console.log(forms);
-    //this.disableButton();
+    this.api.updateUser(getValueById("emailInput"), getValueById("nameInput"), getValueById("lastnameInput")).then((response) => {
+        try {
+          var elementList = this.document.querySelectorAll('.modal-backdrop');
+          for (let i = 0; i < elementList.length; i++) {
+            elementList[i].removeAttribute('class');
+          }
+        }
+        catch {}
+        
+        try {
+          var elementList = this.document.querySelectorAll('.modal-open');
+          for (let i = 0; i < elementList.length; i++) {
+            document.removeChild(elementList[i])
+          }
+        }
+        catch {}
+        
+      }).catch((error) => {
+        console.log(error);
+      });
 }
 
 fileToUpload: File = null;
@@ -151,16 +196,14 @@ postFile(fileToUpload: File): Observable<boolean> {
       .pipe(map(() => { return true; }));
 }
 
-/*
 disableButton() {
-    var button = document.getElementById("userInfoButton");
     var name = this.nameRegex();
     var surname = this.surnameRegex();
 
-    if (button || name == 0 || surname == 0) {
+    if (name == 0 || surname == 0) {
         return false;
     } else {
-
+        this.updateUserInfo();
         return true;
     }
 }
@@ -193,36 +236,7 @@ surnameRegex() {
         return 1;
     }
 }
-
-ConNameRegex(element) {
-
-    var regex = new RegExp("^([a-zA-Z0-9 ]){1,20}$");
-    if (!element.value.match(regex)) {
-        element.style.setProperty("border-color", "red", "important");
-        $('.tt5').toast('show');
-        return 0;
-    } else {
-        element.style.borderColor = "#ced4da";
-        $('.tt5').toast('hide');
-        return 1;
-    }
-}
-
-disableButton2(button) {
-    var form = button.parentNode.parentNode;
-    var name = ConNameRegex(button.parentNode.parentNode.getElementsByClassName("connectionName")[0]);
-
-    if (name == 0) {
-        return false;
-    } else {
-        var inputs = form.getElementsByTagName("input");
-        for (var i = 0; i < inputs.length; i++) {
-            inputs[i].removeAttribute("disabled");
-        }
-        
-        return true;
-    }
-}
+/*
 
 passwordStrength(element) {
     //var button = document.getElementById("buttonup");

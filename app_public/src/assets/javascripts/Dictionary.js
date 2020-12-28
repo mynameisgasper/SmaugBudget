@@ -314,7 +314,7 @@ var english = {
 
 function getTranslation (key)  {
     //console.log(language); 
-    switch ("English") {
+    switch (language) {
         case "Slovenski":
             if (slovenian[key]) {
                 return slovenian[key];
