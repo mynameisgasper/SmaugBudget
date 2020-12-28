@@ -15,6 +15,7 @@ declare var getValueById: any;
 declare var setValueById: any;
 declare var getInnerTextById: any;
 declare var setInnerTextById: any;
+declare var rgbToHex: any;
 
 @Component({
   selector: 'app-account',
@@ -45,7 +46,7 @@ export class AccountComponent implements OnInit {
         this.email = result.email;
         this.defaultCurrency = result.defaultCurrency;
         this.defaultLanguage = result.language;
-        this.categories = result.categories;
+        this.categories = this.fixRGBValues(result.categories);
         this.refreshLanguage(result.language);
       }).catch(error => {
         this.authentication.logout();
@@ -112,6 +113,13 @@ export class AccountComponent implements OnInit {
       "changeProfilePicture": getTranslation("changeImage"),
       "dragAndDropOr": getTranslation("dragAndDropOr")
   };
+
+  fixRGBValues(categories: any) {
+      for (var i = 0; i < categories.length; i++) {
+        categories[i].color = rgbToHex(categories[i].color);
+      }
+      return categories;
+  }
 
   refreshLanguage(language: string) {
     setLanguage(language);
