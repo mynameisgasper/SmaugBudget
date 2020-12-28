@@ -54,7 +54,7 @@ app.use((req, res, next) => {
 });
 
 //Import static files
-app.use(express.static('./public'));
+app.use(express.static(path.join(__dirname, 'app_public', 'build')));
 app.use(passport.initialize());
 
 app.use('/api', (req, res, next) => {
@@ -64,12 +64,11 @@ app.use('/api', (req, res, next) => {
 });
   
 
-app.use('/', applicationRouter);
 app.use('/api', apiRouter);
 
 //Path was not recognized, return 404
 app.all('*', (req, res) => {
-    notFound404.get(req, res);
+    res.sendFile(path.join(__dirname, 'app_public', 'build', 'index.html'));
 });
 
 module.exports = {
