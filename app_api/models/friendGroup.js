@@ -42,6 +42,17 @@ const friendGroupSchema = new mongoose.Schema();
  *      type: string
  *    required:
  *     - id
+ *   calculateBalances:
+ *    type: object
+ *    description: Podatki urejanje podatkov skupine
+ *    properties:
+ *     id:
+ *      type: string
+ *     friends:
+ *      type: string
+ *     required:
+ *      - id
+ *      - friends
  */
 
 friendGroupSchema.add({

@@ -42,15 +42,7 @@ var swaggerOptions = {
       "./app_api/models/friendGroup.js",
       "./app_api/models/goals.js",
       "./app_api/models/user.js",
-      "./app_api/controllers/billsController.js",
-      "./app_api/controllers/categoryController.js",
-      "./app_api/controllers/currencyController.js",
-      "./app_api/controllers/dbController.js",
-      "./app_api/controllers/evelopesController.js",
-      "./app_api/controllers/expenseController.js",
-      "./app_api/controllers/friendGroupController.js",
-      "./app_api/controllers/goalsController.js",
-      "./app_api/controllers/userController.js"
+      "./app_api/routers/apiRouter.js"
     ]
   };
   const swaggerDocument = swaggerJsdoc(swaggerOptions);
