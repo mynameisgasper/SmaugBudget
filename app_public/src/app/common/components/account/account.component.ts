@@ -15,6 +15,7 @@ declare var getValueById: any;
 declare var setValueById: any;
 declare var getInnerTextById: any;
 declare var setInnerTextById: any;
+declare var rgbToHex: any;
 
 @Component({
   selector: 'app-account',
@@ -45,7 +46,7 @@ export class AccountComponent implements OnInit {
         this.email = result.email;
         this.defaultCurrency = result.defaultCurrency;
         this.defaultLanguage = result.language;
-        this.categories = result.categories;
+        this.categories = this.fixRGBValues(result.categories);
         this.refreshLanguage(result.language);
       }).catch(error => {
         this.authentication.logout();
@@ -90,11 +91,39 @@ export class AccountComponent implements OnInit {
       "currency": getTranslation("currency"),
       "data_defCurrency": "data_defCurrency",
       "data_currency": [
-          {
-              "key": "key",
-              "name": "name"
-          }
-      ],
+        { key: "EUR", name: "EURO" },
+        { key: "USD", name: "US Dollar" },
+        { key: "INR", name: "Indian Rupee" },
+        { key: "AUD", name: "Australian Dollar" },
+        { key: "CAD", name: "Canadian Dollar" },
+        { key: "SGD", name: "Singapore Dollar" },
+        { key: "RUB", name: "Russian Ruble" },
+        { key: "BGN", name: "Bulgarian Lev" },
+        { key: "BRL", name: "Brazilian Real" },
+        { key: "CHF", name: "Swis Franc" },
+        { key: "CNY", name: "Chinese Yuan Renmibi" },
+        { key: "CZK", name: "Czech Koruna" },
+        { key: "DKK", name: "Danish Krone" },
+        { key: "HKD", name: "Hong Kong Dollar" },
+        { key: "HRK", name: "Croatian Kuna" },
+        { key: "HUF", name: "Hungarian Forint" },
+        { key: "IDR", name: "Indonesian Rupiah" },
+        { key: "ILS", name: "Israeli Shekel" },
+        { key: "ISK", name: "Icelandic Krona" },
+        { key: "JPY", name: "Japanese Yen" },
+        { key: "KRW", name: "South Korean Won" },
+        { key: "MXN", name: "Mexican Peso" },
+        { key: "MYR", name: "Malaysian Ringgit" },
+        { key: "NOK", name: "Norwegian Krone" },
+        { key: "NZD", name: "New Zeland Dollar" },
+        { key: "PHP", name: "Philipine Peso" },
+        { key: "PLN", name: "Polish Zloty" },
+        { key: "RON", name: "Romanian Leu" },
+        { key: "SEK", name: "Swedish Krona" },
+        { key: "THB", name: "Thai Baht" },
+        { key: "TRY", name: "Turkish Lira" },
+        { key: "ZAR", name: "South African Rand" }
+        ],
       "categories": getTranslation("categories"),
       "data_categories": [
           {
@@ -112,6 +141,13 @@ export class AccountComponent implements OnInit {
       "changeProfilePicture": getTranslation("changeImage"),
       "dragAndDropOr": getTranslation("dragAndDropOr")
   };
+
+  fixRGBValues(categories: any) {
+      for (var i = 0; i < categories.length; i++) {
+        categories[i].color = rgbToHex(categories[i].color);
+      }
+      return categories;
+  }
 
   refreshLanguage(language: string) {
     setLanguage(language);
@@ -206,18 +242,14 @@ readURL(input: FileList) {
 }
 
 uploadFileToActivity() {
-    this.postFile(this.fileToUpload);
-  }
-
-postFile(fileToUpload: File) {
-    /*
-    const endpoint = 'your-destination-url';
-    const formData: FormData = new FormData();
-    formData.append('fileKey', fileToUpload, fileToUpload.name);
-    return this.httpClient
-      .post(endpoint, formData, { headers: this.yourHeadersConfig })
-      .pipe(map(() => { return true; }));*/
+    this.api.postFile(getValueById("emailInput"), this.fileToUpload).then((response) => {
+        console.log(response);
+        
+      }).catch((error) => {
+        console.log(error);
+      });
 }
+
 
 disableButton() {
     var name = this.nameRegex();

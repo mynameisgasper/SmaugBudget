@@ -343,6 +343,25 @@ export class ApiService {
     }
   }
 
+  public postFile(email, fileToUpload: File): Promise<any> {
+    if (this.authorization.getLoggedIn()) {
+      console.log(email);
+      const url: string = `${this.apiUrl}/uploadPfp`; 
+      const body = {
+        'email': email
+        
+      }
+      const formData: FormData = new FormData();
+      formData.append('fileKey', fileToUpload, fileToUpload.name);
+      const options = {
+        headers: new HttpHeaders().set('Authorization', this.authorization.generateCompleteJwt())
+      }
+      return this.http.post(url, body, options).toPromise().then(response => response).catch(err => this.parseError(err));
+    }
+    else {
+      this.parseError('Error');
+    }
+  }
   public deleteGroup(friendGroupId): Promise<any> {
     if (this.authorization.getLoggedIn()) {
       const url: string = `${this.apiUrl}/deleteFriendGroup`; 
