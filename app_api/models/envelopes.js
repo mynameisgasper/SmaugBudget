@@ -7,6 +7,7 @@ const { categorySchema } = require('./categories')
  *  schemas:
  *   getEnvelope:
  *    type: object
+ *    description: Vsi podatki o kuverti
  *    properties:
  *     id:
  *      type: string
@@ -39,6 +40,7 @@ const { categorySchema } = require('./categories')
  *     - category
  *   addEnvelope:
  *    type: object
+ *    description: Podatki za dodajanje nove kuverte
  *    properties:
  *     category:
  *      type: string
@@ -56,6 +58,7 @@ const { categorySchema } = require('./categories')
  *     - month
  *   editEnvelope:
  *    type: object
+ *    description: Podatki za urejanje kuverte
  *    properties:
  *     id:
  *      type: string
@@ -66,6 +69,7 @@ const { categorySchema } = require('./categories')
  *     - budget
  *   deleteEnvelope:
  *    type: object
+ *    description: Podatki za brisanje kuverte
  *    properties:
  *     id:
  *      type: string

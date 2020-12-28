@@ -9,6 +9,7 @@ const friendGroupSchema = new mongoose.Schema();
  *  schemas:
  *   getFriendGroup:
  *    type: object
+ *    description: Vsi podatki o skupini
  *    properties:
  *     name:
  *      type: string

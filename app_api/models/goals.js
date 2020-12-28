@@ -7,6 +7,7 @@ const { categorySchema } = require('./categories')
  *  schemas:
  *   getGoal:
  *    type: object
+ *    description: Vsi podatki o ciljih uporabnika
  *    properties:
  *     id:
  *      type: string
@@ -29,6 +30,7 @@ const { categorySchema } = require('./categories')
  *     - category
  *   addGoal:
  *    type: object
+ *    description: Podatki za kreiranje novega cilja
  *    properties:
  *     title:
  *      type: string
@@ -45,6 +47,7 @@ const { categorySchema } = require('./categories')
  *     - category
  *   editGoal:
  *    type: object
+ *    description: Podatki za urejanje cilja
  *    properties:
  *     id:
  *      type: string
@@ -64,6 +67,7 @@ const { categorySchema } = require('./categories')
  *     - category
  *   addMoney:
  *    type: object
+ *    description: Podatki za dodajanje denarja k izbranemu cilju
  *    properties:
  *     title:
  *      type: string
@@ -74,6 +78,7 @@ const { categorySchema } = require('./categories')
  *     - amount
  *   deleteGoal:
  *    type: object
+ *    description: Vsi podatki za brisanje cilja
  *    properties:
  *     id:
  *      type: string

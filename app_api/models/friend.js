@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
  *  schemas:
  *   Friend:
  *    type: object
+ *    description: Podatki o prijatelju o skupini
  *    properties:
  *     name:
  *      type: string
