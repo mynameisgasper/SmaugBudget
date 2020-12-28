@@ -43,6 +43,9 @@ export class HistoryTableElementComponent implements OnInit {
   @ViewChild('amount') amount: ElementRef;
   @ViewChild('date') date: ElementRef;
 
+  hasEditMessage: boolean = false;
+  editMessage: string = "";
+
   ngOnInit(): void {
     const date: Date = new Date(this.Expense.date);
     this.day = date.getDate();
@@ -51,24 +54,27 @@ export class HistoryTableElementComponent implements OnInit {
   }
 
   editExpense(): void {
-      this.api.editExpense(
-        this.id.nativeElement.value,
-        this.category.nativeElement.value,
-        this.name.nativeElement.value,
-        this.amount.nativeElement.value,
-        this.date.nativeElement.value
-      ).then(result => {      
-      }).catch(error => console.log(error));
-      this.Expense.category = this.category.nativeElement.value;
+    this.hasEditMessage = true;
+    this.editMessage = "Saving expense";
+
+    this.api.editExpense(
+      this.id.nativeElement.value,
+      this.category.nativeElement.value,
+      this.name.nativeElement.value,
+      this.amount.nativeElement.value,
+      this.date.nativeElement.value
+    ).then(result => {
+      this.hasEditMessage = false;
+      this.Expense.category.name = this.category.nativeElement.value;
       this.Expense._id = this.id.nativeElement.value;
-      this.Expense.category = this.category.nativeElement.value;
       this.Expense.recipient = this.name.nativeElement.value;
       this.Expense.value = this.amount.nativeElement.value;
       //this.Expense.date = this.date.nativeElement.value
       let dateArr = this.parseDate(this.date.nativeElement.value);
       this.day = parseInt(dateArr[2]);
-      this.month = parseInt(dateArr[1]);
+      this.month = parseInt(dateArr[1]) - 1;
       this.year = parseInt(dateArr[0]);
+    }).catch(error => this.editMessage = "Failed to save!");
   }
 
   nameEditHistory(): number {
