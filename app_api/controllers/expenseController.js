@@ -221,51 +221,59 @@ function getExpenses(req, res) {
                     res.status(500).json(response);
                 }
                 
-                const allExpenses = user.expense;
-                const length = user.expense.length;
+                if (user) {
+                    const allExpenses = user.expense;
+                    const length = user.expense.length;
 
-                var filteredExpenses = [];
-                if (filter) {
-                    for (e of allExpenses) {
-                        if (e.recipient.toUpperCase().includes(filter.toUpperCase()) || e.category.name.toUpperCase().includes(filter.toUpperCase())) {
-                            filteredExpenses.push(e);
-                        }
-                    }
-                }
-                else {
-                    filteredExpenses = allExpenses;
-                }
-                
-                var paginatedExpenses = [];
-                if (!limit || limit == 0) {
-                    if (!offset || offset == 0) {
-                        paginatedExpenses = filteredExpenses;
-                    }
-                    else {
-                        for (var i = offset; i < filteredExpenses.length; i++) {
-                            paginatedExpenses.push(filteredExpenses[i]);
-                        }
-                    }
-                }
-                else {
-                    if (!offset || offset == 0) {
-                        for (var i = 0; (i < limit) && (i < filteredExpenses.length); i++) {
-                            paginatedExpenses.push(filteredExpenses[i]);
+                    var filteredExpenses = [];
+                    if (filter) {
+                        for (e of allExpenses) {
+                            if (e.recipient.toUpperCase().includes(filter.toUpperCase()) || e.category.name.toUpperCase().includes(filter.toUpperCase())) {
+                                filteredExpenses.push(e);
+                            }
                         }
                     }
                     else {
-                        for (var i = offset; (i < offset + limit) && (i < filteredExpenses.length); i++) {
-                            paginatedExpenses.push(filteredExpenses[i]);
+                        filteredExpenses = allExpenses;
+                    }
+                    
+                    var paginatedExpenses = [];
+                    if (!limit || limit == 0) {
+                        if (!offset || offset == 0) {
+                            paginatedExpenses = filteredExpenses;
+                        }
+                        else {
+                            for (var i = offset; i < filteredExpenses.length; i++) {
+                                paginatedExpenses.push(filteredExpenses[i]);
+                            }
                         }
                     }
+                    else {
+                        if (!offset || offset == 0) {
+                            for (var i = 0; (i < limit) && (i < filteredExpenses.length); i++) {
+                                paginatedExpenses.push(filteredExpenses[i]);
+                            }
+                        }
+                        else {
+                            for (var i = offset; (i < offset + limit) && (i < filteredExpenses.length); i++) {
+                                paginatedExpenses.push(filteredExpenses[i]);
+                            }
+                        }
+                    }
+                    
+                    const response = {
+                        length: length,
+                        filter: filter,
+                        expenses: paginatedExpenses
+                    };
+                    res.status(200).json(response);
                 }
-                
-                const response = {
-                    length: length,
-                    filter: filter,
-                    expenses: paginatedExpenses
-                };
-                res.status(200).json(response);
+                else {
+                    const response = {
+                        status: "Not found"
+                    };
+                    res.status(404).json(response);
+                }
             });
         }
     } catch (exception) {
