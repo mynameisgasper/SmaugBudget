@@ -40,11 +40,11 @@ export class UtilitiesEditModalComponent implements OnInit {
     //črkev male,velike,številke
     if (!regex.test(field.value)) {
         field.style.setProperty("border-color", "red", "important");
-        $('.tt1').toast('show')
+        $('.tt1' + this.group.id).toast('show')
         return 0;
     } else {
         field.style.borderColor = "#ced4da";
-        $('.tt1').toast('hide')
+        $('.tt1' + this.group.id).toast('hide')
         return 1;
     }
   }
@@ -56,11 +56,11 @@ export class UtilitiesEditModalComponent implements OnInit {
     //črkev male,velike,številke
     if (!regex.test(field.value)) {
         field.style.setProperty("border-color", "red", "important");
-        $('.tt1').toast('show')
+        $('.tt1' + this.group.id).toast('show')
         return 0;
     } else {
         field.style.borderColor = "#ced4da";
-        $('.tt1').toast('hide')
+        $('.tt1' + this.group.id).toast('hide')
         return 1;
     }
   }
@@ -72,11 +72,11 @@ export class UtilitiesEditModalComponent implements OnInit {
     //črkev male,velike,številke
     if (!regex.test(value)) {
         field.style.setProperty("border-color", "red", "important");
-        $('.tt1').toast('show')
+        $('.tt1' + this.group.id).toast('show')
         return 0;
     } else {
         field.style.borderColor = "#ced4da";
-        $('.tt1').toast('hide')
+        $('.tt1' + this.group.id).toast('hide')
         return 1;
     }
   }
@@ -88,18 +88,37 @@ export class UtilitiesEditModalComponent implements OnInit {
     //črkev male,velike,številke
     if (!regex.test(value)) {
         field.style.setProperty("border-color", "red", "important");
-        $('.tt1').toast('show')
+        $('.tt1' + this.group.id).toast('show')
         return 0;
     } else {
         field.style.borderColor = "#ced4da";
-        $('.tt1').toast('hide')
+        $('.tt1' + this.group.id).toast('hide')
         return 1;
     }
   }
 
-  disableButtonMember(pricePaidArray): void {
+  checkSumPricePaid(pricePaidArray){
+    var priceSum = 0;
+    var paidSum = 0;
+    for(var i = 0; i < pricePaidArray.length; i++){
+      priceSum += pricePaidArray[i][0];
+      paidSum += pricePaidArray[i][1];
+    }
+    console.log(priceSum + " " + paidSum);
+    if(priceSum == paidSum){
+      $('.tt2' + this.group.id).toast('hide')
+      return 1
+    }
+    else{
+      $('.tt2' + this.group.id).toast('show')
+      return 0
+    }
+  }
+
+  disableButtonMember(pricePaidArray, fake): void {
     var price = this.valueGroupsUtilities();
     var paid = this.valueGroupsUtilities2();
+    var sum = this.checkSumPricePaid(pricePaidArray);
     
     var index = 1;
     for(var member of this.group.groupMember){
@@ -109,16 +128,20 @@ export class UtilitiesEditModalComponent implements OnInit {
       index++;
     }
 
-    if (price == 0 || paid == 0 ) {
+    if (price == 0 || paid == 0 || sum == 0 || fake == 1) {
+      $('.tt2' + this.group.id).toast('show')
+      $('.tt1' + this.group.id).toast('show')
         //DO NOTHING
     } else {
+      $('.tt2' + this.group.id).toast('hide')
+      $('.tt1' + this.group.id).toast('hide')
       this.renderer.setAttribute(document.getElementById("sum" + this.group.id), 'data-dismiss', 'modal');
       this.calculateBalances(pricePaidArray)
       this.renderer.removeAttribute(document.getElementById("sum" + this.group.id), 'data-dismiss', 'modal');
     }
   }
   
-  formCalculateBalances(f: NgForm) {
+  formCalculateBalances(f: NgForm, fake) {
     const values = f.form.value;
     var pricePaidArray: number[][] = [];
     var kjeSm = 0;
@@ -146,7 +169,7 @@ export class UtilitiesEditModalComponent implements OnInit {
       kjeSm++;    
     }
 
-    this.disableButtonMember(pricePaidArray);
+    this.disableButtonMember(pricePaidArray, fake);
   }
 
   calculateBalances(pricePaidArray){
