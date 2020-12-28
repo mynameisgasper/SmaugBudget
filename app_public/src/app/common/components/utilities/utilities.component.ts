@@ -1,9 +1,11 @@
-import { Component, OnInit, ElementRef, ViewChild} from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, Renderer2} from '@angular/core';
 import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 import { ApiService } from '../../services/api.service';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { NgForm } from '@angular/forms';
+import { FriendGroup } from '../../classes/friendGroup'
+import { Friend } from '../../classes/friend'
 declare var $:any;
 
 @Component({
@@ -14,7 +16,8 @@ declare var $:any;
 export class UtilitiesComponent implements OnInit {
 
     public data: any;
-    public groups: any;
+    groups: FriendGroup[];
+    userId: string;
 
     faPlusSquare = faPlusSquare;
     resultValue: number;
@@ -23,7 +26,8 @@ export class UtilitiesComponent implements OnInit {
 
     constructor(
         private api: ApiService,
-        private pit: ActivatedRoute
+        private pit: ActivatedRoute,
+        private renderer: Renderer2
     ) {}
 
     @ViewChild('groupName') groupName: ElementRef;
@@ -51,18 +55,19 @@ export class UtilitiesComponent implements OnInit {
                 "light":"Light",
                 "dark":"Dark"
             }
-            this.groups = this.generateGroups(result.friendgroups,result._id);
+            this.userId = result._id;
+            this.groups = this.generateGroups(result.friendgroups);
             console.log(this.groups);
         }).catch(error => console.log(error));
     }
 
-    generateGroups(groups, myId){
+    generateGroups(groups){
         var groupsArray = [];
     
         for(var group of groups){
             var memberArray = [];
             var members = group.friends;
-            memberArray = this.insertMe(memberArray, myId, group.balance);
+            memberArray = this.insertMe(memberArray,group.balance);
             var nextToPay = 'Me';
             var min = group.balance;
             for(var member of members){
@@ -70,30 +75,33 @@ export class UtilitiesComponent implements OnInit {
                     nextToPay = member.name;
                     min = member.balance;
                 }
-                memberArray.push({
-                    id: member._id,
-                    name: member.name,
+                var newFriend: Friend = {
+                    id: member._id, 
+                    name: member.name, 
                     amount: member.balance
-                })
+                };
+                memberArray.push(newFriend);
             }
-            groupsArray.push({
-                id: group._id,
-                Group: group.name,
-                Next: nextToPay,
+            var newGroup: FriendGroup = {
+                id: group._id, 
+                Group: group.name, 
+                Next: nextToPay, 
                 Balance: group.balance,
                 groupMember: memberArray
-            })
+            };
+            groupsArray.push(newGroup)
         }
         return groupsArray;
     }
 
 
-    insertMe(memberArray, myId, myBalance){
-        memberArray.push({
-            id: myId,
-            name: 'Me',
+    insertMe(memberArray, myBalance){
+        var me: Friend = {
+            id: this.userId, 
+            name: 'Me', 
             amount: myBalance
-        });
+        }
+        memberArray.push(me);
 
         return memberArray;
     }
@@ -176,10 +184,40 @@ export class UtilitiesComponent implements OnInit {
             }
         }
 
+        this.renderer.setAttribute(document.getElementById("addGroup"), 'data-dismiss', 'modal');
         this.api.addFriendGroup(groupName, friends).then(result => {
-            console.log(result);
+            this.afterAddFriedGroup(result);
         }).catch(error => {
             console.log(error);
         });
+        this.renderer.removeAttribute(document.getElementById("addGroup"), 'data-dismiss', 'modal');
+    }
+
+    afterAddFriedGroup(friendGroup){
+        var memberArray = [];
+        var members = friendGroup.friends;
+        memberArray = this.insertMe(memberArray, friendGroup.balance);
+        var nextToPay = 'Me';
+        var min = friendGroup.balance;
+        for(var member of members){
+            if(member.balance < min){
+                nextToPay = member.name;
+                min = member.balance;
+            }
+            var newFriend: Friend = {
+                id: member._id, 
+                name: member.name, 
+                amount: member.balance
+            };
+            memberArray.push(newFriend);
+        }
+        var newGroup: FriendGroup = {
+            id: friendGroup._id, 
+            Group: friendGroup.name, 
+            Next: nextToPay, 
+            Balance: friendGroup.balance,
+            groupMember: memberArray 
+        }
+        this.groups.push(newGroup);
     }
 }
