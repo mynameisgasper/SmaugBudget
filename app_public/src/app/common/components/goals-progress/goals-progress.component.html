@@ -92,7 +92,7 @@
                         <label for="inputCategory">Choose a Category</label>
                         <select #editCategoryGoal id="inputCategory" name="inputCategory" class="form-control" required="required">
                             <option selected disabled>{{item.categoryName}}</option>
-                            <option *ngFor="let cat of category" id="category{{cat._id}}">{{cat.category}}</option>
+                            <option *ngFor="let cat of category" id="category{{cat._id}}">{{cat.name}}</option>
                         </select>
                         <br>
                         <label for="inputAmount">How much do you want to save?</label>

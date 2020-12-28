@@ -3,6 +3,7 @@ import { faMinusSquare, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { Goal } from '../../classes/goal';
 import { ApiService } from '../../services/api.service';
 import { GoalsComponent } from '../goals/goals.component';
+import { Category } from '../../classes/category';
 declare var $:any;
 
 @Component({
@@ -19,7 +20,6 @@ export class GoalsProgressComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    
   }
 
   faMinusSquare = faMinusSquare;
@@ -33,7 +33,7 @@ export class GoalsProgressComponent implements OnInit {
     currency:any 
   
   @Input()
-    category:any  
+    category: Category []
   
   @ViewChild('editNameGoal') editNameGoal: ElementRef;
   @ViewChild('editAmountGoal') editAmountGoal: ElementRef;
