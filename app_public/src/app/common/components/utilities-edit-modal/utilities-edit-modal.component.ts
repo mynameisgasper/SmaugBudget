@@ -16,7 +16,9 @@ export class UtilitiesEditModalComponent implements OnInit {
     group: FriendGroup;
 
     pricePaidArray: number[][] = [];
-    index: 0;
+    
+    hasEditGroupMessage: boolean = true;
+    editGroupMessage: string = "";
   
   constructor(
     private renderer: Renderer2,
@@ -174,25 +176,14 @@ export class UtilitiesEditModalComponent implements OnInit {
 
   calculateBalances(pricePaidArray){
     console.log(document.getElementById("sum" + this.group.id))
+    this.hasEditGroupMessage = true;
+    this.editGroupMessage = "Calculating balances";
     
     this.api.calculateBalances(JSON.stringify(pricePaidArray), this.group.id).then((response) => {
       this.UtilitiesComponent.afterCalculatingBalances(response);
-      
-      //this.hasGoalMessage = false;
+      this.hasEditGroupMessage = false;
     }).catch((error) => {
-      //this.goalMessage = "Failed to save goal!";
+      this.editGroupMessage = "Failed to calculate balances!";
     });
-    
-    /*this.hasGoalMessage = true;
-    this.goalMessage = "Saving goal";
-
-    this.api.addGoal(name, category, amount, date).then((response) => {
-      this.renderer.setAttribute(document.getElementById("buttonAddGoal"), 'data-dismiss', 'modal');
-      this.afterAddGoal(response);
-      this.renderer.removeAttribute(document.getElementById("buttonAddGoal"), 'data-dismiss', 'modal');
-      this.hasGoalMessage = false;
-    }).catch((error) => {
-      this.goalMessage = "Failed to save goal!";
-    });*/
   }
 }
