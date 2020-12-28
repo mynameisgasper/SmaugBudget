@@ -6,6 +6,7 @@ import { Goal } from '../../classes/goal';
 import { Category } from '../../classes/category';
 import { Router } from "@angular/router";
 import { DatePipe } from '@angular/common';
+import { AuthenticationService } from '../../services/authentication.service';
 declare var $:any;
 
 @Component({
@@ -17,7 +18,9 @@ export class GoalsComponent implements OnInit {
 
   constructor(
     private api: ApiService,
-    private renderer: Renderer2,) { }
+    private renderer: Renderer2, 
+    private router: Router, 
+    private authentication: AuthenticationService) { }
 
   cards: Card[]
   goals: Goal[]
@@ -26,6 +29,12 @@ export class GoalsComponent implements OnInit {
   message: String;
   welcomeMessage: String;
   faPlusSquare = faPlusSquare;
+
+  hasExpenseMessage: boolean = false;
+  expenseMessage: string = "";
+
+  hasGoalMessage: boolean = false;
+  goalMessage: string = "";
 
   @ViewChild('nameGoal') nameGoal: ElementRef;
   @ViewChild('categoryGoal') categoryGoal: ElementRef;
@@ -41,7 +50,10 @@ export class GoalsComponent implements OnInit {
       this.currency = result.defaultCurrency;
       this.message = "Welcome to Goals!";
       this.welcomeMessage = "Here you can add saving goals you want to achieve. Click 'Add Goal', fill in the form, submit and you`re done!";
-    }).catch(error => console.log(error));
+    }).catch(error => {
+      this.authentication.logout();
+      this.router.navigate(['']);
+    });
   }
 
   hasTargetLeft(value: Number): Boolean {
@@ -171,9 +183,7 @@ export class GoalsComponent implements OnInit {
     if (name == 0 || category == 0 || amount == 0 || date == 0 ) {
         //DO NOTHING
     } else {
-      this.renderer.setAttribute(document.getElementById("buttonAddGoal"), 'data-dismiss', 'modal');
       this.addGoal(nameValue, categoryValue, amountValue, dateValue);
-      this.renderer.removeAttribute(document.getElementById("buttonAddGoal"), 'data-dismiss', 'modal');
     }
   }
 
@@ -183,9 +193,7 @@ export class GoalsComponent implements OnInit {
     if (amount == 0) {
         //DO NOTHING
     } else {
-      this.renderer.setAttribute(document.getElementById("buttonAddMoneyToGoal"), 'data-dismiss', 'modal');
       this.addMoneyToGoal(addAmount, titleGoal);
-      this.renderer.removeAttribute(document.getElementById("buttonAddMoneyToGoal"), 'data-dismiss', 'modal');
     }
   }
 
@@ -267,10 +275,16 @@ export class GoalsComponent implements OnInit {
   }
 
   addGoal(name, category, amount, date){
+    this.hasGoalMessage = true;
+    this.goalMessage = "Saving goal";
+
     this.api.addGoal(name, category, amount, date).then((response) => {
+      this.renderer.setAttribute(document.getElementById("buttonAddGoal"), 'data-dismiss', 'modal');
       this.afterAddGoal(response);
+      this.renderer.removeAttribute(document.getElementById("buttonAddGoal"), 'data-dismiss', 'modal');
+      this.hasGoalMessage = false;
     }).catch((error) => {
-      console.log(error);
+      this.goalMessage = "Failed to save goal!";
     });
   }
 
@@ -292,10 +306,16 @@ export class GoalsComponent implements OnInit {
   }
 
   addMoneyToGoal(amount, title){
+    this.hasExpenseMessage = true;
+    this.expenseMessage = "Saving expense";
+
     this.api.addMoneyToGoal(amount, title).then((response) => {
+      this.renderer.setAttribute(document.getElementById("buttonAddMoneyToGoal"), 'data-dismiss', 'modal');
       this.afterAddMoneyToGoal(response);
+      this.renderer.removeAttribute(document.getElementById("buttonAddMoneyToGoal"), 'data-dismiss', 'modal');
+      this.hasExpenseMessage = false;
     }).catch((error) => {
-      console.log(error);
+      this.expenseMessage = "Failed to save!";
     });
   }
 

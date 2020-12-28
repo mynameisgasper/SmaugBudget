@@ -34,6 +34,12 @@ export class GoalsProgressComponent implements OnInit {
   
   @Input()
     category: Category []
+
+  hasRowMessage: boolean = false;
+  rowMessage: string = "";
+
+  hasEditMessage: boolean = false;
+  editMessage: string = "";
   
   @ViewChild('editNameGoal') editNameGoal: ElementRef;
   @ViewChild('editAmountGoal') editAmountGoal: ElementRef;
@@ -132,17 +138,21 @@ export class GoalsProgressComponent implements OnInit {
     if (name == 0 || amount == 0 || date == 0 ) {
         //DO NOTHING
     } else {
-      this.renderer.setAttribute(document.getElementById("buttonEditGoal"+ this.item._id), 'data-dismiss', 'modal');
       this.editGoal(nameValue, categoryValue, amountValue, dateValue);
-      this.renderer.removeAttribute(document.getElementById("buttonEditGoal" + this.item._id), 'data-dismiss', 'modal');
     }
   }
 
   editGoal(name, category, amount, date){
+    this.hasEditMessage = true;
+    this.editMessage = "Saving goal";
+
     this.api.editGoal(this.item._id, name, category, amount, date).then((response) => {
       this.goalsComponent.afterEdit(response);
+      this.hasEditMessage = false;
     }).catch((error) => {
-      console.log(error);
+      this.renderer.setAttribute(document.getElementById("buttonEditGoal"+ this.item._id), 'data-dismiss', 'modal');
+      this.editMessage = "Failed to save!";
+      this.renderer.removeAttribute(document.getElementById("buttonEditGoal" + this.item._id), 'data-dismiss', 'modal');
     });
   }
 
@@ -155,10 +165,14 @@ export class GoalsProgressComponent implements OnInit {
   }
 
   deleteGoal(){
+    this.hasRowMessage = true;
+    this.rowMessage = "Deleting row";
+
     this.api.deleteGoal(this.item._id).then((response) => {
-      this.goalsComponent.afterDelete(this.item._id)
+      this.goalsComponent.afterDelete(this.item._id);
+      this.hasRowMessage = false;
     }).catch((error) => {
-      console.log(error);
+      this.rowMessage = "Failed to delete row!";
     });
   }
 }

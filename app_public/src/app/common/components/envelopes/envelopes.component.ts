@@ -100,6 +100,7 @@ export class EnvelopesComponent implements OnInit {
       this.renderer.setAttribute(document.getElementById("buttonAddExpense"), 'data-dismiss', 'modal');
       this.cards = this.generateCards(this.envelopes);
       this.renderer.removeAttribute(document.getElementById("buttonAddExpense"), 'data-dismiss', 'modal');
+      this.hasAddExpenseMessage = false;
     }).catch(error => {
       this.addExpenseMessage = 'Failed saving exepse!';
     });
