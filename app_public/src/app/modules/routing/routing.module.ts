@@ -11,6 +11,7 @@ import { GoalsComponent } from '../../common/components/goals/goals.component';
 import { HistoryComponent } from '../../common/components/history/history.component';
 import { HomeComponent } from '../../common/components/home/home.component';
 import { UtilitiesComponent } from '../../common/components/utilities/utilities.component';
+import { NotfoundComponent } from '../../common/components/notfound/notfound.component';
 import { GoldGuardService } from '../../common/services/gold-guard.service';
 import { LoginGuardService } from '../../common/services/login-guard.service';
 import { SilverGuardService } from '../../common/services/silver-guard.service';
@@ -67,6 +68,10 @@ const routes: Routes = [
     path: 'bills',
     component: BillsComponent, 
     canActivate:[LoginGuardService]
+  },
+  {
+    path: '**',
+    component: NotfoundComponent, 
   }
 ];
 

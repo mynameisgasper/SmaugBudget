@@ -38,6 +38,7 @@ import { InputMemberPipe } from './common/pipes/input-member.pipe';
 import { TranslateMonthNumberPipe } from './common/pipes/month-number.pipe';
 import { IconTranslatorPipe } from './common/pipes/icon-translator.pipe';
 import { CurrencyTranslatorPipe } from './common/pipes/currency-translator.pipe';
+import { NotfoundComponent } from './common/components/notfound/notfound.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { CurrencyTranslatorPipe } from './common/pipes/currency-translator.pipe'
     InputMemberPipe,
     TranslateMonthNumberPipe,
     IconTranslatorPipe,
-    CurrencyTranslatorPipe
+    CurrencyTranslatorPipe,
+    NotfoundComponent
   ],
   imports: [
     BrowserModule,
