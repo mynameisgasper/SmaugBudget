@@ -2,17 +2,41 @@ const mongoose = require('mongoose');
 const billsSchema = new mongoose.Schema();
 const { categorySchema } = require('./categories')
 
+//Bill je primeren za editBill in getBill ne ni
 /**
  * @swagger
  * components:
  *  schemas:
+ *   Bill:
+ *    type: object
+ *    properties:
+ *     id:
+ *      type: string
+ *     recipient:
+ *      type: string
+ *     value:
+ *      type: number
+ *     category:
+ *      type: object
+ *      $ref: "#/components/schemas/Categories"
+ *     date:
+ *      type: string
+ *     repeating:
+ *      type: string
+ *    required:
+ *     - id
+ *     - recipient
+ *     - value
+ *     - category
+ *     - date
+ *     - repeating
  *   addBill:
  *    type: object
  *    properties:
  *     recipient:
  *      type: string
  *     value:
- *      type: Number
+ *      type: number
  *     category:
  *      type: string
  *     date:
@@ -33,7 +57,7 @@ const { categorySchema } = require('./categories')
  *     recipient:
  *      type: string
  *     value:
- *      type: Number
+ *      type: number
  *     category:
  *      type: string
  *     date:
@@ -41,6 +65,7 @@ const { categorySchema } = require('./categories')
  *     repeating:
  *      type: string
  *    required:
+ *     - id
  *     - recipient
  *     - value
  *     - category

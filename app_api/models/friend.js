@@ -10,7 +10,7 @@ const mongoose = require('mongoose');
  *     name:
  *      type: string
  *     balance:
- *      type: integer
+ *      type: number
  *    required:
  *     - name
  *     - balance

@@ -7,11 +7,76 @@ const { categorySchema } = require('./categories');
 const { expenseSchema } = require('./expense');
 const { friendGroupSchema } = require('./friendGroup');
 
+//treba dodat friend groupe pa njihove sheme nardit pa za utility kar je
 
 /**
  * @swagger
  * components:
  *  schemas:
+ *   GetUserData:
+ *    type: object
+ *    description: Vsi podatki uporabnika za funkcionalnost strani
+ *    properties:
+ *     _id:
+ *      type: string
+ *     firstname:
+ *      type: string
+ *     lastname:
+ *      type: string
+ *     email:
+ *      type: string
+ *     accessLevel:
+ *      type: integer
+ *     language:
+ *      type: string
+ *     password:
+ *      type: string
+ *     passwordSalt:
+ *      type: string
+ *     paycheck:
+ *      type: number
+ *     paycheckDate:
+ *      type: number
+ *     paycheckLastMonth:
+ *      type: number
+ *     defaultCurrency:
+ *      type: string
+ *     __v:
+ *      type: string
+ *     bills:
+ *      type: object
+ *      $ref: "#/components/schemas/Bill"
+ *     categories:
+ *      type: object
+ *      $ref: "#/components/schemas/Categories"
+ *     envelopes:
+ *      type: object
+ *      $ref: "#/components/schemas/getEnvelope"
+ *     expense:
+ *      type: object
+ *      $ref: "#/components/schemas/getExpense"
+ *     goals:
+ *      type: object
+ *      $ref: "#/components/schemas/getGoal"
+ *    required:
+ *     - _id
+ *     - firstname
+ *     - lastname
+ *     - email
+ *     - accessLevel
+ *     - language
+ *     - password
+ *     - passwordSalt
+ *     - paycheck
+ *     - paycheckDate
+ *     - paycheckLastMonth
+ *     - defaultCurrency
+ *     - __v
+ *     - bills
+ *     - categories
+ *     - envelopes
+ *     - expense
+ *     - goals
  *   UporabnikPrijava:
  *    type: object
  *    description: Podatki uporabnika za prijavo

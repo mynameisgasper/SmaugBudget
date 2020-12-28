@@ -130,6 +130,9 @@
             </div>
             <div class="col-md-0 col-sm-0 col-xl-2 col-lg-2"></div>
         </div>
+        <div class="row" style="text-align: center;" *ngIf="hasConverterMessage">
+            <b class="col-md-12 col-sm-12 col-xl-12 col-lg-12">{{converterMessage}}</b>
+        </div>
         <div class="row3">
             <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                 <button type="button" class="btn btn-primary" id="convert" (click)="converter(curr1.value, curr2.value, value.value)">Convert</button>
@@ -187,6 +190,7 @@
                             </div>                    
                         </div>
                     <div class="modal-footer">
+                        <p *ngIf="hasCreateGroupMessage"><b>{{createGroupMessage}}</b></p>
                         <button id="addGroup" class="btn btn-primary">Add Group</button>
                         <button type="button" id="addGroupMember" class="btn btn-primary" (click)="addGroupMember(groupName.value);"> 
                             <fa-icon [icon]="faPlusSquare"></fa-icon>

@@ -5,13 +5,45 @@ const { categorySchema } = require('./categories')
  * @swagger
  * components:
  *  schemas:
+ *   getEnvelope:
+ *    type: object
+ *    properties:
+ *     id:
+ *      type: string
+ *     progress:
+ *      type: number
+ *     budget:
+ *      type: number
+ *     spent:
+ *      type: number
+ *     color:
+ *      type: string
+ *     colorHex:
+ *      type: string
+ *     bgColor:
+ *      type: string
+ *     month:
+ *      type: string
+ *     category:
+ *      type: object
+ *      $ref: "#/components/schemas/Categories"
+ *    required:
+ *     - id
+ *     - progress
+ *     - budget
+ *     - spent
+ *     - color
+ *     - colorHex
+ *     - bgColor
+ *     - month
+ *     - category
  *   addEnvelope:
  *    type: object
  *    properties:
  *     category:
  *      type: string
  *     budget:
- *      type: Number
+ *      type: number
  *     color:
  *      type: string
  *     month:
@@ -28,7 +60,7 @@ const { categorySchema } = require('./categories')
  *     id:
  *      type: string
  *     budget:
- *      type: Number
+ *      type: number
  *    required:
  *     - id
  *     - budget

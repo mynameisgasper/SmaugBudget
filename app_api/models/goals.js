@@ -1,23 +1,43 @@
 const mongoose = require('mongoose');
 const { categorySchema } = require('./categories')
 
-//schema goal je za add in edit
 /**
  * @swagger
  * components:
  *  schemas:
+ *   getGoal:
+ *    type: object
+ *    properties:
+ *     id:
+ *      type: string
+ *     title:
+ *      type: string
+ *     save:
+ *      type: number
+ *     target:
+ *      type: number
+ *     date:
+ *      type: string
+ *     category:
+ *      type: object
+ *      $ref: "#/components/schemas/Categories"
+ *    required:
+ *     - id
+ *     - title
+ *     - target
+ *     - date
+ *     - category
  *   addGoal:
  *    type: object
  *    properties:
  *     title:
  *      type: string
  *     target:
- *      type: integer
+ *      type: number
  *     date:
  *      type: string
  *     category:
- *      type: object
- *      $ref: "#/components/schemas/Categories"
+ *      type: string
  *    required:
  *     - title
  *     - target
@@ -31,12 +51,11 @@ const { categorySchema } = require('./categories')
  *     title:
  *      type: string
  *     target:
- *      type: integer
+ *      type: number
  *     date:
  *      type: string
  *     category:
- *      type: object
- *      $ref: "#/components/schemas/Categories"
+ *      type: string
  *    required:
  *     - id
  *     - title
@@ -49,7 +68,7 @@ const { categorySchema } = require('./categories')
  *     title:
  *      type: string
  *     amount:
- *      type: integer
+ *      type: number
  *    required:
  *     - title
  *     - amount
