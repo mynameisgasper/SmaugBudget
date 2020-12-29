@@ -164,14 +164,17 @@ export class GoalsProgressComponent implements OnInit {
   }
 
   deleteGoal(){
-    this.hasRowMessage = true;
-    this.rowMessage = "Deleting row";
+    let decision = confirm("Are you sure you want to delete goal " + this.item.title + "?");
+    if (decision == true) {
+      this.hasRowMessage = true;
+      this.rowMessage = "Deleting row";
 
-    this.api.deleteGoal(this.item._id).then((response) => {
-      this.goalsComponent.afterDelete(this.item._id);
-      this.hasRowMessage = false;
-    }).catch((error) => {
-      this.rowMessage = "Failed to delete row!";
-    });
+      this.api.deleteGoal(this.item._id).then((response) => {
+        this.goalsComponent.afterDelete(this.item._id);
+        this.hasRowMessage = false;
+      }).catch((error) => {
+        this.rowMessage = "Failed to delete row!";
+      });
+    }
   }
 }
