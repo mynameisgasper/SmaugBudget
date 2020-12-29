@@ -66,7 +66,7 @@ function addEnvelope(req, res) {
 
                             if (user.envelopes[i].category.name.toUpperCase() === categoryName.toUpperCase()) {
                                 if (user.envelopes[i].month === currentMonth) {
-                                    res.sendStatus(304);
+                                    res.sendStatus(400);
                                     return;
                                 }
                             }
@@ -123,7 +123,7 @@ function addEnvelope(req, res) {
                                     category: category,
                                     envelope: envelope
                                 }
-                                res.status(200).json(odgovor);
+                                res.status(201).json(odgovor);
                             }
 
                         });
@@ -228,11 +228,11 @@ function deleteEnvelope(req, res) {
                         if (user.envelopes[i]._id == envelope_id) {
                             user.envelopes.pull(envelope_id);
                             user.save();
-                            res.status(200).json(user);
+                            res.status(204).json(user);
                             return;
                         }
                     }
-                    res.status(304);
+                    res.status(404);
                     return;
                 }
             });
@@ -344,7 +344,7 @@ function addExpense(req, res) {
                                                     } else {
                                                         user.expense.push(expense);
                                                         user.save();
-                                                        res.status(200).json(user);
+                                                        res.status(201).json(user);
                                                         return;
                                                     }
                                                 });
