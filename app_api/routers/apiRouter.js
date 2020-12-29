@@ -327,6 +327,9 @@ router.post('/removeConnection', authentication, (req, res) => {
  *      application/json:
  *       schema:
  *        $ref: "#/components/schemas/addFriendGroup"
+ *       example:
+ *        name: "skupina1"
+ *        friends: "[\"ena1\",\"dva2\",\"tr3i\"]"
  *    responses:
  *     "201":
  *      description: Uspešno kreirana skupina.
@@ -360,6 +363,9 @@ router.post('/addFriendGroup', authentication, (req, res) => {
  *      application/json:
  *       schema:
  *        $ref: "#/components/schemas/calculateBalances"
+ *       example:
+ *        group_id: "5feb3dcb496be31c4f6574e7"
+ *        friends: "[[1,5],[2,4],[3,3],[4,2],[5,1]]"
  *    responses:
  *     "200":
  *      description: Uspešno posodobljena skupina.
@@ -372,7 +378,6 @@ router.post('/addFriendGroup', authentication, (req, res) => {
  *     "500":
  *      description: Napaka na strežniku.
  */
-//{"friends": "[[1,5],[2,4],[3,3],[4,2],[5,1]]", "group_id": "5feb3dcb496be31c4f6574e7"}
 router.post('/calculateBalances', authentication, (req, res) => {
     friendGroup.calculateBalances(req, res);
 })
@@ -393,6 +398,8 @@ router.post('/calculateBalances', authentication, (req, res) => {
  *      application/json:
  *       schema:
  *        $ref: "#/components/schemas/deleteFriendGroup"
+ *       example:
+ *        group_id: "5feb3dcb496be31c4f6574e7"
  *    responses:
  *     "204":
  *      description: Uspešna brisanje skupine.
@@ -403,7 +410,6 @@ router.post('/calculateBalances', authentication, (req, res) => {
  *     "500":
  *      description: Napaka na strežniku.
  */
-// {"group_id": "5feb4b77695d9343498253e0"}
 router.post('/deleteFriendGroup', authentication, (req, res) => {
     friendGroup.deleteFriendGroup(req, res);
 })
