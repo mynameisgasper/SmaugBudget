@@ -249,17 +249,141 @@ router.post('/deleteBill', authentication, (req, res) => {
     bills.deleteBill(req, res);
 });
 
+/**
+ * @swagger
+ *  /addGoal:
+ *   post:
+ *    summary: Kreiranje novega cilja
+ *    description: Kreiranje novega cilja s pripadujočimi podatki - ime cilja, ciljma vrednost privarčevanega denarja, ciljni datum in kategorija.
+ *    tags: [Goals]
+ *    security:
+ *     - jwt: []
+ *    requestBody:
+ *     description: Podatki za kreiranje cilja
+ *     required: true
+ *     content:
+ *      application/json:
+ *       schema:
+ *        $ref: "#/components/schemas/addGoal"
+ *       example:
+ *        name: "New phone"
+ *        amount: "300"
+ *        date: "2021-01-30T00:00:00.000Z"
+ *        category: "Electronics"
+ *    responses:
+ *     "201":
+ *      description: Uspešno kreiran cilj.
+ *     "400":
+ *      description: Napaka zahteve, obvezni so vsi podatki ali pa cilj s tem imenom že obstaja.
+ *     "401":
+ *      description: Uporabnik ni potrjen.
+ *     "500":
+ *      description: Napaka na strežniku.
+ */
+
 router.post('/addGoal', authentication, (req, res) => {
     goals.addGoal(req, res);
 });
+
+/**
+ * @swagger
+ *  /editGoal:
+ *   post:
+ *    summary: Spreminjanje podatkov zastavljenega cilja uporabnika
+ *    description: Spreminjanje podatkov zastavljenega cilja uporabnika. Vsebuje podatke - id cilja, novo ime cilja, novo ciljno vrednost, nov ciljni datum in novo kategorijo.
+ *    tags: [Goals]
+ *    security:
+ *     - jwt: []
+ *    requestBody:
+ *     description: Podatki za posodobitev cilja
+ *     required: true
+ *     content:
+ *      application/json:
+ *       schema:
+ *        $ref: "#/components/schemas/editGoal"
+ *       example:
+ *        goal_id: "5feb546ad99c505c0677195a"
+ *        name: "Playstation"
+ *        amount: 800
+ *        date: "2025-07-01T00:00:00.000Z"
+ *        category: "Electronics"
+ *    responses:
+ *     "200":
+ *      description: Uspešno dodan denar v cilj.
+ *     "400":
+ *      description: Napaka zahteve, obvezni so vsi podatki.
+ *     "401":
+ *      description: Uporabnik ni potrjen.
+ *     "500":
+ *      description: Napaka na strežniku.
+ */
 
 router.post('/editGoal', authentication, (req, res) => {
     goals.editGoal(req, res);
 });
 
+/**
+ * @swagger
+ *  /addToGoalWithCategory:
+ *   post:
+ *    summary: Dodajanje denarja k izbranemu zastavljenemu cilju uporabnika
+ *    description: Dodajanje denarja k izbranemu zastavljenemu cilju uporabnika. Vsebuje podatka o kategoriji ter znesku denarja.
+ *    tags: [Goals]
+ *    security:
+ *     - jwt: []
+ *    requestBody:
+ *     description: Podatki za dodajanje denarja
+ *     required: true
+ *     content:
+ *      application/json:
+ *       schema:
+ *        $ref: "#/components/schemas/addMoney"
+ *       example:
+ *        title: "Playstation 5"
+ *        amount: 100
+ *    responses:
+ *     "200":
+ *      description: Uspešno dodan denar v cilj.
+ *     "400":
+ *      description: Napaka zahteve, obvezni so vsi podatki.
+ *     "401":
+ *      description: Uporabnik ni potrjen.
+ *     "500":
+ *      description: Napaka na strežniku.
+ */
+
 router.post('/addToGoalWithCategory', authentication, (req, res) => {
     goals.addToGoalWithCategory(req, res);
 });
+
+/**
+ * @swagger
+ *  /deleteGoal:
+ *   post:
+ *    summary: Brisanje cilja
+ *    description: Brisanje cilja uporabnika z vsemi podatki
+ *    tags: [Goals]
+ *    security:
+ *     - jwt: []
+ *    requestBody:
+ *     description: Podatki za brisanje cilja.
+ *     required: true
+ *     content:
+ *      application/json:
+ *       schema:
+ *        $ref: "#/components/schemas/deleteGoal"
+ *       example:
+ *        goal_id: "5feb3dcb496be31c4f6574db"
+ *    responses:
+ *     "204":
+ *      description: Uspešna brisanje cilja.
+ *     "400":
+ *      description: Napaka zahteve, obvezni so vsi podatki.
+ *     "404":
+ *      description: Cilj s temi podatki ne obstaja.
+ *     "500":
+ *      description: Napaka na strežniku.
+ */
 
 router.post('/deleteGoal', authentication, (req, res) => {
     goals.deleteGoal(req, res);
@@ -342,7 +466,6 @@ router.post('/removeConnection', authentication, (req, res) => {
  *     "500":
  *      description: Napaka na strežniku.
  */
-//{"name": "skupina1", "friends": "[\"ena1\",\"dva2\",\"tr3i\"]"}
 router.post('/addFriendGroup', authentication, (req, res) => {
     friendGroup.addFriendGroup(req, res);
 })
