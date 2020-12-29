@@ -42,6 +42,7 @@ export class UtilitiesComponent implements OnInit {
     @ViewChild('groupName') groupName: ElementRef;
     @ViewChild('memberName') memberName: ElementRef;
     @ViewChild('counter') counter1: ElementRef;
+    @ViewChild('addGroupModal') addGroupModal: ElementRef;
 
     ngOnInit(): void {
         this.api.getUser().then(result => {
@@ -176,9 +177,7 @@ export class UtilitiesComponent implements OnInit {
         }
         else{
             $('.tt5').toast('hide');
-            this.renderer.setAttribute(document.getElementById("addGroup"), 'data-dismiss', 'modal');
-            this.addFriendGroup(groupName, friends)
-            this.renderer.removeAttribute(document.getElementById("addGroup"), 'data-dismiss', 'modal');
+            this.addFriendGroup(groupName, friends);
         }
     }
 
@@ -214,6 +213,7 @@ export class UtilitiesComponent implements OnInit {
         this.createGroupMessage = "Saving group";
 
         this.api.addFriendGroup(groupName, friends).then(result => {
+            this.addGroupModal.nativeElement.click();
             this.hasCreateGroupMessage = false;
             this.afterAddFriedGroup(result);
         }).catch(error => {
