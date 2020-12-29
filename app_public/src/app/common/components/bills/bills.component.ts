@@ -47,6 +47,7 @@ export class BillsComponent implements OnInit {
 
     ngOnInit(): void {
         this.api.getUser().then(result => {
+            console.log(result.bills)
             this.bills = this.generateBills(result.bills)
             this.cards = this.generateCards();
             this.categories = result.categories;
@@ -236,6 +237,7 @@ export class BillsComponent implements OnInit {
     }
 
     afterAddBill(bill){
+        console.log(bill)
         var date = bill.date.split('T')[0].split('-');
         var newBill: Bill = {
             _id: bill._id, 

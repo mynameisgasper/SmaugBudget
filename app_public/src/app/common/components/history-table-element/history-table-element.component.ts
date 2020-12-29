@@ -42,6 +42,8 @@ export class HistoryTableElementComponent implements OnInit {
   @ViewChild('name') name: ElementRef;
   @ViewChild('amount') amount: ElementRef;
   @ViewChild('date') date: ElementRef;
+  @ViewChild('editHistoryModal') editHistoryModal: ElementRef;
+  
 
   hasEditMessage: boolean = false;
   editMessage: string = "";
@@ -64,6 +66,7 @@ export class HistoryTableElementComponent implements OnInit {
       this.amount.nativeElement.value,
       this.date.nativeElement.value
     ).then(result => {
+      this.editHistoryModal.nativeElement.click();
       this.hasEditMessage = false;
       this.Expense.category.name = this.category.nativeElement.value;
       this.Expense._id = this.id.nativeElement.value;

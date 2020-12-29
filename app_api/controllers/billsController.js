@@ -44,7 +44,7 @@ function addBill(req, res) {
                                     value: amount,
                                     category: category,
                                     date: date,
-                                    currency: "€",
+                                    currency: "EUR",
                                     repeating: radio,
                                 });
                                 bill.save();

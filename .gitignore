@@ -4,5 +4,6 @@ generated/
 uploads/*
 !uploads/README
 test/report
+test/porocilo
 
 .vscode/launch.json

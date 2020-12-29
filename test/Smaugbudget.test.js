@@ -47,6 +47,17 @@
         .usingServer(seleniumServerUrl)
         .build();
       });
+  
+      describe("Login", function() {
+        this.timeout(30 * 1000);
+        before(() => { browser.get(accplicationUrl); });
+
+        it("Open modal", async () => {
+            await waitPageLoaded(browser, 10, "//h4");
+            let t = true;
+            expect(t).to.be.an("boolean").to.have.false;
+        });
+      });
 
       after(async () => {
         browser.quit();

@@ -25,6 +25,7 @@ export class BillTableComponent implements OnInit {
   editMessage: string = "";
 
   ngOnInit(): void {
+    console.log(this.Currency)
   }
 
   @ViewChild('editBillPayee') editBillPayee: ElementRef;

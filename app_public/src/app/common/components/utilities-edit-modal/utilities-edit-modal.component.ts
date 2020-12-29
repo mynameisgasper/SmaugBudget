@@ -32,6 +32,8 @@ export class UtilitiesEditModalComponent implements OnInit {
 
   @ViewChild('price') price: ElementRef;
   @ViewChild('paid') paid: ElementRef;
+  @ViewChild('showGroupModal') showGroupModal: ElementRef;
+  
 
 
 
@@ -150,9 +152,7 @@ export class UtilitiesEditModalComponent implements OnInit {
     } else {
       $('.tt2' + this.group.id).toast('hide')
       $('.tt1' + this.group.id).toast('hide')
-      this.renderer.setAttribute(document.getElementById("sum" + this.group.id), 'data-dismiss', 'modal');
-      this.calculateBalances(pricePaidArray)
-      this.renderer.removeAttribute(document.getElementById("sum" + this.group.id), 'data-dismiss', 'modal');
+      this.calculateBalances(pricePaidArray);
     }
   }
   
@@ -193,6 +193,7 @@ export class UtilitiesEditModalComponent implements OnInit {
     this.editGroupMessage = "Calculating balances";
     
     this.api.calculateBalances(JSON.stringify(pricePaidArray), this.group.id).then((response) => {
+      this.showGroupModal.nativeElement.click();
       this.UtilitiesComponent.afterCalculatingBalances(response);
       this.hasEditGroupMessage = false;
     }).catch((error) => {
