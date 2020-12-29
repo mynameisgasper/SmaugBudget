@@ -19,6 +19,7 @@ export class DashboardComponent implements OnInit {
 
   @ViewChild('amountDashboard') amount: ElementRef;
   @ViewChild('dateDashboard') date: ElementRef;
+  @ViewChild('changeIncomeModal') changeIncomeModal: ElementRef;
 
   modalRef: BsModalRef;
 

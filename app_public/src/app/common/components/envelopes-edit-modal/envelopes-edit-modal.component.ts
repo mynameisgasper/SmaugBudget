@@ -42,6 +42,8 @@ export class EnvelopesEditModalComponent implements OnInit {
     ) { }
 
   @ViewChild('amountEdit') amountEdit: ElementRef;
+  @ViewChild('editEnvelopeModal') editEnvelopeModal: ElementRef;
+  
 
   ngOnInit(): void {
   }
@@ -55,9 +57,8 @@ export class EnvelopesEditModalComponent implements OnInit {
       this.Envelope._id,
       this.amountEdit.nativeElement.value
       ).then(result => {
-        this.renderer.setAttribute(document.getElementById("buttonEditEnvelopes" + this.Envelope._id), 'data-dismiss', 'modal');
+        this.editEnvelopeModal.nativeElement.click();
         this.Envelope.budget = this.amountEdit.nativeElement.value;
-        this.renderer.removeAttribute(document.getElementById("buttonEditEnvelopes"), 'data-dismiss', 'modal');
         this.hasEditEnvelopeMessage = false;
        }).catch(error => {
         this.editEnvelopeMessage = "Failed saving changes!";    

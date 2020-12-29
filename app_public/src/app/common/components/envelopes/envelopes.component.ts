@@ -70,6 +70,9 @@ export class EnvelopesComponent implements OnInit {
   @ViewChild('nameExpense') nameExpense: ElementRef;
   @ViewChild('amountExpense') amountExpense: ElementRef;
   @ViewChild('dateExpense') dateExpense: ElementRef;
+  @ViewChild('addEnvelopeModal') addEnvelopeModal: ElementRef;
+  @ViewChild('addExpenseModal') addExpenseModal: ElementRef;
+  
 
   faPlusSquare = faPlusSquare;
 
@@ -97,9 +100,8 @@ export class EnvelopesComponent implements OnInit {
       this.nameExpense.nativeElement.value,
       this.dateExpense.nativeElement.value
     ).then(result => { 
-      this.renderer.setAttribute(document.getElementById("buttonAddExpense"), 'data-dismiss', 'modal');
+      this.addExpenseModal.nativeElement.click();
       this.cards = this.generateCards(this.envelopes);
-      this.renderer.removeAttribute(document.getElementById("buttonAddExpense"), 'data-dismiss', 'modal');
       this.hasAddExpenseMessage = false;
     }).catch(error => {
       this.addExpenseMessage = 'Failed saving exepse!';
@@ -116,10 +118,9 @@ export class EnvelopesComponent implements OnInit {
         this.colorAdd.nativeElement.value,
         this.setMonthNumber - 1
       ).then(result => {
-        this.renderer.setAttribute(document.getElementById("buttonAddEnvelopes"), 'data-dismiss', 'modal');
+        this.addEnvelopeModal.nativeElement.click();
         this.categories.push(result.category);
         this.envelopes.push(result.envelope);
-        this.renderer.removeAttribute(document.getElementById("buttonAddEnvelopes"), 'data-dismiss', 'modal');
         this.router.navigate(['/envelopes']);
       }).catch(error => {
         if (error.includes('304 Not Modified')) {

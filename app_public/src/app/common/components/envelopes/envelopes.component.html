@@ -1,7 +1,7 @@
 <main>
     <app-header [component]="'envelopes'"></app-header>
 
-    <div class="modal fade" id="addEnvelopeForm" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
+    <div class="modal fade" #addEnvelopeModal id="addEnvelopeForm" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
         <div class="position-absolute w-100 p-4 d-flex flex-column align-items-end">
             <div class="w-25 toastek">
                 <div class="toast ml-auto tt5" role="alert" data-delay="3000" data-autohide="false">
@@ -90,7 +90,7 @@
 
     <app-envelopes-edit-modal *ngFor="let item of envelopes" [Envelope]='item' [Currency]='currency'></app-envelopes-edit-modal>
 
-    <div class="modal fade" id="addExpenseForm" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
+    <div class="modal fade" #addExpenseModal id="addExpenseForm" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
         <div class="position-absolute w-100 p-4 d-flex flex-column align-items-end">
             <div class="w-25 toastek">
                 <div class="toast ml-auto tt2" role="alert" data-delay="3000" data-autohide="false">
