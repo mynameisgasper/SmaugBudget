@@ -179,8 +179,82 @@ router.post('/editEnvelope', authentication, (req, res) => {
     envelopes.editEnvelope(req, res);
 });
 
+router.post('/deleteEnvelope', authentication, (req, res) => {
+    envelopes.deleteEnvelope(req, res);
+});
+
+/**
+ * @swagger
+ *  /addExpense:
+ *   post:
+ *    summary: Kreiranje novega stroška (dodajanje stroška v kuverto)
+ *    description: Kreiranje novega stroška s pripadujočimi podatki - prejemnik plačila, vrednost stroška, datum računa, kategorija stroška. Stroške se avtomatsko doda v kuverto.
+ *    tags: [Expenses]
+ *    security:
+ *     - jwt: []
+ *    requestBody:
+ *     description: Podatki za kreiranje stroška
+ *     required: true
+ *     content:
+ *      application/json:
+ *       schema:
+ *        $ref: "#/components/schemas/addBill"
+ *       example:
+ *        recipient: "Simobil"
+ *        inputAmount: "50"
+ *        date: "2020-12-15T00:00:00.000Z"
+ *        category: "Electronics"
+ *    responses:
+ *     "201":
+ *      description: Uspešno kreiran strošek in dodan v kuverto.
+ *     "400":
+ *      description: Napaka zahteve, obvezni.
+ *     "401":
+ *      description: Uporabnik ni potrjen.
+ *     "500":
+ *      description: Napaka na strežniku.
+ */
+
 router.post('/addExpense', authentication, (req, res) => {
     envelopes.addExpense(req, res);
+});
+
+/**
+ * @swagger
+ *  /editExpense:
+ *   post:
+ *    summary: Spreminjanje podatkov stroškov
+ *    description: Spreminjanje podatkov stroškov. Vsebuje podatke - id stroška, nov prejemnik stroška, novo vrednost, nov datum računa in novo kategorijo.
+ *    tags: [Expenses]
+ *    security:
+ *     - jwt: []
+ *    requestBody:
+ *     description: Podatki za posodobitev strška
+ *     required: true
+ *     content:
+ *      application/json:
+ *       schema:
+ *        $ref: "#/components/schemas/editExpense"
+ *       example:
+ *        expId: "5feb637ce10cc08e4a48ee3c"
+ *        payee: "Simobil"
+ *        amount: 50
+ *        expCategory: "Electronics"
+ *        date: "2020-12-02'"
+ *    responses:
+ *     "200":
+ *      description: Uspešno posodobljen strošek.
+ *     "400":
+ *      description: Napaka zahteve, obvezni so vsi podatki.
+ *     "401":
+ *      description: Uporabnik ni potrjen.
+ *     "500":
+ *      description: Napaka na strežniku.
+ */
+
+
+router.post('/editExpense', authentication, (req, res) => {
+    history.editExpense(req, res);
 });
 
 router.get('/getExpenses', authentication, (req, res) => {
@@ -189,14 +263,6 @@ router.get('/getExpenses', authentication, (req, res) => {
 
 router.post('/getLastMonthExpenses', authentication, (req, res) => {
     history.getLastMonthExpenses(req, res);
-});
-
-router.post('/deleteEnvelope', authentication, (req, res) => {
-    envelopes.deleteEnvelope(req, res);
-});
-
-router.post('/editExpense', authentication, (req, res) => {
-    history.editExpense(req, res);
 });
 
 /**
