@@ -12,7 +12,7 @@
 <td class="zadnji align-middle">
     <button type="button" class="btn p" data-toggle="modal" [attr.data-target]="'#editForm' + Expense._id"><fa-icon [icon]="faPencilAlt"></fa-icon></button>
 </td>
-<div class="modal fade expensesModal" id="editForm{{Expense._id}}" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
+<div class="modal fade expensesModal" #editHistoryModal id="editForm{{Expense._id}}" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
     <div class="position-absolute w-100 p-4 d-flex flex-column align-items-end">
         <div class="w-25 toastek">
             <div class="toast ml-auto historyName{{Expense._id}}" role="alert" data-delay="3000" data-autohide="false">
