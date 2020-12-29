@@ -262,13 +262,13 @@ function changeIncome(req, res) {
     }
 }
 
-function updateUser(req, requestBody, res, session) {
+function updateUser(req, res) {
     try {
         var regex = new RegExp("^([a-zA-Z])+$");
         var regex2 = new RegExp("^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})");
-        const firstName = requestBody.firstName ? regex.test(requestBody.firstName) : true;
-        const lastName = requestBody.lastName ? regex.test(requestBody.lastName) : true;
-        const password = requestBody.password ? regex2.test(requestBody.password) : true;
+        const firstName = req.body.firstName ? regex.test(req.body.firstName) : true;
+        const lastName = req.body.lastName ? regex.test(req.body.lastName) : true;
+        const password = req.body.password ? regex2.test(req.body.password) : true;
 
         const authorization = req.headers.authorization;
         if (authorization) {
@@ -276,18 +276,18 @@ function updateUser(req, requestBody, res, session) {
             const decodedToken = jwt_decode(token);
 
             if (firstName && lastName && password) {
-                User.findOne({ 'email': requestBody.email }, function(err, user) {
+                User.findById(decodedToken._id, function(err, user) {
                     if (err) {
                         console.log(err);
                     } else {
                         if (user) {
 
-                            user.firstname = requestBody.firstName ? requestBody.firstName : user.firstname;
-                            user.lastname = requestBody.lastName ? requestBody.lastName : user.lastname;
-                            user.email = requestBody.email ? requestBody.email : user.email;
-                            user.password = requestBody.password ? requestBody.password : user.password;
-                            user.language = requestBody.language ? requestBody.language : user.language;
-                            user.defaultCurrency = requestBody.defaultCurrency ? requestBody.defaultCurrency : user.defaultCurrency;
+                            user.firstname = req.body.firstName ? req.body.firstName : user.firstname;
+                            user.lastname = req.body.lastName ? req.body.lastName : user.lastname;
+                            user.email = req.body.email ? req.body.email : user.email;
+                            user.password = req.body.password ? req.body.password : user.password;
+                            user.language = req.body.language ? req.body.language : user.language;
+                            user.defaultCurrency = req.body.defaultCurrency ? req.body.defaultCurrency : user.defaultCurrency;
 
                             user.save();
                             res.status(200).json(user);
@@ -310,19 +310,19 @@ function updateUser(req, requestBody, res, session) {
     }
 }
 
-function setCurrency(req, requestBody, res, session) {
+function setCurrency(req, res) {
     try {
         const authorization = req.headers.authorization;
         if (authorization) {
             const token = authorization.split(' ')[1];
             const decodedToken = jwt_decode(token);
-            User.findOne({ 'email': requestBody.email}, function (err, user) {
+            User.findById(decodedToken._id, function (err, user) {
                 if (err) {
                     console.log(err);
                 } else {
                     if (user) {
-                        user.defaultCurrency = requestBody.currency ;
-                        console.log(requestBody);
+                        user.defaultCurrency = req.body.currency ;
+                        console.log(req.body);
                         user.save();
                         res.status(200).json(user);
                     } else {
@@ -491,7 +491,6 @@ function changePassword(req, res) {
         var oldPassword = req.body.oldPassword;
         var newPassword1 = req.body.newPassword1;
         var newPassword2 = req.body.newPassword2;
-        var id = req.body.id;
 
         const authorization = req.headers.authorization;
         if (authorization) {
@@ -499,7 +498,7 @@ function changePassword(req, res) {
             const decodedToken = jwt_decode(token);
 
             if (newPassword1 === newPassword2) {
-                User.findById(id, function(err, user) {
+                User.findById(decodedToken._id, function(err, user) {
                     if (err) {
                         res.sendStatus(500);
                     }
@@ -594,10 +593,10 @@ module.exports = {
         getPfp(req, res);
     },
     updateUser: function(req, res) {
-        updateUser(req, req.body, res, req.session);
+        updateUser(req, res);
     },
     setCurrency: function(req, res) {
-        setCurrency(req, req.body, res, req.session);
+        setCurrency(req, res);
     },
     handlePaychecks: function() {
         handlePaychecks();

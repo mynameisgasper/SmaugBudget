@@ -12,11 +12,10 @@ const jwt_decode = require('jwt-decode');
 ? Change category color
 */
 
-function changeColorCategory(req, requestBody, res) {
+function changeColorCategory(req, res) {
     try {
-        var newColor = requestBody.colorPicker;
-        var category_id = requestBody.category_id;
-        var user_id = requestBody.user_id;
+        var newColor = req.body.colorPicker;
+        var category_id = req.body.category_id;
         var colorRGB;
         const colorCorrect = checkColorCode(newColor);
 
@@ -28,7 +27,7 @@ function changeColorCategory(req, requestBody, res) {
             if (colorCorrect) {
                 colorRGB = hexToRGB(newColor);
                 colorRGBA = hexToRGB(newColor, 0.5);
-                User.findById(user_id, function(error, user) {
+                User.findById(decodedToken._id, function(error, user) {
                     if (error) {
                         console.log(error);
                         res.sendStatus(500);
@@ -111,13 +110,11 @@ function changeColorCategory(req, requestBody, res) {
     }
 }
 
-function deleteCategory(req, requestBody, res) {
+function deleteCategory(req, res) {
     try {
-        var category_id = requestBody.category_id;
-        var user_id = requestBody.user_id;
+        var category_id = req.body.category_id;
 
         console.log(category_id);
-        console.log(user_id);
         var categoryName;
 
         const authorization = req.headers.authorization;
@@ -156,7 +153,7 @@ function deleteCategory(req, requestBody, res) {
                     } else {}
                 });
 
-                User.findById(user_id, function(err, user) {
+                User.findById(decodedToken._id, function(err, user) {
                     if (err) {
                         console.log(err);
                     } else {
@@ -236,9 +233,9 @@ function hexToRGB(hex, alpha) {
 
 module.exports = {
     changeColorCategory: function(req, res) {
-        changeColorCategory(req, req.body, res);
+        changeColorCategory(req, res);
     },
     deleteCategory: function(req, res) {
-        deleteCategory(req, req.body, res);
+        deleteCategory(req, res);
     }
 }
