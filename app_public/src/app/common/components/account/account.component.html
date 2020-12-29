@@ -117,7 +117,7 @@
     <div id="categories-setting"  class="col-sm-12 col-md-12 col-lg-12 col-xl-12" >
         <h2>{{data.categories}}</h2>
         <div *ngFor="let item of categories">
-            <form  name="editColor{{item._id}}" method="post" action="/account">
+            <form  name="editColor{{item._id}}" id="editColor{{item._id}}" method="post" action="/account">
                 <div class="category-row col-5 col-sm-6 col-md-5 col-lg-4 col-xl-4">
                 <label for="color-picker{{item._id}}" style=" text-align:left;">{{item.name}}</label>
                 </div>
@@ -126,14 +126,10 @@
                 </div>
                 <div class="category-row col-3 col-sm-12 col-md-1 col-lg-4 col-xl-4" style="text-align: right;">
                 <button type="submit" class="btn btn-primary" (click)="changeColor(item._id)"><fa-icon [icon]="faPencilAlt"></fa-icon></button>
-                <button type="submit" [attr.form]="'deleteColor' + item.id" class="btn btn-danger"><fa-icon [icon]="faTrashAlt"></fa-icon></button>
+                <button type="submit" (click)="removeCategory(item._id)" class="btn btn-danger"><fa-icon [icon]="faTrashAlt"></fa-icon></button>
                 <input type="hidden" name="id" value="{{item._id}}" />
                 <input type="hidden" name="formType" value="changeColorCategory" />
                 </div>
-            </form>
-            <form id="deleteColor{{item._id}}" name="deleteColor{{item._id}}" method="post" action="/account" onsubmit="return confirm('Deleting category will remove all related envelopes and goals!');">
-                <input type="hidden" name="formType" value="deleteCategory">
-                <input type="hidden" name="id" value="{{item._id}}">
             </form>
         </div>
         
@@ -197,7 +193,7 @@
             </div>
             </div>
             <div class="modal-footer">
-            <button type="submit" class="btn btn-primary" onclick="passwordSubmit();">{{data.saveChanges}}</button>
+            <button type="submit" class="btn btn-primary" (click)="passwordSubmit()">{{data.saveChanges}}</button>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">{{data.close}}</button>
             </div>
         </div>

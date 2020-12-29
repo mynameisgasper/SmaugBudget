@@ -79,6 +79,9 @@ export class AccountComponent implements OnInit {
   hasChangeColorMessage: boolean = false;
   changeColorMessage: string = "";
 
+  haschangePasswordMessage: boolean = false;
+  changePasswordMessage: string = "";
+
   data = {
       "HINT": getTranslation("HINT"),
       "nameHint": getTranslation("nameHint"),
@@ -381,22 +384,30 @@ passwordCheckSignUp() {
         return 1;
     }
 }
-/*
-passwordSubmit(obj) {
-    var password1 = document.getElementById('oldPassword');
-    var hashOne1 = new jsSHA("SHA-512", "TEXT", { numRounds: 1 });
-    hashOne1.update(getValueById('oldPassword'));
-    setValueById('oldPasswordHash', hashOne1.getHash("HEX"));
 
-    var password2 = document.getElementById('newPassword');
-    var hashOne2 = new jsSHA("SHA-512", "TEXT", { numRounds: 1 });
-    hashOne2.update(getValueById('newPassword'));
-    setValueById('newPasswordHash1', hashOne2.getHash("HEX"));
-
-    var password3 = document.getElementById('confirmPassword');
-    var hashOne3 = new jsSHA("SHA-512", "TEXT", { numRounds: 1 });
-    hashOne3.update(getValueById('confirmPassword'));
-    setValueById('newPasswordHash2', hashOne3.getHash("HEX"));
+removeCategory(id: string) {
+  if(confirm("Deleting category will remove all related envelopes and goals!")) {
+    this.api.deleteCategory(id, this.uID).then((response) => {
+      this.elementRef.nativeElement.querySelector('#editColor' + id ).parentNode.remove();
+      
+    }).catch((error) => {
+      this.changeColorMessage = "Failed to remove!";
+    });
+  }
 }
-  */
+
+passwordSubmit() {
+  if (this.passwordStrength("newPassword") && this.passwordCheckSignUp()) {
+    this.api.updatePassword(getValueById('oldPassword'), getValueById('newPassword'), getValueById('confirmPassword'), this.uID).then((response) => {
+      try {
+        this.elementRef.nativeElement.querySelector('#changePassowrd').classList.remove("show")
+      }
+      catch {}
+      
+    }).catch((error) => {
+      this.changePasswordMessage = "Failed to save!";
+    });
+  }
+}
+  
 }
