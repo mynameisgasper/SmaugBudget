@@ -71,7 +71,7 @@ const { friendGroupSchema } = require('./friendGroup');
  *     - paycheckDate
  *     - paycheckLastMonth
  *     - defaultCurrency
- *     - __v
+ *     - _v
  *     - bills
  *     - categories
  *     - envelopes
@@ -96,19 +96,27 @@ const { friendGroupSchema } = require('./friendGroup');
  *    type: object
  *    description: Podatki uporabnika za registracijo
  *    properties:
- *     firstname:
+ *     nameup:
  *      type: string
  *      description: ime
  *      example: Gasper
- *     lastname:
+ *     surnameup:
  *      type: string
  *      description: priimek
  *      example: Stepec
- *     email:
+ *     email1up:
  *      type: string
  *      description: elektronski naslov
  *      example: smaug@gold.si
- *     password:
+ *     email2up:
+ *      type: string
+ *      description: elektronski naslov
+ *      example: smaug@gold.si
+ *     password1up:
+ *      type: string
+ *      format: password
+ *      example: SmaugPass1
+ *     password2up:
  *      type: string
  *      format: password
  *      example: SmaugPass1
@@ -137,14 +145,6 @@ const { friendGroupSchema } = require('./friendGroup');
  *    required:
  *     - paycheck
  *     - paycheckDate
- *   Error:
- *    type: object
- *    description: Podrobnosti napake
- *    properties:
- *     sporočilo:
- *      type: string
- *    required:
- *     - sporočilo
  */
 
 const userSchema = new mongoose.Schema();

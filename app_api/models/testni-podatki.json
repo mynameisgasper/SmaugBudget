@@ -734,7 +734,7 @@
                 "name": "Utilities",
                 "__v": 0
             },
-            "date": "2020-11-30T00:00:00Z",
+            "date": "2021-01-30T00:00:00Z",
             "currency": "EUR",
             "repeating": "monthly",
             "__v": 0
@@ -749,12 +749,11 @@
                 "name": "Car",
                 "__v": 0
             },
-            "date": "2020-12-04T00:00:00Z",
+            "date": "2021-01-04T00:00:00Z",
             "currency": "EUR",
             "repeating": "monthly",
             "__v": 0
         }
-
 
     ],
     "goals": [{

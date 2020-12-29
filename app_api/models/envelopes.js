@@ -11,22 +11,31 @@ const { categorySchema } = require('./categories')
  *    properties:
  *     id:
  *      type: string
+ *      description: Id kuverte
  *     progress:
  *      type: number
+ *      description: V procentih podana količina zapravljenega denarja od proračuna
  *     budget:
  *      type: number
+ *      description: Proračun za določeno kuverto/kategorijo
  *     spent:
  *      type: number
+ *      description: Vsota denarja zapravljenega za določeno kuverto/kategorijo
  *     color:
  *      type: string
+ *      description: Barva kuverte RGB
  *     colorHex:
  *      type: string
+ *      description: Barva kuverte HEX
  *     bgColor:
  *      type: string
+ *      description: Barva kuverte v ozadju
  *     month:
  *      type: string
+ *      description: Mesec za katerega velja ta kuverta
  *     category:
  *      type: object
+ *      description: Kategorija kamor spada kuverta
  *      $ref: "#/components/schemas/Categories"
  *    required:
  *     - id
@@ -42,19 +51,23 @@ const { categorySchema } = require('./categories')
  *    type: object
  *    description: Podatki za dodajanje nove kuverte
  *    properties:
- *     category:
+ *     categoryAddEnvelope:
  *      type: string
- *     budget:
+ *      description: Kategorija kamor spada kuverta
+ *     inputAmount:
  *      type: number
- *     color:
+ *      description: Proračun za dano kuverto
+ *     colorPicker:
  *      type: string
+ *      description: Barva za dano kuverto
  *     month:
  *      type: string
+ *      description: Mesec za katerega velja ta kuverta
  *    required:
- *     - category
- *     - value
+ *     - categoryAddEnvelope
+ *     - inputAmount
  *     - budget
- *     - color
+ *     - colorPicker
  *     - month
  *   editEnvelope:
  *    type: object
@@ -62,19 +75,22 @@ const { categorySchema } = require('./categories')
  *    properties:
  *     id:
  *      type: string
- *     budget:
+ *      description: ID kuverte
+ *     inputAmount:
  *      type: number
+ *      description: Proračun za dano kuverto
  *    required:
  *     - id
- *     - budget
+ *     - inputAmount
  *   deleteEnvelope:
  *    type: object
  *    description: Podatki za brisanje kuverte
  *    properties:
- *     id:
+ *     envelope_id:
  *      type: string
+ *      description: ID kuverte
  *    required:
- *     - id
+ *     - envelope_id
  */
 
 const envelopesSchema = new mongoose.Schema();

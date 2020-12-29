@@ -37,15 +37,18 @@ export class UtilityTableElementComponent implements OnInit {
   }
 
   deleteGroup(){
-    this.hasDeleteGroupMessage = true;
-    this.DeleteGroupMessage = "Deleting group";
+    let decision = confirm("Are you sure you want to delete group " + this.group.Group + "?");
+    if (decision == true) {
+      this.hasDeleteGroupMessage = true;
+      this.DeleteGroupMessage = "Deleting group";
 
-    this.api.deleteGroup(this.group.id).then((response) => {
-      this.UtilitiesComponent.afterDelete(this.group.id);
-      this.hasDeleteGroupMessage = false;
-    }).catch((error) => {
-      this.DeleteGroupMessage = "Failed to delete group!";
-    });
+      this.api.deleteGroup(this.group.id).then((response) => {
+        this.UtilitiesComponent.afterDelete(this.group.id);
+        this.hasDeleteGroupMessage = false;
+      }).catch((error) => {
+        this.DeleteGroupMessage = "Failed to delete group!";
+      });
+    }
   }
 
 }

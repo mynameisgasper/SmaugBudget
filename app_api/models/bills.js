@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const billsSchema = new mongoose.Schema();
 const { categorySchema } = require('./categories')
 
-//Bill je primeren za editBill in getBill ne ni
 /**
  * @swagger
  * components:
@@ -35,53 +34,65 @@ const { categorySchema } = require('./categories')
  *    type: object
  *    description: Vsi podatki za kreiranje novega računa
  *    properties:
- *     recipient:
+ *     Payee:
  *      type: string
- *     value:
+ *      description: Recipient of the payment
+ *     Amount:
  *      type: number
- *     category:
+ *      description: Amount to pay
+ *     inputCategory:
  *      type: string
- *     date:
+ *      description: Category of bill
+ *     inputDateAddBill:
  *      type: string
- *     repeating:
+ *      description: Date due
+ *     rad:
  *      type: string
+ *      description: Bill recurrence - only once, monthly, yearly
  *    required:
- *     - recipient
- *     - value
- *     - category
- *     - date
- *     - repeating
+ *     - Payee
+ *     - Amount
+ *     - inputCategory
+ *     - inputDateAddBill
+ *     - rad
  *   editBill:
  *    type: object
  *    description: Vsi podatki za urejanje računa
  *    properties:
- *     id:
+ *     billId:
  *      type: string
- *     recipient:
+ *      description: Bill id
+ *     payee:
  *      type: string
- *     value:
+ *      description: Recipient of the payment
+ *     amount:
  *      type: number
- *     category:
+ *      description: Amount to pay
+ *     inputCategory:
  *      type: string
+ *      description: Category of bill
  *     date:
  *      type: string
- *     repeating:
+ *      description: Date due
+ *     repeat:
  *      type: string
+ *      description: Bill recurrence - only once, monthly, yearly
  *    required:
- *     - id
- *     - recipient
- *     - value
- *     - category
+ *     - billId
+ *     - payee
+ *     - amount
+ *     - inputCategory
  *     - date
- *     - repeating
+ *     - repeat
  *   deleteBill:
  *    type: object
  *    description: Vsi podatki za brisanje računa
  *    properties:
- *     id:
+ *     bill_id:
  *      type: string
+ *      description: Bill id
  *    required:
- *     - id
+ *     - bill_id
  */
 
 billsSchema.add({
