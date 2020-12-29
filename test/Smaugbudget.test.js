@@ -71,7 +71,9 @@
             let passwordField = await browser.findElements(By.xpath("//input[contains(@id, 'passwordin')]"));
             expect(passwordField).to.not.be.empty;
             passwordField[0].sendKeys("Premiumpass1");
+        });
 
+        it("Login", async () => {
             let loginButton = await browser.findElements(By.xpath("//input[contains(@value, 'Login')]"));
             expect(loginButton).to.not.be.empty;
             loginButton[0].click();
@@ -80,10 +82,6 @@
 
             var url = await browser.getCurrentUrl();
             expect(url).to.include('dashboard');
-        });
-
-        it("Login", async () => {
-
         });
       });
 
