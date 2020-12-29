@@ -15,6 +15,15 @@ const mongoose = require('mongoose');
  *    required:
  *     - name
  *     - balance
+ *   addFriend:
+ *    type: array
+ *    description: Podatki za kreiranje nove skupine prijateljev
+ *    properties:
+ *     name:
+ *      type: string
+ *      description: Ime prijatelja
+ *    required:
+ *     - name
  */
 
 const friendSchema = new mongoose.Schema();

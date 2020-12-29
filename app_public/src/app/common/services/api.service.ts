@@ -227,6 +227,7 @@ export class ApiService {
   }
 
   public addFriendGroup(groupName: String, groupMembers: Array<String>): Promise<any> {
+    console.log(groupMembers);
     if (this.authorization.getLoggedIn()) {
       const url: string = `${this.apiUrl}/addFriendGroup`; 
       const body = {
@@ -426,6 +427,7 @@ export class ApiService {
         'friends': pricePaidArrayStringified,
         'group_id': group_id
       }
+      console.log(body);
       const options = {
         headers: new HttpHeaders().set('Authorization', this.authorization.generateCompleteJwt())
       }

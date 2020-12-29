@@ -32,7 +32,7 @@ const friendGroupSchema = new mongoose.Schema();
  *     friends:
  *      type: string
  *      description: Podatki o prijateljih
- *      $ref: "#/components/schemas/Friend"
+ *      $ref: "#/components/schemas/addFriendGroup"
  *    required:
  *     - name
  *     - friends
@@ -55,7 +55,6 @@ const friendGroupSchema = new mongoose.Schema();
  *     friends:
  *      type: string
  *      description: Novi podatki o prijateljih
- *      $ref: "#/components/schemas/Friend"
  *     required:
  *      - group_id
  *      - friends
