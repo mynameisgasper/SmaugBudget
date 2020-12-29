@@ -282,7 +282,7 @@ readURL(input: FileList) {
 uploadFileToActivity() {
     this.api.postFile(getValueById("emailInput"), this.fileToUpload).then((response) => {
         console.log(response);
-        
+        this.pfpImg = this.getImage();
       }).catch((error) => {
         console.log(error);
       });

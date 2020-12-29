@@ -334,32 +334,37 @@ const uploadImg = multer({ storage: storage }).single('image');
 
 function postImg(req, res) {
     try {
-        User.findOne({ 'email': req.body.email }, function(err, user) {
-            if (err) {
-                console.log(err);
-            } else {
-                if (user) {
-                    if (user.profilePic) {
-                        fs.unlink(user.profilePic, (err) => {
-                            if (err) {
-                                console.log('File: ' + user.profilePic + " does not exist!");
-                            } else {
-                                console.log('File: ' + user.profilePic + " was deleted");
-                            }
-                        });
-                    }
-                    if (req.file) {
-                        user.profilePic = req.file.path;
-                        user.save();
-                        res.status(200).json(req.file.path);
-                    } else {
-                        res.sendStatus(500);
-                    }
+        const authorization = req.headers.authorization;
+        if (authorization) {
+            const token = authorization.split(' ')[1];
+            const decodedToken = jwt_decode(token);
+            User.findById(decodedToken._id, function(err, user) {
+                if (err) {
+                    console.log(err);
                 } else {
-                    res.sendStatus(404);
+                    if (user) {
+                        if (user.profilePic) {
+                            fs.unlink(user.profilePic, (err) => {
+                                if (err) {
+                                    console.log('File: ' + user.profilePic + " does not exist!");
+                                } else {
+                                    console.log('File: ' + user.profilePic + " was deleted");
+                                }
+                            });
+                        }
+                        if (req.file) {
+                            user.profilePic = req.file.path;
+                            user.save();
+                            res.status(200).json(req.file.path);
+                        } else {
+                            res.sendStatus(500);
+                        }
+                    } else {
+                        res.sendStatus(404);
+                    }
                 }
-            }
-        });
+            });
+        }
     } catch (ex) {
         res.sendStatus(500);
     }

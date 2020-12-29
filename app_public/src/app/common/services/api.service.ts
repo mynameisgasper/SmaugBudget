@@ -366,11 +366,11 @@ export class ApiService {
         
       }
       const formData: FormData = new FormData();
-      formData.append('fileKey', fileToUpload, fileToUpload.name);
+      formData.append('image', fileToUpload, fileToUpload.name);
       const options = {
         headers: new HttpHeaders().set('Authorization', this.authorization.generateCompleteJwt())
       }
-      return this.http.post(url, body, options).toPromise().then(response => response).catch(err => this.parseError(err));
+      return this.http.post(url, formData, options).toPromise().then(response => response).catch(err => this.parseError(err));
     }
     else {
       this.parseError('Error');
