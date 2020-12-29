@@ -259,7 +259,7 @@ function createDummyAccounts(requestBody, res) {
         userGold.save();
         res.status(200).json();
     } catch (ex) {
-        console.log(ex);
+        res.status(500).json();
     }
 }
 
@@ -305,7 +305,7 @@ async function loadCategories(requestBody, res) {
             }
             res.sendStatus(200);
         } else{
-            res.sendStatus(304);
+            res.sendStatus(400);
         }
     });
     

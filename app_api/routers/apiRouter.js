@@ -39,6 +39,8 @@ const authentication = jwt({
  *    description: Obvladovanje podatkov o stroških
  *  - name: Utilities
  *    description: Obvladovanje podatkov o prijateljskih skupinah in pretvorniku valut
+ *  - name: Database 
+ *    description: Obvladovanje podatkov v bazi
  */
 
 /**
@@ -649,9 +651,7 @@ router.post('/deleteGoal', authentication, (req, res) => {
 });
 
 
-router.post('/removeAllDbData', (req, res) => {
-    dbController.removeAllDbData(req, res);
-});
+
 /*
 router.get('/getNewUsers', authentication, (req, res) => {
     connections.getNewUsers(req, res);
@@ -669,13 +669,81 @@ router.get('/getEnvelopesForDropdown', authentication, (req, res) => {
     connections.getEnvelopesForDropdown(req, res);
 });
 */
+
+/**
+ * @swagger
+ *  /removeAllDbData:
+ *   post:
+ *    summary: Brisanje podatkov v bazi.
+ *    description: Brisanje vseh podatakov v bazi.
+ *    tags: [Database]
+ *    responses:
+ *     "204":
+ *      description: Uspešna brisanje vseh podatkov iz baze.
+ *     "500":
+ *      description: Napaka na strežniku.
+ */
+
+router.post('/removeAllDbData', (req, res) => {
+    dbController.removeAllDbData(req, res);
+});
+
+/**
+ * @swagger
+ *  /createDummyAccounts:
+ *   post:
+ *    summary: Vnašanje podatkov uporabnikov v bazo.
+ *    description: Vnašanje podatkov uporabnikov v bazo.
+ *    tags: [Database]
+ *    responses:
+ *     "200":
+ *      description: Uspešno vnašanje podatkov v baz.
+ *     "500":
+ *      description: Napaka na strežniku.
+ */
+
 router.post('/createDummyAccounts', (req, res) => {
     dbController.createDummyAccounts(req, res);
 });
 
+/*
 router.post('/loadCategories', (req, res) => {
     dbController.loadCategories(req, res);
-});
+});*/
+
+/**
+ * @swagger
+ *  /changeColorCategory:
+ *   post:
+ *    summary: Menjava barve kategorije
+ *    description: Menjava barve kategorije
+ *    tags: [Uporabnik]
+ *    security:
+ *     - jwt: []
+ *    requestBody:
+ *     description: Podatki za spremembo barve kategorije
+ *     required: true
+ *     content:
+ *      application/json:
+ *       schema:
+ *        $ref: "#/components/schemas/changeColorCategory"
+ *       example:
+ *        goal_id: "5feb546ad99c505c0677195a"
+ *        name: "Playstation"
+ *        amount: 800
+ *        date: "2025-07-01T00:00:00.000Z"
+ *        category: "Electronics"
+ *    responses:
+ *     "200":
+ *      description: Uspešno dodan denar v cilj.
+ *     "400":
+ *      description: Napaka zahteve, obvezni so vsi podatki.
+ *     "401":
+ *      description: Uporabnik ni potrjen.
+ *     "500":
+ *      description: Napaka na strežniku.
+ */
+
 
 router.post('/changeColorCategory', authentication, (req, res) => {
     categories.changeColorCategory(req, res);
