@@ -175,7 +175,7 @@
         </div>
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
-                <form #f="ngForm" (ngSubmit)="createGroup(f)">
+                <form #f="ngForm" (ngSubmit)="createGroup(f, 0)">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
@@ -183,10 +183,10 @@
                     </div>
                     <div class="modal-body" id="inputMemberBody">
                             <label for="inputGroupName">Input group name</label>
-                            <input type="text" #groupName ngModel class="form-control" placeholder="Group Name" name="inputGroupName" id="inputGroupName" (focusout)="addGroupUtilities()" required="required"><br/>
+                            <input type="text" #groupName ngModel class="form-control" placeholder="Group Name" name="inputGroupName" id="inputGroupName" (focusout)="createGroup(f, 1)" required="required"><br/>
                             <label for="inputGroupName">Add Members</label>
                             <div *ngFor="let member of groupMembers">
-                                <input type="text" ngModel #memberName class="form-control" placeholder="Member {{member.value}}" name="{{member.value | inputMemberPipe}}" id="{{member.value | inputMemberPipe}}" style="margin-top:1%" onfocusout="checkName(this)">
+                                <input type="text" ngModel #memberName class="form-control" (focusout)="createGroup(f, 1)" placeholder="Member {{member.value}}" name="{{member.value | inputMemberPipe}}" id="{{member.value | inputMemberPipe}}" style="margin-top:1%">
                             </div>                    
                         </div>
                     <div class="modal-footer">

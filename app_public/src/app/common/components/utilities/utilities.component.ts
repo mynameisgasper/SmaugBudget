@@ -131,47 +131,55 @@ export class UtilitiesComponent implements OnInit {
         var regex = new RegExp("^[ A-Za-z0-9_@./#&+-: ]{1,16}$");
         if (!field.value.match(regex)) {
             field.style.setProperty("border-color", "red", "important");
-            $('.tt5').toast('show');
+            //$('.tt5').toast('show');
             return 0;
         } else {
             field.style.borderColor = "#ced4da";
-            $('.tt5').toast('hide');
+            //$('.tt5').toast('hide');
             return 1;
         }
     }
 
-    addGroupUtilities2(): number{
-        const field = this.memberName.nativeElement;
+    checkMemberName(name, index){
+        const field = document.getElementById("inputMember" + index);
         var regex = new RegExp("^[ A-Za-z0-9_@./#&+-: ]{1,16}$");
-        if (!field.value.match(regex)) {
+        if (!name.match(regex)) {
             field.style.setProperty("border-color", "red", "important");
-            $('.tt5').toast('show');
+            //$('.tt5').toast('show');
             return 0;
         } else {
             field.style.borderColor = "#ced4da";
-            $('.tt5').toast('hide');
+            //$('.tt5').toast('hide');
             return 1;
         }
     }
 
     counter = 1;
 
-    buttonAddGroupUtilities() {
-        var groupName = this.groupName.nativeElement;
-        if(groupName == 0)
-            return false;
+    buttonAddGroupUtilities(groupName, friends, fake) {
+        var groupNameCheck = this.addGroupUtilities(); 
 
-        var check = true;
-        for(var i = 1; i < this.counter; i++){
-            var testName = this.memberName.nativeElement;
-            if(testName == 0){
-                $('.tt6').toast('show');
-                check = false
-                return false;
-            }
-            $('.tt6').toast('hide');
+        var index = 1;
+        var memberNameOverall = 1;
+        for(var friend of friends){
+            var memberNameCheck = this.checkMemberName(friend, index)
+            if(memberNameCheck == 0)
+                memberNameOverall = 0;
+            index++;
         }
-        return check;
+        console.log(groupNameCheck + " " + memberNameOverall)
+        if(groupNameCheck == 0 || memberNameOverall == 0  || fake == 1){
+            if(groupNameCheck == 0 || memberNameOverall == 0)
+                $('.tt5').toast('show');
+            else
+                $('.tt5').toast('hide');
+        }
+        else{
+            $('.tt5').toast('hide');
+            this.renderer.setAttribute(document.getElementById("addGroup"), 'data-dismiss', 'modal');
+            this.addFriendGroup(groupName, friends)
+            this.renderer.removeAttribute(document.getElementById("addGroup"), 'data-dismiss', 'modal');
+        }
     }
 
 
@@ -184,7 +192,7 @@ export class UtilitiesComponent implements OnInit {
         }
     }
 
-    createGroup(f: NgForm) {
+    createGroup(f: NgForm, fake) {
         const values = f.form.value;
         var groupName: String;
         var friends: Array<String> = [];
@@ -198,17 +206,19 @@ export class UtilitiesComponent implements OnInit {
             }
         }
 
+        this.buttonAddGroupUtilities(groupName, friends, fake);
+    }
+
+    addFriendGroup(groupName, friends){
         this.hasCreateGroupMessage = true;
         this.createGroupMessage = "Saving group";
 
-        this.renderer.setAttribute(document.getElementById("addGroup"), 'data-dismiss', 'modal');
         this.api.addFriendGroup(groupName, friends).then(result => {
             this.hasCreateGroupMessage = false;
             this.afterAddFriedGroup(result);
         }).catch(error => {
             this.createGroupMessage = "Failed to save!";
         });
-        this.renderer.removeAttribute(document.getElementById("addGroup"), 'data-dismiss', 'modal');
     }
 
     afterAddFriedGroup(friendGroup){

@@ -42,11 +42,11 @@ export class UtilitiesEditModalComponent implements OnInit {
     //črkev male,velike,številke
     if (!regex.test(field.value)) {
         field.style.setProperty("border-color", "red", "important");
-        $('.tt1' + this.group.id).toast('show')
+        //$('.tt1' + this.group.id).toast('show')
         return 0;
     } else {
         field.style.borderColor = "#ced4da";
-        $('.tt1' + this.group.id).toast('hide')
+        //$('.tt1' + this.group.id).toast('hide')
         return 1;
     }
   }
@@ -58,11 +58,11 @@ export class UtilitiesEditModalComponent implements OnInit {
     //črkev male,velike,številke
     if (!regex.test(field.value)) {
         field.style.setProperty("border-color", "red", "important");
-        $('.tt1' + this.group.id).toast('show')
+        //$('.tt1' + this.group.id).toast('show')
         return 0;
     } else {
         field.style.borderColor = "#ced4da";
-        $('.tt1' + this.group.id).toast('hide')
+        //$('.tt1' + this.group.id).toast('hide')
         return 1;
     }
   }
@@ -74,11 +74,11 @@ export class UtilitiesEditModalComponent implements OnInit {
     //črkev male,velike,številke
     if (!regex.test(value)) {
         field.style.setProperty("border-color", "red", "important");
-        $('.tt1' + this.group.id).toast('show')
+        //$('.tt1' + this.group.id).toast('show')
         return 0;
     } else {
         field.style.borderColor = "#ced4da";
-        $('.tt1' + this.group.id).toast('hide')
+        //$('.tt1' + this.group.id).toast('hide')
         return 1;
     }
   }
@@ -90,11 +90,11 @@ export class UtilitiesEditModalComponent implements OnInit {
     //črkev male,velike,številke
     if (!regex.test(value)) {
         field.style.setProperty("border-color", "red", "important");
-        $('.tt1' + this.group.id).toast('show')
+        //$('.tt1' + this.group.id).toast('show')
         return 0;
     } else {
         field.style.borderColor = "#ced4da";
-        $('.tt1' + this.group.id).toast('hide')
+        //$('.tt1' + this.group.id).toast('hide')
         return 1;
     }
   }
@@ -103,16 +103,15 @@ export class UtilitiesEditModalComponent implements OnInit {
     var priceSum = 0;
     var paidSum = 0;
     for(var i = 0; i < pricePaidArray.length; i++){
-      priceSum += pricePaidArray[i][0];
-      paidSum += pricePaidArray[i][1];
+      priceSum =  priceSum + Number(pricePaidArray[i][0]);
+      paidSum =  paidSum + Number(pricePaidArray[i][1]);
     }
-    console.log(priceSum + " " + paidSum);
     if(priceSum == paidSum){
-      $('.tt2' + this.group.id).toast('hide')
+      //$('.tt2' + this.group.id).toast('hide')
       return 1
     }
     else{
-      $('.tt2' + this.group.id).toast('show')
+      //$('.tt2' + this.group.id).toast('show')
       return 0
     }
   }
@@ -123,16 +122,30 @@ export class UtilitiesEditModalComponent implements OnInit {
     var sum = this.checkSumPricePaid(pricePaidArray);
     
     var index = 1;
+    var numbersOverall = 1;
+    if(price == 0 || paid == 0)
+      numbersOverall = 0;
     for(var member of this.group.groupMember){
       var memberId = member.id;
       price = this.priceFieldCheckMembers(memberId, pricePaidArray[index][0]);
       paid = this.paidFieldCheckMembers(memberId, pricePaidArray[index][1]);
+      if(price == 0 || paid == 0)
+        numbersOverall = 0;
       index++;
     }
 
-    if (price == 0 || paid == 0 || sum == 0 || fake == 1) {
-      $('.tt2' + this.group.id).toast('show')
-      $('.tt1' + this.group.id).toast('show')
+    if (numbersOverall == 0 || sum == 0 || fake == 1) {
+      if(numbersOverall == 0)
+        $('.tt1' + this.group.id).toast('show')
+      if(sum == 0)
+        $('.tt2' + this.group.id).toast('show')
+
+      if(numbersOverall == 1)
+        $('.tt1' + this.group.id).toast('hide')
+      if(sum == 1)
+        $('.tt2' + this.group.id).toast('hide')
+
+      
         //DO NOTHING
     } else {
       $('.tt2' + this.group.id).toast('hide')
@@ -145,7 +158,7 @@ export class UtilitiesEditModalComponent implements OnInit {
   
   formCalculateBalances(f: NgForm, fake) {
     const values = f.form.value;
-    var pricePaidArray: number[][] = [];
+    var pricePaidArray: Array<Array<number>> = [];
     var kjeSm = 0;
     var index = 0;
     
