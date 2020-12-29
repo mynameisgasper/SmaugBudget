@@ -1,8 +1,21 @@
 /**
  * Funkcionalni testi
  */
+
+function takeScreenshot(browser, filename) {
+  browser.takeScreenshot().then(result => fs.writeFile(filename, result.replace(/^data:image\/png;base64,/,''), 'base64', function(err) {
+    if (err) {
+      console.log("Error saving screenshot");
+    }
+    else {
+      console.log("Screenshot saved!");
+    }
+  }));
+}
+
 (async function SmaugBudget() {
     // Knjižnice
+    fs = require('fs');
     const { exec } = require("child_process");
     const { describe, it, after, before } = require("mocha");
     const { Builder, By, until } = require("selenium-webdriver");
@@ -66,11 +79,14 @@
         it("Enter data", async () => {
             let emailField = await browser.findElements(By.xpath("//input[contains(@id, 'emailin')]"));
             expect(emailField).to.not.be.empty;
-            emailField[0].sendKeys("premium@smaug.com");
+            emailField[0].sendKeys("gold@smaug.com");
 
             let passwordField = await browser.findElements(By.xpath("//input[contains(@id, 'passwordin')]"));
             expect(passwordField).to.not.be.empty;
-            passwordField[0].sendKeys("Premiumpass1");
+            passwordField[0].sendKeys("Goldpass1");
+            
+            await new Promise(r => setTimeout(r, 1000));
+            takeScreenshot(browser, 'test/data.png');
         });
 
         it("Login", async () => {
