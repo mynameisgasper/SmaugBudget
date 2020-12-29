@@ -10,12 +10,12 @@
     const expect = require("chai").expect;
     
     // Parametri
-    let accplicationUrl = "https://smaugbudget.herokuapp.com/";
+    let applicationUrl = "http://smaugbudget.herokuapp.com/";
     let seleniumServerUrl = "http://localhost:4445/wd/hub";
     let browser, jwtToken;
   
     const axios = require('axios').create({
-      baseURL: accplicationUrl + "api/",
+      baseURL: applicationUrl + "api/",
       timeout: 5000
     });
     
@@ -50,12 +50,40 @@
   
       describe("Login", function() {
         this.timeout(30 * 1000);
-        before(() => { browser.get(accplicationUrl); });
+        before(() => { browser.get(applicationUrl); });
 
         it("Open modal", async () => {
             await waitPageLoaded(browser, 10, "//h4");
-            let t = true;
-            expect(t).to.be.an("boolean").to.have.false;
+            let loginButton = await browser.findElements(By.xpath("//a[contains(text(), 'SIGN IN')]"));
+            expect(loginButton).to.not.be.empty;
+            await loginButton[0].click();
+            let opened = await browser.findElements(By.xpath("//div[contains(@class, 'modal-backdrop fade show')]"));
+            expect(opened).to.not.be.empty;
+
+            await new Promise(r => setTimeout(r, 1000));
+        });
+
+        it("Enter data", async () => {
+            let emailField = await browser.findElements(By.xpath("//input[contains(@id, 'emailin')]"));
+            expect(emailField).to.not.be.empty;
+            emailField[0].sendKeys("premium@smaug.com");
+
+            let passwordField = await browser.findElements(By.xpath("//input[contains(@id, 'passwordin')]"));
+            expect(passwordField).to.not.be.empty;
+            passwordField[0].sendKeys("Premiumpass1");
+
+            let loginButton = await browser.findElements(By.xpath("//input[contains(@value, 'Login')]"));
+            expect(loginButton).to.not.be.empty;
+            loginButton[0].click();
+
+            await new Promise(r => setTimeout(r, 1000));
+
+            var url = await browser.getCurrentUrl();
+            expect(url).to.include('dashboard');
+        });
+
+        it("Login", async () => {
+
         });
       });
 
