@@ -18,6 +18,8 @@ export class HomeComponent implements OnInit {
   hasLoginMessage: boolean = false;
   loginMessage: string = "";
 
+  hasResetMessage: boolean = false;
+  resetMessage: string = "";
 
   constructor(
     private api: AuthenticationService,
@@ -251,5 +253,21 @@ export class HomeComponent implements OnInit {
         return 0;
       }
       return 1;
+    }
+
+    forgotPassword(email: string) {
+      this.hasResetMessage = true;
+      this.resetMessage = "Sending reset email";
+
+      this.api.requestResetPassword(email).then(result => {
+        console.log(result);
+        if (result.status !== 200) {
+          this.resetMessage = "Failed to send an email!";
+        }
+        else {
+          this.resetMessage = "Email sent!";
+        }
+      }).catch(error => {
+      });
     }
 }

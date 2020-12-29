@@ -180,15 +180,14 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
       </div>
       <div class="modal-body">
-        <form action="/" method="post">
-          <input type="hidden" id="formType" name="formType" value="forgotPassword">
-          <div class="form-group">
-            <input type="email" class="form-control" id="username" name="email" placeholder="Insert your E-mail" required="required">		
-          </div>
-          <div class="form-pop">
-            <button tabindex="0" class="btn btn-primary singbut btn-lg btn-block login-btn" type="submit">Reset Password</button>
-          </div>
-        </form>
+        <input type="hidden" id="formType" name="formType" value="forgotPassword">
+        <div class="form-group">
+          <input #forgotEmail type="email" class="form-control" id="username" name="email" placeholder="Insert your E-mail" required="required">		
+        </div>
+        <div class="form-pop">
+          <p *ngIf="hasResetMessage" style="display: flex;justify-content: center;"><b>{{resetMessage}}</b></p>
+          <button tabindex="0" class="btn btn-primary singbut btn-lg btn-block login-btn" (click)="forgotPassword(forgotEmail.value)">Reset Password</button>
+        </div>
       </div>
       <div class="modal-footer" style="padding: 10px;">
         <a href="#login" style="font-family: 'Open Sans'; color: #999;" data-toggle="modal" data-target="#login" data-dismiss="modal">Back?</a>

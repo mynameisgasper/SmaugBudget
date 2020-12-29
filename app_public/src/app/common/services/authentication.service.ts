@@ -103,6 +103,15 @@ export class AuthenticationService {
     } catch (err) {
       return error(err);
     }
+  }
 
+  public requestResetPassword(email: string) {
+    const url: string = `${this.apiUrl}/requestResetPassword`;
+
+    const body = {
+      email: email
+    }
+
+    return this.http.post(url, body).toPromise().then(response => response).catch(err => err);
   }
 }

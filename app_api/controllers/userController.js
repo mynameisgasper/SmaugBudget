@@ -521,7 +521,7 @@ module.exports = {
         login(req.body, res);
     },
     requestResetPassword: function(req, res) {
-        requestResetPassword(req.body, res);
+        requestResetPassword(req, res);
     },
     resetPassword: function(req, res) {
         resetPassword(req, res);
