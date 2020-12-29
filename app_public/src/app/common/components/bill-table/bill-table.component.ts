@@ -166,15 +166,18 @@ export class BillTableComponent implements OnInit {
   }
 
   deleteBill(){
-    this.hasDeleteMessage = true;
-    this.deleteMessage = "Deleting bill";
+    let decision = confirm("Are you sure you want to delete bill " + this.data.recipient + "?");
+    if (decision == true) {
+      this.hasDeleteMessage = true;
+      this.deleteMessage = "Deleting bill";
 
-    this.api.deleteBill(this.data._id).then((response) => {
-      this.BillsComponent.afterDelete(this.data._id)
-      this.hasDeleteMessage = false;
-    }).catch((error) => {
-      this.deleteMessage = "Failed to delete!"
-    });
+      this.api.deleteBill(this.data._id).then((response) => {
+        this.BillsComponent.afterDelete(this.data._id)
+        this.hasDeleteMessage = false;
+      }).catch((error) => {
+        this.deleteMessage = "Failed to delete!"
+      });
+    }
   }
 
 
