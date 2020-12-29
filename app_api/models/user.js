@@ -173,6 +173,20 @@ const { friendGroupSchema } = require('./friendGroup');
  *      type: string
  *     defaultCurrency
  *      type: string
+ *   ResetPassword:
+ *    type: object
+ *    description: Shema za resetiranje gesla
+ *    properties:
+ *     code:
+ *      type: string
+ *     password:
+ *      type: string
+ *   RequestResetPassword:
+ *    type: object
+ *    description: Shema za prošnjo za resetiranje gesla
+ *    properties:
+ *     email:
+ *      type: string
  */
 
 const userSchema = new mongoose.Schema();

@@ -115,9 +115,62 @@ router.post('/login', (req, res) => {
     user.login(req, res);
 });
 
+/**
+ * @swagger
+ *  /requestResetPassword:
+ *   post:
+ *    summary: Prošnja za ponastavitev gesla uporabnika
+ *    description: Prošnja za ponastavitev gesla uporabnika. Vsebuje email uporabnika.
+ *    tags: [Uporabnik]
+ *    requestBody:
+ *     description: Podatki za prošnjo za ponastavitev gesla
+ *     required: true
+ *     content:
+ *      application/json:
+ *       schema:
+ *        $ref: "#/components/schemas/RequestResetPassword"
+ *       example:
+ *        email: "gold@smaug.com"
+ *    responses:
+ *     "200":
+ *      description: Uspešno poslan email za spremembo gesla.
+ *     "404":
+ *      description: Uporabnik ne obstaja.
+ *     "500":
+ *      description: Napaka na strežniku.
+ */
+
 router.post('/requestResetPassword', (req, res) => {
     user.requestResetPassword(req, res);
 });
+
+/**
+ * @swagger
+ *  /resetPassword:
+ *   post:
+ *    summary: Ponastavitev gesla uporabnika
+ *    description: Ponastavitev gesla uporabnika. Vsebuje kodo in geslo.
+ *    tags: [Uporabnik]
+ *    requestBody:
+ *     description: Podatki za ponastavitev gesla
+ *     required: true
+ *     content:
+ *      application/json:
+ *       schema:
+ *        $ref: "#/components/schemas/ResetPassword"
+ *       example:
+ *        code: "awdghztjzrs1svuzad123wd123agzjzu12awd1Goldpaass1"
+ *        password: "nekineki123+"
+ *    responses:
+ *     "200":
+ *      description: Uspešno spremenjeno geslo.
+ *     "400":
+ *      description: Napaka zahteve, obvezni so vsi podatki.
+ *     "404":
+ *      description: Uporabnik ne obstaja.
+ *     "500":
+ *      description: Napaka na strežniku.
+ */
 
 router.post('/resetPassword', (req, res) => {
     user.resetPassword(req, res);
