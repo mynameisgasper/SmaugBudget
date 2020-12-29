@@ -176,35 +176,42 @@ function deleteFriendGroup(req, res){
         const authorization = req.headers.authorization;
         var group_id = req.body.group_id;
 
-        if(authorization && group_id != undefined) {
-            const token = authorization.split(' ')[1];
-            const decodedToken = jwt_decode(token);
-            FriendGroup.findByIdAndDelete(group_id, function(err, group) {
-                if (err) {
-                    console.log(err);
-                } else {}
-            });
+        if(authorization) {
+            if(group_id != undefined) {
+                const token = authorization.split(' ')[1];
+                const decodedToken = jwt_decode(token);
+                FriendGroup.findByIdAndDelete(group_id, function(err, group) {
+                    if (err) {
+                        console.log(err);
+                    } else {}
+                });
 
-            User.findById(decodedToken._id, function(err, user) {
-                if (err) {
-                    console.log(err);
-                } else {
-                    user.friendgroups.pull(group_id);
-                    user.save();
-                    res.status(204).json(user);
+                User.findById(decodedToken._id, function(err, user) {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        user.friendgroups.pull(group_id);
+                        user.save();
+                        res.status(204).json(user);
+                        return;
+                    }
+                    const response = {
+                        status: 'Error'
+                    }
+                    res.status(404).json(response);
                     return;
-                }
+                });
+            } else {
                 const response = {
-                    status: 'Error'
+                    status: 'Bad request'
                 }
-                res.status(404).json(response);
-                 return;
-            });
+                res.status(400).json(response);
+            }
         } else {
             const response = {
-                status: 'Bad request'
+                status: 'Unauthorized'
             }
-            res.status(400).json(response);
+            res.status(401).json(response);
         }
     } catch (ex) {
         console.log(ex);

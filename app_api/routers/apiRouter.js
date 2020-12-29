@@ -171,10 +171,6 @@ router.post('/setCurrency', authentication, (req, res) => {
     user.setCurrency(req, res);
 })
 
-router.post('/addBill', authentication, (req, res) => {
-    bills.addBill(req, res);
-});
-
 router.post('/addEnvelope', authentication, (req, res) => {
     envelopes.addEnvelope(req, res);
 });
@@ -241,9 +237,111 @@ router.get('/converter', authentication, (req, res) => {
     converter.converter(req, res);
 });
 
+/**
+ * @swagger
+ *  /addBill:
+ *   post:
+ *    summary: Kreiranje novega računa - ne uporabniškega
+ *    description: Kreiranje novega računa s pripadujočimi podatki - prejemnik plačila, vrednost računa, datum računa, kategorija računa ter ponavljanje računa
+ *    tags: [Bills]
+ *    security:
+ *     - jwt: []
+ *    requestBody:
+ *     description: Podatki za kreiranje računa
+ *     required: true
+ *     content:
+ *      application/json:
+ *       schema:
+ *        $ref: "#/components/schemas/addBill"
+ *       example:
+ *        Payee: "Simobil"
+ *        Amount: "50"
+ *        inputDateAddBill: "2021-01-30T00:00:00.000Z"
+ *        inputCategory: "Electronics"
+ *        rad: "monthly"
+ *    responses:
+ *     "201":
+ *      description: Uspešno kreiran račun.
+ *     "400":
+ *      description: Napaka zahteve, obvezni.
+ *     "401":
+ *      description: Uporabnik ni potrjen.
+ *     "500":
+ *      description: Napaka na strežniku.
+ */
+
+router.post('/addBill', authentication, (req, res) => {
+    bills.addBill(req, res);
+});
+
+/**
+ * @swagger
+ *  /editBill:
+ *   post:
+ *    summary: Spreminjanje podatkov računa - ne uporabniškega
+ *    description: Spreminjanje podatkov računa. Vsebuje podatke - id računa, novo prejemnik plačila, novo vrednost, nov datum računa, novo kategorijo in na novo podano ponavljanje računa
+ *    tags: [Bills]
+ *    security:
+ *     - jwt: []
+ *    requestBody:
+ *     description: Podatki za posodobitev računa
+ *     required: true
+ *     content:
+ *      application/json:
+ *       schema:
+ *        $ref: "#/components/schemas/editBill"
+ *       example:
+ *        billId: "5feb5d0586861e7788e15436"
+ *        payee: "Simobil"
+ *        amount: 50
+ *        inputCategory: "Phone"
+ *        date: "2021-02-02'"
+ *        repeat: "monthly"
+ *    responses:
+ *     "200":
+ *      description: Uspešno posodobljen račun.
+ *     "400":
+ *      description: Napaka zahteve, obvezni so vsi podatki.
+ *     "401":
+ *      description: Uporabnik ni potrjen.
+ *     "500":
+ *      description: Napaka na strežniku.
+ */
+
 router.post('/editBill', authentication, (req, res) => {
     bills.editBill(req, res);
 });
+
+/**
+ * @swagger
+ *  /deleteBill:
+ *   post:
+ *    summary: Brisanje računa - ne uporabniškega računa
+ *    description: Brisanje računa z vsemi podatki
+ *    tags: [Bills]
+ *    security:
+ *     - jwt: []
+ *    requestBody:
+ *     description: Podatki za brisanje računa.
+ *     required: true
+ *     content:
+ *      application/json:
+ *       schema:
+ *        $ref: "#/components/schemas/deleteBill"
+ *       example:
+ *        bill_id: "5feb5d0586861e7788e15436"
+ *    responses:
+ *     "204":
+ *      description: Uspešna brisanje računa.
+ *     "400":
+ *      description: Napaka zahteve, obvezni so vsi podatki.
+ *     "401":
+ *      description: Uporabnik ni potrjen.
+ *     "404":
+ *      description: Račun s temi podatki ne obstaja.
+ *     "500":
+ *      description: Napaka na strežniku.
+ */
 
 router.post('/deleteBill', authentication, (req, res) => {
     bills.deleteBill(req, res);
@@ -379,6 +477,8 @@ router.post('/addToGoalWithCategory', authentication, (req, res) => {
  *      description: Uspešna brisanje cilja.
  *     "400":
  *      description: Napaka zahteve, obvezni so vsi podatki.
+*      "401":
+ *      description: Uporabnik ni potrjen.
  *     "404":
  *      description: Cilj s temi podatki ne obstaja.
  *     "500":
@@ -528,6 +628,8 @@ router.post('/calculateBalances', authentication, (req, res) => {
  *      description: Uspešna brisanje skupine.
  *     "400":
  *      description: Napaka zahteve, obvezni so vsi podatki.
+ *     "401":
+ *      description: Uporabnik ni potrjen.
  *     "404":
  *      description: Uporabnik s temi podatki ne obstaja.
  *     "500":

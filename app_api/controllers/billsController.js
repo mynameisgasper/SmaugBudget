@@ -18,49 +18,56 @@ function addBill(req, res) {
         var dateOk = checkDate(date);
         const recipientTest = checkRecipient(recipient);
         const amountTest = checkAmount(amount);
-        if (authorization && recipientTest && amountTest && dateOk) {
-            const token = authorization.split(' ')[1];
-            const decodedToken = jwt_decode(token);
-            User.findById(decodedToken._id, function(err, user) {
-                if (err) {
-                    console.log(err);
-                    const response = {
-                        status: 'Error'
-                    }
-                    res.status(500).json(response);
-                } else {
-                    Categories.findById(categoryId, function(err, category) {
-                        if (err) {
-                            console.log(err);
-                            const response = {
-                                status: 'Error'
-                            }
-                            res.status(500).json(response);
-                        } else {
-                            console.log(category);
-                            let bill = new Bill({
-                                recipient: recipient,
-                                value: amount,
-                                category: category,
-                                date: date,
-                                currency: "€",
-                                repeating: radio,
-                            });
-                            bill.save();
-                            user.bills.push(bill);
-                            user.save();
-
-                            res.status(200).json(bill);
+        if (authorization) {
+            if(recipientTest && amountTest && dateOk) {
+                const token = authorization.split(' ')[1];
+                const decodedToken = jwt_decode(token);
+                User.findById(decodedToken._id, function(err, user) {
+                    if (err) {
+                        console.log(err);
+                        const response = {
+                            status: 'Error'
                         }
-                    });
+                        res.status(500).json(response);
+                    } else {
+                        Categories.findById(categoryId, function(err, category) {
+                            if (err) {
+                                console.log(err);
+                                const response = {
+                                    status: 'Error'
+                                }
+                                res.status(500).json(response);
+                            } else {
+                                console.log(category);
+                                let bill = new Bill({
+                                    recipient: recipient,
+                                    value: amount,
+                                    category: category,
+                                    date: date,
+                                    currency: "€",
+                                    repeating: radio,
+                                });
+                                bill.save();
+                                user.bills.push(bill);
+                                user.save();
+
+                                res.status(201).json(bill);
+                            }
+                        });
+                    }
+                });
+            } else {
+                const response = {
+                    status: 'Bad request'
                 }
-            });
+                res.status(400).json(response);
+            }
         } 
         else {
             const response = {
-                status: 'Bad request'
+                status: 'Unauthorized'
             }
-            res.status(400).json(response);
+            res.status(401).json(response);
         }
     } catch (ex) {
         console.log(ex);
@@ -86,53 +93,60 @@ function editBill(req, res) {
         const recipientTest = checkRecipient(recipient);
         const amountTest = checkAmount(amount);
 
-        if (authorization && recipientTest && amountTest && dateOk) {
-            const token = authorization.split(' ')[1];
-            const decodedToken = jwt_decode(token);
-            User.findById(decodedToken._id, function(err, user) {
-                if (err) {
-                    console.log(err);
-                    const response = {
-                        status: 'Error'
-                    }
-                    res.status(500).json(response);
-                } else {
-                    var category = null;
-                    var i = 0;
-                    for (; i < user.bills.length; i++) {
-                        if (user.bills[i]._id == billId) {
-                            user.bills[i].recipient = recipient;
-                            user.bills[i].value = amount;
-                            user.bills[i].repeating = repeat;
-                            user.bills[i].date = date;
-
-                            for (var j = 0; j < user.categories.length; j++) {
-                                if (user.categories[j].name == inputCategory) {
-                                    category = user.categories[j];
-                                    user.bills[i].category = user.categories[j];
-                                    break;
-                                }
-                            }
-                            user.save();
-                            break;
+        if (authorization) {
+            if (recipientTest && amountTest && dateOk) {
+                const token = authorization.split(' ')[1];
+                const decodedToken = jwt_decode(token);
+                User.findById(decodedToken._id, function(err, user) {
+                    if (err) {
+                        console.log(err);
+                        const response = {
+                            status: 'Error'
                         }
-                    }
+                        res.status(500).json(response);
+                    } else {
+                        var category = null;
+                        var i = 0;
+                        for (; i < user.bills.length; i++) {
+                            if (user.bills[i]._id == billId) {
+                                user.bills[i].recipient = recipient;
+                                user.bills[i].value = amount;
+                                user.bills[i].repeating = repeat;
+                                user.bills[i].date = date;
 
-                    Bill.findById(billId, function(err, bill) {
-                        bill.recipient = recipient;
-                        bill.value = amount;
-                        bill.repeating = repeat;
-                        bill.date = date;
-                        if (category != null) bill.category = category;
-                    });
-                    res.status(200).json(user.bills[i]);
+                                for (var j = 0; j < user.categories.length; j++) {
+                                    if (user.categories[j].name == inputCategory) {
+                                        category = user.categories[j];
+                                        user.bills[i].category = user.categories[j];
+                                        break;
+                                    }
+                                }
+                                user.save();
+                                break;
+                            }
+                        }
+
+                        Bill.findById(billId, function(err, bill) {
+                            bill.recipient = recipient;
+                            bill.value = amount;
+                            bill.repeating = repeat;
+                            bill.date = date;
+                            if (category != null) bill.category = category;
+                        });
+                        res.status(200).json(user.bills[i]);
+                    }
+                });
+            } else {
+                const response = {
+                    status: 'Error'
                 }
-            });
+                res.status(400).json(response);
+            }
         } else {
             const response = {
-                status: 'Error'
+                status: 'Unauthorized'
             }
-            res.status(400).json(response);
+            res.status(401).json(response);
         }
     } catch (ex) {
         console.log(ex);
@@ -148,40 +162,46 @@ function deleteBill(req, res) {
         const authorization = req.headers.authorization;
         var id_requested = req.body.bill_id;
 
-        if (authorization && id_requested != undefined) {
-            const token = authorization.split(' ')[1];
-            const decodedToken = jwt_decode(token);
-            Bill.findByIdAndDelete(id_requested, function(err, bills) {
-                if (err) {
-                    console.log(err);
-                } else {}
-            });
+        if (authorization) {
+            if(id_requested != undefined) {
+                const token = authorization.split(' ')[1];
+                const decodedToken = jwt_decode(token);
+                Bill.findByIdAndDelete(id_requested, function(err, bills) {
+                    if (err) {
+                        console.log(err);
+                    } else {}
+                });
 
-            User.findById(decodedToken._id, function(err, user) {
-                if (err) {
-                    console.log(err);
-                } else {
-                    for (var i = 0; i < user.bills.length; i++) {
-                        if (user.bills[i]._id == id_requested) {
-                            user.bills.pull(id_requested);
-                            user.save();
-                            res.status(200).json(user);
-                            return;
+                User.findById(decodedToken._id, function(err, user) {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        for (var i = 0; i < user.bills.length; i++) {
+                            if (user.bills[i]._id == id_requested) {
+                                user.bills.pull(id_requested);
+                                user.save();
+                                res.status(204).json(user);
+                                return;
+                            }
                         }
+                        const response = {
+                            status: 'Error'
+                        }
+                        res.status(404).json(response)
+                        return;
                     }
-                    const response = {
-                        status: 'Error'
-                    }
-                    res.status(304).json(response)
-                    return;
+                });
+            } else {
+                const response = {
+                    status: 'Bad request'
                 }
-            });
-        }
-        else {
-            const response = {
-                status: 'Bad request'
+                res.status(400).json(response);
             }
-            res.status(400).json(response);
+        } else {
+            const response = {
+                status: 'Unauthorized'
+            }
+            res.status(401).json(response);
         }
     } catch (ex) {
         console.log(ex);
