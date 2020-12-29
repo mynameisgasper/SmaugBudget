@@ -305,7 +305,11 @@ async function loadCategories(requestBody, res) {
             }
             res.sendStatus(200);
         } else{
+<<<<<<< HEAD
             res.sendStatus(400);
+=======
+            //res.sendStatus(304);
+>>>>>>> b70d850f02b3f67c443a5936053d5a3498a36613
         }
     });
     
