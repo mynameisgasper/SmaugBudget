@@ -1,0 +1,22 @@
+.progressRow {
+    padding: 1.5vh;
+}
+
+#data h3 {
+    font-size: 1.2rem;
+    font-family: 'Open Sans Bold'
+}
+
+#data p .info {
+    color: gray;
+    font-family: 'Open Sans';
+    display: inline;
+}
+
+.info span {
+    font-family: 'Open Sans Bold';
+}
+
+#data button {
+    float: right;
+}

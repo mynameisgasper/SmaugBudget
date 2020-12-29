@@ -5,97 +5,131 @@ const Goal = mongoose.model('Goals');
 const User = mongoose.model('User');
 const Categories = mongoose.model('Categories');
 const Expenses = mongoose.model('Expense');
+const jwt_decode = require('jwt-decode');
 
-function addGoal(requestBody, res) {
+function addGoal(req, res) {
     try {
-        var title = requestBody.title;
-        var target = requestBody.target;
-        var date = requestBody.date;
-        var categoryName = requestBody.category;
-        var userId = requestBody.id;
+        const authorization = req.headers.authorization;
+        var title = req.body.name;
+        var target = req.body.amount;
+        var date = req.body.date;
+        var categoryName = req.body.category;
 
         //validate date, title and target
         dateOk = checkDate(date);
         const titleTest = checkTitle(title);
         const targetTest = checkTarget(target);
 
-        if (titleTest && targetTest && dateOk) {
-            User.findById(userId, function(error, user) {
-                if (error) {
-                    console.log(error);
-                    res.sendStatus(500);
-                } else {
-                    for (var i = 0; i < user.goals.length; i++) {
-                        if (user.goals[i].title == title) {
-                            res.sendStatus(304);
+        if (authorization) {
+            if(titleTest && targetTest && dateOk) {
+                const token = authorization.split(' ')[1];
+                const decodedToken = jwt_decode(token);
+                User.findById(decodedToken._id, function(error, user) {
+                    if (error) {
+                        const response = {
+                            status: 'Error'
+                        }
+                        console.log(error);
+                        res.status(500).json(response);
+                    } else {
+                        for (var i = 0; i < user.goals.length; i++) {
+                            if (user.goals[i].title == title) {
+                                const response = {
+                                    status: 'Goal already exists'
+                                }
+                                res.status(400).json(response);
+                                return;
+                            }
+                        }
+
+                        //? Try to find the category
+                        var category = null;
+                        for (var i = 0; i < user.categories.length; i++) {
+                            if (user.categories[i].name == categoryName) {
+                                category = user.categories[i];
+                                break;
+                            }
+                        }
+
+                        if (category == null) {
+                            const response = {
+                                status: 'Invalid category'
+                            }
+                            res.status(400).json(response);
                             return;
                         }
+
+                        let goal = new Goal({
+                            title: title,
+                            target: target,
+                            saved: 0,
+                            monthlyTarget: 0,
+                            date: date,
+                            category: category
+                        });
+
+                        goal.save(function callback(err) {
+                            if (err) {
+                                console.log(err);
+                                const response = {
+                                    status: 'Error'
+                                }
+                                res.status(500).json(response);
+                            } else {
+                                user.categories.push(category);
+                                user.goals.push(goal);
+                                user.save();
+                                res.status(201).json(goal);
+                            }
+                        });
                     }
-
-                    //? Try to find the category
-                    var category = null;
-                    for (var i = 0; i < user.categories.length; i++) {
-                        if (user.categories[i].name == categoryName) {
-                            category = user.categories[i];
-                            break;
-                        }
-                    }
-
-                    if (category == null) {
-                        res.sendStatus(400);
-                        return;
-                    }
-
-                    let goal = new Goal({
-                        title: title,
-                        target: target,
-                        saved: 0,
-                        monthlyTarget: 0,
-                        date: date,
-                        category: category
-                    });
-
-                    goal.save(function callback(err) {
-                        if (err) {
-                            console.log(err);
-                            res.sendStatus(500);
-                        } else {
-                            user.categories.push(category);
-                            user.goals.push(goal);
-                            user.save();
-                            res.status(200).json(user);
-                        }
-                    });
+                });
+            } else {
+                const response = {
+                    status: 'Bad request'
                 }
-            });
+                res.status(400).json(response);
+            }
         } else {
-            res.sendStatus(400);
+            const response = {
+                status: 'Unauthorized'
+            }
+            res.status(401).json(response);
         }
     } catch (ex) {
         console.log(ex);
-        res.sendStatus(500);
+        const response = {
+            status: 'Error'
+        }
+        res.status(500).json(response);
     }
 }
 
-function editGoal(requestBody, res) {
+function editGoal(req, res) {
     try {
-        var newTitle = requestBody.title;
-        var newTarget = requestBody.target;
-        var newDate = requestBody.date;
-        var newCategory = requestBody.category;
-        var user_id = requestBody.user_id;
-        var goal_id = requestBody.goal_id;
+        const authorization = req.headers.authorization;
+
+        var newTitle = req.body.name;
+        var newTarget = req.body.amount;
+        var newDate = req.body.date;
+        var newCategory = req.body.category;
+        var goal_id = req.body.goal_id;
 
         //validate date, title and target
         dateOk = checkDate(newDate);
         const titleTest = checkTitle(newTitle);
         const targetTest = checkTarget(newTarget);
 
-        if (titleTest && targetTest && dateOk) {
-            User.findById(user_id, function(error, user) {
+        if (authorization && titleTest && targetTest && dateOk) {
+            const token = authorization.split(' ')[1];
+            const decodedToken = jwt_decode(token);
+            User.findById(decodedToken._id, function(error, user) {
                 if (error) {
                     console.log(error);
-                    res.sendStatus(500);
+                    const response = {
+                        status: 'Error'
+                    }
+                    res.status(500).json(response);
                 } else {
                     for (var i = 0; i < user.goals.length; i++) {
                         if (user.goals[i]._id == goal_id) {
@@ -118,113 +152,144 @@ function editGoal(requestBody, res) {
                         if (err) {
                             console.log(err);
                         } else {
-                            res.status(200).json(user);
+                            goal.title = newTitle;
+                            goal.target = newTarget;
+                            goal.date = newDate;
+                            goal.category.name = newCategory;
+                            goal.save();
+                            res.status(200).json(goal);
                         }
                     });
 
                 }
             });
         } else {
-            res.sendStatus(400);
+            const response = {
+                status: 'Bad request'
+            }
+            res.status(400).json(response);
+            
         }
     } catch (ex) {
         console.log(ex);
-        res.sendStatus(500);
+        const response = {
+            status: 'Error'
+        }
+        res.status(500).json(response);
     }
 }
 
-function addToGoalWithCategory(requestBody, res) {
+function addToGoalWithCategory(req, res) {
     try {
-        var title = requestBody.title;
-        var amount = requestBody.amount;
-        var userId = requestBody.id;
+        const authorization = req.headers.authorization;
+        var title = req.body.title;
+        var amount = req.body.amount;
 
         //validate added amount
         const targetTest = checkTarget(amount);
 
-        if (targetTest) {
-            User.findById(userId, function(error, user) {
-                if (error) {
-                    console.log(error);
-                    res.sendStatus(500);
-                } else {
-                    //? find the correct goal
-                    var goal_id = null;
-                    for (var i = 0; i < user.goals.length; i++) {
-                        if (user.goals[i].title === title) {
-                            goal_id = user.goals[i]._id;
-                            var new_amount = parseInt(amount) + user.goals[i].saved;
-                            if (new_amount > user.goals[i].target)
-                                amount = user.goals[i].target
+        if (authorization) {
+            if(targetTest) {
+                const token = authorization.split(' ')[1];
+                const decodedToken = jwt_decode(token);
+                User.findById(decodedToken._id, function(error, user) {
+                    if (error) {
+                        console.log(error);
+                        const response = {
+                            status: 'Error'
+                        }
+                        res.send(500).json(response);
+                    } else {
+                        //? find the correct goal
+                        var goal_id = null;
+                        for (var i = 0; i < user.goals.length; i++) {
+                            if (user.goals[i].title === title) {
+                                goal_id = user.goals[i]._id;
+                                var new_amount = parseInt(amount) + user.goals[i].saved;
+                                if (new_amount > user.goals[i].target)
+                                new_amount = user.goals[i].target
 
-                            user.goals[i].saved = amount;
+                                user.goals[i].saved = new_amount;
 
-                            Goal.findById(goal_id, function(error, goal) {
-                                if (error) {
-                                    console.log(error);
-                                } else {
-                                    goal.saved = amount;
-                                    goal.save();
+                                Goal.findById(goal_id, function(error, goal) {
+                                    if (error) {
+                                        console.log(error);
+                                    } else {
+                                        goal.saved = new_amount;
+                                        goal.save();
 
-                                    var today = new Date();
+                                        var today = new Date();
 
-                                    let expense = new Expenses({
-                                        date: today,
-                                        category: goal.category,
-                                        recipient: 'Goal: ' + goal.title,
-                                        value: amount,
-                                        currency: user.defaultCurrency
-                                    });
+                                        let expense = new Expenses({
+                                            date: today,
+                                            category: goal.category,
+                                            recipient: 'Goal: ' + goal.title,
+                                            value: amount,
+                                            currency: user.defaultCurrency
+                                        });
 
-                                    expense.save(function callback(err) {
-                                        if (err) {
-                                            console.log(err);
-                                            res.sendStatus(500);
-                                            return;
-                                        } else {
-                                            user.expense.push(expense);
-                                            user.save();
-                                            res.status(200).json(user);
-                                            return;
-                                        }
-                                    });
+                                        expense.save(function callback(err) {
+                                            if (err) {
+                                                console.log(err);
+                                                const response = {
+                                                    status: 'Error'
+                                                }
+                                                res.status(500).json(response);
+                                                return;
+                                            } else {
+                                                user.expense.push(expense);
+                                                user.save();
+                                                res.status(200).json(goal);
+                                                return;
+                                            }
+                                        });
 
-                                }
-                            });
+                                    }
+                                });
 
 
-                            user.save();
-                            break;
+                                user.save();
+                                break;
+                            }
                         }
                     }
-
-
-
-
+                });
+            } else {
+                const response = {
+                    status: 'Bad request'
                 }
-            });
+                res.status(400).json(response);
+            }
         } else {
-            res.sendStatus(400);
+            const response = {
+                status: 'Unauthorized'
+            }
+            res.status(401).json(response);
         }
     } catch (ex) {
         console.log(ex);
-        res.sendStatus(500);
+        const response = {
+            status: 'Error'
+        }
+        res.status(500).json(response);
     }
 }
 
-function deleteGoal(requestBody, res) {
+function deleteGoal(req, res) {
     try {
-        var goal_id = requestBody.goal_id;
-        var user_id = requestBody.user_id;
+        const authorization = req.headers.authorization;
+        var goal_id = req.body.goal_id;
 
-        if (goal_id != undefined) {
+        if (authorization && goal_id != undefined) {
+            const token = authorization.split(' ')[1];
+            const decodedToken = jwt_decode(token);
             Goal.findByIdAndDelete(goal_id, function(err, goal) {
                 if (err) {
                     console.log(err);
                 } else {}
             });
 
-            User.findById(user_id, function(err, user) {
+            User.findById(decodedToken._id, function(err, user) {
                 if (err) {
                     console.log(err);
                 } else {
@@ -232,20 +297,29 @@ function deleteGoal(requestBody, res) {
                         if (user.goals[i]._id == goal_id) {
                             user.goals.pull(goal_id);
                             user.save();
-                            res.status(200).json(user);
+                            res.status(204).json(user);
                             return;
                         }
                     }
-                    res.status(304);
+                    const response = {
+                        status: 'Error'
+                    }
+                    res.status(404).json(response);
                     return;
                 }
             });
         } else {
-            res.sendStatus(400);
+            const response = {
+                status: 'Bad request'
+            }
+            res.status(400).json(response);
         }
     } catch (ex) {
         console.log(ex);
-        res.sendStatus(500);
+        const response = {
+            status: 'Error'
+        }
+        res.status(500).json(response);
     }
 }
 
@@ -297,15 +371,15 @@ function checkTarget(target) {
 
 module.exports = {
     addGoal: function(req, res) {
-        addGoal(req.body, res);
+        addGoal(req, res);
     },
     editGoal: function(req, res) {
-        editGoal(req.body, res);
+        editGoal(req, res);
     },
     addToGoalWithCategory: function(req, res) {
-        addToGoalWithCategory(req.body, res);
+        addToGoalWithCategory(req, res);
     },
     deleteGoal: function(req, res) {
-        deleteGoal(req.body, res);
+        deleteGoal(req, res);
     }
 }

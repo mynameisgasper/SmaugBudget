@@ -1,0 +1,162 @@
+<main>
+    <app-header [component]="'dashboard'"></app-header>
+    <!---- Main Section ---->
+    <div class="modal fade premium-page" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                    
+                <div class="modal-body text-center">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4>Get premium to gain access to History and Utilities page!</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!----- Welcome section ----->
+    <app-welcome [message]="message" [welcomeMessage]="welcomeMessage"></app-welcome>
+
+    <!----- Cards section ----->
+    <div class="container" id="cards-section">
+        <div class="row">
+           <div *ngFor="let card of cards" class="col-xl-3 col-lg-4 col-md-12 col-sm-12 aos-init aos-animate"id="card{{card.id}}" data-aos="flip-down" data-aos-duration="500" style="margin: 0 auto">
+                <card [card]="card"></card>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="cards-section" *ngIf="alertsExist()">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <h2>{{ alertSection }}</h2>
+            </div>
+        </div>
+        <div class="row" *ngFor="let alert of alerts" class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <alert [alert]="alert"></alert>
+        </div>
+    </div>
+
+    <!----- Overview section ----->
+    <div class="container" id="overview-section">
+        <h2 style="text-align: left; padding-bottom: 10px;">{{ overview }}</h2>
+        <div class="row">
+            <div class="col-xl-6 col-lg-6 left-col">
+
+                <!----- Expense section----->
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12" style="border-bottom:1px solid rgb(204, 204, 204); padding-bottom: 20px">
+                        <table class="table table-borderless table-hover tabela-balance">
+                            <tbody>
+                                <tr id="income-tr">
+                                    <th>{{ incomeRow }}</th>
+                                    <td>{{ incomeLastMonth }} {{ currency }}</td>
+                                    <td style="padding: 0px; text-align: right;"><button type="button" class="btn p" (click)="openModal(changeIncome)"><fa-icon [icon]="pencilIcon"></fa-icon></button></td>
+                                </tr>
+                                <tr id="expenses-tr">
+                                    <th>{{ expensesRow }}</th>
+                                    <td>{{ expensesLastMonth }} {{ currency }}</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <th id="border-th">{{ balanceRow }}</th>
+                                    <td id="border-td">{{ incomeLastMonth - expensesLastMonth }} {{ currency }}</td>
+                                    <td id="border-td"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!----- Analytics section ----->
+                    <div *ngIf="analytics" class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <h4 style="text-align: center; padding-top: 35px; padding-bottom: 10px;">{{ analyticsField }}</h4>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 analytics-col" style="padding-bottom: 20px;">
+                            
+                            <table class="table table-borderless table-hover tabela">
+                                <tbody class="analytics-table">
+                                    <tr *ngFor="let analytic of analytics">
+                                        <th>{{analytic.rowName}}</th>
+                                        <td [ngStyle]="{'background-color':analytic.color}" style="text-align:center;" >{{analytic.category}}</td>
+                                    </tr>                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!----- Graph ----->
+            <div class="col-xl-6 col-lg-6" style="padding-top: 25px;">
+                <canvas baseChart *ngIf="analytics; else noData" id="doughnut-canvas" style="display: block; width: 482px; height: 482px;" width="482" height="482"
+                    [data]="chartData"
+                    [colors]="chartColors"
+                    [labels]="chartLabels"
+                    [chartType]="'doughnut'">
+                </canvas>
+                <ng-template #noData><h4 style="text-align: center; padding-top: 35px; padding-bottom: 10px;">{{ noData }}</h4></ng-template>
+            </div>
+        </div>
+    </div>
+
+
+    <!----- Change income modal ----->
+    <div class="modal fade" #changeIncomeModal id="changeIncome" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="position-absolute w-100 p-4 d-flex flex-column align-items-end">
+            <div class="w-25 toastek">
+                <div class="toast ml-auto tt1" role="alert" data-delay="1000" data-autohide="false">
+                    <div class="toast-header">
+                        <strong class="mr-auto text-primary">HINT</strong>
+                        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="toast-body">
+                        Input may only contain decimal numbers separated by . with max 2 decimal places.
+                    </div>
+                </div>
+                <div class="toast ml-auto tt2" role="alert" data-delay="3000" data-autohide="false">
+                    <div class="toast-header">
+                        <strong class="mr-auto text-primary">HINT</strong>
+                        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="toast-body">
+                        Only numbers between 1 and 28 allowed.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ng-template #changeIncome>
+            <div class="modal-dialog-centered" id="modal1" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">{{ incomeModalTitle }}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="number" #amountDashboard id="amount" name="amount" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" class="form-control" (focusout)="amountDashboard1(amountDashboard)" placeholder="{{ incomeModalPlaceholderIncome }}" step="any" required="required">
+                        <div id="amm"></div><br />
+                        <input type="number" #dateDashboard id="date" name="date" class="form-control" (focusout)="dateDashboard1(dateDashboard)" placeholder="{{ incomeModalPlaceholderDate }}" required="required">
+                        <div id="dat"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <p *ngIf="hasChangeIncomeMessage"><b>{{ changeIncomeMessage }}</b></p>
+                        <button type="button" (click)="buttonDashboard(amountDashboard, dateDashboard, changeIncome)" class="btn btn-primary">{{ incomeModalSaveButton }}</button>
+                        <button type="button" (click)="closeModal()" class="btn btn-secondary">{{ incomeModalCloseButton }}</button>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </div>
+
+    <div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 200px;">
+  <!-- Position it -->
+</div>
+
+    <app-footer></app-footer>
+</main>

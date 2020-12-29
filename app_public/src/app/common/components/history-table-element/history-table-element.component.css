@@ -1,0 +1,21 @@
+.date{
+    text-align: center;
+    width: 5vw;
+}
+.sredina{
+    vertical-align: middle;
+}
+
+.cena{
+    text-align: center;
+    font-family: 'Open Sans Bold';
+}
+
+.zadnji {
+    text-align: right;
+}
+
+
+td {
+    text-align: left;
+}

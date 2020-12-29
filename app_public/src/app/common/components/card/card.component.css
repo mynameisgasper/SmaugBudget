@@ -1,0 +1,159 @@
+.card-counter {
+    margin: 2.5%;
+    padding: 2vh 1vh;
+    color: #fff;
+    height: 12vh;
+    border-radius: 5px;
+}
+
+.card-counter i {
+    font-size: 8vh;
+    opacity: 0.3
+}
+
+.card-counter .count-numbers {
+    position: absolute;
+    right: 15%;
+    top: 15%;
+    font-size: 5vh;
+}
+
+.card-counter .count-name {
+    position: absolute;
+    right: 15%;
+    top: 65%;
+    opacity: 0.5;
+    font-size: 2vh;
+}
+
+.green-panel {
+    background: #00c851;
+}
+.card-counter:hover #replies21 {
+    display: none
+}
+
+.card-counter #card21-after #comments21 {
+    opacity: 0;
+}
+
+.card-counter:hover #card21-after #comments21 {
+    opacity: 1;
+}
+
+.card-counter #card21-after {
+    text-align: center;
+    font-size: 2.5vh;
+}
+
+
+.card-counter:hover #replies31 {
+    display: none
+}
+
+.card-counter #card31-after #comments31 {
+    opacity: 0;
+}
+
+.card-counter:hover #card31-after #comments31 {
+    opacity: 1;
+}
+
+.card-counter #card31-after {
+    text-align: center;
+    font-size: 2.5vh;
+}
+
+#pfpNavBar {
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+}
+
+
+/* Shadows */
+
+.card-counter {
+    -webkit-box-shadow: 0px 1px 15px 1px rgba(222, 222, 222, 0.75);
+    -moz-box-shadow: 0px 1px 15px 1px rgba(222, 222, 222, 0.75);
+    box-shadow: 0px 1px 15px 1px rgba(222, 222, 222, 0.75);
+}
+
+.progress {
+    -webkit-box-shadow: 0px 1px 15px 1px rgba(222, 222, 222, 0.75);
+    -moz-box-shadow: 0px 1px 15px 1px rgba(222, 222, 222, 0.75);
+    box-shadow: 0px 1px 15px 1px rgba(222, 222, 222, 0.75);
+}
+
+.btn-primary {
+    -webkit-box-shadow: 0px 1px 15px 1px rgba(222, 222, 222, 0.75);
+    -moz-box-shadow: 0px 1px 15px 1px rgba(222, 222, 222, 0.75);
+    box-shadow: 0px 1px 15px 1px rgba(222, 222, 222, 0.75);
+}
+
+.btn-success {
+    -webkit-box-shadow: 0px 1px 15px 1px rgba(222, 222, 222, 0.75);
+    -moz-box-shadow: 0px 1px 15px 1px rgba(222, 222, 222, 0.75);
+    box-shadow: 0px 1px 15px 1px rgba(222, 222, 222, 0.75);
+}
+
+.footer {
+    -webkit-box-shadow: 0px 1px 15px 1px rgba(209, 209, 209, 1);
+    -moz-box-shadow: 0px 1px 15px 1px rgba(209, 209, 209, 1);
+    box-shadow: 0px 1px 15px 5px rgba(209, 209, 209, 1);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.input-group-lg {
+    align-self: flex-start;
+}
+
+input[type="color"] {
+    border: white;
+    border-radius: 5px;
+}
+
+input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+
+input[type="color"]::-webkit-color-swatch {
+    border: none;
+}
+
+#card2:hover #replies2 {
+    display: none;
+}
+
+#comments2 {
+    opacity: 0;
+}
+
+#card2:hover #comments2 {
+    opacity: 1;
+}
+
+#card2-after {
+    text-align: center;
+    font-size: 2.5vh;
+}
+
+#card1:hover #replies1 {
+    display: none;
+}
+
+#comments1 {
+    opacity: 0;
+}
+
+#card1:hover #comments1 {
+    opacity: 1;
+}
+
+#card1-after {
+    text-align: center;
+    font-size: 2.5vh;
+}

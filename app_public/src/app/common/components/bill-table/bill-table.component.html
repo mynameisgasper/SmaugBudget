@@ -1,0 +1,115 @@
+<td class="date align-middle">
+    <div class="text-muted">{{data.year}}</div>
+    <div class="text-muted font-weight-bold">{{data.month - 1 | monthNumberPipe}}</div>
+    <div class="text-muted font-weight-bold">{{data.day}}</div>
+</td>
+<td class="align-middle">{{data.category}}</td>
+<td class="align-middle">{{data.recipient}}</td>
+<td class="cena align-middle">
+    {{data.value}} {{data.currency}}
+</td>
+<td class="zadnji align-middle">
+    <button type="button" class="btn p" data-toggle="modal" [attr.data-target]="'#editForm' +data._id">
+        <b *ngIf="hasDeleteMessage">{{deleteMessage}}</b>
+        <fa-icon [icon]="faPencilAlt"></fa-icon>
+    </button>
+    <button type="submit" (click)="buttonDeleteBill()" class="btn edit-btn" data-toggle="modal">
+            <fa-icon [icon]="faMinusSquare"></fa-icon>
+    </button>
+</td>
+
+<div class="modal fade billModal" #editBillModal id="editForm{{data._id}}" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
+    <div class="position-absolute w-100 p-4 d-flex flex-column align-items-end">
+        <div class="w-25 toastek">
+            <div class="toast ml-auto billEditNameToast{{data._id}}" role="alert" data-delay="3000" data-autohide="false">
+                <div class="toast-header">
+                    <strong class="mr-auto text-primary">HINT</strong>
+                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="toast-body">
+                    Input may only contain letters, numbers, some special characters (_@./#&+-: ) and whitespaces. Length allowed: 1-20
+                </div>
+            </div>
+            <div class="toast ml-auto billEditAmountToast{{data._id}}" role="alert" data-delay="1000" data-autohide="false">
+                <div class="toast-header">
+                    <strong class="mr-auto text-primary">HINT</strong>
+                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="toast-body">
+                    Input may only contain decimal numbers separated by . with max 2 decimal places.
+                </div>
+            </div>
+            <div class="toast ml-auto billEditDateToast{{data._id}}" id="date-hintEdit{{data._id}}" role="alert" data-delay="1000" data-autohide="false">
+                <div class="toast-header">
+                    <strong class="mr-auto text-primary">HINT</strong>
+                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="toast-body">
+                    Input a valid date (today or in the future).
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form name="editBill">
+                <input type="hidden" value="editBill" name="formType" />
+                <input type="hidden" value="{{data._id}}" name="billId" />
+                <div class="modal-body">
+                    <div class="ena">
+                        <label for="Category">Category</label><br>
+                        <select #editBillCategory id="inputCategory{{data._id}}" name="inputCategory" class="form-control">
+                                <option selected>{{data.category}}</option>
+                                <option *ngFor ="let category of Categories" id="categoryName{{category._id}}">{{category.name}}</option>
+                        </select>
+                    </div>
+                    <div class="ena">
+                        <label for="Payee">Payee</label><br>
+                        <input type="text" #editBillPayee id=".billEditNameToast{{data._id}}" name="Payee2" (focusout)="nameEditBills()" class="form-control" value="{{data.recipient}}" required="required">
+                        <div id="alarm{{data._id}}"></div>
+                    </div>
+
+                    <div class="ena">
+                        <label for="Amount">Amount</label><br>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">{{Currency}}</span>
+                            </div>
+                            <input type="number" #editBillAmount id=".billEditAmountToast{{data._id}}" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" name="Amount2" (focusout)="amountEditBills()" class="form-control" value="{{data.value}}" step="any" required="required">
+                        </div>
+                        <div id="amm{{data._id}}"></div>
+                    </div>
+                    <div class="ena">
+                        <label for="date">Date due</label><br>
+                        <input class="form-control" #editBillDate type="date" value="{{data.year}}-{{data.month}}-{{data.day}}" id=".billEditDateToast{{data._id}}" name="inputDate" (focusout)="dateEditBills()" required="required">
+                    </div>
+                    <div class="ena">
+                        <b>How often?</b><br>
+                        <input #editBillRepeat1 type="radio" name="radio" value="once" required>
+                        <label for="once">Once</label><br/>
+                        <input #editBillRepeat2 type="radio" name="radio" value="monthly">
+                        <label for="monthly">Monthly</label><br/>
+                        <input #editBillRepeat3 type="radio" name="radio" value="yearly">
+                        <label for="yearly">Yearly</label><br/>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <p *ngIf="hasEditMessage"><b>{{editMessage}}</b></p>
+                    <button class="btn btn-primary" id="buttonEditBill{{data._id}}" (click)="buttonEditBills(editBillCategory.value, editBillPayee.value, editBillAmount.value, editBillDate.value, (editBillRepeat1.checked ? editBillRepeat1.value : editBillRepeat2.checked ? editBillRepeat2.value : 'yearly'))">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -3,151 +3,212 @@ const Bill = mongoose.model('Bills');
 const User = mongoose.model('User');
 const Categories = mongoose.model('Categories');
 const Expense = mongoose.model('Expense');
+const jwt_decode = require('jwt-decode');
 
-function addBill(requestBody, res) {
+function addBill(req, res) {
     try {
-        var userId = requestBody.id;
-        var categoryId = requestBody.inputCategory;
-        var recipient = requestBody.Payee;
-        var amount = requestBody.Amount;
-        var date = requestBody.inputDateAddBill;
-        var radio = requestBody.rad;
+        const authorization = req.headers.authorization;
+        var categoryId = req.body.inputCategory;
+        var recipient = req.body.Payee;
+        var amount = req.body.Amount;
+        var date = req.body.inputDateAddBill;
+        var radio = req.body.rad;
 
         //validate date, recipient and amount
         var dateOk = checkDate(date);
         const recipientTest = checkRecipient(recipient);
         const amountTest = checkAmount(amount);
-        if (recipientTest && amountTest && dateOk) {
-            User.findById(userId, function(err, user) {
-                if (err) {
-                    console.log(err);
-                    res.sendStatus(500);
-                } else {
-                    Categories.findById(categoryId, function(err, category) {
-                        if (err) {
-                            console.log(err);
-                            res.sendStatus(500);
-                        } else {
-                            console.log(category);
-                            let bill = new Bill({
-                                recipient: recipient,
-                                value: amount,
-                                category: category,
-                                date: date,
-                                currency: "€",
-                                repeating: radio,
-                            });
-                            bill.save();
-                            user.bills.push(bill);
-                            user.save();
-
-                            res.status(200).json(user);
+        if (authorization) {
+            if(recipientTest && amountTest && dateOk) {
+                const token = authorization.split(' ')[1];
+                const decodedToken = jwt_decode(token);
+                User.findById(decodedToken._id, function(err, user) {
+                    if (err) {
+                        console.log(err);
+                        const response = {
+                            status: 'Error'
                         }
-                    });
-                }
-            });
-        } else {
-            res.sendStatus(400);
-        }
-    } catch (ex) {
-        console.log(ex);
-        res.sendStatus(500);
-    }
-}
-
-function editBill(requestBody, res) {
-    try {
-        var billId = requestBody.billId;
-        var inputCategory = requestBody.inputCategory;
-        var recipient = requestBody.payee;
-        var amount = requestBody.amount;
-        var date = requestBody.date;
-        var repeat = requestBody.repeat;
-        var userId = requestBody.id;
-
-        //validate date, recipient and amount
-        var dateOk = checkDate(date);
-        const recipientTest = checkRecipient(recipient);
-        const amountTest = checkAmount(amount);
-
-        if (recipientTest && amountTest && dateOk) {
-            User.findById(userId, function(err, user) {
-                if (err) {
-                    console.log(err);
-                    res.sendStatus(500);
-                } else {
-                    var category = null;
-                    for (var i = 0; i < user.bills.length; i++) {
-                        if (user.bills[i]._id == billId) {
-                            user.bills[i].recipient = recipient;
-                            user.bills[i].value = amount;
-                            user.bills[i].repeating = repeat;
-                            user.bills[i].date = date;
-
-                            for (var j = 0; j < user.categories.length; j++) {
-                                if (user.categories[j].name == inputCategory) {
-                                    category = user.categories[j];
-                                    user.bills[i].category = user.categories[j];
-                                    break;
+                        res.status(500).json(response);
+                    } else {
+                        Categories.findById(categoryId, function(err, category) {
+                            if (err) {
+                                console.log(err);
+                                const response = {
+                                    status: 'Error'
                                 }
-                            }
-                            user.save();
-                            break;
-                        }
-                    }
+                                res.status(500).json(response);
+                            } else {
+                                console.log(category);
+                                let bill = new Bill({
+                                    recipient: recipient,
+                                    value: amount,
+                                    category: category,
+                                    date: date,
+                                    currency: "EUR",
+                                    repeating: radio,
+                                });
+                                bill.save();
+                                user.bills.push(bill);
+                                user.save();
 
-                    Bill.findById(billId, function(err, bill) {
-                        bill.recipient = recipient;
-                        bill.value = amount;
-                        bill.repeating = repeat;
-                        bill.date = date;
-                        if (category != null) bill.category = category;
-                    });
-                    res.status(200).json(user);
+                                res.status(201).json(bill);
+                            }
+                        });
+                    }
+                });
+            } else {
+                const response = {
+                    status: 'Bad request'
                 }
-            });
-        } else {
-            res.sendStatus(400);
+                res.status(400).json(response);
+            }
+        } 
+        else {
+            const response = {
+                status: 'Unauthorized'
+            }
+            res.status(401).json(response);
         }
     } catch (ex) {
         console.log(ex);
-        res.sendStatus(500);
+        const response = {
+            status: 'Error'
+        }
+        res.status(500).json(response);
     }
 }
 
-function deleteBill(requestBody, res) {
+function editBill(req, res) {
     try {
-        var id_requested = requestBody.bill_id;
-        var user_id = requestBody.user_id;
+        const authorization = req.headers.authorization;
+        var billId = req.body.billId;
+        var inputCategory = req.body.inputCategory;
+        var recipient = req.body.payee;
+        var amount = req.body.amount;
+        var date = req.body.date;
+        var repeat = req.body.repeat;
 
-        console.log(requestBody);
+        //validate date, recipient and amount
+        var dateOk = checkDate(date);
+        const recipientTest = checkRecipient(recipient);
+        const amountTest = checkAmount(amount);
 
-        Bill.findByIdAndDelete(id_requested, function(err, bills) {
-            if (err) {
-                console.log(err);
-            } else {}
-        });
+        if (authorization) {
+            if (recipientTest && amountTest && dateOk) {
+                const token = authorization.split(' ')[1];
+                const decodedToken = jwt_decode(token);
+                User.findById(decodedToken._id, function(err, user) {
+                    if (err) {
+                        console.log(err);
+                        const response = {
+                            status: 'Error'
+                        }
+                        res.status(500).json(response);
+                    } else {
+                        var category = null;
+                        var i = 0;
+                        for (; i < user.bills.length; i++) {
+                            if (user.bills[i]._id == billId) {
+                                user.bills[i].recipient = recipient;
+                                user.bills[i].value = amount;
+                                user.bills[i].repeating = repeat;
+                                user.bills[i].date = date;
 
-        User.findById(user_id, function(err, user) {
-            if (err) {
-                console.log(err);
+                                for (var j = 0; j < user.categories.length; j++) {
+                                    if (user.categories[j].name == inputCategory) {
+                                        category = user.categories[j];
+                                        user.bills[i].category = user.categories[j];
+                                        break;
+                                    }
+                                }
+                                user.save();
+                                break;
+                            }
+                        }
+
+                        Bill.findById(billId, function(err, bill) {
+                            bill.recipient = recipient;
+                            bill.value = amount;
+                            bill.repeating = repeat;
+                            bill.date = date;
+                            if (category != null) bill.category = category;
+                        });
+                        res.status(200).json(user.bills[i]);
+                    }
+                });
             } else {
-                for (var i = 0; i < user.bills.length; i++) {
-                    if (user.bills[i]._id == id_requested) {
-                        user.bills.pull(id_requested);
-                        user.save();
-                        res.status(200).json(user);
+                const response = {
+                    status: 'Error'
+                }
+                res.status(400).json(response);
+            }
+        } else {
+            const response = {
+                status: 'Unauthorized'
+            }
+            res.status(401).json(response);
+        }
+    } catch (ex) {
+        console.log(ex);
+        const response = {
+            status: 'Error'
+        }
+        res.status(500).json(response);
+    }
+}
+
+function deleteBill(req, res) {
+    try {
+        const authorization = req.headers.authorization;
+        var id_requested = req.body.bill_id;
+
+        if (authorization) {
+            if(id_requested != undefined) {
+                const token = authorization.split(' ')[1];
+                const decodedToken = jwt_decode(token);
+                Bill.findByIdAndDelete(id_requested, function(err, bills) {
+                    if (err) {
+                        console.log(err);
+                    } else {}
+                });
+
+                User.findById(decodedToken._id, function(err, user) {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        for (var i = 0; i < user.bills.length; i++) {
+                            if (user.bills[i]._id == id_requested) {
+                                user.bills.pull(id_requested);
+                                user.save();
+                                res.status(204).json(user);
+                                return;
+                            }
+                        }
+                        const response = {
+                            status: 'Error'
+                        }
+                        res.status(404).json(response)
                         return;
                     }
+                });
+            } else {
+                const response = {
+                    status: 'Bad request'
                 }
-                res.status(304);
-                return;
+                res.status(400).json(response);
             }
-        });
-
+        } else {
+            const response = {
+                status: 'Unauthorized'
+            }
+            res.status(401).json(response);
+        }
     } catch (ex) {
         console.log(ex);
-        res.sendStatus(500);
+        const response = {
+            status: 'Error'
+        }
+        res.status(500).json(response);
     }
 }
 
@@ -313,13 +374,13 @@ function getMonthCode(month) {
 
 module.exports = {
     addBill: function(req, res) {
-        addBill(req.body, res);
+        addBill(req, res);
     },
     editBill: function(req, res) {
-        editBill(req.body, res);
+        editBill(req, res);
     },
     deleteBill: function(req, res) {
-        deleteBill(req.body, res);
+        deleteBill(req, res);
     },
     handleBills: function() {
         handleBills();

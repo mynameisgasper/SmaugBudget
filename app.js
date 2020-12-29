@@ -6,7 +6,58 @@ var express = require('express');
 var exphbs = require('express-handlebars');
 var helpers = require('./app_server/views/helpers/hbsh');
 const session = require('express-session');
+require('dotenv').config();
+var passport = require('passport');
+require('./app_api/config/passport');
+var swaggerJsdoc = require('swagger-jsdoc');
+var swaggerUi = require('swagger-ui-express');
+
+var swaggerOptions = {
+    swaggerDefinition: {
+      openapi: "3.0.0",
+      info: {
+        title: "SmaugBudget",
+        version: "1.0.0",
+        description: "SmaugBudget REST API"
+      },
+      license: {
+        name: "GNU LGPLv3",
+        url: "https://choosealicense.com/licenses/lgpl-3.0"
+      },
+      contact: {
+        name: "Gasper Stepec"
+      },
+      servers: [
+        { url: "http://localhost:8080/api" },
+        { url: "https://smaugbudget.herokuapp.com/api" }
+      ]
+    },
+    apis: [
+      "./app_api/models/bills.js",
+      "./app_api/models/categories.js",
+      "./app_api/models/currency.js",
+      "./app_api/models/envelopes.js",
+      "./app_api/models/expense.js",
+      "./app_api/models/friend.js",
+      "./app_api/models/friendGroup.js",
+      "./app_api/models/goals.js",
+      "./app_api/models/user.js",
+      "./app_api/routers/apiRouter.js"
+    ]
+  };
+  const swaggerDocument = swaggerJsdoc(swaggerOptions);
+
 var app = express();
+
+// Preusmeritev na HTTPS na Heroku
+if (process.env.NODE_ENV === 'production') {
+  app.use((req, res, next) => {
+    if (req.header('x-forwarded-proto') !== 'https')
+      res.redirect(`https://${req.header('host')}${req.url}`);
+    else
+      next();
+  });
+}
 
 //Currencies
 var currencies = [];
@@ -50,14 +101,28 @@ app.use((req, res, next) => {
 });
 
 //Import static files
-app.use(express.static('./public'))
+app.use(express.static(path.join(__dirname, 'app_public', 'build')));
+app.use(passport.initialize());
 
-app.use('/', applicationRouter);
+app.use('/api', (req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+    next();
+});
+  
+
 app.use('/api', apiRouter);
 
 //Path was not recognized, return 404
 app.all('*', (req, res) => {
-    notFound404.get(req, res);
+    res.sendFile(path.join(__dirname, 'app_public', 'build', 'index.html'));
+});
+
+//OpenAPI
+
+apiRouter.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+apiRouter.get("/swagger.json", (req, res) => {
+  res.status(200).json(swaggerDocument);
 });
 
 module.exports = {

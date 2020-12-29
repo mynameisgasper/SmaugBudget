@@ -8,7 +8,7 @@ const Goals = mongoose.model('Goals');
 const User = mongoose.model('User');
 const FriendGroup = mongoose.model('FriendGroup');
 const Friend = mongoose.model('Friend');
-const Connections = mongoose.model('Connections');
+//const Connections = mongoose.model('Connections');
 const podatki = require('../models/testni-podatki.json');
 /*
 ? Remove all data currently in DB
@@ -72,17 +72,17 @@ function removeAllDbData(requestBody, res) {
             console.log(error);
             res.sendStatus(500);
         });
-
+/*
         Connections.deleteMany({}).then(function() {
             console.log("Deleted all connections data");
         }).catch(function(error) {
             console.log(error);
             res.sendStatus(500);
         })
+*/
 
 
-
-        res.sendStatus(204);
+        res.status(204).json();
     } catch (ex) {
         console.log(ex);
         res.sendStatus(500);
@@ -98,7 +98,7 @@ function createDummyAccounts(requestBody, res) {
         var goalsArray = [];
         var friendsArray = [];
         var friendGroupsArray = [];
-        var connectionArray = [];
+        //var connectionArray = [];
 
         for (var i = 0; i < podatki.categories.length; i++) {
             let category = new Categories({
@@ -182,7 +182,7 @@ function createDummyAccounts(requestBody, res) {
             friendGroupsArray[i] = friendGroup;
             friendGroup.save();
         }
-
+        /*
         for (var i = 0; i < podatki.connections.length; i++) {
             let connection = new Connections({
                 name: podatki.connections[i].name,
@@ -195,52 +195,71 @@ function createDummyAccounts(requestBody, res) {
             connectionArray[i] = connection;
             connection.save();
         }
-
-        let user = new User({
-            firstname: "Basic",
+*/
+        let userBronze = new User({
+            firstname: "Bronze",
             lastname: "User",
-            email: "basic@smaug.com",
-            password: "fef39973b671dcfc50b3318d3d8c911ad34672a2482f7b331b8099c1af8b9279bb2bde1708551f52e9356b573e4923194895cd77d7557996df758599b94b721c",
-            passwordSalt: "tempSalt",
+            email: "bronze@smaug.com",
+            password: "$2a$10$3fD2JXL3.y45.XZyOCGZP.DhUIosphXrYOdWCZApERT.rtP.G3X6W",
+            passwordSalt: "$2a$10$3fD2JXL3.y45.XZyOCGZP.",
             paycheck: 1100,
             paycheckLastMonth: 1500,
             paycheckDate: 18,
-            isPremium: false,
+            accessLevel: 0,
             language: "English",
             categories: categoriesArray,
             envelopes: envelopesArray,
             expense: expensesArray,
             bills: billsArray,
             goals: goalsArray,
-            friendgroups: friendGroupsArray,
-            connections: connectionArray
-
+            friendgroups: friendGroupsArray
+            //connections: connectionArray
         });
-        let userPremium = new User({
-            firstname: "Premium",
+        let userSilver = new User({
+            firstname: "Silver",
             lastname: "User",
-            email: "premium@smaug.com",
-            password: "7079675d6a49115d18d5f00b1a9be5ae73d0225f5ee8100807e4248846ee50803c130536ce8fc3223b0a22af390b67a013589bdc9e95ac0990ce6eac83de3526",
-            passwordSalt: "tempSalt",
+            email: "silver@smaug.com",
+            password: "$2a$10$l/8Qmu7hqkGrmdJf1oEmLenyP11lB5P6/YV27DBYI6Qjj/4mX/F3m",
+            passwordSalt: "$2a$10$l/8Qmu7hqkGrmdJf1oEmLe",
+            paycheck: 1100,
+            paycheckLastMonth: 1500,
+            paycheckDate: 18,
+            accessLevel: 1,
+            language: "English",
+            categories: categoriesArray,
+            envelopes: envelopesArray,
+            expense: expensesArray,
+            bills: billsArray,
+            goals: goalsArray,
+            friendgroups: friendGroupsArray
+            //connections: connectionArray
+        });
+        let userGold = new User({
+            firstname: "Gold",
+            lastname: "User",
+            email: "gold@smaug.com",
+            password: "$2a$10$wB/vyQL5sOFvfqSb.012I.lgopnxXB1RTLAExqoAt.4FOcmXR0lUG",
+            passwordSalt: "$2a$10$wB/vyQL5sOFvfqSb.012I.",
             paycheck: 1500,
             paycheckLastMonth: 1500,
             paycheckDate: 18,
-            isPremium: true,
+            accessLevel: 2,
             language: "English",
             categories: categoriesArray,
             envelopes: envelopesArray,
             expense: expensesArray,
             bills: billsArray,
             goals: goalsArray,
-            friendgroups: friendGroupsArray,
-            connections: connectionArray
+            friendgroups: friendGroupsArray
+            //connections: connectionArray
 
         });
-        user.save();
-        userPremium.save();
-        res.sendStatus(200);
+        userBronze.save();
+        userSilver.save();
+        userGold.save();
+        res.status(200).json();
     } catch (ex) {
-        console.log(ex);
+        res.status(500).json();
     }
 }
 
@@ -286,7 +305,11 @@ async function loadCategories(requestBody, res) {
             }
             res.sendStatus(200);
         } else{
+<<<<<<< HEAD
+            res.sendStatus(400);
+=======
             //res.sendStatus(304);
+>>>>>>> b70d850f02b3f67c443a5936053d5a3498a36613
         }
     });
     

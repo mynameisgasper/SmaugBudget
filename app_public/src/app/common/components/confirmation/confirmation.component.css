@@ -1,0 +1,56 @@
+main {
+    background-color: rgb(200, 200, 200);
+    text-align: center;
+    vertical-align: center;
+}
+
+.container {
+    height: 100vh;
+}
+.text1 {
+    color: rgb(114, 114, 114);
+    font-size: 30pt;
+}
+
+.btn-primary {
+	color:rgb(114, 114, 114);;
+	background-color:  rgb(200, 200, 200);
+	border-color: rgb(114, 114, 114);;
+	border-width: 3px;
+	border-radius: 30px;
+}
+
+.btn-primary:hover {
+	color: rgb(200, 200, 200);
+	background-color:  rgb(114, 114, 114);;
+	border-color: rgb(114, 114, 114);;
+	border-width: 3px;
+	border-radius: 30px;
+}
+.btn-primary:focus {
+	color:rgb(114, 114, 114);;
+	background-color:  rgb(200, 200, 200);
+	border-color: rgb(114, 114, 114);;
+	border-width: 3px;
+	border-radius: 30px;
+}
+.btn-primary:focus:hover{
+	
+	color: rgb(200, 200, 200);
+	background-color: rgb(114, 114, 114);;
+	border-color: rgb(114, 114, 114);;
+	border-width: 3px;
+	border-radius: 30px;
+}
+.btn-primary:active {
+	color: rgb(200, 200, 200) !important;
+	background-color: rgb(114, 114, 114) !important;
+	border-color: rgb(114, 114, 114) !important;
+	border-width: 3px !important;
+	border-radius: 30px !important;
+	text-shadow: 0 0 1px #fff, 0 0 1px #fff ;
+}
+
+.spodnji {
+	margin-top: 5vh;
+}

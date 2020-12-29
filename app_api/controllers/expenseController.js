@@ -2,6 +2,8 @@ const mongoose = require('mongoose');
 const Expense = mongoose.model('Expense');
 const User = mongoose.model('User');
 const Categories = mongoose.model('Categories');
+const jwt_decode = require('jwt-decode');
+const expense = require('../models/expense');
 
 function getLastMonthExpenses(requestBody, res) {
     try {
@@ -28,50 +30,65 @@ function getLastMonthExpenses(requestBody, res) {
     }
 }
 
-function editExpense(requestBody, res) {
+function editExpense(req, res) {
     try {
-        var id = requestBody.expId;
-        var inputCategory = requestBody.expCategory;
-        var recipient = requestBody.payee;
-        var amount = requestBody.amount;
-        var date = requestBody.date;
-        var userId = requestBody.id;
 
-        //validate date, recipient and amount
-        var dateOk = checkDate(date);
-        const recipientTest = checkRecipient(recipient);
-        const amountTest = checkAmount(amount);
+        const authorization = req.headers.authorization;
+        if (authorization) {
 
-        if (recipientTest && amountTest && dateOk) {
-            User.findById(userId, function(err, user) {
-                if (err) {
-                    console.log(err);
-                    res.sendStatus(500);
-                } else {
-                    var category = null;
-                    for (var i = 0; i < user.expense.length; i++) {
-                        if (user.expense[i]._id == id) {
-                            user.expense[i].recipient = recipient;
-                            user.expense[i].value = amount;
-                            user.expense[i].date = date;
+            const token = authorization.split(' ')[1];
+            const decodedToken = jwt_decode(token);
 
-                            for (var j = 0; j < user.categories.length; j++) {
-                                if (user.categories[j].name == inputCategory) {
-                                    category = user.categories[j];
-                                    user.expense[i].category = user.categories[j];
-                                    break;
+            var id = req.body.expId;
+            var inputCategory = req.body.expCategory;
+            var recipient = req.body.payee;
+            var amount = req.body.amount;
+            var date = req.body.date;
+            var userId = decodedToken._id;
+
+            //validate date, recipient and amount
+            var dateOk = checkDate(date);
+            const recipientTest = checkRecipient(recipient);
+            const amountTest = checkAmount(amount);
+
+            if (recipientTest && amountTest && dateOk) {
+                User.findById(userId, function(err, user) {
+                    if (err) {
+                        console.log(err);
+                        res.sendStatus(500);
+                    } else {
+                        var category = null;
+                        for (var i = 0; i < user.expense.length; i++) {
+                            if (user.expense[i]._id == id) {
+                                user.expense[i].recipient = recipient;
+                                user.expense[i].value = amount;
+                                user.expense[i].date = date;
+
+                                for (var j = 0; j < user.categories.length; j++) {
+                                    if (user.categories[j].name == inputCategory) {
+                                        category = user.categories[j];
+                                        user.expense[i].category = user.categories[j];
+                                        break;
+                                    }
                                 }
+                                user.save();
+                                break;
                             }
-                            user.save();
-                            break;
                         }
+                        res.status(200).json(user);
                     }
-                    res.status(200).json(user);
-                }
-            });
+                });
+            } else {
+                res.sendStatus(400);
+            }
+
         } else {
-            res.sendStatus(400);
+            const response = {
+                status: 'Unauthorized'
+            }
+            res.status(401).json(response);
         }
+
     } catch (ex) {
         console.log(ex);
         res.sendStatus(500);
@@ -184,11 +201,98 @@ function buildArrayFromMap(expenses) {
     return expenseArray;
 }
 
+function getExpenses(req, res) {
+    try {
+        const authorization = req.headers.authorization;
+        if (authorization) {
+            const token = authorization.split(' ')[1];
+            const decodedToken = jwt_decode(token);
+    
+            const userId = decodedToken._id;
+            const filter = req.query.filter;
+            const limit = parseInt(req.query.limit);
+            const offset = parseInt(req.query.offset);
+            
+            User.findById(userId, (err, user) => {
+                if (err) {
+                    const response = {
+                        status: "Server error"
+                    };
+                    res.status(500).json(response);
+                }
+                
+                if (user) {
+                    const allExpenses = user.expense;
+                    const orderedExpenses = allExpenses.sort((a, b) => b.date - a.date);
 
+                    var filteredExpenses = [];
+                    if (filter) {
+                        for (e of orderedExpenses) {
+                            if (e.recipient.toUpperCase().includes(filter.toUpperCase()) || e.category.name.toUpperCase().includes(filter.toUpperCase())) {
+                                filteredExpenses.push(e);
+                            }
+                        }
+                    }
+                    else {
+                        filteredExpenses = orderedExpenses;
+                    }
+                    
+                    const length = filteredExpenses.length;
+
+
+                    var paginatedExpenses = [];
+                    if (!limit || limit == 0) {
+                        if (!offset || offset == 0) {
+                            paginatedExpenses = filteredExpenses;
+                        }
+                        else {
+                            for (var i = offset; i < filteredExpenses.length; i++) {
+                                paginatedExpenses.push(filteredExpenses[i]);
+                            }
+                        }
+                    }
+                    else {
+                        if (!offset || offset == 0) {
+                            for (var i = 0; (i < limit) && (i < filteredExpenses.length); i++) {
+                                paginatedExpenses.push(filteredExpenses[i]);
+                            }
+                        }
+                        else {
+                            for (var i = offset; (i < offset + limit) && (i < filteredExpenses.length); i++) {
+                                paginatedExpenses.push(filteredExpenses[i]);
+                            }
+                        }
+                    }
+                    
+                    const response = {
+                        length: length,
+                        filter: filter,
+                        expenses: paginatedExpenses
+                    };
+                    res.status(200).json(response);
+                }
+                else {
+                    const response = {
+                        status: "Not found"
+                    };
+                    res.status(404).json(response);
+                }
+            });
+        }
+    } catch (exception) {
+        const response = {
+            status: "Server error"
+        };
+        res.status(500).json(response);
+    }
+}
 
 module.exports = {
     editExpense: function(req, res) {
-        editExpense(req.body, res);
+        editExpense(req, res);
+    },
+    getExpenses: function(req, res) {
+        getExpenses(req, res);
     },
     getLastMonthExpenses: function(req, res) {
         getLastMonthExpenses(req.body, res);

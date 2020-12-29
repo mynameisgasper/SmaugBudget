@@ -1,0 +1,74 @@
+<div class="modal fade" #showGroupModal id="showGroup{{group.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    {{group.id}}
+    <div class="position-absolute w-100 p-4 d-flex flex-column align-items-end">
+        <div class="w-25 toastek">
+            <div class="toast ml-auto tt1{{group.id}}" role="alert" data-delay="1000" data-autohide="false">
+                <div class="toast-header">
+                    <strong class="mr-auto text-primary">HINT</strong>
+                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="toast-body">
+                    Input may only contain decimal numbers separated by . with max 2 decimal places.
+                </div>
+            </div>
+            <div class="toast ml-auto tt2{{group.id}}" role="alert" data-delay="1000" data-autohide="false">
+                <div class="toast-header">
+                    <strong class="mr-auto text-primary">HINT</strong>
+                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="toast-body">
+                    Sum of prices must be equal to money paid
+                </div>
+            </div> 
+        </div>
+    </div>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Group Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form #f="ngForm" (ngSubmit)="formCalculateBalances(f, 0)">
+                <div class="modal-body">
+                    <div class="row">
+                        <table class="table" id="table{{group.id}}">
+                            <thead>
+                            <tr>
+                                <th scope="col">Name</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Paid</th>
+                                <th scope="col">Balance</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Me</td>
+                                    <td><input type="number" #price (focusout)="formCalculateBalances(f, 1)" ngModel onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" id=".price" name="price" class="form-control price"  placeholder="Bill amount" step="any" required></td>
+                                    <td><input type="number" #paid  (focusout)="formCalculateBalances(f, 1)" ngModel onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" id=".paid" name="paid" class="form-control paid"  placeholder="Money paid" step="any" required></td>
+                                    <td>{{group.Balance}}</td>
+                                </tr>
+                                <tr *ngFor="let member of group.groupMember" >
+                                    <td>{{member.name}}</td>
+                                    <td><input type="number"  (focusout)="formCalculateBalances(f, 1)" ngModel onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" id=".price{{member.id}}" name="price{{member.id}}" class="form-control price"  placeholder="Bill amount" step="any" required></td>
+                                    <td><input type="number"   (focusout)="formCalculateBalances(f,1)" ngModel onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" id=".paid{{member.id}}" name="paid{{member.id}}" class="form-control paid"  placeholder="Money paid" step="any" required></td>
+                                    <td>{{member.amount}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <p *ngIf="hasEditGroupMessage"><b>{{editGroupMessage}}</b></p>
+                    <button type="submit" id="sum{{group.id}}"  class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

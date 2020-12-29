@@ -66,5 +66,5 @@ process.on('SIGTERM', () => {
 
 
 require('./envelopes');
-require('./connections');
+//require('./connections');
 require('./user');

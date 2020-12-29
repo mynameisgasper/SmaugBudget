@@ -7,89 +7,102 @@ const Categories = mongoose.model('Categories');
 const User = mongoose.model('User');
 const Expense = mongoose.model('Expense');
 const Goals = mongoose.model('Goals');
+const jwt_decode = require('jwt-decode');
 /*
 ? Change category color
 */
 
-function changeColorCategory(requestBody, res) {
+function changeColorCategory(req, requestBody, res) {
     try {
         var newColor = requestBody.colorPicker;
         var category_id = requestBody.category_id;
         var user_id = requestBody.user_id;
         var colorRGB;
         const colorCorrect = checkColorCode(newColor);
-        if (colorCorrect) {
-            colorRGB = hexToRGB(newColor);
-            colorRGBA = hexToRGB(newColor, 0.5);
-            User.findById(user_id, function(error, user) {
-                if (error) {
-                    console.log(error);
-                    res.sendStatus(500);
-                } else {
-                    var categoryName;
-                    for (var i = 0; i < user.categories.length; i++) {
-                        if (user.categories[i]._id == category_id) {
-                            user.categories[i].color = colorRGB;
-                            categoryName = user.categories[i].name;
-                            break;
-                        }
-                    }
 
-                    Categories.findOne({ name: categoryName }, function(error, category) {
-                        if (error) {
-                            console.log(error);
-                        } else {
-                            category.color = colorRGB;
-                            category.save();
-                        }
-                    });
+        const authorization = req.headers.authorization;
+        if (authorization) {
+            const token = authorization.split(' ')[1];
+            const decodedToken = jwt_decode(token);
 
-                    for (var i = 0; i < user.envelopes.length; i++) {
-                        if (user.envelopes[i].category.name == categoryName) {
-                            user.envelopes[i].color = colorRGB;
-                            user.envelopes[i].bgColor = colorRGBA;
-                            user.envelopes[i].colorHex = newColor;
-                            user.envelopes[i].category.color = colorRGB;
-                        }
-                    }
-
-                    Envelopes.find({ 'category.name': categoryName }, function(error, envelopes) {
-                        if (error) {
-                            console.log(error);
-                        } else {
-                            for (var i = 0; i < envelopes.length; i++) {
-                                envelopes[i].colorHex = newColor;
-                                envelopes[i].color = colorRGB;
-                                envelopes[i].bgColor = colorRGBA;
-                                envelopes[i].category.color = colorRGB;
-                                envelopes[i].save();
+            if (colorCorrect) {
+                colorRGB = hexToRGB(newColor);
+                colorRGBA = hexToRGB(newColor, 0.5);
+                User.findById(user_id, function(error, user) {
+                    if (error) {
+                        console.log(error);
+                        res.sendStatus(500);
+                    } else {
+                        var categoryName;
+                        for (var i = 0; i < user.categories.length; i++) {
+                            if (user.categories[i]._id == category_id) {
+                                user.categories[i].color = colorRGB;
+                                categoryName = user.categories[i].name;
+                                break;
                             }
                         }
-                    });
 
-                    for (var i = 0; i < user.expense.length; i++) {
-                        if (user.expense[i].category.name == categoryName) {
-                            user.expense[i].category.color = colorRGB
-                        }
-                    }
+                        Categories.findOne({ name: categoryName }, function(error, category) {
+                            if (error) {
+                                console.log(error);
+                            } else {
+                                category.color = colorRGB;
+                                category.save();
+                            }
+                        });
 
-                    Expense.find({ 'category.name': categoryName }, function(error, expenses) {
-                        if (error) {
-                            console.log(error);
-                        } else {
-                            for (var i = 0; i < expenses.length; i++) {
-                                expenses[i].category.color = colorRGB;
-                                expenses[i].save();
+                        for (var i = 0; i < user.envelopes.length; i++) {
+                            if (user.envelopes[i].category.name == categoryName) {
+                                user.envelopes[i].color = colorRGB;
+                                user.envelopes[i].bgColor = colorRGBA;
+                                user.envelopes[i].colorHex = newColor;
+                                user.envelopes[i].category.color = colorRGB;
                             }
                         }
-                    });
 
-                    user.save();
-                    res.status(200).json(user);
-                }
-            });
+                        Envelopes.find({ 'category.name': categoryName }, function(error, envelopes) {
+                            if (error) {
+                                console.log(error);
+                            } else {
+                                for (var i = 0; i < envelopes.length; i++) {
+                                    envelopes[i].colorHex = newColor;
+                                    envelopes[i].color = colorRGB;
+                                    envelopes[i].bgColor = colorRGBA;
+                                    envelopes[i].category.color = colorRGB;
+                                    envelopes[i].save();
+                                }
+                            }
+                        });
+
+                        for (var i = 0; i < user.expense.length; i++) {
+                            if (user.expense[i].category.name == categoryName) {
+                                user.expense[i].category.color = colorRGB
+                            }
+                        }
+
+                        Expense.find({ 'category.name': categoryName }, function(error, expenses) {
+                            if (error) {
+                                console.log(error);
+                            } else {
+                                for (var i = 0; i < expenses.length; i++) {
+                                    expenses[i].category.color = colorRGB;
+                                    expenses[i].save();
+                                }
+                            }
+                        });
+
+                        user.save();
+                        res.status(200).json(user);
+                    }
+                });
+            } else {
+                res.sendStatus(400);
+            }
         } else {
-            res.sendStatus(400);
+            const response = {
+                status: 'Unauthorized'
+            }
+            res.status(401).json(response);
         }
 
 
@@ -98,7 +111,7 @@ function changeColorCategory(requestBody, res) {
     }
 }
 
-function deleteCategory(requestBody, res) {
+function deleteCategory(req, requestBody, res) {
     try {
         var category_id = requestBody.category_id;
         var user_id = requestBody.user_id;
@@ -107,79 +120,90 @@ function deleteCategory(requestBody, res) {
         console.log(user_id);
         var categoryName;
 
-        const promise = new Promise((resolve, reject) => {
-            Categories.findById(category_id, function(error, category) {
-                if (error) {
-                    console.log(err);
-                } else {
-                    categoryName = category.name;
-                    resolve(categoryName);
-                }
-            });
-        });
+        const authorization = req.headers.authorization;
+        if (authorization) {
+            const token = authorization.split(' ')[1];
+            const decodedToken = jwt_decode(token);
 
-
-        promise.then((categoryName) => {
-            Categories.findByIdAndDelete(category_id, function(err, docs) {
-                if (err) {
-                    console.log(err);
-                } else {}
-            });
-
-            Goals.deleteMany({ 'category.name': categoryName }, function(error, docs) {
-                if (error) {
-                    console.log(error);
-                } else {}
-            });
-
-            Envelopes.deleteMany({ 'category.name': categoryName }, function(error, docs) {
-                if (error) {
-                    console.log(error);
-                } else {}
-            });
-
-            User.findById(user_id, function(err, user) {
-                if (err) {
-                    console.log(err);
-                } else {
-                    var categoriesLength = user.categories.length;
-                    for (var i = 0; i < categoriesLength; i++) {
-                        if (user.categories[i].name === categoryName) {
-                            user.categories.pull(category_id);
-                            break;
-                        }
+            const promise = new Promise((resolve, reject) => {
+                Categories.findById(category_id, function(error, category) {
+                    if (error) {
+                        console.log(err);
+                    } else {
+                        categoryName = category.name;
+                        resolve(categoryName);
                     }
+                });
+            });
 
-                    var envelopesLength = user.envelopes.length;
-                    var envelopesArray = user.envelopes;
-                    for (var i = 0; i < envelopesLength; i++) {
-                        if (envelopesArray.length > 0) {
-                            if (envelopesArray[i].category.name === categoryName) {
-                                user.envelopes.pull(envelopesArray[i]._id);
-                                envelopesLength = envelopesLength - 1;
-                                i = i - 1;
+
+            promise.then((categoryName) => {
+                Categories.findByIdAndDelete(category_id, function(err, docs) {
+                    if (err) {
+                        console.log(err);
+                    } else {}
+                });
+
+                Goals.deleteMany({ 'category.name': categoryName }, function(error, docs) {
+                    if (error) {
+                        console.log(error);
+                    } else {}
+                });
+
+                Envelopes.deleteMany({ 'category.name': categoryName }, function(error, docs) {
+                    if (error) {
+                        console.log(error);
+                    } else {}
+                });
+
+                User.findById(user_id, function(err, user) {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        var categoriesLength = user.categories.length;
+                        for (var i = 0; i < categoriesLength; i++) {
+                            if (user.categories[i].name === categoryName) {
+                                user.categories.pull(category_id);
+                                break;
                             }
                         }
-                    }
 
-                    var goalLength = user.goals.length;
-                    var goalsArray = user.goals;
-                    for (var i = 0; i < goalLength; i++) {
-                        if (goalsArray.length > 0) {
-                            if (goalsArray[i].category.name === categoryName) {
-                                user.goals.pull(goalsArray[i]._id);
-                                goalLength = goalLength - 1;
-                                i = i - 1;
+                        var envelopesLength = user.envelopes.length;
+                        var envelopesArray = user.envelopes;
+                        for (var i = 0; i < envelopesLength; i++) {
+                            if (envelopesArray.length > 0) {
+                                if (envelopesArray[i].category.name === categoryName) {
+                                    user.envelopes.pull(envelopesArray[i]._id);
+                                    envelopesLength = envelopesLength - 1;
+                                    i = i - 1;
+                                }
                             }
                         }
-                    }
 
-                    user.save();
-                    res.status(200).json(user);
-                    return;
-                }
+                        var goalLength = user.goals.length;
+                        var goalsArray = user.goals;
+                        for (var i = 0; i < goalLength; i++) {
+                            if (goalsArray.length > 0) {
+                                if (goalsArray[i].category.name === categoryName) {
+                                    user.goals.pull(goalsArray[i]._id);
+                                    goalLength = goalLength - 1;
+                                    i = i - 1;
+                                }
+                            }
+                        }
+
+                        user.save();
+                        res.status(200).json(user);
+                        return;
+                    }
+                });
             });
-        });
+        } else {
+            const response = {
+                status: 'Unauthorized'
+            }
+            res.status(401).json(response);
+        }
 
     } catch (ex) {
         console.log(ex);
@@ -212,9 +236,9 @@ function hexToRGB(hex, alpha) {
 
 module.exports = {
     changeColorCategory: function(req, res) {
-        changeColorCategory(req.body, res);
+        changeColorCategory(req, req.body, res);
     },
     deleteCategory: function(req, res) {
-        deleteCategory(req.body, res);
+        deleteCategory(req, req.body, res);
     }
 }

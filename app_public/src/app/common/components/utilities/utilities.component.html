@@ -1,0 +1,206 @@
+<main>
+    <app-header [component]="'utilities'"></app-header>
+
+    <app-welcome [message]="data.message" [welcomeMessage]="data.welcomeMessage"></app-welcome>
+
+    <div class="container" id="cards-section">
+        <div class="row" style="margin-bottom: 2vh; padding-left: 15px;">
+            <div class="col-sm-11 col-md-11 col-lg-11 col-xl-11">
+                <h2>Friend groups</h2> 
+            </div>
+            <div class="col-sm-1 col-md-1 col-lg-1 col-xl-1">
+                <button type="button" class="btn btn-primary" id="createGroup" data-toggle="modal" href="#addGroupModal" style="text-align: right;">Create</button>
+            </div>
+        </div>
+        <div class="row" style="padding-left: 25px;">
+            <table class="table">
+                <thead>
+                    <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Next to pay</th>
+                    <th scope="col">Balance</th>
+                    <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr app-table-row *ngFor="let item of groups" [group]='item' data-toggle="modal" ></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="container" id="converter">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <h2>Currency converter</h2> 
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-0 col-sm-0 col-xl-2 col-lg-2"></div>
+            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+                <label for="curr1">From</label>
+                <select #curr1 class="form-control curr1" id="curr1">
+                    <option value="EUR" selected="selected" label="{{'EUR' | currencyTranslator}}">EUR</option>
+                    <option value="USD" label="{{'USD' | currencyTranslator}}">USD</option>
+                    <option value="JPY" label="{{'JPY' | currencyTranslator}}">JPY</option>
+                    <option value="GBP" label="{{'GBP' | currencyTranslator}}">GBP</option>
+                    <option value="HRK" label="{{'HRK' | currencyTranslator}}">HRK</option>
+                    <option disabled>──────────</option>
+                    <option value="AUD" label="{{'AUD' | currencyTranslator}}">AUD</option>
+                    <option value="BGN" label="{{'BGN' | currencyTranslator}}">BGN</option>
+                    <option value="BRL" label="{{'BRL' | currencyTranslator}}">BRL</option>
+                    <option value="CAD" label="{{'CAD' | currencyTranslator}}">CAD</option>
+                    <option value="CHF" label="{{'CHF' | currencyTranslator}}">CHF</option>
+                    <option value="CNY" label="{{'CNY' | currencyTranslator}}">CNY</option>
+                    <option value="CZK" label="{{'CZK' | currencyTranslator}}">CZK</option>
+                    <option value="EUR" label="{{'EUR' | currencyTranslator}}">EUR</option>
+                    <option value="GBP" label="{{'GBP' | currencyTranslator}}">GBP</option>
+                    <option value="HKD" label="{{'HKD' | currencyTranslator}}">HKD</option>
+                    <option value="HRK" label="{{'HRK' | currencyTranslator}}">HRK</option>
+                    <option value="HUF" label="{{'HUF' | currencyTranslator}}">HUF</option>
+                    <option value="ILS" label="{{'ILS' | currencyTranslator}}">ILS</option>
+                    <option value="INR" label="{{'INR' | currencyTranslator}}">INR</option>
+                    <option value="ISK" label="{{'ISK' | currencyTranslator}}">ISK</option>
+                    <option value="JPY" label="{{'JPY' | currencyTranslator}}">JPY</option>
+                    <option value="KRW" label="{{'KRW' | currencyTranslator}}">KRW</option>
+                    <option value="MXN" label="{{'MXN' | currencyTranslator}}">MXN</option>
+                    <option value="MYR" label="{{'MYR' | currencyTranslator}}">MYR</option>
+                    <option value="NOK" label="{{'NOK' | currencyTranslator}}">NOK</option>
+                    <option value="NZD" label="{{'NZD' | currencyTranslator}}">NZD</option>
+                    <option value="PHP" label="{{'PHP' | currencyTranslator}}">PHP</option>
+                    <option value="PLN" label="{{'PLN' | currencyTranslator}}">PLN</option>
+                    <option value="RON" label="{{'RON' | currencyTranslator}}">RON</option>
+                    <option value="RUB" label="{{'RUB' | currencyTranslator}}">RUB</option>
+                    <option value="SEK" label="{{'SEK' | currencyTranslator}}">SEK</option>
+                    <option value="SGD" label="{{'SGD' | currencyTranslator}}">SGD</option>
+                    <option value="THB" label="{{'THB' | currencyTranslator}}">THB</option>
+                    <option value="TRY" label="{{'TRY' | currencyTranslator}}">TRY</option>
+                    <option value="USD" label="{{'USD' | currencyTranslator}}">USD</option>
+                </select>
+            </div>
+            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+                <label for="curr2">To</label>
+                <select #curr2 class="form-control curr2" id="curr2">
+                    <option value="EUR" label="{{'EUR' | currencyTranslator}}">EUR</option>
+                    <option value="USD" selected="selected" label="{{'USD' | currencyTranslator}}">USD</option>
+                    <option value="JPY" label="{{'JPY' | currencyTranslator}}">JPY</option>
+                    <option value="GBP" label="{{'GBP' | currencyTranslator}}">GBP</option>
+                    <option value="HRK" label="{{'HRK' | currencyTranslator}}">HRK</option>
+                    <option disabled>──────────</option>
+                    <option value="AUD" label="{{'AUD' | currencyTranslator}}">AUD</option>
+                    <option value="BGN" label="{{'BGN' | currencyTranslator}}">BGN</option>
+                    <option value="BRL" label="{{'BRL' | currencyTranslator}}">BRL</option>
+                    <option value="CAD" label="{{'CAD' | currencyTranslator}}">CAD</option>
+                    <option value="CHF" label="{{'CHF' | currencyTranslator}}">CHF</option>
+                    <option value="CNY" label="{{'CNY' | currencyTranslator}}">CNY</option>
+                    <option value="CZK" label="{{'CZK' | currencyTranslator}}">CZK</option>
+                    <option value="EUR" label="{{'EUR' | currencyTranslator}}">EUR</option>
+                    <option value="GBP" label="{{'GBP' | currencyTranslator}}">GBP</option>
+                    <option value="HKD" label="{{'HKD' | currencyTranslator}}">HKD</option>
+                    <option value="HRK" label="{{'HRK' | currencyTranslator}}">HRK</option>
+                    <option value="HUF" label="{{'HUF' | currencyTranslator}}">HUF</option>
+                    <option value="ILS" label="{{'ILS' | currencyTranslator}}">ILS</option>
+                    <option value="INR" label="{{'INR' | currencyTranslator}}">INR</option>
+                    <option value="ISK" label="{{'ISK' | currencyTranslator}}">ISK</option>
+                    <option value="JPY" label="{{'JPY' | currencyTranslator}}">JPY</option>
+                    <option value="KRW" label="{{'KRW' | currencyTranslator}}">KRW</option>
+                    <option value="MXN" label="{{'MXN' | currencyTranslator}}">MXN</option>
+                    <option value="MYR" label="{{'MYR' | currencyTranslator}}">MYR</option>
+                    <option value="NOK" label="{{'NOK' | currencyTranslator}}">NOK</option>
+                    <option value="NZD" label="{{'NZD' | currencyTranslator}}">NZD</option>
+                    <option value="PHP" label="{{'PHP' | currencyTranslator}}">PHP</option>
+                    <option value="PLN" label="{{'PLN' | currencyTranslator}}">PLN</option>
+                    <option value="RON" label="{{'RON' | currencyTranslator}}">RON</option>
+                    <option value="RUB" label="{{'RUB' | currencyTranslator}}">RUB</option>
+                    <option value="SEK" label="{{'SEK' | currencyTranslator}}">SEK</option>
+                    <option value="SGD" label="{{'SGD' | currencyTranslator}}">SGD</option>
+                    <option value="THB" label="{{'THB' | currencyTranslator}}">THB</option>
+                    <option value="TRY" label="{{'TRY' | currencyTranslator}}">TRY</option>
+                    <option value="USD" label="{{'USD' | currencyTranslator}}">USD</option>
+                </select>
+            </div>
+            <div class="col-md-0 col-sm-0 col-xl-2 col-lg-2"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-0 col-sm-0 col-xl-2 col-lg-2"></div>
+            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+                <input type="number" #value onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" id="Amount" class="form-control" placeholder="Amount to convert">
+            </div>
+            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+                <output type="number" id="Amount2" class="form-control" placeholder="Amount converted" value="{{resultValue | number : '1.2-2'}}" ></output>
+            </div>
+            <div class="col-md-0 col-sm-0 col-xl-2 col-lg-2"></div>
+        </div>
+        <div class="row" style="text-align: center;" *ngIf="hasConverterMessage">
+            <b class="col-md-12 col-sm-12 col-xl-12 col-lg-12">{{converterMessage}}</b>
+        </div>
+        <div class="row3">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <button type="button" class="btn btn-primary" id="convert" (click)="converter(curr1.value, curr2.value, value.value)">Convert</button>
+            </div>
+        </div>
+    </div>
+    <!-- showGroup -->
+    <app-utilities-edit-modal *ngFor="let item of groups" [group]='item'></app-utilities-edit-modal>
+
+    <div class="modal fade" #addGroupModal id="addGroupModal" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
+        <div class="position-absolute w-100 p-4 d-flex flex-column align-items-end">
+            <div class="w-25 toastek">
+                <div class="toast ml-auto tt5" role="alert" data-delay="3000" data-autohide="false">
+                    <div class="toast-header">
+                        <strong class="mr-auto text-primary">HINT</strong>
+                        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="toast-body">
+                        Input may only contain letters, numbers, some special characters (_@./#&+-: ) and whitespaces. Length allowed: 1-20
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="position-absolute w-100 p-4 d-flex flex-column align-items-end">
+            <div class="w-25 toastek">
+                <div class="toast ml-auto tt6" role="alert" data-delay="3000" data-autohide="false">
+                    <div class="toast-header">
+                        <strong class="mr-auto text-primary">HINT</strong>
+                        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="toast-body">
+                        Input may only contain letters, numbers, some special characters (_@./#&+-: ) and whitespaces. Length allowed: 1-20
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <form #f="ngForm" (ngSubmit)="createGroup(f, 0)">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" id="inputMemberBody">
+                            <label for="inputGroupName">Input group name</label>
+                            <input type="text" #groupName ngModel class="form-control" placeholder="Group Name" name="inputGroupName" id="inputGroupName" (focusout)="createGroup(f, 1)" required="required"><br/>
+                            <label for="inputGroupName">Add Members</label>
+                            <div *ngFor="let member of groupMembers">
+                                <input type="text" ngModel #memberName class="form-control" (focusout)="createGroup(f, 1)" placeholder="Member {{member.value}}" name="{{member.value | inputMemberPipe}}" id="{{member.value | inputMemberPipe}}" style="margin-top:1%">
+                            </div>                    
+                        </div>
+                    <div class="modal-footer">
+                        <p *ngIf="hasCreateGroupMessage"><b>{{createGroupMessage}}</b></p>
+                        <button id="addGroup" class="btn btn-primary">Add Group</button>
+                        <button type="button" id="addGroupMember" class="btn btn-primary" (click)="addGroupMember(groupName.value);"> 
+                            <fa-icon [icon]="faPlusSquare"></fa-icon>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    
+    <app-footer></app-footer>
+</main> 

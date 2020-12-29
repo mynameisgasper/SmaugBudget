@@ -1,4 +1,22 @@
 const mongoose = require('mongoose');
+
+/**
+ * @swagger
+ * components:
+ *  schemas:
+ *   Currency:
+ *    type: object
+ *    description: Vsi podatki o za valuti
+ *    properties:
+ *     currency:
+ *      type: string
+ *     value:
+ *      type: number
+ *    required:
+ *     - currency
+ *     - value
+ */
+
 const currencySchema = new mongoose.Schema();
 
 currencySchema.add({

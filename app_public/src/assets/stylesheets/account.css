@@ -1,0 +1,318 @@
+body {
+    background: #ededed;
+}
+
+h5 {
+    font-weight: bold;
+    height: 23px;
+}
+
+.row {
+    padding: 5px;
+}
+
+.container {
+    background: white;
+}
+
+@media only screen and (min-width: 900px) {
+    .footer {
+        padding-top: 12vh;
+    }
+}
+
+.container {
+    -webkit-box-shadow: 0px 1px 15px 1px rgba(209, 209, 209, 1);
+    -moz-box-shadow: 0px 1px 15px 1px rgba(209, 209, 209, 1);
+    box-shadow: 0px 1px 15px 1px rgba(209, 209, 209, 1);
+    padding: 0;
+}
+
+.dropdown {
+    padding-left: 0px;
+}
+
+#appSettings-container {
+    overflow: visible !important;
+}
+
+#cards-section {
+    padding: 4vh;
+    margin-top: 2vh;
+}
+
+#connectionsBody-container {
+    margin-top: 2vh;
+    padding: 4vh;
+}
+
+#accountBody-container {
+    padding: 4vh;
+}
+
+@media only screen and (min-width: 900px) {
+    #accountBody-container {
+        margin-top: 15vh;
+    }
+}
+
+@media only screen and (max-width: 991px) {
+    #accountBody-container {
+        margin-top: 10vh;
+    }
+}
+
+@media only screen and (max-height: 768px) and (min-width:560px) {
+    #accountBody-container {
+        margin-top: 20vh;
+    }
+}
+
+#appSettings-container {
+    margin-top: 2vh;
+    padding: 4vh;
+}
+
+.scrollable-menu {
+    height: auto;
+    max-height: 200px;
+    overflow-x: hidden;
+}
+
+.sub1 {
+    padding-left: 2vh;
+}
+
+.transportation {
+    background-color: #0096ff !important;
+    border-color: #0096ff !important;
+}
+
+.transportation:active,
+.transportation:visited,
+.transportation:focus {
+    background-color: #9ebde3 !important;
+    border-color: #0096ff !important;
+}
+
+.transportation:hover {
+    background-color: #9ebde3 !important;
+    border-color: #0096ff !important;
+    cursor: pointer;
+}
+
+.groceries {
+    background-color: green !important;
+    border-color: green !important;
+}
+
+.groceries:hover {
+    background-color: lightgreen !important;
+    border-color: green !important;
+    cursor: pointer;
+}
+
+.groceries:active,
+.groceries:visited,
+.groceries:focus {
+    background-color: lightgreen !important;
+    border-color: green !important;
+}
+
+.house-utilities {
+    background-color: purple;
+    border-color: purple !important;
+}
+
+.house-utilities:hover {
+    background-color: plum !important;
+    border-color: purple !important;
+    cursor: pointer;
+}
+
+.house-utilities:active,
+.house-utilities:visited,
+.house-utilities:focus {
+    background-color: plum !important;
+    border-color: purple !important;
+}
+
+.entertainment {
+    background-color: red;
+    border-color: red !important;
+}
+
+.entertainment:hover {
+    background-color: lightcoral !important;
+    border-color: red !important;
+    cursor: pointer;
+}
+
+.entertainment:active,
+.entertainment:visited,
+.entertainment:focus {
+    background-color: lightcoral !important;
+    border-color: red !important;
+}
+
+.label-info {
+    padding: 2px;
+    vertical-align: middle;
+    margin-bottom: 2px;
+    display: inline-block;
+}
+
+.dropright {
+    padding-left: 0px;
+}
+
+.bootstrap-tagsinput {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    display: inline-block;
+    padding: 4px 6px;
+    color: #555;
+    vertical-align: middle;
+    border-radius: 4px;
+    max-width: 100%;
+    line-height: 22px;
+    cursor: text;
+}
+
+.bootstrap-tagsinput input {
+    border: none;
+    box-shadow: none;
+    outline: none;
+    background-color: transparent;
+    padding: 0 6px;
+    margin: 0;
+    width: auto;
+    max-width: inherit;
+}
+
+.bootstrap-tagsinput.form-control input::-moz-placeholder {
+    color: #777;
+    opacity: 1;
+}
+
+.bootstrap-tagsinput.form-control input:-ms-input-placeholder {
+    color: #777;
+}
+
+.bootstrap-tagsinput.form-control input::-webkit-input-placeholder {
+    color: #777;
+}
+
+.bootstrap-tagsinput input:focus {
+    border: none;
+    box-shadow: none;
+}
+
+.bootstrap-tagsinput .tag {
+    margin-right: 2px;
+    color: white;
+}
+
+.bootstrap-tagsinput .tag [data-role="remove"] {
+    margin-left: 8px;
+    cursor: pointer;
+}
+
+.bootstrap-tagsinput .tag [data-role="remove"]:after {
+    content: "x";
+    padding: 0px 2px;
+}
+
+.bootstrap-tagsinput .tag [data-role="remove"]:hover {
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.bootstrap-tagsinput .tag [data-role="remove"]:hover:active {
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+}
+
+body {
+    justify-content: center;
+    align-items: center;
+}
+
+body a:hover {
+    text-decoration: none;
+}
+
+.profile-pic {
+    border-radius: 50%;
+    height: 150px;
+    width: 150px;
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: multiply;
+    color: transparent !important;
+    transition: all .3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+.modal-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-top: 50%;
+}
+
+.profile-pic:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 10000;
+    color: #fafafa !important;
+    transition: all .3s ease;
+    cursor: pointer;
+}
+
+.profile-pic span {
+    display: inline-flex;
+    padding: .2em;
+}
+
+#pfpNavBar {
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+}
+
+#pfpImg {
+    margin: auto;
+}
+
+@media only screen and (min-width: 768px) {
+    #savingsInputLbl,
+    #lastnameInputLbl {
+        text-align: right;
+    }
+}
+
+#categoriesColor-container {
+    padding: 4vh;
+    margin-top: 2vh;
+}
+
+.category-row {
+    padding-top: 1vh;
+    padding-left: 15px;
+    display: inline-block;
+}
+
+.color-picker {
+    border: none;
+    border-radius: 5px;
+}
+
+.Zind {
+    z-index: 90000 !important;
+}
+
+input[type="color"] {
+    width: 100%;
+}

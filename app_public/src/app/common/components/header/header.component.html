@@ -1,0 +1,58 @@
+<p>{{component}}</p>
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark navbar-left bg-dark">
+    <!--- Logo --->
+    <a class="navbar-brand" routerLink="../dashboard">
+        <img src="assets/images/dragon.svg" width="25vh" height="25vh" />
+        <b>SMAUG</b>budget
+    </a>
+
+    <!--- Logo --->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!--- Navbar Links --->
+    <div class="button collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link active" routerLink="../dashboard" *ngIf="component=='dashboard'; else dashboardBlock">DASHBOARD<span class="sr-only">(current)</span></a>
+                <ng-template #dashboardBlock><a class="nav-link" routerLink="../dashboard">DASHBOARD</a></ng-template>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" routerLink="../envelopes" *ngIf="component=='envelopes'; else envelopesBlock">ENVELOPES<span class="sr-only">(current)</span></a>
+                <ng-template #envelopesBlock><a class="nav-link" routerLink="../envelopes">ENVELOPES</a></ng-template>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" routerLink="../goals" *ngIf="component=='goals'; else goalsBlock">GOALS<span class="sr-only">(current)</span></a>
+                <ng-template #goalsBlock><a class="nav-link" routerLink="../goals">GOALS</a></ng-template>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" routerLink="../bills" *ngIf="component=='bills'; else billsBlock">BILLS<span class="sr-only">(current)</span></a>
+                <ng-template #billsBlock><a class="nav-link" routerLink="../bills">BILLS</a></ng-template>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" routerLink="../history" *ngIf="component=='history'; else historyBlock">HISTORY<span class="sr-only">(current)</span></a>
+                <ng-template #historyBlock><a class="nav-link" routerLink="../history">HISTORY</a></ng-template>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" routerLink="../utilities" *ngIf="component=='utilities'; else utilitiesBlock">UTILITIES<span class="sr-only">(current)</span></a>
+                <ng-template #utilitiesBlock><a class="nav-link" routerLink="../utilities">UTILITIES</a></ng-template>
+            </li>
+        </ul>
+
+        <!--- Navbar Profile Dropdown Menu  --->
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding-top: 0px; padding-bottom: 0px">
+                <img id="pfpNavBar" src="/api/getPfp" alt="Profile pic"></a>
+            <div class="dropdown-menu dropdown-menu-right dropdown-info" id="dropdown-user" aria-labelledby="navbarDropdownMenuLink-4">
+                <a class="dropdown-item" routerLink="../account"><fa-icon [icon]="faCog"></fa-icon> Settings</a>
+                <a class="dropdown-item" onclick="toggleDarkMode();loadGraphs();" id="appearanceDark" style="display: none;"><fa-icon [icon]="faAdjust"></fa-icon> Appearance: Dark</a>
+                <a class="dropdown-item" onclick="toggleDarkMode();loadGraphs();" id="appearanceLight"><fa-icon [icon]="faAdjust"></fa-icon> Appearance: Light</a>
+                <hr>
+                <a class="dropdown-item" (click)="logout()"><fa-icon [icon]="faSignOutAlt"></fa-icon> Logout</a>
+            </div>
+            </li>
+        </ul>
+    </div>
+</nav>

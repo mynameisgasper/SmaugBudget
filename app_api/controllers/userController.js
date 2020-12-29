@@ -3,11 +3,11 @@ const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const Categories = mongoose.model('Categories');
 const multer = require('multer');
-const user = require("../models/user");
 const fs = require('fs');
 const path = require("path");
-const categories = require("../models/categories");
-const session = require("express-session");
+const hasher = require('./hasher');
+const passport = require('passport');
+const jwt_decode = require('jwt-decode');
 
 function register(req, res) {
     try {
@@ -39,12 +39,14 @@ function register(req, res) {
             });
 
             promise.then(function(basicCategories) {
+                var hash = hasher.hashPassword(pass1);
+
                 let user = new User({
                     firstname: req.body.nameup,
                     lastname: req.body.surnameup,
                     email: email1,
-                    password: pass1,
-                    passwordSalt: "tempSalt",
+                    password: hash.password,
+                    passwordSalt: hash.passwordSalt,
                     confirmationUrl: urlCode,
                     confirmationCode: confirmationCode,
                     isPremium: false,
@@ -53,10 +55,18 @@ function register(req, res) {
                 });
                 user.save(function callback(err) {
                     if (err) {
-                        res.sendStatus(400);
+                        if (err.code === 11000) {
+                            var response = {"reson": "Account already exists!"}
+                            res.status(409).json(response);
+                            return;
+                        }
+                        else {
+                            var response = {"reson": "Server error!"}
+                            res.status(500).json(response);
+                            return;
+                        }
                     } else {
                         var response = {
-                            user: user,
                             urlCode: urlCode
                         }
                         smtp.sendCode(email1, req.body.nameup, req.body.surnameup, urlCode, confirmationCode, req.headers.host);
@@ -66,12 +76,13 @@ function register(req, res) {
             });
 
         } else {
-            console.log(requestBody);
-            res.sendStatus(400);
+            var response = {"reson": "Bad request!"}
+            res.status(400).json(response);
         }
     } catch (ex) {
         console.log(ex);
-        res.sendStatus(500);
+        var response = {"reson": "Server error!"}
+        res.status(500).json(response);
     }
 }
 
@@ -84,10 +95,15 @@ function login(requestBody, res) {
                 res.sendStatus(500);
             } else {
                 if (user) {
-                    if (user.password === password && user.confirmationUrl == null && user.confirmationCode == null) {
+                    var hash = hasher.hashPasswordWitSalt(password, user.passwordSalt);
+                    if (user.password === hash.password && user.confirmationUrl == null && user.confirmationCode == null) {
                         user.password = null;
                         user.passwordSalt = null;
-                        res.status(200).json(user);
+
+                        var response = {
+                            token: user.generateJwt()
+                        }
+                        res.status(200).json(response);
                     } else {
                         res.sendStatus(401);
                     }
@@ -101,23 +117,33 @@ function login(requestBody, res) {
     }
 }
 
-function retrieveUser(requestBody, res) {
+function retrieveUser(req, res) {
     try {
-        var id = requestBody.id;
+        const authorization = req.headers.authorization;
+        if (authorization) {
+            const token = authorization.split(' ')[1];
+            const decodedToken = jwt_decode(token);
 
-        User.findOne({ '_id': id }, function(err, user) {
-            if (err) {
-                res.sendStatus(500);
-            } else {
-                if (user) {
-                    user.password = null;
-                    user.passwordSalt = null;
-                    res.status(200).json(user);
+            User.findById(decodedToken._id, function(err, user) {
+                if (err) {
+                    res.sendStatus(500);
                 } else {
-                    res.sendStatus(404);
+                    if (user) {
+                        user.password = null;
+                        user.passwordSalt = null;
+                        res.status(200).json(user);
+                    } else {
+                        res.sendStatus(404);
+                    }
                 }
+            });
+        }
+        else {
+            const response = {
+                status: 'Unauthorized'
             }
-        });
+            res.status(401).json(response);
+        }
     } catch (ex) {
         res.sendStatus(500);
     }
@@ -154,44 +180,89 @@ function confirm(req, res) {
         var code = req.params.code;
 
         User.findOne({ 'confirmationUrl': url, 'confirmationCode': code }, function name(err, user) {
-            if (err || user == null) {
-                res.sendStatus(404);
+            if (err) {
+                var response = {
+                    status: 'server error'
+                }
+                res.status(500).json(response);
+            }
+            else if (err || user == null) {
+                var response = {
+                    status: 'not found'
+                }
+                res.status(404).json(response);
             } else {
                 user.confirmationUrl = null;
                 user.confirmationCode = null;
                 user.save();
-                res.sendStatus(200);
+
+                var response = {
+                    status: 'success'
+                }
+                res.status(200).json(response);
             }
         });
     } catch (ex) {
-        res.sendStatus(500);
+        var response = {
+            status: 'server error'
+        }
+        res.status(500).json(response);
     }
 }
 
-function changeIncome(requestBody, res, session) {
-    var day = requestBody.date;
-    var paycheck = requestBody.amount;
+function changeIncome(req, res) {
+    try {
+        const authorization = req.headers.authorization;
+        if (authorization) {
+            const token = authorization.split(' ')[1];
+            const decodedToken = jwt_decode(token);
 
-    var regex = new RegExp("^[0-9]+(\.[0-9]{1,2})?$");
-    var income = regex.test(paycheck);
+            var day = req.body.date;
+            var paycheck = req.body.amount;
 
-    if (income && day > 0 && day < 29) {
-        User.findOne({ 'email': session.user.email }, function name(err, user) {
-            if (err || user == null) {
-                res.sendStatus(404);
+            var regex = new RegExp("^[0-9]+(\.[0-9]{1,2})?$");
+            var income = regex.test(paycheck);
+
+            if (income && day > 0 && day < 29) {
+                User.findById(decodedToken._id, function name(err, user) {
+                    if (err || user == null) {
+                        const response = {
+                            status: 'Not found'
+                        }
+                        res.status(404).json(response);
+                    } else {
+                        user.paycheck = paycheck,
+                        user.paycheckDate = day
+                        user.save();
+
+                        const response = {
+                            status: 'Success'
+                        }
+                        res.status(200).json(response);
+                    }
+                });
             } else {
-                user.paycheck = paycheck,
-                    user.paycheckDate = day
-                user.save();
-                res.sendStatus(200);
+                const response = {
+                    status: 'Bad request'
+                }
+                res.status(400).json(response);
             }
-        });
-    } else {
-        res.sendStatus(400);
+        }
+        else {
+            const response = {
+                status: 'Unauthorized'
+            }
+            res.status(401).json(response);
+        }
+    } catch (ex) {
+        const response = {
+            status: 'Server error'
+        }
+        res.status(500).json(response);
     }
 }
 
-function updateUser(requestBody, res, session) {
+function updateUser(req, requestBody, res, session) {
     try {
         var regex = new RegExp("^([a-zA-Z])+$");
         var regex2 = new RegExp("^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})");
@@ -199,20 +270,59 @@ function updateUser(requestBody, res, session) {
         const lastName = requestBody.lastName ? regex.test(requestBody.lastName) : true;
         const password = requestBody.password ? regex2.test(requestBody.password) : true;
 
-        if (firstName && lastName && password) {
-            User.findOne({ 'email': requestBody.email }, function(err, user) {
+        const authorization = req.headers.authorization;
+        if (authorization) {
+            const token = authorization.split(' ')[1];
+            const decodedToken = jwt_decode(token);
+
+            if (firstName && lastName && password) {
+                User.findOne({ 'email': requestBody.email }, function(err, user) {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        if (user) {
+
+                            user.firstname = requestBody.firstName ? requestBody.firstName : user.firstname;
+                            user.lastname = requestBody.lastName ? requestBody.lastName : user.lastname;
+                            user.email = requestBody.email ? requestBody.email : user.email;
+                            user.password = requestBody.password ? requestBody.password : user.password;
+                            user.language = requestBody.language ? requestBody.language : user.language;
+                            user.defaultCurrency = requestBody.defaultCurrency ? requestBody.defaultCurrency : user.defaultCurrency;
+
+                            user.save();
+                            res.status(200).json(user);
+                        } else {
+                            res.sendStatus(404);
+                        }
+                    }
+                });
+            } else {
+                res.sendStatus(404);
+            }
+        } else {
+            const response = {
+                status: 'Unauthorized'
+            }
+            res.status(401).json(response);
+        }
+    } catch (ex) {
+        res.sendStatus(500);
+    }
+}
+
+function setCurrency(req, requestBody, res, session) {
+    try {
+        const authorization = req.headers.authorization;
+        if (authorization) {
+            const token = authorization.split(' ')[1];
+            const decodedToken = jwt_decode(token);
+            User.findOne({ 'email': requestBody.email}, function (err, user) {
                 if (err) {
                     console.log(err);
                 } else {
                     if (user) {
-
-                        user.firstname = requestBody.firstName ? requestBody.firstName : user.firstname;
-                        user.lastname = requestBody.lastName ? requestBody.lastName : user.lastname;
-                        user.email = requestBody.email ? requestBody.email : user.email;
-                        user.password = requestBody.password ? requestBody.password : user.password;
-                        user.language = requestBody.language ? requestBody.language : user.language;
-                        user.defaultCurrency = requestBody.defaultCurrency ? requestBody.defaultCurrency : user.defaultCurrency;
-
+                        user.defaultCurrency = requestBody.currency ;
+                        console.log(requestBody);
                         user.save();
                         res.status(200).json(user);
                     } else {
@@ -221,30 +331,11 @@ function updateUser(requestBody, res, session) {
                 }
             });
         } else {
-            res.sendStatus(404);
-        }
-    } catch (ex) {
-        res.sendStatus(500);
-    }
-}
-
-function setCurrency(requestBody, res, session) {
-    try {
-        
-        User.findOne({ 'email': requestBody.email}, function (err, user) {
-            if (err) {
-                console.log(err);
-            } else {
-                if (user) {
-                    user.defaultCurrency = requestBody.currency ;
-                    console.log(requestBody);
-                    user.save();
-                    res.status(200).json(user);
-                } else {
-                    res.sendStatus(404);
-                }
+            const response = {
+                status: 'Unauthorized'
             }
-        });
+            res.status(401).json(response);
+        }
     } catch (ex) {
         res.sendStatus(500);
     }
@@ -263,28 +354,42 @@ const uploadImg = multer({ storage: storage }).single('image');
 
 function postImg(req, res) {
     try {
-        User.findOne({ 'email': req.session.user.email }, function(err, user) {
-            if (err) {
-                console.log(err);
-            } else {
-                if (user) {
-                    if (user.profilePic) {
-                        fs.unlink(user.profilePic, (err) => {
-                            if (err) {
-                                console.log('File: ' + user.profilePic + " does not exist!");
-                            } else {
-                                console.log('File: ' + user.profilePic + " was deleted");
-                            }
-                        });
-                    }
-                    user.profilePic = req.file.path;
-                    user.save();
-                    res.status(200).json(req.file.path);
+        const authorization = req.headers.authorization;
+        if (authorization) {
+            const token = authorization.split(' ')[1];
+            const decodedToken = jwt_decode(token);
+            User.findById(decodedToken._id, function(err, user) {
+                if (err) {
+                    console.log(err);
                 } else {
-                    res.sendStatus(404);
+                    if (user) {
+                        if (user.profilePic) {
+                            fs.unlink(user.profilePic, (err) => {
+                                if (err) {
+                                    console.log('File: ' + user.profilePic + " does not exist!");
+                                } else {
+                                    console.log('File: ' + user.profilePic + " was deleted");
+                                }
+                            });
+                        }
+                        if (req.file) {
+                            user.profilePic = req.file.path;
+                            user.save();
+                            res.status(200).json(req.file.path);
+                        } else {
+                            res.sendStatus(500);
+                        }
+                    } else {
+                        res.sendStatus(404);
+                    }
                 }
+            });
+        } else {
+            const response = {
+                status: 'Unauthorized'
             }
-        });
+            res.status(401).json(response);
+        }
     } catch (ex) {
         res.sendStatus(500);
     }
@@ -292,21 +397,31 @@ function postImg(req, res) {
 
 function getPfp(req, res) {
     try {
-        User.findOne({ 'email': req.session.user.email }, function(err, user) {
-            if (err) {
-                console.log(err);
-            } else {
-                if (user) {
-                    if (user.profilePic == null) {
-                        res.status(404).sendFile(path.resolve("public/images/Default_pfp.png"));
-                    } else {
-                        res.status(200).sendFile(path.resolve(user.profilePic));
-                    }
+        const authorization = req.headers.authorization;
+        if (authorization) {
+            const token = authorization.split(' ')[1];
+            const decodedToken = jwt_decode(token);
+            User.findById(decodedToken._id, function(err, user) {
+                if (err) {
+                    console.log(err);
                 } else {
-                    res.sendStatus(404);
+                    if (user) {
+                        if (user.profilePic == null) {
+                            res.status(200).sendFile(path.resolve("public/images/Default_pfp.png"));
+                        } else {
+                            res.status(200).sendFile(path.resolve(user.profilePic));
+                        }
+                    } else {
+                        res.status(404).sendFile(path.resolve("public/images/Default_pfp.png"));
+                    }
                 }
+            });
+        } else {
+            const response = {
+                status: 'Unauthorized'
             }
-        });
+            res.status(401).json(response);
+        }
     } catch (ex) {
         res.sendStatus(500);
     }
@@ -341,17 +456,20 @@ function requestResetPassword(req, res) {
     }
 }
 
-function resetPassword(requestBody, res) {
+function resetPassword(req, res) {
     try {
-        var code = requestBody.code;
-        var password = requestBody.password;
+        var code = req.body.code;
+        var password = req.body.password;
         if (password) {
             User.findOne({ resetPasswordCode: code }, function(err, user) {
                 if (err) {
                     res.sendStatus(500);
                 } else {
                     if (user) {
-                        user.password = password;
+                        var hash = hasher.hashPassword(password);
+
+                        user.password = hash.password;
+                        user.passwordSalt = hash.passwordSalt
                         user.resetPasswordCode = null;
                         user.save();
                         res.sendStatus(200);
@@ -375,29 +493,43 @@ function changePassword(req, res) {
         var newPassword2 = req.body.newPassword2;
         var id = req.body.id;
 
-        if (newPassword1 === newPassword2) {
-            User.findById(id, function(err, user) {
-                if (err) {
-                    res.sendStatus(500);
-                }
-                else {
-                    if (user.password === oldPassword) {
-                        user.password = newPassword1;
-                        user.passwordSalt = "tempSalt"    
-                        user.save(function callback(err) {
-                            user.password = null;
-                            user.passwordSalt = null;
-                            res.status(200).json(user);
-                        });
+        const authorization = req.headers.authorization;
+        if (authorization) {
+            const token = authorization.split(' ')[1];
+            const decodedToken = jwt_decode(token);
+
+            if (newPassword1 === newPassword2) {
+                User.findById(id, function(err, user) {
+                    if (err) {
+                        res.sendStatus(500);
                     }
                     else {
-                        res.sendStatus(401);
+                        var hash = hasher.hashPasswordWitSalt(oldPassword, user.passwordSalt);
+                        if (user.password === hash.password) {
+                            hash = hasher.hashPassword(newPassword1);
+
+                            user.password = hash.password;
+                            user.passwordSalt = hash.passwordSalt;    
+                            user.save(function callback(err) {
+                                user.password = null;
+                                user.passwordSalt = null;
+                                res.status(200).json(user);
+                            });
+                        }
+                        else {
+                            res.sendStatus(401);
+                        }
                     }
-                }
-            });
-        }
-        else {
-            res.sendStatus(400);
+                });
+            }
+            else {
+                res.sendStatus(400);
+            }
+        } else {
+            const response = {
+                status: 'Unauthorized'
+            }
+            res.status(401).json(response);
         }
     } catch (ex) {
         res.sendStatus(500);
@@ -436,7 +568,7 @@ module.exports = {
         login(req.body, res);
     },
     requestResetPassword: function(req, res) {
-        requestResetPassword(req.body, res);
+        requestResetPassword(req, res);
     },
     resetPassword: function(req, res) {
         resetPassword(req, res);
@@ -445,7 +577,7 @@ module.exports = {
         changePassword(req, res);
     },
     retrieveUser: function(req, res) {
-        retrieveUser(req.body, res, req.session);
+        retrieveUser(req, res, req.session);
     },
     retrieveUserEmail: function(req, res) {
         retrieveUserEmail(req.body, res, req.session);
@@ -454,7 +586,7 @@ module.exports = {
         confirm(req, res);
     },
     changeIncome: function(req, res) {
-        changeIncome(req.body, res, req.session);
+        changeIncome(req, res);
     },
     postImg,
     uploadImg,
@@ -462,10 +594,10 @@ module.exports = {
         getPfp(req, res);
     },
     updateUser: function(req, res) {
-        updateUser(req.body, res, req.session);
+        updateUser(req, req.body, res, req.session);
     },
     setCurrency: function(req, res) {
-        setCurrency(req.body, res, req.session);
+        setCurrency(req, req.body, res, req.session);
     },
     handlePaychecks: function() {
         handlePaychecks();
