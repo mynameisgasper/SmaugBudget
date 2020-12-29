@@ -189,11 +189,11 @@
             </div>
             <div class="row">
                 <label id="newPasswordLbl" for="newPassword" class="col-sm-4 col-md-4 col-lg-4 col-xl-4">{{data.newPassword}}:</label>
-                <input type="password" id="newPassword" onfocusout="passwordStrength(this)" placeholder="{{data.newPassword}}"  class="form-control col-sm-7 col-md-7 col-lg-7 col-xl-7">
+                <input type="password" id="newPassword" (focusout)="passwordStrength('newPassword')" placeholder="{{data.newPassword}}"  class="form-control col-sm-7 col-md-7 col-lg-7 col-xl-7">
             </div>
             <div class="row">
                 <label id="confirmPasswordLbl" for="confirmPassword" class="col-sm-4 col-md-4 col-lg-4 col-xl-4">{{data.confirmPassword}}:</label>
-                <input type="password" id="confirmPassword" onfocusout="passwordCheckSignUp()" placeholder="{{data.confirmPassword}}"  class="form-control col-sm-7 col-md-7 col-lg-7 col-xl-7">
+                <input type="password" id="confirmPassword" (focusout)="passwordCheckSignUp()" placeholder="{{data.confirmPassword}}"  class="form-control col-sm-7 col-md-7 col-lg-7 col-xl-7">
             </div>
             </div>
             <div class="modal-footer">
