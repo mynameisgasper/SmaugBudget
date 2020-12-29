@@ -426,17 +426,20 @@ function requestResetPassword(req, res) {
     }
 }
 
-function resetPassword(requestBody, res) {
+function resetPassword(req, res) {
     try {
-        var code = requestBody.code;
-        var password = requestBody.password;
+        var code = req.body.code;
+        var password = req.body.password;
         if (password) {
             User.findOne({ resetPasswordCode: code }, function(err, user) {
                 if (err) {
                     res.sendStatus(500);
                 } else {
                     if (user) {
-                        user.password = password;
+                        var hash = hasher.hashPassword(password);
+
+                        user.password = hash.password;
+                        user.passwordSalt = hash.passwordSalt
                         user.resetPasswordCode = null;
                         user.save();
                         res.sendStatus(200);
