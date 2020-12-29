@@ -169,15 +169,108 @@ router.post('/updateUser', authentication, (req, res) => {
 
 router.post('/setCurrency', authentication, (req, res) => {
     user.setCurrency(req, res);
-})
+});
+
+/**
+ * @swagger
+ *  /addEnvelope:
+ *   post:
+ *    summary: Kreiranje novega kuverte
+ *    description: Kreiranje nove kuverte s pripadujočimi podatki - kategorija kuverte, prejemnik plačila, vrednost proračuna, barvo kuverte, mesec kuverte.
+ *    tags: [Envelopes]
+ *    security:
+ *     - jwt: []
+ *    requestBody:
+ *     description: Podatki za kreiranje kuverte
+ *     required: true
+ *     content:
+ *      application/json:
+ *       schema:
+ *        $ref: "#/components/schemas/addEnvelope"
+ *       example:
+ *        categoryAddEnvelope: "Golf"
+ *        inputAmount: 300
+ *        colorPicker: "#db3d3d"
+ *        month: "11"
+ *    responses:
+ *     "201":
+ *      description: Uspešno kreiran strošek in dodan v kuverto.
+ *     "400":
+ *      description: Napaka zahteve, obvezni so vsi podatki ali pa kuverta s tem imenom že obstaja.
+ *     "401":
+ *      description: Uporabnik ni potrjen.
+ *     "500":
+ *      description: Napaka na strežniku.
+ */
 
 router.post('/addEnvelope', authentication, (req, res) => {
     envelopes.addEnvelope(req, res);
 });
 
+/**
+ * @swagger
+ *  /editEnvelope:
+ *   post:
+ *    summary: Spreminjanje podatkov kuverte
+ *    description: Spreminjanje podatkov kuverte. Vsebuje podatke - id kuverte in novo proračun.
+ *    tags: [Envelopes]
+ *    security:
+ *     - jwt: []
+ *    requestBody:
+ *     description: Podatki za posodobitev kuverte
+ *     required: true
+ *     content:
+ *      application/json:
+ *       schema:
+ *        $ref: "#/components/schemas/editEnvelope"
+ *       example:
+ *        id: "5feb637ce10cc08e4a48ee18"
+ *        inputAmount: 500
+ *    responses:
+ *     "200":
+ *      description: Uspešno posodobljena kuverta.
+ *     "400":
+ *      description: Napaka zahteve, obvezni so vsi podatki.
+ *     "401":
+ *      description: Uporabnik ni potrjen.
+ *     "500":
+ *      description: Napaka na strežniku.
+ */
+
 router.post('/editEnvelope', authentication, (req, res) => {
     envelopes.editEnvelope(req, res);
 });
+
+/**
+ * @swagger
+ *  /deleteEnvelope:
+ *   post:
+ *    summary: Brisanje kuverte
+ *    description: Brisanje kuverte z vsemi podatki
+ *    tags: [Envelopes]
+ *    security:
+ *     - jwt: []
+ *    requestBody:
+ *     description: Podatki za brisanje kuverte.
+ *     required: true
+ *     content:
+ *      application/json:
+ *       schema:
+ *        $ref: "#/components/schemas/deleteEnvelope"
+ *       example:
+ *        envelope_id: "5feb637ce10cc08e4a48ee18"
+ *    responses:
+ *     "204":
+ *      description: Uspešno brisanje kuverte.
+ *     "400":
+ *      description: Napaka zahteve, obvezni so vsi podatki.
+ *     "401":
+ *      description: Uporabnik ni potrjen.
+ *     "404":
+ *      description: Kuverta s temi podatki ne obstaja.
+ *     "500":
+ *      description: Napaka na strežniku.
+ */
 
 router.post('/deleteEnvelope', authentication, (req, res) => {
     envelopes.deleteEnvelope(req, res);
@@ -208,7 +301,7 @@ router.post('/deleteEnvelope', authentication, (req, res) => {
  *     "201":
  *      description: Uspešno kreiran strošek in dodan v kuverto.
  *     "400":
- *      description: Napaka zahteve, obvezni.
+ *      description: Napaka zahteve, obvezni so vsi podatki.
  *     "401":
  *      description: Uporabnik ni potrjen.
  *     "500":

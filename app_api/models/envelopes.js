@@ -66,7 +66,6 @@ const { categorySchema } = require('./categories')
  *    required:
  *     - categoryAddEnvelope
  *     - inputAmount
- *     - budget
  *     - colorPicker
  *     - month
  *   editEnvelope:
