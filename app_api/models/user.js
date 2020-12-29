@@ -138,13 +138,41 @@ const { friendGroupSchema } = require('./friendGroup');
  *    type: object
  *    description: Podatki za spremembo uporabnikove plače
  *    properties:
- *     paycheck:
+ *     amount:
  *      type: number
- *     paycheckDate:
+ *     date:
  *      type: number
  *    required:
  *     - paycheck
  *     - paycheckDate
+ *   ChangePassword:
+ *    type: object
+ *    description: Podatki za spremembo gesla
+ *    properties:
+ *     oldPassword:
+ *      type: number
+ *     newPassword1:
+ *      type: number
+ *     newPassword2:
+ *      type: number
+ *    required:
+ *     - oldPassword
+ *     - newPassword1
+ *     - newPassword2
+ *   ChangeUserData:
+ *    type: object
+ *    description: Podatki za spremembo uporabnikovih podatkov
+ *    properties:
+ *     firstname:
+ *      type: string
+ *     lastname:
+ *      type: string
+ *     email:
+ *      type: string
+ *     language:
+ *      type: string
+ *     defaultCurrency
+ *      type: string
  */
 
 const userSchema = new mongoose.Schema();

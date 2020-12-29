@@ -123,6 +123,37 @@ router.post('/resetPassword', (req, res) => {
     user.resetPassword(req, res);
 });
 
+/**
+ * @swagger
+ *  /changePassword:
+ *   post:
+ *    summary: Sprememba gesla uporabnika
+ *    description: Sprememba gesla uporabnika. Vsebuje podatke staro in 2x novo geslo.
+ *    tags: [Uporabnik]
+ *    security:
+ *     - jwt: []
+ *    requestBody:
+ *     description: Podatki za sprememba gesla
+ *     required: true
+ *     content:
+ *      application/json:
+ *       schema:
+ *        $ref: "#/components/schemas/ChangePassword"
+ *       example:
+ *        oldPassword: "Goldpass1"
+ *        newPassword1: "Goldpass2"
+ *        newPassword2: "Goldpass2"
+ *    responses:
+ *     "200":
+ *      description: Uspešno spremenjeno geslo.
+ *     "400":
+ *      description: Napaka zahteve, obvezni so vsi podatki.
+ *     "401":
+ *      description: Uporabnik ni potrjen.
+ *     "500":
+ *      description: Napaka na strežniku.
+ */
+
 router.post('/changePassword', authentication, (req, res) => {
     user.changePassword(req, res);
 });
@@ -139,6 +170,8 @@ router.post('/changePassword', authentication, (req, res) => {
  *    responses:
  *     "200":
  *      description: Uspešno pridobivanje podatkov.
+ *      schema:
+ *       $ref: "#/components/schemas/GetUserData"
  *     "400":
  *      description: Napaka zahteve, pri prijavi sta obvezna elektronski naslov in geslo.
  */
@@ -147,31 +180,170 @@ router.get('/getUser', authentication, (req, res) => {
     user.retrieveUser(req, res);
 });
 
+/*
 router.post('/getUserEmail/', authentication, (req, res) => {
     user.retrieveUserEmail(req, res);
 });
+*/
+
+/**
+ * @swagger
+ *  /confirm/{urlCode}/{code}:
+ *   all:
+ *    summary: Redirect za potrjevanje registracije.
+ *    description: Redirect za potrjevanje registracije.
+ *    tags: [Avtentikacija]
+ *    parameters:
+ *     - in: path
+ *       name: urlCode
+ *       schema:
+ *        type: string
+ *       required: true
+ *     - in: path
+ *       name: code
+ *       schema:
+ *        type: string
+ *       required: true
+ *    responses:
+ *     "200":
+ *      description: Uspešno potrjena registracija.
+ *     "400":
+ *      description: Napaka zahteve, obvezni so vsi podatki.
+ *     "401":
+ *      description: Uporabnik ni potrjen.
+ *     "404":
+ *      description: Stran ne obstaja.
+ *     "500":
+ *      description: Napaka na strežniku.
+ */
 
 router.all('/confirm/:urlCode/:code', (req, res) => {
     user.confirm(req, res);
 });
 
+
+/**
+ * @swagger
+ *  /changeIncome:
+ *   post:
+ *    summary: Spreminjanje uporabnikove plače.
+ *    description: Spreminjanje uporabnikove plače. Vsebuje podatka o velikosti plače ter o dnevu v mesecu, ko prejme plačo.
+ *    tags: [Uporabnik]
+ *    security:
+ *     - jwt: []
+ *    requestBody:
+ *     description: Podatki za posodobitev plače uporabnika
+ *     required: true
+ *     content:
+ *      application/json:
+ *       schema:
+ *        $ref: "#/components/schemas/ChangeIncome"
+ *       example:
+ *        amount: 1300
+ *        date: 12
+ *    responses:
+ *     "200":
+ *      description: Uspešno posodobljeni podatki uporabnika.
+ *     "400":
+ *      description: Napaka zahteve, obvezni so vsi podatki.
+ *     "401":
+ *      description: Uporabnik ni potrjen.
+ *     "404":
+ *      description: Uporabnik ne obstaja.
+ *     "500":
+ *      description: Napaka na strežniku.
+ */
+
+
 router.post('/changeIncome', authentication, (req, res) => {
     user.changeIncome(req, res);
 });
 
+/**
+ * @swagger
+ *  /uploadPfp:
+ *   post:
+ *    summary: Nalaganje slike.
+ *    description: Nalaganje uporabnikove slike, ki je vidna v navbaru ter nastavitvah.
+ *    tags: [Database]
+ *    responses:
+ *     "200":
+ *      description: Uspešna naložena slika.
+ *     "401":
+ *      description: Uporabnik ni potrjen.
+ *     "404":
+ *      description: Pot do slike ne obstaja.
+ *     "500":
+ *      description: Napaka na strežniku.
+ */
+
 router.post('/uploadPfp', authentication, user.uploadImg, user.postImg);
+
+/**
+ * @swagger
+ *  /getPfp:
+ *   post:
+ *    summary: Pridobivanje slike.
+ *    description: Pridobivanje uporabnikove slike, ki je vidna v navbaru ter nastavitvah.
+ *    tags: [Database]
+ *    responses:
+ *     "200":
+ *      description: Uspešna pridobljena slika.
+ *     "401":
+ *      description: Uporabnik ni potrjen.
+ *     "404":
+ *      description: Uporabnik ne obstaja.
+ *     "500":
+ *      description: Napaka na strežniku.
+ */
 
 router.get('/getPfp', authentication, (req, res) => {
     user.getPfp(req, res);
 });
 
+/**
+ * @swagger
+ *  /updateUser:
+ *   post:
+ *    summary: Spreminjanje podatkov uporabnika
+ *    description: Spreminjanje podatkov uporabnika. Vsebuje podatke - id kuverte in novo proračun. Spreminjamo samo jezik, samo valuto ali email ime ter priimek skupaj.
+ *    tags: [Uporabnik]
+ *    security:
+ *     - jwt: []
+ *    requestBody:
+ *     description: Podatki za posodobitev podatkov uporabnik
+ *     required: true
+ *     content:
+ *      application/json:
+ *       schema:
+ *        $ref: "#/components/schemas/ChangeUserData"
+ *       example:
+ *        firstname: "Gold"
+ *        lastname: "Smaug"
+ *        email: "goldic@smaug.com"
+ *        password: "Goldsmaug2"
+ *        language: "Slovenski"
+ *        defaultCurrency: "USD"
+ *    responses:
+ *     "200":
+ *      description: Uspešno posodobljeni podatki uporabnika.
+ *     "401":
+ *      description: Uporabnik ni potrjen.
+ *     "400":
+ *      description: Uporabnik ne obstaja.
+ *     "500":
+ *      description: Napaka na strežniku.
+ */
+
 router.post('/updateUser', authentication, (req, res) => {
     user.updateUser(req, res);
 });
 
+/*
 router.post('/setCurrency', authentication, (req, res) => {
     user.setCurrency(req, res);
 });
+*/
 
 /**
  * @swagger
@@ -352,13 +524,51 @@ router.post('/editExpense', authentication, (req, res) => {
     history.editExpense(req, res);
 });
 
+/**
+ * @swagger
+ *  /getExpenses:
+ *   get:
+ *    summary: Filtriranje in pagination stroškov
+ *    description: Filtriranje in pagination stroškov
+ *    tags: [Expenses]
+ *    security:
+ *     - jwt: []
+ *    parameters:
+ *     - in: query
+ *       name: filter
+ *       description: Podatek po kateremu filtriramo.
+ *       schema:
+ *        type: string
+ *       required: true
+ *     - in: query
+ *       name: offset
+ *       description: Število stroškov, ki jih preskočimo.
+ *       schema:
+ *        type: string
+ *       required: true
+ *     - in: query
+ *       name: limit
+ *       description: Število stroškov, ki jih vrnemo.
+ *       schema:
+ *        type: number
+ *    responses:
+ *     "200":
+ *      description: Uspešno pridobivanje podatkov.
+ *     "404":
+ *      description: Uporabnik ne obstaja!
+ *     "500":
+ *      description: Napaka na strežniku.
+ */
+
 router.get('/getExpenses', authentication, (req, res) => {
     history.getExpenses(req, res);
 });
 
+/*
 router.post('/getLastMonthExpenses', authentication, (req, res) => {
     history.getLastMonthExpenses(req, res);
 });
+*/
 
 /**
  * @swagger
