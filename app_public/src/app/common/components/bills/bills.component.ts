@@ -60,6 +60,7 @@ export class BillsComponent implements OnInit {
     @ViewChild('nameAdd') nameAdd: ElementRef;
     @ViewChild('amountAdd') amountAdd: ElementRef;
     @ViewChild('dateAdd') dateAdd: ElementRef;
+    @ViewChild('addBillModal') addBillModal: ElementRef;
 
     faPlusSquare = faPlusSquare;
 
@@ -226,9 +227,8 @@ export class BillsComponent implements OnInit {
         this.addMessage = "Saving bill";
 
         this.api.addBill(category, payee, amount, date, repeat).then((response) => {
-            this.renderer.setAttribute(document.getElementById("buttonAddBill"), 'data-dismiss', 'modal');
+            this.addBillModal.nativeElement.click();
             this.afterAddBill(response);
-            this.renderer.removeAttribute(document.getElementById("buttonAddBill"), 'data-dismiss', 'modal');
             this.hasAddMessage = false;
         }).catch((error) => {
             this.addMessage = "Failed to save!";

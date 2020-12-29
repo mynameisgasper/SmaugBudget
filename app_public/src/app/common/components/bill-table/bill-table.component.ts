@@ -30,6 +30,8 @@ export class BillTableComponent implements OnInit {
   @ViewChild('editBillPayee') editBillPayee: ElementRef;
   @ViewChild('editBillAmount') editBillAmount: ElementRef;
   @ViewChild('editBillDate') editBillDate: ElementRef;
+  @ViewChild('editBillModal') editBillModal: ElementRef;
+  
 
   faMinusSquare = faMinusSquare;
   faPencilAlt = faPencilAlt
@@ -147,9 +149,8 @@ export class BillTableComponent implements OnInit {
     this.editMessage = "Saving bill";
 
     this.api.editBill(this.data._id, category, payee, amount, date, repeat).then((response) => {
-      this.renderer.setAttribute(document.getElementById("buttonEditBill" + this.data._id), 'data-dismiss', 'modal');
+      this.editBillModal.nativeElement.click();
       this.BillsComponent.afterEdit(response);
-      this.renderer.removeAttribute(document.getElementById("buttonEditBill" + this.data._id), 'data-dismiss', 'modal');
       this.hasEditMessage = false;
     }).catch((error) => {
       this.editMessage = "Failed to save";
