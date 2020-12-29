@@ -728,14 +728,11 @@ router.post('/loadCategories', (req, res) => {
  *       schema:
  *        $ref: "#/components/schemas/changeColorCategory"
  *       example:
- *        goal_id: "5feb546ad99c505c0677195a"
- *        name: "Playstation"
- *        amount: 800
- *        date: "2025-07-01T00:00:00.000Z"
- *        category: "Electronics"
+ *        category_id: "5feb7f18467e3de04ef1ccd9"
+ *        colorPicker: "#db3d3d"
  *    responses:
  *     "200":
- *      description: Uspešno dodan denar v cilj.
+ *      description: Uspešno spremenjena barva kategorije.
  *     "400":
  *      description: Napaka zahteve, obvezni so vsi podatki.
  *     "401":
@@ -744,10 +741,36 @@ router.post('/loadCategories', (req, res) => {
  *      description: Napaka na strežniku.
  */
 
-
 router.post('/changeColorCategory', authentication, (req, res) => {
     categories.changeColorCategory(req, res);
 })
+
+/**
+ * @swagger
+ *  /deleteCategory:
+ *   post:
+ *    summary: Brisanje kategorije
+ *    description: Brisanje kategorije uporabnika z vsemi podatki
+ *    tags: [Uporabnik]
+ *    security:
+ *     - jwt: []
+ *    requestBody:
+ *     description: Podatki za brisanje kategorije.
+ *     required: true
+ *     content:
+ *      application/json:
+ *       schema:
+ *        $ref: "#/components/schemas/deleteCategory"
+ *       example:
+ *        category_id: "5feb7f18467e3de04ef1ccd9"
+ *    responses:
+ *     "204":
+ *      description: Uspešna brisanje kategorije.
+ *     "401":
+ *      description: Uporabnik ni potrjen.
+ *     "500":
+ *      description: Napaka na strežniku.
+ */
 
 router.post('/deleteCategory', authentication, (req, res) => {
     categories.deleteCategory(req, res);

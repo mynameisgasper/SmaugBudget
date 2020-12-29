@@ -31,13 +31,9 @@ const mongoose = require('mongoose');
  *     colorPicker:
  *      type: string
  *      description: RGB koda nove barve
- *     user_id:
- *      type: string
- *      description: Id uporabnika
  *    required:
  *     - category_id
  *     - colorPicker
- *     - user_id
  *   deleteCategory:
  *    type: object
  *    description: Vsi podatki za izbris kategorije
@@ -45,12 +41,8 @@ const mongoose = require('mongoose');
  *     category_id:
  *      type: string
  *      description: Id kategorije
- *     user_id:
- *      type: string
- *      description: Id uporabnika
  *    required:
  *     - category_id
- *     - user_id
  */
 
 const categorySchema = new mongoose.Schema();

@@ -193,7 +193,7 @@ function deleteCategory(req, requestBody, res) {
                         }
 
                         user.save();
-                        res.status(200).json(user);
+                        res.status(204).json(user);
                         return;
                     }
                 });
