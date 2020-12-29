@@ -41,6 +41,8 @@ export class GoalsComponent implements OnInit {
   @ViewChild('amountGoal') amountGoal: ElementRef;
   @ViewChild('dateGoal') dateGoal: ElementRef;
   @ViewChild('addAmount') addAmount: ElementRef;
+  @ViewChild('addMoneyModal') addMoneyModal: ElementRef;
+  @ViewChild('addGoalModal') addGoalModal: ElementRef;
 
   ngOnInit(): void {
     this.api.getUser().then(result => {
@@ -279,9 +281,8 @@ export class GoalsComponent implements OnInit {
     this.goalMessage = "Saving goal";
 
     this.api.addGoal(name, category, amount, date).then((response) => {
-      this.renderer.setAttribute(document.getElementById("buttonAddGoal"), 'data-dismiss', 'modal');
+      this.addGoalModal.nativeElement.click();
       this.afterAddGoal(response);
-      this.renderer.removeAttribute(document.getElementById("buttonAddGoal"), 'data-dismiss', 'modal');
       this.hasGoalMessage = false;
     }).catch((error) => {
       this.goalMessage = "Failed to save goal!";
@@ -310,9 +311,8 @@ export class GoalsComponent implements OnInit {
     this.expenseMessage = "Saving expense";
 
     this.api.addMoneyToGoal(amount, title).then((response) => {
-      this.renderer.setAttribute(document.getElementById("buttonAddMoneyToGoal"), 'data-dismiss', 'modal');
+      this.addMoneyModal.nativeElement.click();
       this.afterAddMoneyToGoal(response);
-      this.renderer.removeAttribute(document.getElementById("buttonAddMoneyToGoal"), 'data-dismiss', 'modal');
       this.hasExpenseMessage = false;
     }).catch((error) => {
       this.expenseMessage = "Failed to save!";

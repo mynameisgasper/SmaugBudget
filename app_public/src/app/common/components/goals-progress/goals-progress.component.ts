@@ -43,6 +43,7 @@ export class GoalsProgressComponent implements OnInit {
   @ViewChild('editNameGoal') editNameGoal: ElementRef;
   @ViewChild('editAmountGoal') editAmountGoal: ElementRef;
   @ViewChild('editDateGoal') editDateGoal: ElementRef;
+  @ViewChild('editGoalModal') editGoalModal: ElementRef;
   
   nameEditGoal() {
     const field = this.editNameGoal.nativeElement;
@@ -146,12 +147,11 @@ export class GoalsProgressComponent implements OnInit {
     this.editMessage = "Saving goal";
 
     this.api.editGoal(this.item._id, name, category, amount, date).then((response) => {
+      this.editGoalModal.nativeElement.click();
       this.goalsComponent.afterEdit(response);
       this.hasEditMessage = false;
     }).catch((error) => {
-      this.renderer.setAttribute(document.getElementById("buttonEditGoal"+ this.item._id), 'data-dismiss', 'modal');
       this.editMessage = "Failed to save!";
-      this.renderer.removeAttribute(document.getElementById("buttonEditGoal" + this.item._id), 'data-dismiss', 'modal');
     });
   }
 
