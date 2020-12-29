@@ -139,7 +139,6 @@ export class BillTableComponent implements OnInit {
       //DO NOTHING
     } else {
       this.editBill(categoryValue, payeeValue, amountValue, dateValue, repeatValue);
-      
     }
   }
 

@@ -86,7 +86,7 @@ export class BillsComponent implements OnInit {
         return billsArray;
     }
 
-    compare(a, b) { //1 menjava, -1 ni menjava
+    compare(b, a) { //1 menjava, -1 ni menjava
         if (a.year < b.year) {
             return 1;
         } else if (a.year == b.year) {
