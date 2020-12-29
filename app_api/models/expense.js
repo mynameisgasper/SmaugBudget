@@ -11,17 +11,23 @@ const { categorySchema } = require('./categories')
  *    properties:
  *     id:
  *      type: string
+ *      description: ID stroška
  *     recipient:
  *      type: string
+ *      description: Prejemnik plačila
  *     value:
  *      type: number
+ *      description: Znesek plačila
  *     category:
  *      type: object
+ *      description: Kategorija stroška
  *      $ref: "#/components/schemas/Categories"
  *     currency:
  *      type: string
+ *      description: Valuta plačila
  *     date:
  *      type: string
+ *      description: Datum plačila
  *    required:
  *     - recipient
  *     - value
@@ -33,35 +39,40 @@ const { categorySchema } = require('./categories')
  *    properties:
  *     recipient:
  *      type: string
- *     value:
+ *      description: Prejemnik plačila
+ *     inputAmount:
  *      type: number
+ *      description: Znesek plačila
  *     category:
  *      type: string
+ *      description: Kategorija stroška
  *     date:
  *      type: string
+ *      description: Datum plačila
  *    required:
  *     - recipient
- *     - value
+ *     - inputAmount
  *     - category
  *     - date
  *   editExpense:
  *    type: object
  *    description: Podatki za urejanje stroška
  *    properties:
- *     id:
+ *     expId:
  *      type: string
- *     recipient:
+ *     payee:
  *      type: string
- *     value:
+ *     amount:
  *      type: number
- *     category:
+ *     expCategory:
  *      type: string
  *     date:
  *      type: string
  *    required:
- *     - recipient
- *     - value
- *     - category
+ *     - expId
+ *     - payee
+ *     - amount
+ *     - expCategory
  *     - date
  */
 

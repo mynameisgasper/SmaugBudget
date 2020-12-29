@@ -60,7 +60,7 @@ function addFriendGroup(req, res){
                             } else {
                                 user.friendgroups.push(friendGroup);
                                 user.save();
-                                res.status(200).json(friendGroup);
+                                res.status(201).json(friendGroup);
                             }
                         });
                     }
@@ -110,49 +110,56 @@ function calculateBalances(req, res){
             }
         }
 
-       if(authorization && check && sumPrice == sumPaid){
-            const token = authorization.split(' ')[1];
-            const decodedToken = jwt_decode(token);
-            User.findById(decodedToken._id, function(error, user) {
-                if (error) {
-                    console.log(error);
-                    const response = {
-                        status: 'Error'
-                    }
-                    res.status(500).json(response);
-                } else {
-                    FriendGroup.findById(group_id, function(error, group){
-                        if (error) {
-                            console.log(error);
-                            const response = {
-                                status: 'Error'
-                            }
-                            res.status(500).json(response);
-                        } else {
-                            for(var i = 0; i < group.friends.length; i++){
-                                var newBalance = group.friends[i].balance + (friends[i + 1][1] - friends[i + 1][0]);
-                                group.friends[i].balance = newBalance;
-                            }
-                            var myBalance = group.balance + (friends[0][1] - friends[0][0]);
-                            group.balance = myBalance;
-                            group.save();
-                            for(var i = 0; i < user.friendgroups.length; i++){
-                                if(user.friendgroups[i]._id == group_id){
-                                    user.friendgroups[i] = group;
-                                    user.save();
-                                    break;
-                                }
-                            }
-                            res.status(200).json(group);
+        if(authorization)
+            if(check && sumPrice == sumPaid){
+                const token = authorization.split(' ')[1];
+                const decodedToken = jwt_decode(token);
+                User.findById(decodedToken._id, function(error, user) {
+                    if (error) {
+                        console.log(error);
+                        const response = {
+                            status: 'Error'
                         }
-                    });
+                        res.status(500).json(response);
+                    } else {
+                        FriendGroup.findById(group_id, function(error, group){
+                            if (error) {
+                                console.log(error);
+                                const response = {
+                                    status: 'Error'
+                                }
+                                res.status(500).json(response);
+                            } else {
+                                for(var i = 0; i < group.friends.length; i++){
+                                    var newBalance = group.friends[i].balance + (friends[i + 1][1] - friends[i + 1][0]);
+                                    group.friends[i].balance = newBalance;
+                                }
+                                var myBalance = group.balance + (friends[0][1] - friends[0][0]);
+                                group.balance = myBalance;
+                                group.save();
+                                for(var i = 0; i < user.friendgroups.length; i++){
+                                    if(user.friendgroups[i]._id == group_id){
+                                        user.friendgroups[i] = group;
+                                        user.save();
+                                        break;
+                                    }
+                                }
+                                res.status(200).json(group);
+                            }
+                        });
+                    }
+                });
+            } else {
+                const response = {
+                    status: 'Error'
                 }
-            });
+                res.status(400).json(response);
+
         } else {
             const response = {
-                status: 'Error'
+                status: 'Unauthorized'
             }
-            res.status(400).json(response);
+            res.status(401).json(response);
         }
     }
     catch (ex) {
@@ -184,13 +191,13 @@ function deleteFriendGroup(req, res){
                 } else {
                     user.friendgroups.pull(group_id);
                     user.save();
-                    res.status(200).json(user);
+                    res.status(204).json(user);
                     return;
                 }
                 const response = {
                     status: 'Error'
                 }
-                res.status(304).json(response);
+                res.status(404).json(response);
                  return;
             });
         } else {

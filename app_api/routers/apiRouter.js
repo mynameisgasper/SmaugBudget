@@ -31,13 +31,13 @@ const authentication = jwt({
  *    description: Obvladovanje uporabnikov
  *  - name: Envelopes
  *    description: Obvladovanje podatkov o kuvertah
- *  - name: Goals:
+ *  - name: Goals
  *    description: Obvladovanje podatkov o ciljih
- *  - name: Bills:
+ *  - name: Bills
  *    description: Obvladovanje podatkov o računih
- *  - name: Expenses: 
+ *  - name: Expenses 
  *    description: Obvladovanje podatkov o stroških
- *  - name: Utilities:
+ *  - name: Utilities
  *    description: Obvladovanje podatkov o prijateljskih skupinah in pretvorniku valut
  */
 
@@ -214,19 +214,19 @@ router.post('/editExpense', authentication, (req, res) => {
  *     - jwt: []
  *    parameters:
  *     - in: query
- *       name: currency1
+ *       name: curr1
  *       description: Ime prve valute
  *       schema:
- *        type: number
+ *        type: string
  *       required: true
  *     - in: query
- *       name: currency2
+ *       name: curr2
  *       description: Ime druge valute
  *       schema:
- *        type: number
+ *        type: string
  *       required: true
  *     - in: query
- *       name: znesek
+ *       name: amm1
  *       description: Znesek prve valute, ki ga želimo pretvoriti v drugo valuto.
  *       schema:
  *        type: number
@@ -310,9 +310,68 @@ router.post('/removeConnection', authentication, (req, res) => {
     connections.removeConnection(req, res);
 })
 */
+
+/**
+ * @swagger
+ *  /addFriendGroup:
+ *   post:
+ *    summary: Kreiranje nove skupine s prijatelji
+ *    description: Kreiranje nove skupine s prijatelji z vsemi pripadujočimi podatki - ime skupine ter podatki o prijateljih
+ *    tags: [Utilities]
+ *    security:
+ *     - jwt: []
+ *    requestBody:
+ *     description: Podatki za kreiranje skupine
+ *     required: true
+ *     content:
+ *      application/json:
+ *       schema:
+ *        $ref: "#/components/schemas/addFriendGroup"
+ *    responses:
+ *     "201":
+ *      description: Uspešno kreirana skupina.
+ *     "400":
+ *      description: Napaka zahteve, obvezni so vsi podatki.
+ *     "401":
+ *      description: Uporabnik ni potrjen.
+ *     "404":
+ *      description: Uporabnik s temi podatki ne obstaja.
+ *     "500":
+ *      description: Napaka na strežniku.
+ */
+
 router.post('/addFriendGroup', authentication, (req, res) => {
     friendGroup.addFriendGroup(req, res);
 })
+
+/**
+ * @swagger
+ *  /calculateBalances:
+ *   post:
+ *    summary: Vstavitev novih podatkov o prijateljih v skupini
+ *    description: API vzame nove podatke in izračuna nove vrednosti v skupini
+ *    tags: [Utilities]
+ *    security:
+ *     - jwt: []
+ *    requestBody:
+ *     description: Podatki za posodobitev skupine
+ *     required: true
+ *     content:
+ *      application/json:
+ *       schema:
+ *        $ref: "#/components/schemas/calculateBalances"
+ *    responses:
+ *     "200":
+ *      description: Uspešno posodobljena skupina.
+ *     "400":
+ *      description: Napaka zahteve, obvezni so vsi podatki.
+ *     "401":
+ *      description: Uporabnik ni potrjen.
+ *     "404":
+ *      description: Uporabnik s temi podatki ne obstaja.
+ *     "500":
+ *      description: Napaka na strežniku.
+ */
 
 router.post('/calculateBalances', authentication, (req, res) => {
     friendGroup.calculateBalances(req, res);
@@ -335,12 +394,10 @@ router.post('/calculateBalances', authentication, (req, res) => {
  *       schema:
  *        $ref: "#/components/schemas/deleteFriendGroup"
  *    responses:
- *     "200":
- *      description: Uspešna prijava uporabnika z JWT žetonom v rezultatu.
+ *     "204":
+ *      description: Uspešna brisanje skupine.
  *     "400":
- *      description: Napaka zahteve, pri prijavi sta obvezna elektronski naslov in geslo.
- *     "401":
- *      description: Uporabnik ni potrjen.
+ *      description: Napaka zahteve, obvezni so vsi podatki.
  *     "404":
  *      description: Uporabnik s temi podatki ne obstaja.
  *     "500":

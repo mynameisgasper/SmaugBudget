@@ -145,14 +145,6 @@ const { friendGroupSchema } = require('./friendGroup');
  *    required:
  *     - paycheck
  *     - paycheckDate
- *   Error:
- *    type: object
- *    description: Podrobnosti napake
- *    properties:
- *     sporočilo:
- *      type: string
- *    required:
- *     - sporočilo
  */
 
 const userSchema = new mongoose.Schema();

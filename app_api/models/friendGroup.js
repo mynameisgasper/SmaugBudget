@@ -28,8 +28,10 @@ const friendGroupSchema = new mongoose.Schema();
  *    properties:
  *     name:
  *      type: string
+ *      description: Ime nove skupine
  *     friends:
- *      type: object
+ *      type: string
+ *      description: Podatki o prijateljih
  *      $ref: "#/components/schemas/Friend"
  *    required:
  *     - name
@@ -38,20 +40,24 @@ const friendGroupSchema = new mongoose.Schema();
  *    type: object
  *    description: Podatki za brisanje skupine
  *    properties:
- *     id:
+ *     group_id:
  *      type: string
+ *      description: ID skupino k jo želimo izbrisati
  *    required:
- *     - id
+ *     - group_id
  *   calculateBalances:
  *    type: object
  *    description: Podatki urejanje podatkov skupine
  *    properties:
- *     id:
+ *     group_id:
  *      type: string
+ *      description: ID skupine, ki jo bomo spreminjali
  *     friends:
  *      type: string
+ *      description: Novi podatki o prijateljih
+ *      $ref: "#/components/schemas/Friend"
  *     required:
- *      - id
+ *      - group_id
  *      - friends
  */
 

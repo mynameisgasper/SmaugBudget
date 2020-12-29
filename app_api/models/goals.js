@@ -32,37 +32,45 @@ const { categorySchema } = require('./categories')
  *    type: object
  *    description: Podatki za kreiranje novega cilja
  *    properties:
- *     title:
+ *     name:
  *      type: string
- *     target:
+ *      description: Ime novega cilja
+ *     amount:
  *      type: number
+ *      description: Vsota, ki jo mora uporabnik zbrati za dosego cilja
  *     date:
  *      type: string
+ *      description: Predviden rok za dosego cilja
  *     category:
  *      type: string
+ *      description: Kategorija cilja
  *    required:
- *     - title
- *     - target
+ *     - name
+ *     - amount
  *     - date
  *     - category
  *   editGoal:
  *    type: object
  *    description: Podatki za urejanje cilja
  *    properties:
- *     id:
+ *     goal_id:
  *      type: string
- *     title:
+ *     name:
  *      type: string
- *     target:
+ *      description: Novo ime cilja
+ *     amount:
  *      type: number
+ *      description: Nova vota, ki jo mora uporabnik zbrati za dosego cilja
  *     date:
  *      type: string
+ *      description: Nov predviden rok za dosego cilja
  *     category:
  *      type: string
+ *      description: Nova kategorija cilja
  *    required:
- *     - id
+ *     - goal_id
  *     - title
- *     - target
+ *     - amount
  *     - date
  *     - category
  *   addMoney:
@@ -71,8 +79,10 @@ const { categorySchema } = require('./categories')
  *    properties:
  *     title:
  *      type: string
+ *      description: Ime cilja
  *     amount:
  *      type: number
+ *      description: Vsoda dodana k prihrankom k cilju
  *    required:
  *     - title
  *     - amount
@@ -80,10 +90,11 @@ const { categorySchema } = require('./categories')
  *    type: object
  *    description: Vsi podatki za brisanje cilja
  *    properties:
- *     id:
+ *     goal_id:
  *      type: string
+ *      description: ID cilja
  *    required:
- *     - id
+ *     - goal_id
  */
 
 const goalsSchema = new mongoose.Schema();
