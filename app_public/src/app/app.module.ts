@@ -32,7 +32,6 @@ import { AccountComponent } from './common/components/account/account.component'
 import { ConfirmationComponent } from './common/components/confirmation/confirmation.component';
 import { BillsComponent } from './common/components/bills/bills.component';
 import { BillTableComponent } from './common/components/bill-table/bill-table.component';
-import { UtilitiesMemberRowComponent } from './common/components/utilities-member-row/utilities-member-row.component';
 import { RoutingModule } from './modules/routing/routing.module';
 import { InputMemberPipe } from './common/pipes/input-member.pipe';
 import { TranslateMonthNumberPipe } from './common/pipes/month-number.pipe';
@@ -40,6 +39,7 @@ import { IconTranslatorPipe } from './common/pipes/icon-translator.pipe';
 import { CurrencyTranslatorPipe } from './common/pipes/currency-translator.pipe';
 import { NotfoundComponent } from './common/components/notfound/notfound.component';
 import { DoubleDigitPipe } from './common/pipes/double-digit.pipe';
+import { ResetPasswordComponent } from './common/components/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -67,13 +67,13 @@ import { DoubleDigitPipe } from './common/pipes/double-digit.pipe';
     AccountComponent,
     BillsComponent,
     BillTableComponent,
-    UtilitiesMemberRowComponent,
     InputMemberPipe,
     TranslateMonthNumberPipe,
     IconTranslatorPipe,
     CurrencyTranslatorPipe,
     NotfoundComponent,
-    DoubleDigitPipe
+    DoubleDigitPipe,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,

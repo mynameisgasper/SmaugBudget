@@ -15,6 +15,7 @@ import { NotfoundComponent } from '../../common/components/notfound/notfound.com
 import { GoldGuardService } from '../../common/services/gold-guard.service';
 import { LoginGuardService } from '../../common/services/login-guard.service';
 import { SilverGuardService } from '../../common/services/silver-guard.service';
+import { ResetPasswordComponent } from 'src/app/common/components/reset-password/reset-password.component';
 
 const routes: Routes = [
   {
@@ -68,6 +69,10 @@ const routes: Routes = [
     path: 'bills',
     component: BillsComponent, 
     canActivate:[LoginGuardService]
+  },
+  {
+    path: 'passwordReset/:code',
+    component: ResetPasswordComponent
   },
   {
     path: '**',

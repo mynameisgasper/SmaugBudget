@@ -114,4 +114,15 @@ export class AuthenticationService {
 
     return this.http.post(url, body).toPromise().then(response => response).catch(err => err);
   }
+
+  public resetPassword(code: string, password: string) {
+    const url: string = `${this.apiUrl}/resetPassword`;
+
+    const body = {
+      code: code,
+      password: password
+    }
+
+    return this.http.post(url, body).toPromise().then(response => response).catch(err => err);
+  }
 }
