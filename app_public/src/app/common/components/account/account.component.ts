@@ -79,6 +79,9 @@ export class AccountComponent implements OnInit {
   hasChangeColorMessage: boolean = false;
   changeColorMessage: string = "";
 
+  haschangePasswordMessage: boolean = false;
+  changePasswordMessage: string = "";
+
   data = {
       "HINT": getTranslation("HINT"),
       "nameHint": getTranslation("nameHint"),
@@ -329,12 +332,8 @@ surnameRegex() {
         return 1;
     }
 }
-/*
 
 passwordStrength(element) {
-    //var button = document.getElementById("buttonup");
-    //var email1 = document.getElementById(email1up);
-    //var email2 = document.getElementById(email2up);
 
     var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
     var mediumRegex = new RegExp("^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})");
@@ -352,8 +351,8 @@ passwordStrength(element) {
      * - Include at least 1 lowercase letter AND 1 numeric character
      *  OR
      * - Include at least 1 uppercase letter AND 1 numeric character*/
-    /*
-    var pass = element;
+    
+    var pass = this.elementRef.nativeElement.querySelector('#' + element);
     if (pass.value.match(strongRegex)) {
         pass.style.setProperty("border-color", "green", "important");
         $('.tt3').toast('hide')
@@ -371,8 +370,8 @@ passwordStrength(element) {
 }
 
 passwordCheckSignUp() {
-    var pass1 = document.getElementById("newPassword");
-    var pass2 = document.getElementById("confirmPassword");
+    var pass1 = this.elementRef.nativeElement.querySelector("#newPassword");
+    var pass2 = this.elementRef.nativeElement.querySelector("#confirmPassword");
     if (getValueById("newPassword") != getValueById("confirmPassword")) {
         pass1.style.setProperty("border-color", "red", "important");
         pass2.style.setProperty("border-color", "red", "important");
@@ -386,21 +385,29 @@ passwordCheckSignUp() {
     }
 }
 
-passwordSubmit(obj) {
-    var password1 = document.getElementById('oldPassword');
-    var hashOne1 = new jsSHA("SHA-512", "TEXT", { numRounds: 1 });
-    hashOne1.update(getValueById('oldPassword'));
-    setValueById('oldPasswordHash', hashOne1.getHash("HEX"));
-
-    var password2 = document.getElementById('newPassword');
-    var hashOne2 = new jsSHA("SHA-512", "TEXT", { numRounds: 1 });
-    hashOne2.update(getValueById('newPassword'));
-    setValueById('newPasswordHash1', hashOne2.getHash("HEX"));
-
-    var password3 = document.getElementById('confirmPassword');
-    var hashOne3 = new jsSHA("SHA-512", "TEXT", { numRounds: 1 });
-    hashOne3.update(getValueById('confirmPassword'));
-    setValueById('newPasswordHash2', hashOne3.getHash("HEX"));
+removeCategory(id: string) {
+  if(confirm("Deleting category will remove all related envelopes and goals!")) {
+    this.api.deleteCategory(id, this.uID).then((response) => {
+      this.elementRef.nativeElement.querySelector('#editColor' + id ).parentNode.remove();
+      
+    }).catch((error) => {
+      this.changeColorMessage = "Failed to remove!";
+    });
+  }
 }
-  */
+
+passwordSubmit() {
+  if (this.passwordStrength("newPassword") && this.passwordCheckSignUp()) {
+    this.api.updatePassword(getValueById('oldPassword'), getValueById('newPassword'), getValueById('confirmPassword'), this.uID).then((response) => {
+      try {
+        this.elementRef.nativeElement.querySelector('#changePassowrd').classList.remove("show")
+      }
+      catch {}
+      
+    }).catch((error) => {
+      this.changePasswordMessage = "Failed to save!";
+    });
+  }
+}
+  
 }

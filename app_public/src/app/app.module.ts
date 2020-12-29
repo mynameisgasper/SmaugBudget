@@ -40,6 +40,8 @@ import { CurrencyTranslatorPipe } from './common/pipes/currency-translator.pipe'
 import { NotfoundComponent } from './common/components/notfound/notfound.component';
 import { DoubleDigitPipe } from './common/pipes/double-digit.pipe';
 import { ResetPasswordComponent } from './common/components/reset-password/reset-password.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -83,7 +85,8 @@ import { ResetPasswordComponent } from './common/components/reset-password/reset
     ChartsModule,
     FontAwesomeModule,
     ModalModule.forRoot(),
-    NgbModule
+    NgbModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   exports: [],
   providers: [],

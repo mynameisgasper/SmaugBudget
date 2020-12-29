@@ -404,6 +404,36 @@ export class ApiService {
     return this.http.get(url, options).toPromise().then(response => response).catch(err => this.parseError(err));
   }
 
+  public updatePassword(oldPass: string, newPass1: string, newPass2: string, user: string): Promise<any> {
+    const url: string = `${this.apiUrl}/changePassword`;
+
+    const options = {
+      headers: new HttpHeaders().set('Authorization', this.authorization.generateCompleteJwt()),
+    }
+    const body: object = {
+      oldPassword: oldPass,
+      newPassword1: newPass1,
+      newPassword2: newPass2,
+      id: user
+    }
+
+    return this.http.post(url, body, options).toPromise().then(response => response).catch(err => this.parseError(err));
+  }
+
+  public deleteCategory(cId: string, uId: string): Promise<any> {
+    const url: string = `${this.apiUrl}/deleteCategory`;
+
+    const options = {
+      headers: new HttpHeaders().set('Authorization', this.authorization.generateCompleteJwt()),
+    }
+    const body: object = {
+      category_id: cId,
+      user_id: uId
+    }
+
+    return this.http.post(url, body, options).toPromise().then(response => response).catch(err => this.parseError(err));
+  }
+
   public deleteGroup(friendGroupId): Promise<any> {
     if (this.authorization.getLoggedIn()) {
       const url: string = `${this.apiUrl}/deleteFriendGroup`; 

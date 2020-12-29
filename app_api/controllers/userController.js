@@ -469,9 +469,12 @@ function changePassword(req, res) {
                     res.sendStatus(500);
                 }
                 else {
-                    if (user.password === oldPassword) {
-                        user.password = newPassword1;
-                        user.passwordSalt = "tempSalt"    
+                    var hash = hasher.hashPasswordWitSalt(oldPassword, user.passwordSalt);
+                    if (user.password === hash.password) {
+                        hash = hasher.hashPassword(newPassword1);
+
+                        user.password = hash.password;
+                        user.passwordSalt = hash.passwordSalt;    
                         user.save(function callback(err) {
                             user.password = null;
                             user.passwordSalt = null;
