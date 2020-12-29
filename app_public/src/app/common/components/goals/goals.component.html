@@ -2,7 +2,7 @@
     <app-header [component]="'goals'"></app-header>
 
     <!---- Add Goal Form ---->
-    <div class="modal fade" id="addGoalForm" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
+    <div class="modal fade" #addGoalModal id="addGoalForm" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
         <div class="position-absolute w-100 p-4 d-flex flex-column align-items-end">
             <div class="w-25 toastek">
                 <div class="toast ml-auto tt4" role="alert" data-delay="3000" data-autohide="false">
@@ -89,7 +89,7 @@
     </div>
 
     <!--- Add Money Form --->
-    <div class="modal fade" id="addMoneyForm" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
+    <div class="modal fade" #addMoneyModal id="addMoneyForm" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
         <div class="position-absolute w-100 p-4 d-flex flex-column align-items-end">
             <div class="w-25 toastek">
                 <div class="toast ml-auto toastAddMoneyForm" role="alert" data-delay="1000" data-autohide="false">
@@ -112,7 +112,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form name="addExpense">
+                <form #addExpenseForm name="addExpense">
                     <input type="hidden" name="formType" value="addToGoalWithCategory">
                     <div class="modal-body">
                         <div class="ena"><label for="inputGoal">Goal</label><br />
