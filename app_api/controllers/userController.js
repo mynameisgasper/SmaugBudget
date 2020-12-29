@@ -262,7 +262,7 @@ function changeIncome(req, res) {
     }
 }
 
-function updateUser(requestBody, res, session) {
+function updateUser(req, requestBody, res, session) {
     try {
         var regex = new RegExp("^([a-zA-Z])+$");
         var regex2 = new RegExp("^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})");
@@ -270,20 +270,59 @@ function updateUser(requestBody, res, session) {
         const lastName = requestBody.lastName ? regex.test(requestBody.lastName) : true;
         const password = requestBody.password ? regex2.test(requestBody.password) : true;
 
-        if (firstName && lastName && password) {
-            User.findOne({ 'email': requestBody.email }, function(err, user) {
+        const authorization = req.headers.authorization;
+        if (authorization) {
+            const token = authorization.split(' ')[1];
+            const decodedToken = jwt_decode(token);
+
+            if (firstName && lastName && password) {
+                User.findOne({ 'email': requestBody.email }, function(err, user) {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        if (user) {
+
+                            user.firstname = requestBody.firstName ? requestBody.firstName : user.firstname;
+                            user.lastname = requestBody.lastName ? requestBody.lastName : user.lastname;
+                            user.email = requestBody.email ? requestBody.email : user.email;
+                            user.password = requestBody.password ? requestBody.password : user.password;
+                            user.language = requestBody.language ? requestBody.language : user.language;
+                            user.defaultCurrency = requestBody.defaultCurrency ? requestBody.defaultCurrency : user.defaultCurrency;
+
+                            user.save();
+                            res.status(200).json(user);
+                        } else {
+                            res.sendStatus(404);
+                        }
+                    }
+                });
+            } else {
+                res.sendStatus(404);
+            }
+        } else {
+            const response = {
+                status: 'Unauthorized'
+            }
+            res.status(401).json(response);
+        }
+    } catch (ex) {
+        res.sendStatus(500);
+    }
+}
+
+function setCurrency(req, requestBody, res, session) {
+    try {
+        const authorization = req.headers.authorization;
+        if (authorization) {
+            const token = authorization.split(' ')[1];
+            const decodedToken = jwt_decode(token);
+            User.findOne({ 'email': requestBody.email}, function (err, user) {
                 if (err) {
                     console.log(err);
                 } else {
                     if (user) {
-
-                        user.firstname = requestBody.firstName ? requestBody.firstName : user.firstname;
-                        user.lastname = requestBody.lastName ? requestBody.lastName : user.lastname;
-                        user.email = requestBody.email ? requestBody.email : user.email;
-                        user.password = requestBody.password ? requestBody.password : user.password;
-                        user.language = requestBody.language ? requestBody.language : user.language;
-                        user.defaultCurrency = requestBody.defaultCurrency ? requestBody.defaultCurrency : user.defaultCurrency;
-
+                        user.defaultCurrency = requestBody.currency ;
+                        console.log(requestBody);
                         user.save();
                         res.status(200).json(user);
                     } else {
@@ -292,30 +331,11 @@ function updateUser(requestBody, res, session) {
                 }
             });
         } else {
-            res.sendStatus(404);
-        }
-    } catch (ex) {
-        res.sendStatus(500);
-    }
-}
-
-function setCurrency(requestBody, res, session) {
-    try {
-        
-        User.findOne({ 'email': requestBody.email}, function (err, user) {
-            if (err) {
-                console.log(err);
-            } else {
-                if (user) {
-                    user.defaultCurrency = requestBody.currency ;
-                    console.log(requestBody);
-                    user.save();
-                    res.status(200).json(user);
-                } else {
-                    res.sendStatus(404);
-                }
+            const response = {
+                status: 'Unauthorized'
             }
-        });
+            res.status(401).json(response);
+        }
     } catch (ex) {
         res.sendStatus(500);
     }
@@ -364,6 +384,11 @@ function postImg(req, res) {
                     }
                 }
             });
+        } else {
+            const response = {
+                status: 'Unauthorized'
+            }
+            res.status(401).json(response);
         }
     } catch (ex) {
         res.sendStatus(500);
@@ -391,6 +416,11 @@ function getPfp(req, res) {
                     }
                 }
             });
+        } else {
+            const response = {
+                status: 'Unauthorized'
+            }
+            res.status(401).json(response);
         }
     } catch (ex) {
         res.sendStatus(500);
@@ -463,32 +493,43 @@ function changePassword(req, res) {
         var newPassword2 = req.body.newPassword2;
         var id = req.body.id;
 
-        if (newPassword1 === newPassword2) {
-            User.findById(id, function(err, user) {
-                if (err) {
-                    res.sendStatus(500);
-                }
-                else {
-                    var hash = hasher.hashPasswordWitSalt(oldPassword, user.passwordSalt);
-                    if (user.password === hash.password) {
-                        hash = hasher.hashPassword(newPassword1);
+        const authorization = req.headers.authorization;
+        if (authorization) {
+            const token = authorization.split(' ')[1];
+            const decodedToken = jwt_decode(token);
 
-                        user.password = hash.password;
-                        user.passwordSalt = hash.passwordSalt;    
-                        user.save(function callback(err) {
-                            user.password = null;
-                            user.passwordSalt = null;
-                            res.status(200).json(user);
-                        });
+            if (newPassword1 === newPassword2) {
+                User.findById(id, function(err, user) {
+                    if (err) {
+                        res.sendStatus(500);
                     }
                     else {
-                        res.sendStatus(401);
+                        var hash = hasher.hashPasswordWitSalt(oldPassword, user.passwordSalt);
+                        if (user.password === hash.password) {
+                            hash = hasher.hashPassword(newPassword1);
+
+                            user.password = hash.password;
+                            user.passwordSalt = hash.passwordSalt;    
+                            user.save(function callback(err) {
+                                user.password = null;
+                                user.passwordSalt = null;
+                                res.status(200).json(user);
+                            });
+                        }
+                        else {
+                            res.sendStatus(401);
+                        }
                     }
-                }
-            });
-        }
-        else {
-            res.sendStatus(400);
+                });
+            }
+            else {
+                res.sendStatus(400);
+            }
+        } else {
+            const response = {
+                status: 'Unauthorized'
+            }
+            res.status(401).json(response);
         }
     } catch (ex) {
         res.sendStatus(500);
@@ -553,10 +594,10 @@ module.exports = {
         getPfp(req, res);
     },
     updateUser: function(req, res) {
-        updateUser(req.body, res, req.session);
+        updateUser(req, req.body, res, req.session);
     },
     setCurrency: function(req, res) {
-        setCurrency(req.body, res, req.session);
+        setCurrency(req, req.body, res, req.session);
     },
     handlePaychecks: function() {
         handlePaychecks();
