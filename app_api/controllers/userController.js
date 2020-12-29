@@ -16,6 +16,8 @@ function register(req, res) {
         var pass1 = req.body.password1up;
         var pass2 = req.body.password2up;
 
+        console.log('registration', req.body);
+
         var regex = new RegExp("^([a-zA-Z])+$");
         var regex2 = new RegExp("^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})");
         const firstName = regex.test(req.body.nameup);
@@ -57,11 +59,13 @@ function register(req, res) {
                     if (err) {
                         if (err.code === 11000) {
                             var response = {"reson": "Account already exists!"}
+                            console.log('registration', 409);
                             res.status(409).json(response);
                             return;
                         }
                         else {
                             var response = {"reson": "Server error!"}
+                            console.log('registration', 500);
                             res.status(500).json(response);
                             return;
                         }
@@ -70,6 +74,7 @@ function register(req, res) {
                             urlCode: urlCode
                         }
                         smtp.sendCode(email1, req.body.nameup, req.body.surnameup, urlCode, confirmationCode, req.headers.host);
+                        console.log('registration', 200);
                         res.status(200).json(response);
                     }
                 });
@@ -77,11 +82,13 @@ function register(req, res) {
 
         } else {
             var response = {"reson": "Bad request!"}
+            console.log('registration', 400);
             res.status(400).json(response);
         }
     } catch (ex) {
         console.log(ex);
         var response = {"reson": "Server error!"}
+        console.log('registration', 500);
         res.status(500).json(response);
     }
 }
@@ -90,8 +97,11 @@ function login(requestBody, res) {
     try {
         var email = requestBody.email;
         var password = requestBody.password;
+        console.log(requestBody);
+        
         User.findOne({ 'email': email }, function(err, user) {
             if (err) {
+                console.log('login', 500);
                 res.sendStatus(500);
             } else {
                 if (user) {
@@ -103,16 +113,20 @@ function login(requestBody, res) {
                         var response = {
                             token: user.generateJwt()
                         }
+                        console.log('login', 200);
                         res.status(200).json(response);
                     } else {
+                        console.log('login', 401);
                         res.sendStatus(401);
                     }
                 } else {
+                    console.log('login', 401);
                     res.sendStatus(404);
                 }
             }
         });
     } catch (ex) {
+        console.log('login', 500);
         res.sendStatus(500);
     }
 }
