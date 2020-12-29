@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "description": "SP group project",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
+        "test": "mocha test --bail --reporter mochawesome --reporter-options autoOpen=true,reportDir=test/report,reportFilename=report,json=false",
         "build": "cd app_public && ng build --prod --output-path build && cd ..",
         "start": "node ./bin/www",
         "atlas-1": "docker exec -it sp-smaugbudget-mongodb bash -c 'mongodump -h localhost -d SmaugBudget -o ./'; docker exec -it sp-smaugbudget-mongodb bash -c 'mongorestore --host smaugbudget-shard-00-00.tv1kk.mongodb.net:27017,smaugbudget-shard-00-01.tv1kk.mongodb.net:27017,smaugbudget-shard-00-02.tv1kk.mongodb.net:27017 --ssl --username user --authenticationDatabase admin -d SmaugBudget ./SmaugBudget'; docker exec -it sp-smaugbudget-mongodb bash -c 'rm -rf ./SmaugBudget''"
@@ -50,5 +50,12 @@
         "swagger-jsdoc": "^6.0.0",
         "swagger-ui-express": "^4.1.6",
         "xmlhttprequest": "^1.8.0"
+    },
+    "devDependencies": {
+        "chai": "^4.2.0",
+        "chromedriver": "^87.0.4",
+        "mocha": "^8.2.1",
+        "mochawesome": "^6.2.1",
+        "selenium-webdriver": "^4.0.0-alpha.8"
     }
 }

@@ -3,5 +3,6 @@ node_modules/
 generated/
 uploads/*
 !uploads/README
+test/report
 
 .vscode/launch.json
