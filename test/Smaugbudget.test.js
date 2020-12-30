@@ -139,7 +139,7 @@ function savePageSource(browser, filename) {
       //Finished
       describe("Login", function() {
         context("Fail login", function() {
-          this.timeout(30 * 1000);
+          this.timeout(60 * 1000);
           before(() => { browser.get(applicationUrl); });
   
           it("Open modal", async () => {
@@ -198,7 +198,7 @@ function savePageSource(browser, filename) {
             let opened = await browser.findElements(By.xpath("//div[contains(@class, 'modal-backdrop fade show')]"));
             expect(opened).to.not.be.empty;
 
-            await new Promise(r => setTimeout(r, 1000));
+            await new Promise(r => setTimeout(r, 5000));
           });
 
           it("Enter data", async () => {
@@ -217,13 +217,154 @@ function savePageSource(browser, filename) {
             let loginButton = await browser.findElements(By.xpath("//input[contains(@value, 'Login')]"));
             expect(loginButton).to.not.be.empty;
             loginButton[0].click();
-            await new Promise(r => setTimeout(r, 1000));
+            await new Promise(r => setTimeout(r, 5000));
 
             var url = await browser.getCurrentUrl();
             expect(url).to.include('dashboard');
           });
         });
       });
+
+      describe("Envelope", function() {
+        this.timeout(30 * 1000);
+
+        context("Fail saving existing envelope", async () => {
+          this.timeout(30 * 1000);
+          before(() => { browser.get(applicationUrl); });
+  
+          it("Open envelopes tab", async () => {
+            let envelopesButton = await browser.findElements(By.xpath("//a[contains(@routerlink, '../envelopes')]"));
+            expect(envelopesButton).to.not.be.empty;
+            envelopesButton[0].click();
+            await new Promise(r => setTimeout(r, 5000));
+  
+            var url = await browser.getCurrentUrl();
+            expect(url).to.include('envelopes');
+          });
+
+          it("Open modal", async () => {
+            let addEnvelopesButton = await browser.findElements(By.xpath("//button[contains(text(), ' Add Envelope ')]"));
+            expect(addEnvelopesButton).to.not.be.empty;
+            addEnvelopesButton[0].click();
+            await new Promise(r => setTimeout(r, 1000));
+            let opened = await browser.findElements(By.xpath("//div[contains(@class, 'modal-backdrop fade show')]"));
+            expect(opened).to.not.be.empty;
+          });
+
+          it("Enter data", async () => {
+            let categoryField = await browser.findElements(By.xpath("//select[contains(@name, 'chooseCategoryEnvelope')]"));
+            expect(categoryField).to.not.be.empty;
+            categoryField[0].click();
+            await new Promise(r => setTimeout(r, 1000));
+
+            let categoryOptionField = await browser.findElements(By.xpath("//option[contains(@value, 'Car')]"));
+            expect(categoryOptionField).to.not.be.empty;
+            categoryOptionField[0].click();
+            await new Promise(r => setTimeout(r, 1000));
+
+            let ammountField = await browser.findElements(By.xpath("//input[contains(@name, 'inputAmount')]"));
+            expect(ammountField).to.not.be.empty;
+            ammountField[0].click();
+            await new Promise(r => setTimeout(r, 1000));
+
+            ammountField[0].sendKeys("250");
+            await new Promise(r => setTimeout(r, 1000));
+          });
+
+          it("Save envelope", async () => {
+            let addEnvelopesButton = await browser.findElements(By.xpath("//button[contains(@id, 'buttonAddEnvelopes')]"));
+            expect(addEnvelopesButton).to.not.be.empty;
+            addEnvelopesButton[0].click();
+            await new Promise(r => setTimeout(r, 1000));
+            await new Promise(r => setTimeout(r, 1000));
+
+            let opened = await browser.findElements(By.xpath("//div[contains(@class, 'modal-backdrop fade show')]"));
+            expect(opened).to.not.be.empty;
+            await new Promise(r => setTimeout(r, 1000));
+          });
+        });
+
+        context("Delete envelope", async () => {
+          this.timeout(30 * 1000);
+          before(() => { browser.get(applicationUrl); });  
+
+          it("Open envelopes tab", async () => {
+            let envelopesButton = await browser.findElements(By.xpath("//a[contains(@routerlink, '../envelopes')]"));
+            expect(envelopesButton).to.not.be.empty;
+            envelopesButton[0].click();
+            await new Promise(r => setTimeout(r, 5000));
+  
+            var url = await browser.getCurrentUrl();
+            expect(url).to.include('envelopes');
+            await new Promise(r => setTimeout(r, 2000));
+          });
+
+          it("Delete envelope", async () => {
+            let deleteButton = await browser.findElements(By.xpath("//button[contains(@class, 'btn edit-btn')]"));
+            expect(deleteButton).to.not.be.empty;
+            deleteButton[0].click();
+            await new Promise(r => setTimeout(r, 2000));
+            await browser.switchTo().alert().accept();
+          });
+        });
+
+        context("Save new envelope", async () => {
+          this.timeout(30 * 1000);
+          before(() => { browser.get(applicationUrl); });
+  
+          it("Open envelopes tab", async () => {
+            let envelopesButton = await browser.findElements(By.xpath("//a[contains(@routerlink, '../envelopes')]"));
+            expect(envelopesButton).to.not.be.empty;
+            envelopesButton[0].click();
+            await new Promise(r => setTimeout(r, 2000));
+  
+            var url = await browser.getCurrentUrl();
+            expect(url).to.include('envelopes');
+          });
+
+          it("Open modal", async () => {
+            let addEnvelopesButton = await browser.findElements(By.xpath("//button[contains(text(), ' Add Envelope ')]"));
+            expect(addEnvelopesButton).to.not.be.empty;
+            addEnvelopesButton[0].click();
+            await new Promise(r => setTimeout(r, 1000));
+            let opened = await browser.findElements(By.xpath("//div[contains(@class, 'modal-backdrop fade show')]"));
+            expect(opened).to.not.be.empty;
+          });
+
+          it("Enter data", async () => {
+            let categoryField = await browser.findElements(By.xpath("//select[contains(@name, 'chooseCategoryEnvelope')]"));
+            expect(categoryField).to.not.be.empty;
+            categoryField[0].click();
+            await new Promise(r => setTimeout(r, 1000));
+
+            let categoryOptionField = await browser.findElements(By.xpath("//option[contains(@value, 'Car')]"));
+            expect(categoryOptionField).to.not.be.empty;
+            categoryOptionField[0].click();
+            await new Promise(r => setTimeout(r, 1000));
+
+            let ammountField = await browser.findElements(By.xpath("//input[contains(@name, 'inputAmount')]"));
+            expect(ammountField).to.not.be.empty;
+            ammountField[0].click();
+            await new Promise(r => setTimeout(r, 1000));
+
+            ammountField[0].sendKeys("100");
+            await new Promise(r => setTimeout(r, 1000));
+          });
+
+          it("Save envelope", async () => {
+            let addEnvelopesButton = await browser.findElements(By.xpath("//button[contains(@id, 'buttonAddEnvelopes')]"));
+            expect(addEnvelopesButton).to.not.be.empty;
+            addEnvelopesButton[0].click();
+            await new Promise(r => setTimeout(r, 2000));
+
+            let opened = await browser.findElements(By.xpath("//div[contains(@class, 'modal-backdrop fade show')]"));
+            expect(opened).to.not.be.empty;
+            await new Promise(r => setTimeout(r, 5000));
+          });
+        });
+      });
+
+      
       //To be tested
       describe("Add new goal", function() {
         context("Failed to create new goal", function() {
@@ -357,8 +498,8 @@ function savePageSource(browser, filename) {
             expect(newGoal).to.not.be.empty;
             //success
 
-          });
-            */
+          });*/
+            
         });
       });
       
