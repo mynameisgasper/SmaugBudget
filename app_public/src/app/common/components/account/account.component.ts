@@ -6,6 +6,7 @@ import { map, startWith } from 'rxjs/operators';
 import { ApiService } from '../../services/api.service';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication.service';
+import { ModalDirective } from 'ngx-bootstrap/modal';
 declare var $:any;
 
 declare var getTranslation: any;
@@ -68,6 +69,7 @@ export class AccountComponent implements OnInit {
         this.router.navigate(['']);  
       });
   }
+  @ViewChild('changePassowrd') modal: ModalDirective;
   
   hasUrl = false;
 
@@ -419,7 +421,7 @@ passwordSubmit() {
   if (this.passwordStrength("newPassword") && this.passwordCheckSignUp()) {
     this.api.updatePassword(getValueById('oldPassword'), getValueById('newPassword'), getValueById('confirmPassword')).then((response) => {
       try {
-        this.elementRef.nativeElement.querySelector('#changePassowrd').classList.remove("show")
+        this.modal.hide();
       }
       catch {}
       
