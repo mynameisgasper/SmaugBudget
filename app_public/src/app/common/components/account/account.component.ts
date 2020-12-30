@@ -93,6 +93,9 @@ export class AccountComponent implements OnInit {
   haschangePasswordMessage: boolean = false;
   changePasswordMessage: string = "";
 
+  haschangePfpMessage: boolean = false;
+  changePfpMessage: string = "";
+
   data = {
       "HINT": getTranslation("HINT"),
       "nameHint": getTranslation("nameHint"),
@@ -209,7 +212,7 @@ export class AccountComponent implements OnInit {
     
     this.api.setLanguage(language).then((response) => {
         this.refreshLanguage(response.language);
-        
+        this.hasChangeLanguageMessage = false;
       }).catch((error) => {
         this.changeLanguageMessage = 'Failed to save!';
       });
@@ -235,8 +238,10 @@ getImage() {
 }
 
 changeColor(category_id: string) {
+  this.hasChangeColorMessage = true;
+  this.changeColorMessage = 'Saving color';
     this.api.changeColor(category_id, getValueById("color" + category_id)).then((response) => {
-        
+      this.hasChangeColorMessage = false;
         
       }).catch((error) => {
         this.changeColorMessage = 'Failed to save!';
@@ -249,7 +254,7 @@ changeCurrency(curr: string) {
     this.changeCurrencyMessage = 'Saving currency';
     
     this.api.setDefaultCurrency(curr).then((response) => {
-        
+      this.hasChangeCurrencyMessage = false;
       }).catch((error) => {
         this.changeCurrencyMessage = 'Failed to save!';
 
@@ -276,7 +281,7 @@ updateUserInfo() {
           }
         }
         catch {}
-        
+        this.hasChangeUserMessage = false;
       }).catch((error) => {
         this.changeUserMessage = "Failed to save!";
       });
@@ -294,11 +299,15 @@ readURL(input: FileList) {
 }
 
 uploadFileToActivity() {
+  this.haschangePfpMessage = true;
+  this.changePfpMessage = 'Saving image';
     this.api.postFile(this.fileToUpload).then((response) => {
         console.log(response);
         this.pfpImg = this.getImage();
+        this.haschangePfpMessage = false;
       }).catch((error) => {
         console.log(error);
+        this.changePfpMessage = 'Failed to upload!';
       });
 }
 
@@ -398,9 +407,11 @@ passwordCheckSignUp() {
 
 removeCategory(id: string) {
   if(confirm("Deleting category will remove all related envelopes and goals!")) {
+    this.hasChangeColorMessage = true;
+    this.changeColorMessage = "Removing category";
     this.api.deleteCategory(id).then((response) => {
       this.elementRef.nativeElement.querySelector('#editColor' + id ).parentNode.remove();
-      
+      this.hasChangeColorMessage = false;
     }).catch((error) => {
       this.changeColorMessage = "Failed to remove!";
     });
@@ -421,8 +432,11 @@ removeUser() {
  
 passwordSubmit() {
   if (this.passwordStrength("newPassword") && this.passwordCheckSignUp()) {
+    this.haschangePasswordMessage = true;
+    this.changePasswordMessage = "Saving password!";
     this.api.updatePassword(getValueById('oldPassword'), getValueById('newPassword'), getValueById('confirmPassword')).then((response) => {
       try {
+        this.haschangePasswordMessage = false;
         this.modal.hide();
       }
       catch {}
