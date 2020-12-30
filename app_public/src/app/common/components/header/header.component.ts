@@ -7,6 +7,7 @@ import { ApiService } from '../../services/api.service';
 declare var removeForLogout: any;
 declare var loadDarkMode: any;
 declare var toggleDarkMode: any;
+declare var getTranslation: any;
 
 @Component({
   selector: 'app-header',
@@ -29,6 +30,26 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.pfpImg = this.getImage();
     loadDarkMode();
+  }
+
+  lang = {
+    "logout": getTranslation("logout"),
+    "saveChanges": getTranslation("saveChanges"),
+    "name": getTranslation("name"),
+    "edit": getTranslation("edit"),
+    "close": getTranslation("close"),
+    "remove": getTranslation("remove"),
+    "DASHBOARD": getTranslation("DASHBOARD"),
+    "ENVELOPES": getTranslation("ENVELOPES"),
+    "GOALS": getTranslation("GOALS"),
+    "BILLS": getTranslation("BILLS"),
+    "HISTORY": getTranslation("HISTORY"),
+    "UTILITIES": getTranslation("UTILITIES"),
+    "user": getTranslation("user"),
+    "settings": getTranslation("settings"),
+    "appearance": getTranslation("appearance"),
+    "light": getTranslation("light"),
+    "dark": getTranslation("dark")
   }
 
   logout(): void {
