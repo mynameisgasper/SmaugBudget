@@ -10,7 +10,7 @@ export class ApiService {
 
   constructor(private http: HttpClient, private authorization: AuthenticationService) { }
 
-  private apiUrl = 'http://localhost:8080/api';
+  private apiUrl = `${window.location.href.substr(0, window.location.href.lastIndexOf('/')).replace('4200', '8080')}/api`;
   private response: any;
 
   public deleteData(): Promise<any> {
@@ -322,12 +322,11 @@ export class ApiService {
     }
   }
 
-  public setDefaultCurrency(email, currency): Promise<any> {
+  public setDefaultCurrency(currency): Promise<any> {
     if (this.authorization.getLoggedIn()) {
-      console.log(email);
+      
       const url: string = `${this.apiUrl}/updateUser`; 
       const body = {
-        'email': email,
         'defaultCurrency': currency
       }
       const options = {
@@ -340,12 +339,11 @@ export class ApiService {
     }
   }
 
-  public setLanguage(email, language): Promise<any> {
+  public setLanguage(language): Promise<any> {
     if (this.authorization.getLoggedIn()) {
-      console.log(email);
+      
       const url: string = `${this.apiUrl}/updateUser`; 
       const body = {
-        'email': email,
         'language': language
       }
       const options = {
@@ -358,12 +356,11 @@ export class ApiService {
     }
   }
 
-  public postFile(email, fileToUpload: File): Promise<any> {
+  public postFile(fileToUpload: File): Promise<any> {
     if (this.authorization.getLoggedIn()) {
-      console.log(email);
+      
       const url: string = `${this.apiUrl}/uploadPfp`; 
       const body = {
-        'email': email
         
       }
       const formData: FormData = new FormData();
@@ -378,7 +375,7 @@ export class ApiService {
     }
   }
 
-  public changeColor(category: string, color: string, user: string): Promise<any> {
+  public changeColor(category: string, color: string): Promise<any> {
     const url: string = `${this.apiUrl}/changeColorCategory`;
 
     const options = {
@@ -386,14 +383,13 @@ export class ApiService {
     }
     const body: object = {
       colorPicker: color,
-      category_id: category,
-      user_id: user
+      category_id: category
     }
 
     return this.http.post(url, body, options).toPromise().then(response => response).catch(err => this.parseError(err));
   }
 
-  public getPfp(email: string) : Promise<any> {
+  public getPfp() : Promise<any> {
     const url: string = `${this.apiUrl}/getPfp`;
 
     const options = {
@@ -404,7 +400,7 @@ export class ApiService {
     return this.http.get(url, options).toPromise().then(response => response).catch(err => this.parseError(err));
   }
 
-  public updatePassword(oldPass: string, newPass1: string, newPass2: string, user: string): Promise<any> {
+  public updatePassword(oldPass: string, newPass1: string, newPass2: string): Promise<any> {
     const url: string = `${this.apiUrl}/changePassword`;
 
     const options = {
@@ -413,22 +409,20 @@ export class ApiService {
     const body: object = {
       oldPassword: oldPass,
       newPassword1: newPass1,
-      newPassword2: newPass2,
-      id: user
+      newPassword2: newPass2
     }
 
     return this.http.post(url, body, options).toPromise().then(response => response).catch(err => this.parseError(err));
   }
 
-  public deleteCategory(cId: string, uId: string): Promise<any> {
+  public deleteCategory(cId: string): Promise<any> {
     const url: string = `${this.apiUrl}/deleteCategory`;
 
     const options = {
       headers: new HttpHeaders().set('Authorization', this.authorization.generateCompleteJwt()),
     }
     const body: object = {
-      category_id: cId,
-      user_id: uId
+      category_id: cId
     }
 
     return this.http.post(url, body, options).toPromise().then(response => response).catch(err => this.parseError(err));
