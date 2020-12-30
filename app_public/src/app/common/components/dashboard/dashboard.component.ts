@@ -45,7 +45,7 @@ export class DashboardComponent implements OnInit {
   incomeModalPlaceholderIncome = getTranslation("incomeModalPlaceholderIncome");
   incomeModalPlaceholderDate = getTranslation("incomeModalPlaceholderDate");
   incomeModalSaveButton = getTranslation("incomeModalSaveButton");
-  incomeModalCloseButton = getTranslation("incomeModalCloseButton");;
+  incomeModalCloseButton = getTranslation("incomeModalCloseButton");
   chartData: Array<Number> = [];
   chartColors: Array<Object> = [];
   chartLabels: Array<String> = [];
@@ -64,10 +64,29 @@ export class DashboardComponent implements OnInit {
       this.currency = user.defaultCurrency;
       this.incomeLastMonth = user.paycheckLastMonth;
       this.expensesLastMonth = this.getTotalCost(this.getLastMonthExpenses(user.expense, user.paycheckDate));
+      this.refreshLanguage(result.language);
     }).catch(error => {
       this.authentication.logout();
       this.router.navigate(['']);
     });
+  }
+
+  refreshLanguage(language: string) {
+    setLanguage(language);
+        
+    this.message = getTranslation("messageDashboard");
+    this.welcomeMessage = getTranslation("welcomeMessageDashboard");
+    this.overview = getTranslation("overview");
+    this.incomeRow = getTranslation("incomeRow");
+    this.expensesRow = getTranslation("expensesRow");
+    this.balanceRow = getTranslation("balanceRow");
+    this.analyticsField = getTranslation("analyticsField");
+    this.noData = getTranslation("noData");
+    this.incomeModalTitle = getTranslation("incomeModalTitle");
+    this.incomeModalPlaceholderIncome = getTranslation("incomeModalPlaceholderIncome");
+    this.incomeModalPlaceholderDate = getTranslation("incomeModalPlaceholderDate");
+    this.incomeModalSaveButton = getTranslation("incomeModalSaveButton");
+    this.incomeModalCloseButton = getTranslation("incomeModalCloseButton");
   }
 
   amountDashboard1(ammountField: any): number {
