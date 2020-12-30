@@ -396,6 +396,17 @@ removeCategory(id: string) {
   }
 }
 
+removeUser() {
+  if(confirm("Do you want to remove your account?")) {
+    this.api.deleteUser().then((response) => {
+      this.router.navigate(['']);
+      
+    }).catch((error) => {
+      this.changeColorMessage = "Failed to remove!";
+    });
+  }
+}
+
 passwordSubmit() {
   if (this.passwordStrength("newPassword") && this.passwordCheckSignUp()) {
     this.api.updatePassword(getValueById('oldPassword'), getValueById('newPassword'), getValueById('confirmPassword')).then((response) => {

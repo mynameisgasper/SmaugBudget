@@ -559,6 +559,35 @@ function handlePaycheck(user) {
     }
 }
 
+function deleteUser(req, res) {
+    try {
+        const authorization = req.headers.authorization;
+        if (authorization) {
+            const token = authorization.split(' ')[1];
+            const decodedToken = jwt_decode(token);
+
+            User.findById(decodedToken._id, function(err, user) {
+                if (err) {
+                    res.sendStatus(404);
+                }
+                else {
+  
+                    user.deleteOne(function callback(err) {
+                        res.status(200).json("deleted");
+                    });
+                }
+            });
+        } else {
+            const response = {
+                status: 'Unauthorized'
+            }
+            res.status(401).json(response);
+        }
+    } catch (ex) {
+        res.sendStatus(500);
+    }
+}
+
 module.exports = {
     register: function(req, res) {
         register(req, res);
@@ -600,5 +629,8 @@ module.exports = {
     },
     handlePaychecks: function() {
         handlePaychecks();
+    },
+    deleteUser: function(req, res) {
+        deleteUser(req, res);
     }
 }

@@ -64,6 +64,7 @@
             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                 <b *ngIf="hasChangeUserMessage">{{changeUserMessage}}</b>
                 <button type="submit" id="userInfoButton" (click)="disableButton()" class="btn btn-primary" style="float: right;">{{data.saveChanges}}</button>
+                <button type="button" id="userRemoveButton" (click)="removeUser()" class="btn btn-secondary" style="float: right;">Delete account</button>
             </div>
         </div>
         </form>

@@ -398,6 +398,10 @@ router.post('/setCurrency', authentication, (req, res) => {
 });
 */
 
+router.post('/deleteUser', authentication, (req, res) => {
+    user.deleteUser(req, res);
+});
+
 /**
  * @swagger
  *  /addEnvelope:
