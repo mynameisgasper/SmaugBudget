@@ -248,10 +248,10 @@ export class DashboardComponent implements OnInit {
     var totalEmptyEnvelopes = this.getTotalEmptyEnvelopes(envelopes, month);
 
     if (totalAlmostEmptyEnvelopes > 0) {
-      envelopesAlerts.push(new Alert('alert-warning', 'ENVELOPES', totalAlmostEmptyEnvelopes + ' almost empty'));
+      envelopesAlerts.push(new Alert('alert-warning', getTranslation("alertName1"), totalAlmostEmptyEnvelopes + getTranslation("alertText1")));
     }
     if (totalEmptyEnvelopes > 0) {
-        envelopesAlerts.push(new Alert('alert-danger', 'ENVELOPES', totalEmptyEnvelopes + ' empty'));
+        envelopesAlerts.push(new Alert('alert-danger', getTranslation("alertName1"), totalEmptyEnvelopes + getTranslation("alertText1_1")));
     }
 
     return envelopesAlerts;
@@ -262,7 +262,7 @@ export class DashboardComponent implements OnInit {
 
     const nearBills = this.getBillsInTheNext7Days(bills);
     if (nearBills.length > 0) {
-      billsAlerts.push(new Alert('alert-warning', 'BILLS', nearBills.length + ' bill to pay this week'));
+      billsAlerts.push(new Alert('alert-warning', getTranslation("alertName2"), nearBills.length + getTranslation("alertText2")));
     }
     return billsAlerts;
   }
@@ -270,7 +270,7 @@ export class DashboardComponent implements OnInit {
   generateGoalsAlerts(goals) {
     var count = this.goalsCompleted(goals);
     if (count) {
-        return [new Alert('alert-success', 'GOALS', count + ' goal completed')];
+        return [new Alert('alert-success', getTranslation("alertName3"), count + getTranslation("alertText3"))];
     } else {
         return [];
     }
@@ -333,12 +333,12 @@ export class DashboardComponent implements OnInit {
 
     if (mostMoneySpentOn && mostTimesPurchased) {
         return [{
-                rowName: 'Most money spent on',
+                rowName: getTranslation("analyticsRowName1"),
                 color: mostMoneySpentOn.color,
                 category: mostMoneySpentOn.name
             },
             {
-                rowName: 'Most times purchased',
+                rowName: getTranslation("analyticsRowName2"),
                 color: mostTimesPurchased.color,
                 category: mostTimesPurchased.name
             }
