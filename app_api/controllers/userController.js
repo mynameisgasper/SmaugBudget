@@ -16,8 +16,6 @@ function register(req, res) {
         var pass1 = req.body.password1up;
         var pass2 = req.body.password2up;
 
-        console.log('registration', req.body);
-
         var regex = new RegExp("^([a-zA-Z])+$");
         var regex2 = new RegExp("^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})");
         const firstName = regex.test(req.body.nameup);
@@ -59,13 +57,11 @@ function register(req, res) {
                     if (err) {
                         if (err.code === 11000) {
                             var response = {"reson": "Account already exists!"}
-                            console.log('registration', 409);
                             res.status(409).json(response);
                             return;
                         }
                         else {
                             var response = {"reson": "Server error!"}
-                            console.log('registration', 500);
                             res.status(500).json(response);
                             return;
                         }
@@ -74,7 +70,6 @@ function register(req, res) {
                             urlCode: urlCode
                         }
                         smtp.sendCode(email1, req.body.nameup, req.body.surnameup, urlCode, confirmationCode, req.headers.host);
-                        console.log('registration', 200);
                         res.status(200).json(response);
                     }
                 });
@@ -82,13 +77,11 @@ function register(req, res) {
 
         } else {
             var response = {"reson": "Bad request!"}
-            console.log('registration', 400);
             res.status(400).json(response);
         }
     } catch (ex) {
         console.log(ex);
         var response = {"reson": "Server error!"}
-        console.log('registration', 500);
         res.status(500).json(response);
     }
 }
@@ -97,11 +90,8 @@ function login(requestBody, res) {
     try {
         var email = requestBody.email;
         var password = requestBody.password;
-        console.log(requestBody);
-        
         User.findOne({ 'email': email }, function(err, user) {
             if (err) {
-                console.log('login', 500);
                 res.sendStatus(500);
             } else {
                 if (user) {
@@ -113,20 +103,16 @@ function login(requestBody, res) {
                         var response = {
                             token: user.generateJwt()
                         }
-                        console.log('login', 200);
                         res.status(200).json(response);
                     } else {
-                        console.log('login', 401);
                         res.sendStatus(401);
                     }
                 } else {
-                    console.log('login', 401);
                     res.sendStatus(404);
                 }
             }
         });
     } catch (ex) {
-        console.log('login', 500);
         res.sendStatus(500);
     }
 }
@@ -276,13 +262,13 @@ function changeIncome(req, res) {
     }
 }
 
-function updateUser(req, requestBody, res, session) {
+function updateUser(req, res) {
     try {
         var regex = new RegExp("^([a-zA-Z])+$");
         var regex2 = new RegExp("^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})");
-        const firstName = requestBody.firstName ? regex.test(requestBody.firstName) : true;
-        const lastName = requestBody.lastName ? regex.test(requestBody.lastName) : true;
-        const password = requestBody.password ? regex2.test(requestBody.password) : true;
+        const firstName = req.body.firstName ? regex.test(req.body.firstName) : true;
+        const lastName = req.body.lastName ? regex.test(req.body.lastName) : true;
+        const password = req.body.password ? regex2.test(req.body.password) : true;
 
         const authorization = req.headers.authorization;
         if (authorization) {
@@ -290,18 +276,18 @@ function updateUser(req, requestBody, res, session) {
             const decodedToken = jwt_decode(token);
 
             if (firstName && lastName && password) {
-                User.findOne({ 'email': requestBody.email }, function(err, user) {
+                User.findById(decodedToken._id, function(err, user) {
                     if (err) {
                         console.log(err);
                     } else {
                         if (user) {
 
-                            user.firstname = requestBody.firstName ? requestBody.firstName : user.firstname;
-                            user.lastname = requestBody.lastName ? requestBody.lastName : user.lastname;
-                            user.email = requestBody.email ? requestBody.email : user.email;
-                            user.password = requestBody.password ? requestBody.password : user.password;
-                            user.language = requestBody.language ? requestBody.language : user.language;
-                            user.defaultCurrency = requestBody.defaultCurrency ? requestBody.defaultCurrency : user.defaultCurrency;
+                            user.firstname = req.body.firstName ? req.body.firstName : user.firstname;
+                            user.lastname = req.body.lastName ? req.body.lastName : user.lastname;
+                            user.email = req.body.email ? req.body.email : user.email;
+                            user.password = req.body.password ? req.body.password : user.password;
+                            user.language = req.body.language ? req.body.language : user.language;
+                            user.defaultCurrency = req.body.defaultCurrency ? req.body.defaultCurrency : user.defaultCurrency;
 
                             user.save();
                             res.status(200).json(user);
@@ -324,19 +310,19 @@ function updateUser(req, requestBody, res, session) {
     }
 }
 
-function setCurrency(req, requestBody, res, session) {
+function setCurrency(req, res) {
     try {
         const authorization = req.headers.authorization;
         if (authorization) {
             const token = authorization.split(' ')[1];
             const decodedToken = jwt_decode(token);
-            User.findOne({ 'email': requestBody.email}, function (err, user) {
+            User.findById(decodedToken._id, function (err, user) {
                 if (err) {
                     console.log(err);
                 } else {
                     if (user) {
-                        user.defaultCurrency = requestBody.currency ;
-                        console.log(requestBody);
+                        user.defaultCurrency = req.body.currency ;
+                        console.log(req.body);
                         user.save();
                         res.status(200).json(user);
                     } else {
@@ -505,7 +491,6 @@ function changePassword(req, res) {
         var oldPassword = req.body.oldPassword;
         var newPassword1 = req.body.newPassword1;
         var newPassword2 = req.body.newPassword2;
-        var id = req.body.id;
 
         const authorization = req.headers.authorization;
         if (authorization) {
@@ -513,7 +498,7 @@ function changePassword(req, res) {
             const decodedToken = jwt_decode(token);
 
             if (newPassword1 === newPassword2) {
-                User.findById(id, function(err, user) {
+                User.findById(decodedToken._id, function(err, user) {
                     if (err) {
                         res.sendStatus(500);
                     }
@@ -574,6 +559,35 @@ function handlePaycheck(user) {
     }
 }
 
+function deleteUser(req, res) {
+    try {
+        const authorization = req.headers.authorization;
+        if (authorization) {
+            const token = authorization.split(' ')[1];
+            const decodedToken = jwt_decode(token);
+
+            User.findById(decodedToken._id, function(err, user) {
+                if (err) {
+                    res.sendStatus(404);
+                }
+                else {
+  
+                    user.deleteOne(function callback(err) {
+                        res.status(200).json("deleted");
+                    });
+                }
+            });
+        } else {
+            const response = {
+                status: 'Unauthorized'
+            }
+            res.status(401).json(response);
+        }
+    } catch (ex) {
+        res.sendStatus(500);
+    }
+}
+
 module.exports = {
     register: function(req, res) {
         register(req, res);
@@ -608,12 +622,15 @@ module.exports = {
         getPfp(req, res);
     },
     updateUser: function(req, res) {
-        updateUser(req, req.body, res, req.session);
+        updateUser(req, res);
     },
     setCurrency: function(req, res) {
-        setCurrency(req, req.body, res, req.session);
+        setCurrency(req, res);
     },
     handlePaychecks: function() {
         handlePaychecks();
+    },
+    deleteUser: function(req, res) {
+        deleteUser(req, res);
     }
 }

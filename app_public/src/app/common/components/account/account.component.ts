@@ -196,7 +196,7 @@ export class AccountComponent implements OnInit {
     this.hasChangeLanguageMessage = true;
     this.changeLanguageMessage = 'Saving language';
     
-    this.api.setLanguage(getValueById("emailInput"), language).then((response) => {
+    this.api.setLanguage(language).then((response) => {
         this.refreshLanguage(response.language);
         
       }).catch((error) => {
@@ -205,7 +205,7 @@ export class AccountComponent implements OnInit {
 }
 
 getImage() {
-    this.api.getPfp(this.email).then((image) => {
+    this.api.getPfp().then((image) => {
         let reader = new FileReader();
         reader.addEventListener("load",
         () => {
@@ -224,7 +224,7 @@ getImage() {
 }
 
 changeColor(category_id: string) {
-    this.api.changeColor(category_id, getValueById("color" + category_id), this.uID).then((response) => {
+    this.api.changeColor(category_id, getValueById("color" + category_id)).then((response) => {
         
         
       }).catch((error) => {
@@ -237,7 +237,7 @@ changeCurrency(curr: string) {
     this.hasChangeCurrencyMessage = true;
     this.changeCurrencyMessage = 'Saving currency';
     
-    this.api.setDefaultCurrency(getValueById("emailInput"), curr).then((response) => {
+    this.api.setDefaultCurrency(curr).then((response) => {
         
       }).catch((error) => {
         this.changeCurrencyMessage = 'Failed to save!';
@@ -283,7 +283,7 @@ readURL(input: FileList) {
 }
 
 uploadFileToActivity() {
-    this.api.postFile(getValueById("emailInput"), this.fileToUpload).then((response) => {
+    this.api.postFile(this.fileToUpload).then((response) => {
         console.log(response);
         this.pfpImg = this.getImage();
       }).catch((error) => {
@@ -387,8 +387,19 @@ passwordCheckSignUp() {
 
 removeCategory(id: string) {
   if(confirm("Deleting category will remove all related envelopes and goals!")) {
-    this.api.deleteCategory(id, this.uID).then((response) => {
+    this.api.deleteCategory(id).then((response) => {
       this.elementRef.nativeElement.querySelector('#editColor' + id ).parentNode.remove();
+      
+    }).catch((error) => {
+      this.changeColorMessage = "Failed to remove!";
+    });
+  }
+}
+
+removeUser() {
+  if(confirm("Do you want to remove your account?")) {
+    this.api.deleteUser().then((response) => {
+      this.router.navigate(['']);
       
     }).catch((error) => {
       this.changeColorMessage = "Failed to remove!";
@@ -398,7 +409,7 @@ removeCategory(id: string) {
 
 passwordSubmit() {
   if (this.passwordStrength("newPassword") && this.passwordCheckSignUp()) {
-    this.api.updatePassword(getValueById('oldPassword'), getValueById('newPassword'), getValueById('confirmPassword'), this.uID).then((response) => {
+    this.api.updatePassword(getValueById('oldPassword'), getValueById('newPassword'), getValueById('confirmPassword')).then((response) => {
       try {
         this.elementRef.nativeElement.querySelector('#changePassowrd').classList.remove("show")
       }

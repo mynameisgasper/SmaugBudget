@@ -83,7 +83,7 @@ export class HomeComponent implements OnInit {
         
         this.router.navigate(['confirm', response.urlCode]);
       }).catch((error) => {
-        this.registrationMessage = error;
+        this.registrationMessage = "Registration failed!";
         console.log(error);
       });
     }
@@ -122,7 +122,7 @@ export class HomeComponent implements OnInit {
         }
       }).catch((error) => {
         this.api.userLoggedIn = null;
-        this.loginMessage = error;
+        this.loginMessage = "Login failed!";
         console.log(error);
       })
     }
