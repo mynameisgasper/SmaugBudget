@@ -10,7 +10,7 @@ export class ApiService {
 
   constructor(private http: HttpClient, private authorization: AuthenticationService) { }
 
-  private apiUrl = 'http://localhost:8080/api';
+  private apiUrl = `${window.location.href.substr(0, window.location.href.lastIndexOf('/')).replace('4200', '8080')}/api`;
   private response: any;
 
   public deleteData(): Promise<any> {
@@ -452,6 +452,21 @@ export class ApiService {
         'group_id': group_id
       }
       console.log(body);
+      const options = {
+        headers: new HttpHeaders().set('Authorization', this.authorization.generateCompleteJwt())
+      }
+      return this.http.post(url, body, options).toPromise().then(response => response).catch(err => this.parseError(err));
+    }
+    else {
+      this.parseError('Error');
+    }
+  }
+
+  public deleteUser(): Promise<any> {
+    if (this.authorization.getLoggedIn()) {
+      const url: string = `${this.apiUrl}/deleteUser`; 
+      const body = {
+      }
       const options = {
         headers: new HttpHeaders().set('Authorization', this.authorization.generateCompleteJwt())
       }
