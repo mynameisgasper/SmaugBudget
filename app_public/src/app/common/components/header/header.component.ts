@@ -4,10 +4,9 @@ import { faCog, faAdjust, faSignOutAlt } from '@fortawesome/free-solid-svg-icons
 import { AuthenticationService } from '../../services/authentication.service';
 import { ApiService } from '../../services/api.service';
 
-declare var addDarkModeCss: any;
+declare var removeForLogout: any;
 declare var loadDarkMode: any;
 declare var toggleDarkMode: any;
-declare var removeDarkModeCss: any;
 
 @Component({
   selector: 'app-header',
@@ -33,6 +32,7 @@ export class HeaderComponent implements OnInit {
   }
 
   logout(): void {
+    removeForLogout();
     this.auth.logout();
     this.router.navigate(['']);
   }

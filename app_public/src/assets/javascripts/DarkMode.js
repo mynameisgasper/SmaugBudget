@@ -12,6 +12,12 @@ var darkMode = {
     isSet: false
 };
 
+function removeForLogout() {
+    if (document.getElementById("darkmode")) {
+        document.getElementById("darkmode").disabled = true;
+        document.getElementById("darkmode").remove();
+    }
+}
 
 function toggleDarkMode() {
     if (localStorage.getItem('dark') === "false") {
