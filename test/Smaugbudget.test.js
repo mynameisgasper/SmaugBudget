@@ -29,7 +29,7 @@ function savePageSource(browser, filename) {
     fs = require('fs');
     const { exec } = require("child_process");
     const { describe, it, after, before } = require("mocha");
-    const { Builder, By, until } = require("selenium-webdriver");
+    const { Builder, By, until, Key } = require("selenium-webdriver");
     const chrome = require("selenium-webdriver/chrome");
     const expect = require("chai").expect;
     
@@ -221,16 +221,16 @@ function savePageSource(browser, filename) {
 
             var url = await browser.getCurrentUrl();
             expect(url).to.include('dashboard');
+            await new Promise(r => setTimeout(r, 2000));
           });
         });
       });
-
+      /*
       describe("Envelope", function() {
         this.timeout(30 * 1000);
 
         context("Fail saving existing envelope", async () => {
           this.timeout(30 * 1000);
-          before(() => { browser.get(applicationUrl); });
   
           it("Open envelopes tab", async () => {
             let envelopesButton = await browser.findElements(By.xpath("//a[contains(@routerlink, '../envelopes')]"));
@@ -305,6 +305,7 @@ function savePageSource(browser, filename) {
             deleteButton[0].click();
             await new Promise(r => setTimeout(r, 2000));
             await browser.switchTo().alert().accept();
+            await new Promise(r => setTimeout(r, 2000));
           });
         });
 
@@ -363,13 +364,12 @@ function savePageSource(browser, filename) {
           });
         });
       });
-
+      */
       
       //To be tested
       describe("Add new goal", function() {
         context("Failed to create new goal", function() {
-          this.timeout(30 * 1000);
-          before(() => { browser.get(applicationUrl); });
+          this.timeout(60 * 1000);
 
           it("Redirect to goal tab", async () => {
             let goalLink = await browser.findElements(By.xpath("//a[contains(@routerlink, '../goals')]"));
@@ -403,26 +403,22 @@ function savePageSource(browser, filename) {
             let categoryField = await browser.findElements(By.xpath("//select[contains(@name, 'inputCategory')]"));
             expect(categoryField).to.not.be.empty;
             categoryField[0].click();
-            await new Promise(r => setTimeout(r, 3000));
+            await new Promise(r => setTimeout(r, 1000));
 
             let categoryOptionField = await browser.findElements(By.xpath("//option[contains(text(), 'Home')]"));
             expect(categoryOptionField).to.not.be.empty;
             categoryOptionField[0].click();
-            await new Promise(r => setTimeout(r, 3000));
+            await new Promise(r => setTimeout(r, 1000));
             
             let amount = await browser.findElements(By.xpath("//input[contains(@id, 'Amount')]"));
             expect(amount).to.not.be.empty;
-            amount[0].sendKeys("100000");
-            await new Promise(r => setTimeout(r, 3000));
+            amount[0].sendKeys("30000");
+            await new Promise(r => setTimeout(r, 1000));
             
             let buttonAdd = await browser.findElements(By.xpath("//button[contains(@id, 'buttonAddGoal')]"));
             expect(buttonAdd).to.not.be.empty;
             buttonAdd[0].click();
-            await new Promise(r => setTimeout(r, 3000));
-            /*
-            let date = await browser.findElements(By.xpath("//input[contains(@id, 'inputDateAddGoal')]"));
-            console.log(date);
-            */
+            await new Promise(r => setTimeout(r, 2000));
           });
         });
         context("Successful new goal", function() {
@@ -430,18 +426,19 @@ function savePageSource(browser, filename) {
           before(() => { browser.get(applicationUrl); });
 
           it("Redirect to goal tab", async () => {
+            await new Promise(r => setTimeout(r, 1000));
             let goalLink = await browser.findElements(By.xpath("//a[contains(@routerlink, '../goals')]"));
             await new Promise(r => setTimeout(r, 1000));
             expect(goalLink).to.not.be.empty;
             goalLink[0].click();
             
-            await new Promise(r => setTimeout(r, 11000));
+            await new Promise(r => setTimeout(r, 5000));
             var url = await browser.getCurrentUrl();
             expect(url).to.include('goals');
 
           });
           
-          it("Open modal", async () => {
+          it("Open add modal", async () => {
             let addGoalButton = await browser.findElements(By.xpath("//button[contains(@href, '#addGoalForm')]"));
             await new Promise(r => setTimeout(r, 1000));
             expect(addGoalButton).to.not.be.empty;
@@ -456,50 +453,81 @@ function savePageSource(browser, filename) {
             let goalName = await browser.findElements(By.xpath("//input[contains(@id, 'Goal')]"));
             expect(goalName).to.not.be.empty;
             goalName[0].sendKeys("House");
-            await new Promise(r => setTimeout(r, 5000));
+            await new Promise(r => setTimeout(r, 1000));
             
             let categoryField = await browser.findElements(By.xpath("//select[contains(@name, 'inputCategory')]"));
             expect(categoryField).to.not.be.empty;
             categoryField[0].click();
-            await new Promise(r => setTimeout(r, 3000));
+            await new Promise(r => setTimeout(r, 1000));
 
             let categoryOptionField = await browser.findElements(By.xpath("//option[contains(text(), 'Home')]"));
             expect(categoryOptionField).to.not.be.empty;
             categoryOptionField[0].click();
-            await new Promise(r => setTimeout(r, 3000));
+            await new Promise(r => setTimeout(r, 1000));
             
             let amount = await browser.findElements(By.xpath("//input[contains(@id, 'Amount')]"));
             expect(amount).to.not.be.empty;
-            amount[0].sendKeys("100000");
-            await new Promise(r => setTimeout(r, 3000));
+            amount[0].sendKeys("30000");
+            await new Promise(r => setTimeout(r, 1000));
             
             let date = await browser.findElements(By.xpath("//input[contains(@id, 'inputDateAddGoal')]"));
             expect(date).to.not.be.empty;
             date[0].sendKeys("01/01/2026");
-            await new Promise(r => setTimeout(r, 3000));
+            await new Promise(r => setTimeout(r, 1000));
 
             let buttonAdd = await browser.findElements(By.xpath("//button[contains(@id, 'buttonAddGoal')]"));
             expect(buttonAdd).to.not.be.empty;
             buttonAdd[0].click();
-            await new Promise(r => setTimeout(r, 3000));
-          });
-          /*
-          it("Add goal", async () => {
-            let addGoalButton = await browser.findElements(By.xpath("//button[contains(@id, 'buttonAddGoal')]"));
-            expect(addGoalButton).to.not.be.empty;
-            addGoalButton[0].click();
-
             await new Promise(r => setTimeout(r, 5000));
+          });
+        });
+        context("Edit goal", function() {
+          this.timeout(30 * 1000);
+          //before(() => { browser.get(applicationUrl); });
 
+          it("Open edit modal", async () => {
+            let editGoalButton = await browser.findElements(By.xpath("//button[contains(@class, 'edit-btn')]"));
+            await new Promise(r => setTimeout(r, 1000));
+            expect(editGoalButton).to.not.be.empty;
+            editGoalButton[5].click();
+
+            await new Promise(r => setTimeout(r, 1000));
+            let opened = await browser.findElements(By.xpath("//div[contains(@class, 'modal-backdrop fade show')]"));
+            expect(opened).to.not.be.empty;
           });
 
-          it("Find new goal", async () => {
-            let newGoal = await browser.findElements(By.xpath("//p[contains(text(), 'House')]"));
-            expect(newGoal).to.not.be.empty;
-            //success
+          it("Enter data", async () => {
+            let categoryField = await browser.findElements(By.xpath("//select[contains(@name, 'inputCategory')]"));
+            expect(categoryField).to.not.be.empty;
+            console.log(categoryField);
+            categoryField[3].click();
+            await new Promise(r => setTimeout(r, 1000));
 
-          });*/
-            
+            let categoryOptionField = await browser.findElements(By.xpath("//option[contains(text(), 'Gifts')]"));
+            expect(categoryOptionField).to.not.be.empty;
+            console.log(categoryOptionField);
+            categoryOptionField[3].click();
+            await new Promise(r => setTimeout(r, 1000));
+
+            let buttonAdd = await browser.findElements(By.xpath("//button[contains(@class, 'btn-primary')]"));
+            expect(buttonAdd).to.not.be.empty;
+            buttonAdd[5].click();
+            await new Promise(r => setTimeout(r, 5000));
+          });
+        });
+        context("Delete goal", function() {
+          this.timeout(30 * 1000);
+          //before(() => { browser.get(applicationUrl); });
+
+          it("Click delete button", async () => {
+            let deleteGoalButton = await browser.findElements(By.xpath("//button[contains(@class, 'edit-btn')]"));
+            await new Promise(r => setTimeout(r, 1000));
+            expect(deleteGoalButton).to.not.be.empty;
+            deleteGoalButton[4].click();
+            await new Promise(r => setTimeout(r, 2000));
+            await browser.switchTo().alert().accept();
+            await new Promise(r => setTimeout(r, 2000));
+          });
         });
       });
       
@@ -516,7 +544,6 @@ function savePageSource(browser, filename) {
             await new Promise(r => setTimeout(r, 1000));
             let openedDropdown = await browser.findElements(By.xpath("//a[contains(@aria-expanded, 'true')]"));
             expect(openedDropdown).to.not.be.empty;
-            //takeScreenshot(browser, "./test/porocilo/slika.png")
           });
 
           it("Logout", async () => {
