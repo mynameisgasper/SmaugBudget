@@ -71,6 +71,7 @@ export class AccountComponent implements OnInit {
       });
   }
   @ViewChild('modalone') public modal: ModalDirective;
+  @ViewChild('modaltwo') public modal2: ModalDirective;
 
   hasUrl = false;
 
@@ -305,6 +306,7 @@ uploadFileToActivity() {
         console.log(response);
         this.pfpImg = this.getImage();
         this.haschangePfpMessage = false;
+        this.modal2.hide();
       }).catch((error) => {
         console.log(error);
         this.changePfpMessage = 'Failed to upload!';

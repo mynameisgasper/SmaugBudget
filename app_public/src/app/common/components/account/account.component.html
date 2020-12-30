@@ -52,7 +52,7 @@
             </div>
             </div>
             <div id="pfpImg" class="del-margin col-sm-12 col-md-3 col-lg-3 col-xl-3">
-            <a data-toggle="modal" data-target="#changePfp" aria-label="Change Profile Picture">
+            <a (click)="this.modal2.show()" aria-label="Change Profile Picture">
                 <div id="profile-pic" class="profile-pic" [style.background-image]="'url(' + imageToShow + ')'" >
                     <fa-icon [icon]="faCamera"></fa-icon>
                 <span>{{data.changeImage}}</span>
@@ -205,12 +205,12 @@
     <!-- End changePassowrd -->
 
     <!-- changePfp -->
-    <div class="modal fade" id="changePfp" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div bsModal #modaltwo="bs-modal" class="modal fade" id="changePfp" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
         <div class="modal-header">
             <h5 class="modal-title">{{data.changeProfilePicture}}</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <button type="button" class="close" (click)="this.modal2.hide()" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
         </div>
@@ -224,7 +224,7 @@
         <div class="modal-footer">
             <b *ngIf="haschangePfpMessage">{{changePfpMessage}}</b>
             <button type="button" id="submitPfp" class="btn btn-primary" [disabled]="!this.hasUrl" (click)="uploadFileToActivity()">{{data.saveChanges}}</button>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">{{data.close}}</button>
+            <button type="button" class="btn btn-secondary" (click)="this.modal2.hide()">{{data.close}}</button>
         </div>
         </div>
     </div>
