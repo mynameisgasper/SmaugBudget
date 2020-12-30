@@ -177,7 +177,6 @@ function savePageSource(browser, filename) {
 
           it("Close modal", async() => {
             let closeButton = await browser.findElements(By.xpath("//button[contains(@class, 'close')]"));
-            console.log(closeButton);
             expect(closeButton).to.not.be.empty;
             closeButton[0].click();
 
@@ -225,7 +224,7 @@ function savePageSource(browser, filename) {
           });
         });
       });
-      
+      /*
       //To be tested
       describe("Add new goal", function() {
         this.timeout(30 * 1000);
@@ -286,6 +285,34 @@ function savePageSource(browser, filename) {
 
         });
 
+      });
+      */
+      describe("Logout", function() {
+        context("Successful logout", function() {
+          this.timeout(30 * 1000);
+          before(() => { browser.get(applicationUrl); });
+  
+          it("Open dropdown", async () => {
+            await waitPageLoaded(browser, 10, "//h4");
+            let dropdown = await browser.findElements(By.xpath("//a[contains(@id, 'navbarDropdownMenuLink-4')]"));
+            expect(dropdown).to.not.be.empty;
+            await dropdown[0].click();
+            await new Promise(r => setTimeout(r, 1000));
+            let openedDropdown = await browser.findElements(By.xpath("//a[contains(@aria-expanded, 'true')]"));
+            expect(openedDropdown).to.not.be.empty;
+            //takeScreenshot(browser, "./test/porocilo/slika.png")
+          });
+
+          it("Logout", async () => {
+            await waitPageLoaded(browser, 10, "//h4");
+            let logoutButton = await browser.findElements(By.xpath("//a[contains(text(), ' Logout')]"));
+            expect(logoutButton).to.not.be.empty;
+            await logoutButton[0].click();
+            await new Promise(r => setTimeout(r, 1000));
+            var url = await browser.getCurrentUrl();
+            expect(url).to.equals('https://smaugbudget.herokuapp.com/');
+          });
+        });
       });
 
       after(async () => {
