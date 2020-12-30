@@ -61,7 +61,7 @@ function takeScreenshot(browser, filename) {
         .build();
       });
   
-      describe("Login", function() {
+      context("Login", function() {
         this.timeout(30 * 1000);
         before(() => { browser.get(applicationUrl); });
 
@@ -86,14 +86,21 @@ function takeScreenshot(browser, filename) {
             passwordField[0].sendKeys("Goldpass1");
             
             await new Promise(r => setTimeout(r, 1000));
-            takeScreenshot(browser, 'test/data.png');
         });
 
         it("Login", async () => {
             let loginButton = await browser.findElements(By.xpath("//input[contains(@value, 'Login')]"));
             expect(loginButton).to.not.be.empty;
             loginButton[0].click();
+<<<<<<< HEAD
             await new Promise(r => setTimeout(r, 10000));
+=======
+            await new Promise(r => setTimeout(r, 500));
+
+            takeScreenshot(browser, 'test/porocilo/data.png');
+
+            await new Promise(r => setTimeout(r, 1000));
+>>>>>>> 56f8434bcb7b9e0a44025dc6cd38a3af761bc80d
 
             var url = await browser.getCurrentUrl();
             expect(url).to.include('dashboard');

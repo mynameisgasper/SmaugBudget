@@ -113,25 +113,6 @@ canvas{
     padding: 1.5vh;
 }
 
-#daterangepicker {
-    background-color: #007bff;
-    border-color: #007bff;
-    color: #fff;
-    text-decoration: none;
-}
-
-#daterangepicker:hover {
-    color: #fff;
-    background-color: #0069d9;
-    border-color: #0062cc;
-    text-decoration: none;
-    transition: color .15s ease-in-out, background-color .15s;
-    transition-property: color, background-color, border-color, box-shadow;
-    transition-duration: 0.15s, 0.15s, 0.15s, 0.15s;
-    transition-timing-function: ease-in-out, ease-in-out, ease-in-out, ease-in-out;
-    transition-delay: 0s, 0s, 0s, 0s; 
-}
-
 #pfpNavBar {
     border-radius: 50%;
     height: 50px;
