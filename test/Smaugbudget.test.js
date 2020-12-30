@@ -365,8 +365,7 @@ function savePageSource(browser, filename) {
         });
       });
       */
-      
-      //To be tested
+
       describe("Add new goal", function() {
         context("Failed to create new goal", function() {
           this.timeout(60 * 1000);
@@ -421,6 +420,7 @@ function savePageSource(browser, filename) {
             await new Promise(r => setTimeout(r, 2000));
           });
         });
+
         context("Successful new goal", function() {
           this.timeout(30 * 1000);
           before(() => { browser.get(applicationUrl); });
@@ -481,6 +481,7 @@ function savePageSource(browser, filename) {
             await new Promise(r => setTimeout(r, 5000));
           });
         });
+
         context("Edit goal", function() {
           this.timeout(30 * 1000);
           //before(() => { browser.get(applicationUrl); });
@@ -515,6 +516,7 @@ function savePageSource(browser, filename) {
             await new Promise(r => setTimeout(r, 5000));
           });
         });
+
         context("Delete goal", function() {
           this.timeout(30 * 1000);
           //before(() => { browser.get(applicationUrl); });
@@ -531,10 +533,44 @@ function savePageSource(browser, filename) {
         });
       });
       
+      describe("Money converter", function() {
+        context("Successful converting", function() {
+          this.timeout(30 * 1000);
+  
+          it("Redirect to goal tab", async () => {
+            let utilitiesLink = await browser.findElements(By.xpath("//a[contains(@routerlink, 'utilities')]"));
+            await new Promise(r => setTimeout(r, 1000));
+            expect(utilitiesLink).to.not.be.empty;
+            utilitiesLink[0].click();
+            
+            await new Promise(r => setTimeout(r, 11000));
+            var url = await browser.getCurrentUrl();
+            expect(url).to.include('utilities');
+          });
+
+          it("Insert data and call", async () => {
+            let amount = await browser.findElements(By.xpath("//input[contains(@id, 'Amount')]"));
+            expect(amount).to.not.be.empty;
+            amount[0].sendKeys("100");
+            await new Promise(r => setTimeout(r, 1000));
+
+            let convertButton = await browser.findElements(By.xpath("//button[contains(text(), 'Convert')]"));
+            await new Promise(r => setTimeout(r, 1000));
+            console.log(convertButton);
+            expect(convertButton).to.not.be.empty;
+            convertButton[0].click();
+            await new Promise(r => setTimeout(r, 2000));
+            convertButton[0].click();
+            await new Promise(r => setTimeout(r, 5000));
+
+          });
+        });
+      });
+
       describe("Logout", function() {
         context("Successful logout", function() {
-          this.timeout(30 * 1000);
           before(() => { browser.get(applicationUrl); });
+          this.timeout(30 * 1000);
   
           it("Open dropdown", async () => {
             await waitPageLoaded(browser, 10, "//h4");
