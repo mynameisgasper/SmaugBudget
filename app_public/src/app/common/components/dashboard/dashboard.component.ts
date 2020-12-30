@@ -58,13 +58,13 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.api.getUser().then(result => {
       const user: User = result;
+      this.refreshLanguage(result.language);
       this.cards = this.generateCards(user.bills, user.expense, user.paycheck, user.paycheckDate);
       this.alerts = this.generateAlerts(user.envelopes, user.bills, user.goals);
       this.analytics = this.generateAnalyitcs(result.expense, result.paycheckDate)
       this.currency = user.defaultCurrency;
       this.incomeLastMonth = user.paycheckLastMonth;
       this.expensesLastMonth = this.getTotalCost(this.getLastMonthExpenses(user.expense, user.paycheckDate));
-      this.refreshLanguage(result.language);
     }).catch(error => {
       this.authentication.logout();
       this.router.navigate(['']);
@@ -159,9 +159,9 @@ export class DashboardComponent implements OnInit {
     var totalBills = this.getTotalCost(billsUntilPaycheck);
     var budgetLeft = paycheck - totalCost;
     return [
-        new Card(1, 'bg-primary', 'faUniversity', (isNaN(budgetLeft) ? 0 : budgetLeft), 'Budget Left', null),
-        new Card(2, 'bg-primary', 'faCoins', totalBills, 'Expenses Left', null),
-        new Card(3, 'bg-primary', 'faPiggyBank', (isNaN(budgetLeft - totalBills) ? 0 : budgetLeft - totalBills), 'Savings', null),
+        new Card(1, 'bg-primary', 'faUniversity', (isNaN(budgetLeft) ? 0 : budgetLeft), getTranslation("cardTitle1"), null),
+        new Card(2, 'bg-primary', 'faCoins', totalBills, getTranslation("cardTitle2"), null),
+        new Card(3, 'bg-primary', 'faPiggyBank', (isNaN(budgetLeft - totalBills) ? 0 : budgetLeft - totalBills), getTranslation("Savings"), null),
     ];
 }
 
