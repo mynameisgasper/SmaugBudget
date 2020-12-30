@@ -573,7 +573,7 @@ function deleteUser(req, res) {
                 else {
   
                     user.deleteOne(function callback(err) {
-                        res.status(200).json("deleted");
+                        res.status(204).json("deleted");
                     });
                 }
             });

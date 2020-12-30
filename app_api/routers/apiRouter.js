@@ -398,6 +398,27 @@ router.post('/setCurrency', authentication, (req, res) => {
 });
 */
 
+/**
+ * @swagger
+ *  /deleteUser:
+ *   post:
+ *    summary: Brisanje uporabnika in njegovih podatkov
+ *    description: Brisanje uporabnika in njegovih podatkov
+ *    tags: [Uporabnik]
+ *    security:
+ *     - jwt: []
+ *    responses:
+ *     "204":
+ *      description: Uspešno brisanje uporabniškega računa.
+ *     "401":
+ *      description: Uporabnik ni potrjen.
+ *     "404":
+ *      description: Uporabnik s temi podatki ne obstaja.
+ *     "500":
+ *      description: Napaka na strežniku.
+ */
+
+
 router.post('/deleteUser', authentication, (req, res) => {
     user.deleteUser(req, res);
 });
