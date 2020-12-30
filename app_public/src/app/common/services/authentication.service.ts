@@ -13,7 +13,7 @@ export class AuthenticationService {
   public userId: string = localStorage.getItem('id');
 
   private accessLevel: number
-  private apiUrl = 'http://localhost:8080/api';
+  private apiUrl = `${window.location.href.substr(0, window.location.href.lastIndexOf('/')).replace('4200', '8080')}/api`;
 
   setLoggedIn(token: string) {
     const decodedToken = jwt_decode(token);
