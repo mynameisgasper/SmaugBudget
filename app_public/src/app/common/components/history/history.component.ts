@@ -27,9 +27,6 @@ export class HistoryComponent implements OnInit {
     "used": true,
     "name": "HistoryChart"
   };
-  dateRangePicker: Object = {
-    "used": true
-  };
   message: string = "Welcome to History!";
   welcomeMessage: string = "This is the best way to check your past spending by time and category.";
   logout: string = "Logout";

@@ -8,9 +8,6 @@ var data = {
         used: true,
         name: 'HistoryChart'
     },
-    dateRangePicker: {
-        used: true
-    }
 }
 
 var translationKeys = {

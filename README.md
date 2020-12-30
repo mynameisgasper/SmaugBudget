@@ -111,9 +111,6 @@ Lastni projekt pri predmetu **Spletno programiranje** v študijskem letu **2020/
 #### [Chart-js](https://www.chartjs.org/)  
 - Ustvarjanje grafov  
   
-#### [Date-range-selector](https://www.daterangepicker.com/)  
-- Izbira dveh datumov za filtriranje podatkov  
-  
 #### [Bootstrap select](https://developer.snapappointments.com/bootstrap-select/)  
 - Za multiselect, dropdown, izbiro envelopov itd.  
   
