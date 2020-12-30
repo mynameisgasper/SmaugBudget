@@ -224,69 +224,144 @@ function savePageSource(browser, filename) {
           });
         });
       });
-      /*
       //To be tested
       describe("Add new goal", function() {
-        this.timeout(30 * 1000);
-        before(() => { browser.get(applicationUrl); });
+        context("Failed to create new goal", function() {
+          this.timeout(30 * 1000);
+          before(() => { browser.get(applicationUrl); });
 
-        it("Redirect to goal tab", async () => {
-          let goalLink = await browser.findElements(By.xpath("//a[contains(@href, '#goals')]"));
-          expect(goalLink).to.not.be.empty;
-          //console.log(goalLink);
-          goalLink[0].click();
+          it("Redirect to goal tab", async () => {
+            let goalLink = await browser.findElements(By.xpath("//a[contains(@routerlink, '../goals')]"));
+            await new Promise(r => setTimeout(r, 1000));
+            expect(goalLink).to.not.be.empty;
+            goalLink[0].click();
+            
+            await new Promise(r => setTimeout(r, 11000));
+            var url = await browser.getCurrentUrl();
+            expect(url).to.include('goals');
 
-          await new Promise(r => setTimeout(r, 1000));
-        });
-
-        it("Open modal", async () => {
-          let addGoalButton = await browser.findElements(By.xpath("//button[contains(@href, '#addGoalForm')]"));
-          expect(addGoalButton).to.not.be.empty;
-          //console.log(goalButton);
-          addGoalButton[0].click();
-
-          let opened = await browser.findElements(By.xpath("//div[contains(@class, 'modal-backdrop fade show')]"));
-          expect(opened).to.not.be.empty;
+          });
           
-          await new Promise(r => setTimeout(r, 1000));
-        });
+          it("Open modal", async () => {
+            let addGoalButton = await browser.findElements(By.xpath("//button[contains(@href, '#addGoalForm')]"));
+            await new Promise(r => setTimeout(r, 1000));
+            expect(addGoalButton).to.not.be.empty;
+            addGoalButton[0].click();
 
-        it("Enter data", async () => {
-          let goalName = await browser.findElements(By.xpath("//input[contains(@id, 'Goal')]"));
-          expect(goalName).to.not.be.empty;
-          goalName[0].sendKeys("House");
-
-          //select category for you bodza ker nemorm testirat
-          //let category = await browser.findElements(By.xpath("//input[contains(@id, 'inputCategory')]"));
+            await new Promise(r => setTimeout(r, 1000));
+            let opened = await browser.findElements(By.xpath("//div[contains(@class, 'modal-backdrop fade show')]"));
+            expect(opened).to.not.be.empty;
+          });
           
-          let amount = await browser.findElements(By.xpath("//input[contains(@id, 'Amount')]"));
-          expect(amount).to.not.be.empty;
-          amount[0].sendKeys("10000000");
+          it("Enter data", async () => {
+            let goalName = await browser.findElements(By.xpath("//input[contains(@id, 'Goal')]"));
+            expect(goalName).to.not.be.empty;
+            goalName[0].sendKeys("House");
+            await new Promise(r => setTimeout(r, 5000));
+            
+            let categoryField = await browser.findElements(By.xpath("//select[contains(@name, 'inputCategory')]"));
+            expect(categoryField).to.not.be.empty;
+            categoryField[0].click();
+            await new Promise(r => setTimeout(r, 3000));
 
-          //select date for you bodza ker nemorm testirat
-          //let date = await browser.findElements(By.xpath("//input[contains(@id, 'inputDateAddGoal')]"));
-      
-          await new Promise(r => setTimeout(r, 1000));
+            let categoryOptionField = await browser.findElements(By.xpath("//option[contains(text(), 'Home')]"));
+            expect(categoryOptionField).to.not.be.empty;
+            categoryOptionField[0].click();
+            await new Promise(r => setTimeout(r, 3000));
+            
+            let amount = await browser.findElements(By.xpath("//input[contains(@id, 'Amount')]"));
+            expect(amount).to.not.be.empty;
+            amount[0].sendKeys("100000");
+            await new Promise(r => setTimeout(r, 3000));
+            
+            let buttonAdd = await browser.findElements(By.xpath("//button[contains(@id, 'buttonAddGoal')]"));
+            expect(buttonAdd).to.not.be.empty;
+            buttonAdd[0].click();
+            await new Promise(r => setTimeout(r, 3000));
+            /*
+            let date = await browser.findElements(By.xpath("//input[contains(@id, 'inputDateAddGoal')]"));
+            console.log(date);
+            */
+          });
         });
-    
-        it("Add goal", async () => {
-          let addGoalButton = await browser.findElements(By.xpath("//button[contains(@id, 'buttonAddGoal')]"));
-          expect(addGoalButton).to.not.be.empty;
-          addGoalButton[0].click();
+        context("Successful new goal", function() {
+          this.timeout(30 * 1000);
+          before(() => { browser.get(applicationUrl); });
 
-          await new Promise(r => setTimeout(r, 5000));
+          it("Redirect to goal tab", async () => {
+            let goalLink = await browser.findElements(By.xpath("//a[contains(@routerlink, '../goals')]"));
+            await new Promise(r => setTimeout(r, 1000));
+            expect(goalLink).to.not.be.empty;
+            goalLink[0].click();
+            
+            await new Promise(r => setTimeout(r, 11000));
+            var url = await browser.getCurrentUrl();
+            expect(url).to.include('goals');
 
+          });
+          
+          it("Open modal", async () => {
+            let addGoalButton = await browser.findElements(By.xpath("//button[contains(@href, '#addGoalForm')]"));
+            await new Promise(r => setTimeout(r, 1000));
+            expect(addGoalButton).to.not.be.empty;
+            addGoalButton[0].click();
+
+            await new Promise(r => setTimeout(r, 1000));
+            let opened = await browser.findElements(By.xpath("//div[contains(@class, 'modal-backdrop fade show')]"));
+            expect(opened).to.not.be.empty;
+          });
+          
+          it("Enter data", async () => {
+            let goalName = await browser.findElements(By.xpath("//input[contains(@id, 'Goal')]"));
+            expect(goalName).to.not.be.empty;
+            goalName[0].sendKeys("House");
+            await new Promise(r => setTimeout(r, 5000));
+            
+            let categoryField = await browser.findElements(By.xpath("//select[contains(@name, 'inputCategory')]"));
+            expect(categoryField).to.not.be.empty;
+            categoryField[0].click();
+            await new Promise(r => setTimeout(r, 3000));
+
+            let categoryOptionField = await browser.findElements(By.xpath("//option[contains(text(), 'Home')]"));
+            expect(categoryOptionField).to.not.be.empty;
+            categoryOptionField[0].click();
+            await new Promise(r => setTimeout(r, 3000));
+            
+            let amount = await browser.findElements(By.xpath("//input[contains(@id, 'Amount')]"));
+            expect(amount).to.not.be.empty;
+            amount[0].sendKeys("100000");
+            await new Promise(r => setTimeout(r, 3000));
+            
+            let date = await browser.findElements(By.xpath("//input[contains(@id, 'inputDateAddGoal')]"));
+            expect(date).to.not.be.empty;
+            date[0].sendKeys("01/01/2026");
+            await new Promise(r => setTimeout(r, 3000));
+
+            let buttonAdd = await browser.findElements(By.xpath("//button[contains(@id, 'buttonAddGoal')]"));
+            expect(buttonAdd).to.not.be.empty;
+            buttonAdd[0].click();
+            await new Promise(r => setTimeout(r, 3000));
+          });
+          /*
+          it("Add goal", async () => {
+            let addGoalButton = await browser.findElements(By.xpath("//button[contains(@id, 'buttonAddGoal')]"));
+            expect(addGoalButton).to.not.be.empty;
+            addGoalButton[0].click();
+
+            await new Promise(r => setTimeout(r, 5000));
+
+          });
+
+          it("Find new goal", async () => {
+            let newGoal = await browser.findElements(By.xpath("//p[contains(text(), 'House')]"));
+            expect(newGoal).to.not.be.empty;
+            //success
+
+          });
+            */
         });
-
-        it("Find new goal", async () => {
-          let newGoal = await browser.findElements(By.xpath("//p[contains(text(), 'House')]"));
-          expect(newGoal).to.not.be.empty;
-          //success
-
-        });
-
       });
-      */
+      
       describe("Logout", function() {
         context("Successful logout", function() {
           this.timeout(30 * 1000);
