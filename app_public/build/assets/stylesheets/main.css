@@ -1,0 +1,342 @@
+/* 
+ *  Namesto font-weight: bold
+ *  uporabi font-family: 'Open Sans Bold'
+*/
+
+
+/* Navbar related CSS */
+
+@media screen and (max-height:450px) and (max-width:900px) {
+    .navbar-collapse {
+        max-height: 90vh;
+        overflow-y: auto;
+        padding-bottom: 5vh;
+    }
+}
+
+nav .button {
+    font-size: 16px;
+    font-family: 'Open Sans';
+    text-align: center;
+    user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+}
+
+.container {
+    position: relative;
+    padding-top: 10vh;
+}
+
+.navbar-light {
+    text-decoration: none;
+}
+
+.nav-link {
+    transition: text-shadow .3s;
+}
+
+.nav-link:hover {
+    text-shadow: 0 0 1px #fff, 0 0 1px #fff;
+}
+
+.nav-item {
+    padding: 1vh;
+}
+
+.navbar-brand {
+    font-family: 'Open Sans';
+}
+
+.navbar-brand img {
+    margin-top: -3%;
+    padding: 0;
+}
+
+.toast-body {
+    color: #212529;
+    opacity: 1 !important;
+}
+
+.active {
+    text-shadow: 0 0 1px #fff, 0 0 1px #fff;
+}
+
+.fas {
+    user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+    cursor: pointer;
+    font-family: 'Open Sans';
+}
+
+.dropdown-info .dropdown-item {
+    width: 25vh;
+}
+
+.dropdown-info .fas {
+    margin-right: 10%;
+}
+
+.dropdown-info hr {
+    margin: 1vh;
+}
+
+.center {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+}
+
+@keyframes slideInFromLeft {
+    0% {
+        width: 0%;
+    }
+    100% {}
+}
+
+.progress-bar {
+    animation: .75s ease-out 0s 1 slideInFromLeft;
+}
+
+.goals .progress-bar {
+    animation: .9s ease-out 0s 1 slideInFromLeft;
+}
+
+.container {
+    overflow: hidden;
+}
+
+.toast {
+    display: none;
+    opacity: 1 !important;
+}
+
+.toastek {
+    z-index: 999999 !important;
+}
+
+
+/*@media only screen and (min-width: 900px) {
+    .notification{
+        white-space: nowrap;
+    }
+   .alert{
+        padding-top: 0.75rem;
+        padding-right: 0;
+        margin-right: 2.25rem;
+        padding-bottom: 0.75rem;
+        padding-left: 1.25rem;
+    }
+    .dropdown-menu{
+        width: auto;
+        height: auto;
+    }
+}*/
+
+.tekst {
+    vertical-align: sub;
+}
+
+
+/* Footer related */
+
+.footer {
+    color: white;
+    height: 35vh;
+    width: 100%;
+    padding-top: 7.5vh;
+    background: #343a40;
+    overflow-x: hidden;
+}
+
+.footer-col {
+    padding-bottom: 1vh;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.bottom-row-footer {
+    padding-top: 5vh;
+    padding-bottom: 7.5vh;
+    background: #343a40;
+    color: gray;
+}
+
+.footer-col a {
+    text-decoration: none;
+    color: white;
+}
+
+.footer-col a:hover {
+    text-decoration: underline;
+    color: gray;
+}
+
+.bottom-row-footer a {
+    text-decoration: none;
+    color: gray;
+}
+
+.bottom-row-footer a:hover {
+    text-decoration: underline;
+    color: gray;
+}
+
+.footer-row {
+    padding-top: 6vh;
+}
+
+@media only screen and (min-width: 900px) {
+    .footer {
+        margin-top: 9vh;
+    }
+}
+
+@media only screen and (max-width: 991px) {
+    .footer {
+        margin-top: 4vh;
+    }
+}
+
+
+/* Progress bar related */
+
+.progress {
+    height: 28.1px;
+    font: inherit;
+    text-align: center;
+    background-color: #a1ceff;
+    border-radius: .5vw;
+}
+
+.progress-bar {
+    height: 1vh;
+    position: relative;
+    border: solid #007bff;
+    border-radius: .5vw;
+    display: inline-block;
+    color: white
+}
+
+.progress-bar {
+    overflow: visible;
+}
+
+.progress-tooltip p {
+    margin: 0;
+}
+
+.progress-bar .progress-tooltip {
+    display: none;
+    position: absolute;
+    margin: 0 auto;
+    float: none;
+    top: 3.5vh;
+    background: #003166;
+    border: 1px #003166;
+    border-radius: 10%;
+    padding-left: 1vw;
+    padding-right: 1vw;
+    z-index: 1000;
+}
+
+.progress-bar:hover .progress-tooltip {
+    display: block;
+}
+
+
+/* IKONE */
+
+.fa-pencil-alt:hover {
+    color: #007bff;
+}
+
+
+/* CARDS */
+
+.card-counter {
+    margin: 2.5%;
+    padding: 2vh 1vh;
+    color: #fff;
+    height: 12vh;
+    border-radius: 5px;
+}
+
+.card-counter i {
+    font-size: 8vh;
+    opacity: 0.3
+}
+
+.card-counter .count-numbers {
+    position: absolute;
+    right: 15%;
+    top: 15%;
+    font-size: 5vh;
+}
+
+.card-counter .count-name {
+    position: absolute;
+    right: 15%;
+    top: 65%;
+    opacity: 0.5;
+    font-size: 2vh;
+}
+
+
+/* Shadows */
+
+.card-counter {
+    -webkit-box-shadow: 0px 1px 15px 1px rgba(222, 222, 222, 0.75);
+    -moz-box-shadow: 0px 1px 15px 1px rgba(222, 222, 222, 0.75);
+    box-shadow: 0px 1px 15px 1px rgba(222, 222, 222, 0.75);
+}
+
+.progress {
+    -webkit-box-shadow: 0px 1px 15px 1px rgba(222, 222, 222, 0.75);
+    -moz-box-shadow: 0px 1px 15px 1px rgba(222, 222, 222, 0.75);
+    box-shadow: 0px 1px 15px 1px rgba(222, 222, 222, 0.75);
+}
+
+.btn-primary {
+    -webkit-box-shadow: 0px 1px 15px 1px rgba(222, 222, 222, 0.75);
+    -moz-box-shadow: 0px 1px 15px 1px rgba(222, 222, 222, 0.75);
+    box-shadow: 0px 1px 15px 1px rgba(222, 222, 222, 0.75);
+}
+
+.btn-success {
+    -webkit-box-shadow: 0px 1px 15px 1px rgba(222, 222, 222, 0.75);
+    -moz-box-shadow: 0px 1px 15px 1px rgba(222, 222, 222, 0.75);
+    box-shadow: 0px 1px 15px 1px rgba(222, 222, 222, 0.75);
+}
+
+.footer {
+    -webkit-box-shadow: 0px 1px 15px 1px rgba(209, 209, 209, 1);
+    -moz-box-shadow: 0px 1px 15px 1px rgba(209, 209, 209, 1);
+    box-shadow: 0px 1px 15px 5px rgba(209, 209, 209, 1);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.input-group-lg {
+    align-self: flex-start;
+}
+
+input[type="color"] {
+    border: white;
+    border-radius: 5px;
+}
+
+input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+
+input[type="color"]::-webkit-color-swatch {
+    border: none;
+}

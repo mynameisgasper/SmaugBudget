@@ -1,0 +1,99 @@
+{
+  "configVersion": 1,
+  "timestamp": 1609329037947,
+  "index": "/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/favicon.ico",
+        "/index.html",
+        "/main.3ea9f39ba182b6d82d91.js",
+        "/manifest.webmanifest",
+        "/polyfills.b3b05dce4f05c03b56a3.js",
+        "/runtime.0e49e2b53282f40c8925.js",
+        "/scripts.23d953b500ec158287bd.js",
+        "/styles.106337d91047c3d81aa8.css",
+        "/styles.47ac658341ce9432f9bc.js"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/OpenSans-Bold.dbb97fd982ce1b96b6de.ttf",
+        "/OpenSans-Italic.20653d2fac6285bf4dea.ttf",
+        "/OpenSans-Light.ed41bedf131bc097372a.ttf",
+        "/OpenSans-Regular.1b0809d519837cb7aad3.ttf",
+        "/assets/images/Default_pfp.png",
+        "/assets/images/card1.png",
+        "/assets/images/card2.png",
+        "/assets/images/card3.png",
+        "/assets/images/dragon.svg",
+        "/assets/images/filler.png",
+        "/assets/images/office.jpg",
+        "/assets/images/phone.png",
+        "/assets/images/phone1.png",
+        "/assets/stylesheets/fonts.css",
+        "/assets/stylesheets/main.css"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/OpenSans-Bold.dbb97fd982ce1b96b6de.ttf": "1e3704ee48b5ff7e582488ead87b05249f14dc1c",
+    "/OpenSans-Italic.20653d2fac6285bf4dea.ttf": "b8d9f5ceb1e6b3a716dab0bdd09061bbc349b41e",
+    "/OpenSans-Light.ed41bedf131bc097372a.ttf": "bf0d133b628259eca01049d30fa6316094d00bcf",
+    "/OpenSans-Regular.1b0809d519837cb7aad3.ttf": "babe8dce93a3e48b6c3c79720a0c048e88dd1fe7",
+    "/assets/images/Default_pfp.png": "a50467799ff9142c42e50e0b6a81ef4b8b38b58e",
+    "/assets/images/card1.png": "aeddacc0b25369edb8e204f0c4f2541ff7356151",
+    "/assets/images/card2.png": "14486eea1e0cdcd2e4a8e7c85c750f63313538dd",
+    "/assets/images/card3.png": "9d007b0994de3a64a557b4a7d80495ade0b3af12",
+    "/assets/images/dragon.svg": "d8112264a793f712ecbece41c074401756f28884",
+    "/assets/images/filler.png": "ff81f68ee587bb0bf81362d86122db30f51b2df9",
+    "/assets/images/office.jpg": "472a374130c405e567df361e83cbc98ae574aee2",
+    "/assets/images/phone.png": "40f7340c89c9ba855f845efb150b4df923d4417d",
+    "/assets/images/phone1.png": "048ddeab225c9f1a0f6d3724b8afef2fab6dbd08",
+    "/assets/stylesheets/fonts.css": "98710ba2adf78f97f451e555758cc68f22583827",
+    "/assets/stylesheets/main.css": "4ac44efb6ee76340cf0a12c0495791c311f822b1",
+    "/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
+    "/index.html": "73f92528a8e5735870c5f817d0d1b5cd89919231",
+    "/main.3ea9f39ba182b6d82d91.js": "924bfab1b469fb7d87b37557736664c827d65ea7",
+    "/manifest.webmanifest": "dcb951b30ec1eb3de1ccaa8357fd45815070ec0d",
+    "/polyfills.b3b05dce4f05c03b56a3.js": "0d003992512d28c544b0a972ce2ae6b28ebbf5f6",
+    "/runtime.0e49e2b53282f40c8925.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",
+    "/scripts.23d953b500ec158287bd.js": "25a5036a7b1a01e83c68f3cba88cd888d1b63fc9",
+    "/styles.106337d91047c3d81aa8.css": "8dcce2b666cdcf32f7a0a84245b42632ee86fbbe",
+    "/styles.47ac658341ce9432f9bc.js": "b03f81876d4209d5fc6f95ca20366d0571f4b6ae"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ],
+  "navigationRequestStrategy": "performance"
+}

@@ -219,7 +219,7 @@ getImage() {
         }
         
       }).catch((error) => {
-        this.changeLanguageMessage = 'Failed to save!';
+        
       });
 }
 
