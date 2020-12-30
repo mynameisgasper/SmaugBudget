@@ -89,13 +89,13 @@
             </div>
             <!----- Graph ----->
             <div class="col-xl-6 col-lg-6" style="padding-top: 25px;">
-                <canvas baseChart *ngIf="analytics; else noData" id="doughnut-canvas" style="display: block; width: 482px; height: 482px;" width="482" height="482"
+                <canvas baseChart *ngIf="analytics.length > 0; else noData" id="doughnut-canvas" style="display: block; width: 482px; height: 482px;" width="482" height="482"
                     [data]="chartData"
                     [colors]="chartColors"
                     [labels]="chartLabels"
                     [chartType]="'doughnut'">
                 </canvas>
-                <ng-template #noData><h4 style="text-align: center; padding-top: 35px; padding-bottom: 10px;">{{ noData }}</h4></ng-template>
+                <ng-template #noData><h4 style="text-align: center; padding-top: 35px; padding-bottom: 10px;">No data!</h4></ng-template>
             </div>
         </div>
     </div>

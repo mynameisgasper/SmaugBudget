@@ -37,7 +37,7 @@ export class DashboardComponent implements OnInit {
   balanceRow = "Balance";
   expensesLastMonth: any;
   analyticsField = "Analytics";
-  noData = "No data";
+  noData: string = "No data";
   incomeModalTitle = "Update your Income";
   incomeModalPlaceholderIncome = "Enter your income";
   incomeModalPlaceholderDate = "Day in month you receive paycheck";
