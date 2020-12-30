@@ -9,6 +9,9 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { Router } from '@angular/router';
 declare var $:any;
 
+declare var getTranslation: any;
+declare var setLanguage: any;
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -24,25 +27,25 @@ export class DashboardComponent implements OnInit {
   modalRef: BsModalRef;
 
   pencilIcon = faPencilAlt;
-  message = "Welcome to dashboard!";
-  welcomeMessage = "A simple overview of your spending.";
+  message = getTranslation("messageDashboard");
+  welcomeMessage = getTranslation("welcomeMessageDashboard");
   cards: Card[] = [];
   alerts: Alert[] = [];
   analytics: Array<Object> = [];
-  overview = "Last month overview";
-  incomeRow = "Income";
+  overview = getTranslation("overview");
+  incomeRow = getTranslation("incomeRow");
   currency: String;
   incomeLastMonth: any;
-  expensesRow = "Expenses";
-  balanceRow = "Balance";
+  expensesRow = getTranslation("expensesRow");
+  balanceRow = getTranslation("balanceRow");
   expensesLastMonth: any;
-  analyticsField = "Analytics";
-  noData: string = "No data";
-  incomeModalTitle = "Update your Income";
-  incomeModalPlaceholderIncome = "Enter your income";
-  incomeModalPlaceholderDate = "Day in month you receive paycheck";
-  incomeModalSaveButton = "Save Changes";
-  incomeModalCloseButton = "Close";
+  analyticsField = getTranslation("analyticsField");
+  noData: string = getTranslation("noData");
+  incomeModalTitle = getTranslation("incomeModalTitle");
+  incomeModalPlaceholderIncome = getTranslation("incomeModalPlaceholderIncome");
+  incomeModalPlaceholderDate = getTranslation("incomeModalPlaceholderDate");
+  incomeModalSaveButton = getTranslation("incomeModalSaveButton");
+  incomeModalCloseButton = getTranslation("incomeModalCloseButton");;
   chartData: Array<Number> = [];
   chartColors: Array<Object> = [];
   chartLabels: Array<String> = [];
