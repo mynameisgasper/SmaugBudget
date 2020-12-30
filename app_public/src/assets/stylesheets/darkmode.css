@@ -1,16 +1,16 @@
-body {
-    background: #242424;
-    color: lightgray;
+main {
+    background: #242424 !important;
+    color: lightgray !important
 }
 
 body a {
-    text-decoration: none;
-    color: lightgray;
+    text-decoration: none !important;
+    color: lightgray !important;
 }
 
 body a:hover {
-    text-decoration: none;
-    color: lightgray;
+    text-decoration: none !important;
+    color: lightgray !important;
 }
 
 body input {
@@ -21,12 +21,12 @@ body input {
 }
 
 .fas:not(.fa-camera) {
-    color: white;
-    opacity: 0.8;
+    color: white !important;
+    opacity: 0.8 !important;
 }
 
 .collapse .card {
-    background: #2b2b2b
+    background: #2b2b2b !important
 }
 
 .form-control {
@@ -34,164 +34,164 @@ body input {
 }
 
 .close {
-    color: lightgray;
+    color: lightgray !important;
 }
 
 .progress {
-    opacity: 0.8
+    opacity: 0.8 !important
 }
 
 .btn-primary {
-    opacity: 0.8;
+    opacity: 0.8 !important;
 }
 
 .modal-content {
-    background: #2b2b2b;
-    border-color: #595959
+    background: #2b2b2b !important;
+    border-color: #595959 !important
 }
 
 .modal input {
-    background: #2b2b2b;
-    color: lightgray;
-    border-color: #595959
+    background: #2b2b2b !important;
+    color: lightgray !important;
+    border-color: #595959 !important
 }
 
 .modal select {
-    background: #2b2b2b;
-    color: white;
-    border-color: #595959
+    background: #2b2b2b !important;
+    color: white !important;
+    border-color: #595959 !important
 }
 
 .modal textarea {
-    background: #2b2b2b;
-    color: white;
-    border-color: #595959
+    background: #2b2b2b !important;
+    color: white !important;
+    border-color: #595959 !important
 }
 
 .modal input:focus {
-    background: #2b2b2b;
-    color: white;
-    border-color: #595959
+    background: #2b2b2b !important;
+    color: white !important;
+    border-color: #595959 !important
 }
 
 .modal select:focus {
-    background: #2b2b2b;
-    color: white;
-    border-color: #595959
+    background: #2b2b2b !important;
+    color: white !important;
+    border-color: #595959 !important
 }
 
 .modal textarea:focus {
-    background: #2b2b2b;
-    color: white;
-    border-color: #595959
+    background: #2b2b2b !important;
+    color: white !important;
+    border-color: #595959 !important
 }
 
 .dropdown-menu {
-    background: #2b2b2b;
+    background: #2b2b2b !important;
 }
 
 .dropdown-item {
-    color: lightgray
+    color: lightgray !important
 }
 
 .dropdown-item:hover {
-    background: #2b2b2b;
-    color: lightgray;
+    background: #2b2b2b !important;
+    color: lightgray !important;
 }
 
 .container {
-    background: #2b2b2b;
-    -webkit-box-shadow: 0px 1px 15px 1px rgb(30, 30, 30);
-    -moz-box-shadow: 0px 1px 15px 1px rgb(30, 30, 30);
-    box-shadow: 0px 1px 15px 1px rgb(30, 30, 30);
-    padding: 0;
+    background: #2b2b2b !important;
+    -webkit-box-shadow: 0px 1px 15px 1px rgb(30, 30, 30) !important;
+    -moz-box-shadow: 0px 1px 15px 1px rgb(30, 30, 30) !important;
+    box-shadow: 0px 1px 15px 1px rgb(30, 30, 30) !important;
+    padding: 0 !important;
 }
 
 #darkModeButton {
-    color: black;
+    color: black !important;
 }
 
 #darkModeContainerFullWidth {
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
-    background: #242424;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
+    background: #242424 !important;
 }
 
 .card-counter {
-    opacity: 0.8;
-    -webkit-box-shadow: 0px 1px 15px 1px rgba(30, 30, 30, 0.5);
-    -moz-box-shadow: 0px 1px 15px 1px rgba(30, 30, 30, 0.5);
-    box-shadow: 0px 1px 15px 1px rgba(30, 30, 30, 0.5);
+    opacity: 0.8 !important;
+    -webkit-box-shadow: 0px 1px 15px 1px rgba(30, 30, 30, 0.5) !important;
+    -moz-box-shadow: 0px 1px 15px 1px rgba(30, 30, 30, 0.5) !important;
+    box-shadow: 0px 1px 15px 1px rgba(30, 30, 30, 0.5) !important;
 }
 
 .btn-primary {
-    -webkit-box-shadow: 0px 1px 15px 1px rgba(30, 30, 30, 0.5);
-    -moz-box-shadow: 0px 1px 15px 1px rgba(30, 30, 30, 0.5);
-    box-shadow: 0px 1px 15px 1px rgba(30, 30, 30, 0.5);
+    -webkit-box-shadow: 0px 1px 15px 1px rgba(30, 30, 30, 0.5) !important;
+    -moz-box-shadow: 0px 1px 15px 1px rgba(30, 30, 30, 0.5) !important;
+    box-shadow: 0px 1px 15px 1px rgba(30, 30, 30, 0.5) !important;
 }
 
 .btn-success {
-    -webkit-box-shadow: 0px 1px 15px 1px rgba(30, 30, 30, 0.5);
-    -moz-box-shadow: 0px 1px 15px 1px rgba(30, 30, 30, 0.5);
-    box-shadow: 0px 1px 15px 1px rgba(30, 30, 30, 0.5);
+    -webkit-box-shadow: 0px 1px 15px 1px rgba(30, 30, 30, 0.5) !important;
+    -moz-box-shadow: 0px 1px 15px 1px rgba(30, 30, 30, 0.5) !important;
+    box-shadow: 0px 1px 15px 1px rgba(30, 30, 30, 0.5) !important;
 }
 
 nav {
-    -webkit-box-shadow: 0px 1px 15px 1px rgb(30, 30, 30);
-    -moz-box-shadow: 0px 1px 15px 1px rgb(30, 30, 30);
-    box-shadow: 0px 1px 15px 1px rgb(30, 30, 30);
+    -webkit-box-shadow: 0px 1px 15px 1px rgb(30, 30, 30) !important;
+    -moz-box-shadow: 0px 1px 15px 1px rgb(30, 30, 30) !important;
+    box-shadow: 0px 1px 15px 1px rgb(30, 30, 30) !important;
 }
 
 .footer {
-    -webkit-box-shadow: 0px 1px 15px 1px rgb(30, 30, 30);
-    -moz-box-shadow: 0px 1px 15px 1px rgb(30, 30, 30);
-    box-shadow: 0px 1px 15px 1px rgb(30, 30, 30);
+    -webkit-box-shadow: 0px 1px 15px 1px rgb(30, 30, 30) !important;
+    -moz-box-shadow: 0px 1px 15px 1px rgb(30, 30, 30) !important;
+    box-shadow: 0px 1px 15px 1px rgb(30, 30, 30) !important;
 }
 
 .progress {
-    -webkit-box-shadow: 0px 1px 15px 1px rgb(30, 30, 30);
-    -moz-box-shadow: 0px 1px 15px 1px rgb(30, 30, 30);
-    box-shadow: 0px 1px 15px 1px rgb(30, 30, 30);
+    -webkit-box-shadow: 0px 1px 15px 1px rgb(30, 30, 30) !important;
+    -moz-box-shadow: 0px 1px 15px 1px rgb(30, 30, 30) !important;
+    box-shadow: 0px 1px 15px 1px rgb(30, 30, 30) !important;
 }
 
 .table {
-    color: lightgray;
+    color: lightgray !important;
 }
 
 #doughnut-canvas {
-    border-color: black;
+    border-color: black !important;
 }
 
 .bootstrap-tagsinput {
-    background: #2b2b2b;
-    border-color: #595959;
+    background: #2b2b2b !important;
+    border-color: #595959 !important;
 }
 
 .tabela td {
-    color: black;
+    color: black !important;
 }
 
 .tabela th {
-    color: white;
+    color: white !important;
 }
 
 .tabela-balance #border-th {
-    color: black;
+    color: black !important;
 }
 
 .tabela-balance #border-td {
-    color: black;
+    color: black !important;
 }
 
 .tabela-balance th {
-    color: white;
+    color: white !important;
 }
 
 .tabela-balance td {
-    color: white;
+    color: white !important;
 }
 
 .alert {
-    opacity: 0.85;
+    opacity: 0.85 !important;
 }
