@@ -22,16 +22,25 @@ function toggleDarkMode() {
         //turn on darkmode
         removeDarkModeCss();
     }
+    if (document.getElementById("darkmodeEnable")) {
+        if (localStorage.getItem('dark') === "false") {
+            $("#darkmodeEnable")[0].checked = false;
+        }
+        else {
+            $("#darkmodeEnable")[0].checked = true;
+        }
+    }
 }
 
 function addDarkModeCss() {
-    var link = document.createElement('link');
-    link.setAttribute('rel', 'stylesheet');
-    //link.setAttribute('type', 'text/css');
-    link.setAttribute('href', 'assets/stylesheets/darkmode.css');
-    link.setAttribute('id', 'darkmode')
-    document.getElementsByTagName('head')[0].appendChild(link);
-    
+    if (!document.getElementById('darkmode')) {
+        var link = document.createElement('link');
+        link.setAttribute('rel', 'stylesheet');
+        //link.setAttribute('type', 'text/css');
+        link.setAttribute('href', 'assets/stylesheets/darkmode.css');
+        link.setAttribute('id', 'darkmode')
+        document.getElementsByTagName('head')[0].appendChild(link);
+    }
     document.getElementById('appearanceDark').removeAttribute("style");
     document.getElementById('appearanceLight').setAttribute("style", "display: none");
     darkMode.isSet = true;

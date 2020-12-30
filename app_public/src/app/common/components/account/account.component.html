@@ -64,7 +64,7 @@
             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                 <b *ngIf="hasChangeUserMessage">{{changeUserMessage}}</b>
                 <button type="button" id="userInfoButton" (click)="disableButton()" class="btn btn-primary" style="float: right;">{{data.saveChanges}}</button>
-                <button type="button" id="userRemoveButton" (click)="removeUser()" class="btn btn-secondary" style="float: right;">Delete account</button>
+                <button type="button" id="userRemoveButton" (click)="removeUser()" class="btn btn-danger" style="float: right;">Delete account</button>
             </div>
         </div>
         </form>
@@ -77,7 +77,7 @@
         <div class="row">
             <label id="darkmodeEnableLbl" for="darkmodeEnable" class="col-5 col-sm-4 col-md-4 col-lg-4 col-xl-4" style="padding-right: 0px;">{{data.darkMode}}:</label>
             <div class="custom-control custom-switch">
-            <input type="checkbox" class="custom-control-input" id="darkmodeEnable">
+            <input type="checkbox" class="custom-control-input" id="darkmodeEnable" [checked]="this.darkEnabled" (change)="darkModeButton()">
             <label class="custom-control-label" for="darkmodeEnable"></label>
             </div>
         </div>

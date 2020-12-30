@@ -16,6 +16,7 @@ declare var setValueById: any;
 declare var getInnerTextById: any;
 declare var setInnerTextById: any;
 declare var rgbToHex: any;
+declare var toggleDarkMode: any;
 
 @Component({
   selector: 'app-account',
@@ -33,6 +34,7 @@ export class AccountComponent implements OnInit {
     pfpImg: any;
     name: string;
     imageToShow: any;
+    darkEnabled: any;
 
     constructor(
         private api: ApiService,
@@ -45,6 +47,12 @@ export class AccountComponent implements OnInit {
     }
 
   ngOnInit(): void {
+    if (localStorage.getItem('dark') === "false") {
+      this.darkEnabled = false;
+    }
+    else {
+      this.darkEnabled = true;
+    }
     this.api.getUser().then(result => {
         this.uID = result._id;
         this.firstName = result.firstname;
@@ -419,6 +427,10 @@ passwordSubmit() {
       this.changePasswordMessage = "Failed to save!";
     });
   }
+}
+
+darkModeButton() {
+  toggleDarkMode();
 }
   
 }
