@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation, ElementRef, ViewChild, Renderer2, Inject } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ElementRef, ViewChild, Renderer2, Inject, ViewChildren } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { faPlusSquare, faTrashAlt, faCamera, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { Observable } from 'rxjs';
@@ -36,6 +36,7 @@ export class AccountComponent implements OnInit {
     name: string;
     imageToShow: any;
     darkEnabled: any;
+    modalOpen: any = false;
 
     constructor(
         private api: ApiService,
@@ -69,8 +70,8 @@ export class AccountComponent implements OnInit {
         this.router.navigate(['']);  
       });
   }
-  @ViewChild('changePassowrd') modal: ModalDirective;
-  
+  @ViewChild('modalone') public modal: ModalDirective;
+
   hasUrl = false;
 
   faTrashAlt = faTrashAlt;
@@ -417,6 +418,7 @@ removeUser() {
   }
 }
 
+ 
 passwordSubmit() {
   if (this.passwordStrength("newPassword") && this.passwordCheckSignUp()) {
     this.api.updatePassword(getValueById('oldPassword'), getValueById('newPassword'), getValueById('confirmPassword')).then((response) => {
