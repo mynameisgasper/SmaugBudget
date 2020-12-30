@@ -61,7 +61,7 @@ function takeScreenshot(browser, filename) {
         .build();
       });
   
-      context("Login", function() {
+      describe("Login", function() {
         this.timeout(30 * 1000);
         before(() => { browser.get(applicationUrl); });
 
@@ -92,22 +92,75 @@ function takeScreenshot(browser, filename) {
             let loginButton = await browser.findElements(By.xpath("//input[contains(@value, 'Login')]"));
             expect(loginButton).to.not.be.empty;
             loginButton[0].click();
-<<<<<<< HEAD
             await new Promise(r => setTimeout(r, 10000));
-=======
-            await new Promise(r => setTimeout(r, 500));
-
-            takeScreenshot(browser, 'test/porocilo/data.png');
-
-            await new Promise(r => setTimeout(r, 1000));
->>>>>>> 56f8434bcb7b9e0a44025dc6cd38a3af761bc80d
-
+            //takeScreenshot(browser, 'test/login.png')
             var url = await browser.getCurrentUrl();
             expect(url).to.include('dashboard');
         });
       });
       
-      describe("Register", function() {
+      describe("Add new goal", function() {
+        this.timeout(30 * 1000);
+        before(() => { browser.get(applicationUrl); });
+
+        it("Redirect to goal tab", async () => {
+          let goalLink = await browser.findElements(By.xpath("//a[contains(@href, '#goals')]"));
+          expect(goalLink).to.not.be.empty;
+          //console.log(goalLink);
+          goalLink[0].click();
+
+          await new Promise(r => setTimeout(r, 1000));
+        });
+
+        it("Open modal", async () => {
+          let addGoalButton = await browser.findElements(By.xpath("//button[contains(@href, '#addGoalForm')]"));
+          expect(addGoalButton).to.not.be.empty;
+          //console.log(goalButton);
+          addGoalButton[0].click();
+
+          let opened = await browser.findElements(By.xpath("//div[contains(@class, 'modal-backdrop fade show')]"));
+          expect(opened).to.not.be.empty;
+          
+          await new Promise(r => setTimeout(r, 1000));
+        });
+
+        it("Enter data", async () => {
+          let goalName = await browser.findElements(By.xpath("//input[contains(@id, 'Goal')]"));
+          expect(goalName).to.not.be.empty;
+          goalName[0].sendKeys("House");
+
+          //select category for you bodza ker nemorm testirat
+          //let category = await browser.findElements(By.xpath("//input[contains(@id, 'inputCategory')]"));
+          
+          let amount = await browser.findElements(By.xpath("//input[contains(@id, 'Amount')]"));
+          expect(amount).to.not.be.empty;
+          amount[0].sendKeys("10000000");
+
+          //select date for you bodza ker nemorm testirat
+          //let date = await browser.findElements(By.xpath("//input[contains(@id, 'inputDateAddGoal')]"));
+      
+          await new Promise(r => setTimeout(r, 1000));
+        });
+    
+        it("Add goal", async () => {
+          let addGoalButton = await browser.findElements(By.xpath("//button[contains(@id, 'buttonAddGoal')]"));
+          expect(addGoalButton).to.not.be.empty;
+          addGoalButton[0].click();
+
+          await new Promise(r => setTimeout(r, 5000));
+
+        });
+
+        it("Find new goal", async () => {
+          let newGoal = await browser.findElements(By.xpath("//p[contains(text(), 'House')]"));
+          expect(newGoal).to.not.be.empty;
+          //success
+
+        });
+
+      });
+
+      /*describe("Register", function() {
         this.timeout(30 * 1000);
         before(() => { browser.get(applicationUrl); });
 
@@ -168,7 +221,7 @@ function takeScreenshot(browser, filename) {
       });
       
       });
-
+*/
       after(async () => {
         browser.quit();
       });
