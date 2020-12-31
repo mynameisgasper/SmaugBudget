@@ -161,7 +161,7 @@ export class DashboardComponent implements OnInit {
     return [
         new Card(1, 'bg-primary', 'faUniversity', (isNaN(budgetLeft) ? 0 : budgetLeft), getTranslation("cardTitle1"), null),
         new Card(2, 'bg-primary', 'faCoins', totalBills, getTranslation("cardTitle2"), null),
-        new Card(3, 'bg-primary', 'faPiggyBank', (isNaN(budgetLeft - totalBills) ? 0 : budgetLeft - totalBills), getTranslation("Savings"), null),
+        new Card(3, 'bg-primary', 'faPiggyBank', (isNaN(budgetLeft - totalBills) ? 0 : budgetLeft - totalBills), getTranslation("cardTitle3"), null),
     ];
 }
 
