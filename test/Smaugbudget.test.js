@@ -217,7 +217,8 @@ function savePageSource(browser, filename) {
             let loginButton = await browser.findElements(By.xpath("//input[contains(@value, 'Login')]"));
             expect(loginButton).to.not.be.empty;
             loginButton[0].click();
-            await new Promise(r => setTimeout(r, 5000));
+            await new Promise(r => setTimeout(r, 20000));
+
 
             var url = await browser.getCurrentUrl();
             expect(url).to.include('dashboard');
@@ -506,7 +507,6 @@ function savePageSource(browser, filename) {
 
             let categoryOptionField = await browser.findElements(By.xpath("//option[contains(text(), 'Gifts')]"));
             expect(categoryOptionField).to.not.be.empty;
-            console.log(categoryOptionField);
             categoryOptionField[3].click();
             await new Promise(r => setTimeout(r, 1000));
 
