@@ -19,7 +19,7 @@ declare var setLanguage: any;
 })
 export class UtilitiesComponent implements OnInit {
 
-    public data: any;
+    public data: any = {};
     groups: FriendGroup[];
     userId: string;
 

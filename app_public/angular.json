@@ -66,10 +66,7 @@
             "scripts": [
               "src/assets/javascripts/Dictionary.js",
               "src/assets/javascripts/globalFunctions.js",
-              "src/assets/javascripts/confirmation.js",
-              "src/assets/javascripts/DarkMode.js",
-              "src/assets/javascripts/functions.js",
-              "src/assets/javascripts/passwordReset.js"
+              "src/assets/javascripts/DarkMode.js"
             ]
           },
           "configurations": {
