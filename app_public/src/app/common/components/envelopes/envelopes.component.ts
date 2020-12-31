@@ -7,6 +7,9 @@ import { Envelope } from '../../classes/envelope';
 import { AuthenticationService } from '../../services/authentication.service';
 declare var $:any;
 
+declare var getTranslation: any;
+declare var setLanguage: any;
+
 @Component({
   selector: 'app-envelopes',
   templateUrl: './envelopes.component.html',
@@ -24,8 +27,8 @@ export class EnvelopesComponent implements OnInit {
   public envelopes: Array<Envelope>;
   public categories: any;
   fileName = "envelopes";
-  message = "Welcome to Envelopes!";
-  welcomeMessage = "This is the best way to track your monthly and weekly spending per category. Start by clicking 'Add Envelope'.";
+  message = getTranslation("messageEnvelopes");
+  welcomeMessage = getTranslation("welcomeMessageEnvelopes");
   logout = "Logout";
   year = new Date().getFullYear();
   month = new Date().getMonth() + 1;
@@ -44,6 +47,20 @@ export class EnvelopesComponent implements OnInit {
   setMonth = this.getCurrentMonth(new Date().getMonth());
   currentMonth = this.getCurrentMonth(new Date().getMonth());
   currency = "EUR";
+  addExpenseTxt = getTranslation("envelopesAddExpense");
+  addEnvelopeTxt = getTranslation("envelopesAddEnvelope");
+  envelopestt2 = getTranslation("envelopestt2");
+	envelopestt3 = getTranslation("envelopestt3");
+	envelopesFutureErr = getTranslation("envelopesFutureErr");
+	envelopesCategory = getTranslation("envelopesCategory");
+	envelopesSelCat = getTranslation("envelopesSelCat");
+	envelopesMake = getTranslation("envelopesMake");
+	envelopesAmount = getTranslation("envelopesAmount");
+	envelopesColor = getTranslation("envelopesColor");
+	envelopesAdd = getTranslation("envelopesAdd");
+	envelopesRec = getTranslation("envelopesRec");
+  envelopesDate = getTranslation("envelopesDate");
+  HINT = getTranslation("HINT");
 
   hasAddEnvelopeMessage: boolean = false;
   addEnvelopeMessage: string = ""; 
@@ -53,6 +70,7 @@ export class EnvelopesComponent implements OnInit {
 
   ngOnInit(): void {
     this.api.getUser().then(result => {
+      this.refreshLanguage(result.language);
       this.cards = this.generateCards(result.envelopes);
       this.envelopes = result.envelopes;
       this.categories = this.getCategories(result.categories);
@@ -75,6 +93,27 @@ export class EnvelopesComponent implements OnInit {
   
 
   faPlusSquare = faPlusSquare;
+
+  refreshLanguage(language: string) {
+    setLanguage(language);
+        
+    this.message = getTranslation("messageEnvelopes");
+    this.welcomeMessage = getTranslation("welcomeMessageEnvelopes");
+    this.addExpenseTxt = getTranslation("envelopesAddExpense");
+    this.addEnvelopeTxt = getTranslation("envelopesAddEnvelope");
+    this.envelopestt2 = getTranslation("envelopestt2");
+	  this.envelopestt3 = getTranslation("envelopestt3");
+	  this.envelopesFutureErr = getTranslation("envelopesFutureErr");
+	  this.envelopesCategory = getTranslation("envelopesCategory");
+	  this.envelopesSelCat = getTranslation("envelopesSelCat");
+	  this.envelopesMake = getTranslation("envelopesMake");
+  	this.envelopesAmount = getTranslation("envelopesAmount");
+  	this.envelopesColor = getTranslation("envelopesColor");
+  	this.envelopesAdd = getTranslation("envelopesAdd");
+  	this.envelopesRec = getTranslation("envelopesRec");
+    this.envelopesDate = getTranslation("envelopesDate");
+    this.HINT = getTranslation("HINT");
+  }
 
   addExpense(): void {     
     let newSpent = 0;
@@ -348,9 +387,9 @@ export class EnvelopesComponent implements OnInit {
     
 
     return [
-      new Card(1, 'bg-primary', 'faEnvelope', thisMonthEnvelopes.length, 'Envelopes Total', null),
-      new Card(21, 'bg-warning', 'faExclamationTriangle', almostEmptyEnvelopes.length, 'Almost Empty', this.generateAlmostEmptyMessage(almostEmptyEnvelopes)),
-      new Card(31, 'bg-danger', 'faRadiation', emptyEnvelopes.length, 'Empty', this.generateEmptyMessage(emptyEnvelopes)),
+      new Card(1, 'bg-primary', 'faEnvelope', thisMonthEnvelopes.length, getTranslation("envelopesCardTotal"), null),
+      new Card(21, 'bg-warning', 'faExclamationTriangle', almostEmptyEnvelopes.length, getTranslation("envelopesCardAlmost"), this.generateAlmostEmptyMessage(almostEmptyEnvelopes)),
+      new Card(31, 'bg-danger', 'faRadiation', emptyEnvelopes.length, getTranslation("envelopesCardEmpty"), this.generateEmptyMessage(emptyEnvelopes)),
     ];
   }
 
@@ -376,25 +415,25 @@ export class EnvelopesComponent implements OnInit {
 
   generateAlmostEmptyMessage(envelopes: Array<Envelope>): string {
     if (envelopes.length < 1) {
-      return 'No almost empty envelopes!';
+      return getTranslation("envelopesAlmostTextNo");
     }
     else if (envelopes.length == 1) {
-      return envelopes[0].category['name'] + ' almost empty!';
+      return envelopes[0].category['name'] + getTranslation("envelopesAlmostTextOne");
     }
     else {
-      return envelopes.length + ' envelopes almost empty!';
+      return envelopes.length + getTranslation("envelopesAlmostTextMore");
     }
   }
 
   generateEmptyMessage(envelopes: Array<Envelope>): string {
     if (envelopes.length < 1) {
-      return 'No empty envelopes!';
+      return getTranslation("envelopesTextNo");
     }
     else if (envelopes.length == 1) {
-      return envelopes[0].category['name'] + ' empty!';
+      return envelopes[0].category['name'] + getTranslation("envelopesTextOne");
     }
     else {
-      return envelopes.length + ' envelopes empty!';
+      return envelopes.length + getTranslation("envelopesTextMore");
     }
   }
 

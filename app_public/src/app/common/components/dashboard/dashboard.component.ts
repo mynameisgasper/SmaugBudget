@@ -9,6 +9,9 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { Router } from '@angular/router';
 declare var $:any;
 
+declare var getTranslation: any;
+declare var setLanguage: any;
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -24,25 +27,25 @@ export class DashboardComponent implements OnInit {
   modalRef: BsModalRef;
 
   pencilIcon = faPencilAlt;
-  message = "Welcome to dashboard!";
-  welcomeMessage = "A simple overview of your spending.";
+  message = getTranslation("messageDashboard");
+  welcomeMessage = getTranslation("welcomeMessageDashboard");
   cards: Card[] = [];
   alerts: Alert[] = [];
   analytics: Array<Object> = [];
-  overview = "Last month overview";
-  incomeRow = "Income";
+  overview = getTranslation("overview");
+  incomeRow = getTranslation("incomeRow");
   currency: String;
   incomeLastMonth: any;
-  expensesRow = "Expenses";
-  balanceRow = "Balance";
+  expensesRow = getTranslation("expensesRow");
+  balanceRow = getTranslation("balanceRow");
   expensesLastMonth: any;
-  analyticsField = "Analytics";
-  noData = "No data";
-  incomeModalTitle = "Update your Income";
-  incomeModalPlaceholderIncome = "Enter your income";
-  incomeModalPlaceholderDate = "Day in month you receive paycheck";
-  incomeModalSaveButton = "Save Changes";
-  incomeModalCloseButton = "Close";
+  analyticsField = getTranslation("analyticsField");
+  noData: string = getTranslation("noData");
+  incomeModalTitle = getTranslation("incomeModalTitle");
+  incomeModalPlaceholderIncome = getTranslation("incomeModalPlaceholderIncome");
+  incomeModalPlaceholderDate = getTranslation("incomeModalPlaceholderDate");
+  incomeModalSaveButton = getTranslation("incomeModalSaveButton");
+  incomeModalCloseButton = getTranslation("incomeModalCloseButton");
   chartData: Array<Number> = [];
   chartColors: Array<Object> = [];
   chartLabels: Array<String> = [];
@@ -55,6 +58,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.api.getUser().then(result => {
       const user: User = result;
+      this.refreshLanguage(result.language);
       this.cards = this.generateCards(user.bills, user.expense, user.paycheck, user.paycheckDate);
       this.alerts = this.generateAlerts(user.envelopes, user.bills, user.goals);
       this.analytics = this.generateAnalyitcs(result.expense, result.paycheckDate)
@@ -65,6 +69,24 @@ export class DashboardComponent implements OnInit {
       this.authentication.logout();
       this.router.navigate(['']);
     });
+  }
+
+  refreshLanguage(language: string) {
+    setLanguage(language);
+        
+    this.message = getTranslation("messageDashboard");
+    this.welcomeMessage = getTranslation("welcomeMessageDashboard");
+    this.overview = getTranslation("overview");
+    this.incomeRow = getTranslation("incomeRow");
+    this.expensesRow = getTranslation("expensesRow");
+    this.balanceRow = getTranslation("balanceRow");
+    this.analyticsField = getTranslation("analyticsField");
+    this.noData = getTranslation("noData");
+    this.incomeModalTitle = getTranslation("incomeModalTitle");
+    this.incomeModalPlaceholderIncome = getTranslation("incomeModalPlaceholderIncome");
+    this.incomeModalPlaceholderDate = getTranslation("incomeModalPlaceholderDate");
+    this.incomeModalSaveButton = getTranslation("incomeModalSaveButton");
+    this.incomeModalCloseButton = getTranslation("incomeModalCloseButton");
   }
 
   amountDashboard1(ammountField: any): number {
@@ -137,9 +159,9 @@ export class DashboardComponent implements OnInit {
     var totalBills = this.getTotalCost(billsUntilPaycheck);
     var budgetLeft = paycheck - totalCost;
     return [
-        new Card(1, 'bg-primary', 'faUniversity', (isNaN(budgetLeft) ? 0 : budgetLeft), 'Budget Left', null),
-        new Card(2, 'bg-primary', 'faCoins', totalBills, 'Expenses Left', null),
-        new Card(3, 'bg-primary', 'faPiggyBank', (isNaN(budgetLeft - totalBills) ? 0 : budgetLeft - totalBills), 'Savings', null),
+        new Card(1, 'bg-primary', 'faUniversity', (isNaN(budgetLeft) ? 0 : budgetLeft), getTranslation("cardTitle1"), null),
+        new Card(2, 'bg-primary', 'faCoins', totalBills, getTranslation("cardTitle2"), null),
+        new Card(3, 'bg-primary', 'faPiggyBank', (isNaN(budgetLeft - totalBills) ? 0 : budgetLeft - totalBills), getTranslation("cardTitle3"), null),
     ];
 }
 
@@ -226,10 +248,10 @@ export class DashboardComponent implements OnInit {
     var totalEmptyEnvelopes = this.getTotalEmptyEnvelopes(envelopes, month);
 
     if (totalAlmostEmptyEnvelopes > 0) {
-      envelopesAlerts.push(new Alert('alert-warning', 'ENVELOPES', totalAlmostEmptyEnvelopes + ' almost empty'));
+      envelopesAlerts.push(new Alert('alert-warning', getTranslation("alertName1"), totalAlmostEmptyEnvelopes + getTranslation("alertText1")));
     }
     if (totalEmptyEnvelopes > 0) {
-        envelopesAlerts.push(new Alert('alert-danger', 'ENVELOPES', totalEmptyEnvelopes + ' empty'));
+        envelopesAlerts.push(new Alert('alert-danger', getTranslation("alertName1"), totalEmptyEnvelopes + getTranslation("alertText1_1")));
     }
 
     return envelopesAlerts;
@@ -240,7 +262,7 @@ export class DashboardComponent implements OnInit {
 
     const nearBills = this.getBillsInTheNext7Days(bills);
     if (nearBills.length > 0) {
-      billsAlerts.push(new Alert('alert-warning', 'BILLS', nearBills.length + ' bill to pay this week'));
+      billsAlerts.push(new Alert('alert-warning', getTranslation("alertName2"), nearBills.length + getTranslation("alertText2")));
     }
     return billsAlerts;
   }
@@ -248,7 +270,7 @@ export class DashboardComponent implements OnInit {
   generateGoalsAlerts(goals) {
     var count = this.goalsCompleted(goals);
     if (count) {
-        return [new Alert('alert-success', 'GOALS', count + ' goal completed')];
+        return [new Alert('alert-success', getTranslation("alertName3"), count + getTranslation("alertText3"))];
     } else {
         return [];
     }
@@ -311,12 +333,12 @@ export class DashboardComponent implements OnInit {
 
     if (mostMoneySpentOn && mostTimesPurchased) {
         return [{
-                rowName: 'Most money spent on',
+                rowName: getTranslation("analyticsRowName1"),
                 color: mostMoneySpentOn.color,
                 category: mostMoneySpentOn.name
             },
             {
-                rowName: 'Most times purchased',
+                rowName: getTranslation("analyticsRowName2"),
                 color: mostTimesPurchased.color,
                 category: mostTimesPurchased.name
             }

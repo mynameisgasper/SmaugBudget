@@ -12,6 +12,9 @@ import { Expense } from '../../classes/expense';
 
 declare var $:any;
 
+declare var getTranslation: any;
+declare var setLanguage: any;
+
 @Component({
   selector: 'app-history',
   templateUrl: './history.component.html',
@@ -27,11 +30,8 @@ export class HistoryComponent implements OnInit {
     "used": true,
     "name": "HistoryChart"
   };
-  dateRangePicker: Object = {
-    "used": true
-  };
-  message: string = "Welcome to History!";
-  welcomeMessage: string = "This is the best way to check your past spending by time and category.";
+  message: string = getTranslation("messageHistory");
+  welcomeMessage: string = getTranslation("welcomeMessageHistory");
   logout: string = "Logout";
   DASHBOAR: string = "DASHBOARD,";
   ENVELOPES: string = "ENVELOPES";
@@ -59,6 +59,10 @@ export class HistoryComponent implements OnInit {
   pageSize: number = 10
   filter: string = '';
 
+  historyAll = getTranslation("historyAll");
+  historyExport = getTranslation("historyExport");
+  historyTotal = getTranslation("historyTotal");
+
   constructor(
     private api: ApiService,
     @Inject(DOCUMENT) private document: HTMLDocument,
@@ -70,14 +74,14 @@ export class HistoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.api.getUser().then(result => {
-
+      this.refreshLanguage(result.language);
       this.categories = result.categories;
       this.expenses = this.generateExpenses(result.expense);
       this.currency = result.defaultCurrency;
       
       //data za tabele
       const parsedTable = this.parseTable(this.expenses);
-      document.querySelector(".totaltext").innerHTML = "<h5>Total spent: " + parsedTable.sum.toFixed(2); + "€</h5>";
+      document.querySelector(".totaltext").innerHTML = "<h5>" + this.historyTotal + ": " + parsedTable.sum.toFixed(2); + "€</h5>";
       const pieChart = this.groupByCategories(parsedTable);
       const lineChartData = this.makeDataForGraph(this.filterByCategory(this.expenses))
 
@@ -98,6 +102,16 @@ export class HistoryComponent implements OnInit {
       this.authentication.logout();
       this.router.navigate(['']);
     });
+  }
+
+  refreshLanguage(language: string) {
+    setLanguage(language);
+        
+    this.message = getTranslation("messageHistory");
+    this.welcomeMessage = getTranslation("welcomeMessageHistory");
+    this.historyAll = getTranslation("historyAll");
+    this.historyExport = getTranslation("historyExport");
+    this.historyTotal = getTranslation("historyTotal");
   }
 
   parseTable(rows) {

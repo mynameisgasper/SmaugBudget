@@ -18,7 +18,6 @@ import { HeaderComponent } from './common/components/header/header.component';
 import { FooterComponent } from './common/components/footer/footer.component';
 import { EnvelopesComponent } from './common/components/envelopes/envelopes.component';
 import { EnvelopesProgressComponent } from './common/components/envelopes-progress/envelopes-progress.component';
-import { EnvelopesConProgressComponent } from './common/components/envelopes-con-progress/envelopes-con-progress.component';
 import { GoalsComponent } from './common/components/goals/goals.component';
 import { GoalsProgressComponent } from './common/components/goals-progress/goals-progress.component';
 import { DbComponent } from './common/components/db/db.component';
@@ -56,7 +55,6 @@ import { environment } from '../environments/environment';
     FooterComponent,
     EnvelopesComponent,
     EnvelopesProgressComponent,
-    EnvelopesConProgressComponent,
     GoalsComponent,
     GoalsProgressComponent,
     ConfirmationComponent,

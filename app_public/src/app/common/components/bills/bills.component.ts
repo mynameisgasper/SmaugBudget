@@ -7,6 +7,9 @@ import { Router } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication.service';
 declare var $:any;
 
+declare var getTranslation: any;
+declare var setLanguage: any;
+
 @Component({
   selector: 'app-bills',
   templateUrl: './bills.component.html',
@@ -26,8 +29,8 @@ export class BillsComponent implements OnInit {
     public categories: any;
     bills: Bill[]
     fileName: string = "bills";
-    message = "Welcome to Bills!";
-    welcomeMessage = "Here you can add recurring bills. Fill in the form, submit and it will be added to an envelope repeteadly!";
+    message = getTranslation("messageBills");
+    welcomeMessage = getTranslation("welcomeMessageBills");
     logout = "Logout";
     DASHBOARD = "DASHBOARD";
     ENVELOPES = "ENVELOPES";
@@ -42,12 +45,28 @@ export class BillsComponent implements OnInit {
     dark = "Dark";    
     currency: string;
 
+    billsAll = getTranslation("billsAll");
+	billAdd = getTranslation("billAdd");
+	billsPayee = getTranslation("billsPayee");
+	billsDue = getTranslation("billsDue");
+	billsOften = getTranslation("billsOften");
+	billsOnce = getTranslation("billsOnce");
+	billsMonth = getTranslation("billsMonth");
+    billsYear = getTranslation("billsYear");
+    HINT = getTranslation("HINT");
+    envelopestt2 = getTranslation("envelopestt2");
+    envelopestt3 = getTranslation("envelopestt3");
+    goalsDateHint = getTranslation("goalsDateHint");
+    envelopesCategory = getTranslation("envelopesCategory");
+    envelopesSelCat = getTranslation("envelopesSelCat");
+    envelopesAmount = getTranslation("envelopesAmount");
+
     hasAddMessage: boolean = false;
     addMessage: string = "";
 
     ngOnInit(): void {
         this.api.getUser().then(result => {
-            console.log(result.bills)
+            this.refreshLanguage(result.language);
             this.bills = this.generateBills(result.bills)
             this.cards = this.generateCards();
             this.categories = result.categories;
@@ -65,6 +84,27 @@ export class BillsComponent implements OnInit {
 
     faPlusSquare = faPlusSquare;
 
+    refreshLanguage(language: string) {
+        setLanguage(language);
+            
+        this.message = getTranslation("messageBills");
+        this.welcomeMessage = getTranslation("welcomeMessageBills");
+        this.billsAll = getTranslation("billsAll");
+	    this.billAdd = getTranslation("billAdd");
+	    this.billsPayee = getTranslation("billsPayee");
+	    this.billsDue = getTranslation("billsDue");
+	    this.billsOften = getTranslation("billsOften");
+	    this.billsOnce = getTranslation("billsOnce");
+	    this.billsMonth = getTranslation("billsMonth");
+        this.billsYear = getTranslation("billsYear");
+        this.HINT = getTranslation("HINT");
+        this.envelopestt2 = getTranslation("envelopestt2");
+        this.envelopestt3 = getTranslation("envelopestt3");
+        this.goalsDateHint = getTranslation("goalsDateHint");
+        this.envelopesCategory = getTranslation("envelopesCategory");
+        this.envelopesSelCat = getTranslation("envelopesSelCat");
+        this.envelopesAmount = getTranslation("envelopesAmount");
+    }
     generateBills(bills) {
         var billsArray = []
         for (var bill of bills) {
@@ -237,7 +277,6 @@ export class BillsComponent implements OnInit {
     }
 
     afterAddBill(bill){
-        console.log(bill)
         var date = bill.date.split('T')[0].split('-');
         var newBill: Bill = {
             _id: bill._id, 
@@ -262,8 +301,8 @@ export class BillsComponent implements OnInit {
         const nearBills = this.getBillsInTheNext7Days();
 
         return [
-        new Card(1, 'bg-primary', 'faPaperclip', this.bills.length, 'Bills Total', null),
-        new Card(21, 'bg-warning', 'faCalendar', nearBills.length, 'Bills This Week', this.generateComment(nearBills)),
+        new Card(1, 'bg-primary', 'faPaperclip', this.bills.length, getTranslation("billsTotal"), null),
+        new Card(21, 'bg-warning', 'faCalendar', nearBills.length, getTranslation("billsWeek"), this.generateComment(nearBills)),
         ];
     }
 
@@ -283,13 +322,13 @@ export class BillsComponent implements OnInit {
     }
 
     generateComment(bills) {
-        var comment = 'No bills this week.';
+        var comment = getTranslation("billsNone");
 
         var bill = this.findClosestBill(bills);
         if (!bill) return comment;
         const billDate = new Date(Date.parse(bill.date));
         const dtfUK = new Intl.DateTimeFormat('UK', { month: '2-digit', day: '2-digit' });
-        comment = "Closest bill:\n" + bill.recipient + " - " + dtfUK.format(billDate);
+        comment = getTranslation("billsClose") + ":\n" + bill.recipient + " - " + dtfUK.format(billDate);
 
         return comment;
     }

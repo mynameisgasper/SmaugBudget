@@ -82,6 +82,14 @@ app.set('views', path.join('./app_server/views'));
 app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
 
+app.disable('x-powered-by');
+app.use((req, res, next) => {
+  res.header('X-Frame-Options', 'DENY');
+  res.setHeader('X-XSS-Protection', '1; mode=block');
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  next();
+});
+
 //Cookies
 app.use(session({
     key: 'user_sid',
@@ -104,8 +112,15 @@ app.use((req, res, next) => {
 app.use(express.static(path.join(__dirname, 'app_public', 'build')));
 app.use(passport.initialize());
 
+var origin = 'http://localhost:4200';
+if (process.env.NODE_ENV === 'production') {
+  origin = "https://smaugbudget.herokuapp.com/";
+}
+
+
 app.use('/api', (req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
+    res.header("Content-Security-Policy", "default-src 'self'");
+    res.header('Access-Control-Allow-Origin', origin);
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
     next();
 });

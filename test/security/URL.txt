@@ -1,0 +1,7 @@
+http://localhost:8080/dashboard
+http://localhost:8080/envelopes
+http://localhost:8080/goals
+http://localhost:8080/bills
+http://localhost:8080/history
+http://localhost:8080/utilities
+http://localhost:8080/account

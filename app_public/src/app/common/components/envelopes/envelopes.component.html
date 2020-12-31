@@ -6,35 +6,35 @@
             <div class="w-25 toastek">
                 <div class="toast ml-auto tt5" role="alert" data-delay="3000" data-autohide="false">
                     <div class="toast-header">
-                        <strong class="mr-auto text-primary">HINT</strong>
+                        <strong class="mr-auto text-primary">{{HINT}}</strong>
                         <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
                           <span aria-hidden="true">×</span>
                       </button>
                     </div>
                     <div class="toast-body">
-                        Input may only contain letters, numbers, some special characters (_@./#&+-: ) and whitespaces. Length allowed: 1-14
+                        {{envelopestt2}}14
                     </div>
                 </div>
                 <div class="toast ml-auto tt1" role="alert" data-delay="1000" data-autohide="false">
                     <div class="toast-header">
-                        <strong class="mr-auto text-primary">HINT</strong>
+                        <strong class="mr-auto text-primary">{{HINT}}</strong>
                         <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
                     <div class="toast-body">
-                        Input may only contain decimal numbers separated by . with max 2 decimal places.
+                        {{envelopestt3}}
                     </div>
                 </div>
                 <div class="toast ml-auto tt7" id="date-hint" role="alert" data-delay="3000" data-autohide="false">
                     <div class="toast-header">
-                        <strong class="mr-auto text-primary">HINT</strong>
+                        <strong class="mr-auto text-primary">{{HINT}}</strong>
                         <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
                                 <span aria-hidden="true">×</span>
                             </button>
                     </div>
                     <div class="toast-body">
-                        Expense can't be in the future.
+                        {{envelopesFutureErr}}
                     </div>
                 </div>
             </div>
@@ -52,18 +52,18 @@
                     <input type="hidden" value="{{setMonthNumber}}" name="setMonth">
                     <div class="modal-body">
                         <div class="ena">
-                            <label for="chooseCategoryEnvelope">Category</label>
+                            <label for="chooseCategoryEnvelope">{{envelopesCategory}}</label>
                             <select #selectCategoryAdd id="inputCategory" name="chooseCategoryEnvelope" class="form-control" onchange="checkCategory(this)" required>
-                                <option value="" selected>Select category</option>
+                                <option value="" selected>{{envelopesSelCat}}</option>
                                 <option *ngFor="let item of categories;"value="{{item.name}}" id="category{{item._id}}">{{item.name}}</option>
-                                <option value="other">Make your own</option>
+                                <option value="other">{{envelopesMake}}</option>
                             </select>
 
                             <label for="categoryAddEnvelope"></label>
                             <input #categoryAdd type="text" class="form-control" id="ime" (focusout)="nameAddEnvelopes()" name="categoryAddEnvelope" placeholder="Or create your own" style="display:none" disabled>
                         </div>
 
-                        <div class="ena"><label for="inputAmount">Amount</label><br />
+                        <div class="ena"><label for="inputAmount">{{envelopesAmount}}</label><br />
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">{{currency}}</span>
@@ -74,14 +74,14 @@
                         </div>
 
                         <div class="ena">
-                            <label id="colorPickerLabel" for="colorPicker">Color Picker</label><br />
+                            <label id="colorPickerLabel" for="colorPicker">{{envelopesColor}}</label><br />
                             <input #colorAdd type="color" id="colorPicker" name="colorPicker">
                         </div>
 
                     </div>
                     <div class="modal-footer">
                         <p *ngIf="hasAddEnvelopeMessage"><b>{{addEnvelopeMessage}}</b></p>
-                        <button id="buttonAddEnvelopes" (click)="buttonAddEnvelopes()" class="btn btn-primary">Add</button>
+                        <button id="buttonAddEnvelopes" (click)="buttonAddEnvelopes()" class="btn btn-primary">{{envelopesAdd}}</button>
                     </div>
                 </form>
             </div>
@@ -95,35 +95,35 @@
             <div class="w-25 toastek">
                 <div class="toast ml-auto tt2" role="alert" data-delay="3000" data-autohide="false">
                     <div class="toast-header">
-                        <strong class="mr-auto text-primary">HINT</strong>
+                        <strong class="mr-auto text-primary">{{HINT}}</strong>
                         <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
                     <div class="toast-body">
-                        Input may only contain letters, numbers, some special characters (_@./#&+-: ) and whitespaces. Length allowed: 1-16
+                        {{envelopestt2}}16
                     </div>
                 </div>
                 <div class="toast ml-auto tt3" role="alert" data-delay="1000" data-autohide="false">
                     <div class="toast-header">
-                        <strong class="mr-auto text-primary">HINT</strong>
+                        <strong class="mr-auto text-primary">{{HINT}}</strong>
                         <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
                     <div class="toast-body">
-                        Input may only contain decimal numbers separated by . or , with max 2 decimal places.
+                        {{envelopestt3}}
                     </div>
                 </div>
                 <div class="toast ml-auto tt4" id="date-hint" role="alert" data-delay="3000" data-autohide="false">
                     <div class="toast-header">
-                        <strong class="mr-auto text-primary">HINT</strong>
+                        <strong class="mr-auto text-primary">{{HINT}}</strong>
                         <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
                     <div class="toast-body">
-                        Expense can't be in the future.
+                        {{envelopesFutureErr}}
                     </div>
                 </div>
             </div>
@@ -139,18 +139,18 @@
                 <form name="addExpense">
                     <input type="hidden" name="formType" value="addExpense" />
                     <div class="modal-body">
-                        <div class="ena"><label for="inputGoal">Category</label><br />
+                        <div class="ena"><label for="inputGoal">{{envelopesCategory}}</label><br />
                             <select #categoryExpense id="inputCategory" name="inputCategory" class="form-control">
-                                <option selected>Choose a category</option>
+                                <option selected>{{envelopesSelCat}}</option>
                                 <option *ngFor="let item of categories;" id="category{{item._id}}">{{item.name}}</option>
                             </select>
                         </div>
                         <div class="ena">
-                            <label for="Payee">Recipient</label><br>
+                            <label for="Payee">{{envelopesRec}}</label><br>
                             <input type="text" #nameExpense id="Payee25" name="recipient" class="form-control" placeholder="e.g. Elektro Ljubljana d.d." (focusout)="nameExpenseEnvelopes()" value="" required="required">
                             <div id="txt"></div>
                         </div>
-                        <div class="ena"><label for="inputAmount">Amount</label><br />
+                        <div class="ena"><label for="inputAmount">{{envelopesAmount}}</label><br />
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span id="currencyPrepend" class="input-group-text">{{currency}}</span>
@@ -202,13 +202,13 @@
                         </div>-->
 
                         <div class="ena">
-                            <label for="datum">Date</label><br>
+                            <label for="datum">{{envelopesDate}}</label><br>
                             <input type="date" #dateExpense id="inputDate15" name="date" (focusout)="dateExpenseEnvelopes()" class="form-control" value="{{year}}-{{month}}-{{day}}" required="required">
                         </div>
                     </div>
                     <div class="modal-footer">
                         <p *ngIf="hasAddExpenseMessage"><b>{{addExpenseMessage}}</b></p>
-                        <button id="buttonAddExpense" (click)="buttonExpenseEnvelopes()" class="btn btn-primary">Add</button>
+                        <button id="buttonAddExpense" (click)="buttonExpenseEnvelopes()" class="btn btn-primary">{{envelopesAdd}}</button>
                     </div>
                 </form>
             </div>
@@ -243,19 +243,18 @@
         <div class="row">
             <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
                 <button type="button" class="btn btn-success" style="float:left;" data-toggle="modal" href="#addExpenseForm" role="button" aria-expanded="false" aria-controls="about">
-                    Add Expense
+                    {{addExpenseTxt}}
                     <fa-icon [icon]="faPlusSquare"></fa-icon>
                 </button>
             </div>
             <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
                 <button type="button" class="btn btn-primary" style="float:right;" data-toggle="modal" href="#addEnvelopeForm" role="button" aria-expanded="false" aria-controls="about">
-                    Add Envelope
+                    {{addEnvelopeTxt}}
                     <fa-icon [icon]="faPlusSquare"></fa-icon>
                 </button>
             </div>
         </div>
         <app-envelopes-progress *ngFor="let item of envelopes" [envelope]="item" [month]="setMonth" [currency]="currency" id="{{item._id}}"></app-envelopes-progress>
-        <app-envelopes-con-progress></app-envelopes-con-progress>
     </div>
 
     <app-footer></app-footer>

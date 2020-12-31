@@ -49,7 +49,20 @@
               "src/assets/images",
               "src/assets/stylesheets/fonts.css",
               "src/assets/stylesheets/main.css",
-              "src/manifest.webmanifest"
+              "src/assets/stylesheets/aos.css",
+              "src/manifest.webmanifest",
+              "src/assets/stylesheets/darkmode.css",
+              "src/assets/javascripts/jquery-3.5.1.min.js",
+              "src/assets/javascripts/moment.min.js",
+              "src/assets/javascripts/aos.js",
+              "src/assets/stylesheets/bootstrap.min.css",
+              "src/assets/stylesheets/bootstrap-select.css",           
+              "src/assets/javascripts/bootstrap.min.js",           
+              "src/assets/javascripts/bootstrap.min.js.map",           
+              "src/assets/javascripts/bootstrap-select.min.js",          
+              "src/assets/javascripts/bootstrap-select.js.map",          
+              "src/assets/javascripts/popper.min.js",
+              "src/assets/javascripts/popper.min.js.map"
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
@@ -63,19 +76,7 @@
             "scripts": [
               "src/assets/javascripts/Dictionary.js",
               "src/assets/javascripts/globalFunctions.js",
-              "src/assets/javascripts/bills.js",
-              "src/assets/javascripts/confirmation.js",
-              "src/assets/javascripts/DarkMode.js",
-              "src/assets/javascripts/dashboard.js",
-              "src/assets/javascripts/DashboardChart.js",
-              "src/assets/javascripts/envelopes.js",
-              "src/assets/javascripts/functions.js",
-              "src/assets/javascripts/goals.js",
-              "src/assets/javascripts/history.js",
-              "src/assets/javascripts/HistoryChart.js",
-              "src/assets/javascripts/index.js",
-              "src/assets/javascripts/passwordReset.js",
-              "src/assets/javascripts/utilities.js"
+              "src/assets/javascripts/DarkMode.js"
             ]
           },
           "configurations": {
@@ -107,6 +108,33 @@
               ],
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json"
+            }, 
+            "docker": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.docker.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
             }
           }
         },

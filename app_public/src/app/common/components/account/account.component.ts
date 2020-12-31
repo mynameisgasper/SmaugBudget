@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation, ElementRef, ViewChild, Renderer2, Inject } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ElementRef, ViewChild, Renderer2, Inject, ViewChildren } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { faPlusSquare, faTrashAlt, faCamera, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { Observable } from 'rxjs';
@@ -6,6 +6,7 @@ import { map, startWith } from 'rxjs/operators';
 import { ApiService } from '../../services/api.service';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication.service';
+import { ModalDirective } from 'ngx-bootstrap/modal';
 declare var $:any;
 
 declare var getTranslation: any;
@@ -16,6 +17,7 @@ declare var setValueById: any;
 declare var getInnerTextById: any;
 declare var setInnerTextById: any;
 declare var rgbToHex: any;
+declare var toggleDarkMode: any;
 
 @Component({
   selector: 'app-account',
@@ -33,6 +35,8 @@ export class AccountComponent implements OnInit {
     pfpImg: any;
     name: string;
     imageToShow: any;
+    darkEnabled: any;
+    modalOpen: any = false;
 
     constructor(
         private api: ApiService,
@@ -45,6 +49,12 @@ export class AccountComponent implements OnInit {
     }
 
   ngOnInit(): void {
+    if (localStorage.getItem('dark') === "false") {
+      this.darkEnabled = false;
+    }
+    else {
+      this.darkEnabled = true;
+    }
     this.api.getUser().then(result => {
         this.uID = result._id;
         this.firstName = result.firstname;
@@ -60,7 +70,9 @@ export class AccountComponent implements OnInit {
         this.router.navigate(['']);  
       });
   }
-  
+  @ViewChild('modalone') public modal: ModalDirective;
+  @ViewChild('modaltwo') public modal2: ModalDirective;
+
   hasUrl = false;
 
   faTrashAlt = faTrashAlt;
@@ -81,6 +93,9 @@ export class AccountComponent implements OnInit {
 
   haschangePasswordMessage: boolean = false;
   changePasswordMessage: string = "";
+
+  haschangePfpMessage: boolean = false;
+  changePfpMessage: string = "";
 
   data = {
       "HINT": getTranslation("HINT"),
@@ -198,7 +213,7 @@ export class AccountComponent implements OnInit {
     
     this.api.setLanguage(language).then((response) => {
         this.refreshLanguage(response.language);
-        
+        this.hasChangeLanguageMessage = false;
       }).catch((error) => {
         this.changeLanguageMessage = 'Failed to save!';
       });
@@ -219,13 +234,15 @@ getImage() {
         }
         
       }).catch((error) => {
-        this.changeLanguageMessage = 'Failed to save!';
+        
       });
 }
 
 changeColor(category_id: string) {
+  this.hasChangeColorMessage = true;
+  this.changeColorMessage = 'Saving color';
     this.api.changeColor(category_id, getValueById("color" + category_id)).then((response) => {
-        
+      this.hasChangeColorMessage = false;
         
       }).catch((error) => {
         this.changeColorMessage = 'Failed to save!';
@@ -238,7 +255,7 @@ changeCurrency(curr: string) {
     this.changeCurrencyMessage = 'Saving currency';
     
     this.api.setDefaultCurrency(curr).then((response) => {
-        
+      this.hasChangeCurrencyMessage = false;
       }).catch((error) => {
         this.changeCurrencyMessage = 'Failed to save!';
 
@@ -265,7 +282,7 @@ updateUserInfo() {
           }
         }
         catch {}
-        
+        this.hasChangeUserMessage = false;
       }).catch((error) => {
         this.changeUserMessage = "Failed to save!";
       });
@@ -283,11 +300,16 @@ readURL(input: FileList) {
 }
 
 uploadFileToActivity() {
+  this.haschangePfpMessage = true;
+  this.changePfpMessage = 'Saving image';
     this.api.postFile(this.fileToUpload).then((response) => {
         console.log(response);
         this.pfpImg = this.getImage();
+        this.haschangePfpMessage = false;
+        this.modal2.hide();
       }).catch((error) => {
         console.log(error);
+        this.changePfpMessage = 'Failed to upload!';
       });
 }
 
@@ -387,9 +409,11 @@ passwordCheckSignUp() {
 
 removeCategory(id: string) {
   if(confirm("Deleting category will remove all related envelopes and goals!")) {
+    this.hasChangeColorMessage = true;
+    this.changeColorMessage = "Removing category";
     this.api.deleteCategory(id).then((response) => {
       this.elementRef.nativeElement.querySelector('#editColor' + id ).parentNode.remove();
-      
+      this.hasChangeColorMessage = false;
     }).catch((error) => {
       this.changeColorMessage = "Failed to remove!";
     });
@@ -407,11 +431,15 @@ removeUser() {
   }
 }
 
+ 
 passwordSubmit() {
   if (this.passwordStrength("newPassword") && this.passwordCheckSignUp()) {
+    this.haschangePasswordMessage = true;
+    this.changePasswordMessage = "Saving password!";
     this.api.updatePassword(getValueById('oldPassword'), getValueById('newPassword'), getValueById('confirmPassword')).then((response) => {
       try {
-        this.elementRef.nativeElement.querySelector('#changePassowrd').classList.remove("show")
+        this.haschangePasswordMessage = false;
+        this.modal.hide();
       }
       catch {}
       
@@ -419,6 +447,10 @@ passwordSubmit() {
       this.changePasswordMessage = "Failed to save!";
     });
   }
+}
+
+darkModeButton() {
+  toggleDarkMode();
 }
   
 }

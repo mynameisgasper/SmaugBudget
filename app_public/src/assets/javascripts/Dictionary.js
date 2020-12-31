@@ -99,31 +99,87 @@ var slovenian = {
     //welcome
     "messageEnvelopes": "Dobrodošli na kuvertah!",
     "welcomeMessageEnvelopes": "To je najbolši način za sledenje mesečnega in tedenskega porabljanjanja po kategorijah. Začnite s klikom na 'Dodaj kuverto'.",
-
+	"envelopesCardTotal": "Kuverte",
+	"envelopesCardAlmost": "Skoraj Prazne",
+	"envelopesCardEmpty": "Prazne",
+	"envelopesAlmostTextNo": "Ni skoraj praznih kuvert!",
+	"envelopesAlmostTextOne": " skoraj prazno!",
+	"envelopesAlmostTextMore": " skoraj praznih kuvert!",
+	"envelopesTextNo": "Ni praznih kuvert!",
+	"envelopesTextOne": " prazno!",
+	"envelopesTextMore": " praznih kuvert!",
+	"envelopesAddExpense": "Dodaj Strošek",
+	"envelopesAddEnvelope": "Dodaj kuverto",
+	"envelopestt2": "Polje lahko vsebuje samo črke, številke, nekatere znake (_@./#&+-: ) in presledke. Dovoljena dolžina: 1-",
+	"envelopestt3": "Polje lahko vsebuje samo decimalno število ločeno z . ali , z največ 2 decimalnima mestoma.",
+	"envelopesFutureErr": "Strošek nemore biti v prihodnosti.",
+	"envelopesCategory": "Kategorija",
+	"envelopesSelCat": "Izberi kategorijo",
+	"envelopesMake": "Ustvari svojo",
+	"envelopesAmount": "Vrednost",
+	"envelopesColor": "Izberi barvo",
+	"envelopesAdd": "Dodaj",
+	"envelopesRec": "Prejemnik",
+	"envelopesDate": "Datum",
 
     //GOALS
     //welcome
     "messageGoals": "Dobrodošli na ciljih!",
     "welcomeMessageGoals": "Tukaj lahko dodate cilje ki jih želite doseči. Kliknite na 'Dodaj cilj', izpolnite obrazec in ga oddajte.",
-
+	"goalsDateHint": "Vnesi veljaven datum (današnji ali prihodnji).",
+	"goalsInputGoal": "Kaj je vaš cilj?",
+	"goalsInputGamount": "Koliko želite prihraniti?",
+	"goalsPlanDate": "Do datuma",
+	"goalsAdd": "Dodaj Cilj",
+	"goalsTitle": "Cilj",
+	"goalsAddMoney": "Dodaj Denar",
+	"goalsCard1": "Cilji",
+	"goalsCard2": "Doseženi cilji",
+	"goalsCard2Txt1": "Ni doseženih ciljev.",
+	"goalsCard2Txt2": "Več doseženih ciljev!",
+	"goalsCard2Txt3": " dosežen!",
 
     //BILLS
     //welcome
     "messageBills": "Dobrodošli na računih!",
     "welcomeMessageBills": "Tukaj lahko dodate ponavljajoče se račune. Izpolnite obrazec, ga oddajte in račun bo avtomatsko dodeljen kuverti.",
-
+	"billsAll": "Vsi računi",
+	"billAdd": "Dodaj račun",
+	"billsPayee": "Prejemnik",
+	"billsDue": "Zapadlost",
+	"billsOften": "Kako pogosto?",
+	"billsOnce": "Enkrat",
+	"billsMonth": "Mesečno",
+	"billsYear": "Letno",
+	"billsTotal": "Računi",
+	"billsWeek": "Računi ta teden",
+	"billsNone": "Ni računov ta teden.",
+	"billsClose": "Naslednji račun",
 
     //HISTORY
     //welcome
     "messageHistory": "Doborodšli na zgodovini!",
     "welcomeMessageHistory": "To je najbolši način za pregled vašega porabljanja po kategorijah in časovnih obdobjih.",
-
+	"historyAll": "Vsi stroški",
+	"historyExport": "Izvozi v PDF ",
+	"historyTotal": "Skupaj zapravljeno",
 
     //UTILITIES
     //welcome
     "messageUtilities": "Doborodošli na orodjih!",
     "welcomeMessageUtilities": "Tukaj lahko najdete nekaj uporabnih pripomočkov.",
-
+	"utilGroups": "Prijatelske skupine",
+	"utilCreate": "Ustvari",
+	"utilName": "Ime",
+	"utilNext": "Naslednji šlača",
+	"utilBalance": "Stanje",
+	"utilConverter": "Pretvornik valut",
+	"utilFrom": "Iz",
+	"utilTo": "V",
+	"utilConvert": "Pretvori",
+	"utilInputName": "Vnesi ime skupine",
+	"utilAddMem": "Dodaj člane",
+	"utilAddGroup": "Dodaj skupino",
 
     //INDEX
     //navbar
@@ -255,31 +311,88 @@ var english = {
     //welcome
     "messageEnvelopes": "Welcome to Envelopes!",
     "welcomeMessageEnvelopes": "This is the best way to track your monthly and weekly spending per category. Start by clicking 'Add Envelope'.",
-
+	"envelopesCardTotal": "Envelopes Total",
+	"envelopesCardAlmost": "Almost Empty",
+	"envelopesCardEmpty": "Empty",
+	"envelopesAlmostTextNo": "No almost empty envelopes!",
+	"envelopesAlmostTextOne": " almost empty!",
+	"envelopesAlmostTextMore": " envelopes almost empty!",
+	"envelopesTextNo": "No empty envelopes!",
+	"envelopesTextOne": " empty!",
+	"envelopesTextMore": " envelopes empty!",
+	"envelopesAddExpense": "Add expense",
+	"envelopesAddEnvelope": "Add envelope",
+	"envelopestt2": "Input may only contain letters, numbers, some special characters (_@./#&+-: ) and whitespaces. Length allowed: 1-",
+	"envelopestt3": "Input may only contain decimal numbers separated by . or , with max 2 decimal places.",
+	"envelopesFutureErr": "Expense can't be in the future.",
+	"envelopesCategory": "Category",
+	"envelopesSelCat": "Select a category",
+	"envelopesMake": "Make your own",
+	"envelopesAmount": "Amount",
+	"envelopesColor": "Coose Color",
+	"envelopesAdd": "Add",
+	"envelopesRec": "Recipient",
+	"envelopesDate": "Date",
 
     //GOALS
     //welcome
     "messageGoals": "Welcome to Goals!",
     "welcomeMessageGoals": "Here you can add saving goals you want to achieve. Click 'Add Goal', fill in the form, submit and you`re done!",
-
+	"goalsDateHint": "Input a valid date (today or in the future).",
+	"goalsInputGoal": "What's your goal?",
+	"goalsInputGamount": "How much do you want to save?",
+	"goalsPlanDate": "Planned Date",
+	"goalsAdd": "Add Goal",
+	"goalsTitle": "Goal",
+	"goalsAddMoney": "Add Money",
+	"goalsCard1": "Goals Total",
+	"goalsCard2": "Goals Completed",
+	"goalsCard2Txt1": "No goals completed.",
+	"goalsCard2Txt2": "Multiple goals completed!",
+	"goalsCard2Txt3": " completed!",
 
     //BILLS
     //welcome
     "messageBills": "Welcome to Bills!",
     "welcomeMessageBills": "Here you can add recurring bills. Fill in the form, submit and it will be added to an envelope repeteadly!",
-
+	"billsAll": "All bills",
+	"billAdd": "Add bill",
+	"billsPayee": "Payee",
+	"billsDue": "Date due",
+	"billsOften": "How often?",
+	"billsOnce": "Once",
+	"billsMonth": "Monthly",
+	"billsYear": "Yearly",
+	"billsTotal": "Bills Total",
+	"billsWeek": "Bills This Week",
+	"billsNone": "No bills this week.",
+	"billsClose": "Closest bill",
 
     //HISTORY
     //welcome
     "messageHistory": "Welcome to History!",
     "welcomeMessageHistory": "This is the best way to check your past spending by time and category.",
-
+	"historyAll": "All expenses",
+	"historyExport": "Export to PDF ",
+	"historyTotal": "Total spent",
 
     //UTILITIES
     //welcome
     "messageUtilities": "Welcome to Utilites!",
     "welcomeMessageUtilities": "Here you can find some useful gadgets.",
-
+	"utilGroups": "Friend groups",
+	"utilCreate": "Create",
+	"utilName": "Name",
+	"utilNext": "Next to pay",
+	"utilBalance": "Balance",
+	"utilConverter": "Currency converter",
+	"utilFrom": "From",
+	"utilTo": "To",
+	"utilConvert": "Convert",
+	"utilInputName": "Input group name",
+	"utilAddMem": "Add Members",
+	"utilAddGroup": "Add Group",
+	
 
     //INDEX
     //navbar

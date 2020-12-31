@@ -9,9 +9,6 @@
             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                 <!--button type="button" class="btn btn-primary">Date</button-->
                 <div class="row">
-                    <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3">
-                        <!--<input class="form-control shadow p-3 mb-5 rounded" id="daterangepicker" type="text" name="daterange" placeholder="01/01/2020 - 31/12/2020" readonly/>-->
-                    </div>
 
                     <div class="col-3 col-sm-3 col-md-5 col-lg-3 col-xl-3"></div>
 
@@ -51,7 +48,7 @@
     <div class="container" id="cards-section">
         <div class="row">
             <div class="col-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
-                <h3>All expenses</h3>
+                <h3>{{historyAll}}</h3>
 
             </div>
             <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 d-flex ">
@@ -75,7 +72,7 @@
                 </div>
                 <div class="row">
                     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                    <a type="button" style="float: right;" class="btn btn-primary" (click)="generatePdf()">Export to PDF <i class="far fa-file-pdf"></i></a>
+                    <a type="button" style="float: right;" class="btn btn-primary" (click)="generatePdf()">{{historyExport}}<i class="far fa-file-pdf"></i></a>
                     </div>
                 </div>
             </div>
