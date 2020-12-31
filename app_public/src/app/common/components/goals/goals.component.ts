@@ -73,7 +73,7 @@ export class GoalsComponent implements OnInit {
       this.welcomeMessage = getTranslation("welcomeMessageGoals");
     }).catch(error => {
       this.authentication.logout();
-      this.router.navigate(['']);
+      this.router.navigate(['/']);
     });
   }
 

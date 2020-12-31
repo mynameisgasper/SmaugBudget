@@ -26,7 +26,7 @@ export class ConfirmationComponent implements OnInit {
 
   submit(code: string) {
     this.api.confirm(this.url, code, (response) => {
-      this.router.navigate(['']);
+      this.router.navigate(['/']);
     }, (error) => {
       console.log(error);
       var elementList = this.document.querySelectorAll('#alert');

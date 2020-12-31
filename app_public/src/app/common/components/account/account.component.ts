@@ -67,7 +67,7 @@ export class AccountComponent implements OnInit {
         this.pfpImg = this.getImage();
       }).catch(error => {
         this.authentication.logout();
-        this.router.navigate(['']);  
+        this.router.navigate(['/']);  
       });
   }
   @ViewChild('modalone') public modal: ModalDirective;
@@ -423,7 +423,7 @@ removeCategory(id: string) {
 removeUser() {
   if(confirm("Do you want to remove your account?")) {
     this.api.deleteUser().then((response) => {
-      this.router.navigate(['']);
+      this.router.navigate(['/']);
       
     }).catch((error) => {
       this.changeColorMessage = "Failed to remove!";

@@ -76,7 +76,7 @@ export class EnvelopesComponent implements OnInit {
       this.categories = this.getCategories(result.categories);
     }).catch(error => {
       this.authentication.logout();
-      this.router.navigate(['']);
+      this.router.navigate(['/']);
     });
   }
 
