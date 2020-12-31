@@ -48,7 +48,7 @@
     <div class="container" id="cards-section">
         <div class="row">
             <div class="col-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
-                <h3>All expenses</h3>
+                <h3>{{historyAll}}</h3>
 
             </div>
             <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 d-flex ">
@@ -72,7 +72,7 @@
                 </div>
                 <div class="row">
                     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                    <a type="button" style="float: right;" class="btn btn-primary" (click)="generatePdf()">Export to PDF <i class="far fa-file-pdf"></i></a>
+                    <a type="button" style="float: right;" class="btn btn-primary" (click)="generatePdf()">{{historyExport}}<i class="far fa-file-pdf"></i></a>
                     </div>
                 </div>
             </div>

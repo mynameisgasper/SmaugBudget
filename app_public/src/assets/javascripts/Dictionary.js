@@ -160,7 +160,9 @@ var slovenian = {
     //welcome
     "messageHistory": "Doborodšli na zgodovini!",
     "welcomeMessageHistory": "To je najbolši način za pregled vašega porabljanja po kategorijah in časovnih obdobjih.",
-
+	"historyAll": "Vsi stroški",
+	"historyExport": "Izvozi v PDF ",
+	"historyTotal": "Skupaj zapravljeno",
 
     //UTILITIES
     //welcome
@@ -359,7 +361,9 @@ var english = {
     //welcome
     "messageHistory": "Welcome to History!",
     "welcomeMessageHistory": "This is the best way to check your past spending by time and category.",
-
+	"historyAll": "All expenses",
+	"historyExport": "Export to PDF ",
+	"historyTotal": "Total spent",
 
     //UTILITIES
     //welcome
