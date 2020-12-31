@@ -54,7 +54,15 @@
               "src/assets/stylesheets/darkmode.css",
               "src/assets/javascripts/jquery-3.5.1.min.js",
               "src/assets/javascripts/moment.min.js",
-              "src/assets/javascripts/aos.js"
+              "src/assets/javascripts/aos.js",
+              "src/assets/stylesheets/bootstrap.min.css",
+              "src/assets/stylesheets/bootstrap-select.css",           
+              "src/assets/javascripts/bootstrap.min.js",           
+              "src/assets/javascripts/bootstrap.min.js.map",           
+              "src/assets/javascripts/bootstrap-select.min.js",          
+              "src/assets/javascripts/bootstrap-select.js.map",          
+              "src/assets/javascripts/popper.min.js",
+              "src/assets/javascripts/popper.min.js.map"
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
