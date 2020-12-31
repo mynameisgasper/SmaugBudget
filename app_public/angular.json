@@ -50,7 +50,17 @@
               "src/assets/stylesheets/fonts.css",
               "src/assets/stylesheets/main.css",
               "src/manifest.webmanifest",
-              "src/assets/stylesheets/darkmode.css"
+              "src/assets/stylesheets/darkmode.css",
+              "src/assets/stylesheets/_animations.scss",
+              "src/assets/stylesheets/_core.scss",
+              "src/assets/stylesheets/_easing.scss",
+              "src/assets/stylesheets/aos.scss",
+              "src/assets/javascripts/aos.js",
+              "src/assets/javascripts/helpers/calculateOffset.js",
+              "src/assets/javascripts/helpers/detector.js",
+              "src/assets/javascripts/helpers/elements.js",
+              "src/assets/javascripts/helpers/handleScroll.js",
+              "src/assets/javascripts/helpers/prepare.js"
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
