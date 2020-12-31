@@ -47,6 +47,8 @@ export class EnvelopesComponent implements OnInit {
   setMonth = this.getCurrentMonth(new Date().getMonth());
   currentMonth = this.getCurrentMonth(new Date().getMonth());
   currency = "EUR";
+  addExpenseTxt = getTranslation("envelopesAddExpense");
+  addEnvelopeTxt = getTranslation("envelopesAddEnvelope");
 
   hasAddEnvelopeMessage: boolean = false;
   addEnvelopeMessage: string = ""; 
@@ -85,6 +87,8 @@ export class EnvelopesComponent implements OnInit {
         
     this.message = getTranslation("messageEnvelopes");
     this.welcomeMessage = getTranslation("welcomeMessageEnvelopes");
+    this.addExpenseTxt = getTranslation("envelopesAddExpense");
+    this.addEnvelopeTxt = getTranslation("envelopesAddEnvelope");
   }
 
   addExpense(): void {     

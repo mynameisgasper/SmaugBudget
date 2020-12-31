@@ -108,6 +108,8 @@ var slovenian = {
 	"envelopesTextNo": "Ni praznih kuvert!",
 	"envelopesTextOne": " prazno!",
 	"envelopesTextMore": " praznih kuvert!",
+	"envelopesAddExpense": "Dodaj Strošek",
+	"envelopesAddEnvelope": "Dodaj kuverto",
 
     //GOALS
     //welcome
@@ -272,6 +274,8 @@ var english = {
 	"envelopesTextNo": "No empty envelopes!",
 	"envelopesTextOne": " empty!",
 	"envelopesTextMore": " envelopes empty!",
+	"envelopesAddExpense": "Add expense",
+	"envelopesAddEnvelope": "Add envelope",
 
     //GOALS
     //welcome
