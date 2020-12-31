@@ -7,6 +7,9 @@ import { Envelope } from '../../classes/envelope';
 import { AuthenticationService } from '../../services/authentication.service';
 declare var $:any;
 
+declare var getTranslation: any;
+declare var setLanguage: any;
+
 @Component({
   selector: 'app-envelopes',
   templateUrl: './envelopes.component.html',
@@ -24,8 +27,8 @@ export class EnvelopesComponent implements OnInit {
   public envelopes: Array<Envelope>;
   public categories: any;
   fileName = "envelopes";
-  message = "Welcome to Envelopes!";
-  welcomeMessage = "This is the best way to track your monthly and weekly spending per category. Start by clicking 'Add Envelope'.";
+  message = getTranslation("messageEnvelopes");
+  welcomeMessage = getTranslation("welcomeMessageEnvelopes");
   logout = "Logout";
   year = new Date().getFullYear();
   month = new Date().getMonth() + 1;
@@ -56,6 +59,7 @@ export class EnvelopesComponent implements OnInit {
       this.cards = this.generateCards(result.envelopes);
       this.envelopes = result.envelopes;
       this.categories = this.getCategories(result.categories);
+      this.refreshLanguage(result.language);
     }).catch(error => {
       this.authentication.logout();
       this.router.navigate(['']);
@@ -75,6 +79,13 @@ export class EnvelopesComponent implements OnInit {
   
 
   faPlusSquare = faPlusSquare;
+
+  refreshLanguage(language: string) {
+    setLanguage(language);
+        
+    this.message = getTranslation("messageEnvelopes");
+    this.welcomeMessage = getTranslation("welcomeMessageEnvelopes");
+  }
 
   addExpense(): void {     
     let newSpent = 0;
