@@ -126,13 +126,31 @@ var slovenian = {
     //welcome
     "messageGoals": "Dobrodošli na ciljih!",
     "welcomeMessageGoals": "Tukaj lahko dodate cilje ki jih želite doseči. Kliknite na 'Dodaj cilj', izpolnite obrazec in ga oddajte.",
-
+	"goalsDateHint": "Vnesi veljaven datum (današnji ali prihodnji).",
+	"goalsInputGoal": "Kaj je vaš cilj?",
+	"goalsInputGamount": "Koliko želite prihraniti?",
+	"goalsPlanDate": "Do datuma",
+	"goalsAdd": "Dodaj Cilj",
+	"goalsTitle": "Cilj",
+	"goalsAddMoney": "Dodaj Denar",
+	"goalsCard1": "Cilji",
+	"goalsCard2": "Doseženi cilji",
+	"goalsCard2Txt1": "Ni doseženih ciljev.",
+	"goalsCard2Txt2": "Več doseženih ciljev!",
+	"goalsCard2Txt3": " dosežen!",
 
     //BILLS
     //welcome
     "messageBills": "Dobrodošli na računih!",
     "welcomeMessageBills": "Tukaj lahko dodate ponavljajoče se račune. Izpolnite obrazec, ga oddajte in račun bo avtomatsko dodeljen kuverti.",
-
+	"billsAll": "Vsi računi",
+	"billAdd": "Dodaj račun",
+	"billsPayee": "Prejemnik",
+	"billsDue": "Zapadlost",
+	"billsOften": "Kako pogosto?",
+	"billsOnce": "Enkrat",
+	"billsMonth": "Mesečno",
+	"billsYear": "Letno",
 
     //HISTORY
     //welcome
@@ -291,7 +309,7 @@ var english = {
 	"envelopestt3": "Input may only contain decimal numbers separated by . or , with max 2 decimal places.",
 	"envelopesFutureErr": "Expense can't be in the future.",
 	"envelopesCategory": "Category",
-	"envelopesSelCat": "Select category",
+	"envelopesSelCat": "Select a category",
 	"envelopesMake": "Make your own",
 	"envelopesAmount": "Amount",
 	"envelopesColor": "Coose Color",
@@ -303,13 +321,31 @@ var english = {
     //welcome
     "messageGoals": "Welcome to Goals!",
     "welcomeMessageGoals": "Here you can add saving goals you want to achieve. Click 'Add Goal', fill in the form, submit and you`re done!",
-
+	"goalsDateHint": "Input a valid date (today or in the future).",
+	"goalsInputGoal": "What's your goal?",
+	"goalsInputGamount": "How much do you want to save?",
+	"goalsPlanDate": "Planned Date",
+	"goalsAdd": "Add Goal",
+	"goalsTitle": "Goal",
+	"goalsAddMoney": "Add Money",
+	"goalsCard1": "Goals Total",
+	"goalsCard2": "Goals Completed",
+	"goalsCard2Txt1": "No goals completed.",
+	"goalsCard2Txt2": "Multiple goals completed!",
+	"goalsCard2Txt3": " completed!",
 
     //BILLS
     //welcome
     "messageBills": "Welcome to Bills!",
     "welcomeMessageBills": "Here you can add recurring bills. Fill in the form, submit and it will be added to an envelope repeteadly!",
-
+	"billsAll": "All bills",
+	"billAdd": "Add bill",
+	"billsPayee": "Payee",
+	"billsDue": "Date due",
+	"billsOften": "How often?",
+	"billsOnce": "Once",
+	"billsMonth": "Monthly",
+	"billsYear": "Yearly",
 
     //HISTORY
     //welcome

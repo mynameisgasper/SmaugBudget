@@ -9,6 +9,9 @@ import { DatePipe } from '@angular/common';
 import { AuthenticationService } from '../../services/authentication.service';
 declare var $:any;
 
+declare var getTranslation: any;
+declare var setLanguage: any;
+
 @Component({
   selector: 'app-goals',
   templateUrl: './goals.component.html',
@@ -36,6 +39,21 @@ export class GoalsComponent implements OnInit {
   hasGoalMessage: boolean = false;
   goalMessage: string = "";
 
+  goalsDateHint = getTranslation("goalsDateHint");
+	goalsInputGoal = getTranslation("goalsInputGoal");
+	goalsInputGamount = getTranslation("goalsInputGamount");
+	goalsPlanDate = getTranslation("goalsPlanDate");
+	goalsAdd = getTranslation("goalsAdd");
+	goalsTitle = getTranslation("goalsTitle");
+  goalsAddMoney = getTranslation("goalsAddMoney");
+  HINT = getTranslation("HINT");
+  envelopestt2 = getTranslation("envelopestt2");
+  envelopestt3 = getTranslation("envelopestt3");
+  envelopesCategory = getTranslation("envelopesCategory");
+  envelopesSelCat = getTranslation("envelopesSelCat");
+  envelopesAdd = getTranslation("envelopesAdd");
+  envelopesAmount = getTranslation("envelopesAmount");
+
   @ViewChild('nameGoal') nameGoal: ElementRef;
   @ViewChild('categoryGoal') categoryGoal: ElementRef;
   @ViewChild('amountGoal') amountGoal: ElementRef;
@@ -46,12 +64,13 @@ export class GoalsComponent implements OnInit {
 
   ngOnInit(): void {
     this.api.getUser().then(result => {
+      this.refreshLanguage(result.language);
       this.goals = this.generateGoals(result.goals);
       this.cards = this.generateCards();
       this.categories = this.generateCategories(result.categories);
       this.currency = result.defaultCurrency;
-      this.message = "Welcome to Goals!";
-      this.welcomeMessage = "Here you can add saving goals you want to achieve. Click 'Add Goal', fill in the form, submit and you`re done!";
+      this.message = getTranslation("messageGoals");
+      this.welcomeMessage = getTranslation("welcomeMessageGoals");
     }).catch(error => {
       this.authentication.logout();
       this.router.navigate(['']);
@@ -64,6 +83,25 @@ export class GoalsComponent implements OnInit {
 
   areEqual(val1: String, val2: String): Boolean {
     return val1 === val2;
+  }
+
+  refreshLanguage(language: string) {
+    setLanguage(language);
+        
+    this.goalsDateHint = getTranslation("goalsDateHint");
+    this.goalsInputGoal = getTranslation("goalsInputGoal");
+    this.goalsInputGamount = getTranslation("goalsInputGamount");
+    this.goalsPlanDate = getTranslation("goalsPlanDate");
+    this.goalsAdd = getTranslation("goalsAdd");
+    this.goalsTitle = getTranslation("goalsTitle");
+    this.goalsAddMoney = getTranslation("goalsAddMoney");
+    this.HINT = getTranslation("HINT");
+    this.envelopestt2 = getTranslation("envelopestt2");
+    this.envelopestt3 = getTranslation("envelopestt3");
+    this.envelopesCategory = getTranslation("envelopesCategory");
+    this.envelopesSelCat = getTranslation("envelopesSelCat");
+    this.envelopesAdd = getTranslation("envelopesAdd");
+    this.envelopesAmount = getTranslation("envelopesAmount");
   }
 
   nameAddGoals() {
@@ -205,8 +243,8 @@ export class GoalsComponent implements OnInit {
     var comment = this.generateComment(completedGoals);
 
     return [
-      new Card(1, 'bg-primary', 'faBullseye', totalGoals, 'Goals Total', null),
-      new Card(21, 'green-panel', 'faCheckCircle', completedGoals, 'Goals Completed', comment),
+      new Card(1, 'bg-primary', 'faBullseye', totalGoals, getTranslation("goalsCard1"), null),
+      new Card(21, 'green-panel', 'faCheckCircle', completedGoals, getTranslation("goalsCard2"), comment),
     ];
   }
 
@@ -223,16 +261,16 @@ export class GoalsComponent implements OnInit {
   generateComment(completedGoals){
     var comment = "";
     if(completedGoals == 0)
-      comment = "No goals completed.";
+      comment = getTranslation("goalsCard2Txt1");
     else if (completedGoals > 2)
-      comment = "Multiple goals completed!";
+      comment = getTranslation("goalsCard2Txt2");
     else{
       for (var goal of this.goals) {
         if(goal.targetLeft <= 0)
           comment += goal.title + ", ";
       }
       comment = comment.substring(0, comment.length - 2);
-      comment += " completed!"
+      comment += getTranslation("goalsCard2Txt3");
     }
     
     return comment;

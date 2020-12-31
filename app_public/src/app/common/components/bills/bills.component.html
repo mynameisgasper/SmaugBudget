@@ -14,7 +14,7 @@
     <div class="container" id="cards-section">
         <div class="row">
             <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                <h3>All bills</h3>
+                <h3>{{billsAll}}</h3>
 
             </div>
             <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
@@ -34,7 +34,7 @@
                         </tbody>
                     </table>
                 </div>
-                <button data-toggle="modal" href="#modalForm" role="button" aria-expanded="false" aria-controls="about" class="btn btn-primary addbill">Add bill
+                <button data-toggle="modal" href="#modalForm" role="button" aria-expanded="false" aria-controls="about" class="btn btn-primary addbill">{{billAdd}}
                     <fa-icon [icon]="faPlusSquare"></fa-icon>
                 </button><br/>
             </div>
@@ -47,35 +47,35 @@
             <div class="w-25 toastek">
                 <div class="toast ml-auto tt1" role="alert" data-delay="3000" data-autohide="false">
                     <div class="toast-header">
-                        <strong class="mr-auto text-primary">HINT</strong>
+                        <strong class="mr-auto text-primary">{{HINT}}</strong>
                         <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                     </div>
                     <div class="toast-body">
-                        Input may only contain letters, numbers, some special characters (_@./#&+-: ) and whitespaces. Length allowed: 1-20
+                        {{envelopestt2}}20
                     </div>
                 </div>
                 <div class="toast ml-auto tt2" role="alert" data-delay="1000" data-autohide="false">
                     <div class="toast-header">
-                        <strong class="mr-auto text-primary">HINT</strong>
+                        <strong class="mr-auto text-primary">{{HINT}}</strong>
                         <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                     </div>
                     <div class="toast-body">
-                        Input may only contain decimal numbers separated by . with max 2 decimal places.
+                        {{envelopestt3}}
                     </div>
                 </div>
                 <div class="toast ml-auto tt5" id="date-hintAdd" role="alert" data-delay="1000" data-autohide="false">
                     <div class="toast-header">
-                        <strong class="mr-auto text-primary">HINT</strong>
+                        <strong class="mr-auto text-primary">{{HINT}}</strong>
                         <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                     </div>
                     <div class="toast-body">
-                        Input a valid date (today or in the future).
+                        {{goalsDateHint}}
                     </div>
                 </div>
             </div>
@@ -90,19 +90,19 @@
                 <form name="addBill">
                     <input type="hidden" name="formType" value="addBill">
                     <div class="modal-body">
-                        <div class="ena"><label for="inputGoal">Category</label><br/>
+                        <div class="ena"><label for="inputGoal">{{envelopesCategory}}</label><br/>
                         <select #addBillCategory id="inputCategory" name="inputCategory" class="form-control" required>
-                            <option value="" selected disabled>Select Category</option>
+                            <option value="" selected disabled>{{envelopesSelCat}}</option>
                             <option *ngFor="let item of categories" id="{{item._id}}" value="{{item._id}}" name="category">{{item.name}}</option>
                         </select>
                         </div>
                         <div class="checker">
-                            <label for="Payee">Payee</label><br/>
+                            <label for="Payee">{{billsPayee}}</label><br/>
                             <input #addBillPayee type="text" #nameAdd id="Payee" name="Payee" class="form-control" (focusout)="nameAddBills()" placeholder="e.g. Elektro Ljubljana d.d." required>
                         </div>
                         <div id="alerts"></div>
                         <div class="ena">
-                            <label for="Amount">Amount</label><br/>
+                            <label for="Amount">{{envelopesAmount}}</label><br/>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">{{currency}}</span>
@@ -112,22 +112,22 @@
                             <div id="amm"></div>
                         </div>
                         <div class="ena">
-                            <label for="date">Date due</label><br/>
+                            <label for="date">{{billsDue}}</label><br/>
                             <input #addBillDate class="form-control" #dateAdd type="date" placeholder="2020-01-01" id="inputDateAddBill" name="inputDateAddBill" (focusout)="dateAddBills()" required="required">
                         </div>
                         <div class="ena">
-                            <label for="once">How often?</label><br/>
+                            <label for="once">{{billsOften}}</label><br/>
                             <input #billRepeat1 type="radio" id="once" name="rad" value="once" required>
-                            <label for="once">Once</label><br/>
+                            <label for="once">{{billsOnce}}</label><br/>
                             <input #billRepeat2 type="radio" id="monthly" name="rad" value="monthly">
-                            <label for="monthly">Monthly</label><br/>
+                            <label for="monthly">{{billsMonth}}</label><br/>
                             <input #billRepeat3 type="radio" id="yearly" name="rad" value="yearly">
-                            <label for="yearly">Yearly</label><br/>
+                            <label for="yearly">{{billsYear}}</label><br/>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <p *ngIf="hasAddMessage"><b>{{addMessage}}</b></p>
-                        <button (click)="buttonAddBills(addBillCategory.value, addBillPayee.value, addBillAmount.value, addBillDate.value, (billRepeat1.checked ? billRepeat1.value : billRepeat2.checked ? billRepeat2.value : 'yearly'))" class="btn btn-primary" id="buttonAddBill">Add Bill</button>
+                        <button (click)="buttonAddBills(addBillCategory.value, addBillPayee.value, addBillAmount.value, addBillDate.value, (billRepeat1.checked ? billRepeat1.value : billRepeat2.checked ? billRepeat2.value : 'yearly'))" class="btn btn-primary" id="buttonAddBill">{{billAdd}}</button>
                     </div>
                 </form>
             </div>
