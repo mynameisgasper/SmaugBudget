@@ -151,6 +151,10 @@ var slovenian = {
 	"billsOnce": "Enkrat",
 	"billsMonth": "Mesečno",
 	"billsYear": "Letno",
+	"billsTotal": "Računi",
+	"billsWeek": "Računi ta teden",
+	"billsNone": "Ni računov ta teden.",
+	"billsClose": "Naslednji račun",
 
     //HISTORY
     //welcome
@@ -346,6 +350,10 @@ var english = {
 	"billsOnce": "Once",
 	"billsMonth": "Monthly",
 	"billsYear": "Yearly",
+	"billsTotal": "Bills Total",
+	"billsWeek": "Bills This Week",
+	"billsNone": "No bills this week.",
+	"billsClose": "Closest bill",
 
     //HISTORY
     //welcome

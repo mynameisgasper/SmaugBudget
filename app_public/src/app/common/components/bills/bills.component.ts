@@ -301,8 +301,8 @@ export class BillsComponent implements OnInit {
         const nearBills = this.getBillsInTheNext7Days();
 
         return [
-        new Card(1, 'bg-primary', 'faPaperclip', this.bills.length, 'Bills Total', null),
-        new Card(21, 'bg-warning', 'faCalendar', nearBills.length, 'Bills This Week', this.generateComment(nearBills)),
+        new Card(1, 'bg-primary', 'faPaperclip', this.bills.length, getTranslation("billsTotal"), null),
+        new Card(21, 'bg-warning', 'faCalendar', nearBills.length, getTranslation("billsWeek"), this.generateComment(nearBills)),
         ];
     }
 
@@ -322,13 +322,13 @@ export class BillsComponent implements OnInit {
     }
 
     generateComment(bills) {
-        var comment = 'No bills this week.';
+        var comment = getTranslation("billsNone");
 
         var bill = this.findClosestBill(bills);
         if (!bill) return comment;
         const billDate = new Date(Date.parse(bill.date));
         const dtfUK = new Intl.DateTimeFormat('UK', { month: '2-digit', day: '2-digit' });
-        comment = "Closest bill:\n" + bill.recipient + " - " + dtfUK.format(billDate);
+        comment = getTranslation("billsClose") + ":\n" + bill.recipient + " - " + dtfUK.format(billDate);
 
         return comment;
     }
