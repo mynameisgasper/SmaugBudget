@@ -60,7 +60,8 @@
               "src/assets/javascripts/helpers/detector.js",
               "src/assets/javascripts/helpers/elements.js",
               "src/assets/javascripts/helpers/handleScroll.js",
-              "src/assets/javascripts/helpers/prepare.js"
+              "src/assets/javascripts/helpers/prepare.js",
+              "src/assets/javascripts/jquery-3.5.1.min.js"
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
