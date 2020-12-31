@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1609418244522,
+  "timestamp": 1609420447615,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -41,8 +41,6 @@
         "/assets/images/card3.png",
         "/assets/images/dragon.svg",
         "/assets/images/filler.png",
-        "/assets/images/office.jpg",
-        "/assets/images/phone.png",
         "/assets/images/phone1.png",
         "/assets/javascripts/aos.js",
         "/assets/javascripts/bootstrap-select.js.map",
@@ -75,9 +73,7 @@
     "/assets/images/card3.png": "9d007b0994de3a64a557b4a7d80495ade0b3af12",
     "/assets/images/dragon.svg": "d8112264a793f712ecbece41c074401756f28884",
     "/assets/images/filler.png": "ff81f68ee587bb0bf81362d86122db30f51b2df9",
-    "/assets/images/office.jpg": "472a374130c405e567df361e83cbc98ae574aee2",
-    "/assets/images/phone.png": "40f7340c89c9ba855f845efb150b4df923d4417d",
-    "/assets/images/phone1.png": "048ddeab225c9f1a0f6d3724b8afef2fab6dbd08",
+    "/assets/images/phone1.png": "8c1bd37297eff9c9debcb8dbfedfeeeb935b8f44",
     "/assets/javascripts/aos.js": "b67cdbc54788e549b67fe9807e67fb721de112b7",
     "/assets/javascripts/bootstrap-select.js.map": "563b84779c85e4165dbedd8f997533a17f70527d",
     "/assets/javascripts/bootstrap-select.min.js": "78b225092d3d54f0b54442ade7397fdabab64f25",
