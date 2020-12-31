@@ -99,7 +99,15 @@ var slovenian = {
     //welcome
     "messageEnvelopes": "Dobrodošli na kuvertah!",
     "welcomeMessageEnvelopes": "To je najbolši način za sledenje mesečnega in tedenskega porabljanjanja po kategorijah. Začnite s klikom na 'Dodaj kuverto'.",
-
+	"envelopesCardTotal": "Kuverte",
+	"envelopesCardAlmost": "Skoraj Prazne",
+	"envelopesCardEmpty": "Prazne",
+	"envelopesAlmostTextNo": "Ni skoraj praznih kuvert!",
+	"envelopesAlmostTextOne": " skoraj prazno!",
+	"envelopesAlmostTextMore": " skoraj praznih kuvert!",
+	"envelopesTextNo": "Ni praznih kuvert!",
+	"envelopesTextOne": " prazno!",
+	"envelopesTextMore": " praznih kuvert!",
 
     //GOALS
     //welcome
@@ -255,7 +263,15 @@ var english = {
     //welcome
     "messageEnvelopes": "Welcome to Envelopes!",
     "welcomeMessageEnvelopes": "This is the best way to track your monthly and weekly spending per category. Start by clicking 'Add Envelope'.",
-
+	"envelopesCardTotal": "Envelopes Total",
+	"envelopesCardAlmost": "Almost Empty",
+	"envelopesCardEmpty": "Empty",
+	"envelopesAlmostTextNo": "No almost empty envelopes!",
+	"envelopesAlmostTextOne": " almost empty!",
+	"envelopesAlmostTextMore": " envelopes almost empty!",
+	"envelopesTextNo": "No empty envelopes!",
+	"envelopesTextOne": " empty!",
+	"envelopesTextMore": " envelopes empty!",
 
     //GOALS
     //welcome

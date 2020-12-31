@@ -56,10 +56,10 @@ export class EnvelopesComponent implements OnInit {
 
   ngOnInit(): void {
     this.api.getUser().then(result => {
+      this.refreshLanguage(result.language);
       this.cards = this.generateCards(result.envelopes);
       this.envelopes = result.envelopes;
       this.categories = this.getCategories(result.categories);
-      this.refreshLanguage(result.language);
     }).catch(error => {
       this.authentication.logout();
       this.router.navigate(['']);
@@ -359,9 +359,9 @@ export class EnvelopesComponent implements OnInit {
     
 
     return [
-      new Card(1, 'bg-primary', 'faEnvelope', thisMonthEnvelopes.length, 'Envelopes Total', null),
-      new Card(21, 'bg-warning', 'faExclamationTriangle', almostEmptyEnvelopes.length, 'Almost Empty', this.generateAlmostEmptyMessage(almostEmptyEnvelopes)),
-      new Card(31, 'bg-danger', 'faRadiation', emptyEnvelopes.length, 'Empty', this.generateEmptyMessage(emptyEnvelopes)),
+      new Card(1, 'bg-primary', 'faEnvelope', thisMonthEnvelopes.length, getTranslation("envelopesCardTotal"), null),
+      new Card(21, 'bg-warning', 'faExclamationTriangle', almostEmptyEnvelopes.length, getTranslation("envelopesCardAlmost"), this.generateAlmostEmptyMessage(almostEmptyEnvelopes)),
+      new Card(31, 'bg-danger', 'faRadiation', emptyEnvelopes.length, getTranslation("envelopesCardEmpty"), this.generateEmptyMessage(emptyEnvelopes)),
     ];
   }
 
@@ -387,25 +387,25 @@ export class EnvelopesComponent implements OnInit {
 
   generateAlmostEmptyMessage(envelopes: Array<Envelope>): string {
     if (envelopes.length < 1) {
-      return 'No almost empty envelopes!';
+      return getTranslation("envelopesAlmostTextNo");
     }
     else if (envelopes.length == 1) {
-      return envelopes[0].category['name'] + ' almost empty!';
+      return envelopes[0].category['name'] + getTranslation("envelopesAlmostTextOne");
     }
     else {
-      return envelopes.length + ' envelopes almost empty!';
+      return envelopes.length + getTranslation("envelopesAlmostTextMore");
     }
   }
 
   generateEmptyMessage(envelopes: Array<Envelope>): string {
     if (envelopes.length < 1) {
-      return 'No empty envelopes!';
+      return getTranslation("envelopesTextNo");
     }
     else if (envelopes.length == 1) {
-      return envelopes[0].category['name'] + ' empty!';
+      return envelopes[0].category['name'] + getTranslation("envelopesTextOne");
     }
     else {
-      return envelopes.length + ' envelopes empty!';
+      return envelopes.length + getTranslation("envelopesTextMore");
     }
   }
 
