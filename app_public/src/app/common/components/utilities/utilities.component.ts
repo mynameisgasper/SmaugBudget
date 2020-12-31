@@ -9,6 +9,9 @@ import { Friend } from '../../classes/friend'
 import { AuthenticationService } from '../../services/authentication.service';
 declare var $:any;
 
+declare var getTranslation: any;
+declare var setLanguage: any;
+
 @Component({
   selector: 'app-utilities',
   templateUrl: './utilities.component.html',
@@ -24,6 +27,21 @@ export class UtilitiesComponent implements OnInit {
     resultValue: number;
 
     groupMembers: Array<Object> = [{value: 1}]
+
+    utilGroups = getTranslation("utilGroups");
+	utilCreate = getTranslation("utilCreate");
+	utilName = getTranslation("utilName");
+	utilNext = getTranslation("utilNext");
+	utilBalance = getTranslation("utilBalance");
+	utilConverter = getTranslation("utilConverter");
+	utilFrom = getTranslation("utilFrom");
+	utilTo = getTranslation("utilTo");
+	utilConvert = getTranslation("utilConvert");
+	utilInputName = getTranslation("utilInputName");
+	utilAddMem = getTranslation("utilAddMem");
+    utilAddGroup = getTranslation("utilAddGroup");
+    HINT = getTranslation("HINT");
+    envelopestt2 = getTranslation("envelopestt2");
 
     hasConverterMessage: boolean = false;
     converterMessage: string = "";
@@ -47,11 +65,12 @@ export class UtilitiesComponent implements OnInit {
     ngOnInit(): void {
         this.api.getUser().then(result => {
             console.log(result);
+            this.refreshLanguage(result.language);
             this.data = {
                 "utility":true,
                 "fileName":"utilities",
-                "message":"Welcome to Utilites!",
-                "welcomeMessage":"Here you can find some useful gadgets.",
+                "message": getTranslation("messageUtilities"),
+                "welcomeMessage": getTranslation("welcomeMessageUtilities"),
                 "logout":"Logout",
                 "DASHBOARD":"DASHBOARD",
                 "ENVELOPES":"ENVELOPES",
@@ -72,6 +91,25 @@ export class UtilitiesComponent implements OnInit {
             this.router.navigate(['']);
         });
     }
+
+    refreshLanguage(language: string) {
+        setLanguage(language);
+            
+        this.utilGroups = getTranslation("utilGroups");
+        this.utilCreate = getTranslation("utilCreate");
+        this.utilName = getTranslation("utilName");
+        this.utilNext = getTranslation("utilNext");
+        this.utilBalance = getTranslation("utilBalance");
+        this.utilConverter = getTranslation("utilConverter");
+        this.utilFrom = getTranslation("utilFrom");
+        this.utilTo = getTranslation("utilTo");
+        this.utilConvert = getTranslation("utilConvert");
+        this.utilInputName = getTranslation("utilInputName");
+        this.utilAddMem = getTranslation("utilAddMem");
+        this.utilAddGroup = getTranslation("utilAddGroup");
+        this.HINT = getTranslation("HINT");
+        this.envelopestt2 = getTranslation("envelopestt2");
+      }
 
     generateGroups(groups){
         var groupsArray = [];

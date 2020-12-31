@@ -6,19 +6,19 @@
     <div class="container" id="cards-section">
         <div class="row" style="margin-bottom: 2vh; padding-left: 15px;">
             <div class="col-sm-11 col-md-11 col-lg-11 col-xl-11">
-                <h2>Friend groups</h2> 
+                <h2>{{utilGroups}}</h2> 
             </div>
             <div class="col-sm-1 col-md-1 col-lg-1 col-xl-1">
-                <button type="button" class="btn btn-primary" id="createGroup" data-toggle="modal" href="#addGroupModal" style="text-align: right;">Create</button>
+                <button type="button" class="btn btn-primary" id="createGroup" data-toggle="modal" href="#addGroupModal" style="text-align: right;">{{utilCreate}}</button>
             </div>
         </div>
         <div class="row" style="padding-left: 25px;">
             <table class="table">
                 <thead>
                     <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Next to pay</th>
-                    <th scope="col">Balance</th>
+                    <th scope="col">{{utilName}}</th>
+                    <th scope="col">{{utilNext}}</th>
+                    <th scope="col">{{utilBalance}}</th>
                     <th scope="col"></th>
                     </tr>
                 </thead>
@@ -31,13 +31,13 @@
     <div class="container" id="converter">
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                <h2>Currency converter</h2> 
+                <h2>{{utilConverter}}</h2> 
             </div>
         </div>
         <div class="row">
             <div class="col-md-0 col-sm-0 col-xl-2 col-lg-2"></div>
             <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                <label for="curr1">From</label>
+                <label for="curr1">{{utilFrom}}</label>
                 <select #curr1 class="form-control curr1" id="curr1">
                     <option value="EUR" selected="selected" label="{{'EUR' | currencyTranslator}}">EUR</option>
                     <option value="USD" label="{{'USD' | currencyTranslator}}">USD</option>
@@ -78,7 +78,7 @@
                 </select>
             </div>
             <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                <label for="curr2">To</label>
+                <label for="curr2">{{utilTo}}</label>
                 <select #curr2 class="form-control curr2" id="curr2">
                     <option value="EUR" label="{{'EUR' | currencyTranslator}}">EUR</option>
                     <option value="USD" selected="selected" label="{{'USD' | currencyTranslator}}">USD</option>
@@ -135,7 +135,7 @@
         </div>
         <div class="row3">
             <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                <button type="button" class="btn btn-primary" id="convert" (click)="converter(curr1.value, curr2.value, value.value)">Convert</button>
+                <button type="button" class="btn btn-primary" id="convert" (click)="converter(curr1.value, curr2.value, value.value)">{{utilConvert}}</button>
             </div>
         </div>
     </div>
@@ -147,13 +147,13 @@
             <div class="w-25 toastek">
                 <div class="toast ml-auto tt5" role="alert" data-delay="3000" data-autohide="false">
                     <div class="toast-header">
-                        <strong class="mr-auto text-primary">HINT</strong>
+                        <strong class="mr-auto text-primary">{{HINT}}</strong>
                         <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
                     <div class="toast-body">
-                        Input may only contain letters, numbers, some special characters (_@./#&+-: ) and whitespaces. Length allowed: 1-20
+                        {{envelopestt2}}20
                     </div>
                 </div>
             </div>
@@ -162,13 +162,13 @@
             <div class="w-25 toastek">
                 <div class="toast ml-auto tt6" role="alert" data-delay="3000" data-autohide="false">
                     <div class="toast-header">
-                        <strong class="mr-auto text-primary">HINT</strong>
+                        <strong class="mr-auto text-primary">{{HINT}}</strong>
                         <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
                     <div class="toast-body">
-                        Input may only contain letters, numbers, some special characters (_@./#&+-: ) and whitespaces. Length allowed: 1-20
+                        {{envelopestt2}}20
                     </div>
                 </div>
             </div>
@@ -182,16 +182,16 @@
                         </button>
                     </div>
                     <div class="modal-body" id="inputMemberBody">
-                            <label for="inputGroupName">Input group name</label>
+                            <label for="inputGroupName">{{utilInputName}}</label>
                             <input type="text" #groupName ngModel class="form-control" placeholder="Group Name" name="inputGroupName" id="inputGroupName" (focusout)="createGroup(f, 1)" required="required"><br/>
-                            <label for="inputGroupName">Add Members</label>
+                            <label for="inputGroupName">{{utilAddMem}}</label>
                             <div *ngFor="let member of groupMembers">
                                 <input type="text" ngModel #memberName class="form-control" (focusout)="createGroup(f, 1)" placeholder="Member {{member.value}}" name="{{member.value | inputMemberPipe}}" id="{{member.value | inputMemberPipe}}" style="margin-top:1%">
                             </div>                    
                         </div>
                     <div class="modal-footer">
                         <p *ngIf="hasCreateGroupMessage"><b>{{createGroupMessage}}</b></p>
-                        <button id="addGroup" class="btn btn-primary">Add Group</button>
+                        <button id="addGroup" class="btn btn-primary">{{utilAddGroup}}</button>
                         <button type="button" id="addGroupMember" class="btn btn-primary" (click)="addGroupMember(groupName.value);"> 
                             <fa-icon [icon]="faPlusSquare"></fa-icon>
                         </button>

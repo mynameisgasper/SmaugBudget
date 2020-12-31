@@ -168,7 +168,18 @@ var slovenian = {
     //welcome
     "messageUtilities": "Doborodošli na orodjih!",
     "welcomeMessageUtilities": "Tukaj lahko najdete nekaj uporabnih pripomočkov.",
-
+	"utilGroups": "Prijatelske skupine",
+	"utilCreate": "Ustvari",
+	"utilName": "Ime",
+	"utilNext": "Naslednji šlača",
+	"utilBalance": "Stanje",
+	"utilConverter": "Pretvornik valut",
+	"utilFrom": "Iz",
+	"utilTo": "V",
+	"utilConvert": "Pretvori",
+	"utilInputName": "Vnesi ime skupine",
+	"utilAddMem": "Dodaj člane",
+	"utilAddGroup": "Dodaj skupino",
 
     //INDEX
     //navbar
@@ -369,7 +380,19 @@ var english = {
     //welcome
     "messageUtilities": "Welcome to Utilites!",
     "welcomeMessageUtilities": "Here you can find some useful gadgets.",
-
+	"utilGroups": "Friend groups",
+	"utilCreate": "Create",
+	"utilName": "Name",
+	"utilNext": "Next to pay",
+	"utilBalance": "Balance",
+	"utilConverter": "Currency converter",
+	"utilFrom": "From",
+	"utilTo": "To",
+	"utilConvert": "Convert",
+	"utilInputName": "Input group name",
+	"utilAddMem": "Add Members",
+	"utilAddGroup": "Add Group",
+	
 
     //INDEX
     //navbar
