@@ -49,6 +49,18 @@ export class EnvelopesComponent implements OnInit {
   currency = "EUR";
   addExpenseTxt = getTranslation("envelopesAddExpense");
   addEnvelopeTxt = getTranslation("envelopesAddEnvelope");
+  envelopestt2 = getTranslation("envelopestt2");
+	envelopestt3 = getTranslation("envelopestt3");
+	envelopesFutureErr = getTranslation("envelopesFutureErr");
+	envelopesCategory = getTranslation("envelopesCategory");
+	envelopesSelCat = getTranslation("envelopesSelCat");
+	envelopesMake = getTranslation("envelopesMake");
+	envelopesAmount = getTranslation("envelopesAmount");
+	envelopesColor = getTranslation("envelopesColor");
+	envelopesAdd = getTranslation("envelopesAdd");
+	envelopesRec = getTranslation("envelopesRec");
+  envelopesDate = getTranslation("envelopesDate");
+  HINT = getTranslation("HINT");
 
   hasAddEnvelopeMessage: boolean = false;
   addEnvelopeMessage: string = ""; 
@@ -89,6 +101,18 @@ export class EnvelopesComponent implements OnInit {
     this.welcomeMessage = getTranslation("welcomeMessageEnvelopes");
     this.addExpenseTxt = getTranslation("envelopesAddExpense");
     this.addEnvelopeTxt = getTranslation("envelopesAddEnvelope");
+    this.envelopestt2 = getTranslation("envelopestt2");
+	  this.envelopestt3 = getTranslation("envelopestt3");
+	  this.envelopesFutureErr = getTranslation("envelopesFutureErr");
+	  this.envelopesCategory = getTranslation("envelopesCategory");
+	  this.envelopesSelCat = getTranslation("envelopesSelCat");
+	  this.envelopesMake = getTranslation("envelopesMake");
+  	this.envelopesAmount = getTranslation("envelopesAmount");
+  	this.envelopesColor = getTranslation("envelopesColor");
+  	this.envelopesAdd = getTranslation("envelopesAdd");
+  	this.envelopesRec = getTranslation("envelopesRec");
+    this.envelopesDate = getTranslation("envelopesDate");
+    this.HINT = getTranslation("HINT");
   }
 
   addExpense(): void {     

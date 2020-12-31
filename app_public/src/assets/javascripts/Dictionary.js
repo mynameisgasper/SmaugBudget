@@ -110,6 +110,17 @@ var slovenian = {
 	"envelopesTextMore": " praznih kuvert!",
 	"envelopesAddExpense": "Dodaj Strošek",
 	"envelopesAddEnvelope": "Dodaj kuverto",
+	"envelopestt2": "Polje lahko vsebuje samo črke, številke, nekatere znake (_@./#&+-: ) in presledke. Dovoljena dolžina: 1-",
+	"envelopestt3": "Polje lahko vsebuje samo decimalno število ločeno z . ali , z največ 2 decimalnima mestoma.",
+	"envelopesFutureErr": "Strošek nemore biti v prihodnosti.",
+	"envelopesCategory": "Kategorija",
+	"envelopesSelCat": "Izberi kategorijo",
+	"envelopesMake": "Ustvari svojo",
+	"envelopesAmount": "Vrednost",
+	"envelopesColor": "Izberi barvo",
+	"envelopesAdd": "Dodaj",
+	"envelopesRec": "Prejemnik",
+	"envelopesDate": "Datum",
 
     //GOALS
     //welcome
@@ -276,6 +287,17 @@ var english = {
 	"envelopesTextMore": " envelopes empty!",
 	"envelopesAddExpense": "Add expense",
 	"envelopesAddEnvelope": "Add envelope",
+	"envelopestt2": "Input may only contain letters, numbers, some special characters (_@./#&+-: ) and whitespaces. Length allowed: 1-",
+	"envelopestt3": "Input may only contain decimal numbers separated by . or , with max 2 decimal places.",
+	"envelopesFutureErr": "Expense can't be in the future.",
+	"envelopesCategory": "Category",
+	"envelopesSelCat": "Select category",
+	"envelopesMake": "Make your own",
+	"envelopesAmount": "Amount",
+	"envelopesColor": "Coose Color",
+	"envelopesAdd": "Add",
+	"envelopesRec": "Recipient",
+	"envelopesDate": "Date",
 
     //GOALS
     //welcome
