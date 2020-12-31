@@ -67,7 +67,7 @@ export class DashboardComponent implements OnInit {
       this.expensesLastMonth = this.getTotalCost(this.getLastMonthExpenses(user.expense, user.paycheckDate));
     }).catch(error => {
       this.authentication.logout();
-      this.router.navigate(['']);
+      this.router.navigate(['/']);
     });
   }
 

@@ -92,7 +92,7 @@ export class HistoryComponent implements OnInit {
       this.chartColors2 = this.getColors(lineChartData);
     }).catch(error => {
       this.authentication.logout();
-      this.router.navigate(['']);
+      this.router.navigate(['/']);
     });
 
     this.api.getExpense('', this.pageSize, (this.page - 1) * this.pageSize).then(result => {
@@ -100,7 +100,7 @@ export class HistoryComponent implements OnInit {
       this.paginatedExpenses = result['expenses'];
     }).catch(error => {
       this.authentication.logout();
-      this.router.navigate(['']);
+      this.router.navigate(['/']);
     });
   }
 
@@ -416,7 +416,7 @@ export class HistoryComponent implements OnInit {
       this.expenseCount = result['length'];
     }).catch(error => {
       this.authentication.logout();
-      this.router.navigate(['']);
+      this.router.navigate(['/']);
     });
   }
 

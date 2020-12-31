@@ -73,7 +73,7 @@ export class BillsComponent implements OnInit {
             this.currency = result.defaultCurrency;  
         }).catch(error => {
             this.authentication.logout();
-            this.router.navigate(['']);      
+            this.router.navigate(['/']);      
         });
     }
 

@@ -15,7 +15,7 @@ export class SilverGuardService implements CanActivate {
       return true;
     }
     else {
-      this.router.navigate([''], { queryParams: { access: false } });
+      this.router.navigate(['/'], { queryParams: { access: false } });
       return false;
     }
   }

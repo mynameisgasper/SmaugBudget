@@ -42,7 +42,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.api.getLoggedIn()) {
-      this.router.navigate(['dashboard']);
+      this.router.navigate(['/dashboard']);
     }
   }
 
@@ -81,7 +81,7 @@ export class HomeComponent implements OnInit {
         }
         catch {}
         
-        this.router.navigate(['confirm', response.urlCode]);
+        this.router.navigate(['/confirm', response.urlCode]);
       }).catch((error) => {
         this.registrationMessage = "Registration failed!";
         console.log(error);
@@ -118,7 +118,7 @@ export class HomeComponent implements OnInit {
           catch {}
   
           this.api.setLoggedIn(result.token);
-          this.router.navigate(['dashboard']);
+          this.router.navigate(['/dashboard']);
         }
       }).catch((error) => {
         this.api.userLoggedIn = null;

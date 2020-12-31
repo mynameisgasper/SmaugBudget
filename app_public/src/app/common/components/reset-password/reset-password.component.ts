@@ -66,7 +66,7 @@ export class ResetPasswordComponent implements OnInit {
           this.message = 'Failed resetting password!';
         }
         else {
-          this.router.navigate(['']);
+          this.router.navigate(['/']);
         }
       }).catch(error => {
         this.message = 'Failed resetting password!';

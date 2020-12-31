@@ -37,7 +37,7 @@ export class HeaderComponent implements OnInit {
       this.refreshLanguage(this.defaultLanguage);
     }).catch(error => {
       this.auth.logout();
-      this.router.navigate(['']);  
+      this.router.navigate(['/']);  
     });
   }
 
@@ -86,7 +86,7 @@ export class HeaderComponent implements OnInit {
   logout(): void {
     removeForLogout();
     this.auth.logout();
-    this.router.navigate(['']);
+    this.router.navigate(['/']);
   }
 
   getImage() {

@@ -88,7 +88,7 @@ export class UtilitiesComponent implements OnInit {
             this.groups = this.generateGroups(result.friendgroups);
         }).catch(error => {
             this.authentication.logout();
-            this.router.navigate(['']);
+            this.router.navigate(['/']);
         });
     }
 
