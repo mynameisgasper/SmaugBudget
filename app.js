@@ -112,9 +112,15 @@ app.use((req, res, next) => {
 app.use(express.static(path.join(__dirname, 'app_public', 'build')));
 app.use(passport.initialize());
 
+var origin = 'http://localhost:4200';
+if (process.env.NODE_ENV === 'production') {
+  origin = "https://smaugbudget.herokuapp.com/";
+}
+
+
 app.use('/api', (req, res, next) => {
     res.header("Content-Security-Policy", "default-src 'self'");
-    res.header('Access-Control-Allow-Origin', 'https://smaugbudget.herokuapp.com/');
+    res.header('Access-Control-Allow-Origin', origin);
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
     next();
 });
