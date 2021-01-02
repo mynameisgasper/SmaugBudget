@@ -5,50 +5,10 @@
     <div class="modal fade" #addGoalModal id="addGoalForm" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
         <div class="position-absolute w-100 p-4 d-flex flex-column align-items-end">
             <div class="w-25 toastek">
-                <div class="toast ml-auto tt4" role="alert" data-delay="3000" data-autohide="false">
-                    <div class="toast-header">
-                        <strong class="mr-auto text-primary">{{HINT}}</strong>
-                        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                    <div class="toast-body">
-                        {{envelopestt2}}16
-                    </div>
-                </div>
-                <div class="toast ml-auto tt3" role="alert" data-delay="1000" data-autohide="false">
-                    <div class="toast-header">
-                        <strong class="mr-auto text-primary">{{HINT}}</strong>
-                        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                    <div class="toast-body">
-                        {{envelopestt3}}
-                    </div>
-                </div>
-                <div class="toast ml-auto tt7" id="mjav" role="alert" data-delay="1000" data-autohide="false">
-                    <div class="toast-header">
-                        <strong class="mr-auto text-primary">{{HINT}}</strong>
-                        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                    <div class="toast-body">
-                        {{goalsDateHint}}
-                    </div>
-                </div>
-                <div class="toast ml-auto tt69" role="alert" data-delay="1000" data-autohide="false">
-                    <div class="toast-header">
-                        <strong class="mr-auto text-primary">{{HINT}}</strong>
-                        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                    <div class="toast-body">
-                        {{envelopesSelCat}}.
-                    </div>
-                </div>
+                <app-toast [name]="'tt4'" [hintBody]="envelopestt2" [hintHeader]="HINT"></app-toast>
+                <app-toast [name]="'tt3'" [hintBody]="envelopestt3" [hintHeader]="HINT"></app-toast>
+                <app-toast [name]="'tt7'" [hintBody]="goalsDateHint" [hintHeader]="HINT"></app-toast>
+                <app-toast [name]="'tt69'" [hintBody]="envelopesSelCat" [hintHeader]="HINT"></app-toast>
             </div>
         </div>
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -92,17 +52,7 @@
     <div class="modal fade" #addMoneyModal id="addMoneyForm" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
         <div class="position-absolute w-100 p-4 d-flex flex-column align-items-end">
             <div class="w-25 toastek">
-                <div class="toast ml-auto toastAddMoneyForm" role="alert" data-delay="1000" data-autohide="false">
-                    <div class="toast-header">
-                        <strong class="mr-auto text-primary">{{HINT}}</strong>
-                        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                    <div class="toast-body">
-                        {{envelopestt3}}
-                    </div>
-                </div>
+                <app-toast [name]="'toastAddMoneyForm'" [hintBody]="envelopestt3" [hintHeader]="HINT"></app-toast>
             </div>
         </div>
         <div class="modal-dialog modal-dialog-centered" role="document">

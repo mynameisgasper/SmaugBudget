@@ -41,6 +41,7 @@ import { DoubleDigitPipe } from './common/pipes/double-digit.pipe';
 import { ResetPasswordComponent } from './common/components/reset-password/reset-password.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { ToastComponent } from './common/components/toast/toast.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +74,8 @@ import { environment } from '../environments/environment';
     CurrencyTranslatorPipe,
     NotfoundComponent,
     DoubleDigitPipe,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    ToastComponent
   ],
   imports: [
     BrowserModule,
