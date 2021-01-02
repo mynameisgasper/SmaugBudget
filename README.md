@@ -249,3 +249,7 @@ SPA aplikacija na eni strani
 - Silver : Dostop do osnovnih strani ter dodan dostop do History
 - Gold : Dostop do osnovnih strani ter History in Utilities
   
+### Preostale napake pri varnostnem pregledu  
+  
+- Application Error Disclosure: False positive. OWASP ZAP najde Error sporočila v build datoteki in to prebere, kot da imamo error.  
+- CSP: Wildcard Directive: False positive po mnenju profesorja. Napako smo odpravili v kodi, dodatno poskusili tudi s helmet knjižnico.
