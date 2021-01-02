@@ -52,7 +52,7 @@
                                 <tr id="income-tr">
                                     <th>{{ incomeRow }}</th>
                                     <td>{{ incomeLastMonth }} {{ currency }}</td>
-                                    <td style="padding: 0px; text-align: right;"><button type="button" class="btn p" (click)="openModal(changeIncome)"><fa-icon [icon]="pencilIcon"></fa-icon></button></td>
+                                    <td style="padding: 0px; text-align: right;"><button type="button" aria-label="changeIncome" class="btn p" (click)="openModal(changeIncome)"><fa-icon [icon]="pencilIcon"></fa-icon></button></td>
                                 </tr>
                                 <tr id="expenses-tr">
                                     <th>{{ expensesRow }}</th>

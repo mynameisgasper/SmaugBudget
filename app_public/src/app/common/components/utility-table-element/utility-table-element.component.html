@@ -6,7 +6,7 @@
         <div style="float:right;width:60%;"><ng *ngIf="hasDeleteGroupMessage" style="text-align: right;"><b>{{DeleteGroupMessage}}</b></ng></div>
     </td>
     <td id="delete">
-        <button type="button" class="btn edit-btn" data-toggle="modal" [attr.data-target]="'#showGroup' +group.id"><fa-icon [icon]="faPencilAlt"></fa-icon></button>
-        <button (click)="deleteGroup()" class="btn edit-btn" data-toggle="modal"><fa-icon [icon]="faMinusSquare"></fa-icon></button>
+        <button type="button" aria-label="Edit" class="btn edit-btn" data-toggle="modal" [attr.data-target]="'#showGroup' +group.id"><fa-icon [icon]="faPencilAlt"></fa-icon></button>
+        <button (click)="deleteGroup()" aria-label="Delete" class="btn edit-btn" data-toggle="modal"><fa-icon [icon]="faMinusSquare"></fa-icon></button>
     </td>
 <!--</div>-->

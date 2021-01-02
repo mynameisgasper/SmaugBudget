@@ -7,6 +7,7 @@ var exphbs = require('express-handlebars');
 var helpers = require('./app_server/views/helpers/hbsh');
 const session = require('express-session');
 require('dotenv').config();
+var fs = require('fs');
 var passport = require('passport');
 require('./app_api/config/passport');
 var swaggerJsdoc = require('swagger-jsdoc');
@@ -117,9 +118,14 @@ if (process.env.NODE_ENV === 'production') {
   origin = "https://smaugbudget.herokuapp.com/";
 }
 
+//Handles robots.txt
+app.all('/robots.txt', (req, res) => {
+  res.type('text/plain')
+  res.send("User-agent: *\Allow: /");
+});
 
 app.use('/api', (req, res, next) => {
-    res.header("Content-Security-Policy", "default-src 'self'");
+    res.header("Content-Security-Policy", "default-src 'self'; form-action 'none'; frame-ancestors 'self'");
     res.header('Access-Control-Allow-Origin', origin);
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
     next();

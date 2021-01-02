@@ -51,7 +51,7 @@
                 <input type="email" id="emailInput" name="email" value="{{email}}"  class="form-control col-sm-9 col-md-9 col-lg-10 col-xl-10" disabled>
             </div>
             </div>
-            <div id="pfpImg" class="del-margin col-sm-12 col-md-3 col-lg-3 col-xl-3">
+            <div id="pfpImg" class="del-margin col-sm-12 col-md-3 col-lg-3 col-xl-3" alt="Profile pic settings">
             <a (click)="this.modal2.show()" aria-label="Change Profile Picture">
                 <div id="profile-pic" class="profile-pic" [style.background-image]="'url(' + imageToShow + ')'" >
                     <fa-icon [icon]="faCamera"></fa-icon>
@@ -126,8 +126,8 @@
                     <input type="color" id="color{{item._id}}" class="color-picker" name="colorPicker{{item._id}}" value="{{item.color}}">
                 </div>
                 <div class="category-row col-3 col-sm-12 col-md-1 col-lg-4 col-xl-4" style="text-align: right;">
-                <button type="submit" class="btn btn-primary" (click)="changeColor(item._id)"><fa-icon [icon]="faPencilAlt"></fa-icon></button>
-                <button type="submit" (click)="removeCategory(item._id)" class="btn btn-danger"><fa-icon [icon]="faTrashAlt"></fa-icon></button>
+                <button type="submit" class="btn btn-primary" (click)="changeColor(item._id)" aria-label="Edit"><fa-icon [icon]="faPencilAlt"></fa-icon></button>
+                <button type="submit" (click)="removeCategory(item._id)" class="btn btn-danger" aria-label="Delete"><fa-icon [icon]="faTrashAlt"></fa-icon></button>
                 <input type="hidden" name="id" value="{{item._id}}" />
                 <input type="hidden" name="formType" value="changeColorCategory" />
                 </div>

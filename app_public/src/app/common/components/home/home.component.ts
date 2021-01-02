@@ -100,9 +100,6 @@ export class HomeComponent implements OnInit {
           //Wrong password
         }
         else {
-          this.api.setLoggedIn(result.token);
-          this.router.navigate(['/dashboard']);
-
           try {
             var elementList = this.document.querySelectorAll('.modal-backdrop');
             for (let i = 0; i < elementList.length; i++) {
@@ -119,6 +116,9 @@ export class HomeComponent implements OnInit {
             }
           }
           catch {}
+  
+          this.api.setLoggedIn(result.token);
+          this.router.navigate(['/dashboard']);
         }
       }).catch((error) => {
         this.api.userLoggedIn = null;

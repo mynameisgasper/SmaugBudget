@@ -9,11 +9,11 @@
     {{data.value}} {{data.currency}}
 </td>
 <td class="zadnji align-middle">
-    <button type="button" class="btn p" data-toggle="modal" [attr.data-target]="'#editForm' +data._id">
+    <button type="button" class="btn p" aria-label="Edit" data-toggle="modal" [attr.data-target]="'#editForm' +data._id">
         <b *ngIf="hasDeleteMessage">{{deleteMessage}}</b>
         <fa-icon [icon]="faPencilAlt"></fa-icon>
     </button>
-    <button type="submit" (click)="buttonDeleteBill()" class="btn edit-btn" data-toggle="modal">
+    <button type="submit" (click)="buttonDeleteBill()" aria-label="Delete" class="btn edit-btn" data-toggle="modal">
             <fa-icon [icon]="faMinusSquare"></fa-icon>
     </button>
 </td>

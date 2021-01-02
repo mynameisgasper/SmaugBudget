@@ -548,6 +548,15 @@ function savePageSource(browser, filename) {
             expect(url).to.include('utilities');
           });
 
+          it("Check if field is empty", async () => {
+            let output = await browser.findElements(By.xpath("//output[contains(@id, 'Amount2')]"));
+            expect(output).to.not.be.empty;
+            await new Promise(r => setTimeout(r, 1000));
+            let outputVal = await output[0].getAttribute("value");
+            expect(outputVal).to.be.empty;
+            await new Promise(r => setTimeout(r, 1000));
+          });
+
           it("Insert data and call", async () => {
             let amount = await browser.findElements(By.xpath("//input[contains(@id, 'Amount')]"));
             expect(amount).to.not.be.empty;
@@ -563,6 +572,15 @@ function savePageSource(browser, filename) {
             convertButton[0].click();
             await new Promise(r => setTimeout(r, 5000));
 
+          });
+
+          it("Check if field has value", async () => {
+            let output = await browser.findElements(By.xpath("//output[contains(@id, 'Amount2')]"));
+            expect(output).to.not.be.empty;
+            await new Promise(r => setTimeout(r, 1000));
+            let outputVal = await output[0].getAttribute("value");
+            expect(outputVal).to.not.be.empty;
+            await new Promise(r => setTimeout(r, 1000));
           });
         });
       });
