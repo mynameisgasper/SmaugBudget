@@ -7,6 +7,7 @@ import { NgForm } from '@angular/forms';
 import { FriendGroup } from '../../classes/friendGroup'
 import { Friend } from '../../classes/friend'
 import { AuthenticationService } from '../../services/authentication.service';
+import { ConnectionService } from '../../services/connection.service';
 declare var $:any;
 
 declare var getTranslation: any;
@@ -54,8 +55,13 @@ export class UtilitiesComponent implements OnInit {
         private pit: ActivatedRoute,
         private renderer: Renderer2,
         private router: Router, 
-        private authentication: AuthenticationService
+        private authentication: AuthenticationService,
+        private connectionService: ConnectionService
     ) {}
+
+    public hasConnection(): boolean {
+        return this.connectionService.hasConnection;
+    }
 
     @ViewChild('groupName') groupName: ElementRef;
     @ViewChild('memberName') memberName: ElementRef;
@@ -64,7 +70,6 @@ export class UtilitiesComponent implements OnInit {
 
     ngOnInit(): void {
         this.api.getUser().then(result => {
-            console.log(result);
             this.refreshLanguage(result.language);
             this.data = {
                 "utility":true,
@@ -206,7 +211,6 @@ export class UtilitiesComponent implements OnInit {
                 memberNameOverall = 0;
             index++;
         }
-        console.log(groupNameCheck + " " + memberNameOverall)
         if(groupNameCheck == 0 || memberNameOverall == 0  || fake == 1){
             if(groupNameCheck == 0 || memberNameOverall == 0)
                 $('.tt5').toast('show');
@@ -305,15 +309,11 @@ export class UtilitiesComponent implements OnInit {
                     memberClass.amount = memberMongo.balance;
                 }
             }
-            console.log("a" + memberMongo.amount + " " + min);
             if(memberMongo.balance < min){
-                console.log(memberMongo.ba + " " + min);
                 min = memberMongo.amount;
                 next = memberMongo.name;
             }
         }
-        console.log(next);
         groupObject.Next = next;
-        console.log(groupObject);
     }
 }

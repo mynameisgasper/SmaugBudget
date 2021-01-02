@@ -2,6 +2,7 @@ import { Component, OnInit, Input, ElementRef, ViewChild, Renderer2 } from '@ang
 import { faRProject } from '@fortawesome/free-brands-svg-icons';
 import { faMinusSquare, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { ApiService } from '../../services/api.service';
+import { ConnectionService } from '../../services/connection.service';
 import { BillsComponent } from '../bills/bills.component'
 declare var $:any;
 
@@ -15,8 +16,13 @@ export class BillTableComponent implements OnInit {
   constructor(
     private api: ApiService,
     private BillsComponent: BillsComponent,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private connectionService: ConnectionService
   ) { }
+
+  public hasConnection(): boolean {
+    return this.connectionService.hasConnection;
+  }
 
   hasDeleteMessage: boolean = false;
   deleteMessage: string = "";

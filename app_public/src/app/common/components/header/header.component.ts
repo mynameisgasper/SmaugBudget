@@ -1,8 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { faCog, faAdjust, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { faCog, faAdjust, faSignOutAlt, faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import { AuthenticationService } from '../../services/authentication.service';
 import { ApiService } from '../../services/api.service';
+import { ConnectionService } from '../../services/connection.service';
 
 declare var removeForLogout: any;
 declare var loadDarkMode: any;
@@ -26,8 +27,11 @@ export class HeaderComponent implements OnInit {
   faAdjust = faAdjust;
   faSignOutAlt = faSignOutAlt;
   defaultLanguage: string;
+  faConnection = faExclamationCircle;
 
-  constructor(private router: Router, private auth: AuthenticationService, private api: ApiService,) { }
+  accessLevel = this.auth.getAccessLevel();
+
+  constructor(private router: Router, private auth: AuthenticationService, private api: ApiService, private connectionService: ConnectionService) { }
 
   ngOnInit(): void {
     this.pfpImg = this.getImage();
@@ -39,6 +43,10 @@ export class HeaderComponent implements OnInit {
       this.auth.logout();
       this.router.navigate(['/']);  
     });
+  }
+
+  public hasConnection(): boolean {
+    return this.connectionService.hasConnection;
   }
 
   lang = {
@@ -58,7 +66,8 @@ export class HeaderComponent implements OnInit {
     "settings": getTranslation("settings"),
     "appearance": getTranslation("appearance"),
     "light": getTranslation("light"),
-    "dark": getTranslation("dark")
+    "dark": getTranslation("dark"),
+    "admin": getTranslation("admin")
   }
 
   refreshLanguage(language: string) {

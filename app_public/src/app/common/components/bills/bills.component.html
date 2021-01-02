@@ -34,7 +34,7 @@
                         </tbody>
                     </table>
                 </div>
-                <button data-toggle="modal" href="#modalForm" role="button" aria-expanded="false" aria-controls="about" class="btn btn-primary addbill">{{billAdd}}
+                <button [disabled]="!hasConnection()" data-toggle="modal" href="#modalForm" role="button" aria-expanded="false" aria-controls="about" class="btn btn-primary addbill">{{billAdd}}
                     <fa-icon [icon]="faPlusSquare"></fa-icon>
                 </button><br/>
             </div>

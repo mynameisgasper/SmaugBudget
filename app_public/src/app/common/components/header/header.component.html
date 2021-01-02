@@ -42,11 +42,14 @@
 
         <!--- Navbar Profile Dropdown Menu  --->
         <ul class="navbar-nav ml-auto">
+            <fa-icon *ngIf="!hasConnection()" [icon]="faConnection" class="fa-3x" style="color:#f89406;"></fa-icon>
+
             <li class="nav-item dropdown">
             <div class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding-top: 0px; padding-bottom: 0px">
                 <img id="pfpNavBar" [src]="imageToShow" alt="Profile pic"></div>
             <div class="dropdown-menu dropdown-menu-right dropdown-info" id="dropdown-user" aria-labelledby="navbarDropdownMenuLink-4">
                 <a class="dropdown-item" routerLink="../account"><fa-icon [icon]="faCog"></fa-icon> {{lang.settings}}</a>
+                <a *ngIf="accessLevel >= 3" class="dropdown-item" routerLink="../db"><fa-icon [icon]="faCog"></fa-icon> {{lang.admin}}</a>
                 <a class="dropdown-item" (click)="handleDarkMode()" id="appearanceDark" style="display: none;"><fa-icon [icon]="faAdjust"></fa-icon> {{lang.appearance}}: {{lang.dark}}</a>
                 <a class="dropdown-item" (click)="handleDarkMode()" id="appearanceLight"><fa-icon [icon]="faAdjust"></fa-icon> {{lang.appearance}}: {{lang.light}}</a>
                 <hr>

@@ -53,12 +53,12 @@
             </div>
             <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 d-flex ">
                 <!-- Search form -->
-                <input #filter class="form-control search" type="text" id="filter" (keyup)="setFilter(filter.value)" placeholder="Search" aria-label="Search">
+                <input [disabled]="!hasConnection()" #filter class="form-control search" type="text" id="filter" (keyup)="setFilter(filter.value)" placeholder="Search" aria-label="Search">
             </div>
         </div>
         <div class="row">
             <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 d-flex justify-content-center">
-                <ngb-pagination *ngIf="expenseCount > 9" [(page)]="page" [pageSize]="pageSize" [maxSize]="5" [rotate]="true" [collectionSize]="expenseCount" (pageChange)="changePage(page)"></ngb-pagination>
+                <ngb-pagination [disabled]="!hasConnection()" *ngIf="expenseCount > 9" [(page)]="page" [pageSize]="pageSize" [maxSize]="5" [rotate]="true" [collectionSize]="expenseCount" (pageChange)="changePage(page)"></ngb-pagination>
             </div>
         </div>
         <div class="row">

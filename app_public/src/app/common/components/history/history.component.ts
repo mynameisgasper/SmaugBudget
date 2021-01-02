@@ -9,6 +9,7 @@ import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication.service';
 import { Expense } from '../../classes/expense';
+import { ConnectionService } from '../../services/connection.service';
 
 declare var $:any;
 
@@ -67,8 +68,13 @@ export class HistoryComponent implements OnInit {
     private api: ApiService,
     @Inject(DOCUMENT) private document: HTMLDocument,
     private router: Router, 
-    private authentication: AuthenticationService
-    ) { }
+    private authentication: AuthenticationService,
+    private connectionService: ConnectionService
+  ) { }
+
+  public hasConnection(): boolean {
+    return this.connectionService.hasConnection;
+  }
 
   @ViewChild('color') color: ElementRef;
 

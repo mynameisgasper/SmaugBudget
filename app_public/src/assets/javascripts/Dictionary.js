@@ -21,6 +21,7 @@ var slovenian = {
     "appearance": "Izgled",
     "light": "Svetlo",
     "dark": "Temno",
+    "admin": "Administracijska plošča",
 
     //ACCOUNT
     "account_title": "Uporabniški račun",
@@ -234,6 +235,7 @@ var english = {
     "appearance": "Appearance",
     "light": "Light",
     "dark": "Dark",
+    "admin": "Administration panel",
 
     //ACCOUNT
     "account_title": "Account",

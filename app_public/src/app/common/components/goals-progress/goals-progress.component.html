@@ -22,8 +22,8 @@
             of {{item.target}} {{currency}} (
             <b>{{item.monthlyTarget}} {{currency}}</b>/day)
         </p>
-        <button type="submit" (click)="buttonDeleteGoal()" aria-label="Delete" class="btn edit-btn" data-toggle="modal"><fa-icon [icon]="faMinusSquare"></fa-icon></button>
-        <button type="button" class="btn edit-btn" aria-label="Edit" data-toggle="modal" [attr.data-target]="'#editForm' + item._id"><fa-icon [icon]="faPencilAlt"></fa-icon></button>
+        <button [disabled]="!hasConnection()" type="submit" (click)="buttonDeleteGoal()" aria-label="Delete" class="btn edit-btn" data-toggle="modal"><fa-icon [icon]="faMinusSquare"></fa-icon></button>
+        <button [disabled]="!hasConnection()" type="button" class="btn edit-btn" aria-label="Edit" data-toggle="modal" [attr.data-target]="'#editForm' + item._id"><fa-icon [icon]="faPencilAlt"></fa-icon></button>
     </div>
 </div>
 <!--edit modal-->

@@ -7,6 +7,7 @@ import { Card } from '../../classes/card';
 import { User } from '../../classes/user';
 import { AuthenticationService } from '../../services/authentication.service';
 import { Router } from '@angular/router';
+import { ConnectionService } from '../../services/connection.service';
 declare var $:any;
 
 declare var getTranslation: any;
@@ -53,7 +54,13 @@ export class DashboardComponent implements OnInit {
   hasChangeIncomeMessage: boolean = false;
   changeIncomeMessage: string = ""
 
-  constructor(private router: Router, private api: ApiService, private authentication: AuthenticationService, private modalService: BsModalService) { }
+  constructor(
+    private router: Router,
+    private api: ApiService,
+    private authentication: AuthenticationService,
+    private modalService: BsModalService,
+    private connectionService: ConnectionService
+  ) { }
 
   ngOnInit(): void {
     this.api.getUser().then(result => {
@@ -69,6 +76,10 @@ export class DashboardComponent implements OnInit {
       this.authentication.logout();
       this.router.navigate(['/']);
     });
+  }
+
+  public hasConnection(): boolean {
+    return this.connectionService.hasConnection;
   }
 
   refreshLanguage(language: string) {

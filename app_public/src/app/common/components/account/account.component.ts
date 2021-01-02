@@ -7,6 +7,7 @@ import { ApiService } from '../../services/api.service';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication.service';
 import { ModalDirective } from 'ngx-bootstrap/modal';
+import { ConnectionService } from '../../services/connection.service';
 declare var $:any;
 
 declare var getTranslation: any;
@@ -44,6 +45,7 @@ export class AccountComponent implements OnInit {
         private authentication: AuthenticationService,
         private renderer: Renderer2,
         private elementRef: ElementRef,
+        private connectionService: ConnectionService,
         @Inject(DOCUMENT) private document: HTMLDocument
     ) { 
     }
@@ -72,6 +74,10 @@ export class AccountComponent implements OnInit {
   }
   @ViewChild('modalone') public modal: ModalDirective;
   @ViewChild('modaltwo') public modal2: ModalDirective;
+
+  public hasConnection(): boolean {
+    return this.connectionService.hasConnection;
+  }
 
   hasUrl = false;
 
@@ -303,7 +309,6 @@ uploadFileToActivity() {
   this.haschangePfpMessage = true;
   this.changePfpMessage = 'Saving image';
     this.api.postFile(this.fileToUpload).then((response) => {
-        console.log(response);
         this.pfpImg = this.getImage();
         this.haschangePfpMessage = false;
         this.modal2.hide();

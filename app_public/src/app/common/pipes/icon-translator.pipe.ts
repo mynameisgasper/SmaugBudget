@@ -21,7 +21,6 @@ export class IconTranslatorPipe implements PipeTransform {
   }
 
   transform(name: string): unknown {
-    console.log(name);
     return this.translateIcon(name);
   }
 

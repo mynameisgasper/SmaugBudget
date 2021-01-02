@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { Expense } from '../../classes/expense';
 import { ApiService } from '../../services/api.service';
+import { ConnectionService } from '../../services/connection.service';
 declare var $:any;
 
 @Component({
@@ -35,7 +36,12 @@ export class HistoryTableElementComponent implements OnInit {
   constructor(
     private renderer: Renderer2,
     private api: ApiService,
+    private connectionService: ConnectionService
   ) { }
+
+  public hasConnection(): boolean {
+    return this.connectionService.hasConnection;
+  }
 
   @ViewChild('id') id: ElementRef;
   @ViewChild('category') category: ElementRef;

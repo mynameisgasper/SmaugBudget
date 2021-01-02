@@ -38,7 +38,6 @@ function addBill(req, res) {
                                 }
                                 res.status(500).json(response);
                             } else {
-                                console.log(category);
                                 let bill = new Bill({
                                     recipient: recipient,
                                     value: amount,

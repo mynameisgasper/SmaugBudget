@@ -227,7 +227,7 @@ export class ApiService {
   }
 
   public addFriendGroup(groupName: String, groupMembers: Array<String>): Promise<any> {
-    console.log(groupMembers);
+
     if (this.authorization.getLoggedIn()) {
       const url: string = `${this.apiUrl}/addFriendGroup`; 
       const body = {
@@ -262,7 +262,6 @@ export class ApiService {
 
   public addBill(category, payee, amount, date, repeat): Promise<any> {
     if (this.authorization.getLoggedIn()) {
-      console.log(category);
       const url: string = `${this.apiUrl}/addBill`; 
       const body = {
         'inputCategory': category,
@@ -283,7 +282,6 @@ export class ApiService {
 
   public editBill(billId, category, payee, amount, date, repeat): Promise<any> {
     if (this.authorization.getLoggedIn()) {
-      console.log(category);
       const url: string = `${this.apiUrl}/editBill`; 
       const body = {
         'billId': billId,
@@ -305,7 +303,6 @@ export class ApiService {
 
   public updateUser(email, firstName, lastName): Promise<any> {
     if (this.authorization.getLoggedIn()) {
-      console.log(email);
       const url: string = `${this.apiUrl}/updateUser`; 
       const body = {
         'email': email,
@@ -451,7 +448,6 @@ export class ApiService {
         'friends': pricePaidArrayStringified,
         'group_id': group_id
       }
-      console.log(body);
       const options = {
         headers: new HttpHeaders().set('Authorization', this.authorization.generateCompleteJwt())
       }

@@ -4,6 +4,8 @@ import { Router } from "@angular/router"
 import { AuthenticationService } from '../../services/authentication.service';
 declare var $:any;
 
+declare var removeForLogout: any;
+
 @Component({
   selector: 'app-root',
   templateUrl: './home.component.html',
@@ -41,6 +43,7 @@ export class HomeComponent implements OnInit {
 
 
   ngOnInit(): void {
+    removeForLogout();
     if (this.api.getLoggedIn()) {
       this.router.navigate(['/dashboard']);
     }
@@ -50,7 +53,6 @@ export class HomeComponent implements OnInit {
     if(window.location.href.indexOf('#registration') != -1) {
       this.registration.open()
       //document.getElementById("registration").showModal();
-      console.log(this.registration)
     }
 
     else if(window.location.href.indexOf('#login') != -1) {
@@ -260,7 +262,6 @@ export class HomeComponent implements OnInit {
       this.resetMessage = "Sending reset email";
 
       this.api.requestResetPassword(email).then(result => {
-        console.log(result);
         if (result.status !== 200) {
           this.resetMessage = "Failed to send an email!";
         }

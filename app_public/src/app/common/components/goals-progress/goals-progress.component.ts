@@ -4,6 +4,7 @@ import { Goal } from '../../classes/goal';
 import { ApiService } from '../../services/api.service';
 import { GoalsComponent } from '../goals/goals.component';
 import { Category } from '../../classes/category';
+import { ConnectionService } from '../../services/connection.service';
 declare var $:any;
 
 @Component({
@@ -16,10 +17,15 @@ export class GoalsProgressComponent implements OnInit {
   constructor(
     private api: ApiService,
     private goalsComponent: GoalsComponent,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private connectionService: ConnectionService
   ) { }
 
   ngOnInit(): void {
+  }
+
+  public hasConnection(): boolean {
+    return this.connectionService.hasConnection;
   }
 
   faMinusSquare = faMinusSquare;
@@ -63,18 +69,15 @@ export class GoalsProgressComponent implements OnInit {
 
   amountEditGoal() {
     const field = this.editAmountGoal.nativeElement;
-    console.log(field);
     //var field = document.getElementById("PayeeModal");
     var regex = new RegExp("^[0-9]+(\.[0-9]{1,2})?$");
     //decimalna števila z največj 2ma decimalnima mestoma ločilo je pika!
     //črkev male,velike,številke ne veljajo števila kot so .73, 
     if (!field.value.match(regex)) {
-      console.log(1)
         field.style.setProperty("border-color", "red", "important");
         $(field.id).toast('show');
         return 0;
     } else {
-      console.log(2)
         field.style.borderColor = "#ced4da";
         $(field.id).toast('hide');
         return 1;
@@ -83,13 +86,11 @@ export class GoalsProgressComponent implements OnInit {
 
   dateCheckEdit() {
     const field = this.editDateGoal.nativeElement;
-    console.log(field.value);
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
     var mm = String(today.getMonth() + 1).padStart(2, '0');
     var yyyy = today.getFullYear();
     var inputDate = field.value.split("-");
-    console.log(field.value);
 
     if (inputDate == "") {
         $('.toastEditDate').toast('show');

@@ -188,7 +188,6 @@ export class UtilitiesEditModalComponent implements OnInit {
   }
 
   calculateBalances(pricePaidArray){
-    console.log(document.getElementById("sum" + this.group.id))
     this.hasEditGroupMessage = true;
     this.editGroupMessage = "Calculating balances";
     
