@@ -37,14 +37,14 @@
             <div class="row">
                 <input type="hidden" name="formType" value="changeName">
                 <label id="nameInputLbl" for="nameInput" class="col-sm-3 col-md-3 col-lg-2 col-xl-2">{{data.firstName}}:</label>
-                <input type="text" id="nameInput" name="firstName" placeholder="{{data.firstName}}" value="{{firstName}}" class="form-control col-sm-3 col-md-3 col-lg-3 col-xl-3" (focusout)="nameRegex()" required="required">
+                <input [disabled]="!hasConnection()" type="text" id="nameInput" name="firstName" placeholder="{{data.firstName}}" value="{{firstName}}" class="form-control col-sm-3 col-md-3 col-lg-3 col-xl-3" (focusout)="nameRegex()" required="required">
             
                 <label id="lastnameInputLbl" for="lastnameInput" class="col-sm-3 col-md-3 col-lg-4 col-xl-4">{{data.lastName}}:</label>
-                <input type="text" id="lastnameInput" name="lastName" placeholder="{{data.lastName}}" value="{{lastName}}" class="form-control col-sm-3 col-md-3 col-lg-3 col-xl-3" (focusout)="surnameRegex()" required="required">
+                <input [disabled]="!hasConnection()" type="text" id="lastnameInput" name="lastName" placeholder="{{data.lastName}}" value="{{lastName}}" class="form-control col-sm-3 col-md-3 col-lg-3 col-xl-3" (focusout)="surnameRegex()" required="required">
             </div>
             <div class="row">
                 <label id="passwordChangeLbl" for="passwordChange" class="col-sm-3 col-md-3 col-lg-2 col-xl-2">{{data.password}}:</label>
-                <button id ="passwordChange" type="button" class="btn btn-primary" (click)="this.modal.show()">{{data.changePassword}}</button>
+                <button [disabled]="!hasConnection()" id ="passwordChange" type="button" class="btn btn-primary" (click)="this.modal.show()">{{data.changePassword}}</button>
             </div>
             <div class="row">
                 <label id="emailInputLbl" for="emailInput" class="col-sm-3 col-md-3 col-lg-2 col-xl-2">{{data.email}}:</label>
@@ -52,19 +52,19 @@
             </div>
             </div>
             <div id="pfpImg" class="del-margin col-sm-12 col-md-3 col-lg-3 col-xl-3" alt="Profile pic settings">
-            <a (click)="this.modal2.show()" aria-label="Change Profile Picture">
+            <button [disabled]="!hasConnection()" (click)="this.modal2.show()" aria-label="Change Profile Picture">
                 <div id="profile-pic" class="profile-pic" [style.background-image]="'url(' + imageToShow + ')'" >
                     <fa-icon [icon]="faCamera"></fa-icon>
                 <span>{{data.changeImage}}</span>
                 </div>
-            </a>
+            </button>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                 <b *ngIf="hasChangeUserMessage">{{changeUserMessage}}</b>
-                <button type="button" id="userInfoButton" (click)="disableButton()" class="btn btn-primary" style="float: right;">{{data.saveChanges}}</button>
-                <button type="button" id="userRemoveButton" (click)="removeUser()" class="btn btn-danger" style="float: right;">Delete account</button>
+                <button [disabled]="!hasConnection()" type="button" id="userInfoButton" (click)="disableButton()" class="btn btn-primary" style="float: right;">{{data.saveChanges}}</button>
+                <button [disabled]="!hasConnection()" type="button" id="userRemoveButton" (click)="removeUser()" class="btn btn-danger" style="float: right;">Delete account</button>
             </div>
         </div>
         </form>
@@ -84,7 +84,7 @@
         <div class="row">
             <label id="languageChangeLbl" for="languageChange" class="col-5 col-sm-4 col-md-4 col-lg-4 col-xl-4">{{data.language}}:</label>
             <div class="dropdown col-sm-4 col-md-4 col-lg-4 col-xl-4">
-                <button class="btn btn-secondary dropdown-toggle col-sm-12 col-md-12 col-lg-12 col-xl-12" type="button" id="languageChange" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button  [disabled]="!hasConnection()" class="btn btn-secondary dropdown-toggle col-sm-12 col-md-12 col-lg-12 col-xl-12" type="button" id="languageChange" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     {{defaultLanguage}}
                 </button>
                 <div class="dropdown-menu" aria-labelledby="languageChange">
@@ -99,7 +99,7 @@
         <div class="row">
             <label id="currencyChangeLbl" for="currencyChange" class="col-5 col-sm-4 col-md-4 col-lg-4 col-xl-4">{{data.currency}}:</label>
             <div class="dropdown col-sm-4 col-md-4 col-lg-4 col-xl-4">
-                <button class="btn btn-secondary dropdown-toggle col-sm-12 col-md-12 col-lg-12 col-xl-12" type="button" id="currencyChange" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button [disabled]="!hasConnection()" class="btn btn-secondary dropdown-toggle col-sm-12 col-md-12 col-lg-12 col-xl-12" type="button" id="currencyChange" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 {{defaultCurrency}}
                 </button>
                 <div class="dropdown-menu dropdown-menu-right scrollable-menu" aria-labelledby="currencyChange">
@@ -123,11 +123,11 @@
                 <label for="color-picker{{item._id}}" style=" text-align:left;">{{item.name}}</label>
                 </div>
                 <div class="category-row col-3 col-sm-5 col-md-5 col-lg-3 col-xl-3" style="text-align: center;">
-                    <input type="color" id="color{{item._id}}" class="color-picker" name="colorPicker{{item._id}}" value="{{item.color}}">
+                    <input [disabled]="!hasConnection()" type="color" id="color{{item._id}}" class="color-picker" name="colorPicker{{item._id}}" value="{{item.color}}">
                 </div>
                 <div class="category-row col-3 col-sm-12 col-md-1 col-lg-4 col-xl-4" style="text-align: right;">
-                <button type="submit" class="btn btn-primary" (click)="changeColor(item._id)" aria-label="Edit"><fa-icon [icon]="faPencilAlt"></fa-icon></button>
-                <button type="submit" (click)="removeCategory(item._id)" class="btn btn-danger" aria-label="Delete"><fa-icon [icon]="faTrashAlt"></fa-icon></button>
+                <button [disabled]="!hasConnection()" type="submit" class="btn btn-primary" (click)="changeColor(item._id)" aria-label="Edit"><fa-icon [icon]="faPencilAlt"></fa-icon></button>
+                <button [disabled]="!hasConnection()" type="submit" (click)="removeCategory(item._id)" class="btn btn-danger" aria-label="Delete"><fa-icon [icon]="faTrashAlt"></fa-icon></button>
                 <input type="hidden" name="id" value="{{item._id}}" />
                 <input type="hidden" name="formType" value="changeColorCategory" />
                 </div>
