@@ -126,8 +126,8 @@
                     <input type="color" id="color{{item._id}}" class="color-picker" name="colorPicker{{item._id}}" value="{{item.color}}">
                 </div>
                 <div class="category-row col-3 col-sm-12 col-md-1 col-lg-4 col-xl-4" style="text-align: right;">
-                <button type="submit" class="btn btn-primary" (click)="changeColor(item._id)"><fa-icon [icon]="faPencilAlt"></fa-icon></button>
-                <button type="submit" (click)="removeCategory(item._id)" class="btn btn-danger"><fa-icon [icon]="faTrashAlt"></fa-icon></button>
+                <button type="submit" class="btn btn-primary" (click)="changeColor(item._id)" aria-label="Edit"><fa-icon [icon]="faPencilAlt"></fa-icon></button>
+                <button type="submit" (click)="removeCategory(item._id)" class="btn btn-danger" aria-label="Delete"><fa-icon [icon]="faTrashAlt"></fa-icon></button>
                 <input type="hidden" name="id" value="{{item._id}}" />
                 <input type="hidden" name="formType" value="changeColorCategory" />
                 </div>
