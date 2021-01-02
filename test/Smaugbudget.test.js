@@ -365,8 +365,7 @@ function savePageSource(browser, filename) {
           });
         });
       });
-      */
-
+      
       describe("Add new goal", function() {
         context("Failed to create new goal", function() {
           this.timeout(60 * 1000);
@@ -564,7 +563,7 @@ function savePageSource(browser, filename) {
             await new Promise(r => setTimeout(r, 1000));
           });
         });
-      });
+      });*/
       
       describe("Money converter", function() {
         context("Successful converting", function() {
@@ -624,12 +623,13 @@ function savePageSource(browser, filename) {
           this.timeout(30 * 1000);
   
           it("Open dropdown", async () => {
+            await new Promise(r => setTimeout(r, 5000));
             await waitPageLoaded(browser, 10, "//h4");
-            let dropdown = await browser.findElements(By.xpath("//a[contains(@id, 'navbarDropdownMenuLink-4')]"));
+            let dropdown = await browser.findElements(By.xpath("//div[contains(@id, 'navbarDropdownMenuLink-4')]"));
             expect(dropdown).to.not.be.empty;
             await dropdown[0].click();
             await new Promise(r => setTimeout(r, 1000));
-            let openedDropdown = await browser.findElements(By.xpath("//a[contains(@aria-expanded, 'true')]"));
+            let openedDropdown = await browser.findElements(By.xpath("//div[contains(@aria-expanded, 'true')]"));
             expect(openedDropdown).to.not.be.empty;
           });
 
