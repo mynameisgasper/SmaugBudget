@@ -243,11 +243,13 @@ SPA aplikacija na eni strani
 ## 5. LP
 
 ### Opis razlike med vrstami uporabniki  
-  #### Uporabnike delimo na 3 nivoje - Bronze, Silver in Gold
-  
-- Bronze: Dostop do osnovnih strani: Dashboard, Envelopes, Goals, Bills in Settings
-- Silver : Dostop do osnovnih strani ter dodan dostop do History
-- Gold : Dostop do osnovnih strani ter History in Utilities
+  #### Uporabnike delimo na 3 skupine - Neregistrirani, registrirani ter admin.  
+- Neregistrirani uporabniki: Dostop le do prve strani, kjer se lahko registrira ali prijavi.  
+- Registrirani uporabniki:  
+    - Bronze: Dostop do osnovnih strani: Dashboard, Envelopes, Goals, Bills in Settings
+    - Silver : Dostop do osnovnih strani ter dodan dostop do History
+    - Gold : Dostop do osnovnih strani ter History in Utilities  
+- Admin: Dodaten dostop do funkcije brisanja podatkov v bazi.
   
 ### Preostale napake pri varnostnem pregledu  
   
