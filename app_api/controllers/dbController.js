@@ -252,11 +252,31 @@ function createDummyAccounts(requestBody, res) {
             goals: goalsArray,
             friendgroups: friendGroupsArray
             //connections: connectionArray
-
         });
+        let adminUser = new User({
+            firstname: "Admin",
+            lastname: "User",
+            email: "admin@smaug.com",
+            password: "$2a$10$L0ZgurAiFhmaH1KGg6UYdOpuNJTU4X0TMBSMNIYAo2NE5/QEK0tSG",
+            passwordSalt: "$2a$10$L0ZgurAiFhmaH1KGg6UYdO",
+            paycheck: 1500,
+            paycheckLastMonth: 1500,
+            paycheckDate: 18,
+            accessLevel: 3,
+            language: "English",
+            categories: [],
+            envelopes: [],
+            expense: [],
+            bills: [],
+            goals: [],
+            friendgroups: []
+            //connections: connectionArray
+        });
+
         userBronze.save();
         userSilver.save();
         userGold.save();
+        adminUser.save();
         res.status(200).json();
     } catch (ex) {
         res.status(500).json();

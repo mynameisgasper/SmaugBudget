@@ -27,10 +27,11 @@ export class HeaderComponent implements OnInit {
   faAdjust = faAdjust;
   faSignOutAlt = faSignOutAlt;
   defaultLanguage: string;
+  faConnection = faExclamationCircle;
+
+  accessLevel = this.auth.getAccessLevel();
 
   constructor(private router: Router, private auth: AuthenticationService, private api: ApiService, private connectionService: ConnectionService) { }
-
-  faConnection = faExclamationCircle;
 
   ngOnInit(): void {
     this.pfpImg = this.getImage();
@@ -65,7 +66,8 @@ export class HeaderComponent implements OnInit {
     "settings": getTranslation("settings"),
     "appearance": getTranslation("appearance"),
     "light": getTranslation("light"),
-    "dark": getTranslation("dark")
+    "dark": getTranslation("dark"),
+    "admin": getTranslation("admin")
   }
 
   refreshLanguage(language: string) {
