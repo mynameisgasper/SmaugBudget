@@ -206,7 +206,6 @@ export class UtilitiesComponent implements OnInit {
                 memberNameOverall = 0;
             index++;
         }
-        console.log(groupNameCheck + " " + memberNameOverall)
         if(groupNameCheck == 0 || memberNameOverall == 0  || fake == 1){
             if(groupNameCheck == 0 || memberNameOverall == 0)
                 $('.tt5').toast('show');
@@ -305,15 +304,11 @@ export class UtilitiesComponent implements OnInit {
                     memberClass.amount = memberMongo.balance;
                 }
             }
-            console.log("a" + memberMongo.amount + " " + min);
             if(memberMongo.balance < min){
-                console.log(memberMongo.ba + " " + min);
                 min = memberMongo.amount;
                 next = memberMongo.name;
             }
         }
-        console.log(next);
         groupObject.Next = next;
-        console.log(groupObject);
     }
 }

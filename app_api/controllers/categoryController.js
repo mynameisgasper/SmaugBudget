@@ -114,7 +114,6 @@ function deleteCategory(req, res) {
     try {
         var category_id = req.body.category_id;
 
-        console.log(category_id);
         var categoryName;
 
         const authorization = req.headers.authorization;

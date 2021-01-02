@@ -51,7 +51,6 @@ function addDarkModeCss() {
     document.getElementById('appearanceLight').setAttribute("style", "display: none");
     darkMode.isSet = true;
     localStorage.setItem('dark',"true");
-    console.log("addDark " +localStorage.getItem('dark'));
 }
 
 function removeDarkModeCss() {
@@ -64,5 +63,4 @@ function removeDarkModeCss() {
     document.getElementById('appearanceDark').setAttribute("style", "display: none");
     darkMode.isSet = false;
     localStorage.setItem('dark',"false");
-    console.log("removeDark "+localStorage.getItem('dark'));
 }

@@ -25,7 +25,6 @@ export class UtilityTableElementComponent implements OnInit {
     group: FriendGroup;
 
   ngOnInit(): void {
-    console.log(this.group);
   }
 
   buttonDeleteGroup(){

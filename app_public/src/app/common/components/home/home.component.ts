@@ -53,7 +53,6 @@ export class HomeComponent implements OnInit {
     if(window.location.href.indexOf('#registration') != -1) {
       this.registration.open()
       //document.getElementById("registration").showModal();
-      console.log(this.registration)
     }
 
     else if(window.location.href.indexOf('#login') != -1) {

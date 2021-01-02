@@ -34,7 +34,6 @@ export class WelcomeComponent implements OnInit {
   fixScreen(index: number) {
     var element = this.document.querySelectorAll('.container')[index];
     element.setAttribute('style', 'margin-top:15vh!important');
-    console.log(element);
   }
 
 }

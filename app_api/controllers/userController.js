@@ -322,7 +322,6 @@ function setCurrency(req, res) {
                 } else {
                     if (user) {
                         user.defaultCurrency = req.body.currency ;
-                        console.log(req.body);
                         user.save();
                         res.status(200).json(user);
                     } else {

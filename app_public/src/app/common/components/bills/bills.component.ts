@@ -361,7 +361,6 @@ export class BillsComponent implements OnInit {
 
     afterEdit(bill){
         var billObject = this.bills.find(billObject => billObject._id === bill._id)
-        console.log(billObject);
         var date = bill.date.split('T')[0].split('-');
 
         billObject._id = bill._id;
