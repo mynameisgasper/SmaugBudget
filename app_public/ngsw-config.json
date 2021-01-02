@@ -35,7 +35,7 @@
         "https://smaugbudget.herokuapp.com/**"
       ],
       "cacheConfig": {
-        "strategy": "performance",
+        "strategy": "freshness",
         "maxSize": 20,
         "maxAge": "1h",
         "timeout": "5s"

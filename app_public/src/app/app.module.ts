@@ -87,7 +87,7 @@ import { ToastComponent } from './common/components/toast/toast.component';
     FontAwesomeModule,
     ModalModule.forRoot(),
     NgbModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production, registrationStrategy: 'registerImmediately' })
   ],
   exports: [],
   providers: [],

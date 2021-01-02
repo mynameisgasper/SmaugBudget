@@ -82,7 +82,7 @@ export class DashboardComponent implements OnInit {
     return this.connectionService.hasConnection;
   }
 
-  refreshLanguage(language: string) {
+  async refreshLanguage(language: string) {
     setLanguage(language);
         
     this.message = getTranslation("messageDashboard");
