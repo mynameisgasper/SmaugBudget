@@ -3,6 +3,7 @@
 require('./app_api/models/db');
 const path = require('path');
 var express = require('express');
+const compression = require('compression');
 var exphbs = require('express-handlebars');
 var helpers = require('./app_server/views/helpers/hbsh');
 const session = require('express-session');
@@ -50,6 +51,7 @@ var swaggerOptions = {
   const swaggerDocument = swaggerJsdoc(swaggerOptions);
 
 var app = express();
+app.use(compression());
 
 // Preusmeritev na HTTPS na Heroku
 if (process.env.NODE_ENV === 'production') {
