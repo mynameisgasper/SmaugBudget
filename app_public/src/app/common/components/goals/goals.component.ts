@@ -129,7 +129,7 @@ export class GoalsComponent implements OnInit {
 
   categoryCheckAddGoal() {
     const field = this.categoryGoal.nativeElement;
-    if (field.value == "Select Category") {
+    if (field.value == "Select a category") {
         field.style.setProperty("border-color", "red", "important");
         $('.tt69').toast('show');
         return 0;
@@ -166,39 +166,39 @@ export class GoalsComponent implements OnInit {
     var inputDate = field.value.split("-");
 
     if (inputDate == "") {
-        $('#mjav').toast('show');
+        $('.tt7').toast('show');
         field.style.setProperty("border-color", "red", "important");
         return 0;
     }
 
     if (inputDate[0] > yyyy) {
-        $('#mjav').toast('hide');
+        $('.tt7').toast('hide');
         field.style.borderColor = "#ced4da";
         return 1;
     } else if (inputDate[0] == yyyy) {
         if (inputDate[1] > mm) {
-            $('#mjav').toast('hide');
+            $('.tt7').toast('hide');
             field.style.borderColor = "#ced4da";
             return 1;
         } else if (inputDate[1] == mm) {
             /* 
             ? IF DAY IS >= NOW */
             if (inputDate[2] >= dd) {
-                $('#mjav').toast('hide');
+                $('.tt7').toast('hide');
                 field.style.borderColor = "#ced4da";
                 return 1;
             } else {
-                $('#mjav').toast('show');
+                $('.tt7').toast('show');
                 field.style.setProperty("border-color", "red", "important");
                 return 0;
             }
         } else {
-            $('#mjav').toast('show');
+            $('.tt7').toast('show');
             field.style.setProperty("border-color", "red", "important");
             return 0;
         }
     } else {
-        $('#date-hint').toast('show');
+        $('.tt7').toast('show');
         field.style.setProperty("border-color", "red", "important");
         return 0;
     }
