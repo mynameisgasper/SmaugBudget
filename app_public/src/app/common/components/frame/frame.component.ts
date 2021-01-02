@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ConnectionService } from '../../services/connection.service';
 
 @Component({
   selector: 'app-frame',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FrameComponent implements OnInit {
 
-  constructor() { }
+  constructor(private connectionService: ConnectionService) { }
 
   ngOnInit(): void {
+  }
+
+  public hasConnection(): boolean {
+    return this.connectionService.hasConnection;
   }
 
 }

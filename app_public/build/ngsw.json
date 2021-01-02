@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1609597864627,
+  "timestamp": 1609601933646,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -13,14 +13,14 @@
       "urls": [
         "/favicon.ico",
         "/index.html",
-        "/main.ed6b67e6ceda439bf087.js",
+        "/main.5b4be5db755e29c201b3.js",
         "/manifest.webmanifest",
         "/polyfills.b3b05dce4f05c03b56a3.js",
         "/runtime.0e49e2b53282f40c8925.js",
         "/scripts.82c999a74df85745f1d1.js",
         "/styles.76025043f84190022dba.js",
         "/styles.f93bf1806c2f655e783c.css",
-        "/vendor.1954ec227da7fbece6b1.js"
+        "/vendor.745f93a33bb737842e55.js"
       ],
       "patterns": []
     },
@@ -55,7 +55,23 @@
       "patterns": []
     }
   ],
-  "dataGroups": [],
+  "dataGroups": [
+    {
+      "name": "Smaugbudget-api",
+      "patterns": [
+        "http:\\/\\/localhost:8080\\/.*",
+        "https:\\/\\/smaugbudget\\.herokuapp\\.com\\/api\\/.*"
+      ],
+      "strategy": "freshness",
+      "maxSize": 20,
+      "maxAge": 3600000,
+      "timeoutMs": 5000,
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "version": 1
+    }
+  ],
   "hashTable": {
     "/OpenSans-Bold.dbb97fd982ce1b96b6de.ttf": "1e3704ee48b5ff7e582488ead87b05249f14dc1c",
     "/OpenSans-Italic.20653d2fac6285bf4dea.ttf": "b8d9f5ceb1e6b3a716dab0bdd09061bbc349b41e",
@@ -77,15 +93,15 @@
     "/assets/stylesheets/fonts.css": "98710ba2adf78f97f451e555758cc68f22583827",
     "/assets/stylesheets/main.css": "4ac44efb6ee76340cf0a12c0495791c311f822b1",
     "/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
-    "/index.html": "38b4630551dd2c89c1c3dc52e0c5a03311eaa99b",
-    "/main.ed6b67e6ceda439bf087.js": "01d5cffbcdd0e32bfefedb4c97b8be1b895d369f",
-    "/manifest.webmanifest": "7de43dab8180498e755c422cbb2bb9cf0a659f68",
+    "/index.html": "502ef5311720bdab99b2c05bbf2bf3066eeffdef",
+    "/main.5b4be5db755e29c201b3.js": "cebad31dc7f8baf6cc7c69930cf8d6634277c9da",
+    "/manifest.webmanifest": "221ff6302e7aad369adcb1a30560d2381e17e230",
     "/polyfills.b3b05dce4f05c03b56a3.js": "0d003992512d28c544b0a972ce2ae6b28ebbf5f6",
     "/runtime.0e49e2b53282f40c8925.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",
     "/scripts.82c999a74df85745f1d1.js": "1de63d6a82ff6028251311b774232af798fa98f9",
     "/styles.76025043f84190022dba.js": "c099a30d595d006679f3bd2be841704773e387ec",
     "/styles.f93bf1806c2f655e783c.css": "3eeafe12439fa533b2062ecacb5e88df20982a47",
-    "/vendor.1954ec227da7fbece6b1.js": "29fcaa3a05f0fbb23aeae2816e572266e2daea5e"
+    "/vendor.745f93a33bb737842e55.js": "c07b34612b8527a28fb5a23e2844cff792f57d5c"
   },
   "navigationUrls": [
     {
