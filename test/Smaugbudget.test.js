@@ -137,6 +137,7 @@ function savePageSource(browser, filename) {
       });*/
   
       //Finished
+      /*
       describe("Login", function() {
         context("Fail login", function() {
           this.timeout(60 * 1000);
@@ -563,7 +564,7 @@ function savePageSource(browser, filename) {
             await new Promise(r => setTimeout(r, 1000));
           });
         });
-      });*/
+      });
       
       describe("Money converter", function() {
         context("Successful converting", function() {
@@ -616,7 +617,7 @@ function savePageSource(browser, filename) {
           });
         });
       });
-
+      
       describe("Logout", function() {
         context("Successful logout", function() {
           before(() => { browser.get(applicationUrl); });
@@ -642,6 +643,93 @@ function savePageSource(browser, filename) {
             await new Promise(r => setTimeout(r, 1000));
             var url = await browser.getCurrentUrl();
             expect(url).to.equals('https://smaugbudget.herokuapp.com/');
+          });
+        });
+      });
+      */
+      describe("Reset database with admin account", function() {
+        context("Successfully login Admin User", function() {
+          this.timeout(30 * 1000);
+          before(() => { browser.get(applicationUrl); });
+  
+          it("Open modal", async () => {
+            await waitPageLoaded(browser, 10, "//h4");
+            let loginButton = await browser.findElements(By.xpath("//a[contains(text(), 'SIGN IN')]"));
+            expect(loginButton).to.not.be.empty;
+            await loginButton[0].click();
+            let opened = await browser.findElements(By.xpath("//div[contains(@class, 'modal-backdrop fade show')]"));
+            expect(opened).to.not.be.empty;
+
+            await new Promise(r => setTimeout(r, 5000));
+          });
+
+          it("Enter data", async () => {
+            let emailField = await browser.findElements(By.xpath("//input[contains(@id, 'emailin')]"));
+            expect(emailField).to.not.be.empty;
+            emailField[0].sendKeys("admin@smaug.com");
+
+            let passwordField = await browser.findElements(By.xpath("//input[contains(@id, 'passwordin')]"));
+            expect(passwordField).to.not.be.empty;
+            passwordField[0].sendKeys("Adminpass1");
+            
+            await new Promise(r => setTimeout(r, 1000));
+          });
+
+          it("Login", async () => {
+            let loginButton = await browser.findElements(By.xpath("//input[contains(@value, 'Login')]"));
+            expect(loginButton).to.not.be.empty;
+            loginButton[0].click();
+            await new Promise(r => setTimeout(r, 20000));
+
+            
+            var url = await browser.getCurrentUrl();
+            expect(url).to.include('dashboard');
+            await new Promise(r => setTimeout(r, 2000));
+          });
+
+          context("Navigate to administration panel", function() {
+            it("Open dropdown", async () => {
+              await waitPageLoaded(browser, 10, "//h4");
+              let dropdown = await browser.findElements(By.xpath("//div[contains(@id, 'navbarDropdownMenuLink-4')]"));
+              expect(dropdown).to.not.be.empty;
+              await dropdown[0].click();
+              await new Promise(r => setTimeout(r, 1000));
+              let openedDropdown = await browser.findElements(By.xpath("//div[contains(@aria-expanded, 'true')]"));
+              expect(openedDropdown).to.not.be.empty;
+            });
+
+            it("Click on administartion panel", async () => {
+              await waitPageLoaded(browser, 10, "//h4");
+              let adminButton = await browser.findElements(By.xpath("//a[contains(text(), ' Administration panel')]"));
+              await new Promise(r => setTimeout(r, 1000));
+              expect(adminButton).to.not.be.empty;
+              await adminButton[0].click();
+              await new Promise(r => setTimeout(r, 1000));
+              var url = await browser.getCurrentUrl();
+              expect(url).to.equals('https://smaugbudget.herokuapp.com/db');
+            });
+          });
+
+          context("Reset database", function() {
+            it("Click on delete all data", async () => {
+              let deleteDataButton = await browser.findElements(By.xpath("//button[contains(@class, 'btn btn-danger')]"));
+              await new Promise(r => setTimeout(r, 1000));
+              expect(deleteDataButton).to.not.be.empty;
+              deleteDataButton[0].click();
+
+              await new Promise(r => setTimeout(r, 1000));
+              await browser.switchTo().alert().accept();
+            });
+
+            it("Click on add test data", async () => {
+              let addDataButton = await browser.findElements(By.xpath("//button[contains(@class, 'btn btn-success')]"));
+              await new Promise(r => setTimeout(r, 1000));
+              expect(addDataButton).to.not.be.empty;
+              addDataButton[0].click();
+
+              await new Promise(r => setTimeout(r, 1000));
+              await browser.switchTo().alert().accept();
+            });
           });
         });
       });
