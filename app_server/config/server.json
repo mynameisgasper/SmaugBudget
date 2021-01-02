@@ -7,12 +7,12 @@
     },
     "email": {
         "auth": {
-            "address": "smaugbudget@gmail.com",
-            "password": "smaug123+"   
+            "address": "smaugbudget@mail.com",
+            "password": "Belikombi123"   
         },
         "smtp": {
-            "host": "smtp.gmail.com",
-            "port": 465
+            "host": "smtp.mail.com",
+            "port": 587
         }
     }
 }

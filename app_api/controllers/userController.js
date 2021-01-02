@@ -587,6 +587,33 @@ function deleteUser(req, res) {
     }
 }
 
+function createAdminAccount() {
+    if (User.findOne({ 'email': "admin@smaug.com" }, function(err, result) {
+        if (err || !result) {
+            let adminUser = new User({
+                firstname: "Admin",
+                lastname: "User",
+                email: "admin@smaug.com",
+                password: "$2a$10$L0ZgurAiFhmaH1KGg6UYdOpuNJTU4X0TMBSMNIYAo2NE5/QEK0tSG",
+                passwordSalt: "$2a$10$L0ZgurAiFhmaH1KGg6UYdO",
+                paycheck: 1500,
+                paycheckLastMonth: 1500,
+                paycheckDate: 18,
+                accessLevel: 3,
+                language: "English",
+                categories: [],
+                envelopes: [],
+                expense: [],
+                bills: [],
+                goals: [],
+                friendgroups: []
+                //connections: connectionArray
+            });
+            adminUser.save();
+        }
+    }));
+}
+
 module.exports = {
     register: function(req, res) {
         register(req, res);
@@ -631,5 +658,8 @@ module.exports = {
     },
     deleteUser: function(req, res) {
         deleteUser(req, res);
+    },
+    createAdminAccount: function() {
+        createAdminAccount();
     }
 }

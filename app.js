@@ -10,6 +10,7 @@ require('dotenv').config();
 var fs = require('fs');
 var passport = require('passport');
 require('./app_api/config/passport');
+var user = require('./app_api/controllers/userController');
 var swaggerJsdoc = require('swagger-jsdoc');
 var swaggerUi = require('swagger-ui-express');
 
@@ -140,11 +141,13 @@ app.all('*', (req, res) => {
 });
 
 //OpenAPI
-
 apiRouter.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 apiRouter.get("/swagger.json", (req, res) => {
   res.status(200).json(swaggerDocument);
 });
+
+//Create admin account if it does not exist
+user.createAdminAccount();
 
 module.exports = {
     startServer: (port) => {
