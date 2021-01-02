@@ -42,6 +42,8 @@
 
         <!--- Navbar Profile Dropdown Menu  --->
         <ul class="navbar-nav ml-auto">
+            <fa-icon *ngIf="!hasConnection()" [icon]="faConnection" class="fa-3x" style="color:#f89406;"></fa-icon>
+
             <li class="nav-item dropdown">
             <div class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding-top: 0px; padding-bottom: 0px">
                 <img id="pfpNavBar" [src]="imageToShow" alt="Profile pic"></div>

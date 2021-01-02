@@ -1,8 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { faCog, faAdjust, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { faCog, faAdjust, faSignOutAlt, faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import { AuthenticationService } from '../../services/authentication.service';
 import { ApiService } from '../../services/api.service';
+import { ConnectionService } from '../../services/connection.service';
 
 declare var removeForLogout: any;
 declare var loadDarkMode: any;
@@ -27,7 +28,9 @@ export class HeaderComponent implements OnInit {
   faSignOutAlt = faSignOutAlt;
   defaultLanguage: string;
 
-  constructor(private router: Router, private auth: AuthenticationService, private api: ApiService,) { }
+  constructor(private router: Router, private auth: AuthenticationService, private api: ApiService, private connectionService: ConnectionService) { }
+
+  faConnection = faExclamationCircle;
 
   ngOnInit(): void {
     this.pfpImg = this.getImage();
@@ -39,6 +42,10 @@ export class HeaderComponent implements OnInit {
       this.auth.logout();
       this.router.navigate(['/']);  
     });
+  }
+
+  public hasConnection(): boolean {
+    return this.connectionService.hasConnection;
   }
 
   lang = {
