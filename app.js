@@ -119,7 +119,7 @@ if (process.env.NODE_ENV === 'production') {
 
 
 app.use('/api', (req, res, next) => {
-    res.header("Content-Security-Policy", "default-src 'self'");
+    res.header("Content-Security-Policy", "default-src 'self'; form-action 'none'; frame-ancestors 'self'");
     res.header('Access-Control-Allow-Origin', origin);
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
     next();
