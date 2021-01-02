@@ -7,6 +7,7 @@ import { Category } from '../../classes/category';
 import { Router } from "@angular/router";
 import { DatePipe } from '@angular/common';
 import { AuthenticationService } from '../../services/authentication.service';
+import { ConnectionService } from '../../services/connection.service';
 declare var $:any;
 
 declare var getTranslation: any;
@@ -23,7 +24,13 @@ export class GoalsComponent implements OnInit {
     private api: ApiService,
     private renderer: Renderer2, 
     private router: Router, 
-    private authentication: AuthenticationService) { }
+    private authentication: AuthenticationService,
+    private connectionService: ConnectionService
+  ) { }
+
+  public hasConnection(): boolean {
+    return this.connectionService.hasConnection;
+  }
 
   cards: Card[]
   goals: Goal[]

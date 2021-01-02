@@ -4,6 +4,7 @@ import { Goal } from '../../classes/goal';
 import { ApiService } from '../../services/api.service';
 import { GoalsComponent } from '../goals/goals.component';
 import { Category } from '../../classes/category';
+import { ConnectionService } from '../../services/connection.service';
 declare var $:any;
 
 @Component({
@@ -16,10 +17,15 @@ export class GoalsProgressComponent implements OnInit {
   constructor(
     private api: ApiService,
     private goalsComponent: GoalsComponent,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private connectionService: ConnectionService
   ) { }
 
   ngOnInit(): void {
+  }
+
+  public hasConnection(): boolean {
+    return this.connectionService.hasConnection;
   }
 
   faMinusSquare = faMinusSquare;

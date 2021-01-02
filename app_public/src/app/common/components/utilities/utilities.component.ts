@@ -7,6 +7,7 @@ import { NgForm } from '@angular/forms';
 import { FriendGroup } from '../../classes/friendGroup'
 import { Friend } from '../../classes/friend'
 import { AuthenticationService } from '../../services/authentication.service';
+import { ConnectionService } from '../../services/connection.service';
 declare var $:any;
 
 declare var getTranslation: any;
@@ -54,8 +55,13 @@ export class UtilitiesComponent implements OnInit {
         private pit: ActivatedRoute,
         private renderer: Renderer2,
         private router: Router, 
-        private authentication: AuthenticationService
+        private authentication: AuthenticationService,
+        private connectionService: ConnectionService
     ) {}
+
+    public hasConnection(): boolean {
+        return this.connectionService.hasConnection;
+    }
 
     @ViewChild('groupName') groupName: ElementRef;
     @ViewChild('memberName') memberName: ElementRef;

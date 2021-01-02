@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { faMinusSquare, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { FriendGroup } from '../../classes/friendGroup'
 import { ApiService } from '../../services/api.service';
+import { ConnectionService } from '../../services/connection.service';
 import { UtilitiesComponent } from '../utilities/utilities.component'
 
 @Component({
@@ -18,8 +19,13 @@ export class UtilityTableElementComponent implements OnInit {
 
   constructor(
     private api: ApiService,
-    private UtilitiesComponent: UtilitiesComponent
+    private UtilitiesComponent: UtilitiesComponent,
+    private connectionService: ConnectionService
   ) { }
+
+  public hasConnection(): boolean {
+    return this.connectionService.hasConnection;
+  }
 
   @Input()
     group: FriendGroup;

@@ -3,6 +3,7 @@ import { faMinusSquare, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { DOCUMENT } from '@angular/common'
 import { ApiService } from '../../services/api.service';
 import { Envelope } from '../../classes/envelope';
+import { ConnectionService } from '../../services/connection.service';
 
 @Component({
   selector: 'app-envelopes-progress',
@@ -29,8 +30,13 @@ export class EnvelopesProgressComponent implements OnInit {
 
   constructor(
     private api: ApiService,
+    private connectionService: ConnectionService,
     @Inject(DOCUMENT) private document: HTMLDocument
   ) { }
+
+  public hasConnection(): boolean {
+    return this.connectionService.hasConnection;
+  }
 
   isLow(value: Number): Boolean {
     return value < 85;

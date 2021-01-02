@@ -8,13 +8,8 @@ import { ConnectionService } from '../../services/connection.service';
 })
 export class FrameComponent implements OnInit {
 
-  constructor(private connectionService: ConnectionService) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
-
-  public hasConnection(): boolean {
-    return this.connectionService.hasConnection;
-  }
-
 }

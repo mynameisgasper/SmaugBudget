@@ -5,6 +5,7 @@ import { ApiService } from '../../services/api.service';
 import { Card } from '../../classes/card';
 import { Envelope } from '../../classes/envelope';
 import { AuthenticationService } from '../../services/authentication.service';
+import { ConnectionService } from '../../services/connection.service';
 declare var $:any;
 
 declare var getTranslation: any;
@@ -21,7 +22,13 @@ export class EnvelopesComponent implements OnInit {
     private api: ApiService,
     private renderer: Renderer2,
     private router: Router, 
-    private authentication: AuthenticationService) { }
+    private authentication: AuthenticationService,
+    private connectionService: ConnectionService
+  ) { }
+
+  public hasConnection(): boolean {
+    return this.connectionService.hasConnection;
+  }
 
   cards: Card[]
   public envelopes: Array<Envelope>;

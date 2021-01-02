@@ -10,7 +10,7 @@
     <input type="hidden" id="color{{Expense._id}}" value="{{Expense.category.color}}">
 </td>
 <td class="zadnji align-middle">
-    <button type="button" class="btn p" data-toggle="modal" aria-label="Edit" [attr.data-target]="'#editForm' + Expense._id"><fa-icon [icon]="faPencilAlt"></fa-icon></button>
+    <button [disabled]="!hasConnection()" type="button" class="btn p" data-toggle="modal" aria-label="Edit" [attr.data-target]="'#editForm' + Expense._id"><fa-icon [icon]="faPencilAlt"></fa-icon></button>
 </td>
 <div class="modal fade expensesModal" #editHistoryModal id="editForm{{Expense._id}}" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
     <div class="position-absolute w-100 p-4 d-flex flex-column align-items-end">

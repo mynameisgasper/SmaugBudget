@@ -9,7 +9,7 @@
                 <h2>{{utilGroups}}</h2> 
             </div>
             <div class="col-sm-1 col-md-1 col-lg-1 col-xl-1">
-                <button type="button" class="btn btn-primary" id="createGroup" data-toggle="modal" href="#addGroupModal" style="text-align: right;">{{utilCreate}}</button>
+                <button [disabled]="!hasConnection()" type="button" class="btn btn-primary" id="createGroup" data-toggle="modal" href="#addGroupModal" style="text-align: right;">{{utilCreate}}</button>
             </div>
         </div>
         <div class="row" style="padding-left: 25px;">
@@ -38,7 +38,7 @@
             <div class="col-md-0 col-sm-0 col-xl-2 col-lg-2"></div>
             <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
                 <label for="curr1">{{utilFrom}}</label>
-                <select #curr1 class="form-control curr1" id="curr1">
+                <select [disabled]="!hasConnection()" #curr1 class="form-control curr1" id="curr1">
                     <option value="EUR" selected="selected" label="{{'EUR' | currencyTranslator}}">EUR</option>
                     <option value="USD" label="{{'USD' | currencyTranslator}}">USD</option>
                     <option value="JPY" label="{{'JPY' | currencyTranslator}}">JPY</option>
@@ -79,7 +79,7 @@
             </div>
             <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
                 <label for="curr2">{{utilTo}}</label>
-                <select #curr2 class="form-control curr2" id="curr2">
+                <select [disabled]="!hasConnection()" #curr2 class="form-control curr2" id="curr2">
                     <option value="EUR" label="{{'EUR' | currencyTranslator}}">EUR</option>
                     <option value="USD" selected="selected" label="{{'USD' | currencyTranslator}}">USD</option>
                     <option value="JPY" label="{{'JPY' | currencyTranslator}}">JPY</option>
@@ -123,7 +123,7 @@
         <div class="row">
             <div class="col-md-0 col-sm-0 col-xl-2 col-lg-2"></div>
             <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                <input type="number" #value onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" id="Amount" class="form-control" placeholder="Amount to convert">
+                <input [disabled]="!hasConnection()" type="number" #value onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" id="Amount" class="form-control" placeholder="Amount to convert">
             </div>
             <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
                 <output type="number" id="Amount2" class="form-control" placeholder="Amount converted" value="{{resultValue | number : '1.2-2'}}" ></output>
@@ -135,7 +135,7 @@
         </div>
         <div class="row3">
             <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                <button type="button" class="btn btn-primary" id="convert" (click)="converter(curr1.value, curr2.value, value.value)">{{utilConvert}}</button>
+                <button [disabled]="!hasConnection()" type="button" class="btn btn-primary" id="convert" (click)="converter(curr1.value, curr2.value, value.value)">{{utilConvert}}</button>
             </div>
         </div>
     </div>
