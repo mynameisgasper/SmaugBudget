@@ -32,6 +32,7 @@ import { ConfirmationComponent } from './common/components/confirmation/confirma
 import { BillsComponent } from './common/components/bills/bills.component';
 import { BillTableComponent } from './common/components/bill-table/bill-table.component';
 import { RoutingModule } from './modules/routing/routing.module';
+import { IndexModule } from './modules/index/index.module';
 import { InputMemberPipe } from './common/pipes/input-member.pipe';
 import { TranslateMonthNumberPipe } from './common/pipes/month-number.pipe';
 import { IconTranslatorPipe } from './common/pipes/icon-translator.pipe';
@@ -48,7 +49,6 @@ import { ToastComponent } from './common/components/toast/toast.component';
     FrameComponent,
     DbComponent,
     DashboardComponent,
-    HomeComponent,
     CardComponent,
     WelcomeComponent,
     AlertComponent,
@@ -81,6 +81,7 @@ import { ToastComponent } from './common/components/toast/toast.component';
     BrowserModule,
     HttpClientModule,
     RoutingModule,
+    IndexModule,
     FormsModule,
     ChartsModule,
     FontAwesomeModule,
