@@ -1,10 +1,6 @@
 {
   "configVersion": 1,
-<<<<<<< Updated upstream
-  "timestamp": 1609592873258,
-=======
-  "timestamp": 1609593649563,
->>>>>>> Stashed changes
+  "timestamp": 1609594131954,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -17,8 +13,7 @@
       "urls": [
         "/favicon.ico",
         "/index.html",
-<<<<<<< Updated upstream
-        "/main.32e43999f442635ea503.js",
+        "/main.f171f034a54cb346386e.js",
         "/manifest.webmanifest",
         "/polyfills.b3b05dce4f05c03b56a3.js",
         "/runtime.0e49e2b53282f40c8925.js",
@@ -26,16 +21,6 @@
         "/styles.76025043f84190022dba.js",
         "/styles.f93bf1806c2f655e783c.css",
         "/vendor.1954ec227da7fbece6b1.js"
-=======
-        "/main.d6003dbc8d6d763e8c3a.js",
-        "/manifest.webmanifest",
-        "/polyfills.c3d988ef40fe3a931281.js",
-        "/runtime.359d5ee4682f20e936e9.js",
-        "/scripts.86b9c1cef1a487815147.js",
-        "/styles.76178f94fb9b9a3796d9.js",
-        "/styles.cf8034254d8305a1a937.css",
-        "/vendor.2907ad6325107e9a0b7a.js"
->>>>>>> Stashed changes
       ],
       "patterns": []
     },
@@ -59,14 +44,6 @@
         "/assets/images/filler.png",
         "/assets/images/phone1.png",
         "/assets/javascripts/aos.js",
-<<<<<<< Updated upstream
-=======
-        "/assets/javascripts/bootstrap-select.js.map",
-        "/assets/javascripts/bootstrap-select.min.js",
-        "/assets/javascripts/bootstrap.min.js",
-        "/assets/javascripts/bootstrap.min.js.map",
-        "/assets/javascripts/jquery-3.5.1.min.js",
->>>>>>> Stashed changes
         "/assets/stylesheets/aos.css",
         "/assets/stylesheets/darkmode.css",
         "/assets/stylesheets/fonts.css",
@@ -89,14 +66,13 @@
     "/assets/images/filler.png": "ff81f68ee587bb0bf81362d86122db30f51b2df9",
     "/assets/images/phone1.png": "8c1bd37297eff9c9debcb8dbfedfeeeb935b8f44",
     "/assets/javascripts/aos.js": "b67cdbc54788e549b67fe9807e67fb721de112b7",
-<<<<<<< Updated upstream
     "/assets/stylesheets/aos.css": "9a26a349d21a4b871f45dfd124a43fada4f94b98",
     "/assets/stylesheets/darkmode.css": "5146f9f517d2a7f41d05904533d183a793fecb9c",
     "/assets/stylesheets/fonts.css": "98710ba2adf78f97f451e555758cc68f22583827",
     "/assets/stylesheets/main.css": "4ac44efb6ee76340cf0a12c0495791c311f822b1",
     "/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
-    "/index.html": "df072e971b443635f7b7d557bce56f3850c37955",
-    "/main.32e43999f442635ea503.js": "2c6f27834f6dfa5213d36aa6d951ab2e40717e85",
+    "/index.html": "df5ddc6038f847d8a950a0cf4b3649eb27a8e66b",
+    "/main.f171f034a54cb346386e.js": "61ffb47ee31443f8017b49b8da0e1494f29ef4ad",
     "/manifest.webmanifest": "4e1f332868783ce51aee2500b17e2eea0ba81aa8",
     "/polyfills.b3b05dce4f05c03b56a3.js": "0d003992512d28c544b0a972ce2ae6b28ebbf5f6",
     "/runtime.0e49e2b53282f40c8925.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",
@@ -104,29 +80,6 @@
     "/styles.76025043f84190022dba.js": "c099a30d595d006679f3bd2be841704773e387ec",
     "/styles.f93bf1806c2f655e783c.css": "3eeafe12439fa533b2062ecacb5e88df20982a47",
     "/vendor.1954ec227da7fbece6b1.js": "29fcaa3a05f0fbb23aeae2816e572266e2daea5e"
-=======
-    "/assets/javascripts/bootstrap-select.js.map": "563b84779c85e4165dbedd8f997533a17f70527d",
-    "/assets/javascripts/bootstrap-select.min.js": "1c9ea97a4cac814125f256e7bce9f99e80385189",
-    "/assets/javascripts/bootstrap.min.js": "83a730b09d93abef59f787f0385f24bbe46cd578",
-    "/assets/javascripts/bootstrap.min.js.map": "d64a289f698e446b0cc78e83dd0161bb8e2f2075",
-    "/assets/javascripts/jquery-3.5.1.min.js": "d2cc8d43ce1c854b1172e42b1209502ad563db83",
-    "/assets/stylesheets/aos.css": "9a26a349d21a4b871f45dfd124a43fada4f94b98",
-    "/assets/stylesheets/bootstrap-select.css": "5bdbc24950c80eb0ae2c65fa38f7c46ff2a57720",
-    "/assets/stylesheets/bootstrap.min.css": "c470239d4c7db36d56dc3a74a080c62218c6edc4",
-    "/assets/stylesheets/darkmode.css": "84857b2b6a65950baff2890395dc2728caaef85a",
-    "/assets/stylesheets/fonts.css": "47c691a87d88a12c666053199b11a78da539530e",
-    "/assets/stylesheets/main.css": "5f0149e446b4f25ad1faf70d4d103ef937883de6",
-    "/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
-    "/index.html": "f8a40c8de086c63697afc6a306011c8149734187",
-    "/main.d6003dbc8d6d763e8c3a.js": "61ffb47ee31443f8017b49b8da0e1494f29ef4ad",
-    "/manifest.webmanifest": "4da91bf6559950b36938c53e8cd91af043834c4d",
-    "/polyfills.c3d988ef40fe3a931281.js": "0d003992512d28c544b0a972ce2ae6b28ebbf5f6",
-    "/runtime.359d5ee4682f20e936e9.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",
-    "/scripts.86b9c1cef1a487815147.js": "590781688265ebc0b90e0ab335a2bb17b892f59d",
-    "/styles.76178f94fb9b9a3796d9.js": "b03f81876d4209d5fc6f95ca20366d0571f4b6ae",
-    "/styles.cf8034254d8305a1a937.css": "8dcce2b666cdcf32f7a0a84245b42632ee86fbbe",
-    "/vendor.2907ad6325107e9a0b7a.js": "45a22b68d6cf1c1145ad1939c25c8d100a381bf3"
->>>>>>> Stashed changes
   },
   "navigationUrls": [
     {
