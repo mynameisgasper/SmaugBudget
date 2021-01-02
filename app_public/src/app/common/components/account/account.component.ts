@@ -303,7 +303,6 @@ uploadFileToActivity() {
   this.haschangePfpMessage = true;
   this.changePfpMessage = 'Saving image';
     this.api.postFile(this.fileToUpload).then((response) => {
-        console.log(response);
         this.pfpImg = this.getImage();
         this.haschangePfpMessage = false;
         this.modal2.hide();

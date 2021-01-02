@@ -262,7 +262,6 @@ export class HomeComponent implements OnInit {
       this.resetMessage = "Sending reset email";
 
       this.api.requestResetPassword(email).then(result => {
-        console.log(result);
         if (result.status !== 200) {
           this.resetMessage = "Failed to send an email!";
         }

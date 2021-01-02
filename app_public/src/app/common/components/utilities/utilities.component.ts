@@ -64,7 +64,6 @@ export class UtilitiesComponent implements OnInit {
 
     ngOnInit(): void {
         this.api.getUser().then(result => {
-            console.log(result);
             this.refreshLanguage(result.language);
             this.data = {
                 "utility":true,
