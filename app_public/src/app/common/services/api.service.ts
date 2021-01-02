@@ -126,7 +126,7 @@ export class ApiService {
     return this.http.post(url, body, options).toPromise().then(response => response).catch(err => this.parseError(err));
   }
 
-  public getUser(): Promise<User> {
+  public async getUser(): Promise<User> {
     if (this.authorization.getLoggedIn()) {
       const url: string = `${this.apiUrl}/getUser`;  
       const options = {
