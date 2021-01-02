@@ -532,6 +532,39 @@ function savePageSource(browser, filename) {
           });
         });
       });
+
+      describe("History filter", function() {
+        context("Find expense", function() {
+          this.timeout(30 * 1000);
+          it("Redirect to history tab", async () => {
+            let historyLink = await browser.findElements(By.xpath("//a[contains(@routerlink, 'history')]"));
+            await new Promise(r => setTimeout(r, 1000));
+            expect(historyLink).to.not.be.empty;
+            historyLink[0].click();
+            
+            await new Promise(r => setTimeout(r, 11000));
+            var url = await browser.getCurrentUrl();
+            expect(url).to.include('history');
+            await new Promise(r => setTimeout(r, 1000));
+          });
+
+          it("Input search", async () => {
+            let input = await browser.findElements(By.xpath("//input[contains(@id, 'filter')]"));
+            await new Promise(r => setTimeout(r, 1000));
+            expect(input).to.not.be.empty;
+            input[0].sendKeys('Lidl', Key.ENTER);
+            await new Promise(r => setTimeout(r, 2000));
+            let tr = await browser.findElements(By.xpath("//td"));
+            await new Promise(r => setTimeout(r, 1000));
+            expect(tr).to.not.be.empty;
+            await new Promise(r => setTimeout(r, 1000));
+            let outputVal = await tr[2].getAttribute("innerText");
+            await new Promise(r => setTimeout(r, 1000));
+            expect(outputVal).to.include('Lidl');
+            await new Promise(r => setTimeout(r, 1000));
+          });
+        });
+      });
       
       describe("Money converter", function() {
         context("Successful converting", function() {
@@ -603,6 +636,7 @@ function savePageSource(browser, filename) {
           it("Logout", async () => {
             await waitPageLoaded(browser, 10, "//h4");
             let logoutButton = await browser.findElements(By.xpath("//a[contains(text(), ' Logout')]"));
+            await new Promise(r => setTimeout(r, 1000));
             expect(logoutButton).to.not.be.empty;
             await logoutButton[0].click();
             await new Promise(r => setTimeout(r, 1000));
