@@ -4,6 +4,8 @@ import { Router } from "@angular/router"
 import { AuthenticationService } from '../../services/authentication.service';
 declare var $:any;
 
+declare var removeForLogout: any;
+
 @Component({
   selector: 'app-root',
   templateUrl: './home.component.html',
@@ -41,6 +43,7 @@ export class HomeComponent implements OnInit {
 
 
   ngOnInit(): void {
+    removeForLogout();
     if (this.api.getLoggedIn()) {
       this.router.navigate(['/dashboard']);
     }
