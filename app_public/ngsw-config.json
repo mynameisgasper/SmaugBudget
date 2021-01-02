@@ -32,7 +32,7 @@
       "name": "Smaugbudget-api",
       "urls": [
         "http://localhost:8080/**",
-        "https://smaugbudget.herokuapp.com/api/**"
+        "https://smaugbudget.herokuapp.com/**"
       ],
       "cacheConfig": {
         "strategy": "freshness",

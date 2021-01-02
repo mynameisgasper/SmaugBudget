@@ -24,7 +24,8 @@ const routes: Routes = [
   },
   {
     path: 'db',
-    component: DbComponent
+    component: DbComponent, 
+    canActivate:[LoginGuardService]
   },
   {
     path: 'dashboard',

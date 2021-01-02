@@ -17,11 +17,11 @@ declare var setLanguage: any;
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  imageToShow: any;
-  pfpImg: any;
+  imageToShow?: any;
+  pfpImg?: any;
 
   @Input()
-  component: string
+  component?: string
 
   faCog = faCog;
   faAdjust = faAdjust;
@@ -34,15 +34,17 @@ export class HeaderComponent implements OnInit {
   constructor(private router: Router, private auth: AuthenticationService, private api: ApiService, private connectionService: ConnectionService) { }
 
   ngOnInit(): void {
-    this.pfpImg = this.getImage();
-    loadDarkMode();
-    this.api.getUser().then(result => {
-      this.defaultLanguage = result.language;
-      this.refreshLanguage(this.defaultLanguage);
-    }).catch(error => {
-      this.auth.logout();
-      this.router.navigate(['/']);  
-    });
+    if (this.auth.userLoggedIn) {
+      this.pfpImg = this.getImage();
+      loadDarkMode();
+      this.api.getUser().then(result => {
+        this.defaultLanguage = result.language;
+        this.refreshLanguage(this.defaultLanguage);
+      }).catch(error => {
+        this.auth.logout();
+        this.router.navigate(['/']);  
+      });
+    }  
   }
 
   public hasConnection(): boolean {
