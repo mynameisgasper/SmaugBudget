@@ -6,7 +6,7 @@
             "colorHex": "#32a89c",
             "color": "rgb(50, 168, 156)",
             "bgColor": "rgba(50, 168, 156, 0.5)",
-            "month": "NOV",
+            "month": "DEC",
             "category": {
                 "color": "rgb(50, 168, 156)",
                 "basic": true,
@@ -22,7 +22,7 @@
             "colorHex": "#e8b017",
             "color": "rgb(232, 176, 23)",
             "bgColor": "rgba(232, 176, 23, 0.5)",
-            "month": "NOV",
+            "month": "DEC",
             "category": {
                 "color": "rgb(232, 176, 23)",
                 "basic": true,
@@ -39,7 +39,7 @@
             "colorHex": "#bf21c2",
             "color": "rgb(191, 33, 194)",
             "bgColor": "rgba(191, 33, 194, 0.5)",
-            "month": "NOV",
+            "month": "DEC",
             "category": {
                 "color": "rgb(191, 33, 194)",
                 "basic": true,
@@ -55,7 +55,7 @@
             "colorHex": "#d11768",
             "color": "rgb(209, 23, 104)",
             "bgColor": "rgba(209, 23, 104, 0.5)",
-            "month": "NOV",
+            "month": "DEC",
             "category": {
                 "color": "rgb(209, 23, 104)",
                 "basic": true,
@@ -71,7 +71,7 @@
             "colorHex": "#5834b3",
             "color": "rgb(88, 52, 179)",
             "bgColor": "rgba(88, 52, 179, 0.5)",
-            "month": "NOV",
+            "month": "DEC",
             "category": {
                 "color": "rgb(88, 52, 179)",
                 "basic": true,
@@ -88,7 +88,7 @@
             "colorHex": "#add134",
             "color": "rgb(173, 209, 52)",
             "bgColor": "rgba(173, 209, 52, 0.5)",
-            "month": "NOV",
+            "month": "DEC",
             "category": {
                 "color": "rgb(173, 209, 52)",
                 "basic": true,
@@ -104,7 +104,7 @@
             "colorHex": "#32a852",
             "color": "rgb(50, 168, 82)",
             "bgColor": "rgba(50, 168, 82, 0.5)",
-            "month": "NOV",
+            "month": "DEC",
             "category": {
                 "color": "rgb(50, 168, 82)",
                 "basic": true,
@@ -121,7 +121,7 @@
             "colorHex": "#30bf62",
             "color": "rgb(209, 73, 23)",
             "bgColor": "rgba(209, 73, 23, 0.5)",
-            "month": "NOV",
+            "month": "DEC",
             "category": {
                 "color": "rgb(209, 73, 23)",
                 "basic": true,
@@ -137,7 +137,7 @@
             "colorHex": "#51dbed",
             "color": "rgb(81, 219, 237)",
             "bgColor": "rgba(81, 219, 237, 0.5)",
-            "month": "NOV",
+            "month": "DEC",
             "category": {
                 "color": "rgb(81, 219, 237)",
                 "basic": true,
@@ -153,7 +153,7 @@
             "colorHex": "#32a89c",
             "color": "rgb(50, 168, 156)",
             "bgColor": "rgba(50, 168, 156, 0.5)",
-            "month": "OCT",
+            "month": "NOV",
             "category": {
                 "color": "rgb(50, 168, 156)",
                 "basic": true,
@@ -168,7 +168,7 @@
             "colorHex": "#e8b017",
             "color": "rgb(232, 176, 23)",
             "bgColor": "rgba(232, 176, 23, 0.5)",
-            "month": "OCT",
+            "month": "NOV",
             "category": {
                 "color": "rgb(232, 176, 23)",
                 "basic": true,
@@ -183,7 +183,7 @@
             "colorHex": "#bf21c2",
             "color": "rgb(191, 33, 194)",
             "bgColor": "rgba(191, 33, 194, 0.5)",
-            "month": "OCT",
+            "month": "NOV",
             "category": {
                 "color": "rgb(191, 33, 194)",
                 "basic": true,
@@ -198,7 +198,7 @@
             "colorHex": "#d11768",
             "color": "rgb(209, 23, 104)",
             "bgColor": "rgba(209, 23, 104, 0.5)",
-            "month": "OCT",
+            "month": "NOV",
             "category": {
                 "color": "rgb(209, 23, 104)",
                 "basic": true,
@@ -213,7 +213,7 @@
             "colorHex": "#5834b3",
             "color": "rgb(88, 52, 179)",
             "bgColor": "rgba(88, 52, 179, 0.5)",
-            "month": "OCT",
+            "month": "NOV",
             "category": {
                 "color": "rgb(88, 52, 179)",
                 "basic": true,
@@ -228,7 +228,7 @@
             "colorHex": "#add134",
             "color": "rgb(173, 209, 52)",
             "bgColor": "rgba(173, 209, 52, 0.5)",
-            "month": "OCT",
+            "month": "NOV",
             "category": {
                 "color": "rgb(173, 209, 52)",
                 "basic": true,
@@ -243,7 +243,7 @@
             "colorHex": "#32a852",
             "color": "rgb(50, 168, 82)",
             "bgColor": "rgba(50, 168, 82, 0.5)",
-            "month": "OCT",
+            "month": "NOV",
             "category": {
                 "color": "rgb(50, 168, 82)",
                 "basic": true,
@@ -258,7 +258,7 @@
             "colorHex": "#30bf62",
             "color": "rgb(48, 191, 98)",
             "bgColor": "rgba(48, 191, 98, 0.5)",
-            "month": "OCT",
+            "month": "NOV",
             "category": {
                 "color": "rgb(48, 191, 98)",
                 "basic": true,
@@ -273,7 +273,7 @@
             "colorHex": "#51dbed",
             "color": "rgb(81, 219, 237)",
             "bgColor": "rgba(81, 219, 237, 0.5)",
-            "month": "OCT",
+            "month": "NOV",
             "category": {
                 "color": "rgb(81, 219, 237)",
                 "basic": true,
@@ -291,7 +291,7 @@
             "colorHex": "#32a89c",
             "color": "rgb(50, 168, 156)",
             "bgColor": "rgba(50, 168, 156, 0.5)",
-            "month": "DEC",
+            "month": "JAN",
             "category": {
                 "_id": "5fc42028ee6abc0760345c38",
                 "color": "rgb(50, 168, 156)",
@@ -308,7 +308,7 @@
             "colorHex": "#e8b017",
             "color": "rgb(232, 176, 23)",
             "bgColor": "rgba(232, 176, 23, 0.5)",
-            "month": "DEC",
+            "month": "JAN",
             "category": {
                 "_id": "5fc42028ee6abc0760345c39",
                 "color": "rgb(232, 176, 23)",
@@ -325,7 +325,7 @@
             "colorHex": "#bf21c2",
             "color": "rgb(191, 33, 194)",
             "bgColor": "rgba(191, 33, 194, 0.5)",
-            "month": "DEC",
+            "month": "JAN",
             "category": {
                 "_id": "5fc42028ee6abc0760345c3a",
                 "color": "rgb(191, 33, 194)",
@@ -342,7 +342,7 @@
             "colorHex": "#d11768",
             "color": "rgb(209, 23, 104)",
             "bgColor": "rgba(209, 23, 104, 0.5)",
-            "month": "DEC",
+            "month": "JAN",
             "category": {
                 "_id": "5fc42028ee6abc0760345c3b",
                 "color": "rgb(209, 23, 104)",
@@ -359,7 +359,7 @@
             "colorHex": "#5834b3",
             "color": "rgb(88, 52, 179)",
             "bgColor": "rgba(88, 52, 179, 0.5)",
-            "month": "DEC",
+            "month": "JAN",
             "category": {
                 "_id": "5fc42028ee6abc0760345c3c",
                 "color": "rgb(88, 52, 179)",
@@ -376,7 +376,7 @@
             "colorHex": "#add134",
             "color": "rgb(173, 209, 52)",
             "bgColor": "rgba(173, 209, 52, 0.5)",
-            "month": "DEC",
+            "month": "JAN",
             "category": {
                 "_id": "5fc42028ee6abc0760345c3d",
                 "color": "rgb(173, 209, 52)",
@@ -393,7 +393,7 @@
             "colorHex": "#32a852",
             "color": "rgb(50, 168, 82)",
             "bgColor": "rgba(50, 168, 82, 0.5)",
-            "month": "DEC",
+            "month": "JAN",
             "category": {
                 "_id": "5fc42028ee6abc0760345c3e",
                 "color": "rgb(50, 168, 82)",
@@ -410,7 +410,7 @@
             "colorHex": "#d14917",
             "color": "rgb(209, 73, 23)",
             "bgColor": "rgba(209, 73, 23, 0.5)",
-            "month": "DEC",
+            "month": "JAN",
             "category": {
                 "_id": "5fc42028ee6abc0760345c3f",
                 "color": "rgb(209, 73, 23)",
@@ -427,7 +427,7 @@
             "colorHex": "#51dbed",
             "color": "rgb(81, 219, 237)",
             "bgColor": "rgba(81, 219, 237, 0.5)",
-            "month": "DEC",
+            "month": "JAN",
             "category": {
                 "_id": "5fc42028ee6abc0760345c40",
                 "color": "rgb(81, 219, 237)",
@@ -444,7 +444,7 @@
             "colorHex": "#28eb4f",
             "color": "rgb(40, 235, 79)",
             "bgColor": "rgba(40, 235, 79, 0.5)",
-            "month": "DEC",
+            "month": "JAN",
             "category": {
                 "_id": "5fc42028ee6abc0760345c41",
                 "color": "rgb(40, 235, 79)",
@@ -520,7 +520,7 @@
 
     ],
     "expenses": [{
-            "date": "2020-11-07T00:00:00Z",
+            "date": "2020-12-07T00:00:00Z",
             "category": {
                 "color": "rgb(50, 168, 156)",
                 "basic": true,
@@ -532,7 +532,7 @@
             "__v": 0
         },
         {
-            "date": "2020-11-12T00:00:00Z",
+            "date": "2020-12-12T00:00:00Z",
             "category": {
                 "color": "rgb(50, 168, 156)",
                 "basic": true,
@@ -544,7 +544,7 @@
             "__v": 0
         },
         {
-            "date": "2020-11-03T00:00:00Z",
+            "date": "2020-12-03T00:00:00Z",
             "category": {
                 "color": "rgb(232, 176, 23)",
                 "basic": true,
@@ -556,7 +556,7 @@
             "__v": 0
         },
         {
-            "date": "2020-11-17T00:00:00Z",
+            "date": "2020-12-17T00:00:00Z",
             "category": {
                 "color": "rgb(232, 176, 23)",
                 "basic": true,
@@ -568,7 +568,7 @@
             "__v": 0
         },
         {
-            "date": "2020-11-21T00:00:00Z",
+            "date": "2020-12-21T00:00:00Z",
             "category": {
                 "color": "rgb(191, 33, 194)",
                 "basic": true,
@@ -580,7 +580,7 @@
             "__v": 0
         },
         {
-            "date": "2020-11-16T00:00:00Z",
+            "date": "2020-12-16T00:00:00Z",
             "category": {
                 "color": "rgb(209, 23, 104)",
                 "basic": true,
@@ -592,7 +592,7 @@
             "__v": 0
         },
         {
-            "date": "2020-11-25T00:00:00Z",
+            "date": "2020-12-25T00:00:00Z",
             "category": {
                 "color": "rgb(88, 52, 179)",
                 "basic": true,
@@ -604,7 +604,7 @@
             "__v": 0
         },
         {
-            "date": "2020-11-15T00:00:00Z",
+            "date": "2020-12-15T00:00:00Z",
             "category": {
                 "color": "rgb(81, 219, 237)",
                 "basic": true,
@@ -616,7 +616,7 @@
             "__v": 0
         },
         {
-            "date": "2020-11-01T00:00:00Z",
+            "date": "2020-12-01T00:00:00Z",
             "category": {
                 "color": "rgb(48, 191, 98)",
                 "basic": true,
@@ -628,7 +628,7 @@
             "__v": 0
         },
         {
-            "date": "2020-10-16T00:00:00Z",
+            "date": "2020-11-16T00:00:00Z",
             "category": {
                 "color": "rgb(50, 168, 156)",
                 "basic": true,
@@ -640,7 +640,7 @@
             "__v": 0
         },
         {
-            "date": "2020-10-11T00:00:00Z",
+            "date": "2020-11-11T00:00:00Z",
             "category": {
                 "color": "rgb(232, 176, 23)",
                 "basic": true,
@@ -652,7 +652,7 @@
             "__v": 0
         },
         {
-            "date": "2020-10-03T00:00:00Z",
+            "date": "2020-11-03T00:00:00Z",
             "category": {
                 "color": "rgb(191, 33, 194)",
                 "basic": true,
@@ -664,7 +664,7 @@
             "__v": 0
         },
         {
-            "date": "2020-10-20T00:00:00Z",
+            "date": "2020-11-20T00:00:00Z",
             "category": {
                 "color": "rgb(209, 23, 104)",
                 "basic": true,
@@ -676,7 +676,7 @@
             "__v": 0
         },
         {
-            "date": "2020-10-28T00:00:00Z",
+            "date": "2020-11-28T00:00:00Z",
             "category": {
                 "color": "rgb(88, 52, 179)",
                 "basic": true,
@@ -688,7 +688,7 @@
             "__v": 0
         },
         {
-            "date": "2020-10-18T00:00:00Z",
+            "date": "2020-11-18T00:00:00Z",
             "category": {
                 "color": "rgb(81, 219, 237)",
                 "basic": true,
@@ -700,7 +700,7 @@
             "__v": 0
         },
         {
-            "date": "2020-10-13T00:00:00Z",
+            "date": "2020-11-13T00:00:00Z",
             "category": {
                 "color": "rgb(48, 191, 98)",
                 "basic": true,
@@ -712,7 +712,7 @@
             "__v": 0
         },
         {
-            "date": "2020-11-28T21:27:05.603Z",
+            "date": "2020-12-28T21:27:05.603Z",
             "category": {
                 "color": "rgb(40, 235, 79)",
                 "basic": true,
