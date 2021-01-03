@@ -722,6 +722,210 @@
             "value": 250,
             "currency": "EUR",
             "__v": 0
+        },
+        {
+            "date": "2020-10-07T00:00:00Z",
+            "category": {
+                "color": "rgb(50, 168, 156)",
+                "basic": true,
+                "name": "Car"
+            },
+            "recipient": "Avto Servis",
+            "value": 100,
+            "currency": "EUR",
+            "__v": 0
+        },
+        {
+            "date": "2020-10-12T00:00:00Z",
+            "category": {
+                "color": "rgb(50, 168, 156)",
+                "basic": true,
+                "name": "Car"
+            },
+            "recipient": "Petrol",
+            "value": 55,
+            "currency": "EUR",
+            "__v": 0
+        },
+        {
+            "date": "2020-10-03T00:00:00Z",
+            "category": {
+                "color": "rgb(232, 176, 23)",
+                "basic": true,
+                "name": "Groceries"
+            },
+            "recipient": "Mercator",
+            "value": 15,
+            "currency": "EUR",
+            "__v": 0
+        },
+        {
+            "date": "2020-10-17T00:00:00Z",
+            "category": {
+                "color": "rgb(232, 176, 23)",
+                "basic": true,
+                "name": "Groceries"
+            },
+            "recipient": "Tuš",
+            "value": 63,
+            "currency": "EUR",
+            "__v": 0
+        },
+        {
+            "date": "2020-10-21T00:00:00Z",
+            "category": {
+                "color": "rgb(191, 33, 194)",
+                "basic": true,
+                "name": "Leisure"
+            },
+            "recipient": "Knjigarna Kranj",
+            "value": 45,
+            "currency": "EUR",
+            "__v": 0
+        },
+        {
+            "date": "2020-10-16T00:00:00Z",
+            "category": {
+                "color": "rgb(209, 23, 104)",
+                "basic": true,
+                "name": "Subscriptions"
+            },
+            "recipient": "Netflix",
+            "value": 10,
+            "currency": "EUR",
+            "__v": 0
+        },
+        {
+            "date": "2020-10-25T00:00:00Z",
+            "category": {
+                "color": "rgb(88, 52, 179)",
+                "basic": true,
+                "name": "Travel"
+            },
+            "recipient": "Slovenjske Zeleznice",
+            "value": 18,
+            "currency": "EUR",
+            "__v": 0
+        },
+        {
+            "date": "2020-10-15T00:00:00Z",
+            "category": {
+                "color": "rgb(81, 219, 237)",
+                "basic": true,
+                "name": "Utilities"
+            },
+            "recipient": "Elektro Gorenjska",
+            "value": 45,
+            "currency": "EUR",
+            "__v": 0
+        },
+        {
+            "date": "2020-10-01T00:00:00Z",
+            "category": {
+                "color": "rgb(48, 191, 98)",
+                "basic": true,
+                "name": "Shopping"
+            },
+            "recipient": "HM",
+            "value": 111,
+            "currency": "EUR",
+            "__v": 0
+        },
+        {
+            "date": "2020-10-16T00:00:00Z",
+            "category": {
+                "color": "rgb(50, 168, 156)",
+                "basic": true,
+                "name": "Car"
+            },
+            "recipient": "OMV",
+            "value": 55,
+            "currency": "EUR",
+            "__v": 0
+        },
+        {
+            "date": "2020-10-11T00:00:00Z",
+            "category": {
+                "color": "rgb(232, 176, 23)",
+                "basic": true,
+                "name": "Groceries"
+            },
+            "recipient": "Hofer",
+            "value": 115,
+            "currency": "EUR",
+            "__v": 0
+        },
+        {
+            "date": "2020-10-03T00:00:00Z",
+            "category": {
+                "color": "rgb(191, 33, 194)",
+                "basic": true,
+                "name": "Leisure"
+            },
+            "recipient": "Steam",
+            "value": 75,
+            "currency": "EUR",
+            "__v": 0
+        },
+        {
+            "date": "2020-10-20T00:00:00Z",
+            "category": {
+                "color": "rgb(209, 23, 104)",
+                "basic": true,
+                "name": "Subscriptions"
+            },
+            "recipient": "Prime Video",
+            "value": 15,
+            "currency": "EUR",
+            "__v": 0
+        },
+        {
+            "date": "2020-10-28T00:00:00Z",
+            "category": {
+                "color": "rgb(88, 52, 179)",
+                "basic": true,
+                "name": "Travel"
+            },
+            "recipient": "Alpetour",
+            "value": 11,
+            "currency": "EUR",
+            "__v": 0
+        },
+        {
+            "date": "2020-10-18T00:00:00Z",
+            "category": {
+                "color": "rgb(81, 219, 237)",
+                "basic": true,
+                "name": "Utilities"
+            },
+            "recipient": "Elektro Gorenjska",
+            "value": 51,
+            "currency": "EUR",
+            "__v": 0
+        },
+        {
+            "date": "2020-10-13T00:00:00Z",
+            "category": {
+                "color": "rgb(48, 191, 98)",
+                "basic": true,
+                "name": "Shopping"
+            },
+            "recipient": "Big Bang",
+            "value": 100,
+            "currency": "EUR",
+            "__v": 0
+        },
+        {
+            "date": "2020-10-28T21:27:05.603Z",
+            "category": {
+                "color": "rgb(40, 235, 79)",
+                "basic": true,
+                "name": "Electronics"
+            },
+            "recipient": "Goal: Headphones",
+            "value": 250,
+            "currency": "EUR",
+            "__v": 0
         }
 
     ],
