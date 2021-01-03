@@ -75,61 +75,11 @@
 <div id="registration" #registration class="modal fade">
   <div class="position-absolute w-100 p-4 d-flex flex-column align-items-end">
       <div class="w-25">
-          <div class="toast ml-auto tt1" role="alert" data-delay="1000" data-autohide="false">
-              <div class="toast-header">
-                  <strong class="mr-auto text-primary">HINT</strong>
-                  <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                      <span aria-hidden="true">×</span>
-                  </button>
-              </div>
-              <div class="toast-body">
-                Name can't be empty and may only contain letters A-Z.
-              </div>
-          </div>
-          <div class="toast ml-auto tt2" role="alert" data-delay="1000" data-autohide="false">
-              <div class="toast-header">
-                  <strong class="mr-auto text-primary">HINT</strong>
-                  <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                      <span aria-hidden="true">×</span>
-                  </button>
-              </div>
-              <div class="toast-body">
-                Surname can't be empty and may only contain letters A-Z.
-              </div>
-          </div>
-          <div class="toast ml-auto tt5" role="alert" data-delay="1000" data-autohide="false">
-              <div class="toast-header">
-                  <strong class="mr-auto text-primary">HINT</strong>
-                  <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                      <span aria-hidden="true">×</span>
-                  </button>
-              </div>
-              <div class="toast-body">
-                E-mails don't match or are empty!
-              </div>
-          </div>
-          <div class="toast ml-auto tt4" role="alert" data-delay="1000" data-autohide="false">
-              <div class="toast-header">
-                  <strong class="mr-auto text-primary">HINT</strong>
-                  <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                      <span aria-hidden="true">×</span>
-                  </button>
-              </div>
-              <div class="toast-body">
-                Strong passwords are at least 8 characters long, include at least 1 lowercase letter, 1 capital letter, 1 number and 1 special character => !@#$%^&/
-              </div>
-          </div>
-          <div class="toast ml-auto tt3" role="alert" data-delay="3000" data-autohide="false">
-              <div class="toast-header">
-                  <strong class="mr-auto text-primary">HINT</strong>
-                  <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                      <span aria-hidden="true">×</span>
-                  </button>
-              </div>
-              <div class="toast-body">
-                Passwords don't match!
-              </div>
-          </div>                
+        <app-toast [name]="'tt1'" [hintBody]="'Name cannot be empty and may only contain letters A-Z.'" [hintHeader]="'HINT'"></app-toast>
+        <app-toast [name]="'tt2'" [hintBody]="'Surname cannot be empty and may only contain letters A-Z.'" [hintHeader]="'HINT'"></app-toast>
+        <app-toast [name]="'tt5'" [hintBody]="'E-mails do not match or are empty!'" [hintHeader]="'HINT'"></app-toast>
+        <app-toast [name]="'tt4'" [hintBody]="'Strong passwords are at least 8 characters long, include at least 1 lowercase letter, 1 capital letter, 1 number and 1 special character => !@#$%^&/'" [hintHeader]="'HINT'"></app-toast>
+        <app-toast [name]="'tt3'" [hintBody]="'Password do not match!'" [hintHeader]="'HINT'"></app-toast>     
       </div>
   </div>
   <div class="modal-dialog modal-login">

@@ -6,7 +6,7 @@ import { FormsModule }   from '@angular/forms';
 import { ChartsModule } from 'ng2-charts';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 import { ModalModule } from 'ngx-bootstrap/modal';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { HomeComponent } from './common/components/home/home.component';
 import { DashboardComponent } from './common/components/dashboard/dashboard.component';
@@ -81,7 +81,6 @@ import { ToastComponent } from './common/components/toast/toast.component';
     BrowserModule,
     HttpClientModule,
     RoutingModule,
-    IndexModule,
     FormsModule,
     ChartsModule,
     FontAwesomeModule,
@@ -89,7 +88,7 @@ import { ToastComponent } from './common/components/toast/toast.component';
     NgbModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production, registrationStrategy: 'registerImmediately' })
   ],
-  exports: [],
+  exports: [ToastComponent],
   providers: [],
   bootstrap: [FrameComponent]
 })

@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit, ViewEncapsulation, ElementRef, ViewChild, Renderer2 } from '@angular/core';
 import { DOCUMENT } from '@angular/common'
 import { Router } from "@angular/router"
+//import { ToastComponent } from "../toast/toast.component"
 import { AuthenticationService } from '../../services/authentication.service';
 declare var $:any;
 
