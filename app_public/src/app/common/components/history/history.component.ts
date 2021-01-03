@@ -76,6 +76,17 @@ export class HistoryComponent implements OnInit {
     return this.connectionService.hasConnection;
   }
 
+  async handlePaginatedOfflineAsync() {
+    if (this.connectionService.hasConnection && this.paginatedExpenses.length === 0) {
+      if (this.connectionService.hasConnection) {
+        this.api.getExpense('', this.pageSize, (this.page - 1) * this.pageSize).then(result => {
+          this.expenseCount = result['length'];
+          this.paginatedExpenses = result['expenses'];
+        }).catch(error => {});
+      }
+    }
+  }
+
   @ViewChild('color') color: ElementRef;
 
   ngOnInit(): void {
@@ -101,13 +112,8 @@ export class HistoryComponent implements OnInit {
       this.router.navigate(['/']);
     });
 
-    this.api.getExpense('', this.pageSize, (this.page - 1) * this.pageSize).then(result => {
-      this.expenseCount = result['length'];
-      this.paginatedExpenses = result['expenses'];
-    }).catch(error => {
-      this.authentication.logout();
-      this.router.navigate(['/']);
-    });
+    setInterval(()=> { this.handlePaginatedOfflineAsync() }, 1000);
+    
   }
 
   refreshLanguage(language: string) {
