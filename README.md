@@ -260,3 +260,6 @@ SPA aplikacija na eni strani
   
 - docker-compose up --build (v primeru sprememb ali težav pri zagonu)
 - docker-compose up (sicer)
+
+### Povezava do produkcije  
+http://smaugbudget.herokuapp.com/
