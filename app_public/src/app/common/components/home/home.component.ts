@@ -1,7 +1,8 @@
-import { Component, Inject, OnInit, ViewEncapsulation, ElementRef, ViewChild, Renderer2 } from '@angular/core';
+import { Component, Inject, OnInit, ViewEncapsulation, ElementRef, ViewChild, Renderer2, TemplateRef } from '@angular/core';
 import { DOCUMENT } from '@angular/common'
 import { Router } from "@angular/router"
 import { AuthenticationService } from '../../services/authentication.service';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 declare var $:any;
 
 declare var removeForLogout: any;
@@ -28,10 +29,13 @@ export class HomeComponent implements OnInit {
     private router: Router,
     private renderer: Renderer2,
     private elementRef: ElementRef,
+    private modalService: BsModalService,
     @Inject(DOCUMENT) private document: HTMLDocument
     ) {}
 
+    modalRef: BsModalRef;
   
+    @ViewChild('loginModal') loginModal: ElementRef;
     @ViewChild('registration') registration: any;
 
     @ViewChild('firstname') firstName: ElementRef;
@@ -102,23 +106,7 @@ export class HomeComponent implements OnInit {
           //Wrong password
         }
         else {
-          try {
-            var elementList = this.document.querySelectorAll('.modal-backdrop');
-            for (let i = 0; i < elementList.length; i++) {
-              elementList[i].removeAttribute('class');
-            }
-          }
-          catch {}
-          
-          try {
-            var elementList = this.document.querySelectorAll('.modal-open');
-            for (let i = 0; i < elementList.length; i++) {
-              elementList[i].removeAttribute('class');
-              elementList[i].removeAttribute('style');
-            }
-          }
-          catch {}
-  
+          this.closeModal();
           this.api.setLoggedIn(result.token);
           this.router.navigate(['/dashboard']);
         }
@@ -270,5 +258,13 @@ export class HomeComponent implements OnInit {
         }
       }).catch(error => {
       });
+    }
+
+    openModal(template: TemplateRef<any>) {
+      this.modalRef = this.modalService.show(template);
+    }
+  
+    closeModal() {
+      this.modalRef.hide();
     }
 }
