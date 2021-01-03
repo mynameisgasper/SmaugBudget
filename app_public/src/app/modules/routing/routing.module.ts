@@ -64,8 +64,7 @@ const routes: Routes = [
   },
   {
     path: 'confirm/:url/:code',
-    component: ConfirmationComponent, 
-    canActivate:[LoginGuardService]
+    component: ConfirmationComponent
   },
   {
     path: 'bills',
