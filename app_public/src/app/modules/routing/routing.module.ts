@@ -12,9 +12,10 @@ import { HistoryComponent } from '../../common/components/history/history.compon
 import { HomeComponent } from '../../common/components/home/home.component';
 import { UtilitiesComponent } from '../../common/components/utilities/utilities.component';
 import { NotfoundComponent } from '../../common/components/notfound/notfound.component';
-import { GoldGuardService } from '../../common/services/gold-guard.service';
 import { LoginGuardService } from '../../common/services/login-guard.service';
 import { SilverGuardService } from '../../common/services/silver-guard.service';
+import { GoldGuardService } from '../../common/services/gold-guard.service';
+import { AdminGuardService } from '../../common/services/admin-guard.service';
 import { ResetPasswordComponent } from 'src/app/common/components/reset-password/reset-password.component';
 
 const routes: Routes = [
@@ -25,7 +26,7 @@ const routes: Routes = [
   {
     path: 'db',
     component: DbComponent, 
-    canActivate:[LoginGuardService]
+    canActivate:[AdminGuardService]
   },
   {
     path: 'dashboard',
