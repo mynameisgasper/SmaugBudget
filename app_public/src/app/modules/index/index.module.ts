@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { HomeComponent } from '../../common/components/home/home.component';
 
@@ -6,6 +7,6 @@ import { HomeComponent } from '../../common/components/home/home.component';
   declarations: [
     HomeComponent
   ],
-  imports: []
+  imports: [CommonModule]
 })
 export class IndexModule { }
