@@ -31,7 +31,7 @@
           <a class="nav-link" href="#aboutUs">ABOUT US</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#login" (click)="openModal(loginModal)">SIGN IN</a>
+          <a class="nav-link" a href="#login" data-toggle="modal" data-target="#login">SIGN IN</a>
         </li>
       </ul>
 
@@ -42,8 +42,8 @@
 </div>
 </header>
 <!----- Sign in modal ----->
-<ng-template #loginModal>
-  <div class="modal-dialog-centered modal-login">
+<div id="login" #login class="modal fade">
+  <div class="modal-dialog modal-login">
     <div class="modal-content">
       <div class="modal-header">
         <img src="assets/images/dragon.svg" alt="Logo signin" >				
@@ -63,12 +63,12 @@
         </div>
       </div>
       <div class="modal-footer">
-        <a href="#forgottenPasswordForm" class="a1" data-toggle="modal" data-target="#forgottenPasswordForm" data-dismiss="modal" (click)="closeModal()">Forgot Password?</a>
-        <a href="#registration" class="a2" data-toggle="modal" data-target="#registration" data-dismiss="modal" (click)="closeModal()">Not a member?</a>
+        <a href="#forgottenPasswordForm" class="a1" data-toggle="modal" data-target="#forgottenPasswordForm" data-dismiss="modal">Forgot Password?</a>
+        <a href="#registration" class="a2" data-toggle="modal" data-target="#registration" data-dismiss="modal">Not a member?</a>
       </div>
     </div>
   </div>
-</ng-template>
+</div>
 <!----- End sign in modal ----->
 
 <!----- Sign up modal ----->
@@ -164,7 +164,7 @@
           </div>
       </div>
       <div class="modal-footer" style="padding: 10px;">
-        <a href="#login" style="font-family: 'Open Sans'; color: #999;" data-toggle="modal" data-target="#login" data-dismiss="modal" (click)="openModal(loginModal)">Already a member?</a>
+        <a href="login" style="font-family: 'Open Sans'; color: #999;" data-toggle="modal" data-target="#login" data-dismiss="modal">Already a member?</a>
       </div>
     </div>
   </div>
@@ -293,7 +293,7 @@
         <a href="#registration" class="gumb" data-toggle="modal" data-target="#registration">Sign up</a>
       </div>
       <div class="col-6 col-sm-4 col-md-4 col-lg-4 col-xl-4 footer-col">
-        <a  href="#login" (click)="openModal(loginModal)">Sign in</a>
+        <a  href="#login" data-toggle="modal" data-target="#login">Sign in</a>
       </div>
       <div class="col-12 col-sm-4 col-md-4 col-lg-4 col-xl-4 footer-col">
         <a href="#top" >Back to Top</a>

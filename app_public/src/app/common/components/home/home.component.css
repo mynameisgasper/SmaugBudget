@@ -105,7 +105,8 @@ body {
 }
 
 /*Modal sign in*/
-.modal-login {
+.modal-login {		
+	max-width: 450px;
 	width: 100%;
 }
 
