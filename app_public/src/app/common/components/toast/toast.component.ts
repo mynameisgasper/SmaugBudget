@@ -19,7 +19,7 @@ export class ToastComponent implements OnInit {
     hintHeader: String
 
   ngOnInit(): void {
-    console.log(this.name + " " + this.hintBody + " " + this.hintHeader);
+   
   }
 
 }
