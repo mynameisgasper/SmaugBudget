@@ -102,7 +102,7 @@
 
 
     <!----- Change income modal ----->
-    <div class="modal fade" #changeIncomeModal id="changeIncome" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <ng-template #changeIncome>
         <div class="position-absolute w-100 p-4 d-flex flex-column align-items-end">
             <div class="w-25 toastek">
                 <div class="toast ml-auto tt1" role="alert" data-delay="1000" data-autohide="false">
@@ -129,30 +129,28 @@
                 </div>
             </div>
         </div>
-        <ng-template #changeIncome>
-            <div class="modal-dialog-centered" id="modal1" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">{{ incomeModalTitle }}</h5>
-                        <button type="button" class="close" (click)="closeModal()" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <input type="number" #amountDashboard id="amount" name="amount" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" class="form-control" (focusout)="amountDashboard1(amountDashboard)" placeholder="{{ incomeModalPlaceholderIncome }}" step="any" required="required">
-                        <div id="amm"></div><br />
-                        <input type="number" #dateDashboard id="date" name="date" class="form-control" (focusout)="dateDashboard1(dateDashboard)" placeholder="{{ incomeModalPlaceholderDate }}" required="required">
-                        <div id="dat"></div>
-                    </div>
-                    <div class="modal-footer">
-                        <p *ngIf="hasChangeIncomeMessage"><b>{{ changeIncomeMessage }}</b></p>
-                        <button type="button" (click)="buttonDashboard(amountDashboard, dateDashboard, changeIncome)" class="btn btn-primary">{{ incomeModalSaveButton }}</button>
-                        <button type="button" (click)="closeModal()" class="btn btn-secondary">{{ incomeModalCloseButton }}</button>
-                    </div>
+        <div class="modal-dialog-centered" id="modal1" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">{{ incomeModalTitle }}</h5>
+                    <button type="button" class="close" (click)="closeModal()" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="number" #amountDashboard id="amount" name="amount" onkeydown="return event.keyCode !== 69 && event.keyCode !== 188" class="form-control" (focusout)="amountDashboard1(amountDashboard)" placeholder="{{ incomeModalPlaceholderIncome }}" step="any" required="required">
+                    <div id="amm"></div><br />
+                    <input type="number" #dateDashboard id="date" name="date" class="form-control" (focusout)="dateDashboard1(dateDashboard)" placeholder="{{ incomeModalPlaceholderDate }}" required="required">
+                    <div id="dat"></div>
+                </div>
+                <div class="modal-footer">
+                    <p *ngIf="hasChangeIncomeMessage"><b>{{ changeIncomeMessage }}</b></p>
+                    <button type="button" (click)="buttonDashboard(amountDashboard, dateDashboard, changeIncome)" class="btn btn-primary">{{ incomeModalSaveButton }}</button>
+                    <button type="button" (click)="closeModal()" class="btn btn-secondary">{{ incomeModalCloseButton }}</button>
                 </div>
             </div>
-        </ng-template>
-    </div>
+        </div>
+    </ng-template>
 
     <div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 200px;">
   <!-- Position it -->
