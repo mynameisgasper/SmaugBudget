@@ -228,7 +228,7 @@ function savePageSource(browser, filename) {
           });
         });
       });
-      
+      /*
       describe("Envelope", function() {
         this.timeout(30 * 1000);
 
@@ -326,7 +326,7 @@ function savePageSource(browser, filename) {
   
             var url = await browser.getCurrentUrl();
             expect(url).to.include('envelopes');
-          });*/
+          });
 
           it("Open modal", async () => {
             let addEnvelopesButton = await browser.findElements(By.xpath("//button[contains(@href, '#addEnvelopeForm')]"));
@@ -370,7 +370,7 @@ function savePageSource(browser, filename) {
           });
         });
       });
-      
+      */
       describe("Add new goal", function() {
         context("Failed to create new goal", function() {
           this.timeout(60 * 1000);
