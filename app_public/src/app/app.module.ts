@@ -32,6 +32,7 @@ import { ConfirmationComponent } from './common/components/confirmation/confirma
 import { BillsComponent } from './common/components/bills/bills.component';
 import { BillTableComponent } from './common/components/bill-table/bill-table.component';
 import { RoutingModule } from './modules/routing/routing.module';
+import { IndexModule } from './modules/index/index.module';
 import { InputMemberPipe } from './common/pipes/input-member.pipe';
 import { TranslateMonthNumberPipe } from './common/pipes/month-number.pipe';
 import { IconTranslatorPipe } from './common/pipes/icon-translator.pipe';
@@ -41,13 +42,13 @@ import { DoubleDigitPipe } from './common/pipes/double-digit.pipe';
 import { ResetPasswordComponent } from './common/components/reset-password/reset-password.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { ToastComponent } from './common/components/toast/toast.component';
 
 @NgModule({
   declarations: [
     FrameComponent,
     DbComponent,
     DashboardComponent,
-    HomeComponent,
     CardComponent,
     WelcomeComponent,
     AlertComponent,
@@ -73,18 +74,20 @@ import { environment } from '../environments/environment';
     CurrencyTranslatorPipe,
     NotfoundComponent,
     DoubleDigitPipe,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    ToastComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     RoutingModule,
+    IndexModule,
     FormsModule,
     ChartsModule,
     FontAwesomeModule,
     ModalModule.forRoot(),
     NgbModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production, registrationStrategy: 'registerImmediately' })
   ],
   exports: [],
   providers: [],

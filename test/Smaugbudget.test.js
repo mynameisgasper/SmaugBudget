@@ -705,6 +705,7 @@ function savePageSource(browser, filename) {
               expect(adminButton).to.not.be.empty;
               await adminButton[0].click();
               await new Promise(r => setTimeout(r, 1000));
+              
               var url = await browser.getCurrentUrl();
               expect(url).to.equals('https://smaugbudget.herokuapp.com/db');
             });

@@ -30,50 +30,9 @@
 <div class="modal fade goalModal" #editGoalModal id="editForm{{item._id}}" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
     <div class="position-absolute w-100 p-4 d-flex flex-column align-items-end">
         <div class="w-25 toastek">
-            <div class="toast ml-auto toastEditName{{item._id}}" role="alert" data-delay="3000" data-autohide="false">
-                <div class="toast-header">
-                    <strong class="mr-auto text-primary">HINT</strong>
-                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="toast-body">
-                    Input may only contain letters, numbers, some special characters (_@./#&+-: ) and whitespaces. Length allowed: 1-20
-                </div>
-            </div>
-            <div class="toast ml-auto toastEditAmount{{item._id}}" role="alert" data-delay="1000" data-autohide="false">
-                <div class="toast-header">
-                    <strong class="mr-auto text-primary">HINT</strong>
-                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="toast-body">
-                    Input may only contain decimal numbers separated by . with max 2 decimal places.
-                </div>
-            </div>
-            <div class="toast ml-auto toastEditDate{{item._id}}" id="date-hint" role="alert" data-delay="1000" data-autohide="false">
-                <div class="toast-header">
-                    <strong class="mr-auto text-primary">HINT</strong>
-                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="toast-body">
-                    Input a valid date (today or in the future).
-                </div>
-            </div>
-            <div class="toast ml-auto tt420" role="alert" data-delay="1000" data-autohide="false">
-                <div class="toast-header">
-                    <strong class="mr-auto text-primary">HINT</strong>
-                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="toast-body">
-                    Select a category.
-                </div>
-            </div>
+            <app-toast [name]="'toastEditName' + item._id" [hintBody]="'Input may only contain letters, numbers, some special characters (_@./#&+-: ) and whitespaces. Length allowed: 1-20'" [hintHeader]="'HINT'"></app-toast>
+            <app-toast [name]="'toastEditAmount' + item._id" [hintBody]="'Input may only contain decimal numbers separated by . with max 2 decimal places.'" [hintHeader]="'HINT'"></app-toast>
+            <app-toast [name]="'toastEditDate' + item._id" [hintBody]="'Input a valid date (today or in the future).'" [hintHeader]="'HINT'"></app-toast>
         </div>
     </div>
     <div class="modal-dialog modal-dialog-centered" role="document">
