@@ -452,6 +452,153 @@
                 "name": "Electronics"
             },
             "__v": 0
+        },
+        {
+            "progress": 258,
+            "budget": 60,
+            "spent": 155,
+            "colorHex": "#32a89c",
+            "color": "rgb(50, 168, 156)",
+            "bgColor": "rgba(50, 168, 156, 0.5)",
+            "month": "OCT",
+            "category": {
+                "color": "rgb(50, 168, 156)",
+                "basic": true,
+                "name": "Car",
+                "__v": 0
+            },
+            "__v": 0
+        },
+        {
+            "progress": 65,
+            "budget": 120,
+            "spent": 78,
+            "colorHex": "#e8b017",
+            "color": "rgb(232, 176, 23)",
+            "bgColor": "rgba(232, 176, 23, 0.5)",
+            "month": "OCT",
+            "category": {
+                "color": "rgb(232, 176, 23)",
+                "basic": true,
+                "name": "Groceries",
+                "__v": 0
+            },
+            "__v": 0
+        },
+
+        {
+            "progress": 82,
+            "budget": 55,
+            "spent": 45,
+            "colorHex": "#bf21c2",
+            "color": "rgb(191, 33, 194)",
+            "bgColor": "rgba(191, 33, 194, 0.5)",
+            "month": "OCT",
+            "category": {
+                "color": "rgb(191, 33, 194)",
+                "basic": true,
+                "name": "Leisure",
+                "__v": 0
+            },
+            "__v": 0
+        },
+        {
+            "progress": 29,
+            "budget": 35,
+            "spent": 10,
+            "colorHex": "#d11768",
+            "color": "rgb(209, 23, 104)",
+            "bgColor": "rgba(209, 23, 104, 0.5)",
+            "month": "OCT",
+            "category": {
+                "color": "rgb(209, 23, 104)",
+                "basic": true,
+                "name": "Subscriptions",
+                "__v": 0
+            },
+            "__v": 0
+        },
+        {
+            "progress": 45,
+            "budget": 40,
+            "spent": 18,
+            "colorHex": "#5834b3",
+            "color": "rgb(88, 52, 179)",
+            "bgColor": "rgba(88, 52, 179, 0.5)",
+            "month": "OCT",
+            "category": {
+                "color": "rgb(88, 52, 179)",
+                "basic": true,
+                "name": "Travel",
+                "__v": 0
+            },
+            "__v": 0
+        },
+
+        {
+            "progress": 0,
+            "budget": 35,
+            "spent": 0,
+            "colorHex": "#add134",
+            "color": "rgb(173, 209, 52)",
+            "bgColor": "rgba(173, 209, 52, 0.5)",
+            "month": "OCT",
+            "category": {
+                "color": "rgb(173, 209, 52)",
+                "basic": true,
+                "name": "Home",
+                "__v": 0
+            },
+            "__v": 0
+        },
+        {
+            "progress": 0,
+            "budget": 25,
+            "spent": 0,
+            "colorHex": "#32a852",
+            "color": "rgb(50, 168, 82)",
+            "bgColor": "rgba(50, 168, 82, 0.5)",
+            "month": "OCT",
+            "category": {
+                "color": "rgb(50, 168, 82)",
+                "basic": true,
+                "name": "Gifts",
+                "__v": 0
+            },
+            "__v": 0
+        },
+
+        {
+            "progress": 93,
+            "budget": 120,
+            "spent": 111,
+            "colorHex": "#30bf62",
+            "color": "rgb(209, 73, 23)",
+            "bgColor": "rgba(209, 73, 23, 0.5)",
+            "month": "OCT",
+            "category": {
+                "color": "rgb(209, 73, 23)",
+                "basic": true,
+                "name": "Shopping",
+                "__v": 0
+            },
+            "__v": 0
+        },
+        {
+            "progress": 45,
+            "budget": 100,
+            "spent": 45,
+            "colorHex": "#51dbed",
+            "color": "rgb(81, 219, 237)",
+            "bgColor": "rgba(81, 219, 237, 0.5)",
+            "month": "OCT",
+            "category": {
+                "color": "rgb(81, 219, 237)",
+                "basic": true,
+                "name": "Utilities",
+                "__v": 0
+            },
+            "__v": 0
         }
 
     ],
@@ -713,6 +860,210 @@
         },
         {
             "date": "2020-12-28T21:27:05.603Z",
+            "category": {
+                "color": "rgb(40, 235, 79)",
+                "basic": true,
+                "name": "Electronics"
+            },
+            "recipient": "Goal: Headphones",
+            "value": 250,
+            "currency": "EUR",
+            "__v": 0
+        },
+        {
+            "date": "2020-10-07T00:00:00Z",
+            "category": {
+                "color": "rgb(50, 168, 156)",
+                "basic": true,
+                "name": "Car"
+            },
+            "recipient": "Avto Servis",
+            "value": 100,
+            "currency": "EUR",
+            "__v": 0
+        },
+        {
+            "date": "2020-10-12T00:00:00Z",
+            "category": {
+                "color": "rgb(50, 168, 156)",
+                "basic": true,
+                "name": "Car"
+            },
+            "recipient": "Petrol",
+            "value": 55,
+            "currency": "EUR",
+            "__v": 0
+        },
+        {
+            "date": "2020-10-03T00:00:00Z",
+            "category": {
+                "color": "rgb(232, 176, 23)",
+                "basic": true,
+                "name": "Groceries"
+            },
+            "recipient": "Mercator",
+            "value": 15,
+            "currency": "EUR",
+            "__v": 0
+        },
+        {
+            "date": "2020-10-17T00:00:00Z",
+            "category": {
+                "color": "rgb(232, 176, 23)",
+                "basic": true,
+                "name": "Groceries"
+            },
+            "recipient": "Tuš",
+            "value": 63,
+            "currency": "EUR",
+            "__v": 0
+        },
+        {
+            "date": "2020-10-21T00:00:00Z",
+            "category": {
+                "color": "rgb(191, 33, 194)",
+                "basic": true,
+                "name": "Leisure"
+            },
+            "recipient": "Knjigarna Kranj",
+            "value": 45,
+            "currency": "EUR",
+            "__v": 0
+        },
+        {
+            "date": "2020-10-16T00:00:00Z",
+            "category": {
+                "color": "rgb(209, 23, 104)",
+                "basic": true,
+                "name": "Subscriptions"
+            },
+            "recipient": "Netflix",
+            "value": 10,
+            "currency": "EUR",
+            "__v": 0
+        },
+        {
+            "date": "2020-10-25T00:00:00Z",
+            "category": {
+                "color": "rgb(88, 52, 179)",
+                "basic": true,
+                "name": "Travel"
+            },
+            "recipient": "Slovenjske Zeleznice",
+            "value": 18,
+            "currency": "EUR",
+            "__v": 0
+        },
+        {
+            "date": "2020-10-15T00:00:00Z",
+            "category": {
+                "color": "rgb(81, 219, 237)",
+                "basic": true,
+                "name": "Utilities"
+            },
+            "recipient": "Elektro Gorenjska",
+            "value": 45,
+            "currency": "EUR",
+            "__v": 0
+        },
+        {
+            "date": "2020-10-01T00:00:00Z",
+            "category": {
+                "color": "rgb(48, 191, 98)",
+                "basic": true,
+                "name": "Shopping"
+            },
+            "recipient": "HM",
+            "value": 111,
+            "currency": "EUR",
+            "__v": 0
+        },
+        {
+            "date": "2020-10-16T00:00:00Z",
+            "category": {
+                "color": "rgb(50, 168, 156)",
+                "basic": true,
+                "name": "Car"
+            },
+            "recipient": "OMV",
+            "value": 55,
+            "currency": "EUR",
+            "__v": 0
+        },
+        {
+            "date": "2020-10-11T00:00:00Z",
+            "category": {
+                "color": "rgb(232, 176, 23)",
+                "basic": true,
+                "name": "Groceries"
+            },
+            "recipient": "Hofer",
+            "value": 115,
+            "currency": "EUR",
+            "__v": 0
+        },
+        {
+            "date": "2020-10-03T00:00:00Z",
+            "category": {
+                "color": "rgb(191, 33, 194)",
+                "basic": true,
+                "name": "Leisure"
+            },
+            "recipient": "Steam",
+            "value": 75,
+            "currency": "EUR",
+            "__v": 0
+        },
+        {
+            "date": "2020-10-20T00:00:00Z",
+            "category": {
+                "color": "rgb(209, 23, 104)",
+                "basic": true,
+                "name": "Subscriptions"
+            },
+            "recipient": "Prime Video",
+            "value": 15,
+            "currency": "EUR",
+            "__v": 0
+        },
+        {
+            "date": "2020-10-28T00:00:00Z",
+            "category": {
+                "color": "rgb(88, 52, 179)",
+                "basic": true,
+                "name": "Travel"
+            },
+            "recipient": "Alpetour",
+            "value": 11,
+            "currency": "EUR",
+            "__v": 0
+        },
+        {
+            "date": "2020-10-18T00:00:00Z",
+            "category": {
+                "color": "rgb(81, 219, 237)",
+                "basic": true,
+                "name": "Utilities"
+            },
+            "recipient": "Elektro Gorenjska",
+            "value": 51,
+            "currency": "EUR",
+            "__v": 0
+        },
+        {
+            "date": "2020-10-13T00:00:00Z",
+            "category": {
+                "color": "rgb(48, 191, 98)",
+                "basic": true,
+                "name": "Shopping"
+            },
+            "recipient": "Big Bang",
+            "value": 100,
+            "currency": "EUR",
+            "__v": 0
+        },
+        {
+            "date": "2020-10-28T21:27:05.603Z",
             "category": {
                 "color": "rgb(40, 235, 79)",
                 "basic": true,
