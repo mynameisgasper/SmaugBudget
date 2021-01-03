@@ -294,8 +294,10 @@ function savePageSource(browser, filename) {
             let envelopesButton = await browser.findElements(By.xpath("//a[contains(@routerlink, '../envelopes')]"));
             expect(envelopesButton).to.not.be.empty;
             envelopesButton[0].click();
+            await new Promise(r => setTimeout(r, 1000));
+            envelopesButton[0].click();
             await new Promise(r => setTimeout(r, 5000));
-  
+
             var url = await browser.getCurrentUrl();
             expect(url).to.include('envelopes');
             await new Promise(r => setTimeout(r, 2000));
