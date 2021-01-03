@@ -4,39 +4,8 @@
     <div class="modal fade" #addEnvelopeModal id="addEnvelopeForm" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
         <div class="position-absolute w-100 p-4 d-flex flex-column align-items-end">
             <div class="w-25 toastek">
-                <div class="toast ml-auto tt5" role="alert" data-delay="3000" data-autohide="false">
-                    <div class="toast-header">
-                        <strong class="mr-auto text-primary">{{HINT}}</strong>
-                        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                          <span aria-hidden="true">×</span>
-                      </button>
-                    </div>
-                    <div class="toast-body">
-                        {{envelopestt2}}14
-                    </div>
-                </div>
-                <div class="toast ml-auto tt1" role="alert" data-delay="1000" data-autohide="false">
-                    <div class="toast-header">
-                        <strong class="mr-auto text-primary">{{HINT}}</strong>
-                        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                    <div class="toast-body">
-                        {{envelopestt3}}
-                    </div>
-                </div>
-                <div class="toast ml-auto tt7" id="date-hint" role="alert" data-delay="3000" data-autohide="false">
-                    <div class="toast-header">
-                        <strong class="mr-auto text-primary">{{HINT}}</strong>
-                        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                                <span aria-hidden="true">×</span>
-                            </button>
-                    </div>
-                    <div class="toast-body">
-                        {{envelopesFutureErr}}
-                    </div>
-                </div>
+                <app-toast [name]="'tt5'" [hintBody]="envelopestt2" [hintHeader]="HINT"></app-toast>
+                <app-toast [name]="'tt1'" [hintBody]="envelopestt3" [hintHeader]="HINT"></app-toast>  
             </div>
         </div>
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -53,7 +22,7 @@
                     <div class="modal-body">
                         <div class="ena">
                             <label for="chooseCategoryEnvelope">{{envelopesCategory}}</label>
-                            <select #selectCategoryAdd id="inputCategory" name="chooseCategoryEnvelope" class="form-control" onchange="checkCategory(this)" required>
+                            <select #selectCategoryAdd id="inputCategory" name="chooseCategoryEnvelope" class="form-control" (change)="checkCategory(selectCategoryAdd)" required>
                                 <option value="" selected>{{envelopesSelCat}}</option>
                                 <option *ngFor="let item of categories;"value="{{item.name}}" id="category{{item._id}}">{{item.name}}</option>
                                 <option value="other">{{envelopesMake}}</option>
@@ -93,39 +62,9 @@
     <div class="modal fade" #addExpenseModal id="addExpenseForm" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
         <div class="position-absolute w-100 p-4 d-flex flex-column align-items-end">
             <div class="w-25 toastek">
-                <div class="toast ml-auto tt2" role="alert" data-delay="3000" data-autohide="false">
-                    <div class="toast-header">
-                        <strong class="mr-auto text-primary">{{HINT}}</strong>
-                        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                    <div class="toast-body">
-                        {{envelopestt2}}16
-                    </div>
-                </div>
-                <div class="toast ml-auto tt3" role="alert" data-delay="1000" data-autohide="false">
-                    <div class="toast-header">
-                        <strong class="mr-auto text-primary">{{HINT}}</strong>
-                        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                    <div class="toast-body">
-                        {{envelopestt3}}
-                    </div>
-                </div>
-                <div class="toast ml-auto tt4" id="date-hint" role="alert" data-delay="3000" data-autohide="false">
-                    <div class="toast-header">
-                        <strong class="mr-auto text-primary">{{HINT}}</strong>
-                        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                    <div class="toast-body">
-                        {{envelopesFutureErr}}
-                    </div>
-                </div>
+                <app-toast [name]="'tt2'" [hintBody]="envelopestt2" [hintHeader]="HINT"></app-toast>
+                <app-toast [name]="'tt3'" [hintBody]="envelopestt3" [hintHeader]="HINT"></app-toast>
+                <app-toast [name]="'tt4'" [hintBody]="envelopesFutureErr" [hintHeader]="HINT"></app-toast>
             </div>
         </div>
         <div class="modal-dialog modal-dialog-centered" role="document">

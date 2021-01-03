@@ -455,4 +455,23 @@ export class EnvelopesComponent implements OnInit {
     else this.setMonthNumber--;
     this.setMonth = this.getCurrentMonth(this.setMonthNumber - 1);
   }
+
+  checkCategory(selectCategoryAdd) {
+    if (selectCategoryAdd.value == "other") {
+        document.getElementById("ime").style.display = "block";
+        (document.getElementById("ime")as any).disabled = false;
+        document.getElementById("ime").focus();
+        (document.getElementById("colorPicker")as any).disabled = false;
+        document.getElementById("colorPicker").style.display = "block";
+        document.getElementById("colorPickerLabel").style.display = "inline-block";
+
+
+    } else {
+        document.getElementById("ime").style.display = "none";
+        (document.getElementById("ime")as any).disabled = true;
+        (document.getElementById("colorPicker")as any).disabled = true;
+        document.getElementById("colorPicker").style.display = "none";
+        document.getElementById("colorPickerLabel").style.display = "none";
+    }
+}
 }
