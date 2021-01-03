@@ -31,8 +31,8 @@ export class HistoryComponent implements OnInit {
     "used": true,
     "name": "HistoryChart"
   };
-  message: string = getTranslation("messageHistory");
-  welcomeMessage: string = getTranslation("welcomeMessageHistory");
+  message: string = "messageHistory";
+  welcomeMessage: string = "welcomeMessageHistory";
   logout: string = "Logout";
   DASHBOAR: string = "DASHBOARD,";
   ENVELOPES: string = "ENVELOPES";
@@ -60,9 +60,9 @@ export class HistoryComponent implements OnInit {
   pageSize: number = 10
   filter: string = '';
 
-  historyAll = getTranslation("historyAll");
-  historyExport = getTranslation("historyExport");
-  historyTotal = getTranslation("historyTotal");
+  historyAll = "historyAll";
+  historyExport = "historyExport";
+  historyTotal = "historyTotal";
 
   constructor(
     private api: ApiService,
