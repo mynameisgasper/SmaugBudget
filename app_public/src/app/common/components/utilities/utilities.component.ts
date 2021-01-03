@@ -29,20 +29,20 @@ export class UtilitiesComponent implements OnInit {
 
     groupMembers: Array<Object> = [{value: 1}]
 
-    utilGroups = getTranslation("utilGroups");
-	utilCreate = getTranslation("utilCreate");
-	utilName = getTranslation("utilName");
-	utilNext = getTranslation("utilNext");
-	utilBalance = getTranslation("utilBalance");
-	utilConverter = getTranslation("utilConverter");
-	utilFrom = getTranslation("utilFrom");
-	utilTo = getTranslation("utilTo");
-	utilConvert = getTranslation("utilConvert");
-	utilInputName = getTranslation("utilInputName");
-	utilAddMem = getTranslation("utilAddMem");
-    utilAddGroup = getTranslation("utilAddGroup");
-    HINT = getTranslation("HINT");
-    envelopestt2 = getTranslation("envelopestt2");
+    utilGroups = "utilGroups";
+	utilCreate = "utilCreate";
+	utilName = "utilName";
+	utilNext = "utilNext";
+	utilBalance = "utilBalance";
+	utilConverter = "utilConverter";
+	utilFrom = "utilFrom";
+	utilTo = "utilTo";
+	utilConvert = "utilConvert";
+	utilInputName = "utilInputName";
+	utilAddMem = "utilAddMem";
+    utilAddGroup = "utilAddGroup";
+    HINT = "HINT";
+    envelopestt2 = "envelopestt2";
 
     hasConverterMessage: boolean = false;
     converterMessage: string = "";
