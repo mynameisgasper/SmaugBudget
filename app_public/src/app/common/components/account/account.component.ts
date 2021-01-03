@@ -355,7 +355,7 @@ surnameRegex() {
         return 0;
     } else {
         username.style.borderColor = "#ced4da";
-        $('.tt3').toast('hide')
+        $('.tt2').toast('hide')
         return 1;
     }
 }
