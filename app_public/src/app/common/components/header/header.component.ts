@@ -52,24 +52,24 @@ export class HeaderComponent implements OnInit {
   }
 
   lang = {
-    "logout": getTranslation("logout"),
-    "saveChanges": getTranslation("saveChanges"),
-    "name": getTranslation("name"),
-    "edit": getTranslation("edit"),
-    "close": getTranslation("close"),
-    "remove": getTranslation("remove"),
-    "DASHBOARD": getTranslation("DASHBOARD"),
-    "ENVELOPES": getTranslation("ENVELOPES"),
-    "GOALS": getTranslation("GOALS"),
-    "BILLS": getTranslation("BILLS"),
-    "HISTORY": getTranslation("HISTORY"),
-    "UTILITIES": getTranslation("UTILITIES"),
-    "user": getTranslation("user"),
-    "settings": getTranslation("settings"),
-    "appearance": getTranslation("appearance"),
-    "light": getTranslation("light"),
-    "dark": getTranslation("dark"),
-    "admin": getTranslation("admin")
+    "logout": "logout",
+    "saveChanges": "saveChanges",
+    "name": "name",
+    "edit": "edit",
+    "close": "close",
+    "remove": "remove",
+    "DASHBOARD": "DASHBOARD",
+    "ENVELOPES": "ENVELOPES",
+    "GOALS": "GOALS",
+    "BILLS": "BILLS",
+    "HISTORY": "HISTORY",
+    "UTILITIES": "UTILITIES",
+    "user": "user",
+    "settings": "settings",
+    "appearance": "appearance",
+    "light": "light",
+    "dark": "dark",
+    "admin": "admin"
   }
 
   refreshLanguage(language: string) {
