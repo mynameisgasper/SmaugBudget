@@ -316,3 +316,7 @@ body a:hover {
 input[type="color"] {
     width: 100%;
 }
+
+.dropdown-item {
+    cursor: pointer;
+}

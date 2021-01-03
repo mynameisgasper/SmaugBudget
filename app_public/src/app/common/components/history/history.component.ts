@@ -31,8 +31,8 @@ export class HistoryComponent implements OnInit {
     "used": true,
     "name": "HistoryChart"
   };
-  message: string = getTranslation("messageHistory");
-  welcomeMessage: string = getTranslation("welcomeMessageHistory");
+  message: string = "messageHistory";
+  welcomeMessage: string = "welcomeMessageHistory";
   logout: string = "Logout";
   DASHBOAR: string = "DASHBOARD,";
   ENVELOPES: string = "ENVELOPES";
@@ -60,9 +60,9 @@ export class HistoryComponent implements OnInit {
   pageSize: number = 10
   filter: string = '';
 
-  historyAll = getTranslation("historyAll");
-  historyExport = getTranslation("historyExport");
-  historyTotal = getTranslation("historyTotal");
+  historyAll = "historyAll";
+  historyExport = "historyExport";
+  historyTotal = "historyTotal";
 
   constructor(
     private api: ApiService,
@@ -74,6 +74,17 @@ export class HistoryComponent implements OnInit {
 
   public hasConnection(): boolean {
     return this.connectionService.hasConnection;
+  }
+
+  async handlePaginatedOfflineAsync() {
+    if (this.connectionService.hasConnection && this.paginatedExpenses.length === 0) {
+      if (this.connectionService.hasConnection) {
+        this.api.getExpense('', this.pageSize, (this.page - 1) * this.pageSize).then(result => {
+          this.expenseCount = result['length'];
+          this.paginatedExpenses = result['expenses'];
+        }).catch(error => {});
+      }
+    }
   }
 
   @ViewChild('color') color: ElementRef;
@@ -101,13 +112,8 @@ export class HistoryComponent implements OnInit {
       this.router.navigate(['/']);
     });
 
-    this.api.getExpense('', this.pageSize, (this.page - 1) * this.pageSize).then(result => {
-      this.expenseCount = result['length'];
-      this.paginatedExpenses = result['expenses'];
-    }).catch(error => {
-      this.authentication.logout();
-      this.router.navigate(['/']);
-    });
+    setInterval(()=> { this.handlePaginatedOfflineAsync() }, 1000);
+    
   }
 
   refreshLanguage(language: string) {

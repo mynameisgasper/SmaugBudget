@@ -3,28 +3,8 @@
     <!-- Account body -->
     <div class="position-absolute w-100 Zind">
         <div class="w-25 toast-front">
-            <div class="toast ml-auto tt1" role="alert" data-delay="1000" data-autohide="false">
-                <div class="toast-header">
-                    <strong class="mr-auto text-primary">{{data.HINT}}</strong>
-                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="toast-body">
-                    {{data.nameHint}} 
-                </div>
-            </div>
-            <div class="toast ml-auto tt2" role="alert" data-delay="1000" data-autohide="false">
-                <div class="toast-header">
-                    <strong class="mr-auto text-primary">{{data.HINT}}</strong>
-                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="toast-body">
-                    {{data.surnameHint}}
-                </div>
-            </div>        
+            <app-toast [name]="'tt1'" [hintBody]="data.nameHint" [hintHeader]="data.HINT"></app-toast>
+            <app-toast [name]="'tt2'" [hintBody]="data.surnameHint" [hintHeader]="data.HINT"></app-toast>   
         </div>
     </div>
     <div class="container" id="accountBody-container">  
@@ -52,7 +32,7 @@
             </div>
             </div>
             <div id="pfpImg" class="del-margin col-sm-12 col-md-3 col-lg-3 col-xl-3" alt="Profile pic settings">
-            <button [disabled]="!hasConnection()" (click)="this.modal2.show()" aria-label="Change Profile Picture">
+            <button [disabled]="!hasConnection()" (click)="this.modal2.show()" style="border: none; background: none;" aria-label="Change Profile Picture">
                 <div id="profile-pic" class="profile-pic" [style.background-image]="'url(' + imageToShow + ')'" >
                     <fa-icon [icon]="faCamera"></fa-icon>
                 <span>{{data.changeImage}}</span>
@@ -63,8 +43,9 @@
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                 <b *ngIf="hasChangeUserMessage">{{changeUserMessage}}</b>
-                <button [disabled]="!hasConnection()" type="button" id="userInfoButton" (click)="disableButton()" class="btn btn-primary" style="float: right;">{{data.saveChanges}}</button>
                 <button [disabled]="!hasConnection()" type="button" id="userRemoveButton" (click)="removeUser()" class="btn btn-danger" style="float: right;">Delete account</button>
+                <button [disabled]="!hasConnection()" type="button" id="userInfoButton" (click)="disableButton()" class="btn btn-primary" style="float: right;">{{data.saveChanges}}</button>
+                
             </div>
         </div>
         </form>
@@ -142,28 +123,8 @@
     <div bsModal #modalone="bs-modal" class="modal fade" id="changePassowrd" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="position-absolute w-100 p-4 d-flex flex-column align-items-end">
         <div class="w-25 toast-front">
-            <div class="toast ml-auto tt3" role="alert" data-delay="1000" data-autohide="false">
-                <div class="toast-header">
-                    <strong class="mr-auto text-primary">{{data.HINT}}</strong>
-                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="toast-body">
-                    {{data.passwordHint}}
-                </div>
-            </div>
-            <div class="toast ml-auto tt4" role="alert" data-delay="1000" data-autohide="false">
-                <div class="toast-header">
-                    <strong class="mr-auto text-primary">{{data.HINT}}</strong>
-                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="toast-body">
-                    {{data.passwordNoMatch}}
-                </div>
-            </div>        
+            <app-toast [name]="'tt3'" [hintBody]="data.passwordHint" [hintHeader]="data.HINT"></app-toast>
+            <app-toast [name]="'tt4'" [hintBody]="data.passwordNoMatch" [hintHeader]="data.HINT"></app-toast>    
         </div>
     </div>
     <div class="modal-dialog" role="document">

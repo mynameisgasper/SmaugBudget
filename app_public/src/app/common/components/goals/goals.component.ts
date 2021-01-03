@@ -46,20 +46,20 @@ export class GoalsComponent implements OnInit {
   hasGoalMessage: boolean = false;
   goalMessage: string = "";
 
-  goalsDateHint = getTranslation("goalsDateHint");
-	goalsInputGoal = getTranslation("goalsInputGoal");
-	goalsInputGamount = getTranslation("goalsInputGamount");
-	goalsPlanDate = getTranslation("goalsPlanDate");
-	goalsAdd = getTranslation("goalsAdd");
-	goalsTitle = getTranslation("goalsTitle");
-  goalsAddMoney = getTranslation("goalsAddMoney");
-  HINT = getTranslation("HINT");
-  envelopestt2 = getTranslation("envelopestt2");
-  envelopestt3 = getTranslation("envelopestt3");
-  envelopesCategory = getTranslation("envelopesCategory");
-  envelopesSelCat = getTranslation("envelopesSelCat");
-  envelopesAdd = getTranslation("envelopesAdd");
-  envelopesAmount = getTranslation("envelopesAmount");
+  goalsDateHint = "goalsDateHint";
+	goalsInputGoal = "goalsInputGoal";
+	goalsInputGamount = "goalsInputGamount";
+	goalsPlanDate = "goalsPlanDate";
+	goalsAdd = "goalsAdd";
+	goalsTitle = "goalsTitle";
+  goalsAddMoney = "goalsAddMoney";
+  HINT = "HINT";
+  envelopestt2 = "envelopestt2";
+  envelopestt3 = "envelopestt3";
+  envelopesCategory = "envelopesCategory";
+  envelopesSelCat = "envelopesSelCat";
+  envelopesAdd = "envelopesAdd";
+  envelopesAmount = "envelopesAmount";
 
   @ViewChild('nameGoal') nameGoal: ElementRef;
   @ViewChild('categoryGoal') categoryGoal: ElementRef;

@@ -104,25 +104,25 @@ export class AccountComponent implements OnInit {
   changePfpMessage: string = "";
 
   data = {
-      "HINT": getTranslation("HINT"),
-      "nameHint": getTranslation("nameHint"),
-      "surnameHint": getTranslation("surnameHint"),
-      "title": getTranslation("account_title"),
-      "firstName": getTranslation("firstName"),
+      "HINT": "HINT",
+      "nameHint": "nameHint",
+      "surnameHint": "surnameHint",
+      "title": "account_title",
+      "firstName": "firstName",
       "data_firstName": "data_firstName",
-      "lastName": getTranslation("lastName"),
+      "lastName": "lastName",
       "data_lastName": "data_lastName",
-      "password": getTranslation("password"),
-      "changePassword": getTranslation("changePassword"),
-      "email": getTranslation("email"),
+      "password": "password",
+      "changePassword": "changePassword",
+      "email": "email",
       "data_email": "data_email",
-      "changeImage": getTranslation("changeImage"),
-      "saveChanges": getTranslation("saveChanges"),
-      "application": getTranslation("application"),
-      "darkMode": getTranslation("darkMode"),
-      "language": getTranslation("language"),
+      "changeImage": "changeImage",
+      "saveChanges": "saveChanges",
+      "application": "application",
+      "darkMode": "darkMode",
+      "language": "language",
       "selLanguage": "selLanguage",
-      "currency": getTranslation("currency"),
+      "currency": "currency",
       "data_defCurrency": "data_defCurrency",
       "data_currency": [
         { key: "EUR", name: "EURO" },
@@ -158,7 +158,7 @@ export class AccountComponent implements OnInit {
         { key: "TRY", name: "Turkish Lira" },
         { key: "ZAR", name: "South African Rand" }
         ],
-      "categories": getTranslation("categories"),
+      "categories": "categories",
       "data_categories": [
           {
               "id": "id",
@@ -166,14 +166,14 @@ export class AccountComponent implements OnInit {
               "hexColor": "#fcba03"
           }
       ],
-      "passwordHint": getTranslation("passwordHint"),
-      "passwordNoMatch": getTranslation("passwordNoMatch"),
-      "oldPassword": getTranslation("oldPassword"),
-      "newPassword": getTranslation("newPassword"),
-      "confirmPassword": getTranslation("confirmPassword"),
-      "close": getTranslation("close"),
-      "changeProfilePicture": getTranslation("changeImage"),
-      "dragAndDropOr": getTranslation("dragAndDropOr")
+      "passwordHint": "passwordHint",
+      "passwordNoMatch": "passwordNoMatch",
+      "oldPassword": "oldPassword",
+      "newPassword": "newPassword",
+      "confirmPassword": "confirmPassword",
+      "close": "close",
+      "changeProfilePicture": "changeImage",
+      "dragAndDropOr": "dragAndDropOr"
   };
 
   fixRGBValues(categories: any) {
@@ -355,7 +355,7 @@ surnameRegex() {
         return 0;
     } else {
         username.style.borderColor = "#ced4da";
-        $('.tt3').toast('hide')
+        $('.tt2').toast('hide')
         return 1;
     }
 }

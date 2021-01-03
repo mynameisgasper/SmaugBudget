@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1609681653131,
+  "timestamp": 1609691387933,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -13,14 +13,14 @@
       "urls": [
         "/favicon.ico",
         "/index.html",
-        "/main.d88e97f475517095f0cb.js",
+        "/main.e323a1f6532b6b33d864.js",
         "/manifest.webmanifest",
-        "/polyfills.c3d988ef40fe3a931281.js",
-        "/runtime.359d5ee4682f20e936e9.js",
-        "/scripts.0a9c6162565250a13c2f.js",
-        "/styles.52fbe365e0e5f9ca6465.js",
-        "/styles.be8ae9305f718e98900f.css",
-        "/vendor.dfd8e8f3190e9e4cfebb.js"
+        "/polyfills.b3b05dce4f05c03b56a3.js",
+        "/runtime.0e49e2b53282f40c8925.js",
+        "/scripts.b2115ab8ca2edd127d82.js",
+        "/styles.76025043f84190022dba.js",
+        "/styles.f93bf1806c2f655e783c.css",
+        "/vendor.745f93a33bb737842e55.js"
       ],
       "patterns": []
     },
@@ -89,19 +89,19 @@
     "/assets/images/phone1.png": "8c1bd37297eff9c9debcb8dbfedfeeeb935b8f44",
     "/assets/javascripts/aos.js": "b67cdbc54788e549b67fe9807e67fb721de112b7",
     "/assets/stylesheets/aos.css": "9a26a349d21a4b871f45dfd124a43fada4f94b98",
-    "/assets/stylesheets/darkmode.css": "84857b2b6a65950baff2890395dc2728caaef85a",
-    "/assets/stylesheets/fonts.css": "47c691a87d88a12c666053199b11a78da539530e",
-    "/assets/stylesheets/main.css": "5f0149e446b4f25ad1faf70d4d103ef937883de6",
+    "/assets/stylesheets/darkmode.css": "5146f9f517d2a7f41d05904533d183a793fecb9c",
+    "/assets/stylesheets/fonts.css": "98710ba2adf78f97f451e555758cc68f22583827",
+    "/assets/stylesheets/main.css": "4ac44efb6ee76340cf0a12c0495791c311f822b1",
     "/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
-    "/index.html": "34ca7ae09e9bb50e7072f5385f88c71bdf388db7",
-    "/main.d88e97f475517095f0cb.js": "befa5fc007f62699e41d6631800c3fc5b19202d2",
-    "/manifest.webmanifest": "f4f45b10ac55a6cb78939021a9b6bc6e887e8cc5",
-    "/polyfills.c3d988ef40fe3a931281.js": "0d003992512d28c544b0a972ce2ae6b28ebbf5f6",
-    "/runtime.359d5ee4682f20e936e9.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",
-    "/scripts.0a9c6162565250a13c2f.js": "9664529949df198e8dd538ea173bdaba3d19f41e",
-    "/styles.52fbe365e0e5f9ca6465.js": "c099a30d595d006679f3bd2be841704773e387ec",
-    "/styles.be8ae9305f718e98900f.css": "3eeafe12439fa533b2062ecacb5e88df20982a47",
-    "/vendor.dfd8e8f3190e9e4cfebb.js": "5b072a2cc74b50e8aa0dc5c8db76f0eb096f3d93"
+    "/index.html": "8a553d59d32a08cefcfb9ca4dc4cd18e8ec8c5ba",
+    "/main.e323a1f6532b6b33d864.js": "2d7c9d6c19c40f136174b54b3a380b9251365ced",
+    "/manifest.webmanifest": "a4dc9428c48038d3ef5aa88db2ee75924a394443",
+    "/polyfills.b3b05dce4f05c03b56a3.js": "0d003992512d28c544b0a972ce2ae6b28ebbf5f6",
+    "/runtime.0e49e2b53282f40c8925.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",
+    "/scripts.b2115ab8ca2edd127d82.js": "9664529949df198e8dd538ea173bdaba3d19f41e",
+    "/styles.76025043f84190022dba.js": "c099a30d595d006679f3bd2be841704773e387ec",
+    "/styles.f93bf1806c2f655e783c.css": "3eeafe12439fa533b2062ecacb5e88df20982a47",
+    "/vendor.745f93a33bb737842e55.js": "c07b34612b8527a28fb5a23e2844cff792f57d5c"
   },
   "navigationUrls": [
     {
