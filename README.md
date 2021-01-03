@@ -237,7 +237,11 @@ Lastni projekt pri predmetu **Spletno programiranje** v študijskem letu **2020/
 
 ## 4. LP
 
-SPA aplikacija na eni strani
+### Posodobljena navodila za lokalni zagon preko Dockerja  
+  
+- docker-compose up --build (v primeru sprememb ali težav pri zagonu)
+- docker-compose up (sicer)
+- docker-compose down (ob zaključku)
 
 
 ## 5. LP
@@ -256,10 +260,6 @@ SPA aplikacija na eni strani
 - Application Error Disclosure: False positive. OWASP ZAP najde Error sporočila v build datoteki in to prebere, kot da imamo error.  
 - CSP: Wildcard Directive: False positive po mnenju profesorja. Napako smo odpravili v kodi, dodatno poskusili tudi s helmet knjižnico.  
   
-### Posodobljena navodila za lokalni zagon preko Dockerja  
-  
-- docker-compose up --build (v primeru sprememb ali težav pri zagonu)
-- docker-compose up (sicer)
 
 ### Povezava do produkcije  
 http://smaugbudget.herokuapp.com/
